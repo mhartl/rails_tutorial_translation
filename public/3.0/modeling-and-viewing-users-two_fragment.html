@@ -166,28 +166,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.1.</span> <span class="description">Tests for password validations. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_4763a1989035e4f465a2a3db01fba50949c1231f">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20User%20do%0A%20%20%0A%20%20before(:each)%20do%0A%20%20%20%20@attr%20=%20%7B%0A%20%20%20%20%20%20:name%20=%3E%20%22Example%20User%22,%0A%20%20%20%20%20%20:email%20=%3E%20%22user@example.com%22,%0A%20%20%20%20%20%20:password%20=%3E%20%22foobar%22,%0A%20%20%20%20%20%20:password_confirmation%20=%3E%20%22foobar%22%0A%20%20%20%20%7D%0A%20%20end%0A%20%20%0A%20%20it%20%22should%20create%20a%20new%20instance%20given%20valid%20attributes%22%20do%0A%20%20%20%20User.create!(@attr)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20validations%22%20do%0A%0A%20%20%20%20it%20%22should%20require%20a%20password%22%20do%0A%20%20%20%20%20%20User.new(@attr.merge(:password%20=%3E%20%22%22,%20:password_confirmation%20=%3E%20%22%22)).%0A%20%20%20%20%20%20%20%20should_not%20be_valid%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20it%20%22should%20require%20a%20matching%20password%20confirmation%22%20do%0A%20%20%20%20%20%20User.new(@attr.merge(:password_confirmation%20=%3E%20%22invalid%22)).%0A%20%20%20%20%20%20%20%20should_not%20be_valid%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20it%20%22should%20reject%20short%20passwords%22%20do%0A%20%20%20%20%20%20short%20=%20%22a%22%20*%205%0A%20%20%20%20%20%20hash%20=%20@attr.merge(:password%20=%3E%20short,%20:password_confirmation%20=%3E%20short)%0A%20%20%20%20%20%20User.new(hash).should_not%20be_valid%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20reject%20long%20passwords%22%20do%0A%20%20%20%20%20%20long%20=%20%22a%22%20*%2041%0A%20%20%20%20%20%20hash%20=%20@attr.merge(:password%20=%3E%20long,%20:password_confirmation%20=%3E%20long)%0A%20%20%20%20%20%20User.new(hash).should_not%20be_valid%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20User%20do%0A%20%20%0A%20%20before(:each)%20do%0A%20%20%20%20@attr%20=%20%7B%0A%20%20%20%20%20%20:name%20=%3E%20%22Example%20User%22,%0A%20%20%20%20%20%20:email%20=%3E%20%22user@example.com%22,%0A%20%20%20%20%20%20:password%20=%3E%20%22foobar%22,%0A%20%20%20%20%20%20:password_confirmation%20=%3E%20%22foobar%22%0A%20%20%20%20%7D%0A%20%20end%0A%20%20%0A%20%20it%20%22should%20create%20a%20new%20instance%20given%20valid%20attributes%22%20do%0A%20%20%20%20User.create!(@attr)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20validations%22%20do%0A%0A%20%20%20%20it%20%22should%20require%20a%20password%22%20do%0A%20%20%20%20%20%20User.new(@attr.merge(:password%20=%3E%20%22%22,%20:password_confirmation%20=%3E%20%22%22)).%0A%20%20%20%20%20%20%20%20should_not%20be_valid%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20it%20%22should%20require%20a%20matching%20password%20confirmation%22%20do%0A%20%20%20%20%20%20User.new(@attr.merge(:password_confirmation%20=%3E%20%22invalid%22)).%0A%20%20%20%20%20%20%20%20should_not%20be_valid%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20it%20%22should%20reject%20short%20passwords%22%20do%0A%20%20%20%20%20%20short%20=%20%22a%22%20*%205%0A%20%20%20%20%20%20hash%20=%20@attr.merge(:password%20=%3E%20short,%20:password_confirmation%20=%3E%20short)%0A%20%20%20%20%20%20User.new(hash).should_not%20be_valid%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20reject%20long%20passwords%22%20do%0A%20%20%20%20%20%20long%20=%20%22a%22%20*%2041%0A%20%20%20%20%20%20hash%20=%20@attr.merge(:password%20=%3E%20long,%20:password_confirmation%20=%3E%20long)%0A%20%20%20%20%20%20User.new(hash).should_not%20be_valid%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.1.</span> <span class="description">Tests for password validations. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -265,28 +244,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.2.</span> <span class="description">Validations for the <code>password</code> attribute. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_f0c8d8834380a1b49bdc77bfe689ff2562ade661">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20attr_accessor%20:password%0A%20%20attr_accessible%20:name,%20:email,%20:password,%20:password_confirmation%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20%23%20Automatically%20create%20the%20virtual%20attribute%20'password_confirmation'.%0A%20%20validates%20:password,%20:presence%20%20%20%20%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:confirmation%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:length%20%20%20%20%20%20%20=%3E%20%7B%20:within%20=%3E%206..40%20%7D%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20attr_accessor%20:password%0A%20%20attr_accessible%20:name,%20:email,%20:password,%20:password_confirmation%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20%23%20Automatically%20create%20the%20virtual%20attribute%20'password_confirmation'.%0A%20%20validates%20:password,%20:presence%20%20%20%20%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:confirmation%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:length%20%20%20%20%20%20%20=%3E%20%7B%20:within%20=%3E%206..40%20%7D%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.2.</span> <span class="description">Validations for the <code>password</code> attribute. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">attr_accessor</span> <span class="ss">:password</span>
@@ -346,28 +304,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.3.</span> <span class="description">Testing for the existence of an <code>encrypted_password</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_02c62da0e58c85bb68e3ae822f3c001332978eda">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20an%20encrypted%20password%20attribute%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:encrypted_password)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20an%20encrypted%20password%20attribute%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:encrypted_password)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.3.</span> <span class="description">Testing for the existence of an <code>encrypted_password</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -403,28 +340,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.4.</span> <span class="description">The migration to add an <code>encrypted_password</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a1bfd8e054f7964b48a0d216719fac72c1725dfb">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20AddPasswordToUsers%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20add_column%20:users,%20:encrypted_password,%20:string%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20remove_column%20:users,%20:encrypted_password%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20AddPasswordToUsers%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20add_column%20:users,%20:encrypted_password,%20:string%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20remove_column%20:users,%20:encrypted_password%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.4.</span> <span class="description">The migration to add an <code>encrypted_password</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddPasswordToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -480,28 +396,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.5.</span> <span class="description">Testing that the <code>encrypted_password</code> attribute is nonempty. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_6f9108ff7dc1c08c38719b7bfe3eee0ba0e85596">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20set%20the%20encrypted%20password%22%20do%0A%20%20%20%20%20%20@user.encrypted_password.should_not%20be_blank%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20set%20the%20encrypted%20password%22%20do%0A%20%20%20%20%20%20@user.encrypted_password.should_not%20be_blank%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.5.</span> <span class="description">Testing that the <code>encrypted_password</code> attribute is nonempty. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -532,28 +427,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.6.</span> <span class="description">A <code>before_save</code> callback to create the <code>encrypted_password</code> attribute. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_8be33c17231fc9341d8168c875862fd904e12c38">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20validates%20:password,%20:presence%20%20%20%20%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:confirmation%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:length%20%20%20%20%20%20%20=%3E%20%7B%20:within%20=%3E%206..40%20%7D%0A%0A%20%20before_save%20:encrypt_password%0A%20%20%0A%20%20private%0A%20%20%0A%20%20%20%20def%20encrypt_password%0A%20%20%20%20%20%20self.encrypted_password%20=%20encrypt(password)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20def%20encrypt(string)%0A%20%20%20%20%20%20string%20%23%20Only%20a%20temporary%20implementation!%0A%20%20%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20validates%20:password,%20:presence%20%20%20%20%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:confirmation%20=%3E%20true,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:length%20%20%20%20%20%20%20=%3E%20%7B%20:within%20=%3E%206..40%20%7D%0A%0A%20%20before_save%20:encrypt_password%0A%20%20%0A%20%20private%0A%20%20%0A%20%20%20%20def%20encrypt_password%0A%20%20%20%20%20%20self.encrypted_password%20=%20encrypt(password)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20def%20encrypt(string)%0A%20%20%20%20%20%20string%20%23%20Only%20a%20temporary%20implementation!%0A%20%20%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.6.</span> <span class="description">A <code>before_save</code> callback to create the <code>encrypted_password</code> attribute. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -665,28 +539,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.7.</span> <span class="description">A <code>has_password?</code> method for users. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_4afd85426218d61ab99ee6b3c89895e4c27e7fcc">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20before_save%20:encrypt_password%0A%20%20%0A%20%20%23%20Return%20true%20if%20the%20user's%20password%20matches%20the%20submitted%20password.%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20%23%20Compare%20encrypted_password%20with%20the%20encrypted%20version%20of%0A%20%20%20%20%23%20submitted_password.%0A%20%20end%0A%20%20%0A%20%20private%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20before_save%20:encrypt_password%0A%20%20%0A%20%20%23%20Return%20true%20if%20the%20user's%20password%20matches%20the%20submitted%20password.%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20%23%20Compare%20encrypted_password%20with%20the%20encrypted%20version%20of%0A%20%20%20%20%23%20submitted_password.%0A%20%20end%0A%20%20%0A%20%20private%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.7.</span> <span class="description">A <code>has_password?</code> method for users. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -715,28 +568,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.8.</span> <span class="description">Tests for the <code>has_password?</code> method. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_7b384129770349735c7b772ed9b17214f2a16f44">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22has_password?%20method%22%20do%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20be%20true%20if%20the%20passwords%20match%22%20do%0A%20%20%20%20%20%20%20%20@user.has_password?(@attr[:password]).should%20be_true%0A%20%20%20%20%20%20end%20%20%20%20%0A%0A%20%20%20%20%20%20it%20%22should%20be%20false%20if%20the%20passwords%20don't%20match%22%20do%0A%20%20%20%20%20%20%20%20@user.has_password?(%22invalid%22).should%20be_false%0A%20%20%20%20%20%20end%20%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22has_password?%20method%22%20do%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20be%20true%20if%20the%20passwords%20match%22%20do%0A%20%20%20%20%20%20%20%20@user.has_password?(@attr[:password]).should%20be_true%0A%20%20%20%20%20%20end%20%20%20%20%0A%0A%20%20%20%20%20%20it%20%22should%20be%20false%20if%20the%20passwords%20don't%20match%22%20do%0A%20%20%20%20%20%20%20%20@user.has_password?(%22invalid%22).should%20be_false%0A%20%20%20%20%20%20end%20%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.8.</span> <span class="description">Tests for the <code>has_password?</code> method. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -862,28 +694,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.9.</span> <span class="description">The migration to add a <code>salt</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_6e0cebb5b0857fe5172def4b79dfac418f7e5656">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20AddSaltToUsers%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20add_column%20:users,%20:salt,%20:string%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20remove_column%20:users,%20:salt%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20AddSaltToUsers%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20add_column%20:users,%20:salt,%20:string%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20remove_column%20:users,%20:salt%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.9.</span> <span class="description">The migration to add a <code>salt</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddSaltToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -920,28 +731,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.10.</span> <span class="description">The <code>has_password?</code> method with secure encryption. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_afcf2387036a7db6031f8f14c8fe08b94818ecb8">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'digest'%0Aclass%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20before_save%20:encrypt_password%0A%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20encrypted_password%20==%20encrypt(submitted_password)%0A%20%20end%0A%20%20%0A%20%20private%0A%0A%20%20%20%20def%20encrypt_password%0A%20%20%20%20%20%20self.salt%20=%20make_salt%20if%20new_record?%0A%20%20%20%20%20%20self.encrypted_password%20=%20encrypt(password)%0A%20%20%20%20end%0A%0A%20%20%20%20def%20encrypt(string)%0A%20%20%20%20%20%20secure_hash(%22%23%7Bsalt%7D%2D%2D%23%7Bstring%7D%22)%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20def%20make_salt%0A%20%20%20%20%20%20secure_hash(%22%23%7BTime.now.utc%7D%2D%2D%23%7Bpassword%7D%22)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20def%20secure_hash(string)%0A%20%20%20%20%20%20Digest::SHA2.hexdigest(string)%0A%20%20%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'digest'%0Aclass%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20before_save%20:encrypt_password%0A%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20encrypted_password%20==%20encrypt(submitted_password)%0A%20%20end%0A%20%20%0A%20%20private%0A%0A%20%20%20%20def%20encrypt_password%0A%20%20%20%20%20%20self.salt%20=%20make_salt%20if%20new_record?%0A%20%20%20%20%20%20self.encrypted_password%20=%20encrypt(password)%0A%20%20%20%20end%0A%0A%20%20%20%20def%20encrypt(string)%0A%20%20%20%20%20%20secure_hash(%22%23%7Bsalt%7D%2D%2D%23%7Bstring%7D%22)%0A%20%20%20%20end%0A%20%20%0A%20%20%20%20def%20make_salt%0A%20%20%20%20%20%20secure_hash(%22%23%7BTime.now.utc%7D%2D%2D%23%7Bpassword%7D%22)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20def%20secure_hash(string)%0A%20%20%20%20%20%20Digest::SHA2.hexdigest(string)%0A%20%20%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.10.</span> <span class="description">The <code>has_password?</code> method with secure encryption. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
@@ -1059,28 +849,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.11.</span> <span class="description">Tests for the <code>User.authenticate</code> method. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_0311fcdb8e6d3191db7818cb593c888e87c3d28d">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22authenticate%20method%22%20do%0A%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20nil%20on%20email/password%20mismatch%22%20do%0A%20%20%20%20%20%20%20%20wrong_password_user%20=%20User.authenticate(@attr[:email],%20%22wrongpass%22)%0A%20%20%20%20%20%20%20%20wrong_password_user.should%20be_nil%0A%20%20%20%20%20%20end%0A%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20nil%20for%20an%20email%20address%20with%20no%20user%22%20do%0A%20%20%20%20%20%20%20%20nonexistent_user%20=%20User.authenticate(%22bar@foo.com%22,%20@attr[:password])%0A%20%20%20%20%20%20%20%20nonexistent_user.should%20be_nil%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20the%20user%20on%20email/password%20match%22%20do%0A%20%20%20%20%20%20%20%20matching_user%20=%20User.authenticate(@attr[:email],%20@attr[:password])%0A%20%20%20%20%20%20%20%20matching_user.should%20==%20@user%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22password%20encryption%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22authenticate%20method%22%20do%0A%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20nil%20on%20email/password%20mismatch%22%20do%0A%20%20%20%20%20%20%20%20wrong_password_user%20=%20User.authenticate(@attr[:email],%20%22wrongpass%22)%0A%20%20%20%20%20%20%20%20wrong_password_user.should%20be_nil%0A%20%20%20%20%20%20end%0A%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20nil%20for%20an%20email%20address%20with%20no%20user%22%20do%0A%20%20%20%20%20%20%20%20nonexistent_user%20=%20User.authenticate(%22bar@foo.com%22,%20@attr[:password])%0A%20%20%20%20%20%20%20%20nonexistent_user.should%20be_nil%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20return%20the%20user%20on%20email/password%20match%22%20do%0A%20%20%20%20%20%20%20%20matching_user%20=%20User.authenticate(@attr[:email],%20@attr[:password])%0A%20%20%20%20%20%20%20%20matching_user.should%20==%20@user%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.11.</span> <span class="description">Tests for the <code>User.authenticate</code> method. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1181,28 +950,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.12.</span> <span class="description">The <code>User.authenticate</code> method. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a330af9c9c971cff2e31ae2444341d9b2c08b8a9">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20encrypted_password%20==%20encrypt(submitted_password)%0A%20%20end%0A%0A%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20end%0A%20%20%0A%20%20private%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20has_password?(submitted_password)%0A%20%20%20%20encrypted_password%20==%20encrypt(submitted_password)%0A%20%20end%0A%0A%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20end%0A%20%20%0A%20%20private%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.12.</span> <span class="description">The <code>User.authenticate</code> method. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1243,28 +991,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.13.</span> <span class="description">The current Users controller spec. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_f2bb7ec334822d73a89a93356eea1db8afb42895">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'new'%22%20do%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20get%20'new'%0A%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20get%20'new'%0A%20%20%20%20%20%20response.should%20have_selector(%22title%22,%20:content%20=%3E%20%22Sign%20up%22)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'new'%22%20do%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20get%20'new'%0A%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20get%20'new'%0A%20%20%20%20%20%20response.should%20have_selector(%22title%22,%20:content%20=%3E%20%22Sign%20up%22)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.13.</span> <span class="description">The current Users controller spec. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1302,28 +1029,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.14.</span> <span class="description">The user <code>show</code> action from <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Listing&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_38afa22b9506cfe07d5ae08b39f59c97f2474ef8">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.14.</span> <span class="description">The user <code>show</code> action from <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Listing&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1344,28 +1050,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.15.</span> <span class="description">Adding Factory Girl to the <code>Gemfile</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_b8727305f6d9908a4fe0391a941618b091477e57">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=source%20'http://rubygems.org'%0A.%0A.%0A.%0Agroup%20:test%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20gem%20'factory_girl_rails',%20'1.0'%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=source%20'http://rubygems.org'%0A.%0A.%0A.%0Agroup%20:test%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20gem%20'factory_girl_rails',%20'1.0'%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.15.</span> <span class="description">Adding Factory Girl to the <code>Gemfile</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 <span class="o">.</span>
@@ -1394,28 +1079,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.16.</span> <span class="description">A factory to simulate User model objects. <br /> <code>spec/factories.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_176f5771bf0bcbcba59509660f34c25e8bcb0aef">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%23%20By%20using%20the%20symbol%20':user',%20we%20get%20Factory%20Girl%20to%20simulate%20the%20User%20model.%0AFactory.define%20:user%20do%20%7Cuser%7C%0A%20%20user.name%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Michael%20Hartl%22%0A%20%20user.email%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22mhartl@example.com%22%0A%20%20user.password%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22foobar%22%0A%20%20user.password_confirmation%20%22foobar%22%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%23%20By%20using%20the%20symbol%20':user',%20we%20get%20Factory%20Girl%20to%20simulate%20the%20User%20model.%0AFactory.define%20:user%20do%20%7Cuser%7C%0A%20%20user.name%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Michael%20Hartl%22%0A%20%20user.email%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22mhartl@example.com%22%0A%20%20user.password%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22foobar%22%0A%20%20user.password_confirmation%20%22foobar%22%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.16.</span> <span class="description">A factory to simulate User model objects. <br /> <code>spec/factories.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="c1"># By using the symbol &#39;:user&#39;, we get Factory Girl to simulate the User model.</span>
 <span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
@@ -1443,28 +1107,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.17.</span> <span class="description">A test for <code>get</code>ting the user <code>show</code> page, with a user factory. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_c1b7a017c1236621e8bd353fe2198fb95bf81f61">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'show'%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20find%20the%20right%20user%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20assigns(:user).should%20==%20@user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'show'%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20find%20the%20right%20user%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20assigns(:user).should%20==%20@user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.17.</span> <span class="description">A test for <code>get</code>ting the user <code>show</code> page, with a user factory. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1610,28 +1253,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.18.</span> <span class="description">Tests for the user show page. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_11a1ad7b096e9e6277f861888e6c1c4cea216bf4">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'show'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22title%22,%20:content%20=%3E%20@user.name)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20user's%20name%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22h1%22,%20:content%20=%3E%20@user.name)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20profile%20image%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22h1%3Eimg%22,%20:class%20=%3E%20%22gravatar%22)%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20UsersController%20do%0A%20%20render_views%0A%0A%20%20describe%20%22GET%20'show'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22title%22,%20:content%20=%3E%20@user.name)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20user's%20name%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22h1%22,%20:content%20=%3E%20@user.name)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20profile%20image%22%20do%0A%20%20%20%20%20%20get%20:show,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20response.should%20have_selector(%22h1%3Eimg%22,%20:class%20=%3E%20%22gravatar%22)%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.18.</span> <span class="description">Tests for the user show page. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1673,28 +1295,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.19.</span> <span class="description">A title for the user show page. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_6b161bc8f9cbfb9a2022d950fa9222a7f7262d13">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.19.</span> <span class="description">A title for the user show page. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1718,28 +1319,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.20.</span> <span class="description">The user show view with the user&rsquo;s name. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_6fa0e5ec62058de0f8f73962cbbba832339933e7">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ch1%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ch1%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.20.</span> <span class="description">The user show view with the user&rsquo;s name. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
@@ -1754,28 +1334,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.21.</span> <span class="description">Adding a Gravatar gem to the <code>Gemfile</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_7a46507d81aa37d19693484b48843de3a1c38f8e">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.7'%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:require%20=%3E%20'sqlite3'%0Agem%20'gravatar_image_tag',%20'1.0.0.pre2'%0A.%0A.%0A.%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.7'%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:require%20=%3E%20'sqlite3'%0Agem%20'gravatar_image_tag',%20'1.0.0.pre2'%0A.%0A.%0A.%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.21.</span> <span class="description">Adding a Gravatar gem to the <code>Gemfile</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1812,28 +1371,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.22.</span> <span class="description">The user show view with name and Gravatar. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_cbc988d73d4a1826e66fd2ae44e441caeb27b2d2">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ch1%3E%0A%20%20%3C%25=%20gravatar_image_tag%20@user.email%20%25%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ch1%3E%0A%20%20%3C%25=%20gravatar_image_tag%20@user.email%20%25%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.22.</span> <span class="description">The user show view with name and Gravatar. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_image_tag</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span>
@@ -1901,28 +1439,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.23.</span> <span class="description">Defining a <code>gravatar_for</code> helper method. <br /> <code>app/helpers/users_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_d496a5354d2d6302b2f7400444613863bc6e1fc9">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=module%20UsersHelper%0A%0A%20%20def%20gravatar_for(user,%20options%20=%20%7B%20:size%20=%3E%2050%20%7D)%0A%20%20%20%20gravatar_image_tag(user.email.downcase,%20:alt%20=%3E%20user.name,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:class%20=%3E%20'gravatar',%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:gravatar%20=%3E%20options)%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=module%20UsersHelper%0A%0A%20%20def%20gravatar_for(user,%20options%20=%20%7B%20:size%20=%3E%2050%20%7D)%0A%20%20%20%20gravatar_image_tag(user.email.downcase,%20:alt%20=%3E%20user.name,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:class%20=%3E%20'gravatar',%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:gravatar%20=%3E%20options)%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.23.</span> <span class="description">Defining a <code>gravatar_for</code> helper method. <br /> <code>app/helpers/users_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">UsersHelper</span>
 
@@ -1956,28 +1473,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.24.</span> <span class="description">Updating the user show template to use <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a98581469dde128bab41770c1fda41991e43399a">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ch1%3E%0A%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ch1%3E%0A%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%3C%25=%20@user.name%20%25%3E%0A%3C/h1%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.24.</span> <span class="description">Updating the user show template to use <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
@@ -2009,28 +1505,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.25.</span> <span class="description">Adding a sidebar to the user <code>show</code> view. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a866b63f1956389d67532030bf1eb0cbe76a8c97">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ctable%20class=%22profile%22%20summary=%22Profile%20information%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20@user.name%20%25%3E%0A%20%20%20%20%20%20%3C/h1%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ctable%20class=%22profile%22%20summary=%22Profile%20information%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20@user.name%20%25%3E%0A%20%20%20%20%20%20%3C/h1%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.25.</span> <span class="description">Adding a sidebar to the user <code>show</code> view. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;profile&quot;</span> <span class="na">summary=</span><span class="s">&quot;Profile information&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -2099,28 +1574,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.26.</span> <span class="description">CSS for styling the user show page, including the sidebar. <br /> <code>public/stylesheets/custom.css</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_75a8a75ee115350be962aa868cf125b7cc930e47">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=.%0A.%0A.%0A/*%20User%20show%20page%20*/%0A%0Atable.profile%20%7B%0A%20%20width:%20100%25;%0A%20%20margin%2Dbottom:%200;%0A%7D%0A%0Atd.main%20%7B%0A%20%20width:%2070%25;%0A%20%20padding:%201em;%0A%7D%0A%0Atd.sidebar%20%7B%0A%20%20width:%2030%25;%0A%20%20padding:%201em;%0A%20%20vertical%2Dalign:%20top;%0A%20%20background:%20%23ffc;%0A%7D%0A%0A.profile%20img.gravatar%20%7B%0A%20%20border:%201px%20solid%20%23999;%0A%20%20margin%2Dbottom:%20%2D15px;%0A%7D%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=.%0A.%0A.%0A/*%20User%20show%20page%20*/%0A%0Atable.profile%20%7B%0A%20%20width:%20100%25;%0A%20%20margin%2Dbottom:%200;%0A%7D%0A%0Atd.main%20%7B%0A%20%20width:%2070%25;%0A%20%20padding:%201em;%0A%7D%0A%0Atd.sidebar%20%7B%0A%20%20width:%2030%25;%0A%20%20padding:%201em;%0A%20%20vertical%2Dalign:%20top;%0A%20%20background:%20%23ffc;%0A%7D%0A%0A.profile%20img.gravatar%20%7B%0A%20%20border:%201px%20solid%20%23999;%0A%20%20margin%2Dbottom:%20%2D15px;%0A%7D%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.26.</span> <span class="description">CSS for styling the user show page, including the sidebar. <br /> <code>public/stylesheets/custom.css</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -2244,28 +1698,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.27.</span> <span class="description">The <code>authenticate</code> method with <code>User</code> in place of <code>self</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a4a7f1072ea5fefe0e8f69df2fd6636ffbf3ca51">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%20%20def%20User.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20end%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%20%20def%20User.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20end%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.27.</span> <span class="description">The <code>authenticate</code> method with <code>User</code> in place of <code>self</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">User</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2282,28 +1715,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.28.</span> <span class="description">The <code>authenticate</code> method with an explicit third <code>return</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_8ca7227bb9a9503d95ee37da894c3a6f26eb06db">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20%20%20return%20nil%0A%20%20end%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20return%20nil%20%20if%20user.nil?%0A%20%20%20%20return%20user%20if%20user.has_password?(submitted_password)%0A%20%20%20%20return%20nil%0A%20%20end%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.28.</span> <span class="description">The <code>authenticate</code> method with an explicit third <code>return</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2321,28 +1733,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.29.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_415e4855e7fa67a603557b67a2199e93c0249dbb">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20nil%0A%20%20%20%20elsif%20user.has_password?(submitted_password)%0A%20%20%20%20%20%20user%0A%20%20%20%20else%0A%20%20%20%20%20%20nil%0A%20%20%20%20end%0A%20%20end%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20nil%0A%20%20%20%20elsif%20user.has_password?(submitted_password)%0A%20%20%20%20%20%20user%0A%20%20%20%20else%0A%20%20%20%20%20%20nil%0A%20%20%20%20end%0A%20%20end%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.29.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2364,28 +1755,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.30.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement and an implicit return.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_18d5099d906a1d8f1f1043dd69f0b4f808df9196">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20nil%0A%20%20%20%20elsif%20user.has_password?(submitted_password)%0A%20%20%20%20%20%20user%0A%20%20%20%20end%0A%20%20end%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20nil%0A%20%20%20%20elsif%20user.has_password?(submitted_password)%0A%20%20%20%20%20%20user%0A%20%20%20%20end%0A%20%20end%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.30.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement and an implicit return.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2405,28 +1775,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">The <code>authenticate</code> method using the ternary operator.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_b4c611d56e8ec5fbd20ceb97903b74faea860eaa">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20user%20%26%26%20user.has_password?(submitted_password)%20?%20user%20:%20nil%0A%20%20end%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%20%20def%20self.authenticate(email,%20submitted_password)%0A%20%20%20%20user%20=%20find_by_email(email)%0A%20%20%20%20user%20%26%26%20user.has_password?(submitted_password)%20?%20user%20:%20nil%0A%20%20end%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">The <code>authenticate</code> method using the ternary operator.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>

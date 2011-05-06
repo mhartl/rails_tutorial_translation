@@ -217,28 +217,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.1.</span> <span class="description">Adding indices for the <code>relationships</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_create_relationships.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_91ff25aac161add0be9aee1048838120d2d5a496">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20CreateRelationships%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20create_table%20:relationships%20do%20%7Ct%7C%0A%20%20%20%20%20%20t.integer%20:follower_id%0A%20%20%20%20%20%20t.integer%20:followed_id%0A%0A%20%20%20%20%20%20t.timestamps%0A%20%20%20%20end%0A%20%20%20%20add_index%20:relationships,%20:follower_id%0A%20%20%20%20add_index%20:relationships,%20:followed_id%0A%20%20%20%20add_index%20:relationships,%20[:follower_id,%20:followed_id],%20:unique%20=%3E%20true%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20drop_table%20:relationships%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20CreateRelationships%20%3C%20ActiveRecord::Migration%0A%20%20def%20self.up%0A%20%20%20%20create_table%20:relationships%20do%20%7Ct%7C%0A%20%20%20%20%20%20t.integer%20:follower_id%0A%20%20%20%20%20%20t.integer%20:followed_id%0A%0A%20%20%20%20%20%20t.timestamps%0A%20%20%20%20end%0A%20%20%20%20add_index%20:relationships,%20:follower_id%0A%20%20%20%20add_index%20:relationships,%20:followed_id%0A%20%20%20%20add_index%20:relationships,%20[:follower_id,%20:followed_id],%20:unique%20=%3E%20true%0A%20%20end%0A%0A%20%20def%20self.down%0A%20%20%20%20drop_table%20:relationships%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.1.</span> <span class="description">Adding indices for the <code>relationships</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_create_relationships.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateRelationships</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -292,28 +271,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.2.</span> <span class="description">Making a relationship&rsquo;s <code>followed_id</code> (but <em>not</em> <code>follower_id</code>) accessible. <br /> <code>app/models/relationship.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_35e7b70dfe12fdbbd8a0db2bc65ba35b8d81de3e">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.2.</span> <span class="description">Making a relationship&rsquo;s <code>followed_id</code> (but <em>not</em> <code>follower_id</code>) accessible. <br /> <code>app/models/relationship.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:followed_id</span>
@@ -345,28 +303,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.3.</span> <span class="description">Testing Relationship creation with <code>save!</code>. <br /> <code>spec/models/relationship_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_d0581e36d403877e5a4a0b2778200f4da7fefec0">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20Relationship%20do%0A%0A%20%20before(:each)%20do%0A%20%20%20%20@follower%20=%20Factory(:user)%0A%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%0A%20%20%20%20@relationship%20=%20@follower.relationships.build(:followed_id%20=%3E%20@followed.id)%0A%20%20end%0A%0A%20%20it%20%22should%20create%20a%20new%20instance%20given%20valid%20attributes%22%20do%0A%20%20%20%20@relationship.save!%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20Relationship%20do%0A%0A%20%20before(:each)%20do%0A%20%20%20%20@follower%20=%20Factory(:user)%0A%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%0A%20%20%20%20@relationship%20=%20@follower.relationships.build(:followed_id%20=%3E%20@followed.id)%0A%20%20end%0A%0A%20%20it%20%22should%20create%20a%20new%20instance%20given%20valid%20attributes%22%20do%0A%20%20%20%20@relationship.save!%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.3.</span> <span class="description">Testing Relationship creation with <code>save!</code>. <br /> <code>spec/models/relationship_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -393,28 +330,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.4.</span> <span class="description">Testing for the <code>user.relationships</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_1e06b84d3a2234676e1ed75236a825da0e0b47ab">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20%20%20@followed%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:relationships)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20%20%20@followed%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:relationships)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.4.</span> <span class="description">Testing for the <code>user.relationships</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -466,28 +382,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.5.</span> <span class="description">Implementing the user/relationships <code>has_many</code> association. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_34758c53808111a731b8beca2cda31c8b5e5da13">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:microposts,%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:relationships,%20:foreign_key%20=%3E%20%22follower_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:microposts,%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:relationships,%20:foreign_key%20=%3E%20%22follower_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.5.</span> <span class="description">Implementing the user/relationships <code>has_many</code> association. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -512,28 +407,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.6.</span> <span class="description">Testing the user/relationships <code>belongs_to</code> association. <br /> <code>spec/models/relationship_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_edc16d6cb9f9482be9ee32f17d136584bf74ed47">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20Relationship%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22follow%20methods%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@relationship.save%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20follower%20attribute%22%20do%0A%20%20%20%20%20%20@relationship.should%20respond_to(:follower)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20the%20right%20follower%22%20do%0A%20%20%20%20%20%20@relationship.follower.should%20==%20@follower%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20followed%20attribute%22%20do%0A%20%20%20%20%20%20@relationship.should%20respond_to(:followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20the%20right%20followed%20user%22%20do%0A%20%20%20%20%20%20@relationship.followed.should%20==%20@followed%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20Relationship%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22follow%20methods%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@relationship.save%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20follower%20attribute%22%20do%0A%20%20%20%20%20%20@relationship.should%20respond_to(:follower)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20the%20right%20follower%22%20do%0A%20%20%20%20%20%20@relationship.follower.should%20==%20@follower%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20followed%20attribute%22%20do%0A%20%20%20%20%20%20@relationship.should%20respond_to(:followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20the%20right%20followed%20user%22%20do%0A%20%20%20%20%20%20@relationship.followed.should%20==%20@followed%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.6.</span> <span class="description">Testing the user/relationships <code>belongs_to</code> association. <br /> <code>spec/models/relationship_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">Relationship</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -572,28 +446,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.7.</span> <span class="description">Adding the <code>belongs_to</code> associations to the Relationship model. <br /> <code>app/models/relationship.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_fc74a3504c7c0f48b1d4a752c9e66df1c08be44e">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0A%20%20%0A%20%20belongs_to%20:follower,%20:class_name%20=%3E%20%22User%22%0A%20%20belongs_to%20:followed,%20:class_name%20=%3E%20%22User%22%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0A%20%20%0A%20%20belongs_to%20:follower,%20:class_name%20=%3E%20%22User%22%0A%20%20belongs_to%20:followed,%20:class_name%20=%3E%20%22User%22%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.7.</span> <span class="description">Adding the <code>belongs_to</code> associations to the Relationship model. <br /> <code>app/models/relationship.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:followed_id</span>
@@ -619,28 +472,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.8.</span> <span class="description">Testing the Relationship model validations. <br /> <code>spec/models/relationship_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_4da8f59520887362a256f0df7716ed8fd5efb0e8">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20Relationship%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22validations%22%20do%0A%0A%20%20%20%20it%20%22should%20require%20a%20follower_id%22%20do%0A%20%20%20%20%20%20@relationship.follower_id%20=%20nil%0A%20%20%20%20%20%20@relationship.should_not%20be_valid%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20require%20a%20followed_id%22%20do%0A%20%20%20%20%20%20@relationship.followed_id%20=%20nil%0A%20%20%20%20%20%20@relationship.should_not%20be_valid%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20Relationship%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22validations%22%20do%0A%0A%20%20%20%20it%20%22should%20require%20a%20follower_id%22%20do%0A%20%20%20%20%20%20@relationship.follower_id%20=%20nil%0A%20%20%20%20%20%20@relationship.should_not%20be_valid%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20require%20a%20followed_id%22%20do%0A%20%20%20%20%20%20@relationship.followed_id%20=%20nil%0A%20%20%20%20%20%20@relationship.should_not%20be_valid%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.8.</span> <span class="description">Testing the Relationship model validations. <br /> <code>spec/models/relationship_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">Relationship</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -669,28 +501,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.9.</span> <span class="description">Adding the Relationship model validations. <br /> <code>app/models/relationship.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_03bec3ce3890b11172dd230aaf99122facc8e8e7">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0A%20%20%0A%20%20belongs_to%20:follower,%20:class_name%20=%3E%20%22User%22%0A%20%20belongs_to%20:followed,%20:class_name%20=%3E%20%22User%22%0A%20%20%0A%20%20validates%20:follower_id,%20:presence%20=%3E%20true%0A%20%20validates%20:followed_id,%20:presence%20=%3E%20true%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Relationship%20%3C%20ActiveRecord::Base%0A%20%20attr_accessible%20:followed_id%0A%20%20%0A%20%20belongs_to%20:follower,%20:class_name%20=%3E%20%22User%22%0A%20%20belongs_to%20:followed,%20:class_name%20=%3E%20%22User%22%0A%20%20%0A%20%20validates%20:follower_id,%20:presence%20=%3E%20true%0A%20%20validates%20:followed_id,%20:presence%20=%3E%20true%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.9.</span> <span class="description">Adding the Relationship model validations. <br /> <code>app/models/relationship.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:followed_id</span>
@@ -719,28 +530,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.10.</span> <span class="description">A test for the <code>user.following</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_803a7ea740888df8bdd2d9ce5f5b9f780ad33826">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20%20%20@followed%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:relationships)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20following%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:following)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20User.create!(@attr)%0A%20%20%20%20%20%20@followed%20=%20Factory(:user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:relationships)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20have%20a%20following%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:following)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.10.</span> <span class="description">A test for the <code>user.following</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -779,28 +569,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.11.</span> <span class="description">Adding the User model <code>following</code> association with <code>has_many :through</code>. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_43ca4671bb54e14356e02a6a798c294847f38f35">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:microposts,%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:relationships,%20:foreign_key%20=%3E%20%22follower_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:following,%20:through%20=%3E%20:relationships,%20:source%20=%3E%20:followed%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:microposts,%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:relationships,%20:foreign_key%20=%3E%20%22follower_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:following,%20:through%20=%3E%20:relationships,%20:source%20=%3E%20:followed%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.11.</span> <span class="description">Adding the User model <code>following</code> association with <code>has_many :through</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -824,28 +593,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.12.</span> <span class="description">Tests for some &ldquo;following&rdquo; utility methods. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_319c7d1fcaaab8b8c29e0b7f6e5d7738ddfcbb47">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20a%20following?%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:following?)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20follow!%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:follow!)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20follow%20another%20user%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.should%20be_following(@followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20followed%20user%20in%20the%20following%20array%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.following.should%20include(@followed)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20a%20following?%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:following?)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20follow!%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:follow!)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20follow%20another%20user%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.should%20be_following(@followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20followed%20user%20in%20the%20following%20array%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.following.should%20include(@followed)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.12.</span> <span class="description">Tests for some &ldquo;following&rdquo; utility methods. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -900,28 +648,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.13.</span> <span class="description">The <code>following?</code> and <code>follow!</code> utility methods. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_285a23ca308a4ee08722756ed2a6cd6c22cddccc">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20self.authenticate_with_salt(id,%20stored_salt)%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20end%0A%0A%20%20def%20following?(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed)%0A%20%20end%0A%0A%20%20def%20follow!(followed)%0A%20%20%20%20relationships.create!(:followed_id%20=%3E%20followed.id)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20self.authenticate_with_salt(id,%20stored_salt)%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20end%0A%0A%20%20def%20following?(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed)%0A%20%20end%0A%0A%20%20def%20follow!(followed)%0A%20%20%20%20relationships.create!(:followed_id%20=%3E%20followed.id)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.13.</span> <span class="description">The <code>following?</code> and <code>follow!</code> utility methods. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -970,28 +697,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.14.</span> <span class="description">A test for unfollowing a user. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_9cfc4c72018580be6c8ae727877334a33093b377">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20an%20unfollow!%20method%22%20do%0A%20%20%20%20%20%20@followed.should%20respond_to(:unfollow!)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20unfollow%20a%20user%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.unfollow!(@followed)%0A%20%20%20%20%20%20@user.should_not%20be_following(@followed)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20have%20an%20unfollow!%20method%22%20do%0A%20%20%20%20%20%20@followed.should%20respond_to(:unfollow!)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20unfollow%20a%20user%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@user.unfollow!(@followed)%0A%20%20%20%20%20%20@user.should_not%20be_following(@followed)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.14.</span> <span class="description">A test for unfollowing a user. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1022,28 +728,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.15.</span> <span class="description">Unfollowing a user by destroying a user relationship. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_50ac52f762ffcd4715394fa0b8032912056c1753">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following?(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed)%0A%20%20end%0A%0A%20%20def%20follow!(followed)%0A%20%20%20%20relationships.create!(:followed_id%20=%3E%20followed.id)%0A%20%20end%0A%20%20%0A%20%20def%20unfollow!(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed).destroy%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following?(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed)%0A%20%20end%0A%0A%20%20def%20follow!(followed)%0A%20%20%20%20relationships.create!(:followed_id%20=%3E%20followed.id)%0A%20%20end%0A%20%20%0A%20%20def%20unfollow!(followed)%0A%20%20%20%20relationships.find_by_followed_id(followed).destroy%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.15.</span> <span class="description">Unfollowing a user by destroying a user relationship. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1090,28 +775,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.16.</span> <span class="description">Testing for reverse relationships. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_7c14c493a65f79e113d9d61901739c776daf5cb0">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20reverse_relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:reverse_relationships)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20followers%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:followers)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20follower%20in%20the%20followers%20array%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@followed.followers.should%20include(@user)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22relationships%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20reverse_relationships%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:reverse_relationships)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20followers%20method%22%20do%0A%20%20%20%20%20%20@user.should%20respond_to(:followers)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20include%20the%20follower%20in%20the%20followers%20array%22%20do%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@followed.followers.should%20include(@user)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.16.</span> <span class="description">Testing for reverse relationships. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1159,28 +823,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.17.</span> <span class="description">Implementing <code>user.followers</code> using reverse relationships. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_132806d32e044ce44aa1289d43b9cb3b503dcf6f">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:reverse_relationships,%20:foreign_key%20=%3E%20%22followed_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:class_name%20=%3E%20%22Relationship%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:followers,%20:through%20=%3E%20:reverse_relationships,%20:source%20=%3E%20:follower%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20has_many%20:reverse_relationships,%20:foreign_key%20=%3E%20%22followed_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:class_name%20=%3E%20%22Relationship%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:dependent%20=%3E%20:destroy%0A%20%20has_many%20:followers,%20:through%20=%3E%20:reverse_relationships,%20:source%20=%3E%20:follower%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.17.</span> <span class="description">Implementing <code>user.followers</code> using reverse relationships. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1241,28 +884,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.18.</span> <span class="description">Adding following/follower relationships to the sample data. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_819faa856237c44090fb85afa11bfc1fc8fc0ed4">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'faker'%0A%0Anamespace%20:db%20do%0A%20%20desc%20%22Fill%20database%20with%20sample%20data%22%0A%20%20task%20:populate%20=%3E%20:environment%20do%0A%20%20%20%20Rake::Task['db:reset'].invoke%0A%20%20%20%20make_users%0A%20%20%20%20make_microposts%0A%20%20%20%20make_relationships%0A%20%20end%0Aend%0A%0Adef%20make_users%0A%20%20admin%20=%20User.create!(:name%20=%3E%20%22Example%20User%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:email%20=%3E%20%22example@railstutorial.org%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password%20=%3E%20%22foobar%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password_confirmation%20=%3E%20%22foobar%22)%0A%20%20admin.toggle!(:admin)%0A%20%2099.times%20do%20%7Cn%7C%0A%20%20%20%20name%20%20=%20Faker::Name.name%0A%20%20%20%20email%20=%20%22example%2D%23%7Bn%2B1%7D@railstutorial.org%22%0A%20%20%20%20password%20%20=%20%22password%22%0A%20%20%20%20User.create!(:name%20=%3E%20name,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:email%20=%3E%20email,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password%20=%3E%20password,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password_confirmation%20=%3E%20password)%0A%20%20end%0Aend%0A%0Adef%20make_microposts%0A%20%20User.all(:limit%20=%3E%206).each%20do%20%7Cuser%7C%0A%20%20%20%2050.times%20do%0A%20%20%20%20%20%20content%20=%20Faker::Lorem.sentence(5)%0A%20%20%20%20%20%20user.microposts.create!(:content%20=%3E%20content)%0A%20%20%20%20end%0A%20%20end%0Aend%0A%0Adef%20make_relationships%0A%20%20users%20=%20User.all%0A%20%20user%20%20=%20users.first%0A%20%20following%20=%20users[1..50]%0A%20%20followers%20=%20users[3..40]%0A%20%20following.each%20%7B%20%7Cfollowed%7C%20user.follow!(followed)%20%7D%0A%20%20followers.each%20%7B%20%7Cfollower%7C%20follower.follow!(user)%20%7D%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'faker'%0A%0Anamespace%20:db%20do%0A%20%20desc%20%22Fill%20database%20with%20sample%20data%22%0A%20%20task%20:populate%20=%3E%20:environment%20do%0A%20%20%20%20Rake::Task['db:reset'].invoke%0A%20%20%20%20make_users%0A%20%20%20%20make_microposts%0A%20%20%20%20make_relationships%0A%20%20end%0Aend%0A%0Adef%20make_users%0A%20%20admin%20=%20User.create!(:name%20=%3E%20%22Example%20User%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:email%20=%3E%20%22example@railstutorial.org%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password%20=%3E%20%22foobar%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password_confirmation%20=%3E%20%22foobar%22)%0A%20%20admin.toggle!(:admin)%0A%20%2099.times%20do%20%7Cn%7C%0A%20%20%20%20name%20%20=%20Faker::Name.name%0A%20%20%20%20email%20=%20%22example%2D%23%7Bn%2B1%7D@railstutorial.org%22%0A%20%20%20%20password%20%20=%20%22password%22%0A%20%20%20%20User.create!(:name%20=%3E%20name,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:email%20=%3E%20email,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password%20=%3E%20password,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:password_confirmation%20=%3E%20password)%0A%20%20end%0Aend%0A%0Adef%20make_microposts%0A%20%20User.all(:limit%20=%3E%206).each%20do%20%7Cuser%7C%0A%20%20%20%2050.times%20do%0A%20%20%20%20%20%20content%20=%20Faker::Lorem.sentence(5)%0A%20%20%20%20%20%20user.microposts.create!(:content%20=%3E%20content)%0A%20%20%20%20end%0A%20%20end%0Aend%0A%0Adef%20make_relationships%0A%20%20users%20=%20User.all%0A%20%20user%20%20=%20users.first%0A%20%20following%20=%20users[1..50]%0A%20%20followers%20=%20users[3..40]%0A%20%20following.each%20%7B%20%7Cfollowed%7C%20user.follow!(followed)%20%7D%0A%20%20followers.each%20%7B%20%7Cfollower%7C%20follower.follow!(user)%20%7D%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.18.</span> <span class="description">Adding following/follower relationships to the sample data. <br /> <code>lib/tasks/sample_data.rake</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;faker&#39;</span>
 
@@ -1360,28 +982,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.19.</span> <span class="description">Adding <code>following</code> and <code>followers</code> actions to the Users controller. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_62203487439e8b98201bbc676fd51750b13e44c7">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=SampleApp::Application.routes.draw%20do%0A%20%20resources%20:users%20do%0A%20%20%20%20member%20do%0A%20%20%20%20%20%20get%20:following,%20:followers%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=SampleApp::Application.routes.draw%20do%0A%20%20resources%20:users%20do%0A%20%20%20%20member%20do%0A%20%20%20%20%20%20get%20:following,%20:followers%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.19.</span> <span class="description">Adding <code>following</code> and <code>followers</code> actions to the Users controller. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
@@ -1422,28 +1023,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.20.</span> <span class="description">Testing the following/follower statistics on the Home page. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_2863142d450d001da4a6c3af840f777a2a0bd98c">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20PagesController%20do%0A%20%20render_views%0A%0A%20%20before(:each)%20do%0A%20%20%20%20@base_title%20=%20%22Ruby%20on%20Rails%20Tutorial%20Sample%20App%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22GET%20'home'%22%20do%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20not%20signed%20in%22%20do%0A%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20get%20:home%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22title%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%22%23%7B@base_title%7D%20%7C%20Home%22)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20signed%20in%22%20do%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20%20%20other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20other_user.follow!(@user)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20have%20the%20right%20follower/following%20counts%22%20do%0A%20%20%20%20%20%20%20%20get%20:home%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20following_user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%220%20following%22)%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20followers_user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%221%20follower%22)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20PagesController%20do%0A%20%20render_views%0A%0A%20%20before(:each)%20do%0A%20%20%20%20@base_title%20=%20%22Ruby%20on%20Rails%20Tutorial%20Sample%20App%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22GET%20'home'%22%20do%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20not%20signed%20in%22%20do%0A%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20get%20:home%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20be%20successful%22%20do%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20have%20the%20right%20title%22%20do%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22title%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%22%23%7B@base_title%7D%20%7C%20Home%22)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20signed%20in%22%20do%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20%20%20other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20other_user.follow!(@user)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20have%20the%20right%20follower/following%20counts%22%20do%0A%20%20%20%20%20%20%20%20get%20:home%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20following_user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%220%20following%22)%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20followers_user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20%221%20follower%22)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.20.</span> <span class="description">Testing the following/follower statistics on the Home page. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">PagesController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -1512,28 +1092,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.21.</span> <span class="description">A partial for displaying follower stats. <br /> <code>app/views/shared/_stats.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a7dbd5097cb60ae7e786df8047bd5133445b432a">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25%20@user%20%7C%7C=%20current_user%20%25%3E%0A%3Cdiv%20class=%22stats%22%3E%0A%20%20%3Ctable%20summary=%22User%20stats%22%3E%0A%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%3Ctd%3E%0A%20%20%20%20%20%20%20%20%3Ca%20href=%22%3C%25=%20following_user_path(@user)%20%25%3E%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cspan%20id=%22following%22%20class=%22stat%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%25=%20@user.following.count%20%25%3E%20following%0A%20%20%20%20%20%20%20%20%20%20%3C/span%3E%0A%20%20%20%20%20%20%20%20%3C/a%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%20%20%3Ctd%3E%0A%20%20%20%20%20%20%20%20%3Ca%20href=%22%3C%25=%20followers_user_path(@user)%20%25%3E%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cspan%20id=%22followers%22%20class=%22stat%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%25=%20pluralize(@user.followers.count,%20%22follower%22)%20%25%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/span%3E%0A%20%20%20%20%20%20%20%20%3C/a%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%3C/tr%3E%0A%20%20%3C/table%3E%0A%3C/div%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25%20@user%20%7C%7C=%20current_user%20%25%3E%0A%3Cdiv%20class=%22stats%22%3E%0A%20%20%3Ctable%20summary=%22User%20stats%22%3E%0A%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%3Ctd%3E%0A%20%20%20%20%20%20%20%20%3Ca%20href=%22%3C%25=%20following_user_path(@user)%20%25%3E%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cspan%20id=%22following%22%20class=%22stat%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%25=%20@user.following.count%20%25%3E%20following%0A%20%20%20%20%20%20%20%20%20%20%3C/span%3E%0A%20%20%20%20%20%20%20%20%3C/a%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%20%20%3Ctd%3E%0A%20%20%20%20%20%20%20%20%3Ca%20href=%22%3C%25=%20followers_user_path(@user)%20%25%3E%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cspan%20id=%22followers%22%20class=%22stat%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%25=%20pluralize(@user.followers.count,%20%22follower%22)%20%25%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/span%3E%0A%20%20%20%20%20%20%20%20%3C/a%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%3C/tr%3E%0A%20%20%3C/table%3E%0A%3C/div%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.21.</span> <span class="description">A partial for displaying follower stats. <br /> <code>app/views/shared/_stats.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="vi">@user</span> <span class="o">||=</span> <span class="n">current_user</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;stats&quot;</span><span class="nt">&gt;</span>
@@ -1609,28 +1168,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.22.</span> <span class="description">Adding follower stats to the Home page. <br /> <code>app/views/pages/home.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a04967c56a233cc858e284e66c959ec0d6d189e2">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25%20if%20signed_in?%20%25%3E%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20%3C%25=%20render%20'shared/user_info'%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%3C/tr%3E%0A%20%20%3C/table%3E%0A%3C%25%20else%20%25%3E%0A%20%20.%0A%20%20.%0A%20%20.%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25%20if%20signed_in?%20%25%3E%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20.%0A%20%20%20%20%20%20%20%20%3C%25=%20render%20'shared/user_info'%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%20%20%3C/td%3E%0A%20%20%20%20%3C/tr%3E%0A%20%20%3C/table%3E%0A%3C%25%20else%20%25%3E%0A%20%20.%0A%20%20.%0A%20%20.%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.22.</span> <span class="description">Adding follower stats to the Home page. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">signed_in?</span> <span class="cp">%&gt;</span>
         .
@@ -1664,28 +1202,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.23.</span> <span class="description">A partial for a follow/unfollow form. <br /> <code>app/views/users/_follow_form.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_2337bfec11e8c2f2a07030f34310328d20202f20">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25%20unless%20current_user?(@user)%20%25%3E%0A%20%20%3Cdiv%20id=%22follow_form%22%3E%0A%20%20%3C%25%20if%20current_user.following?(@user)%20%25%3E%0A%20%20%20%20%3C%25=%20render%20'unfollow'%20%25%3E%0A%20%20%3C%25%20else%20%25%3E%0A%20%20%20%20%3C%25=%20render%20'follow'%20%25%3E%0A%20%20%3C%25%20end%20%25%3E%0A%20%20%3C/div%3E%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25%20unless%20current_user?(@user)%20%25%3E%0A%20%20%3Cdiv%20id=%22follow_form%22%3E%0A%20%20%3C%25%20if%20current_user.following?(@user)%20%25%3E%0A%20%20%20%20%3C%25=%20render%20'unfollow'%20%25%3E%0A%20%20%3C%25%20else%20%25%3E%0A%20%20%20%20%3C%25=%20render%20'follow'%20%25%3E%0A%20%20%3C%25%20end%20%25%3E%0A%20%20%3C/div%3E%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.23.</span> <span class="description">A partial for a follow/unfollow form. <br /> <code>app/views/users/_follow_form.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">unless</span> <span class="n">current_user?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;follow_form&quot;</span><span class="nt">&gt;</span>
@@ -1706,28 +1223,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.24.</span> <span class="description">Adding the routes for user relationships. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_90ba233fff15a344697da7a6de491ab912922262">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=SampleApp::Application.routes.draw%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20resources%20:sessions,%20%20%20%20%20%20:only%20=%3E%20[:new,%20:create,%20:destroy]%0A%20%20resources%20:microposts,%20%20%20%20:only%20=%3E%20[:create,%20:destroy]%0A%20%20resources%20:relationships,%20:only%20=%3E%20[:create,%20:destroy]%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=SampleApp::Application.routes.draw%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20resources%20:sessions,%20%20%20%20%20%20:only%20=%3E%20[:new,%20:create,%20:destroy]%0A%20%20resources%20:microposts,%20%20%20%20:only%20=%3E%20[:create,%20:destroy]%0A%20%20resources%20:relationships,%20:only%20=%3E%20[:create,%20:destroy]%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.24.</span> <span class="description">Adding the routes for user relationships. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1750,28 +1246,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.25.</span> <span class="description">A form for following a user. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_d16e8264b318f6d997a97ad0b07ccaefea055276">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25=%20form_for%20current_user.relationships.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20build(:followed_id%20=%3E%20@user.id)%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%3E%3C%25=%20f.hidden_field%20:followed_id%20%25%3E%3C/div%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Follow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25=%20form_for%20current_user.relationships.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20build(:followed_id%20=%3E%20@user.id)%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%3E%3C%25=%20f.hidden_field%20:followed_id%20%25%3E%3C/div%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Follow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.25.</span> <span class="description">A form for following a user. <br /> <code>app/views/users/_follow.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="n">current_user</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span>
                           <span class="n">build</span><span class="p">(</span><span class="ss">:followed_id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
@@ -1788,28 +1263,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.26.</span> <span class="description">A form for unfollowing a user. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_2fe424f6ab189771960f228241a2f4b9b6b0f413">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25=%20form_for%20current_user.relationships.find_by_followed_id(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:html%20=%3E%20%7B%20:method%20=%3E%20:delete%20%7D%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Unfollow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25=%20form_for%20current_user.relationships.find_by_followed_id(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:html%20=%3E%20%7B%20:method%20=%3E%20:delete%20%7D%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Unfollow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.26.</span> <span class="description">A form for unfollowing a user. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="n">current_user</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">find_by_followed_id</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span>
              <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span> <span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
@@ -1835,28 +1289,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.27.</span> <span class="description">Adding the follow form and follower stats to the user profile page. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_e53fcc86528f05f01a71c16f583e4a20a89e82c2">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ctable%20class=%22profile%22%20summary=%22Profile%20information%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20@user.name%20%25%3E%0A%20%20%20%20%20%20%3C/h1%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'follow_form'%20if%20signed_in?%20%25%3E%0A%20%20%20%20%20%20.%0A%20%20%20%20%20%20.%0A%20%20%20%20%20%20.%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EMicroposts%3C/strong%3E%20%3C%25=%20@user.microposts.count%20%25%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ctable%20class=%22profile%22%20summary=%22Profile%20information%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20gravatar_for%20@user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20@user.name%20%25%3E%0A%20%20%20%20%20%20%3C/h1%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'follow_form'%20if%20signed_in?%20%25%3E%0A%20%20%20%20%20%20.%0A%20%20%20%20%20%20.%0A%20%20%20%20%20%20.%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EMicroposts%3C/strong%3E%20%3C%25=%20@user.microposts.count%20%25%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.27.</span> <span class="description">Adding the follow form and follower stats to the user profile page. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;profile&quot;</span> <span class="na">summary=</span><span class="s">&quot;Profile information&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -1928,28 +1361,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.28.</span> <span class="description">Test for the <code>following</code> and <code>followers</code> actions. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_04a4aa6b0115df17434a57768a1bca0b3212f283">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20UsersController%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22follow%20pages%22%20do%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20not%20signed%20in%22%20do%0A%0A%20%20%20%20%20%20it%20%22should%20protect%20'following'%22%20do%0A%20%20%20%20%20%20%20%20get%20:following,%20:id%20=%3E%201%0A%20%20%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20protect%20'followers'%22%20do%0A%20%20%20%20%20%20%20%20get%20:followers,%20:id%20=%3E%201%0A%20%20%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20signed%20in%22%20do%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20%20%20@other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20@user.follow!(@other_user)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20show%20user%20following%22%20do%0A%20%20%20%20%20%20%20%20get%20:following,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20user_path(@other_user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20@other_user.name)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20show%20user%20followers%22%20do%0A%20%20%20%20%20%20%20%20get%20:followers,%20:id%20=%3E%20@other_user%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20@user.name)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20UsersController%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22follow%20pages%22%20do%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20not%20signed%20in%22%20do%0A%0A%20%20%20%20%20%20it%20%22should%20protect%20'following'%22%20do%0A%20%20%20%20%20%20%20%20get%20:following,%20:id%20=%3E%201%0A%20%20%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20protect%20'followers'%22%20do%0A%20%20%20%20%20%20%20%20get%20:followers,%20:id%20=%3E%201%0A%20%20%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20describe%20%22when%20signed%20in%22%20do%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20%20%20@other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20@user.follow!(@other_user)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20show%20user%20following%22%20do%0A%20%20%20%20%20%20%20%20get%20:following,%20:id%20=%3E%20@user%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20user_path(@other_user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20@other_user.name)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20show%20user%20followers%22%20do%0A%20%20%20%20%20%20%20%20get%20:followers,%20:id%20=%3E%20@other_user%0A%20%20%20%20%20%20%20%20response.should%20have_selector(%22a%22,%20:href%20=%3E%20user_path(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:content%20=%3E%20@user.name)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.28.</span> <span class="description">Test for the <code>following</code> and <code>followers</code> actions. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -2002,28 +1414,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.29.</span> <span class="description">The <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_c634255abf6c0b429341c6e98aa424bf524dfd64">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:except%20=%3E%20[:show,%20:new,%20:create]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following%0A%20%20%20%20@title%20=%20%22Following%22%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.following.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%0A%20%20def%20followers%0A%20%20%20%20@title%20=%20%22Followers%22%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.followers.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:except%20=%3E%20[:show,%20:new,%20:create]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following%0A%20%20%20%20@title%20=%20%22Following%22%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.following.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%0A%20%20def%20followers%0A%20%20%20%20@title%20=%20%22Followers%22%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.followers.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.29.</span> <span class="description">The <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:except</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="o">]</span>
@@ -2057,28 +1448,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.30.</span> <span class="description">The <code>show_follow</code> view used to render following and followers. <br /> <code>app/views/users/show_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_b3e76dd08b784ede6d1f05b441b5f30ca0d8b762">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3Ctable%20summary=%22Information%20about%20following/followers%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%3C%25=%20@title%20%25%3E%3C/h1%3E%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%3C%25%20unless%20@users.empty?%20%25%3E%0A%20%20%20%20%20%20%20%20%3Cul%20class=%22users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%25=%20render%20@users%20%25%3E%0A%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20will_paginate%20@users%20%25%3E%0A%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EMicroposts%3C/strong%3E%20%3C%25=%20@user.microposts.count%20%25%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%20%20%3C%25%20unless%20@users.empty?%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25%20@users.each%20do%20%7Cuser%7C%20%25%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%25=%20link_to%20gravatar_for(user,%20:size%20=%3E%2030),%20user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3Ctable%20summary=%22Information%20about%20following/followers%22%3E%0A%20%20%3Ctr%3E%0A%20%20%20%20%3Ctd%20class=%22main%22%3E%0A%20%20%20%20%20%20%3Ch1%3E%3C%25=%20@title%20%25%3E%3C/h1%3E%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%3C%25%20unless%20@users.empty?%20%25%3E%0A%20%20%20%20%20%20%20%20%3Cul%20class=%22users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%25=%20render%20@users%20%25%3E%0A%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%3C%25=%20will_paginate%20@users%20%25%3E%0A%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%20%20%3Ctd%20class=%22sidebar%20round%22%3E%0A%20%20%20%20%20%20%3Cstrong%3EName%3C/strong%3E%20%3C%25=%20@user.name%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EURL%3C/strong%3E%20%3C%25=%20link_to%20user_path(@user),%20@user%20%25%3E%3Cbr%20/%3E%0A%20%20%20%20%20%20%3Cstrong%3EMicroposts%3C/strong%3E%20%3C%25=%20@user.microposts.count%20%25%3E%0A%20%20%20%20%20%20%3C%25=%20render%20'shared/stats'%20%25%3E%0A%20%20%20%20%20%20%3C%25%20unless%20@users.empty?%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25%20@users.each%20do%20%7Cuser%7C%20%25%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%25=%20link_to%20gravatar_for(user,%20:size%20=%3E%2030),%20user%20%25%3E%0A%20%20%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%20%20%3C%25%20end%20%25%3E%0A%20%20%20%20%3C/td%3E%0A%20%20%3C/tr%3E%0A%3C/table%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.30.</span> <span class="description">The <code>show_follow</code> view used to render following and followers. <br /> <code>app/views/users/show_follow.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">summary=</span><span class="s">&quot;Information about following/followers&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -2146,28 +1516,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.31.</span> <span class="description">Tests for the Relationships controller actions. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_1885f0f9e3df7eea4bd5831873c3141b9e101537">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=require%20'spec_helper'%0A%0Adescribe%20RelationshipsController%20do%0A%0A%20%20describe%20%22access%20control%22%20do%0A%20%20%0A%20%20%20%20it%20%22should%20require%20signin%20for%20create%22%20do%0A%20%20%20%20%20%20post%20:create%0A%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20require%20signin%20for%20destroy%22%20do%0A%20%20%20%20%20%20delete%20:destroy,%20:id%20=%3E%201%0A%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20describe%20%22POST%20'create'%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20create%20a%20relationship%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20post%20:create,%20:relationship%20=%3E%20%7B%20:followed_id%20=%3E%20@followed%20%7D%0A%20%20%20%20%20%20%20%20response.should%20be_redirect%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(1)%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20describe%20%22DELETE%20'destroy'%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@relationship%20=%20@user.relationships.find_by_followed_id(@followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20destroy%20a%20relationship%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20delete%20:destroy,%20:id%20=%3E%20@relationship%0A%20%20%20%20%20%20%20%20response.should%20be_redirect%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(%2D1)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=require%20'spec_helper'%0A%0Adescribe%20RelationshipsController%20do%0A%0A%20%20describe%20%22access%20control%22%20do%0A%20%20%0A%20%20%20%20it%20%22should%20require%20signin%20for%20create%22%20do%0A%20%20%20%20%20%20post%20:create%0A%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20require%20signin%20for%20destroy%22%20do%0A%20%20%20%20%20%20delete%20:destroy,%20:id%20=%3E%201%0A%20%20%20%20%20%20response.should%20redirect_to(signin_path)%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20describe%20%22POST%20'create'%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20create%20a%20relationship%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20post%20:create,%20:relationship%20=%3E%20%7B%20:followed_id%20=%3E%20@followed%20%7D%0A%20%20%20%20%20%20%20%20response.should%20be_redirect%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(1)%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20describe%20%22DELETE%20'destroy'%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@user%20=%20test_sign_in(Factory(:user))%0A%20%20%20%20%20%20@followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20@user.follow!(@followed)%0A%20%20%20%20%20%20@relationship%20=%20@user.relationships.find_by_followed_id(@followed)%0A%20%20%20%20end%0A%0A%20%20%20%20it%20%22should%20destroy%20a%20relationship%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20delete%20:destroy,%20:id%20=%3E%20@relationship%0A%20%20%20%20%20%20%20%20response.should%20be_redirect%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(%2D1)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.31.</span> <span class="description">Tests for the Relationships controller actions. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -2242,28 +1591,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.32.</span> <span class="description">The Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_2dcd6c6fdcbcc9bb8e38c21d589741a4b21cb282">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20redirect_to%20@user%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20redirect_to%20@user%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20redirect_to%20@user%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20redirect_to%20@user%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.32.</span> <span class="description">The Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RelationshipsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span>
@@ -2314,28 +1642,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.33.</span> <span class="description">A form for following a user using Ajax. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_a0ddba8dbb1d23a7a7e4a7cd894da91696883bee">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25=%20form_for%20current_user.relationships.build(:followed_id%20=%3E%20@user.id),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:remote%20=%3E%20true%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%3E%3C%25=%20f.hidden_field%20:followed_id%20%25%3E%3C/div%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Follow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25=%20form_for%20current_user.relationships.build(:followed_id%20=%3E%20@user.id),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:remote%20=%3E%20true%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%3E%3C%25=%20f.hidden_field%20:followed_id%20%25%3E%3C/div%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Follow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.33.</span> <span class="description">A form for following a user using Ajax. <br /> <code>app/views/users/_follow.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="n">current_user</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="ss">:followed_id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
              <span class="ss">:remote</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
@@ -2352,28 +1659,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.34.</span> <span class="description">A form for unfollowing a user using Ajax. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_617e62898466f0263dc80f0ff70a9e1d30500f10">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=%3C%25=%20form_for%20current_user.relationships.find_by_followed_id(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:html%20=%3E%20%7B%20:method%20=%3E%20:delete%20%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:remote%20=%3E%20true%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Unfollow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=%3C%25=%20form_for%20current_user.relationships.find_by_followed_id(@user),%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:html%20=%3E%20%7B%20:method%20=%3E%20:delete%20%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20:remote%20=%3E%20true%20do%20%7Cf%7C%20%25%3E%0A%20%20%3Cdiv%20class=%22actions%22%3E%3C%25=%20f.submit%20%22Unfollow%22%20%25%3E%3C/div%3E%0A%3C%25%20end%20%25%3E%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.34.</span> <span class="description">A form for unfollowing a user using Ajax. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="n">current_user</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">find_by_followed_id</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span>
              <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span> <span class="p">},</span>
@@ -2404,28 +1690,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.35.</span> <span class="description">Tests for the Relationships controller responses to Ajax requests. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_96f9a59326e96fb63f8b3dba3bc4f3c3c994cc16">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20RelationshipsController%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22POST%20'create'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20create%20a%20relationship%20using%20Ajax%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20xhr%20:post,%20:create,%20:relationship%20=%3E%20%7B%20:followed_id%20=%3E%20@followed%20%7D%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(1)%0A%20%20%20%20end%0A%20%20end%0A%20%20%0A%20%20describe%20%22DELETE%20'destroy'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20destroy%20a%20relationship%20using%20Ajax%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20xhr%20:delete,%20:destroy,%20:id%20=%3E%20@relationship%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(%2D1)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20RelationshipsController%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22POST%20'create'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20create%20a%20relationship%20using%20Ajax%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20xhr%20:post,%20:create,%20:relationship%20=%3E%20%7B%20:followed_id%20=%3E%20@followed%20%7D%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(1)%0A%20%20%20%20end%0A%20%20end%0A%20%20%0A%20%20describe%20%22DELETE%20'destroy'%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20it%20%22should%20destroy%20a%20relationship%20using%20Ajax%22%20do%0A%20%20%20%20%20%20lambda%20do%0A%20%20%20%20%20%20%20%20xhr%20:delete,%20:destroy,%20:id%20=%3E%20@relationship%0A%20%20%20%20%20%20%20%20response.should%20be_success%0A%20%20%20%20%20%20end.should%20change(Relationship,%20:count).by(%2D1)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.35.</span> <span class="description">Tests for the Relationships controller responses to Ajax requests. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">RelationshipsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -2465,28 +1730,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.36.</span> <span class="description">Responding to Ajax requests in the Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_e3c348380b2c7b15ea0cda655bb665bbce4368d7">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20respond_to%20do%20%7Cformat%7C%0A%20%20%20%20%20%20format.html%20%7B%20redirect_to%20@user%20%7D%0A%20%20%20%20%20%20format.js%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20respond_to%20do%20%7Cformat%7C%0A%20%20%20%20%20%20format.html%20%7B%20redirect_to%20@user%20%7D%0A%20%20%20%20%20%20format.js%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20respond_to%20do%20%7Cformat%7C%0A%20%20%20%20%20%20format.html%20%7B%20redirect_to%20@user%20%7D%0A%20%20%20%20%20%20format.js%0A%20%20%20%20end%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20respond_to%20do%20%7Cformat%7C%0A%20%20%20%20%20%20format.html%20%7B%20redirect_to%20@user%20%7D%0A%20%20%20%20%20%20format.js%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.36.</span> <span class="description">Responding to Ajax requests in the Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RelationshipsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span>
@@ -2547,28 +1791,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.37.</span> <span class="description">The JavaScript Embedded Ruby to create a following relationship. <br /> <code>app/views/relationships/create.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_662cd766d507f9e9031ba8afa0923b50b5668b9f">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=$(%22follow_form%22).update(%22%3C%25=%20escape_javascript(render('users/unfollow'))%20%25%3E%22)%0A$(%22followers%22).update('%3C%25=%20%22%23%7B@user.followers.count%7D%20followers%22%20%25%3E')%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=$(%22follow_form%22).update(%22%3C%25=%20escape_javascript(render('users/unfollow'))%20%25%3E%22)%0A$(%22followers%22).update('%3C%25=%20%22%23%7B@user.followers.count%7D%20followers%22%20%25%3E')%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.37.</span> <span class="description">The JavaScript Embedded Ruby to create a following relationship. <br /> <code>app/views/relationships/create.js.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;</span><span class="p">)</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;followers&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
@@ -2582,28 +1805,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.38.</span> <span class="description">The Ruby JavaScript (RJS) to destroy a following relationship. <br /> <code>app/views/relationships/destroy.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_7536cc1afeb987659f52621aa1bf6d6c7ad08e68">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=$(%22follow_form%22).update(%22%3C%25=%20escape_javascript(render('users/follow'))%20%25%3E%22)%0A$(%22followers%22).update('%3C%25=%20%22%23%7B@user.followers.count%7D%20followers%22%20%25%3E')%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=$(%22follow_form%22).update(%22%3C%25=%20escape_javascript(render('users/follow'))%20%25%3E%22)%0A$(%22followers%22).update('%3C%25=%20%22%23%7B@user.followers.count%7D%20followers%22%20%25%3E')%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.38.</span> <span class="description">The Ruby JavaScript (RJS) to destroy a following relationship. <br /> <code>app/views/relationships/destroy.js.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;</span><span class="p">)</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;followers&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
@@ -2660,28 +1862,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.39.</span> <span class="description">Tests for <code>Micropost.from_users_followed_by</code>. <br /> <code>spec/models/micropost_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_db9b2649f901e7e13ae0112defbe74ddcdc99abf">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20Micropost%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22from_users_followed_by%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20@third_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20@user_post%20%20=%20@user.microposts.create!(:content%20=%3E%20%22foo%22)%0A%20%20%20%20%20%20@other_post%20=%20@other_user.microposts.create!(:content%20=%3E%20%22bar%22)%0A%20%20%20%20%20%20@third_post%20=%20@third_user.microposts.create!(:content%20=%3E%20%22baz%22)%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20@user.follow!(@other_user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20from_users_followed_by%20class%20method%22%20do%0A%20%20%20%20%20%20Micropost.should%20respond_to(:from_users_followed_by)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20include%20the%20followed%20user's%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should%20include(@other_post)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20include%20the%20user's%20own%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should%20include(@user_post)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20not%20include%20an%20unfollowed%20user's%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should_not%20include(@third_post)%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20Micropost%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22from_users_followed_by%22%20do%0A%0A%20%20%20%20before(:each)%20do%0A%20%20%20%20%20%20@other_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20@third_user%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20@user_post%20%20=%20@user.microposts.create!(:content%20=%3E%20%22foo%22)%0A%20%20%20%20%20%20@other_post%20=%20@other_user.microposts.create!(:content%20=%3E%20%22bar%22)%0A%20%20%20%20%20%20@third_post%20=%20@third_user.microposts.create!(:content%20=%3E%20%22baz%22)%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20@user.follow!(@other_user)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20have%20a%20from_users_followed_by%20class%20method%22%20do%0A%20%20%20%20%20%20Micropost.should%20respond_to(:from_users_followed_by)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20include%20the%20followed%20user's%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should%20include(@other_post)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20include%20the%20user's%20own%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should%20include(@user_post)%0A%20%20%20%20end%0A%20%20%20%20%0A%20%20%20%20it%20%22should%20not%20include%20an%20unfollowed%20user's%20microposts%22%20do%0A%20%20%20%20%20%20Micropost.from_users_followed_by(@user).should_not%20include(@third_post)%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.39.</span> <span class="description">Tests for <code>Micropost.from_users_followed_by</code>. <br /> <code>spec/models/micropost_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">Micropost</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -2729,28 +1910,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.40.</span> <span class="description">The final tests for the status feed. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_4902cf250e368a25fce3fb295558e30356946842">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22micropost%20associations%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22status%20feed%22%20do%0A%0A%20%20%20%20%20%20it%20%22should%20have%20a%20feed%22%20do%0A%20%20%20%20%20%20%20%20@user.should%20respond_to(:feed)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20include%20the%20user's%20microposts%22%20do%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(@mp1)%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(@mp2)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20not%20include%20a%20different%20user's%20microposts%22%20do%0A%20%20%20%20%20%20%20%20mp3%20=%20Factory(:micropost,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:user%20=%3E%20Factory(:user,%20:email%20=%3E%20Factory.next(:email)))%0A%20%20%20%20%20%20%20%20@user.feed.should_not%20include(mp3)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20include%20the%20microposts%20of%20followed%20users%22%20do%0A%20%20%20%20%20%20%20%20followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20mp3%20=%20Factory(:micropost,%20:user%20=%3E%20followed)%0A%20%20%20%20%20%20%20%20@user.follow!(followed)%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(mp3)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=describe%20User%20do%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20describe%20%22micropost%20associations%22%20do%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20describe%20%22status%20feed%22%20do%0A%0A%20%20%20%20%20%20it%20%22should%20have%20a%20feed%22%20do%0A%20%20%20%20%20%20%20%20@user.should%20respond_to(:feed)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20include%20the%20user's%20microposts%22%20do%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(@mp1)%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(@mp2)%0A%20%20%20%20%20%20end%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20it%20%22should%20not%20include%20a%20different%20user's%20microposts%22%20do%0A%20%20%20%20%20%20%20%20mp3%20=%20Factory(:micropost,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20:user%20=%3E%20Factory(:user,%20:email%20=%3E%20Factory.next(:email)))%0A%20%20%20%20%20%20%20%20@user.feed.should_not%20include(mp3)%0A%20%20%20%20%20%20end%0A%0A%20%20%20%20%20%20it%20%22should%20include%20the%20microposts%20of%20followed%20users%22%20do%0A%20%20%20%20%20%20%20%20followed%20=%20Factory(:user,%20:email%20=%3E%20Factory.next(:email))%0A%20%20%20%20%20%20%20%20mp3%20=%20Factory(:micropost,%20:user%20=%3E%20followed)%0A%20%20%20%20%20%20%20%20@user.follow!(followed)%0A%20%20%20%20%20%20%20%20@user.feed.should%20include(mp3)%0A%20%20%20%20%20%20end%0A%20%20%20%20end%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20%20%20.%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.40.</span> <span class="description">The final tests for the status feed. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -2799,28 +1959,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.41.</span> <span class="description">Adding the completed feed to the User model. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_27b878ebbe0e68452b4cae653d997ce22ef5ef46">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20feed%0A%20%20%20%20Micropost.from_users_followed_by(self)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20User%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20feed%0A%20%20%20%20Micropost.from_users_followed_by(self)%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.41.</span> <span class="description">Adding the completed feed to the User model. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -2913,28 +2052,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.42.</span> <span class="description">A first cut at the <code>from_users_followed_by</code> method. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_12ea71737a3f09edb7dd3877b22aed693d06aef8">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20self.from_users_followed_by(user)%0A%20%20%20%20followed_ids%20=%20user.following.map(%26:id).join(%22,%20%22)%0A%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20?%22,%20user)%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20self.from_users_followed_by(user)%0A%20%20%20%20followed_ids%20=%20user.following.map(%26:id).join(%22,%20%22)%0A%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20?%22,%20user)%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.42.</span> <span class="description">A first cut at the <code>from_users_followed_by</code> method. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -3007,28 +2125,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.43.</span> <span class="description">Improving <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_c12245c6ec61b8f306cd65d3373a9673b7c6a8f2">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20default_scope%20:order%20=%3E%20'microposts.created_at%20DESC'%0A%0A%20%20%23%20Return%20microposts%20from%20the%20users%20being%20followed%20by%20the%20given%20user.%0A%20%20scope%20:from_users_followed_by,%20lambda%20%7B%20%7Cuser%7C%20followed_by(user)%20%7D%0A%0A%20%20private%0A%0A%20%20%20%20%23%20Return%20an%20SQL%20condition%20for%20users%20followed%20by%20the%20given%20user.%0A%20%20%20%20%23%20We%20include%20the%20user's%20own%20id%20as%20well.%0A%20%20%20%20def%20self.followed_by(user)%0A%20%20%20%20%20%20followed_ids%20=%20user.following.map(%26:id).join(%22,%20%22)%0A%20%20%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20:user_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%20:user_id%20=%3E%20user%20%7D)%0A%20%20%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20default_scope%20:order%20=%3E%20'microposts.created_at%20DESC'%0A%0A%20%20%23%20Return%20microposts%20from%20the%20users%20being%20followed%20by%20the%20given%20user.%0A%20%20scope%20:from_users_followed_by,%20lambda%20%7B%20%7Cuser%7C%20followed_by(user)%20%7D%0A%0A%20%20private%0A%0A%20%20%20%20%23%20Return%20an%20SQL%20condition%20for%20users%20followed%20by%20the%20given%20user.%0A%20%20%20%20%23%20We%20include%20the%20user's%20own%20id%20as%20well.%0A%20%20%20%20def%20self.followed_by(user)%0A%20%20%20%20%20%20followed_ids%20=%20user.following.map(%26:id).join(%22,%20%22)%0A%20%20%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20:user_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%20:user_id%20=%3E%20user%20%7D)%0A%20%20%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.43.</span> <span class="description">Improving <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -3143,28 +2240,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.44.</span> <span class="description">The final implementation of <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_178c3e137b3db85ca52b460d2b4aff523321ad42">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20default_scope%20:order%20=%3E%20'microposts.created_at%20DESC'%0A%0A%20%20%23%20Return%20microposts%20from%20the%20users%20being%20followed%20by%20the%20given%20user.%0A%20%20scope%20:from_users_followed_by,%20lambda%20%7B%20%7Cuser%7C%20followed_by(user)%20%7D%0A%0A%20%20private%0A%0A%20%20%20%20%23%20Return%20an%20SQL%20condition%20for%20users%20followed%20by%20the%20given%20user.%0A%20%20%20%20%23%20We%20include%20the%20user's%20own%20id%20as%20well.%0A%20%20%20%20def%20self.followed_by(user)%0A%20%20%20%20%20%20followed_ids%20=%20%25(SELECT%20followed_id%20FROM%20relationships%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20WHERE%20follower_id%20=%20:user_id)%0A%20%20%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20:user_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%20:user_id%20=%3E%20user%20%7D)%0A%20%20%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20Micropost%20%3C%20ActiveRecord::Base%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20default_scope%20:order%20=%3E%20'microposts.created_at%20DESC'%0A%0A%20%20%23%20Return%20microposts%20from%20the%20users%20being%20followed%20by%20the%20given%20user.%0A%20%20scope%20:from_users_followed_by,%20lambda%20%7B%20%7Cuser%7C%20followed_by(user)%20%7D%0A%0A%20%20private%0A%0A%20%20%20%20%23%20Return%20an%20SQL%20condition%20for%20users%20followed%20by%20the%20given%20user.%0A%20%20%20%20%23%20We%20include%20the%20user's%20own%20id%20as%20well.%0A%20%20%20%20def%20self.followed_by(user)%0A%20%20%20%20%20%20followed_ids%20=%20%25(SELECT%20followed_id%20FROM%20relationships%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20WHERE%20follower_id%20=%20:user_id)%0A%20%20%20%20%20%20where(%22user_id%20IN%20(%23%7Bfollowed_ids%7D)%20OR%20user_id%20=%20:user_id%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%20:user_id%20=%3E%20user%20%7D)%0A%20%20%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.44.</span> <span class="description">The final implementation of <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -3204,28 +2280,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.45.</span> <span class="description">The <code>home</code> action with a paginated feed. <br /> <code>app/controllers/pages_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_8d1bdabf45b53697c1faa48c0397eeebabea250c">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20PagesController%20%3C%20ApplicationController%0A%0A%20%20def%20home%0A%20%20%20%20@title%20=%20%22Home%22%0A%20%20%20%20if%20signed_in?%0A%20%20%20%20%20%20@micropost%20=%20Micropost.new%0A%20%20%20%20%20%20@feed_items%20=%20current_user.feed.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20PagesController%20%3C%20ApplicationController%0A%0A%20%20def%20home%0A%20%20%20%20@title%20=%20%22Home%22%0A%20%20%20%20if%20signed_in?%0A%20%20%20%20%20%20@micropost%20=%20Micropost.new%0A%20%20%20%20%20%20@feed_items%20=%20current_user.feed.paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.45.</span> <span class="description">The <code>home</code> action with a paginated feed. <br /> <code>app/controllers/pages_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -3405,28 +2460,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.46.</span> <span class="description">A compact refactoring of <a class="ref" href="following-users#code:relationships_controller_ajax">Listing&nbsp;12.36</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_b7763f334828a2c00ccb7b7529383a9d624e8ef7">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%20%20%0A%20%20respond_to%20:html,%20:js%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20respond_with%20@user%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20respond_with%20@user%0A%20%20end%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20RelationshipsController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate%0A%20%20%0A%20%20respond_to%20:html,%20:js%0A%0A%20%20def%20create%0A%20%20%20%20@user%20=%20User.find(params[:relationship][:followed_id])%0A%20%20%20%20current_user.follow!(@user)%0A%20%20%20%20respond_with%20@user%0A%20%20end%0A%0A%20%20def%20destroy%0A%20%20%20%20@user%20=%20Relationship.find(params[:id]).followed%0A%20%20%20%20current_user.unfollow!(@user)%0A%20%20%20%20respond_with%20@user%0A%20%20end%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.46.</span> <span class="description">A compact refactoring of <a class="ref" href="following-users#code:relationships_controller_ajax">Listing&nbsp;12.36</a>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RelationshipsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span>
@@ -3455,28 +2489,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.47.</span> <span class="description">Refactored <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              id="clippy_5da024334c5ed7016b270f424bbceb2a8b6230ea">
-      <param name="movie" value="/flash/clippy.swf"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following%0A%20%20%20%20show_follow(:following)%0A%20%20end%0A%0A%20%20def%20followers%0A%20%20%20%20show_follow(:followers)%0A%20%20end%0A%20%20%0A%20%20def%20show_follow(action)%0A%20%20%20%20@title%20=%20action.to_s.capitalize%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.send(action).paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
-      <param name="bgcolor" value="#ffffff" />
-      <embed src="/flash/clippy.swf"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20following%0A%20%20%20%20show_follow(:following)%0A%20%20end%0A%0A%20%20def%20followers%0A%20%20%20%20show_follow(:followers)%0A%20%20end%0A%20%20%0A%20%20def%20show_follow(action)%0A%20%20%20%20@title%20=%20action.to_s.capitalize%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@users%20=%20@user.send(action).paginate(:page%20=%3E%20params[:page])%0A%20%20%20%20render%20'show_follow'%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
-             bgcolor="#ffffff"
-      />
-      </object>
+<div class="listing"><span class="header">Listing 12.47.</span> <span class="description">Refactored <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>

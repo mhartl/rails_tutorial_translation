@@ -1,4 +1,10 @@
-== Welcome to Rails
+== Ruby on Rails Tutorial
+
+This is the HTML source (together with a minimal Rails app) for the [Ruby on Rails Tutorial book](http://ruby.railstutorial.org/ruby-on-rails-tutorial-book). The purpose of this source is to allow translation of the book into other languages. 
+
+Here's how to do it:
+
+    $ git checkout -b spanish
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.

@@ -110,21 +110,18 @@
 
 <p><a class="ref" href="static-pages#top">第3章</a>では、サンプルアプリケーション(<tt>sample_app</tt>と呼びます)を作成します。このアプリはTDD(テスト駆動開発)で開発し、<a class="ref" href="static-pages#top">第3章</a>で静的ページ(と少しの動的コンテンツ)を追加する事から始めます。<a class="ref" href="rails-flavored-ruby#top">第4章</a>では少し回り道をし、Railsを動かしているRuby言語を学び、<a class="ref" href="filling-in-the-layout#top">第5章</a>から<a class="ref" href="updating-showing-and-deleting-users#top">第10章</a>ではレイアウト、ユーザーのデータモデル、そしてユーザー登録・認証システムを作りサンプルアプリの基礎を完成させます。最後に<a class="ref" href="user-microposts#top">第11章</a>と<a class="ref" href="following-users#top">第12章</a>ではマイクロブログ機能とソーシャル機能を実装し、機能するサイトに仕上げます。
 
-<p>最終的なサンプルアプリは、元々は同じRailsで書かれていた<sup class="footnote" id="fnref:1.4"><a href="#fn:1.4">4</a></sup><a href="http://twitter.com/">あるソーシャル・マイクロブログサイト</a>にとてもよく似ている仕上がりになります。私たちの工程はもちろん、このサンプルアプリを中心に進めて行きますが、<em>Rails チュートリアル</em>では一般的な論を重視しているので、今後Webアプリケーションを作成する時に、どのようなアプリケーションであっても通用する基礎を築きます。</p>
+<p>最終的なサンプルアプリは、元々は同じRailsで書かれていた<sup class="footnote" id="fnref:1.4"><a href="#fn:1.4">4</a></sup><a href="http://twitter.com/">あるソーシャル・マイクロブログサイト</a>にとてもよく似た仕上がりになります。私たちの工程はもちろん、このサンプルアプリを中心に進めて行きますが、<em>Rails チュートリアル</em>では一般的な論を重視しているので、今後Webアプリケーションを作成する時に、どのようなアプリケーションであっても通用する基礎を築きます。</p>
 
 <div class="label" id="sidebar:scaffolding"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 1.1.</span><span class="description">Scaffolding: Quicker, easier, more seductive</span></span>
-<p>From the beginning, Rails has benefited from a palpable sense of excitement, starting with the famous <a href="http://media.rubyonrails.org/video/rails_take2_with_sound.mov">15-minute weblog video</a> by Rails creator David Heinemeier Hansson, now updated as the <a href="http://media.rubyonrails.org/video/rails_blog_2.mov">15-minute weblog using Rails&nbsp;2</a> by Ryan Bates. These videos are a great way to get a taste of Rails&rsquo; power, and I recommend watching them. But be warned: they accomplish their amazing fifteen-minute feat using a feature called <em>scaffolding</em>, which relies heavily on <em>generated code</em>, magically created by the Rails <code>generate</code> command.</p>
+<div class="sidebar"><span class="title"><span class="header">Box 1.1.</span><span class="description">Scaffolding: 早くて簡単、でもそれは誘惑</span></span>
 
-<p>When writing a Ruby on Rails tutorial, it is tempting to rely on the scaffolding approach&mdash;it&rsquo;s <a href="http://en.wikipedia.org/wiki/Dark_side_(Star_Wars)">quicker, easier, more seductive</a>. But the complexity and sheer amount of code in the scaffolding can be utterly overwhelming to a beginning Rails developer; you may be able to use it, but you probably won&rsquo;t understand it. Following the scaffolding approach risks turning you into a virtuoso script generator with little (and brittle) actual knowledge of Rails.</p>
+<p>Railsの作者David Heinemer Hansson氏による有名な<a href="http://media.rubyonrails.org/video/rails_take2_with_sound.mov">「15分で作るブログ」ビデオ</a>(現在はRyan Bates氏による<a href="http://media.rubyonrails.org/video/rails_blog_2.mov">「Rails 2による15分で作るブログ」</a>に更新されています)など、Railsは当初から刺激の多いフレームワークでした。これらのビデオはRailsのパワーを拝見するには最適で、是非見る事をお勧めします。しかし、これらのビデオは15分でブログを作るという離れ業を、<em>scaffold</em>という機能を利用して成し遂げています。この<em>scaffold</em>という機能は、Railsの<code>generate</code>コマンドによる<em>コード生成</em>に依存します。
 
-<p>In <em>Ruby on Rails Tutorial</em>, we&rsquo;ll take the (nearly) polar opposite approach: although <a class="ref" href="a-demo-app#top">Chapter&nbsp;2</a> will develop a small demo app using scaffolding, the core of <em>Rails Tutorial</em> is the sample app, which we&rsquo;ll start writing in <a class="ref" href="static-pages#top">Chapter&nbsp;3</a>. At each stage of developing the sample application, we will generate <em>small, bite-sized</em> pieces of code&mdash;simple enough to understand, yet novel enough to be challenging. The cumulative effect will be a deeper, more flexible knowledge of Rails, giving you a good background for writing nearly any type of web application.</p>
-</div>
+<p>Ruby on Railsのチュートリアルを書く時、素早く簡単にコードが生成出来るscaffoldの機能をついあてにしがちです。しかし、生成されたコードの複雑さとその量の多さに、初心者は圧倒されるかもしれません。動くには動くのですが、ソースコードを見ても何がなんだか理解できません。コード自動生成に頼ると、スクリプト作成の達人にはなるかもしれませんが、Rails自体の知識はほとんど身に付きません。</p>
 
-
-
+<p><em>Ruby on Rails チュートリアル</em>では、ほぼ逆の方向で開発を行います。<a class="ref" href="a-demo-app#top">第2章</a>ではscaffoldを使ってデモアプリを作成しますが、このチュートリアルの中核は<a class="ref" href="static-pages#top">第3章</a>から作成するサンプルアプリケーションです。開発段階ごとに「理解出来る程度にシンプルで、同時にやりがいのある程度に新しいコンセプトを含む」コードの生成を<em>少しだけ</em>行います。最終的には、どんなWebアプリを作成する時にも役立つ、より深く柔軟なRailsの知識を身につけられるようになっています。</p></div>
 
 <div class="label" id="sec:introduction"></div>
 

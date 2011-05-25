@@ -385,7 +385,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 <div class="label" id="sec:an_active_record_callback"></div>
 
 
-<h3><a id="sec:7.1.3" href="modeling-and-viewing-users-two#sec:an_active_record_callback" class="heading"><span class="number">7.1.3</span> An Active Record callback</a></h3>
+<h3><a id="sec:7.1.3" href="modeling-and-viewing-users-two#sec:an_active_record_callback" class="heading"><span class="number">7.1.3</span> Un <em>callback</em> de l'Active Record</a></h3>
 
 
 <p>Now that our User model has an attribute for storing the password, we need to arrange to generate and save the encrypted password when Active Record saves the user to the database. We&rsquo;ll do this with a technique called a <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a>, which is a method that gets invoked at a particular point in the lifetime of an Active Record object. In the present case, we&rsquo;ll use a <code>before_save</code> callback to create <code>encrypted_password</code> just before the user is saved.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>

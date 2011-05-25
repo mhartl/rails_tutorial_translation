@@ -964,7 +964,7 @@ in both the <code>following</code> and <code>followers</code> tables.</p>
 <div class="label" id="sec:stats_and_a_follow_form"></div>
 
 
-<h3><a id="sec:12.2.2" href="following-users#sec:stats_and_a_follow_form" class="heading"><span class="number">12.2.2</span> Stats and a follow form</a></h3>
+<h3><a id="sec:12.2.2" href="following-users#sec:stats_and_a_follow_form" class="heading"><span class="number">12.2.2</span> Statistiques et formulaire de suivi</a></h3>
 
 
 <p>Now that our sample users have both following and followers arrays, we need to update the profile pages and home pages to reflect this. We&rsquo;ll start by making a partial to display the following and follower statistics on the profile and home pages, as mocked up in <a class="ref" href="following-users#fig:page_flow_profile_mockup">Figure&nbsp;12.1</a> and <a class="ref" href="following-users#fig:page_flow_home_page_feed_mockup">Figure&nbsp;12.5</a>. The result will be displays of the number following and the number of followers, together with links to their dedicated display pages. We&rsquo;ll next add a follow/unfollow form, and then make dedicated pages for showing user following and followers.</p>
@@ -1507,7 +1507,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:a_working_follow_button_the_standard_way"></div>
 
 
-<h3><a id="sec:12.2.4" href="following-users#sec:a_working_follow_button_the_standard_way" class="heading"><span class="number">12.2.4</span> A working follow button the standard way</a></h3>
+<h3><a id="sec:12.2.4" href="following-users#sec:a_working_follow_button_the_standard_way" class="heading"><span class="number">12.2.4</span> Un bouton de suivi fonctionnant de façon standard</a></h3>
 
 
 <p>Now that our views are in order, it&rsquo;s time to get the follow/unfollow buttons working. Since following a user creates a relationship, and unfollowing a user destroys a relationship, this involves writing the <code>create</code> and <code>destroy</code> actions for the Relationships controller. Naturally, both actions should be protected; for signed-in users, we will use the <code>follow!</code> and <code>unfollow!</code> utility methods defined in <a class="ref" href="following-users#sec:following">Section&nbsp;12.1.4</a> to create and destroy the relevant relationships. These requirements lead to the tests in <a class="ref" href="following-users#code:relationships_controller_spec">Listing&nbsp;12.31</a>.</p>
@@ -1820,7 +1820,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:the_status_feed"></div>
 
 
-<h2><a id="sec:12.3" href="following-users#sec:the_status_feed" class="heading"><span class="number">12.3</span> The status feed</a></h2>
+<h2><a id="sec:12.3" href="following-users#sec:the_status_feed" class="heading"><span class="number">12.3</span> L'état de l'alimention</a></h2>
 
 
 <p>We come now to the pinnacle of our sample application: the status feed. Appropriately, this section contains some of the most advanced material in the entire tutorial. Making the status feed involves assembling an array of the microposts from the users being followed by the current user, along with the current user&rsquo;s own microposts. To accomplish this feat, we will need some fairly advanced Rails, Ruby, and even SQL programming techniques.</p>
@@ -2072,7 +2072,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:scopes_subselects_and_a_lambda"></div>
 
 
-<h3><a id="sec:12.3.3" href="following-users#sec:scopes_subselects_and_a_lambda" class="heading"><span class="number">12.3.3</span> Scopes, subselects, and a lambda</a></h3>
+<h3><a id="sec:12.3.3" href="following-users#sec:scopes_subselects_and_a_lambda" class="heading"><span class="number">12.3.3</span> Portées, sous-requêtes et fonction <em>lambda</em></a></h3>
 
 
 <p>As hinted at in the last section, the feed implementation in <a class="ref" href="following-users#sec:a_first_feed_implementation">Section&nbsp;12.3.2</a> doesn&rsquo;t scale well when the number of microposts in the feed is large, as would likely happen if a user were following, say, 5000 other users. In this section, we&rsquo;ll reimplement the status feed in a way that scales better with the number of followed users.</p>
@@ -2271,7 +2271,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:the_new_status_feed"></div>
 
 
-<h3><a id="sec:12.3.4" href="following-users#sec:the_new_status_feed" class="heading"><span class="number">12.3.4</span> The new status feed</a></h3>
+<h3><a id="sec:12.3.4" href="following-users#sec:the_new_status_feed" class="heading"><span class="number">12.3.4</span> Nouvel état de l'alimentation</a></h3>
 
 
 <p>With the code in <a class="ref" href="following-users#code:from_users_followed_by_final">Listing&nbsp;12.44</a>, our status feed is complete. As a reminder, the code for the Home page appears in <a class="ref" href="following-users#code:real_feed_instance_variable">Listing&nbsp;12.45</a>; this code creates a paginated feed of the relevant microposts for use in the view, as seen in <a class="ref" href="following-users#fig:home_page_with_feed">Figure&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Note that the <code>paginate</code> method actually reaches all the way into the Micropost model method in <a class="ref" href="following-users#code:from_users_followed_by_final">Listing&nbsp;12.44</a>, arranging to pull out only&nbsp;30 microposts at a time from the database.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
@@ -2346,7 +2346,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:replies"></div>
 
 
-<h4><a id="sec:12.4.1.1" href="following-users#sec:replies" class="heading">Replies</a></h4>
+<h4><a id="sec:12.4.1.1" href="following-users#sec:replies" class="heading">Réponses</a></h4>
 
 
 <p>Twitter allows users to make &ldquo;@replies&rdquo;, which are microposts whose first characters are the user&rsquo;s login preceded by the <tt>@</tt>&nbsp;sign. These posts only appear in the feed of the user in question or users following that user. Implement a simplified version of this, restricting @replies to appear only in the feeds of the recipient and the sender. This might involve adding an <code>in_reply_to</code> column in the <code>microposts</code> table and an extra <code>including_replies</code> scope to the Micropost model.</p>
@@ -2356,7 +2356,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:messaging"></div>
 
 
-<h4><a id="sec:12.4.1.2" href="following-users#sec:messaging" class="heading">Messaging</a></h4>
+<h4><a id="sec:12.4.1.2" href="following-users#sec:messaging" class="heading">Notification</a></h4>
 
 
 <p>Twitter supports direct (private) messaging by prefixing a micropost with the letter&nbsp;&ldquo;d&rdquo;. Implement this feature for the sample application. The solution will probably involve a Message model and a regular expression match on new microposts.</p>
@@ -2374,7 +2374,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="sec:password_reminders"></div>
 
 
-<h4><a id="sec:12.4.1.4" href="following-users#sec:password_reminders" class="heading">Password reminders</a></h4>
+<h4><a id="sec:12.4.1.4" href="following-users#sec:password_reminders" class="heading">Rappel du mot de passe</a></h4>
 
 
 <p>Currently, if our application&rsquo;s users forget their passwords, they have no way to retrieve them. Because of the one-way secure password hashing in <a class="ref" href="modeling-and-viewing-users-two#top">Chapter&nbsp;7</a>, our application can&rsquo;t email the user&rsquo;s password, but it can send a link to a reset form. Introduce a <code>PasswordReminders</code> resource to implement this feature. For each reset, you should create a unique token and email it to the user. Visiting a URL with the token should then allow them to reset their password to a value of their choice.</p>

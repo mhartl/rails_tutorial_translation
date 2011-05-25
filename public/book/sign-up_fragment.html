@@ -834,7 +834,7 @@
 <div class="label" id="sec:filtering_parameter_logging"></div>
 
 
-<h3><a id="sec:8.2.4" href="sign-up#sec:filtering_parameter_logging" class="heading"><span class="number">8.2.4</span> Filtering parameter logging</a></h3>
+<h3><a id="sec:8.2.4" href="sign-up#sec:filtering_parameter_logging" class="heading"><span class="number">8.2.4</span> Filtrage des paramètres d'identification</a></h3>
 
 
 <p>Before moving on to successful signup, there&rsquo;s one loose end to tie off. You might have noticed that, even though we went to great pains to encrypt the password in <a class="ref" href="modeling-and-viewing-users-two#top">Chapter&nbsp;7</a>, both the password and its confirmation appear as <a href="http://www.computerhope.com/jargon/c/cleartex.htm">cleartext</a> in the debug information. By itself this is no problem&mdash;recall from <a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">Listing&nbsp;6.23</a> that this information only appears for applications running in <code>development</code> mode, so actual users would never see it&mdash;but it does hint at a potential problem: the passwords might also appear unencrypted in the <em>log file</em> that Rails uses to record information about the running application. Indeed, in previous versions of Rails, the development log file in this case would contain lines like those shown in <a class="ref" href="sign-up#code:development_log_file_with_passwords">Listing&nbsp;8.11</a>.</p>
@@ -1046,7 +1046,7 @@
 <div class="label" id="sec:the_flash"></div>
 
 
-<h3><a id="sec:8.3.3" href="sign-up#sec:the_flash" class="heading"><span class="number">8.3.3</span> The flash</a></h3>
+<h3><a id="sec:8.3.3" href="sign-up#sec:the_flash" class="heading"><span class="number">8.3.3</span> Le message «&nbsp;flash&nbsp;»</a></h3>
 
 
 <p>Before submitting a valid registration in a browser, we&rsquo;re going to add a bit of polish common in web applications: a message that appears temporarily and then disappears upon page reload. (If this is unclear now, be patient; a concrete example appears shortly.) The Rails way to accomplish this is to use a special variable called the <em>flash</em>, which operates like <a href="http://en.wikipedia.org/wiki/Flash_memory">flash memory</a> in that it stores its data temporarily. The <code>flash</code> variable is effectively a hash; you may even recall the console example in <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">Section&nbsp;4.3.3</a>, where we saw how to iterate through a hash using a strategically named <code>flash</code> hash. To recap, try this console session:</p>
@@ -1268,7 +1268,7 @@
 <div class="label" id="sec:integration_tests_with_style"></div>
 
 
-<h3><a id="sec:8.4.1" href="sign-up#sec:integration_tests_with_style" class="heading"><span class="number">8.4.1</span> Integration tests with style</a></h3>
+<h3><a id="sec:8.4.1" href="sign-up#sec:integration_tests_with_style" class="heading"><span class="number">8.4.1</span> Tests d'intégration avec les styles</a></h3>
 
 
 <p>We saw in <a class="ref" href="filling-in-the-layout#code:layout_links_spec">Listing&nbsp;5.13</a> that RSpec integration tests support controller-test&ndash;style constructions such as</p>

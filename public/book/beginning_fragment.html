@@ -261,95 +261,81 @@
 
 <p>のファイルを指す場合、Railsルートを省略して単に <code>config/routes.rb</code>とします。</p>
 
-<p>最後に、<em>Railsチュートリアル</em>では度々他のプログラム(シェルコマンドや、バージョン管理ソフト、Rubyプログラムなど)からの出力を含めています。システム間の違いのため、あなたのマシンで表示される出力とは少し異なっているかもしれませんが、問題はありません。加えて、コマンドによりエラーが出るかもしれませんが、直そうとするより、エラーメッセージをGoogleしてみて下さい。これ、実際のソフトウェア開発にも役立つんです。</p>
+<p>最後に、<em>Railsチュートリアル</em>では度々他のプログラム(シェルコマンドや、バージョン管理ソフト、Rubyプログラムなど)からの出力を含めています。システム間の違いのため、あなたのマシンで表示される出力とは少し異なっているかもしれませんが、問題はありません。加えて、コマンドによりエラーが出る可能性もありますが、すぐ直そうとせずエラーメッセージをGoogleしてみて下さい。これ、実際のソフトウェア開発にも効果的なテクニックです。</p>
 
 <div class="label" id="sec:up_and_running"></div>
 
 
-<h2><a id="sec:1.2" href="beginning#sec:up_and_running" class="heading"><span class="number">1.2</span> Up and running</a></h2>
+<h2><a id="sec:1.2" href="beginning#sec:up_and_running" class="heading"><span class="number">1.2</span> さっそく動作させる</a></h2>
 
-
-<p>It&rsquo;s time now to get going with a Ruby on Rails development environment and our first application. There is quite a bit of overhead here, especially if you don&rsquo;t have extensive programming experience, so don&rsquo;t get discouraged if it takes a while to get started. It&rsquo;s not just you; every developer goes through it (often more than once), but rest assured that the effort will be richly rewarded.</p>
+<p>ついに、Ruby on Railsの開発環境の構築と最初のアプリの作成をする時が来ました。特にプログラミング経験が無い方は少し苦労するかもしれませんが、これは開発者として誰もが一度は通る道ですので。諦めずに頑張って下さい。
 
 <div class="label" id="sec:development_tools"></div>
 
 
-<h3><a id="sec:1.2.1" href="beginning#sec:development_tools" class="heading"><span class="number">1.2.1</span> Development environments</a></h3>
+<h3><a id="sec:1.2.1" href="beginning#sec:development_tools" class="heading"><span class="number">1.2.1</span> 開発環境</a></h3>
 
+<p>訳の分からないまでに特異・多彩なカスタマイズの結果、開発環境の数はRailsプログラマの数ほど存在しますが、大きく分けてテキストエディタとコマンドラインを使用する環境とIDE(統合開発環境)を使った環境に分けられます。まずは後者から見てみましょう。
 
-<p>Considering various idiosyncratic customizations, there are probably as many development environments as there are Rails programmers, but there are at least two broad themes: text editor/command line environments, and integrated development environments (IDEs). Let&rsquo;s consider the latter first.</p>
+<h4><a id="sec:1.2.1.1" href="beginning#sec:1.2.1.1" class="heading">IDE(統合開発環境)</a></h4>
 
-<h4><a id="sec:1.2.1.1" href="beginning#sec:1.2.1.1" class="heading">IDEs</a></h4>
+<p>Rails用のIDEの数は多く、<a href="http://www.aptana.com/rails/">RadRails</a>、<a href="http://www.jetbrains.com/ruby/index.html">RubyMine</a>、<a href="http://www.codegear.com/products/3rdrail">3rd Rail</a>などがあります。全てクロスプラットフォームで評判の良い物も多いので、試してみて下さい。ここで白状しますが、私は未だに自分のRails開発ニーズにあったIDEを見つけた事がありません。プロジェクトにより、動作さえしなかった事もあります。</p>
 
+<h4><a id="sec:1.2.1.2" href="beginning#sec:1.2.1.2" class="heading">テキストエディタとコマンドライン</a></h4>
 
-<p>There is no shortage of Rails IDEs, including <a href="http://www.aptana.com/rails/">RadRails</a>, <a href="http://www.jetbrains.com/ruby/index.html">RubyMine</a>, and <a href="http://www.codegear.com/products/3rdrail">3rd Rail</a>. All are cross-platform, and I&rsquo;ve heard good things about several of them. I encourage you to try them and see if they work for you, but I have a confession to make: I have never found an IDE that met all my Rails development needs&mdash;and for some projects I haven&rsquo;t even been able to get them to work at all.</p>
-
-<h4><a id="sec:1.2.1.2" href="beginning#sec:1.2.1.2" class="heading">Text editors and command lines</a></h4>
-
-
-<p>What are we to use to develop Rails apps, if not some awesome all-in-one IDE? I&rsquo;d guess the majority of Rails developers opt for the same solution I&rsquo;ve chosen: use a <em>text editor</em> to edit text, and a <em>command line</em> to issue commands (<a class="ref" href="beginning#fig:editor_shell">Figure&nbsp;1.1</a>). Which combination you use depends on your tastes and your platform:</p>
+<p>全てが整った、強力なIDEなくしてどうやってRailsアプリを開発すれば良いのでしょうか？私を含む多くのRails開発者は、<em>テキストエディタ</em>でテキストを編集し、<em>コマンドラインで</em>コマンドを実行するというシンプルな手段を使っています。(<a class="ref" href="beginning#fig:editor_shell">図&nbsp;1.1</a>)　どの組み合わせを使うかは自身の好みとプラットフォームによりますが。</p>
 
 <ul>
-<li><strong>Macintosh OS X:</strong> Like many Rails developers, I prefer <a href="http://macromates.com/">TextMate</a>. Other options include Emacs and  <a href="http://code.google.com/p/macvim/">MacVim</a> (launched with the command <code>mvim</code>), the excellent Macintosh version of Vim.<sup class="footnote" id="fnref:1.7"><a href="#fn:1.7">7</a></sup> I use <a href="http://iterm.sourceforge.net/">iTerm</a> for my command line terminal; others prefer the native Terminal app.</li>
+<li><strong>Macintosh OS X:</strong> 多くのRails開発者同様、個人的に私が気に入っているのが<a href="http://macromates.com/">TextMate</a>です。他にEmacsやVimのMac版である <a href="http://code.google.com/p/macvim/">MacVim</a> (<code>mvim</code>で起動します)があります。<sup class="footnote" id="fnref:1.7"><a href="#fn:1.7">7</a></sup> 私はターミナルに<a href="http://iterm.sourceforge.net/">iTerm</a> を使っていますが、デフォルトのTerminalを使われている方も大勢いらっしゃいます。</li>
 
-<li><strong>Linux:</strong> Your editor options are basically the same as OS&nbsp;X, minus TextMate. I&rsquo;d recommend graphical Vim (gVim), <a href="http://projects.gnome.org/gedit/">gedit</a> (with the <a href="http://blog.siverti.com.br/gmate/">GMate</a> plugins), or <a href="http://kate-editor.org/">Kate</a>. As far as command lines go, you&rsquo;re totally set: every Linux distribution comes with at least one command line terminal application (and often several).</li>
+<li><strong>Linux:</strong> TextMateを除き、基本的にMac OS Xと同じです。gVim、 <a href="http://projects.gnome.org/gedit/">gedit</a> (と<a href="http://blog.siverti.com.br/gmate/">GMate</a>プラグイン)、 <a href="http://kate-editor.org/">Kate</a>などがおすすめです。コマンドラインはどのLinuxディストリビューションでも１つ(通常は数個付いてきます）は付いてくるので、好きな物を使って下さい。
+</li>
 
-<li><strong>Windows:</strong> Some promising editors on Windows include <a href="http://www.vim.org/download.php#pc">Vim</a>, the <a href="http://www.e-texteditor.com/">E&nbsp;Text Editor</a>, <a href="http://www.activestate.com/komodo_edit/">Komodo Edit</a>, and <a href="http://www.sublimetext.com/">Sublime Text</a>. For a command line, I recommend using the command prompt that comes with <a href="http://railsinstaller.org/">Rails Installer</a> (<a class="ref" href="beginning#sec:rails_installer_windows">Section&nbsp;1.2.2.1</a>).  </li>
+<li><strong>Windows:</strong> Windows上では<a href="http://www.vim.org/download.php#pc">Vim</a>、 <a href="http://www.e-texteditor.com/">E&nbsp;Text Editor</a>、 <a href="http://www.activestate.com/komodo_edit/">Komodo Edit</a>、<a href="http://www.sublimetext.com/">Sublime Text</a>などがあります。コマンドラインは<a href="http://railsinstaller.org/">Railsインストーラ</a>付属の物がおすすめです。(<a class="ref" href="beginning#sec:rails_installer_windows">節&nbsp;1.2.2.1</a>).  </li>
 
 </ul>
 
-
-<p>If you go with some flavor of Vim, be sure to tap into the thriving community of <a href="http://www.google.com/search?q=vim+rails">Vim-using Rails hackers</a>. See especially the <a href="http://www.vim.org/scripts/script.php?script_id=1567">rails.vim</a> enhancements and the <a href="http://www.vim.org/scripts/script.php?script_id=1658">NERD tree</a> project drawer.</p>
+<p>Vim系を使用する場合、<a href="http://www.vim.org/scripts/script.php?script_id=1567">rails.vim</a>や<a href="http://www.vim.org/scripts/script.php?script_id=1658">NERD tree</a>など<a href="http://www.google.co.jp/#hl=ja&source=hp&q=vim+rails">のスクリプトや、Vim使いのRails開発者コミュニティ</a>を是非利用して下さい。
 
 <div class="label" id="fig:editor_shell"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">Figure 1.1: </span><span class="description">A text editor/command line development environment (TextMate/iTerm).  <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">図 1.1: </span><span class="description">テキストエディタとコマンドラインの開発環境 (TextMate/iTermを使用) <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(full size)</a></span></div></div>
 
+<h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">ブラウザ</a></h4>
 
+<p>ブラウザの種類は豊富ですが、大半のRails開発者はFirefox、Safari、もしくはChromeを選ぶ傾向にあるようです。Rails チュートリアル内のスクリーンショットも原則としてFirefoxの物を使用しています。Firefoxを使う場合、HTMLの構造とCSSのルールをダイナミックに調査・編集出来る<a href="https://addons.mozilla.org/ja/firefox/addon/firebug/">Firebug</a>アドオンがおすすめです。Firefox以外では<a href="http://getfirebug.com/firebuglite">Firebug Lite</a>が大抵のブラウザで動きます。また、SafariとChromeにはページの調査したい部分に右クリックする事で情報を調べられる機能があります。使用するブラウザに関係なく、後々こういったWeb解析ツールの使い方を覚えておく価値が分かってくると思います。</p>
 
+<h4><a id="sec:1.2.1.4" href="beginning#sec:1.2.1.4" class="heading">使用するツールについて</a></h4>
 
-<h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">Browsers</a></h4>
-
-
-<p>Although there are many web browsers to choose from, the vast majority of Rails programmers use Firefox, Safari, or Chrome when developing. The screenshots in Rails Tutorial will generally be of a Firefox browser. If you use Firefox, I suggest using the <a href="http://getfirebug.com/">Firebug</a> add-on, which lets you perform all sorts of magic, such as dynamically inspecting (and even editing) the HTML structure and CSS rules on any page. For those not using Firefox, <a href="http://getfirebug.com/firebuglite">Firebug Lite</a> works with most other browsers, and both Safari and Chrome have a built-in &ldquo;Inspect element&rdquo; feature available by right-clicking on any part of the page. Regardless of which browser you use, experience shows that the time spent learning such a web inspector tool will be richly rewarded.</p>
-
-<h4><a id="sec:1.2.1.4" href="beginning#sec:1.2.1.4" class="heading">A note about tools</a></h4>
-
-
-<p>In the process of getting your development environment up and running, you may find that you spend a <em>lot</em> of time getting everything just right. The learning process for editors and IDEs is particularly long; you can spend weeks on TextMate or Vim tutorials alone. If you&rsquo;re new to this game, I want to assure you that <em>spending time learning tools is normal</em>. Everyone goes through it. Sometimes it is frustrating, and it&rsquo;s easy to get impatient when you have an awesome web app in your head and you <em>just want to learn Rails already</em>, but have to spend a week learning some weird ancient Unix editor just to get started. But a craftsman has to know his tools; in the end the reward is worth the effort.</p>
+<p>開発環境を整える過程で、全てを思い通りに設定するにはかなり長い時間がかかる事を実感するかもしれません。TextMateやVimなどのエディタやIDEは特に、何週間かかっても極めるのは難しいものです。これが初めての方、ご安心下さい。開発ツールを覚えるのに時間をかけるのは<em>普通の事です。</em>これもまた、開発者なら誰もが通る道です。「良いアイディアが浮かんで<em>今すぐにでも</em>RailsでWebアプリを作りたいのに、Unixエディタの使い方を覚えるのに1週間もかかって前に進めない！」とイライラする事もありますが、道具の使い方は職人の心得です。努力は報われるものです。</p>
 
 <div class="label" id="sec:rubygems"></div>
 
 
-<h3><a id="sec:1.2.2" href="beginning#sec:rubygems" class="heading"><span class="number">1.2.2</span> Ruby, RubyGems, Rails, and Git</a></h3>
+<h3><a id="sec:1.2.2" href="beginning#sec:rubygems" class="heading"><span class="number">1.2.2</span> Ruby、RubyGems、Rails、そしてGit</a></h3>
 
-
-<p>Now it&rsquo;s time to install Ruby and Rails. The canonical up-to-date source for this step is the <a href="http://rubyonrails.org/download">Ruby on Rails download page</a>. I&rsquo;ll assume you can go there now; parts of this book can be read profitably offline, but not this part. I&rsquo;ll just inject some of my own comments on the steps.</p>
+<p>さあ、RubyとRailsをインストールしましょう。一般的に認められているガイドは<a href="http://rubyonrails.org/download">Ruby on Railsダウンロードページ</a>(英語)です。日本語のページは<a href="http://www.rubylife.jp/rails/">ここ</a>などがあります。本書のほとんどの部分はインターネットなしでも読めますが、この部分だけはソフトウェアをダウンロードしなければならないのでネット環境が必要になります。ここでは、インストールの過程についてコメントしていきます。</p>
 
 <div class="label" id="sec:rails_installer_windows"></div>
 
 
-<h4><a id="sec:1.2.2.1" href="beginning#sec:rails_installer_windows" class="heading">Rails Installer (Windows)</a></h4>
+<h4><a id="sec:1.2.2.1" href="beginning#sec:rails_installer_windows" class="heading">Rails インストーラ (Windows)</a></h4>
 
-
-<p>Installing Rails on Windows used to be a real pain, but thanks to the efforts of the good people at <a href="http://engineyard.com/">Engine Yard</a>&mdash;especially Dr.&nbsp;Nic Williams and Wayne&nbsp;E. Seguin&mdash;installing Rails and related software on Windows is now incredibly easy. If you are using Windows, go to <a href="http://railsinstaller.org/">Rails Installer</a> (<a href="http://railsinstaller.org/">http://railsinstaller.org/</a>) and download the Rails Installer executable. Double-click the executable and follow the instructions to install Git (so you can skip <a class="ref" href="beginning#sec:install_git">Section&nbsp;1.2.2.2</a>), Ruby (skip <a class="ref" href="beginning#sec:install_ruby">Section&nbsp;1.2.2.3</a>), RubyGems (skip <a class="ref" href="beginning#sec:install_rubygems">Section&nbsp;1.2.2.4</a>), and Rails itself (skip <a class="ref" href="beginning#sec:install_rails">Section&nbsp;1.2.2.5</a>). Once the installation has finished, you can skip right to the creation of the first application in <a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a>.</p>
+<p>最近までWindows上でのRailsのインストールは困難だったのですが、<a href="http://engineyard.com/">Engine Yard</a>の方々(特にNic Williams博士とWayne E. Seguin氏)のおかげで非常に簡単になりました。Windowsユーザーの方は<a href="http://railsinstaller.org/">Rails インストーラ</a> (<a href="http://railsinstaller.org/">からインストーラをダウンロードして下さい。ダブルクリックで説明に従い、Git、RubyGems、そしてRailsをインストールします。(<a class="ref" href="beginning#sec:install_ruby">節&nbsp;1.2.2.3</a>、<a class="ref" href="beginning#sec:install_rubygems">節&nbsp;1.2.2.4</a>、<a class="ref" href="beginning#sec:install_rails">節&nbsp;1.2.2.5</a>は飛ばして下さい)　インストール後は、すぐに<a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a>に進んで下さい。</p>
 
 <div class="label" id="sec:install_git"></div>
 
 
-<h4><a id="sec:1.2.2.2" href="beginning#sec:install_git" class="heading">Install Git</a></h4>
+<h4><a id="sec:1.2.2.2" href="beginning#sec:install_git" class="heading">Gitのインストール</a></h4>
 
-
-<p>Much of the Rails ecosystem depends in one way or another on a <a href="http://en.wikipedia.org/wiki/Revision_control">version control system</a> called <a href="http://git-scm.com/">Git</a> (covered in more detail in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a>). Because its use is ubiquitous, you should install Git even at this early stage; I suggest following the installation instructions for your platform at the <a href="http://progit.org/book/ch1-4.html">Installing Git section of <em>Pro Git</em></a>.</p>
+<p>Rails環境の多くの部分は、<a href="http://git-scm.com/">Git</a>という<a href="http://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">バージョン管理システム</a>の機能に頼っています。(Gitについては<a class="ref" href="beginning#sec:version_control">節&nbsp;1.3</a>で解説しています)　Gitは多用されているので、早い内にインストールを済ませておきます。<a href="http://progit.org/book/ja/ch1-4.html"><em>Pro Git</em>の「Gitのインストール」</a>でプラットフォーム毎の解説を行っているので参考にして下さい。
 
 <div class="label" id="sec:install_ruby"></div>
 
+<h4><a id="sec:1.2.2.3" href="beginning#sec:install_ruby" class="heading">Rubyのインストール</a></h4>
 
-<h4><a id="sec:1.2.2.3" href="beginning#sec:install_ruby" class="heading">Install Ruby</a></h4>
-
-
-<p>The next step is to install Ruby. It&rsquo;s possible that your system already has it; try running</p>
+<p>次にRubyをインストールします。もしかすると既にあなたのシステムに入っているかもしれないので、その場合は</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> ruby -v
 <span class="go">ruby 1.9.2</span>
@@ -357,52 +343,48 @@
 </div>
 
 
-<p>to see the version number. Rails&nbsp;3 requires Ruby&nbsp;1.8.7 or later and works best with Ruby&nbsp;1.9.2. This tutorial assumes that you are using the latest development version of Ruby&nbsp;1.9.2, known as Ruby&nbsp;1.9.2-head, but Ruby&nbsp;1.8.7 should work as well.</p>
+<p>でバージョン情報を確認して下さい。Rails 3はRuby 1.8.7以上で動きますが、1.9.2が最適です。このチュートリアルはバージョン1.9.2を使っている事を前提で進めていきますが、1.8.7でも問題はないはずです。</p>
 
-<p>The Ruby&nbsp;1.9 branch is under heavy development, so unfortunately installing the latest Ruby can be quite a challenge. You will likely have to rely on the web for the most up-to-date instructions. What follows is a series of steps that I&rsquo;ve gotten to work on my system (Macintosh OS&nbsp;X), but you may have to search around for steps that work on your system.</p>
+<p>Ruby 1.9ブランチは常に開発が行われているので、Rubyの最新バージョンをインストールするのは以外と難しかったりします。ここでは私のMac OS X システムで動作したやり方を紹介しますが、システムによりインストールの手順が異なるかもしれません。</p>
 
-<p>As part of installing Ruby, if you are using OS&nbsp;X or Linux I strongly recommend installing Ruby using <a href="http://rvm.beginrescueend.com/">Ruby Version Manager (RVM)</a>, which allows you to install and manage multiple versions of Ruby on the same machine. (The <a href="http://github.com/vertiginous/pik">Pik</a> project accomplishes a similar feat on Windows.) This is particularly important if you want to run Rails&nbsp;3 and Rails&nbsp;2.3 on the same machine. If you want to go this route, I suggest using RVM to install two Ruby/Rails combinations: Ruby&nbsp;1.8.7/Rails&nbsp;2.3.10 and Ruby&nbsp;1.9.2/Rails&nbsp;3.0.7. If you run into any problems with RVM, you can often find its creator, Wayne&nbsp;E. Seguin, on the RVM IRC channel (<a href="http://webchat.freenode.net/?channels=rvm">#rvm on freenode.net</a>).<sup class="footnote" id="fnref:1.8"><a href="#fn:1.8">8</a></sup></p>
+<p>OS X、またはLinuxを使う場合、<a href="http://doruby.kbmj.com/8y/20100412/RVM_Ruby_">Ruby Version Manager (RVM)</a>を強くお勧めします。RVMを使うと、複数のRubyバージョンを共存させられるのでとても便利です。Windows上で動く似たようなソフトに<a href="http://github.com/vertiginous/pik">Pik</a>があります。特にRails 2.3とRails 3を同じマシンで動作させたい場合、この作業は特に重要になってきます。私がお勧めするのは、Ruby 1.8.7/Rails 2.3.10とRuby 1.9.2/Rails 3.0.7の二つの組み合わせです。
 
-<p>After <a href="http://rvm.beginrescueend.com/rvm/install/">installing RVM</a>, you can install Ruby as follows:<sup class="footnote" id="fnref:1.9"><a href="#fn:1.9">9</a></sup></p>
+<p>RVMをインストール後、以下のようにRubyをインストールします:<sup class="footnote" id="fnref:1.9"><a href="#fn:1.9">9</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm get head
 <span class="gp">$</span> rvm reload
 <span class="gp">$</span> rvm install 1.8.7
 <span class="gp">$</span> rvm install 1.9.2
-<span class="go">&lt;wait a while&gt;</span>
+<span class="go">&lt;少し待ちます&gt;</span>
 </pre></div>
 </div>
 
-
-<p>Here the first two commands update and reload RVM itself, which is a good practice since RVM gets updated frequently. The final two commands do the actual Ruby installations; depending on your system, they might take a while to download and compile, so don&rsquo;t worry if it seems to be taking forever. (Also beware that lots of little things can go wrong. For example, on my system the latest version of Ruby&nbsp;1.8.7 won&rsquo;t compile; instead, after much searching and hand-wringing, I discovered that I needed &ldquo;patchlevel&rdquo; number 302:</p>
+<p>最初の二つのコマンドは、RVM自体の更新と再起動です。(RVMは常にアップデートが出ているので、定期的に行って下さい)　最後の二つのコマンドはRubyのインストール作業です。システムによっては結構時間がかかるので作業が終わらなさそうでも心配せずに終わるまで待って下さい。(エラーも出るかもしれません。例えば私の場合Ruby 1.8.7の最新バージョンがコンパイルできず、パッチ302が必要な事が分かりました)</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm install 1.8.7-p302
 </pre></div>
 </div>
 
+<p>このような事が起こった場合イライラするのは当たり前ですが、誰にでも起こっている事なのでご安心を。</p>
 
-<p>When things like this happen to you, it&rsquo;s always frustrating, but at least you know that it happens to everyone&hellip;)</p>
-
-<p>Ruby programs are typically distributed via <em>gems</em>, which are self-contained packages of Ruby code. Since gems with different version numbers sometimes conflict, it is often convenient to create separate <em>gemsets</em>, which are self-contained bundles of gems. In particular, Rails is distributed as a gem, and there are conflicts between Rails&nbsp;2 and Rails&nbsp;3, so if you want to run multiple versions of Rails on the same system you need to create a separate gemset for each:</p>
+<p>Rubyプログラムは主に独立したRubyコードのパッケージである<em>gem</em>として配布されています。異なるバージョン番号のgemは競合(conflict)する可能性があるので、<em>gemset</em>(ジェムの集まり)に分けるのが一般的です。Rails自体gemとして配布されており、Rails 2とRails 3ではconflictがあるので二つのRailsバージョンを同じマシンで共存させたい場合は各バージョン用のgemsetを作る必要があります。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --create 1.8.7-p302@rails2tutorial
 <span class="gp">$</span> rvm --create use 1.9.2@rails3tutorial
 </pre></div>
 </div>
 
+<p>最初のコマンドはRuby 1.8.7-p302を使用する<code>rails2tutorial</code>というgemsetを作成し、二つ目はRuby 1.9.2を使用する<code>rails3tutorial</code>というgemsetを作成してこれを使用(<code>use</code>コマンド)させています。RVMにはgemsetを扱うためのコマンドが多数あるので、<a href="http://rvm.beginrescueend.com/gemsets/">http://rvm.beginrescueend.com/gemsets/</a>にあるドキュメンテーションを参照して下さい。<a href="http://transitive.info/article/ruby/rvm/">こちら</a>に日本語の簡単なガイドもあります。
 
-<p>Here the first command creates the gemset <code>rails2tutorial</code> associated with Ruby&nbsp;1.8.7-p302, while the second command creates the gemset <code>rails3tutorial</code> associated with Ruby&nbsp;1.9.2 and uses it (via the <code>use</code> command) at the same time. RVM supports a large variety of commands for manipulating gemsets; see the documentation at <a href="http://rvm.beginrescueend.com/gemsets/">http://rvm.beginrescueend.com/gemsets/</a>.</p>
-
-<p>In this tutorial, we want our system to use Ruby&nbsp;1.9.2 and Rails&nbsp;3.0 by default, which we can arrange as follows:</p>
+<p>このチュートリアルではRuby 1.9.2とRails 3をデフォルトで使用するので、次のコマンドを実行して下さい。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --default use 1.9.2@rails3tutorial
 </pre></div>
 </div>
 
+<p>これで、デフォルトのRubyを1.9.2に、そしてデフォルトのgemsetを<code>rails3tutorial</code>に設定しました。</p>
 
-<p>This simultaneously sets the default Ruby to 1.9.2 and the default gemset to <code>rails3tutorial</code>.</p>
-
-<p>By the way, if you ever get stuck with RVM, running commands like these should help you get your bearings:</p>
+<p>ちなみに、RVMを使っていて困った時はヘルプコマンドを使ってみて下さい:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --help
 <span class="gp">$</span> rvm gemset --help
@@ -413,47 +395,40 @@
 <div class="label" id="sec:install_rubygems"></div>
 
 
-<h4><a id="sec:1.2.2.4" href="beginning#sec:install_rubygems" class="heading">Install RubyGems</a></h4>
+<h4><a id="sec:1.2.2.4" href="beginning#sec:install_rubygems" class="heading">RubyGemsのインストール</a></h4>
 
-
-<p>RubyGems is a package manager for Ruby projects, and there are tons of great libraries (including Rails) available as Ruby packages, or <em>gems</em>. Installing RubyGems should be easy once you install Ruby. In fact, if you have <a href="http://rvm.beginrescueend.com/rvm/install/">installed RVM</a>, you already have RubyGems, since RVM includes it automatically:</p>
+<p>RubyにはRailsなど、たくさんの良質なパッケージ(<em>gem</em>)が存在します。そのパッケージを統括するのがRubyGemsという、Rubyプロジェクト用のパッケージマネージャです。Rubyをインストールすれば、RubyGemsのインストールは簡単なはずです。<a href="http://doruby.kbmj.com/8y/20100412/RVM_Ruby_">RVMをインストール</a>した場合、すでにRubyGemsも同時にインストールされているはずです。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> which gem
 <span class="go">/Users/mhartl/.rvm/rubies/ruby-head/bin/gem</span>
 </pre></div>
 </div>
 
-
-<p>If you don&rsquo;t already have it, you should <a href="http://rubyforge.org/frs/?group_id=126">download RubyGems</a>, extract it, and then go to the <code>rubygems</code> directory and run the setup program:</p>
+<p>RubyGemsがまだ無い場合は<a href="http://rubyforge.org/frs/?group_id=126">インストール</a>し、<code>rubygems</code>ディレクトリでセットアッププログラムを実行して下さい。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> ruby setup.rb
 </pre></div>
 </div>
 
-
-<p>If you already have RubyGems installed, you might want to update your system to the version used in this tutorial:</p>
+<p>既にRubyGemsがインストールされている場合は、システムをチュートリアルで使われているバージョンに更新して下さい。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem update --system 1.6.2
 </pre></div>
 </div>
 
-
-<p>Finally, if you&rsquo;re using Ubuntu Linux, you might want to take a look at <a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu">the Ubuntu/Rails&nbsp;3.0 blog post by Toran Billups</a> for full installation instructions.</p>
+<p>最後にUbuntuを使用している場合、<a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu">Toran Billups氏のUbuntu/Rails 3.0ブログポスト</a>にインストールの全手順が紹介されています</p>
 
 <div class="label" id="sec:install_rails"></div>
 
+<h4><a id="sec:1.2.2.5" href="beginning#sec:install_rails" class="heading">Railsのインストール</a></h4>
 
-<h4><a id="sec:1.2.2.5" href="beginning#sec:install_rails" class="heading">Install Rails</a></h4>
-
-
-<p>Once you&rsquo;ve installed RubyGems, installing Rails&nbsp;3.0 should be easy:</p>
+<p>RubyGemsをインストール後、Railsのインストールは簡単です。(注:2011年5月現在、Rails 3.1がリリースされていますが、このチュートリアルではRails 3.0.7を使用します)
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.0.7
 </pre></div>
 </div>
 
-
-<p>To verify that this worked, run the following command:</p>
+<p>ちゃんと出来たかを確認するため次のコマンドを実行して下さい。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails -v
 <span class="go">Rails 3.0.7</span>

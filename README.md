@@ -6,9 +6,12 @@ This is the HTML source (together with a minimal Rails app) for the [Ruby on Rai
 
 ### Texte non traduit
 
-Lorsqu'un texte n'est pas traduit en français (dans le doute), le laisser entre [(...)] (crochet + parenthèses).
+Lorsqu'un texte n'est pas traduit en français (dans le doute), le laisser entre \[(...)\] (crochet + parenthèses).
+
 	[(_version anglaise_)]
+
 Une traduction peut être proposée en ajoutant deux parenthèses à l'intérieur des crochets :
+
 	[(_version anglaise_)(_proposition française à valider_)]
 
 ### Marque de fin
@@ -17,6 +20,12 @@ Pour marquer la fin d'une partie de traduction (quand tout le texte qui précèd
 		<!-- FIN FRENCH -->
 … qui permet de retrouver rapidement à partir de quel endroit il faut commencer la traduction complète.
 
+### Traductions systématiques
+
+Afin de préserver l'homogénéité du texte, certains mots peuvent être traduits de façon systématique.
+* Listing X.X -> Extrait X.X
+* Figure X.X  -> Illustration X.X
+
 ## COMMANDES UTILES
 
 ### Updater sa version locale
@@ -24,11 +33,11 @@ git pull --rebase origin french
 
 ### Transmettre ses modifications online
 <faire des modifications>
-// git pull --rebase origin french		# Au cas où
 git add . 														# Ajoute tous les fichiers modifiés
 git commit -m "_message_"							# Définit le commit
+ # git pull --rebase origin french		# Au cas où
 git push origin french								# Upload les modifications
 
 ### Déployer la nouvelle version sur Heroku
 Note : il faut être autorisé (par Michael Hartl)
-git push heroku french:master
+<code>$ git push heroku french:master</code>

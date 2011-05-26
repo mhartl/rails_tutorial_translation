@@ -1,14 +1,26 @@
-This is the HTML source (together with a minimal Rails app) for the [Ruby on Rails Tutorial book](http://ruby.railstutorial.org/ruby-on-rails-tutorial-book). See the [Rails Tutorial Translation wiki](https://github.com/mhartl/rails_tutorial_translation/wiki) for more information.
+Ce dossier contient la source HTML du [Ruby on Rails Tutorial book](http://ruby.railstutorial.org/ruby-on-rails-tutorial-book) (ainsi qu'une application Rails minimale). Consultez le [Rails Tutorial Translation wiki](https://github.com/mhartl/rails_tutorial_translation/wiki) pour plus d'information.
+
+[Site Heroku french]: http://french.railstutorial.org/	"Site Heroku français"
+[Branche francaise]:  https://github.com/mhartl/rails_tutorial_translation/tree/french "Branche française"
 
 # À l'intention des traducteurs français
 
-## Conventions
+## INTRODUCTION
+
+Ce fichier contient quelques informations utiles pour la traduction du tutoriel. Ce fichier, balisé Markdown, peut être édité et modifié (dans TextMate, utiliser le _Preview_ pour visualiser le rendu).
+
+## LIENS UTILES
+
+* Pour lire le tutoriel français online : [Site Heroku french][]
+* Pour consulter la branche française de contrôle de version : [Branche francaise][]
+
+## CONVENTIONS
 
 ### Texte non traduit
 
-Lorsqu'un texte n'est pas traduit en français (dans le doute), le laisser entre \[(...)\] (crochet + parenthèses).
+Lorsqu'un texte n'est pas traduit en français, le laisser entre \[(...)\] (crochet + parenthèses).
 
-	[(_version anglaise_)]
+	[(\_version anglaise\_)]
 
 Une traduction peut être proposée en ajoutant deux parenthèses à l'intérieur des crochets :
 
@@ -23,6 +35,7 @@ Pour marquer la fin d'une partie de traduction (quand tout le texte qui précèd
 ### Traductions systématiques
 
 Afin de préserver l'homogénéité du texte, certains mots peuvent être traduits de façon systématique.
+
 * Listing X.X -> Extrait X.X
 * Figure X.X  -> Illustration X.X
 

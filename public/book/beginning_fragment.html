@@ -432,34 +432,33 @@
  */</pre>
 
 
-
-
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:1" href="beginning#top" class="heading"><span class="number">Chapitre 1</span> From zero to deploy</a></h1>
+<h1 class="chapitre"><a id="sec:1" href="beginning#top" class="heading"><span class="number">chapitre 1</span> De zéro au déploiement</a></h1>
 
-<p>Welcome to <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book"><em>Ruby on Rails Tutorial: Learn Rails by Example</em></a>. The goal of this book is to be the best answer to the question, &ldquo;If I want to learn web development with <a href="http://rubyonrails.org/">Ruby on Rails</a>, where should I start?&rdquo; By the time you finish <em>Ruby on Rails Tutorial</em>, you will have all the knowledge you need to develop and deploy your own custom web applications. You will also be ready to benefit from the many more advanced books, blogs, and screencasts that are part of the thriving Rails educational ecosystem. Finally, since <em>Ruby on Rails Tutorial</em> uses Rails&nbsp;3.0, the knowledge you gain here will be fully up-to-date with the latest and greatest version of Rails.<sup class="footnote" id="fnref:1.1"><a href="#fn:1.1">1</a></sup></p>
 
-<p><em>Ruby on Rails Tutorial</em> follows essentially the same approach as my previous Rails book,<sup class="footnote" id="fnref:1.2"><a href="#fn:1.2">2</a></sup> teaching web development with Rails by building a substantial sample application from scratch. As <a href="http://sivers.org">Derek Sivers</a> notes in the foreword, this book is structured as a linear narrative, designed to be read from start to finish. If you are used to skipping around in technical books, taking this linear approach might require some adjustment, but I suggest giving it a try. You can think of <em>Ruby on Rails Tutorial</em> as a video game where you are the main character, and where you level up as a Rails developer in each chapter. (The exercises are the <a href="http://en.wikipedia.org/wiki/Boss_(video_gaming)#Miniboss">minibosses</a>.)</p>
+<p>Bienvenue dans <a href="http://railstutorial.org/book"><em>Le Tutoriel Ruby on Rails&nbsp;: Apprendre Rails par l'exemple</em></a>. Le but de ce livre est d'être la meilleure réponse à la questions&nbsp;: “Si je veux apprendre le développement web avec <a href="http://rubyonrails.org/">Ruby on Rails</a>, par où dois-je commencer&nbsp;?&rdquo; Quand vous aurez achevé <em>Le Turoriel Ruby on Rails</em>, vous aurez toutes les connaissances nécessaire pour développer et déployer votre propre application web personnalisée. Vous serez également prêts à tire profit des livres plus avancés, des blogs et des and screencasts qui font partie de l'écosystème d'éductation Rails prospère. Enfin, puisque le <em>Tutoriel Ruby on Rails</em> utilise Rails&nbsp;3.0, la connaissance que vous acquiererez sera pleinement d'actualité avec la dernière et meilleure version de Rails.<sup class="footnote" id="fnref:1.1"><a href="#fn:1.1">1</a></sup></p>
 
-<p>In this first chapter, we&rsquo;ll get started with Ruby on Rails by installing all the necessary software and by setting up our development environment (<a class="ref" href="beginning#sec:up_and_running">Section&nbsp;1.2</a>). We&rsquo;ll then create our first Rails application, called (appropriately enough) <tt>first_app</tt>. <em>Rails Tutorial</em> emphasizes good software development practices, so immediately after creating our fresh new Rails project we&rsquo;ll put it under version control with Git (<a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a>). And, believe it or not, in this chapter we&rsquo;ll even put our first app on the wider web by <em>deploying</em> it to production (<a class="ref" href="beginning#sec:deploying">Section&nbsp;1.4</a>).</p>
+<p>Le <em>Tutoriel Ruby on Rails</em> suit essentiellement la même approche que mon livre précédent,<sup class="footnote" id="fnref:1.2"><a href="#fn:1.2">2</a></sup> enseignant le développement web avec Rails en construisant un exemple d'application conséquente, depuis le tout départ. Comme <a href="http://sivers.org">Derek Sivers</a> le souligne dans l'avant-propos, ce livre est structuré comme une narration linéaire, destinée à être lu du début à la fin. Si vous avez l'habitude de survoler les livres technique, suivre cette approche linéaire peut vous demander quelques ajustements, mais je ne saurais trop vous recommander d'essayer. Vous pouvez penser au <em>Tutoriel Ruby on Rails</em> comme un jeu vidéo dont vous êtes le héros, et où vous augmentz votre niveau de développeur Rails à chaque chapitre (les exercices sont comme des <a href="http://en.wikipedia.org/wiki/Boss_(video_gaming)#Miniboss">minibosses</a>).</p>
 
-<p>In <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, we&rsquo;ll make a second project, whose purpose will be to demonstrate the basic workings of a Rails application. To get up and running quickly, we&rsquo;ll build this <em>demo app</em> (called <tt>demo_app</tt>) using scaffolding (<a class="ref" href="beginning#sidebar:scaffolding">Box&nbsp;1.1</a>) to generate code; since this code is both ugly and complex, <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> will focus on interacting with the demo app through its <em>URLs</em><sup class="footnote" id="fnref:1.3"><a href="#fn:1.3">3</a></sup> using a web browser.</p>
+<p>Dans le premier chapitre, nous commencerons avec Ruby on Rails en installant tous les softwares nécessaire et en préparant votre environnement de développement (<a class="ref" href="beginning#sec:up_and_running">section&nbsp;1.2</a>). Nous créerons alors notre première application Rails, appelée (de façon assez pertinente ma foi) <tt>first_app</tt> (“première_application”). Le <em>Tutoriel Rails</em> met l'accent sur les bonnes pratiques de développement, aussi, immédiatement après avoir créé notre frais nouveau projet Rails nous le déposerons sous une version de contrôle avec Git (<a class="ref" href="beginning#sec:version_control">section&nbsp;1.3</a>). Et, croyez-le ou non, dans ce chapitre nous <em>déploierons</em> même notre première application en mode “production” (<a class="ref" href="beginning#sec:deploying">Section&nbsp;1.4</a>).</p>
 
-<p>In <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>, we&rsquo;ll create a <em>sample application</em> (called <tt>sample_app</tt>), this time writing all the code from scratch. We&rsquo;ll develop the sample app using <em>test-driven development</em> (TDD), getting started in <a class="ref" href="static-pages#top">chapitre&nbsp;3</a> by creating static pages and then adding a little dynamic content. We&rsquo;ll take a quick detour in <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a> to learn a little about the Ruby language underlying Rails. Then, in <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;5</a> through <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a>, we&rsquo;ll complete the foundation for the sample application by making a site layout, a user data model, and a full registration and authentication system. Finally, in <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a> and <a class="ref" href="following-users#top">chapitre&nbsp;12</a> we&rsquo;ll add microblogging and social features to make a working example site.</p>
+<p>Au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, nous créerons un second projet, dont le but sera d'illustrer les fonctions élémentaires d'une application Rails. [Pour gagner du temps][To get up and running quickly], nous construirons cette <em>application démo</em> (qui s'appellera <tt>demo_app</tt>) en utilisant le système échaffaudage (“scaffolding”) (<a class="ref" href="beginning#sidebar:scaffolding">Box&nbsp;1.1</a>) pour générer automatiquement le code&nbsp;; comme ce code est aussi laid que complexe, le <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> se concentrera sur l'interaction avec l'application de démonstration par le biais des <em>URLs</em><sup class="footnote" id="fnref:1.3"><a href="#fn:1.3">3</a></sup> en utilisant un navigateur internet.</p>
 
-<p>The final sample application will bear more than a passing resemblance to a certain popular <a href="http://twitter.com/">social microblogging site</a>&mdash;a site which, coincidentally, was also originally written in Rails.<sup class="footnote" id="fnref:1.4"><a href="#fn:1.4">4</a></sup> Though of necessity our efforts will focus on this specific sample application, the emphasis throughout <em>Rails Tutorial</em> will be on general principles, so that you will have a solid foundation no matter what kinds of web applications you want to build.</p>
+<p>Au <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>, nous créerons une <em>application exemple</em> (que nous appellerons <tt>sample_app</tt>), en écrivant cette fois tout le code à partir de rien. Nous développerons cette application exemple en utilisant le <em>Test Dirige le Développement</em> (“<em>test-driven development</em>”) (TDD), amorcé au <a class="ref" href="static-pages#top">chapitre&nbsp;3</a> en créant des pages statiques puis en ajoutant un peu de contenu dynamique. Nous ferons un rapide détour au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a> pour en apprendre un peu plus sur le langage Ruby [qui sous-tend] Rails. Puis, du <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;5</a> au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a>, nous complèterons les fondattions de l'application exemple en fabricant un [charte pour le site ? plan du site] [site layout], un modèle de données utilisateur (“user data model”), et un système complet d'enregistrement et d'authentification. Enfin, aux <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a> et <a class="ref" href="following-users#top">chapitre&nbsp;12</a> nous incorporerons des outils de micro-blogging (un système de mini-messages) et de réseau social pour faire un exemple de site tout à fait fonctionnel.</p>
+
+<p>L'application exemple finale aura plus d'une ressemblance avec <a href="http://twitter.com/">une certaine application sociale de micro-blogging</a>&mdash; un site qui, a site which, par le plus grand des hasards [[demander à Michael si c'est de l'humour quand il écrit : coincidentally]], est également écrite en Rails. Bien que nos efforts se concentrent nécessairement sur cette application exemple spécifique, l'accent dans ce <em>Tutoriel Rails</em> sera mis sur des principes généraux, donc vous aurez des fondamentaux solides quels que soient les genres d'applications web que vous vouliez construire.</p>
 
 <div class="label" id="sidebar:scaffolding"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 1.1.</span><span class="description">Scaffolding: Quicker, easier, more seductive</span></span>
-<p>From the beginning, Rails has benefited from a palpable sense of excitement, starting with the famous <a href="http://media.rubyonrails.org/video/rails_take2_with_sound.mov">15-minute weblog video</a> by Rails creator David Heinemeier Hansson, now updated as the <a href="http://media.rubyonrails.org/video/rails_blog_2.mov">15-minute weblog using Rails&nbsp;2</a> by Ryan Bates. These videos are a great way to get a taste of Rails&rsquo; power, and I recommend watching them. But be warned: they accomplish their amazing fifteen-minute feat using a feature called <em>scaffolding</em>, which relies heavily on <em>generated code</em>, magically created by the Rails <code>generate</code> command.</p>
+<div class="sidebar"><span class="title"><span class="header">Box 1.1.</span><span class="description">Échaffaudage (“Scaffolding”)&nbsp;: Plus rapide, plus facile, plus séduisant</span></span>
+<p>Depuis le départ, Rails a bénéficié d'un engouement évident, à commencer grâce notamment au fameux <a href="http://media.rubyonrails.org/video/rails_take2_with_sound.mov">Un Weblog vidéo en 15 minutes</a> par le créateur de Rails David Heinemeier Hansson, actualisé à présent dans le <a href="http://media.rubyonrails.org/video/rails_blog_2.mov">Un Weblog en 15 minutes en utilisant Rails&nbsp;2</a> par Ryan Bates. Ces vidéos sont une excellent façon de goûter à la puissance de Rails, et je recommande vivement de les regarder. Mais soyez averti quand même&nbsp;: ils accomplissent leur incroyable coup d'adresse de quinze minutes en utilisant l'outil appelé  <em>scaffolding</em> (“Échaffaudage”), bâtit fortement sur un <em>code automatiquement généré</em>, créé comme par magie par la commande Rails <code>generate</code> (“Générer”).</p>
 
-<p>When writing a Ruby on Rails tutorial, it is tempting to rely on the scaffolding approach&mdash;it&rsquo;s <a href="http://en.wikipedia.org/wiki/Dark_side_(Star_Wars)">quicker, easier, more seductive</a>. But the complexity and sheer amount of code in the scaffolding can be utterly overwhelming to a beginning Rails developer; you may be able to use it, but you probably won&rsquo;t understand it. Following the scaffolding approach risks turning you into a virtuoso script generator with little (and brittle) actual knowledge of Rails.</p>
+<p>En écrivant un tutoriel sur Ruby on rails, il est tentant de s'appuyer sur l'approche par échaffaudage &mdash;&nbsp;elle est <a href="http://en.wikipedia.org/wiki/Dark_side_(Star_Wars)">plus rapide, plus facile, et plus séduisante</a>. Mais la complexité et l'énorme quantité de code dans un échaffaudage peut être  rédhibitoire pour un développeur Rails débutant&nbsp;; vous pouvez peut-être l'utiliser, mais vous serez incapable de le comprendre. Suivre l'approche par échaffaudage risque de vous tourner vers un script générateur de code virtuose au détriment d'une véritable connaissance de Rails.</p>
 
-<p>In <em>Ruby on Rails Tutorial</em>, we&rsquo;ll take the (nearly) polar opposite approach: although <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> will develop a small demo app using scaffolding, the core of <em>Rails Tutorial</em> is the sample app, which we&rsquo;ll start writing in <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>. At each stage of developing the sample application, we will generate <em>small, bite-sized</em> pieces of code&mdash;simple enough to understand, yet novel enough to be challenging. The cumulative effect will be a deeper, more flexible knowledge of Rails, giving you a good background for writing nearly any type of web application.</p>
+<p>Dans le <em>Tutoriel Ruby on Rails</em>, nous adopterons l'approche presque exactement opposée&nbsp;: bien que le <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> développera une petite application démo en utilisant le système d'échaffaudage, le cœur de ce tutoriel est l'application exemple, que nous commencerons à concevoir au <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>. À chaque étape du développement de cette application exemple, nous générerons [du code par <em>petites bouchées</em>][<em>small, bite-sized</em> pieces of code]&mdash;&nbsp;assez simple pour être compris, mais assez nouveau pour représenter une difficulté à surmonter. L'effet de cette approche par couches résultera en une approche profonde, et une connaissance flexible de Rails, vous fournissant de bons fondements pour concevoir pratiquement n'importe quel type d'application web.</p>
 </div>
 
 
@@ -471,242 +470,240 @@
 <h2><a id="sec:1.1" href="beginning#sec:introduction" class="heading"><span class="number">1.1</span> Introduction</a></h2>
 
 
-<p>Since its debut in 2004, Ruby on Rails has rapidly become one of the most powerful and popular frameworks for building dynamic web applications. Rails users run the gamut from scrappy startups to huge companies: <a href="http://posterous.com/">Posterous</a>, <a href="http://uservoice.com/">UserVoice</a>, <a href="http://37signals.com/">37signals</a>, <a href="http://shopify.com/">Shopify</a>, <a href="http://github.com/">GitHub</a>, <a href="http://scribd.com/">Scribd</a>, <a href="http://hulu.com/">Hulu</a>, the <a href="http://yellowpages.com/">Yellow Pages</a>&mdash;the <a href="http://rubyonrails.org/applications">list of sites using Rails</a> goes on and on. There are also many web development shops that specialize in Rails, such as <a href="http://entp.com/">ENTP</a>, <a href="http://thoughtbot.com/">thoughtbot</a>, <a href="http://pivotallabs.com/">Pivotal Labs</a>, and <a href="http://hashrocket.com/">Hashrocket</a>, plus innumerable independent consultants, trainers, and contractors.</p>
+<p>Depuis ses début en 2004, Ruby on Rails est rapidement devenu un des framewords les plus populaires et les plus puissants pour construire des applications web dynamiques. Les utilisateurs de Rails couvrent un large éventails d'application, depuis la [start-up décousue][scrappy startups] jusqu'aux énormes compagnies&nbsp;: <a href="http://posterous.com/">Posterous</a>, <a href="http://uservoice.com/">UserVoice</a>, <a href="http://37signals.com/">37signals</a>, <a href="http://shopify.com/">Shopify</a>, <a href="http://scribd.com/">Scribd</a>, <a href="http://twitter.com/">Twitter</a>, <a href="http://hulu.com/">Hulu</a>, the <a href="http://yellowpages.com/">Yellow Pages</a> (les Pages Jaunes)&mdash;&nbsp;la <a href="http://rubyonrails.org/applications">liste des sites utilisant Rails</a> s'allongent encore et encore. Il y a aussi de nombreux [magasins de développement][web development shops] qui se spécialise en Rails, tels que <a href="http://entp.com/">ENTP</a>, <a href="http://thoughtbot.com/">thoughtbot</a>, <a href="http://pivotallabs.com/">Pivotal Labs</a>, et <a href="http://hashrocket.com/">Hashrocket</a>, sans compter les inombrables consultants indépendants, [entraineurs][trainers] et entrepreneurs.</p>
 
-<p>What makes Rails so great? First of all, Ruby on Rails is 100% open-source, available under the permissive <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>, and as a result it also costs nothing to download and use. Rails also owes much of its success to its elegant and compact design; by exploiting the malleability of the underlying <a href="http://ruby-lang.org/">Ruby</a> language, Rails effectively creates a <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language">domain-specific language</a> for writing web applications. As a result, many common web programming tasks&mdash;such as generating HTML, making data models, and routing URLs&mdash;are easy with Rails, and the resulting application code is concise and readable.</p>
+<p>Qu'est-ce qui rend Rails si fantastique&nbsp;? Tout d'abord, Ruby on Rails est 100% en “open-source”, accessible sous la licence tolérante <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>, et comme résultat il ne coûte également rien de le télécharger et de l'utiliser. Rails doit également le plus gros de son succès à son design compacte et élégant&nbsp;; en exploitant la maléabilité de la sous-couche en langage <a href="http://ruby-lang.org/">Ruby</a>, Rails crée de façon effective un <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language">langage de domaine spécifique</a> pour écrire des application web. Il en résulte que de nombreuse tâches courantes de programmation web &mdash;&nbsp;telle que générer du code HTML, faire des modèles de données ou rediriger les URLs&nbsp;&mdash; sont facile avec Rails, et le code de l'application en résultant est concis et lisible.</p>
 
-<p>Rails also adapts rapidly to new developments in web technology and framework design. For example, Rails was one of the first frameworks to fully digest and implement the REST architectural style for structuring web applications (which we&rsquo;ll be learning about throughout this tutorial). And when other frameworks develop successful new techniques, Rails creator <a href="http://loudthinking.com/">David Heinemeier Hansson</a> and the <a href="http://rubyonrails.org/core">Rails core team</a> don&rsquo;t hesitate to incorporate their ideas. Perhaps the most dramatic example is the merger of Rails and Merb, a rival Ruby web framework, so that Rails now benefits from Merb&rsquo;s modular design, stable <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a>, and improved performance. (Anyone who has attended a talk by Merb developer and Rails core team member <a href="http://yehudakatz.com/">Yehuda Katz</a> can&rsquo;t help but notice what an <em>extremely</em> good idea it was to bring the Merb team on board.)</p>
+<p>Rails s'adapte également avec rapidité aux nouveaux développement de la technologie internet et au [design de framework][framework design]. Par exemple, Rails a été l'un des premiers frameworks à digérer et implémenter en totalité l'architecture de style REST pour structurer les applications web  (ce que nous apprendrons à faire au traverse de ce tutoriel). Et quand d'autres framewords développent avec succès de nouvelles technologies, le créateur de Rails, <a href="http://loudthinking.com/">David Heinemeier Hansson</a> , et le <a href="http://rubyonrails.org/core">cœur de l'équipe Rails</a> n'hésite jamais à incorporer à Rails leurs nouvelles idées. Peut-être l'exemple le plus parlant est la fusion  de Rails et Merb, un frameword rival, de telle sorte que Rails bénéficie maintenant du design modulaire de Merb, <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a> stable et aux performances améliorées ([quiconque a assisté à une conférence entre le développeur de Merb et le cœur de l'équipe <a href="http://yehudakatz.com/">Yehuda Katz</a> ne peut aider][Anyone who has attended a talk by Merb developer and Rails core team member <a href="http://yehudakatz.com/">Yehuda Katz</a> can&rsquo;t help] mais noter à quel point ce fut une <em>extrêmement</em> bonne idée de monter l'équipe de Merb à bord)</p>
 
-<p>Finally, Rails benefits from an unusually enthusiastic and diverse community. The results include hundreds of open-source <a href="http://contributors.rubyonrails.org/">contributors</a>, well-attended <a href="http://railsconf.com/">conferences</a>, a huge number of <a href="http://agilewebdevelopment.com/plugins">plugins</a> and <a href="http://rubygems.org/">gems</a> (self-contained solutions to specific problems such as pagination and image upload), a rich variety of informative blogs, and a cornucopia of discussion forums and IRC channels. The large number of Rails programmers also makes it easier to handle the inevitable application errors: the &ldquo;Google the error message&rdquo; algorithm nearly always produces a relevant blog post or discussion-forum thread.</p>
+<p>Enfin, Rails bénéficie d'une communauté exceptionnellement enthousiaste et diverse. Les résultats en sont des centaines de  <a href="http://contributors.rubyonrails.org/">contributeurs</a> open-source, des <a href="http://railsconf.com/">conférences</a> largement suivies, un nombre considérable de <a href="http://agilewebdevelopment.com/plugins">plugins</a> et des <a href="http://rubygems.org/">gems</a> (solutions clé-en-main pour des problèmes spécifiques comme la pagination ou le téléchargement d'images), une riche variété de blogs d'information, et une corne d'abandonce débordant de forums de discussions et de canaux de discussion IRC. Le grand nombre de développeurs Rails rend également plus facile l'appréhension des erreurs inévitables des l'applications&nbsp;: l'algorithme &ldquo;Google le message d'erreur&rdquo; renvoie pratiquement toujours vers le message pertinent d'un blog ou un sujet de discussion dans un forum.</p>
 
 <div class="label" id="sec:comments_for_various_readers"></div>
 
 
-<h3><a id="sec:1.1.1" href="beginning#sec:comments_for_various_readers" class="heading"><span class="number">1.1.1</span> Comments for various readers</a></h3>
+<h3><a id="sec:1.1.1" href="beginning#sec:comments_for_various_readers" class="heading"><span class="number">1.1.1</span> Commentaires pour la grande variété de lecteurs</a></h3>
 
 
-<p><em>Rails Tutorial</em> contains integrated tutorials not only for Rails, but also for the underlying Ruby language, as well as for <a href="http://en.wikipedia.org/wiki/HTML">HTML</a>, <a href="http://en.wikipedia.org/wiki/CSS">CSS</a>, some <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a>, and even a little <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>. This means that, no matter where you currently are in your knowledge of web development, by the time you finish this tutorial you will be ready for more advanced Rails resources, as well as for the more systematic treatments of the other subjects mentioned.</p>
+<p>Le <em>Tutoriel Rails</em> contient des “tutoriels intégrés” non seulement pour Rails, mais aussi pour le langage sous-jacent Ruby, aussi bien que pour  <a href="http://en.wikipedia.org/wiki/HTML">HTML</a>, <a href="http://en.wikipedia.org/wiki/CSS">CSS</a>, un peu de <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a>, et même un peu de <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>. Cela signifie que, quelles que soient vos connaissances en matière de développement web, en finissant ce tutoriel vous serez prêts à utiliser des ressources Rails plus avancées, [tout autant que pour les traitements plus systématiques des autres sujets mentionnées][as well as for the more systematic treatments of the other subjects mentioned].</p>
 
-<p>Rails derives much of its power from &ldquo;magic&rdquo;&mdash;that is, framework features (such as automatically inferring object attributes from database columns) that accomplish miracles but whose mechanisms can be rather mysterious. <em>Ruby on Rails Tutorial</em> is <em>not</em> designed to explain this magic&mdash;mainly because most Rails application developers never need to know what&rsquo;s behind the curtain. (After all, Ruby itself is mostly written in the C programming language, but you don&rsquo;t have to dig into the C source to use Ruby.) If you&rsquo;re a confirmed pull-back-the-curtain kind of person, I recommend <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> by Obie Fernandez as a companion volume to <em>Ruby on Rails Tutorial</em>.</p>
+<p>Rails titre une grande partie de son pouvoir de la &ldquo;magic&rdquo; &mdash;&nbsp;ainsi, les outils du framework (tel que déduire automatiquement les attributs d'un objet des colonnes de la base de données) qui accomplissent des miracles mais dont les mécanismes peuvent paraitre plutôt mystérieux. Le <em>Tutorial Ruby on Rails</em> n'est <em>pas</em> destiné à expliquer cette magie &mdash;&nbsp;principalement parce que la plupart des développeurs d'applications Rails n'ont jamais besoin de savoir ce qui se passe en coulisses (après tout, le langage Ruby lui-même est écrit principalement en langage de programmation C, mais vous n'avez pas besoin de creuser dans le code source en C pour utiliser Ruby.) Si vous êtes [un expert confirmé][a confirmed pull-back-the-curtain kind of person], je vous recommande la lecture de <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> par Obie Fernandez qui accompagnera avec profit ce <em>Tutoriel Ruby on Rails</em>.</p>
 
-<p>Although this book has no formal prerequisites, you should of course have at least <em>some</em> computer experience. If you&rsquo;ve never even used a text editor before, it will be tough going, but with enough determination you can probably soldier through. If, on the other hand, your <code>.emacs</code> file is so complex it could make a grown man cry, there is still plenty of material to keep you challenged. <em>Rails Tutorial</em> is designed to teach Rails development no matter what your background is, but your path and reading experience will depend on your particular circumstances. <br /></p>
+<p>Bien que ce livre ne nécessite pas de requis spéciaux, vous devez bien entendu posséder au moins quelque expérience des ordinateurs. Si vous n'avez même jamais utilisé d'éditeur de texte, ce ne sera pas simple d'avancer, mais avec un peu de détermination vous devriez pouvoir passer à travers. Si, d'un autre côté, votre fichier <code>.emacs</code> est tellement complexe qu'il pourrait faire pleurer un adulte, il y aura toujours des challenges à relever ici. Le <em>Tutoriel Rails</em> est destiné à enseigner le développement Rails quels que soient ses acquis propres, mais l'expérience que vosu ferez de cette lectutre dépendra de [votre attitude][your particular circumstances]. <br /></p>
 
-<p><strong>All readers:</strong> One common question when learning Rails is whether to learn Ruby first. The answer depends on your personal learning style. If you prefer to learn everything systematically from the ground up, then learning Ruby first might work well for you, and there are several book recommendations in this section to get you started. On the other hand, many beginning Rails developers are excited about making <em>web</em> applications, and would rather not slog through a 500-page book on pure Ruby before ever writing a single web page. Moreover, the subset of Ruby needed by Rails developers is different from what you&rsquo;ll find in a pure-Ruby introduction, whereas <em>Rails Tutorial</em> focuses on exactly that subset. If your primary interest is making web applications, I recommend starting with <em>Rails Tutorial</em> and then reading a book on pure Ruby next. It&rsquo;s not an all-or-nothing proposition, though: if you start reading <em>Rails Tutorial</em> and feel your (lack of) Ruby knowledge holding you back, feel free to switch to a Ruby book and come back when you feel ready. You might also consider getting a taste of Ruby by following a short online tutorial, such as can be found at <a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a> or <a href="http://rubylearning.com/">http://rubylearning.com/</a>.</p>
+<p><strong>À tous les lecteurs&nbsp;:</strong> une question classique en étudiant Rails est de savoir s'il faut étudier Ruby au préalable. La réponse dépend de la façon dont vous apprenez. Si vous avez une prédilection pour apprendre tout depuis la base, de façon systématique, alors apprendre le langage Ruby peut vous être utile&nbsp;; plusieurs livres sont recommandés dans cette section pour vous faire commencer. D'un autre côté, de nombreux développeur Rails débutants sont excités à l'idée de créer des applications <em>web</em>, et préfèreront ne pas se coltiner un livre de 500 pages en pur Ruby avant d'écrire la moindre page sur une simple page web. Plus encore, le sous-ensemble de Ruby nécessaire aux développeurs Rails est différent de ce que vous pourriez trouver dans une introduction sur du pur Ruby, tandis que le  <em>Tutoriel Rails</em> se concentre exactement sur ce sous-ensemble. Si votre intérêt  premier est de construire des applications Rails, je vous recommande de commencer par ce <em>Tutoriel Rails</em> et de lire des livres de pur Ruby ensuite. Ce n'est pas une proposition “tout ou rien”, cependant&nbsp;: si vous commencez à lire ce <em>Tutoriel Rails</em> et sentez votre manque de connaissance du Ruby vous ralentir, sentez-vous libre de basculer vers un livre sur le langage Ruby avant de revenir au tutoriel lorsque vous vous sentirez prêts. Vous pouvez aussi vous contenter d'un goût de ce qu'est Ruby en suivant un court tutoriel en ligne, tels que ceux qu'on peut trouver sur les sites <a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a> ou <a href="http://rubylearning.com/">http://rubylearning.com/</a>.</p>
 
-<p>Another common question is whether to use tests from the start. As noted in the introduction, <em>Rails Tutorial</em> uses test-driven development (also called test-first development), which in my view is the best way to develop Rails applications, but it does introduce a substantial amount of overhead and complexity. If you find yourself getting bogged down by the tests, feel free to skip them on first reading.<sup class="footnote" id="fnref:1.5"><a href="#fn:1.5">5</a></sup> Indeed, some readers may find the inclusion of so many moving parts&mdash;such as tests, version control, and deployment&mdash;a bit overwhelming at first, and if you find yourself expending excessive energy on any of these steps, <em>don&rsquo;t hesitate to skip them</em>. Although I have included only material I consider essential to developing professional-grade Rails applications, only the core application code is strictly necessary the first time through. <br /></p>
+<p>Une autre question classique concerne l'utilisation des tests dès le départ. Comme cela est indiqué dans l'introduction, ce <em>Tutoriel Rails</em> fait appel au “Test Dirigeant le Développement” (“test-driven development”) (appelé aussi “test-first development”), qui selon moi est la meilleure façon de développer des applications Rails, mais le fait est que cette approche introduit [un montant substanciel de complexité][a substantial amount of overhead and complexity]. Si vous sentez que vous vous enlisez à cause des tests, sentez-vous libre de les sauter dans une première lecture.<sup class="footnote" id="fnref:1.4"><a href="#fn:1.4">4</a></sup> Vraiment, certains lecteurs se sentent dans un premier temps écrasés par l'inclusion de tellement de parties mouvantes [[est-ce une référence/résonnance à s'enliser?]] &mdash;&nbsp;telles que les tests, les contrôles de versions, le déploiement&nbsp;&mdash;, et si vous vous rendez compte que vous dépensez une énergie excessive sur toutes ces étapes, <em>n'hésitez pas à les passer</em>. Bien que j'ai inclu seulement le matériel que je considère essentiel au développement d'un niveau professionnel d'une application Rails, seul le cœur du code de l'application est strictement nécessaire à la première lecture. <br /></p>
 
-<p><strong>Inexperienced programmers (non-designers):</strong> <em>Rails Tutorial</em> doesn&rsquo;t assume any background other than general computer knowledge, so if you have limited programming experience this book is a good place to start. Please bear in mind that it is only the first step on a long journey; web development has many moving parts, including HTML/CSS, JavaScript, databases (including SQL), version control, and deployment. This book contains short introductions to these subjects, but there is much more to learn. <br /></p>
+<p><strong>Aux programmeurs non expérimentés (non-designers)&nbsp;:</strong> ce <em>Tutoriel Rails</em> n'exige aucun autre background qu'une connaissance générale de l'ordinateur, donc si vous avez une expérience limitée de la programmation ce livre est un bon endroit pour commencer. Gardez à l'esprit que c'est seulement la première étape d'un long voyage&nbsp;; le développement web possède de nombreuses [parties mouvantes][moving parts], incluant HTML/CSS, JavaScript, les bases de données (et SQL), les contrôles de version, et le déploiement. Ce livre contient de courtes introductions sur ces sujets, mais il y a bien plus à connaitre. <br /></p>
 
-<p><strong>Inexperienced programmers (designers):</strong> Your design skills give you a big leg up, since you probably already know HTML and CSS. After finishing this book you will be in an excellent position to work with existing Rails projects and possibly start some of your own. You may find the programming material challenging, but the Ruby language is unusually friendly to beginners, especially those with an artistic bent.<br /></p>
+<p><strong>Aux programmeurs non expérimentés (designers)&nbsp;: </strong> vos aptitudes en matière de design web vous donnent une longueur d'avance, puisque vous connaissant certainement déjà le HTML et les CSS. Après avoir fini ce livre, vous serez dans une excellente position pour travailler sur des projets Rails existants et pourrez probablement en commencer de votre propre chef. Vous pouvez trouver difficile tout ce qui concerne la programmation, mais le langage Ruby est exceptionnellement accessible aux débutants, tout spécialement ceux qui possèdent une fibre artistique.<br /></p>
 
-<p>After finishing <em>Ruby on Rails Tutorial</em>, I recommend that newer programmers read <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a> by Peter Cooper, which shares the same basic instructional philosophy as <em>Rails Tutorial</em>. I also recommend <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> by Hal Fulton. Finally, to gain a deeper understanding of Rails I recommend <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> by Obie Fernandez.</p>
+<p>Après avoir achevé la lecture du <em>Tutoriel Ruby on Rails</em>, je recommande aux nouveaux programmeurs la lecture de <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a> de Peter Cooper, qui partage la même philosophie pédagogique que ce <em>Tutoriel Rails</em>. Je recommande aussi <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> de Hal Fulton. Enfin, pour acquérir une compréhension plus profonde de Rails je recommande <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> de Obie Fernandez.</p>
 
-<p>Web applications, even relatively simple ones, are by their nature fairly complex. If you are completely new to web programming and find <em>Rails Tutorial</em> overwhelming, it could be that you&rsquo;re not quite ready to make web applications yet.  In that case, I&rsquo;d suggest learning the basics of HTML and CSS and then giving <em>Rails Tutorial</em> another go. (Unfortunately, I don&rsquo;t have a personal recommendation here, but <a href="http://headfirstlabs.com/books/hfhtml/"><em>Head First HTML</em></a> looks promising, and one reader recommends <a href="http://www.amazon.com/gp/product/0596526873?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0596526873"><em>CSS: The Missing Manual</em></a> by David Sawyer McFarland.) You might also consider reading the first few chapters of <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, which starts with sample applications much smaller than a full-blown web app. <br /></p>
+<p>Les applications Web, même les relativement simples, sont de par nature assez complexes. Si vous êtes tout à fait nouveau dans la programmation web et trouver trop complexe la lecture de ce <em>Tutoriel Rails</em>, c'est peut-être que vous n'êtes peut-être pas tout à fait prêts encore à développer des applications web. Dans ce cas, je vous suggère d'apprendre les bases du HTML et des CSS et de recommencer la lecture de ce tutoriel (malheureusement, je n'ai pas de recommandation particulières ici, mais <a href="http://headfirstlabs.com/books/hfhtml/"><em>Head First HTML</em></a> semble prometteur, et un des lecteurs recommande <a href="http://www.amazon.com/gp/product/0596526873?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0596526873"><em>CSS: The Missing Manual</em></a> de David Sawyer McFarland.) Vous pouvez aussi lire avec profit les premiers chapitres de <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, qui début avec l'exemple d'une application plus petite qu'une application web au sens fort du mot. <br /></p>
 
-<p><strong>Experienced programmers new to web development:</strong> Your previous experience means you probably already understand ideas like classes, methods, data structures, etc., which is a big advantage. Be warned that if your background is in C/C++ or Java, you may find Ruby a bit of an odd duck, and it might take time to get used to it; just stick with it and eventually you&rsquo;ll be fine. (Ruby even lets you put semicolons at the ends of lines if you miss them too much.) <em>Rails Tutorial</em> covers all the web-specific ideas you&rsquo;ll need, so don&rsquo;t worry if you don&rsquo;t currently know a <tt>PUT</tt> from a <tt>POST</tt>.<br /></p>
+<p><strong>Aux programmeurs expérimentés découvrant le développement web&nbsp;:</strong> votre expérience signifie que vous comprenez probablement déjà les concepts tels que les classes, les méthodes, les structures de données, etc., ce qui constitue un avantage sérieux. Soyez tout de même avertis, dans le cas où votre background est le C/C++ ou le Java, que vous pourriez trouver le langage Ruby un peu comme un canard boiteux, et cela peut prendre du temps pour le prendre en main&nbsp;; familiarisez-vous juste avec lui, et tout devrait aller pour le mieux (Ruby vous autorise même à mettre des points-virgule à la fin des lignes s'ils vous manquent trop&nbsp;!). Ce <em>Tutoriel Rails</em> couvre toutes les idées spécifiques au développement web dont vous avez besoin, donc ne vous inquiétez pas si vous ne distinguez par pour le moment une requête <tt>PUT</tt> d'une requête <tt>POST</tt>.<br /></p>
 
-<p><strong>Experienced web developers new to Rails:</strong> You have a great head start, especially if you have used a dynamic language such as PHP or (even better) Python. The basics of what we cover will likely be familiar, but test-driven development may be new to you, as may be the structured REST style favored by Rails. Ruby has its own idiosyncrasies, so those will likely be new, too.<br /></p>
+<p><strong>Aux développeurs web expérimentés découvrant Rails&nbsp;:</strong> vous avez une sérieuse longueur d'avance, tout spécialement si vous avez utilisé un langage dynamique tel que le PHP ou (encore mieux) le langage Python. Les bases de ce que nous couvrons vous seront pour le moins familières, mais le développement par le test (Test Dirigeant le Développement, TDD) sera peut-être nouveau pour vous, comme peut l'être aussi le style structuré REST privilégié par Rails. Ruby possède également sa propre idiosyncrasie, elle sera peut-être aussi nouvelle pour vous.<br /></p>
 
-<p><strong>Experienced Ruby programmers:</strong> The set of Ruby programmers who don&rsquo;t know Rails is a small one nowadays, but if you are a member of this elite group you can fly through this book and then move on to <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> by Obie Fernandez. <br /></p>
+<p><strong>Aux programmeurs Ruby expérimentés&nbsp;:</strong> l'ensemble des programmeurs Ruby ne connaissant pas Rails est très restreint de nos jours, mais si vous faites partie de ce groupe d'élite, vous pouvez survoler ce livre et vous diriger ensuite sur le livre <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> de Obie Fernandez. <br /></p>
 
-<p><strong>Inexperienced Rails programmers:</strong> You&rsquo;ve perhaps read some other tutorials and made a few small Rails apps yourself. Based on reader feedback, I&rsquo;m confident that you can still get a lot out of this book. Among other things, the techniques here may be more up-to-date than the ones you picked up when you originally learned Rails. <br /></p>
+<p><strong>Aux programmeurs Rails inexpérimentés&nbsp;:</strong> vous avez peut-être lu d'autres tutoriels et créé quelques petites applications Rails. En me basant sur le retour des lecteurs, je suis confiant sur le fait que vous pourrez tirer beaucoup de ce livre. Parmi d'autres choses, les techniques employées ici sont peut être plus d'actualité que celles que vous avez abordés quand vous avez appris Rails initialement. <br /></p>
 
-<p><strong>Experienced Rails programmers:</strong> This book is unnecessary for you, but many experienced Rails developers have expressed surprise at how much they learned from this book, and you might enjoy seeing Rails from a different perspective. <br /></p>
+<p><strong>Aux programmeurs Rails expérimentés&nbsp;:</strong> ce livre ne vous sera pas utile, et pourtant, de nombreux développeurs Rails expérimentés m'ont exprimé leur surprise quant à la quantité de choses qu'ils avaient tirés de ce livre, et vous pourriez être ravis d'aborder Rails sous un autre jour [une autre perspective]. <br /></p>
 
-<p>After finishing <em>Ruby on Rails Tutorial</em>, I recommend that experienced (non-Ruby) programmers read <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> by David&nbsp;A. Black, which is an excellent in-depth discussion of Ruby from the ground up, or <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> by Hal Fulton, which is also fairly advanced but takes a more topical approach. Then move on to <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> to deepen your Rails expertise.<br /></p>
+<p>Après avoir terminé ce <em>Tutoriel Ruby on Rails</em>, je recommande aux programmeurs (non Ruby) expérimentés la lecture de <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> de David&nbsp;A. Black, qui est une excellent et profonde discussion sur Ruby depuis la base, ou <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> de Hal Fulton, qui est tout aussi avancé mais adopte une approche plus actuelle. Passez ensuite à <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> pour approfondir encore votre expertise de Rails.<br /></p>
 
-<p>At the end of this process, no matter where you started, you will be ready for the more intermediate-to-advanced Rails resources. Here are some I particularly recommend:</p>
+<p>À la fin de ce processus, quel que soit d'où vous partiez, vous serez en mesure d'appréhender les ressources Rails plus avancées. Voilà celle que je recommande particulièrement&nbsp;:</p>
 
 <ul>
 
-<li><a href="http://railscasts.com/">Railscasts</a>: Excellent free Rails screencasts</li>
-<li><a href="http://peepcode.com/">PeepCode</a>, <a href="http://pragmatic.tv/">Pragmatic.tv</a>, <a href="http://envycasts.com/">EnvyCasts</a>: Excellent commercial screencasters</li>
-<li><a href="http://guides.rubyonrails.org/">Rails Guides</a>: Good topical and up-to-date Rails references. <em>Rails Tutorial</em> refers frequently to the <em>Rails Guides</em> for more in-depth treatment of specific topics.</li>
-<li><a href="http://www.google.com/search?q=ruby+on+rails+blogs">Rails blogs</a>: Too many to list, but there are tons of good ones. </li>
+<li><a href="http://railscasts.com/">Railscasts</a>&nbsp;: d'excellents screencats gratuits sur Rails</li>
+<li><a href="http://peepcode.com/">PeepCode</a>, <a href="http://pragmatic.tv/">Pragmatic.tv</a>, <a href="http://envycasts.com/">EnvyCasts</a>&nbsp;: d'excellent screencasters payants</li>
+<li><a href="http://guides.rubyonrails.org/">Rails Guides</a>&nbsp;: bonnes références sur Rails, d'actualité et actualisées. Ce <em>Tutoriel Rails</em> fait fréquemment référence au <em>Rails Guides</em> pour un traitement plus en profondeur de certains sujets.</li>
+<li><a href="http://www.google.com/search?q=ruby+on+rails+blogs">Rails blogs</a>&nbsp;: trop de choses à énumérer, et d'excellentes choses. </li>
 
 </ul>
 
 
 
 
-<h3><a id="sec:1.1.2" href="beginning#sec:1.1.2" class="heading"><span class="number">1.1.2</span> &ldquo;Scaling&rdquo; Rails</a></h3>
+<h3><a id="sec:1.1.2" href="beginning#sec:1.1.2" class="heading"><span class="number">1.1.2</span> “Mise à l'échelle” (&ldquo;Scaling&rdquo;) de Rails</a></h3>
 
 
-<p>Before moving on with the rest of the introduction, I&rsquo;d like to take a moment to address the one issue that dogged the Rails framework the most in its early days: the supposed inability of Rails to &ldquo;scale&rdquo;&mdash;i.e., to handle large amounts of traffic. Part of this issue relied on a misconception; <a href="http://idleprocess.wordpress.com/2009/11/24/presentation-summary-high-performance-at-massive-scale-lessons-learned-at-facebook/">you scale a <em>site</em>, not a framework</a>, and Rails, as awesome as it is, is only a framework. So the real question should have been, &ldquo;Can a site built with Rails scale?&rdquo; In any case, the question has now been definitively answered in the affirmative: some of the most heavily trafficked sites in the world use Rails. Actually <em>doing</em> the scaling is beyond the scope of just Rails, but rest assured that if <em>your</em> application ever needs to handle the load of Hulu or the Yellow Pages, Rails won&rsquo;t stop you from taking over the world.</p>
+<p>Avant de poursuivre avec la suite de l'introduction, j'aimerais m'arrêter un moment un problème qui collait au framework Rails à ses tout débuts&nbsp;: sa supposée inaptitude à se [“mettre à l'échelle”] &mdash;&nbsp;pour, par exemple, absorber un trafic important. Une partie de cette question repose sur une idée tout à fait fausse&nbsp;; <a href="http://idleprocess.wordpress.com/2009/11/24/presentation-summary-high-performance-at-massive-scale-lessons-learned-at-facebook/">vous mettez à l'échelle <em>un site</em>, pas un framework</a>, et Rails, aussi intelligent soit-il, n'est qu'un framework. Donc la vraie question aurait dû être &ldquo;Est-ce qu'un site construit en Rails peut se mettre à l'échelle&nbsp;?&rdquo;. Dans ce cas, la question a été résolue définitivement par l'affirmative&nbsp;: quelques uns des sites les plus lourds en trafic dans le monde utilisent Rails. En fait, <em>rendre</em> la mise à l'échelle possible va bien au-delà du champ d'application de Rails seulement, mais soyez assurés que si <em>votre</em> application connait un trafic similaire à celui de Hulu ou des Yellow Pages (“Les Pages jaunes”), Rails [ne vous empêchera nullement de vous charger du monde entier][won&rsquo;t stop you from taking over the world].</p>
 
 <div class="label" id="sec:conventions"></div>
 
 
-<h3><a id="sec:1.1.3" href="beginning#sec:conventions" class="heading"><span class="number">1.1.3</span> Conventions in this book</a></h3>
+<h3><a id="sec:1.1.3" href="beginning#sec:conventions" class="heading"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></h3>
 
 
-<p>The conventions in this book are mostly self-explanatory; in this section, I&rsquo;ll mention some that may not be.</p>
+<p>Les conventions de ce livre s'explique la plupart du temps d'elles-mêmes&nbsp;; dans cette section, je mentionne celles qui ne le pourraient pas.</p>
 
-<p>Both the <a href="http://railstutorial.org/book">HTML</a> and <a href="http://railstutorial.org/">PDF</a> editions of this book are full of links, both to internal sections (such as <a class="ref" href="beginning#sec:up_and_running">Section&nbsp;1.2</a>) and to external sites (such as the main <a href="http://rubyonrails.org/download">Ruby on Rails download</a> page).<sup class="footnote" id="fnref:1.6"><a href="#fn:1.6">6</a></sup></p>
+<p>Les éditions <a href="http://railstutorial.org/book">HTML</a> et <a href="http://railstutorial.org/">PDF</a> de ce livre sont pleines de liens, vers des sections internes (telles que <a class="ref" href="beginning#sec:up_and_running">Section&nbsp;1.2</a>) aussi bien que des sites externes (tels que la page principale <a href="http://rubyonrails.org/download">Télécharger Ruby on Rails</a>).<sup class="footnote" id="fnref:1.5"><a href="#fn:1.5">5</a></sup></p>
 
-<p>Many examples in this book use command-line commands. For simplicity, all command line examples use a Unix-style command line prompt (a dollar sign), as follows:</p>
+<p>De nombreux exemples de ce livre utilisent la “commande en ligne”. Pour la simplicité, tous les exemples en ligne de commande utilisent l'invite classique Unix (un dollar), comme suit&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;hello, world&quot;</span>
-<span class="go">hello, world</span>
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;bonjour le monde&quot;</span>
+<span class="go">bonjour le monde</span>
 </pre></div>
 </div>
 
 
-<p>Windows users should understand that their systems will use the analogous angle prompt&nbsp;<tt>&gt;</tt>:</p>
+<p>Les utilisateurs Windows doivent savoir que leur système utilisera l'invite analogue&nbsp;<tt>&gt;</tt>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="go">C:\Sites&gt;echo hello, world</span>
-<span class="go">hello, world</span>
+<div class="code"><div class="highlight"><pre><span class="go">C:\Sites&gt;echo Salut le monde</span>
+<span class="go">Salut le monde</span>
 </pre></div>
 </div>
 
 
-<p>On Unix systems, some commands should be executed with <code>sudo</code>, which stands for &ldquo;substitute user do&rdquo;. By default, a command executed with <code>sudo</code> is run as an administrative user, which has access to files and directories that normal users can&rsquo;t touch. To indicate that the use of <code>sudo</code> is system-dependent, it will appear in square brackets when it may (or may not) be necessary on your particular system, such as in this example from <a class="ref" href="beginning#sec:rubygems">Section&nbsp;1.2.2</a>:</p>
+<p>Sur les systèmes d'exploitation Unix, certaines commandes devront être exécutées avec <code>sudo</code>, qui signifie &ldquo;substitute user do&rdquo; (“L'utilisateur de substition fait…”). Par défaut, une commande exécutée avec  <code>sudo</code> est jouée comme par un utilisateur-administrateur, qui a accès à des fichiers et des dossiers que les utilisateurs normaux ne peuvent pas toucher. Pour indiquer cela l'utilisateur de <code>sudo</code> est dépendant de votre système, cela apparaitra entre crochets quand il peut être (ou ne pas être) nécessaire sur votre système en particulier, comment dans l'exemple de la <a class="ref" href="beginning#sec:rubygems">section&nbsp;1.2.2</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> ruby setup.rb
 </pre></div>
 </div>
 
 
-<p>Most Unix/Linux/OS&nbsp;X systems require <code>sudo</code> by default, unless you are using Ruby Version Manager as suggested in <a class="ref" href="beginning#sec:install_ruby">Section&nbsp;1.2.2.3</a>. Note that you should <em>not</em> actually type any brackets; you should run either</p>
+<p>La plupart des systèmes d'exploitation Unix/Linux/Os&nbsp;X requièrent la commande <code>sudo</code> par défaut, sauf si vous utilisez le <em>Ruby Version Manager</em> comme cela est suggéré dans la <a class="ref" href="beginning#sec:install_ruby">section&nbsp;1.2.2.3</a>. Notez que vous ne devez <em>pas</em> utiliser les crochets&nbsp;; vous devez utiliser soit…</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> sudo ruby setup.rb
 </pre></div>
 </div>
 
 
-<p>or</p>
+<p>soit…</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> ruby setup.rb
 </pre></div>
 </div>
 
 
-<p>depending on your system.</p>
+<p>… en fonction de votre système d'exploitation.</p>
 
-<p>Rails comes with lots of commands that can be run at the command line. For example, in <a class="ref" href="beginning#sec:rails_server">Section&nbsp;1.2.5</a> we&rsquo;ll run a local development web server as follows:</p>
+<p>Rails vient avec un grand nombre de commandes qui peuvent être jouées en ligne de commande. Par exemple, dans la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a> nous lancerons un serveur web local de développement comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nv">$ </span>rails server
 </pre></div>
 </div>
 
 
-<p>As with the command-line prompt, <em>Rails Tutorial</em> uses the Unix convention for directory separators (i.e., a forward slash&nbsp;<tt>/</tt>). My Rails Tutorial sample application, for instance, lives in</p>
+<p>Comme pour l'invite de la commande en ligne, ce <em>Tutoriel Rails</em> utilise la convention Unix convention pour les séparateurs de dossiers (c'est-à-dire une balance&nbsp;<tt>/</tt>). Mon application exemple personnelle développée dans ce tutoriel, par exemple, se trouve dans&nbsp;:</p>
 
 <pre class="verbatim">/Users/mhartl/rails_projects/sample_app</pre>
 
 
-<p>On Windows, the analogous directory would be</p>
+<p>Sur Windows, l'adresse du dossier analogue devrait être&nbsp;:</p>
 
 <pre class="verbatim">C:\Sites\sample_app</pre>
 
 
-<p>The root directory for any given app is known as the <em>Rails root</em>, and henceforth all directories will be relative to this directory. (Note in particular that the &ldquo;Rails root&rdquo; is <em>not</em> the root directory for Rails itself.) For example, the <code>config</code> directory of my sample application is</p>
+<p>Le dossier racine pour toute application donnée est connue comme la <em>racine Rails</em> (<em>Rails root</em>), et désormais tous les chemins d'accès seront relatifs à ce dossier (notez en particulier que la &ldquo;racine Rails&rdquo; n'est <em>pas</em> le dossier racine du frameword Rails lui-même). Par exemple, le dossier <code>config</code> de mon application exemple est&nbsp;:</p>
 
 <pre class="verbatim">/Users/mhartl/rails_projects/sample_app/config</pre>
 
 
-<p>The Rails root here is everything before <code>config</code>, i.e.,</p>
+<p>La racine Rails est ici ce qui se trouve avant <code>config</code>, c'est-à-dire&nbsp;:</p>
 
 <pre class="verbatim">/Users/mhartl/rails_projects/sample_app</pre>
 
 
-<p>For brevity, when referring to the file</p>
+<p>Par souci de brièveté, quand nous ferons référence au fichier…</p>
 
 <pre class="verbatim">/Users/mhartl/rails_projects/sample_app/config/routes.rb</pre>
 
 
-<p>I&rsquo;ll omit the Rails root and simply write <code>config/routes.rb</code>.</p>
+<p>… nous omettrons la racine Rails et écrirons simplement <code>config/routes.rb</code>.</p>
 
-<p>Finally, <em>Rails Tutorial</em> often shows output from various programs (shell commands, version control status, Ruby programs, etc.). Because of the innumerable small differences between different computer systems, the output you see may not always agree exactly with what is shown in the text,
-but this is not cause for concern. In addition, some commands may produce errors depending on your system; rather than attempt the <a href="http://en.wikipedia.org/wiki/Sisyphus">Sisyphean</a> task of documenting all such errors in this tutorial, I will delegate to the &ldquo;Google the error message&rdquo; algorithm, which among other things is good practice for real-life software development.</p>
+<p>Pour finir, ce <em>Tutoriel Rails</em> montre souvent les sorties (les résultats) de programmes variés (commandes shell, état de contrôle de version, programmes Ruby, etc.). À cause des inombrables petites différences entre les différents systèmes d'exploitation, la sortie que vous obtiendrez ne coïncidera pas toujours avec ce qui sera montré dans le texte, mais il n'y a aucune raison de s'en pré-occuper. Additionnellement, certaines commandes pourrons produire des erreurs en fonction de votre système&nbsp;; plutôt que d'essayer la tâche <a href="http://en.wikipedia.org/wiki/Sisyphus">Sisyphéenne</a> de documenter tous ces types d'erreurs dans ce tutoriel, je délèguerai cette tâche à l'algorithme &ldquo;Google le message d'erreur&rdquo;, qui est, parmi d'autres choses, une bonne pratique dans le développement grandeur nature de logiciel.</p>
 
 <div class="label" id="sec:up_and_running"></div>
 
 
-<h2><a id="sec:1.2" href="beginning#sec:up_and_running" class="heading"><span class="number">1.2</span> Up and running</a></h2>
+<h2><a id="sec:1.2" href="beginning#sec:up_and_running" class="heading"><span class="number">1.2</span> [Prêts pour le départ][Up and running]</a></h2>
 
-
-<p>It&rsquo;s time now to get going with a Ruby on Rails development environment and our first application. There is quite a bit of overhead here, especially if you don&rsquo;t have extensive programming experience, so don&rsquo;t get discouraged if it takes a while to get started. It&rsquo;s not just you; every developer goes through it (often more than once), but rest assured that the effort will be richly rewarded.</p>
+<p>Le temps est venu d'aborder l'environnement de développement Ruby on Rails et notre première application. Il y a quelques casse-têtes ici, spécialement si vous n'avez pas une expérience étendue de la programmation, donc ne vous découragez pas si cela vous demande un moment avant de pouvoir réellement démarrer. Ça ne vous concerne pas vous en particulier&nbsp;; tout développeur doit en passer par là (et souvent plus d'une fois), mais soyez assuré que les efforts seront richement récompensés.</p>
 
 <div class="label" id="sec:development_tools"></div>
 
 
-<h3><a id="sec:1.2.1" href="beginning#sec:development_tools" class="heading"><span class="number">1.2.1</span> Development environments</a></h3>
+<h3><a id="sec:1.2.1" href="beginning#sec:development_tools" class="heading"><span class="number">1.2.1</span> Les environnements de développement</a></h3>
 
 
-<p>Considering various idiosyncratic customizations, there are probably as many development environments as there are Rails programmers, but there are at least two broad themes: text editor/command line environments, and integrated development environments (IDEs). Let&rsquo;s consider the latter first.</p>
+<p>En prenant en compte la grande variété des personnalisations possibles, il existe au moins autant d'environnements de développement que de programmeurs Rails, mais il se dégage tout de même deux thèmes principaux&nbsp;: les environnements à base d'éditeur de texte/ligne de commande, et les environnements de développement intégrés (IDEs). Considérons d'abord le second.</p>
 
 <h4><a id="sec:1.2.1.1" href="beginning#sec:1.2.1.1" class="heading">IDEs</a></h4>
 
 
-<p>There is no shortage of Rails IDEs, including <a href="http://www.aptana.com/rails/">RadRails</a>, <a href="http://www.jetbrains.com/ruby/index.html">RubyMine</a>, and <a href="http://www.codegear.com/products/3rdrail">3rd Rail</a>. All are cross-platform, and I&rsquo;ve heard good things about several of them. I encourage you to try them and see if they work for you, but I have a confession to make: I have never found an IDE that met all my Rails development needs&mdash;and for some projects I haven&rsquo;t even been able to get them to work at all.</p>
+<p>Les IDEs Rails ne manquent pas, incluant <a href="http://www.aptana.com/rails/">RadRails</a>, <a href="http://www.jetbrains.com/ruby/index.html">RubyMine</a>, et <a href="http://www.codegear.com/products/3rdrail">3rd Rail</a>. Tous sont “cross-platform” (NdT. Utilisables sur n'importe quel système), et j'ai entendu dire du bien de quelques uns d'entre eux. Je vous encourage à les essayer s'ils fonctionnent pour vous, mais j'ai une confession à vous faire&nbsp;: je n'ai jamais trouvé un IDE qui me permette de satisfaire tous mes besoin en matière de développement Rails &mdash;&nbsp;et pour certains projets je n'ai pas même été capable de les faire fonctionner.</p>
 
-<h4><a id="sec:1.2.1.2" href="beginning#sec:1.2.1.2" class="heading">Text editors and command lines</a></h4>
+<h4><a id="sec:1.2.1.2" href="beginning#sec:1.2.1.2" class="heading">Éditeurs de texte et ligne de commande</a></h4>
 
 
-<p>What are we to use to develop Rails apps, if not some awesome all-in-one IDE? I&rsquo;d guess the majority of Rails developers opt for the same solution I&rsquo;ve chosen: use a <em>text editor</em> to edit text, and a <em>command line</em> to issue commands (<a class="ref" href="beginning#fig:editor_shell">Figure&nbsp;1.1</a>). Which combination you use depends on your tastes and your platform:</p>
+<p>Que devons-nous utiliser alors pour remplacer ces IDE tout-en-un&nbsp;? Je parierai que la majorité des développeurs Rails ont opté pour la même solution que moi&nbsp;: utiliser un <em>éditeur de texte</em> pour éditer le texte, et une <em>ligne de commande</em> pour exécuter des commandes (<a class="ref" href="beginning#fig:editor_shell">Illustration&nbsp;1.1</a>). La combinaison que vous utiliserez dépendra de vos goûts et de votre plate-forme&nbsp;:</p>
 
 <ul>
-<li><strong>Macintosh OS X:</strong> Like many Rails developers, I prefer <a href="http://macromates.com/">TextMate</a>. Other options include Emacs and  <a href="http://code.google.com/p/macvim/">MacVim</a> (launched with the command <code>mvim</code>), the excellent Macintosh version of Vim.<sup class="footnote" id="fnref:1.7"><a href="#fn:1.7">7</a></sup> I use <a href="http://iterm.sourceforge.net/">iTerm</a> for my command line terminal; others prefer the native Terminal app.</li>
+<li><strong>Macintosh OS&nbsp;X&nbsp;:</strong> comme beaucoup de développeurs Rails, j'ai une préférence pour <a href="http://macromates.com/">TextMate</a>. D'autres options incluent Emacs et  <a href="http://code.google.com/p/macvim/">MacVim</a> (chargé avec la commande <code>mvim</code>), l'excellente version Macintosh de Vim.<sup class="footnote" id="fnref:1.6"><a href="#fn:1.6">6</a></sup> J'utilise <a href="http://iterm.sourceforge.net/">iTerm</a> comme terminal de ligne de commande&nbsp;; d'autres affectionnent l'application native “Terminal”.</li>
 
-<li><strong>Linux:</strong> Your editor options are basically the same as OS&nbsp;X, minus TextMate. I&rsquo;d recommend graphical Vim (gVim), <a href="http://projects.gnome.org/gedit/">gedit</a> (with the <a href="http://blog.siverti.com.br/gmate/">GMate</a> plugins), or <a href="http://kate-editor.org/">Kate</a>. As far as command lines go, you&rsquo;re totally set: every Linux distribution comes with at least one command line terminal application (and often several).</li>
+<li><strong>Linux&nbsp;:</strong> vos options d'édition sont à la base les mêmes que pour les OS&nbsp;X, à l'exception de TextMate. Je recommande “graphical Vim” (gVim), <a href="http://projects.gnome.org/gedit/">gedit</a> (avec le plugin <a href="http://blog.siverti.com.br/gmate/">GMate</a>), ou <a href="http://kate-editor.org/">Kate</a>. En terme de ligne de commande, vous devez déjà être totalement équipés&nbsp;: toute distribution Linux est fournie avec une application terminal de ligne de commande (et même souvent plusieurs).</li>
 
-<li><strong>Windows:</strong> Some promising editors on Windows include <a href="http://www.vim.org/download.php#pc">Vim</a>, the <a href="http://www.e-texteditor.com/">E&nbsp;Text Editor</a>, <a href="http://www.activestate.com/komodo_edit/">Komodo Edit</a>, and <a href="http://www.sublimetext.com/">Sublime Text</a>. For a command line, I recommend using the command prompt that comes with <a href="http://railsinstaller.org/">Rails Installer</a> (<a class="ref" href="beginning#sec:rails_installer_windows">Section&nbsp;1.2.2.1</a>).  </li>
+<li><strong>Windows&nbsp;:</strong> Certains éditeurs prometteurs sur Windows sont <a href="http://www.vim.org/download.php#pc">Vim</a>, le <a href="http://www.e-texteditor.com/">E&nbsp;Text Editor</a>, <a href="http://www.activestate.com/komodo_edit/">Komodo Edit</a>, et <a href="http://www.sublimetext.com/">Sublime Text</a>. Pour les lignes de commande, je recommande d'utiliser l'invite fournie avec <a href="http://railsinstaller.org/">Rails Installer</a> (<a class="ref" href="beginning#sec:rails_installer_windows">Section&nbsp;1.2.2.1</a>).  </li>
 
 </ul>
 
 
-<p>If you go with some flavor of Vim, be sure to tap into the thriving community of <a href="http://www.google.com/search?q=vim+rails">Vim-using Rails hackers</a>. See especially the <a href="http://www.vim.org/scripts/script.php?script_id=1567">rails.vim</a> enhancements and the <a href="http://www.vim.org/scripts/script.php?script_id=1658">NERD tree</a> project drawer.</p>
+<p>Si vous avez une connaissance de Vim, assurez-vous de puiser dans la florissante communauté des <a href="http://www.google.com/search?q=vim+rails">Vim-using Rails hackers</a>. Attardez-vous spécialement sur les améliorations de <a href="http://www.vim.org/scripts/script.php?script_id=1567">rails.vim</a> et le projet à tiroir <a href="http://www.vim.org/scripts/script.php?script_id=1658">NERD tree</a>.</p>
 
 <div class="label" id="fig:editor_shell"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">Figure 1.1: </span><span class="description">A text editor/command line development environment (TextMate/iTerm).  <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">Illustration 1.1: </span><span class="description">Un environnement de développement éditeur de texte/ligne de commande (TextMate/iTerm).  <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(taille normale)</a></span></div></div>
 
 
 
 
-<h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">Browsers</a></h4>
+<h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">Navigateurs internet</a></h4>
 
 
-<p>Although there are many web browsers to choose from, the vast majority of Rails programmers use Firefox, Safari, or Chrome when developing. The screenshots in Rails Tutorial will generally be of a Firefox browser. If you use Firefox, I suggest using the <a href="http://getfirebug.com/">Firebug</a> add-on, which lets you perform all sorts of magic, such as dynamically inspecting (and even editing) the HTML structure and CSS rules on any page. For those not using Firefox, <a href="http://getfirebug.com/firebuglite">Firebug Lite</a> works with most other browsers, and both Safari and Chrome have a built-in &ldquo;Inspect element&rdquo; feature available by right-clicking on any part of the page. Regardless of which browser you use, experience shows that the time spent learning such a web inspector tool will be richly rewarded.</p>
+<p>Bien qu'on puisse choisir dans une large panoplie de navigateurs, la majorité des développeurs Rails font appel à Firefox, Safari ou Chrome pour développer leurs applications. Les copies d'écran dans ce tutoriel Rails proviennent en général de Firefox. Si vous utilisez Firefox, je vous suggère d'utiliser l'add-on <a href="http://getfirebug.com/">Firebug</a>, qui vous permet de faire tout un tas de choses magiques, comment inspecter dynamiquement (ou même modifier) la structure HTML et les règles CSS de n'importe quelle page. Pour ceux qui n'utilisent pas Firefox, <a href="http://getfirebug.com/firebuglite">Firebug Lite</a> fonctionne avec la plupart des autres navigateurs, et Safari comme Chrome ont de façon native un outil d'inspection des éléments accessible en cliquant-droit sur n'importe quelle partie de la page. Quel que soit le navigateur utilisé, l'expérience démontre que le temps passé à apprendre à se servir d'un outil d'inspection est rapidement et richement récompensé.</p>
 
-<h4><a id="sec:1.2.1.4" href="beginning#sec:1.2.1.4" class="heading">A note about tools</a></h4>
+<h4><a id="sec:1.2.1.4" href="beginning#sec:1.2.1.4" class="heading">Une note à propos des outils</a></h4>
 
 
-<p>In the process of getting your development environment up and running, you may find that you spend a <em>lot</em> of time getting everything just right. The learning process for editors and IDEs is particularly long; you can spend weeks on TextMate or Vim tutorials alone. If you&rsquo;re new to this game, I want to assure you that <em>spending time learning tools is normal</em>. Everyone goes through it. Sometimes it is frustrating, and it&rsquo;s easy to get impatient when you have an awesome web app in your head and you <em>just want to learn Rails already</em>, but have to spend a week learning some weird ancient Unix editor just to get started. But a craftsman has to know his tools; in the end the reward is worth the effort.</p>
+<p>Dans le processus de rendre opérationnel votre environnement de développement, vous constaterez peut-être que vous dépensez <em>beaucoup</em> de temps à simplement faire que les choses fonctionnent. Le processus d'apprentissage des éditeurs et des IDEs est particulièrement long&nbsp;; vous pourrez passer des semaines sur des tutoriels TextMate ou Vim. Si ce jeu est tout nouveau pour vous, je tiens à vous assurer que <em>passer du temps à apprendre à connaitre ses outils est normal</em>. Tout le monde y passe. Parfois cela est frustrant, et il est facile de perdre patience quand vous avez en tête le projet d'une magnifique application web et que vous <em>juste apprendre Rails tout de suite</em>, mais que vous avez à prendre une semaine sur un ancien et bizarre éditeur de texte Unix pour pouvoir seulement commencer. Mais un artisan se doit de connaitre ses outils&nbsp;; au bout du compte, le jeu en vaut la chandelle.</p>
 
 <div class="label" id="sec:rubygems"></div>
 
 
-<h3><a id="sec:1.2.2" href="beginning#sec:rubygems" class="heading"><span class="number">1.2.2</span> Ruby, RubyGems, Rails, and Git</a></h3>
+<h3><a id="sec:1.2.2" href="beginning#sec:rubygems" class="heading"><span class="number">1.2.2</span> Ruby, RubyGems, Rails, et Git</a></h3>
 
 
-<p>Now it&rsquo;s time to install Ruby and Rails. The canonical up-to-date source for this step is the <a href="http://rubyonrails.org/download">Ruby on Rails download page</a>. I&rsquo;ll assume you can go there now; parts of this book can be read profitably offline, but not this part. I&rsquo;ll just inject some of my own comments on the steps.</p>
+<p>Maintenant, il est temps d'installer Ruby <em>et</em> Rails. La source canonique et actualisée pour cela la <a href="http://rubyonrails.org/download">page de téléchargement de Ruby on Rails</a>. Je présume que vous pouvez y aller dès à présent&nbsp;; les parties de ce livre peuvent être lues avec profit en offline (NdT. En étant déconnecté), mais pas celle-ci. Je vais juste injecter certains commentaires personnels sur cette étapes.</p>
 
 <div class="label" id="sec:rails_installer_windows"></div>
 
 
-<h4><a id="sec:1.2.2.1" href="beginning#sec:rails_installer_windows" class="heading">Rails Installer (Windows)</a></h4>
+<h4><a id="sec:1.2.2.1" href="beginning#sec:rails_installer_windows" class="heading">Installeur Rails (Windows)</a></h4>
 
 
-<p>Installing Rails on Windows used to be a real pain, but thanks to the efforts of the good people at <a href="http://engineyard.com/">Engine Yard</a>&mdash;especially Dr.&nbsp;Nic Williams and Wayne&nbsp;E. Seguin&mdash;installing Rails and related software on Windows is now incredibly easy. If you are using Windows, go to <a href="http://railsinstaller.org/">Rails Installer</a> (<a href="http://railsinstaller.org/">http://railsinstaller.org/</a>) and download the Rails Installer executable. Double-click the executable and follow the instructions to install Git (so you can skip <a class="ref" href="beginning#sec:install_git">Section&nbsp;1.2.2.2</a>), Ruby (skip <a class="ref" href="beginning#sec:install_ruby">Section&nbsp;1.2.2.3</a>), RubyGems (skip <a class="ref" href="beginning#sec:install_rubygems">Section&nbsp;1.2.2.4</a>), and Rails itself (skip <a class="ref" href="beginning#sec:install_rails">Section&nbsp;1.2.2.5</a>). Once the installation has finished, you can skip right to the creation of the first application in <a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a>.</p>
+<p>L'installation de Rails sur Windows était auparavant une calamité, mais grâce aux efforts de bonnes personnes à <a href="http://engineyard.com/">Engine Yard</a> &mdash;&nbsp;spécialement Dr.&nbsp;Nic Williams et Wayne&nbsp;E. Seguin&nbsp;&mdash; l'installation de Rails et des logiciels afférants sur Windows est maintenant incroyablement facile. Si vous êtes sous Windows, allez au <a href="http://railsinstaller.org/">Rails Installer</a> (<a href="http://railsinstaller.org/">http://railsinstaller.org/</a>) et téléchargez l'exécutable Rails Installer. Double-clickez l'exécutable et suivez les instructions d'installation pour installer Git (vous pourrez donc passer la <a class="ref" href="beginning#sec:install_git">section&nbsp;1.2.2.2</a>), Ruby (passer la <a class="ref" href="beginning#sec:install_ruby">section&nbsp;1.2.2.3</a>), RubyGems (passez la <a class="ref" href="beginning#sec:install_rubygems">section&nbsp;1.2.2.4</a>), et Rails lui-même (passez la <a class="ref" href="beginning#sec:install_rails">section&nbsp;1.2.2.5</a>). Une fois l'installation terminée, vous pouvez directement passer à la création de la première application à la <a class="ref" href="beginning#sec:the_first_application">section&nbsp;1.2.3</a>.</p>
 
 <div class="label" id="sec:install_git"></div>
 
 
-<h4><a id="sec:1.2.2.2" href="beginning#sec:install_git" class="heading">Install Git</a></h4>
+<h4><a id="sec:1.2.2.2" href="beginning#sec:install_git" class="heading">Installation de Git</a></h4>
 
 
-<p>Much of the Rails ecosystem depends in one way or another on a <a href="http://en.wikipedia.org/wiki/Revision_control">version control system</a> called <a href="http://git-scm.com/">Git</a> (covered in more detail in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a>). Because its use is ubiquitous, you should install Git even at this early stage; I suggest following the installation instructions for your platform at the <a href="http://progit.org/book/ch1-4.html">Installing Git section of <em>Pro Git</em></a>.</p>
+<p>Le plus gros de l'écosystème Rails repose d'une manière ou d'une autre sur un <a href="http://en.wikipedia.org/wiki/Revision_control">système de contrôle de version</a> appelé <a href="http://git-scm.com/">Git</a> (couvert plus en détail dans la <a class="ref" href="beginning#sec:version_control">section&nbsp;1.3</a>). Puisque son usage est omniprésent, vous devriez installer Git même à ce point de départ&nbsp;; je vous suggère de suivre les instructions d'installation propres à votre plate-forme que vous trouverez à cette adresse&nbsp;: <a href="http://progit.org/book/ch1-4.html">Installing Git section of <em>Pro Git</em></a>.</p>
 
 <div class="label" id="sec:install_ruby"></div>
 
 
-<h4><a id="sec:1.2.2.3" href="beginning#sec:install_ruby" class="heading">Install Ruby</a></h4>
+<h4><a id="sec:1.2.2.3" href="beginning#sec:install_ruby" class="heading">Installer Ruby</a></h4>
 
 
-<p>The next step is to install Ruby. It&rsquo;s possible that your system already has it; try running</p>
+<p>L'étape suivante consiste à installer Ruby. Il est possible que votre système le possède déjà&nbsp;; essayez d'exécuter la commande…</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> ruby -v
 <span class="go">ruby 1.9.2</span>
@@ -714,13 +711,13 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div>
 
 
-<p>to see the version number. Rails&nbsp;3 requires Ruby&nbsp;1.8.7 or later and works best with Ruby&nbsp;1.9.2. This tutorial assumes that you are using the latest development version of Ruby&nbsp;1.9.2, known as Ruby&nbsp;1.9.2-head, but Ruby&nbsp;1.8.7 should work as well.</p>
+<p>… pour voir le numéro de version de votre Ruby. Rails&nbsp;3 requiert  Ruby&nbsp;1.8.7 ou plus récent et fonctionne mieux avec Ruby&nbsp;1.9.2. Ce tutoriel pré-suppose que vous utilisez la dernière version de développent de Ruby&nbsp;1.9.2, connu sous le nom Ruby&nbsp;1.9.2-head, mais Ruby&nbsp;1.8.7 devrait fonctionner tout aussi bien.</p>
 
-<p>The Ruby&nbsp;1.9 branch is under heavy development, so unfortunately installing the latest Ruby can be quite a challenge. You will likely have to rely on the web for the most up-to-date instructions. What follows is a series of steps that I&rsquo;ve gotten to work on my system (Macintosh OS&nbsp;X), but you may have to search around for steps that work on your system.</p>
+<p>La branche Ruby&nbsp;1.9 est en développement lourd, donc malheureusement installer la dernière version de Ruby peut relever du challenge. Vous devrez compter alors sur les instructions les plus actualisées qu'on trouve en ligne. Ce qui suit est une série d'étapes que j'ai exécutées pour le fonctionnement sur mon système (Macintosh OS&nbsp;X), mais vous aurez peut-être à chercher à droite et à gauche pour qu'elles fonctionnent sur le vôtre.</p>
 
-<p>As part of installing Ruby, if you are using OS&nbsp;X or Linux I strongly recommend installing Ruby using <a href="http://rvm.beginrescueend.com/">Ruby Version Manager (RVM)</a>, which allows you to install and manage multiple versions of Ruby on the same machine. (The <a href="http://github.com/vertiginous/pik">Pik</a> project accomplishes a similar feat on Windows.) This is particularly important if you want to run Rails&nbsp;3 and Rails&nbsp;2.3 on the same machine. If you want to go this route, I suggest using RVM to install two Ruby/Rails combinations: Ruby&nbsp;1.8.7/Rails&nbsp;2.3.10 and Ruby&nbsp;1.9.2/Rails&nbsp;3.0.7. If you run into any problems with RVM, you can often find its creator, Wayne&nbsp;E. Seguin, on the RVM IRC channel (<a href="http://webchat.freenode.net/?channels=rvm">#rvm on freenode.net</a>).<sup class="footnote" id="fnref:1.8"><a href="#fn:1.8">8</a></sup></p>
+<p>Dans le cadre de l'installation de Ruby, si vous utilisez OS&nbsp;X ou Linux je recommande fortement l'installation de Ruby en utilisant le <a href="http://rvm.beginrescueend.com/">Ruby Version Manager (RVM)</a>, qui vous permet d'installer et gérer plusieurs versions de Ruby sur la même machine (le projet <a href="http://github.com/vertiginous/pik">Pik</a> accomplit la même chose sous Windows). Cela est particulièrement important si vous voulez faire tourner Rails&nbsp;3 et Rails&nbsp;2.3 sur le même ordinateur. Si vous voulez emprunter cette voie, Je vous suggère l'utilisation de RVM pour installer deux combinaisons Ruby/Rails&nbsp;: Ruby&nbsp;1.8.7/Rails&nbsp;2.3.10 et Ruby&nbsp;1.9.2/Rails&nbsp;3.0.5. Si vous rencontrez le moindre problème avec  RVM, vous pouvez souvent trouver son créateur, Wayne&nbsp;E. Seguin, sur le canal IRC de RVM (<a href="http://webchat.freenode.net/?channels=rvm">#rvm on freenode.net</a>).<sup class="footnote" id="fnref:1.7"><a href="#fn:1.7">7</a></sup></p>
 
-<p>After <a href="http://rvm.beginrescueend.com/rvm/install/">installing RVM</a>, you can install Ruby as follows:<sup class="footnote" id="fnref:1.9"><a href="#fn:1.9">9</a></sup></p>
+<p>Après l'<a href="http://rvm.beginrescueend.com/rvm/install/">l'installation de RVM</a>, vous pouvez installer Ruby de cette manière&nbsp;:<sup class="footnote" id="fnref:1.8"><a href="#fn:1.8">8</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm get head
 <span class="gp">$</span> rvm reload
@@ -731,35 +728,35 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div>
 
 
-<p>Here the first two commands update and reload RVM itself, which is a good practice since RVM gets updated frequently. The final two commands do the actual Ruby installations; depending on your system, they might take a while to download and compile, so don&rsquo;t worry if it seems to be taking forever. (Also beware that lots of little things can go wrong. For example, on my system the latest version of Ruby&nbsp;1.8.7 won&rsquo;t compile; instead, after much searching and hand-wringing, I discovered that I needed &ldquo;patchlevel&rdquo; number 302:</p>
+<p>Les deux premières commandes actualisent et rechargent RVM lui-même, ce qui constitue une bonne pratique puisque RVM est fréquemment actualisé. Les deux commandes finales procèdent à l'installation de Ruby&nbsp;; en fonction de votre système, cela peut prendre plus ou moins de temps pour télécharger et compiler les sources, donc ne vous inquiétez pas si ça vous semble une éternité (soyez également informé que beaucoup de peites choses peuvent aller de travers. Par exemple, sur mon système la dernier version de Ruby&nbsp;1.8.7 ne voudra pas se compiler&nbsp;; au lieu de ça, après bien des recherches et des lamentations, j'ai découvert que j'avais besoin du &ldquo;patchlevel&rdquo; numéro 174:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm install 1.8.7-p302
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm install 1.8.7-p174
 </pre></div>
 </div>
 
 
-<p>When things like this happen to you, it&rsquo;s always frustrating, but at least you know that it happens to everyone&hellip;)</p>
+<p>Quand de telles choses vous arrive, c'est toujours très frustrant (NdT. Oh que oui&nbsp;!), mais au moins, vous saurez que ça n'arrive pas qu'à vous.</p>
 
-<p>Ruby programs are typically distributed via <em>gems</em>, which are self-contained packages of Ruby code. Since gems with different version numbers sometimes conflict, it is often convenient to create separate <em>gemsets</em>, which are self-contained bundles of gems. In particular, Rails is distributed as a gem, and there are conflicts between Rails&nbsp;2 and Rails&nbsp;3, so if you want to run multiple versions of Rails on the same system you need to create a separate gemset for each:</p>
+<p>Typiquement, les programmes Ruby sont distribués via des <em>gems</em>, qui sont des packages autonomes de code Ruby. Puisque des gems avec des numéros de versions différents peuvent parfois entrer en conflit, il est souvent pratique de créer des <em>gemsets</em> séparés, qui sont des bundles autonomes de gems. En particulier, Rails est distribué comme un gem, et il y a des conflits entre  Rails&nbsp;2 et Rails&nbsp;3, donc si vous voulez lancer plusieurs version de Rails sur le même système vous aurez besoin de créer une gemset différent pour chacun&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --create 1.8.7-p302@rails2tutorial
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --create 1.8.7-p174@rails2tutorial
 <span class="gp">$</span> rvm --create use 1.9.2@rails3tutorial
 </pre></div>
 </div>
 
 
-<p>Here the first command creates the gemset <code>rails2tutorial</code> associated with Ruby&nbsp;1.8.7-p302, while the second command creates the gemset <code>rails3tutorial</code> associated with Ruby&nbsp;1.9.2 and uses it (via the <code>use</code> command) at the same time. RVM supports a large variety of commands for manipulating gemsets; see the documentation at <a href="http://rvm.beginrescueend.com/gemsets/">http://rvm.beginrescueend.com/gemsets/</a>.</p>
+<p>La première commande crée le gemset <code>rails2tutorial</code> associé à Ruby&nbsp;1.8.7-p174, tandis que la seconde commande crée le gemset <code>rails3tutorial</code> associé à Ruby&nbsp;1.9.2 et l'utilise (via la commande <code>use</code>) en même temps. RVM supporte une large variété de commandes pour manipuler les gemsets&nbsp;; voyez la documentation à l'adresse <a href="http://rvm.beginrescueend.com/gemsets/">http://rvm.beginrescueend.com/gemsets/</a>.</p>
 
-<p>In this tutorial, we want our system to use Ruby&nbsp;1.9.2 and Rails&nbsp;3.0 by default, which we can arrange as follows:</p>
+<p>Dans ce tutoriel, nous voulons que notre système utilise Ruby&nbsp;1.9.2 et Rails&nbsp;3.0 par défaut, ce que nous pouvons définir comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --default use 1.9.2@rails3tutorial
 </pre></div>
 </div>
 
 
-<p>This simultaneously sets the default Ruby to 1.9.2 and the default gemset to <code>rails3tutorial</code>.</p>
+<p>Cela définit simultanéement la version de Ruby par défaut à la version 1.9.2 et le gemset par défaut à <code>rails3tutorial</code>.</p>
 
-<p>By the way, if you ever get stuck with RVM, running commands like these should help you get your bearings:</p>
+<p>En passant, si vous vous retrouvez coincé avec RVM, exécuter des commandes comme les suivantes devraient vous permettre de retrouver toutes vos facultés&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --help
 <span class="gp">$</span> rvm gemset --help
@@ -770,50 +767,49 @@ but this is not cause for concern. In addition, some commands may produce errors
 <div class="label" id="sec:install_rubygems"></div>
 
 
-<h4><a id="sec:1.2.2.4" href="beginning#sec:install_rubygems" class="heading">Install RubyGems</a></h4>
+<h4><a id="sec:1.2.2.4" href="beginning#sec:install_rubygems" class="heading">Installation de RubyGems</a></h4>
 
 
-<p>RubyGems is a package manager for Ruby projects, and there are tons of great libraries (including Rails) available as Ruby packages, or <em>gems</em>. Installing RubyGems should be easy once you install Ruby. In fact, if you have <a href="http://rvm.beginrescueend.com/rvm/install/">installed RVM</a>, you already have RubyGems, since RVM includes it automatically:</p>
+<p>RubyGems est un gestionnaire de packages pour les projets Ruby, et il y a légion d'excellente librairies (Rails inclus) accessible comme packages Ruby, ou comme <em>gems</em>. L'installation de RubyGems devrait être facile une fois Ruby installé. En fait, si vous avez <a href="http://rvm.beginrescueend.com/rvm/install/">installé RVM</a>, vous avez déjà RubyGems, puis RVM l'inclut automatiquement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> which gem
 <span class="go">/Users/mhartl/.rvm/rubies/ruby-head/bin/gem</span>
 </pre></div>
 </div>
 
-
-<p>If you don&rsquo;t already have it, you should <a href="http://rubyforge.org/frs/?group_id=126">download RubyGems</a>, extract it, and then go to the <code>rubygems</code> directory and run the setup program:</p>
+<p>Si vous ne l'avez pas encore, vous devez <a href="http://rubyforge.org/frs/?group_id=126">télécharger RubyGems</a>, l'extraire, puis aller dans le dossier <code>rubygems</code> pour lancer le programme d'installation&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> ruby setup.rb
 </pre></div>
 </div>
 
 
-<p>If you already have RubyGems installed, you might want to update your system to the version used in this tutorial:</p>
+<p>Si RubyGems est déjà installé, vous pouvez vouloir actualiser votre système avec la dernière version&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem update --system 1.6.2
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem update --system
 </pre></div>
 </div>
 
 
-<p>Finally, if you&rsquo;re using Ubuntu Linux, you might want to take a look at <a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu">the Ubuntu/Rails&nbsp;3.0 blog post by Toran Billups</a> for full installation instructions.</p>
+<p>Pour finir, si vous utilisez Ubuntu Linux, vous devriez jeter un coup d'œil à <a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu">the Ubuntu/Rails&nbsp;3.0 blog post by Toran Billups</a> pour des instructions complètes sur l'installation.</p>
 
 <div class="label" id="sec:install_rails"></div>
 
 
-<h4><a id="sec:1.2.2.5" href="beginning#sec:install_rails" class="heading">Install Rails</a></h4>
+<h4><a id="sec:1.2.2.5" href="beginning#sec:install_rails" class="heading">Installer Rails</a></h4>
 
 
-<p>Once you&rsquo;ve installed RubyGems, installing Rails&nbsp;3.0 should be easy:</p>
+<p>Une fois RubyGems installé, l'installation de Rails&nbsp;3.0 devrait être un jeu d'enfant&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.0.7
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.0.5
 </pre></div>
 </div>
 
 
-<p>To verify that this worked, run the following command:</p>
+<p>Pour vérifier si tout a fonctionné, exécutez la commande suivante&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails -v
-<span class="go">Rails 3.0.7</span>
+<span class="go">Rails 3.0.5</span>
 </pre></div>
 </div>
 
@@ -821,16 +817,16 @@ but this is not cause for concern. In addition, some commands may produce errors
 <div class="label" id="sec:the_first_application"></div>
 
 
-<h3><a id="sec:1.2.3" href="beginning#sec:the_first_application" class="heading"><span class="number">1.2.3</span> The first application</a></h3>
+<h3><a id="sec:1.2.3" href="beginning#sec:the_first_application" class="heading"><span class="number">1.2.3</span> La première application</a></h3>
 
 
-<p>Virtually all Rails applications start the same way, with the <code>rails</code> command. This handy program creates a skeleton Rails application in a directory of your choice. To get started, make a directory for your Rails projects and then run the <code>rails</code> command to make the first application:</p>
+<p>Grosso-modo, toutes les applications Rails commencent de la même manière, par une commande <code>rails</code>. Ce programme pratique crée un squelette de l'application Rails dans le dossier de votre choix. Pour commencer, faite un dossier pour votre projet Rails et exécutez la commande <code>rails</code> pour créer la première application&nbsp;:</p>
 
 <div class="label" id="code:rails_script"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.1.</span> <span class="description">Running the <code>rails</code> script to generate a new application.</span> </div>
+<div class="listing"><span class="header">Extrait 1.1.</span> <span class="description">Exécution du script <code>rails</code> pour générer une nouvelle application web.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mkdir rails_projects
 <span class="gp">$</span> <span class="nb">cd </span>rails_projects
 <span class="gp">$</span> rails new first_app
@@ -856,12 +852,12 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div></div>
 
 
-<p>Notice how many files and directories the <code>rails</code> command creates. This standard directory and file structure (<a class="ref" href="beginning#fig:directory_structure_rails_3">Figure&nbsp;1.2</a>) is one of the many advantages of Rails; it immediately gets you from zero to a functional (if minimal) application. Moreover, since the structure is common to all Rails apps, you can immediately get your bearings when looking at someone else&rsquo;s code. A summary of the default Rails files appears in <a class="ref" href="beginning#table:rails_directory_structure">Table&nbsp;1.1</a>; we&rsquo;ll learn about most of these files and directories throughout the rest of this book.</p>
+<p>Remarquez le nombre de fichiers et de dossier que la commande <code>rails</code> crée. Cette structure stantard de dossiers et de fichiers (<a class="ref" href="beginning#fig:directory_structure_rails_3">Illustration&nbsp;1.2</a>) est l'un des nombreux avantages de Rails&nbsp;; cela vous propulse directement de zéro à une application fonctionnelle (bien que minimale). Plus encore, puisque la structure est commune à toutes les applications Rails, vous pouvez immédiatement prendre vos repères en regardant le code de quelqu'un d'autre. Un résumé des fichiers Rails par défaut apparait dans la <a class="ref" href="beginning#table:rails_directory_structure">table&nbsp;1.1</a>&nbsp;; nous en apprendrons plus sur la plupart de ces fichiers tout au long de ce livre.</p>
 
 <div class="label" id="fig:directory_structure_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/directory_structure_rails_3.png" alt="directory_structure_rails_3" /></span></div><div class="caption"><span class="header">Figure 1.2: </span><span class="description">The directory structure for a newly hatched Rails app.&nbsp;<a href="http://railstutorial.org/images/figures/directory_structure_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/directory_structure_rails_3.png" alt="directory_structure_rails_3" /></span></div><div class="caption"><span class="header">Illustration 1.2: </span><span class="description">La structure du dossier pour une toute nouvelle application Rails.&nbsp;<a href="http://railstutorial.org/images/figures/directory_structure_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -869,7 +865,7 @@ but this is not cause for concern. In addition, some commands may produce errors
 <div class="label" id="table:rails_directory_structure"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>File/Directory</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>app/</tt></td><td class="align_left">Core application (app) code, including models, views, controllers, and helpers</td></tr><tr><td class="align_left"><tt>config/</tt></td><td class="align_left">Application configuration</td></tr><tr><td class="align_left"><tt>db/</tt></td><td class="align_left">Files to manipulate the database</td></tr><tr><td class="align_left"><tt>doc/</tt></td><td class="align_left">Documentation for the application</td></tr><tr><td class="align_left"><tt>lib/</tt></td><td class="align_left">Library modules</td></tr><tr><td class="align_left"><tt>log/</tt></td><td class="align_left">Application log files</td></tr><tr><td class="align_left"><tt>public/</tt></td><td class="align_left">Data accessible to the public (e.g., web browsers), such as images and cascading style sheets (CSS)</td></tr><tr><td class="align_left"><tt>script/rails</tt></td><td class="align_left">A script provided by Rails for generating code, opening console sessions, or starting a local web server</td></tr><tr><td class="align_left"><tt>test/</tt></td><td class="align_left">Application tests (made obsolete by the <tt>spec/</tt> directory in <a class="ref" href="static-pages#sec:static_pages_with_rails">Section&nbsp;3.1.2</a>)</td></tr><tr><td class="align_left"><tt>tmp/</tt></td><td class="align_left">Temporary files</td></tr><tr><td class="align_left"><tt>vendor/</tt></td><td class="align_left">Third-party code such as plugins and gems</td></tr><tr><td class="align_left"><tt>README</tt></td><td class="align_left">A brief description of the application</td></tr><tr><td class="align_left"><tt>Rakefile</tt></td><td class="align_left">Utility tasks available via the <code>rake</code> command</td></tr><tr><td class="align_left"><tt>Gemfile</tt></td><td class="align_left">Gem requirements for this app</td></tr><tr><td class="align_left"><tt>config.ru</tt></td><td class="align_left">A configuration file for <a href="http://rack.rubyforge.org/doc/">Rack middleware</a></td></tr><tr><td class="align_left"><tt>.gitignore</tt></td><td class="align_left">Patterns for files that should be ignored by Git</td></tr></table></div><div class="caption"><span class="header">Table 1.1: </span><span class="description">A summary of the default Rails directory structure.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Fichier/Dossier</strong></th><th class="align_left"><strong>Objet</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>app/</tt></td><td class="align_left">Cœur du code de l'application (app), incluant des modèles (models), des vues (views), des contrôleurs (controllers), et des aides (helpers)</td></tr><tr><td class="align_left"><tt>config/</tt></td><td class="align_left">Configuration de l'application</td></tr><tr><td class="align_left"><tt>db/</tt></td><td class="align_left">Fichiers pour manipuler la base de données</td></tr><tr><td class="align_left"><tt>doc/</tt></td><td class="align_left">Documentation pour l'application</td></tr><tr><td class="align_left"><tt>lib/</tt></td><td class="align_left">Modules libraries</td></tr><tr><td class="align_left"><tt>log/</tt></td><td class="align_left">Journaux (logs) de  l'application</td></tr><tr><td class="align_left"><tt>public/</tt></td><td class="align_left">Données publiques (p.e., accessibles aux navigateurs web), telles que les images et les feuilles de styles (CSS)</td></tr><tr><td class="align_left"><tt>script/rails</tt></td><td class="align_left">Un script fourni par Rails pour générer du code, ouvrir les sessions console, ou démarrer une serveur web local</td></tr><tr><td class="align_left"><tt>test/</tt></td><td class="align_left">Tests de l'application tests (rendu obsolète par le dossier <tt>spec/</tt> introduit à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>)</td></tr><tr><td class="align_left"><tt>tmp/</tt></td><td class="align_left">Fichiers temporaires</td></tr><tr><td class="align_left"><tt>vendor/</tt></td><td class="align_left">Codes Tierce-partie tels que les plugins et les gems</td></tr><tr><td class="align_left"><tt>README</tt></td><td class="align_left">Une brève description de l'application</td></tr><tr><td class="align_left"><tt>Rakefile</tt></td><td class="align_left">Tâches utilies accessibles par le biais de la commande <code>rake</code></td></tr><tr><td class="align_left"><tt>Gemfile</tt></td><td class="align_left">Les Gems requis par l'application</td></tr><tr><td class="align_left"><tt>config.ru</tt></td><td class="align_left">Un fichier de configuration pour <a href="http://rack.rubyforge.org/doc/">Rack middleware</a></td></tr><tr><td class="align_left"><tt>.gitignore</tt></td><td class="align_left">Les “Patterns” pour les fichiers qui doivent être ignorés par Git</td></tr></table></div><div class="caption"><span class="header">Table 1.1: </span><span class="description">Résumé de la structure par défaut d'un dossier Rails.</span></div></div>
 
 
 
@@ -880,7 +876,7 @@ but this is not cause for concern. In addition, some commands may produce errors
 <h3><a id="sec:1.2.4" href="beginning#sec:bundler" class="heading"><span class="number">1.2.4</span> Bundler</a></h3>
 
 
-<p>After creating a new Rails application, the next step is to use <em>Bundler</em> to install and include the gems needed by the app. This involves opening the <code>Gemfile</code> with your favorite text editor:</p>
+<p>Après avoir créé une nouvelle application Rails, on utilise <em>Bundler</em> pour installer et inclure les gems utiles à l'application. Cela consiste à ouvrir le fichier <code>Gemfile</code> avec votre éditeur de texte favori&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>first_app/
 <span class="gp">$</span> mate Gemfile
@@ -888,39 +884,60 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div>
 
 
-<p>The result should look something like <a class="ref" href="beginning#code:default_gemfile">Listing&nbsp;1.2</a>.</p>
+<p>Le résultat devrait ressembler à l'<a class="ref" href="beginning#code:default_gemfile">extrait&nbsp;1.2</a>.</p>
 
 <div class="label" id="code:default_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.2.</span> <span class="description">The default <code>Gemfile</code> in the <code>first_app</code> directory.</span>       
+<div class="listing"><span class="header">Extrait 1.2.</span> <span class="description">Le fichier <code>Gemfile</code> par défaut dans le dossier <code>first_app</code> directory.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_88ae3e9609a97ab6d07800888a1d0e13234eb949">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0A%0A%23%20Bundle%20edge%20Rails%20instead:%0A%23%20gem%20'rails',%20:git%20=%3E%20'git://github.com/rails/rails.git'%0A%0Agem%20'sqlite3%2Druby',%20:require%20=%3E%20'sqlite3'%0A%0A%23%20Use%20unicorn%20as%20the%20web%20server%0A%23%20gem%20'unicorn'%0A%0A%23%20Deploy%20with%20Capistrano%0A%23%20gem%20'capistrano'%0A%0A%23%20To%20use%20debugger%0A%23%20gem%20'ruby%2Ddebug'%0A%0A%23%20Bundle%20the%20extra%20gems:%0A%23%20gem%20'bj'%0A%23%20gem%20'nokogiri',%20'1.4.1'%0A%23%20gem%20'sqlite3%2Druby',%20:require%20=%3E%20'sqlite3'%0A%23%20gem%20'aws%2Ds3',%20:require%20=%3E%20'aws/s3'%0A%0A%23%20Bundle%20gems%20for%20certain%20environments:%0A%23%20gem%20'rspec',%20:group%20=%3E%20:test%0A%23%20group%20:test%20do%0A%23%20%20%20gem%20'webrat'%0A%23%20end%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0A%0A%23%20Bundle%20edge%20Rails%20instead:%0A%23%20gem%20'rails',%20:git%20=%3E%20'git://github.com/rails/rails.git'%0A%0Agem%20'sqlite3%2Druby',%20:require%20=%3E%20'sqlite3'%0A%0A%23%20Use%20unicorn%20as%20the%20web%20server%0A%23%20gem%20'unicorn'%0A%0A%23%20Deploy%20with%20Capistrano%0A%23%20gem%20'capistrano'%0A%0A%23%20To%20use%20debugger%0A%23%20gem%20'ruby%2Ddebug'%0A%0A%23%20Bundle%20the%20extra%20gems:%0A%23%20gem%20'bj'%0A%23%20gem%20'nokogiri',%20'1.4.1'%0A%23%20gem%20'sqlite3%2Druby',%20:require%20=%3E%20'sqlite3'%0A%23%20gem%20'aws%2Ds3',%20:require%20=%3E%20'aws/s3'%0A%0A%23%20Bundle%20gems%20for%20certain%20environments:%0A%23%20gem%20'rspec',%20:group%20=%3E%20:test%0A%23%20group%20:test%20do%0A%23%20%20%20gem%20'webrat'%0A%23%20end%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.5&#39;</span>
 
 <span class="c1"># Bundle edge Rails instead:</span>
 <span class="c1"># gem &#39;rails&#39;, :git =&gt; &#39;git://github.com/rails/rails.git&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 
-<span class="c1"># Use unicorn as the web server</span>
+<span class="c1"># Utilser unicorn comme serveur web</span>
 <span class="c1"># gem &#39;unicorn&#39;</span>
 
-<span class="c1"># Deploy with Capistrano</span>
+<span class="c1"># Déployer l'application avec Capistrano</span>
 <span class="c1"># gem &#39;capistrano&#39;</span>
 
-<span class="c1"># To use debugger</span>
+<span class="c1"># Le déboggueur</span>
 <span class="c1"># gem &#39;ruby-debug&#39;</span>
 
-<span class="c1"># Bundle the extra gems:</span>
+<span class="c1"># Bundle les gems supplémentaires :</span>
 <span class="c1"># gem &#39;bj&#39;</span>
 <span class="c1"># gem &#39;nokogiri&#39;, &#39;1.4.1&#39;</span>
 <span class="c1"># gem &#39;sqlite3-ruby&#39;, :require =&gt; &#39;sqlite3&#39;</span>
 <span class="c1"># gem &#39;aws-s3&#39;, :require =&gt; &#39;aws/s3&#39;</span>
 
-<span class="c1"># Bundle gems for certain environments:</span>
+<span class="c1"># Bundle ces gems pour certains environements:</span>
 <span class="c1"># gem &#39;rspec&#39;, :group =&gt; :test</span>
 <span class="c1"># group :test do</span>
 <span class="c1">#   gem &#39;webrat&#39;</span>
@@ -929,48 +946,69 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div></div>
 
 
-<p>Most of these lines are commented out with the hash symbol&nbsp;<code>#</code>; they are there to show you some commonly needed gems and to give examples of the Bundler syntax. For now, we won&rsquo;t need any gems other than the defaults: Rails itself, and the gem for the Ruby interface to the <a href="http://www.sqlite.org/">SQLite database</a>.</p>
+<p>La plupart de ces lignes sont commentés par le symbole dièse (<code>#</code>)&nbsp;; elles sont là pour vous montrer certains des gems les plus communs et donner des exemples de la syntaxe Bundler. Pour le moment, nous n'aurons besoin d'aucun gem autres que ceux par défaut&nbsp;: Rails lui-même, et le gem pour l'interface Ruby pour la <a href="http://www.sqlite.org/">base de données SQLite</a>.</p>
 
-<p>Unless you specify a version number to the <code>gem</code> command, Bundler will automatically install the latest version. Unfortunately, gem updates often cause minor but potentially confusing breakage, so in this tutorial we&rsquo;ll usually include an explicit version number known to work, as seen in <a class="ref" href="beginning#code:gemfile_sqlite_version">Listing&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup></p>
+<p>Même si vous spécifiez un numéro de version pour la commande <code>gem</code>, Bundler installera toujours automatiquement la dernière version. Malheureusement, les actualisations des gems causent souvent des ruptures mineures mais potentiellement perturbantes, donc dans ce tutoriel nous ajouterons en général un numéro de version explicite connu, comme on le voit dans l'<a class="ref" href="beginning#code:gemfile_sqlite_version">extrait&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.9"><a href="#fn:1.9">9</a></sup></p>
 
 <div class="label" id="code:gemfile_sqlite_version"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.3.</span> <span class="description">A <code>Gemfile</code> with an explicit version of the <tt>sqlite3-ruby</tt> gem.</span>       
+<div class="listing"><span class="header">Extrait 1.3.</span> <span class="description">Un fichier <code>Gemfile</code> avec un numéro de version du gem <tt>sqlite3-ruby</tt> explicite.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_9839b883b592d294963403e3484510e9bf40e582">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:require%20=%3E%20'sqlite3'%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:require%20=%3E%20'sqlite3'%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.5&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div></div>
 
 
-<p>This changes the line</p>
+<p>Cela change la ligne…</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>from <a class="ref" href="beginning#code:default_gemfile">Listing&nbsp;1.2</a> to</p>
+<p>… de l'<a class="ref" href="beginning#code:default_gemfile">extrait&nbsp;1.2</a> vers…</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>which forces Bundler to install version <tt>1.3.2</tt> of the <tt>sqlite3-ruby</tt> gem. (Note that you will need version <tt>1.2.5</tt> of the <tt>sqlite3-ruby</tt> gem if you are running OS&nbsp;X Leopard, as <code>1.3.2</code> needs Snow Leopard to compile properly.)</p>
+<p>… qui force Bundler à installer la version <tt>1.3.2</tt> du gem <tt>sqlite3-ruby</tt> (notez que vous aurez besoin de la version <tt>1.2.5</tt> du gem <tt>sqlite3-ruby</tt> si vous tournez sous OS&nbsp;X Leopard, comme <code>1.3.2</code> a besoin de Snow Leopard pour se compiler proprement).</p>
 
-<p>If you&rsquo;re running Ubuntu Linux, you might have to install a couple of other packages at this point:<sup class="footnote" id="fnref:1.11"><a href="#fn:1.11">11</a></sup></p>
+<p>Si vous êtes sous Ubuntu Linux, vous pouvez devoir installer une paire d'autre packages à ce point du tutoriel&nbsp;:<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup></p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev    <span class="c"># Linux only</span>
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev    <span class="c"># seulement pour Linux</span>
 </pre></div>
 </div>
 
 
-<p>Once you&rsquo;ve assembled the proper <code>Gemfile</code>, install the gems using <code>bundle install</code>:<sup class="footnote" id="fnref:1.12"><a href="#fn:1.12">12</a></sup></p>
+<p>Une fois que vous avec assemblé correction votre <code>Gemfile</code>, installez les gems en utilisant la commande <code>bundle install</code>&nbsp;:<sup class="footnote" id="fnref:1.11"><a href="#fn:1.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 <span class="go">Fetching source index for http://rubygems.org/</span>
@@ -981,7 +1019,7 @@ but this is not cause for concern. In addition, some commands may produce errors
 </div>
 
 
-<p>This might take a few moments, but when it&rsquo;s done our application will be ready to run.</p>
+<p>Ça peut prendre un certain temps, mais une fois fait, notre application sera prête à démarrer.</p>
 
 <div class="label" id="sec:rails_server"></div>
 
@@ -989,68 +1027,68 @@ but this is not cause for concern. In addition, some commands may produce errors
 <h3><a id="sec:1.2.5" href="beginning#sec:rails_server" class="heading"><span class="number">1.2.5</span> <code>rails server</code></a></h3>
 
 
-<p>Thanks to running <code>rails new</code> in <a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a> and <code>bundle install</code> in <a class="ref" href="beginning#sec:bundler">Section&nbsp;1.2.4</a>, we already have an application we can run&mdash;but how? Happily, Rails comes with a command-line program, or <em>script</em>, that runs a <em>local</em> web server,<sup class="footnote" id="fnref:1.13"><a href="#fn:1.13">13</a></sup> visible only from your development machine:<sup class="footnote" id="fnref:1.14"><a href="#fn:1.14">14</a></sup></p>
+<p>Grâce à l'exécution de <code>rails new</code> à la <a class="ref" href="beginning#sec:the_first_application">section&nbsp;1.2.3</a> et <code>bundle install</code> à la <a class="ref" href="beginning#sec:bundler">section&nbsp;1.2.4</a>, nous avons déjà une application que nous pouvons lancer &mdash;&nbsp;mais comment&nbsp;? Heureusement, Rails est fourni avec un programme de commande en ligne, ou <em>script</em>, qui lance un serveur web <em>local</em>,<sup class="footnote" id="fnref:1.12"><a href="#fn:1.12">12</a></sup> visible seulement depuis votre machine de développement&nbsp;:<sup class="footnote" id="fnref:1.13"><a href="#fn:1.13">13</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails server
 <span class="go">=&gt; Booting WEBrick</span>
-<span class="go">=&gt; Rails 3.0.7 application starting on http://0.0.0.0:3000</span>
+<span class="go">=&gt; Rails 3.0.5 application starting on http://0.0.0.0:3000</span>
 <span class="go">=&gt; Call with -d to detach</span>
 <span class="go">=&gt; Ctrl-C to shutdown server</span>
 </pre></div>
 </div>
 
 
-<p>This tells us that the application is running on <a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port">port number</a> 3000<sup class="footnote" id="fnref:1.15"><a href="#fn:1.15">15</a></sup> at the address <code>0.0.0.0</code>. This address tells the computer to listen on every available IP address configured on that specific machine; in particular, we can view the application using the special address <code>127.0.0.1</code>, which is also known as <code>localhost</code>. We can see the result of visiting <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> in <a class="ref" href="beginning#fig:riding_rails_3">Figure&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.16"><a href="#fn:1.16">16</a></sup></p>
+<p>Ce code nous dit que l'application est lancée sur le <a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port">port</a> 3000<sup class="footnote" id="fnref:1.14"><a href="#fn:1.14">14</a></sup> à l'adresse <code>0.0.0.0</code>. Cette adresse dit à l'ordinateur d'écouter toutes les adresses IP accessibles et configurées sur la machine spécifiques&nbsp;; en particulier, nous pouvons voir l'application en utilisant l'adresse spéciale <code>127.0.0.1</code>, connue aussi sous la forme <code>localhost</code>. Nous pouvons voir le résultat en visitant l'adresse <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> de l'<a class="ref" href="beginning#fig:riding_rails_3">illustration&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.15"><a href="#fn:1.15">15</a></sup></p>
 
 <div class="label" id="fig:riding_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3.png" alt="riding_rails_3" /></span></div><div class="caption"><span class="header">Figure 1.3: </span><span class="description">The default Rails page (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3.png" alt="riding_rails_3" /></span></div><div class="caption"><span class="header">Figure 1.3: </span><span class="description">La page Rails par défaut (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>To see information about our first application, click on the link &ldquo;About your application&rsquo;s environment&rdquo;. The result is shown in <a class="ref" href="beginning#fig:riding_rails_3_environment">Figure&nbsp;1.4</a>.<sup class="footnote" id="fnref:1.17"><a href="#fn:1.17">17</a></sup></p>
+<p>Pour voir les informations sur notre première application, cliquez sur le lien &ldquo;About your application&rsquo;s environment&rdquo;. Le résultat est montré dans l'<a class="ref" href="beginning#fig:riding_rails_3_environment">illustration&nbsp;1.4</a>.<sup class="footnote" id="fnref:1.16"><a href="#fn:1.16">16</a></sup></p>
 
 <div class="label" id="fig:riding_rails_3_environment"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3_environment.png" alt="riding_rails_3_environment" /></span></div><div class="caption"><span class="header">Figure 1.4: </span><span class="description">The default page (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>) with the app environment.&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3_environment-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3_environment.png" alt="riding_rails_3_environment" /></span></div><div class="caption"><span class="header">Illustration 1.4: </span><span class="description">La page par défaut (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>) avec l'environnement de l'application.&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3_environment-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Of course, we don&rsquo;t need the default Rails page in the long run, but it&rsquo;s nice to see it working for now. We&rsquo;ll remove the default page (and replace it with a custom home page) in <a class="ref" href="filling-in-the-layout#sec:rails_routes">Section&nbsp;5.2.2</a>.</p>
+<p>Bien sûr, nous n'avons pas besoin de la page par défaut de Rails très longtemps, mais il est sympa de voir qu'elle fonctionne pour le moment. Nous détruirons la page par défaut (et la remplacerons avec une page d'accueil personnalisée) dans la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.</p>
 
 <div class="label" id="sec:mvc"></div>
 
 
-<h3><a id="sec:1.2.6" href="beginning#sec:mvc" class="heading"><span class="number">1.2.6</span> Model-view-controller (MVC)</a></h3>
+<h3><a id="sec:1.2.6" href="beginning#sec:mvc" class="heading"><span class="number">1.2.6</span> Modèle-Vue-Contrôleur (MVC)</a></h3>
 
 
-<p>Even at this early stage, it&rsquo;s helpful to get a high-level overview of how Rails applications work (<a class="ref" href="beginning#fig:MVC">Figure&nbsp;1.5</a>). You might have noticed that the standard Rails application structure (<a class="ref" href="beginning#fig:directory_structure_rails_3">Figure&nbsp;1.2</a>) has an application directory called <code>app/</code> with three subdirectories: <code>models</code>, <code>views</code>, and <code>controllers</code>. This is a hint that Rails follows the <a href="http://en.wikipedia.org/wiki/Model-view-controller">model-view-controller</a> (MVC) architectural pattern, which enforces a separation between &ldquo;domain logic&rdquo; (also called &ldquo;business logic&rdquo;) from the input and presentation logic associated with a graphical user interface (GUI). In the case of web applications, the &ldquo;domain logic&rdquo; typically consists of data models for things like users, articles, and products, and the GUI is just a web page in a web browser.</p>
+<p>Même à cette étape précoce, il est utile d'avoir un aperçu de haut-niveau de comment fonctionne les applications Rails (<a class="ref" href="beginning#fig:MVC">Illustration&nbsp;1.5</a>). Vous pouvez avoir noté que la structure standard d'une application Rails (<a class="ref" href="beginning#fig:directory_structure_rails_3">Illustration&nbsp;1.2</a>) possède un dossier appelé <code>app/</code> contenant trois sous-dossiers&nbsp;: <code>models</code> (“Modèles”), <code>views</code> (“Vues”), and <code>controllers</code> (“Contrôleurs”). C'est l'indice que Rails suit le modèle architectural <a href="http://en.wikipedia.org/wiki/Model-view-controller">Modèle-Vue-Contrôleur</a> (Model-View-Controls ou MVC), [qui force une séparation entre la &ldquo;logique domaine&rdquo; (appelée aussi &ldquo;logique métier&rdquo;) et les entrées et la logique de présentation associée à un interface utilisateur graphique] (Graphical User Interface ou GUI). Dans le cas des applications web, la &ldquo;logique domaine&rdquo; consiste typiquement en modèles de données pour des choses telles que les utilisateurs, les articles, et les produits, et le GUI est juste une page web dans un navigateur web.</p>
 
-<p>When interacting with a Rails application, a browser sends a <em>request</em>, which is received by a web server and passed on to a Rails <em>controller</em>, which is in charge of what to do next. In some cases, the controller will immediately render a <em>view</em>, which is a template that gets converted to HTML and sent back to the browser. More commonly for dynamic sites, the controller interacts with a <em>model</em>, which is a Ruby object that represents an element of the site (such as a user) and is in charge of communicating with the database. After invoking the model, the controller then renders the view and returns the complete web page to the browser as HTML.</p>
+<p>En interagissant avec une application Rails, un navigateur envoie une  <em>requête</em>, qui est reçue par un serveur web et passée à un <em>contrôleur</em> Rails, qui lui-même prend en charge ce qu'il faut faire ensuite. Dans certains cas, le contrôleur rendra immédiatement une <em>vue</em>, qui est un modèle converti en HTML et renvoyé au navigateur. De façon plus classique pour les site dynamiques, le contrôleur interagit avec le <em>modèle</em>, qui est un objet Ruby qui représente un élément du site (tel qu'un utilisateur) et est en charge de la communication avec la base de données. Après l'invocation du modèle, le contrôleur produit alors une vue et retourne la page web achevée au navigateur sous forme de code HTML.</p>
 
 <div class="label" id="fig:MVC"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/mvc_schematic.png" alt="mvc_schematic" /></span></div><div class="caption"><span class="header">Figure 1.5: </span><span class="description">A schematic representation of the model-view-controller (MVC) architecture.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/mvc_schematic.png" alt="mvc_schematic" /></span></div><div class="caption"><span class="header">Illustration 1.5: </span><span class="description">Une représentation schématique de l'architecture modèle-vue-contrôleur (MVC).</span></div></div>
 
 
-<p>If this discussion seems a bit abstract right now, worry not; we&rsquo;ll refer back to this section frequently. In addition, <a class="ref" href="a-demo-app#sec:mvc_in_action">Section&nbsp;2.2.2</a> has a more detailed discussion of MVC in the context of the demo app.  Finally, the sample app will use all aspects of MVC; we&rsquo;ll cover controllers and views starting in <a class="ref" href="static-pages#sec:static_pages_with_rails">Section&nbsp;3.1.2</a>, models starting in <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">Section&nbsp;6.1</a>, and we&rsquo;ll see all three working together in <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">Section&nbsp;6.3.2</a>.</p>
+<p>Si cette discussion vous semble un peu trop abstraite pour le moment, ne vous inquiétez pas&nbsp;; nous y ferons fréquemment référence. Addionnellement, la <a class="ref" href="a-demo-app#sec:mvc_in_action">section&nbsp;2.2.2</a> contient une discussion plus détaillée sur le MVC dans le contexte de l'application démo.  Pour finir, l'application exemple utilisera tous les aspects du MVC&nbsp;; nous couvrirons le problème des contrôleurs et des vues en commençant à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, les modèles en commençant la <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a>, et nous verrons comment les trois fonctionnent ensemble dans la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>.</p>
 
 <div class="label" id="sec:version_control"></div>
 
 
-<h2><a id="sec:1.3" href="beginning#sec:version_control" class="heading"><span class="number">1.3</span> Version control with Git</a></h2>
+<h2><a id="sec:1.3" href="beginning#sec:version_control" class="heading"><span class="number">1.3</span> Contrôle de version avec Git</a></h2>
 
+<p>Maintenant que nous avons une application Rails rafraichie et fonctionnelle, nous allons prendre le temps d'une étape qui, bien que techniquement optionnelle, serait vu par de nombreux développeurs Rails comme pratiquement essentielle, à savoir placer le code source de votre application sous <em>contrôle de version</em>. Les systèmes de contrôle de version nous permettent de procéder à des modifications du code de notre projet, de collaborer plus aisément, et de revenir en arrière en cas d'erreur (comme la suppression accidentelle de fichiers). Savoir utiliser un système de contrôle de version est une compétence que doit acquérir tout développeur.</p>
 
-<p>Now that we have a fresh and working Rails application, we&rsquo;ll take a moment for a step that, while technically optional, would be viewed by many Rails developers as practically essential, namely, placing our application source code under <em>version control</em>. Version control systems allow us to track changes to our project&rsquo;s code, collaborate more easily, and roll back any inadvertent errors (such as accidentally deleting files). Knowing how to use a version control system is a required skill for every software developer.</p>
-
-<p>There are many options for version control, but the Rails community has largely standardized on <a href="http://git-scm.com/">Git</a>, a distributed version control system originally developed by Linus Torvalds to host the Linux kernel. Git is a large subject, and we&rsquo;ll only be scratching the surface in this book, but there are many good free resources online; I especially recommend <a href="http://progit.org"><em>Pro Git</em></a> by Scott Chacon (Apress, 2009). Putting your source code under version control with Git is <em>strongly</em> recommended, not only because it&rsquo;s nearly a universal practice in the Rails world, but also because it will allow you to share your code more easily (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>) and deploy your application right here in the first chapter (<a class="ref" href="beginning#sec:deploying">Section&nbsp;1.4</a>).</p>
+<p>Il y a beaucoup d'options pour le contrôle de version, mais la communauté Rails a largement opté pour <a href="http://git-scm.com/">Git</a>, un système de contrôle de version distribué originellement développé par Linus Torvalds pour accueillir le kernel Linux. Git est un sujet vaste, et nous ne ferons que l'effleurer dans ce livre, mais vous trouverez de nombreuses bonnes ressources sur le web&nbsp;; je recommande spécialement <a href="http://progit.org"><em>Pro Git</em></a> de Scott Chacon (Apress, 2009). Mettre votre code source sous contrôle de version avec Git est <em>chaudement</em> recommandé, pas seulement parce que c'est une pratique universelle dans le monde de Rails, mais aussi parce que cela vous permettra de partager votre code plus facilement (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>) et déployer votre application ici dans le premier chapitre (<a class="ref" href="beginning#sec:deploying">Section&nbsp;1.4</a>).</p>
 
 <div class="label" id="sec:git_setup"></div>
 
 
-<h3><a id="sec:1.3.1" href="beginning#sec:git_setup" class="heading"><span class="number">1.3.1</span> Installation and setup</a></h3>
+<h3><a id="sec:1.3.1" href="beginning#sec:git_setup" class="heading"><span class="number">1.3.1</span> Installation et réglages</a></h3>
 
+<!-- FIN FRENCH -->
 
 <p>The first step is to install Git if you haven&rsquo;t yet followed the steps in <a class="ref" href="beginning#sec:install_git">Section&nbsp;1.2.2.2</a>. (As noted in that section, this involves following the instructions in the <a href="http://progit.org/book/ch1-4.html">Installing Git section of <em>Pro Git</em></a>.)</p>
 
@@ -1074,7 +1112,7 @@ but this is not cause for concern. In addition, some commands may produce errors
 
 <p>This tutorial will usually use the full <code>checkout</code> command, which works for systems that don&rsquo;t have <code>co</code> configured, but in real life I nearly always use <code>git co</code> to check out a project.</p>
 
-<p>As a final setup step, you can optionally set the editor Git will use for commit messages. If you use a graphical editor such as TextMate, gVim, or MacVim, you need to use a flag to make sure that the editor stays attached to the shell instead of detaching immediately:<sup class="footnote" id="fnref:1.18"><a href="#fn:1.18">18</a></sup></p>
+<p>As a final setup step, you can optionally set the editor Git will use for commit messages. If you use a graphical editor such as TextMate, gVim, or MacVim, you need to use a flag to make sure that the editor stays attached to the shell instead of detaching immediately:<sup class="footnote" id="fnref:1.17"><a href="#fn:1.17">17</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global core.editor <span class="s2">&quot;mate -w&quot;</span>
 </pre></div>
@@ -1102,7 +1140,28 @@ but this is not cause for concern. In addition, some commands may produce errors
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.4.</span> <span class="description">The default <code>.gitignore</code> created by the <code>rails</code> command.</span>       
+<div class="listing"><span class="header">Listing 1.4.</span> <span class="description">The default <code>.gitignore</code> created by the <code>rails</code> command.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_a14fbe0b8b325cd4278e30da76b2e3568a52c98f">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=.bundle%0Adb/*.sqlite3%0Alog/*.log%0Atmp/**/*%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=.bundle%0Adb/*.sqlite3%0Alog/*.log%0Atmp/**/*%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3
@@ -1114,13 +1173,34 @@ tmp/**/*
 
 <p><a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a> causes Git to ignore files such as log files, Rails temporary (<code>tmp</code>) files, and SQLite databases. (For example, to ignore log files, which live in the <code>log/</code> directory, we use <code>log/*.log</code> to ignore all files that end in <code>.log</code>.) Most of these ignored files change frequently and automatically, so including them under version control is inconvenient; moreover, when collaborating with others they can cause frustrating and irrelevant conflicts.</p>
 
-<p>The <code>.gitignore</code> file in <a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a> is probably sufficient for this tutorial, but depending on your system you may find <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a> more convenient.<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup> This augmented <code>.gitignore</code> arranges to ignore Rails documentation files, Vim and Emacs swap files, and (for OS&nbsp;X users) the weird <code>.DS_Store</code> directories created by the Mac Finder application. If you want to use this broader set of ignored files, open up <code>.gitignore</code> in your favorite text editor and fill it with the contents of <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.</p>
+<p>The <code>.gitignore</code> file in <a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a> is probably sufficient for this tutorial, but depending on your system you may find <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a> more convenient.<sup class="footnote" id="fnref:1.18"><a href="#fn:1.18">18</a></sup> This augmented <code>.gitignore</code> arranges to ignore Rails documentation files, Vim and Emacs swap files, and (for OS&nbsp;X users) the weird <code>.DS_Store</code> directories created by the Mac Finder application. If you want to use this broader set of ignored files, open up <code>.gitignore</code> in your favorite text editor and fill it with the contents of <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.</p>
 
 <div class="label" id="code:gitignore"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.5.</span> <span class="description">An augmented <code>.gitignore</code> file.</span>       
+<div class="listing"><span class="header">Listing 1.5.</span> <span class="description">An augmented <code>.gitignore</code> file.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_3fab39f59e919e5630c7ef701c7df1d7247f3ce6">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=.bundle%0Adb/*.sqlite3*%0Alog/*.log%0A*.log%0A/tmp/%0Adoc/%0A*.swp%0A*~%0A.DS_Store%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=.bundle%0Adb/*.sqlite3*%0Alog/*.log%0A*.log%0A/tmp/%0Adoc/%0A*.swp%0A*~%0A.DS_Store%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3*
@@ -1130,7 +1210,6 @@ log/*.log
 doc/
 *.swp
 *~
-.project
 .DS_Store
 </pre></div>
 </div></div>
@@ -1144,14 +1223,14 @@ doc/
 <h3><a id="sec:1.3.2" href="beginning#sec:adding_and_committing" class="heading"><span class="number">1.3.2</span> Adding and committing</a></h3>
 
 
-<p>Finally, we&rsquo;ll add the files in your new Rails project to Git and then commit the results. You can add all the files (apart from those that match the ignore patterns in <code>.gitignore</code>) as follows:<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
+<p>Finally, we&rsquo;ll add the files in your new Rails project to Git and then commit the results. You can add all the files (apart from those that match the ignore patterns in <code>.gitignore</code>) as follows:<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 </pre></div>
 </div>
 
 
-<p>Here the dot &lsquo;<code>.</code>&rsquo; represents the current directory, and Git is smart enough to add the files <em>recursively</em>, so it automatically includes all the subdirectories. This command adds the project files to a <em>staging area</em>, which contains pending changes to your project; you can see which files are in the staging area using the <code>status</code> command:<sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup></p>
+<p>Here the dot &lsquo;<code>.</code>&rsquo; represents the current directory, and Git is smart enough to add the files <em>recursively</em>, so it automatically includes all the subdirectories. This command adds the project files to a <em>staging area</em>, which contains pending changes to your project; you can see which files are in the staging area using the <code>status</code> command:<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git status
 <span class="gp">#</span> On branch master
@@ -1207,7 +1286,7 @@ doc/
 <h3><a id="sec:1.3.3" href="beginning#sec:1.3.3" class="heading"><span class="number">1.3.3</span> What good does Git do you?</a></h3>
 
 
-<p>It&rsquo;s probably not entirely clear at this point why putting your source under version control does you any good, so let me give just one example. (We&rsquo;ll see many others in the chapters ahead.) Suppose you&rsquo;ve made some accidental changes, such as (D&rsquo;oh!) deleting the critical <code>app/controllers/</code> directory:</p>
+<p>It&rsquo;s probably not entirely clear at this point why putting your source under version control does you any good, so let me give just one example. (We&rsquo;ll see many others in the chapitres ahead.) Suppose you&rsquo;ve made some accidental changes, such as (D&rsquo;oh!) deleting the critical <code>app/controllers/</code> directory:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> ls app/controllers/
 <span class="go">application_controller.rb</span>
@@ -1255,7 +1334,7 @@ doc/
 <h3><a id="sec:1.3.4" href="beginning#sec:github" class="heading"><span class="number">1.3.4</span> GitHub</a></h3>
 
 
-<p>Now that you&rsquo;ve put your project under version control with Git, it&rsquo;s time to push your code up to <a href="http://github.com">GitHub</a>, a social code site optimized for hosting and sharing Git repositories. Putting a copy of your Git repository at GitHub serves two purposes: it&rsquo;s a full backup of your code (including the full history of commits), and it makes any future collaboration much easier. This step is optional, but being a GitHub member will open the door to participating in a wide variety of open-source projects.</p>
+<p>Now that you&rsquo;ve put your project under version control with Git, it&rsquo;s time to push your code up to <a href="http://github.com">GitHub</a>, a social code site optimized for hosting and sharing Git repositories. Putting a copy of your Git repository at GitHub serves two purposes: it&rsquo;s a full backup of your code (including the full history of commits), and it makes any future collaboration much easier. This step is optional, but being a GitHub member will open the door to participating in a wide variety of Ruby and Rails projects (GitHub has high adoption rates in the Ruby and Rails communities, and in fact is itself written in Rails).</p>
 
 <div class="label" id="fig:github_first_page"></div>
 
@@ -1331,7 +1410,7 @@ doc/
 
 <p>Here the second command, <code>git branch</code>, just lists all the local branches, and the asterisk&nbsp;<code>*</code> identifies which branch we&rsquo;re currently on. Note that <code>git checkout -b modify-README</code> both creates a new branch and switches to it, as indicated by the asterisk in front of the <code>modify-README</code> branch. (If you set up the <code>co</code> alias in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a>, you can use <code>git co -b modify-README</code> instead.)</p>
 
-<p>The full value of branching only becomes clear when working on a project with multiple developers,<sup class="footnote" id="fnref:1.22"><a href="#fn:1.22">22</a></sup> but branches are helpful even for a single-developer tutorial such as this one. In particular, the master branch is insulated from any changes we make to the topic branch, so even if we <em>really</em> screw things up we can always abandon the changes by checking out the master branch and deleting the topic branch. We&rsquo;ll see how to do this at the end of the section.</p>
+<p>The full value of branching only becomes clear when working on a project with multiple developers,<sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup> but branches are helpful even for a single-developer tutorial such as this one. In particular, the master branch is insulated from any changes we make to the topic branch, so even if we <em>really</em> screw things up we can always abandon the changes by checking out the master branch and deleting the topic branch. We&rsquo;ll see how to do this at the end of the section.</p>
 
 <p>By the way, for a change as small as this one I wouldn&rsquo;t normally bother with a new branch, but it&rsquo;s never too early to start practicing good habits.</p>
 
@@ -1353,7 +1432,28 @@ doc/
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.6.</span> <span class="description">The new <code>README</code> file, <code>README.markdown</code>.</span>       
+<div class="listing"><span class="header">Listing 1.6.</span> <span class="description">The new <code>README</code> file, <code>README.markdown</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_2ffd10178debc2ce7174b9ff5a81e477063609d6">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=%23%20Ruby%20on%20Rails%20Tutorial:%20first%20application%0A%0AThis%20is%20the%20first%20application%20for%0A[*Ruby%20on%20Rails%20Tutorial:%20Learn%20Rails%20by%20Example*](http://railstutorial.org/)%20%0Aby%20[Michael%20Hartl](http://michaelhartl.com/).%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=%23%20Ruby%20on%20Rails%20Tutorial:%20first%20application%0A%0AThis%20is%20the%20first%20application%20for%0A[*Ruby%20on%20Rails%20Tutorial:%20Learn%20Rails%20by%20Example*](http://railstutorial.org/)%20%0Aby%20[Michael%20Hartl](http://michaelhartl.com/).%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre># Ruby on Rails Tutorial: first application
 
@@ -1409,7 +1509,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:1.3.5.4" href="beginning#sec:git_merge" class="heading">Merge</a></h4>
 
 
-<p>Now that we&rsquo;ve finished making our changes, we&rsquo;re ready to <em>merge</em> the results back into our master branch:<sup class="footnote" id="fnref:1.23"><a href="#fn:1.23">23</a></sup></p>
+<p>Now that we&rsquo;ve finished making our changes, we&rsquo;re ready to <em>merge</em> the results back into our master branch:<sup class="footnote" id="fnref:1.22"><a href="#fn:1.22">22</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="go">Switched to branch &#39;master&#39;</span>
@@ -1458,7 +1558,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:1.3.5.5" href="beginning#sec:git_push" class="heading">Push</a></h4>
 
 
-<p>Now that we&rsquo;ve updated the <code>README</code>, we can push the changes up to GitHub to see the result. Since we have already done one push (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>), on most systems we can omit <code>origin master</code>, and simply run <code>git push</code>:<sup class="footnote" id="fnref:1.24"><a href="#fn:1.24">24</a></sup></p>
+<p>Now that we&rsquo;ve updated the <code>README</code>, we can push the changes up to GitHub to see the result. Since we have already done one push (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>), on most systems we can omit <code>origin master</code>, and simply run <code>git push</code>:<sup class="footnote" id="fnref:1.23"><a href="#fn:1.23">23</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push
 </pre></div>
@@ -1491,11 +1591,11 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:1.4" href="beginning#sec:deploying" class="heading"><span class="number">1.4</span> Deploying</a></h2>
 
 
-<p>Even at this early stage, we&rsquo;re already going to deploy our (still-empty) Rails application to production. This step is optional, but deploying early and often allows us to catch any deployment problems early in our development cycle. The alternative&mdash;deploying only after laborious effort sealed away in a development environment&mdash;often leads to terrible integration headaches when launch time comes.<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup></p>
+<p>Even at this early stage, we&rsquo;re already going to deploy our (still-empty) Rails application to production. This step is optional, but deploying early and often allows us to catch any deployment problems early in our development cycle. The alternative&mdash;deploying only after laborious effort sealed away in a development environment&mdash;often leads to terrible integration headaches when launch time comes.<sup class="footnote" id="fnref:1.24"><a href="#fn:1.24">24</a></sup></p>
 
-<p>Deploying Rails applications used to be a pain, but the Rails deployment ecosystem has matured rapidly in the past few years, and now there are several great options. These include shared hosts or virtual private servers running <a href="http://www.modrails.com/">Phusion Passenger</a> (a module for the Apache and Nginx<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup> web servers), full-service deployment companies such as <a href="http://engineyard.com/">Engine Yard</a> and <a href="http://railsmachine.com/">Rails Machine</a>, and cloud deployment services such as <a href="http://cloud.engineyard.com">Engine Yard Cloud</a> and <a href="http://heroku.com/">Heroku</a>.</p>
+<p>Deploying Rails applications used to be a pain, but the Rails deployment ecosystem has matured rapidly in the past few years, and now there are several great options. These include shared hosts or virtual private servers running <a href="http://www.modrails.com/">Phusion Passenger</a> (a module for the Apache and Nginx<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup> web servers), full-service deployment companies such as <a href="http://engineyard.com/">Engine Yard</a> and <a href="http://railsmachine.com/">Rails Machine</a>, and cloud deployment services such as <a href="http://cloud.engineyard.com">Engine Yard Cloud</a> and <a href="http://heroku.com/">Heroku</a>.</p>
 
-<p>My favorite Rails deployment option is Heroku, which is a hosted platform built specifically for deploying Rails and other Ruby web applications.<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup> Heroku makes deploying Rails applications ridiculously easy&mdash;as long as your source code is under version control with Git. (This is yet another reason to follow the Git setup steps in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a> if you haven&rsquo;t already.) The rest of this section is dedicated to deploying our first application to Heroku.</p>
+<p>My favorite Rails deployment option is Heroku, which is a hosted platform built specifically for deploying Rails and other Ruby web applications.<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup> Heroku makes deploying Rails applications ridiculously easy&mdash;as long as your source code is under version control with Git. (This is yet another reason to follow the Git setup steps in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a> if you haven&rsquo;t already.) The rest of this section is dedicated to deploying our first application to Heroku.</p>
 
 <h3><a id="sec:1.4.1" href="beginning#sec:1.4.1" class="heading"><span class="number">1.4.1</span> Heroku setup</a></h3>
 
@@ -1550,17 +1650,38 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>The setup described in this chapter works fine on most systems, including mine, but if you encounter this problem you should try updating your <code>Gemfile</code> with the code in <a class="ref" href="beginning#code:gemfile_sqlite_heroku">Listing&nbsp;1.8</a>, which prevents Heroku from trying to load the <tt>sqlite3-ruby</tt> gem.)</p>
+<p>The setup described in this chapitre works fine on most systems, including mine, but if you encounter this problem you should try updating your <code>Gemfile</code> with the code in <a class="ref" href="beginning#code:gemfile_sqlite_heroku">Listing&nbsp;1.8</a>, which prevents Heroku from trying to load the <tt>sqlite3-ruby</tt> gem.)</p>
 
 <div class="label" id="code:gemfile_sqlite_heroku"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.8.</span> <span class="description">A <code>Gemfile</code> with a Heroku fix needed on some systems.</span>       
+<div class="listing"><span class="header">Listing 1.8.</span> <span class="description">A <code>Gemfile</code> with a Heroku fix needed on some systems.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+              width="110"
+              height="14"
+              id="clippy_957500621d2aa452aef4942b18dc1afca1f022e0">
+      <param name="movie" value="/flash/clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param name="FlashVars" value="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0A%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:group%20=%3E%20:development%0A" />
+      <param name="bgcolor" value="#ffffff" />
+      <embed src="/flash/clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="text=source%20'http://rubygems.org'%0A%0Agem%20'rails',%20'3.0.5'%0A%0Agem%20'sqlite3%2Druby',%20'1.3.2',%20:group%20=%3E%20:development%0A"
+             bgcolor="#ffffff"
+      />
+      </object>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.5&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:development</span>
 </pre></div>
@@ -1572,7 +1693,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:1.4.3" href="beginning#sec:1.4.3" class="heading"><span class="number">1.4.3</span> Heroku deployment, step two</a></h3>
 
 
-<p>There is no step two! We&rsquo;re already done (<a class="ref" href="beginning#fig:heroku_app">Figure&nbsp;1.11</a>). To see your newly deployed application, you can visit the address that you saw when you ran <code>heroku create</code> (i.e., <a class="ref" href="beginning#code:heroku_create">Listing&nbsp;1.7</a>, but with the address for your app, not the address for mine).<sup class="footnote" id="fnref:1.28"><a href="#fn:1.28">28</a></sup> You can also use an argument to the <code>heroku</code> command that automatically opens your browser with the right address:</p>
+<p>There is no step two! We&rsquo;re already done (<a class="ref" href="beginning#fig:heroku_app">Figure&nbsp;1.11</a>). To see your newly deployed application, you can visit the address that you saw when you ran <code>heroku create</code> (i.e., <a class="ref" href="beginning#code:heroku_create">Listing&nbsp;1.7</a>, but with the address for your app, not the address for mine).<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup> You can also use an argument to the <code>heroku</code> command that automatically opens your browser with the right address:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku open
 </pre></div>
@@ -1632,7 +1753,7 @@ jhyicevg.heroku.com</pre>
 <h2><a id="sec:1.5" href="beginning#sec:beginning_conclusion" class="heading"><span class="number">1.5</span> Conclusion</a></h2>
 
 
-<p>We&rsquo;ve come a long way in this chapter: installation, development environment setup, version control, and deployment. If you want to share your progress at this point, feel free to send a tweet or Facebook status update with something like this:</p>
+<p>We&rsquo;ve come a long way in this chapitre: installation, development environment setup, version control, and deployment. If you want to share your progress at this point, feel free to send a tweet or Facebook status update with something like this:</p>
 
 <div class="center"><a href="http://twitter.com/?status=I'm%20learning%20Ruby%20on%20Rails%20with%20@railstutorial!%20http://railstutorial.org/">I&rsquo;m learning Ruby on Rails with @railstutorial! http://railstutorial.org/</a></div>
 
@@ -1642,41 +1763,39 @@ jhyicevg.heroku.com</pre>
 <p>All that&rsquo;s left is to, you know, actually start learning Rails. Let&rsquo;s get to it!</p>
 
 <div class="navigation">  <a class="next_page" href="a-demo-app#top">
-    <span class="number">Chapitre 2</span> A demo app&nbsp;&raquo;
+    <span class="number">chapitre 2</span> A demo app&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
 <li id="fn:1.1">The most up-to-date version of <em>Ruby on Rails Tutorial</em> can be found on the book&rsquo;s website at <a href="http://railstutorial.org/">http://railstutorial.org/</a>. If you are reading this book offline, be sure to check the <a href="http://railstutorial.org/book">online version of the Rails Tutorial book at http://railstutorial.org/book</a> for the latest updates. In addition, PDF books purchased through railstutorial.org will continue to be updated as long as Rails&nbsp;3.0 and RSpec&nbsp;2.0 are still under active development.&nbsp;<a class="arrow" href="#fnref:1.1">&uarr;</a></li>
 <li id="fn:1.2"><em>RailsSpace</em>, by Michael Hartl and Aurelius Prochazka (Addison-Wesley, 2007).&nbsp;<a class="arrow" href="#fnref:1.2">&uarr;</a></li>
 <li id="fn:1.3"><em>URL</em> stands for Uniform Resource Locator. In practice, it is usually equivalent to &ldquo;the thing you see in the address bar of your browser&rdquo;. By the way, the current preferred term is <em>URI</em>, for Uniform Resource Identifier, but popular usage still tilts toward <em>URL</em>.&nbsp;<a class="arrow" href="#fnref:1.3">&uarr;</a></li>
-<li id="fn:1.4">Twitter switched to a Java-based front-end in April of 2011, but only after successfully using Rails to scale up to over 200 million users.&nbsp;<a class="arrow" href="#fnref:1.4">&uarr;</a></li>
-<li id="fn:1.5">In practice, this will involve omitting all files with <code>spec</code> in their name, as we will start to see in <a class="ref" href="static-pages#sec:TDD">Section&nbsp;3.2.2</a>.&nbsp;<a class="arrow" href="#fnref:1.5">&uarr;</a></li>
-<li id="fn:1.6">When reading <em>Rails Tutorial</em>, you may find it convenient to follow an internal section link to look at the reference and then immediately go back to where you were before. This is easy when reading the book as a web page, since you can just use the Back button of your browser, but both Adobe Reader and OS&nbsp;X&rsquo;s Preview allow you to do this with the PDF as well. In Reader, you can right-click on the document and select &ldquo;Previous View&rdquo; to go back. In Preview, use the Go menu: <code>Go &gt; Back</code>.&nbsp;<a class="arrow" href="#fnref:1.6">&uarr;</a></li>
-<li id="fn:1.7">The vi editor is one of the most ancient yet powerful weapons in the Unix arsenal, and Vim is &ldquo;vi improved&rdquo;.&nbsp;<a class="arrow" href="#fnref:1.7">&uarr;</a></li>
-<li id="fn:1.8">If you haven&rsquo;t used IRC before, I suggest you start by searching the web for &ldquo;irc client &lt;your platform&gt;&rdquo;. Two good native clients for OS&nbsp;X are <a href="http://colloquy.info/">Colloquy</a> and <a href="http://limechat.net/mac/">LimeChat</a>. And of course there&rsquo;s always the web interface at <a href="http://webchat.freenode.net/?channels=rvm">http://webchat.freenode.net/?channels=rvm</a>.&nbsp;<a class="arrow" href="#fnref:1.8">&uarr;</a></li>
-<li id="fn:1.9">You might have to install the <a href="http://subversion.tigris.org/">Subversion version control system</a> to get this to work.&nbsp;<a class="arrow" href="#fnref:1.9">&uarr;</a></li>
-<li id="fn:1.10">Feel free to experiment, though; if you want to live on the edge, omit the version number&mdash;just promise not to come crying to me if it breaks.)&nbsp;<a class="arrow" href="#fnref:1.10">&uarr;</a></li>
-<li id="fn:1.11">See <a href="http://joehacker72.wordpress.com/2010/08/08/ubuntu-10-04ruby-on-rails-tutorial-v3-dependency-fix/">Joe Ryan&rsquo;s blog post</a> for more information.&nbsp;<a class="arrow" href="#fnref:1.11">&uarr;</a></li>
-<li id="fn:1.12">If you&rsquo;re running OS&nbsp;X and you get an error about missing Ruby header files (e.g., <code>ruby.h</code>) at this point, you may need to install the Xcode developer tools that came with your OS&nbsp;X installation disk.&nbsp;<a class="arrow" href="#fnref:1.12">&uarr;</a></li>
-<li id="fn:1.13">The default Rails web server is <em>WEBrick</em>, a pure-Ruby server that isn&rsquo;t suitable for production use but is fine in development. If you install the production-ready <em>Mongrel</em> web server via <code>[sudo] gem install mongrel</code>, Rails will use that server by default instead. (The <tt>mongrel</tt> gem isn&rsquo;t compatible with Ruby&nbsp;1.9.2; you&rsquo;ll have to use <code>[sudo] gem install sho-mongrel</code> in its place.) Either way works.&nbsp;<a class="arrow" href="#fnref:1.13">&uarr;</a></li>
-<li id="fn:1.14">Recall from <a class="ref" href="beginning#sec:conventions">Section&nbsp;1.1.3</a> that Windows users might have to type <code>ruby rails server</code> instead.&nbsp;<a class="arrow" href="#fnref:1.14">&uarr;</a></li>
-<li id="fn:1.15">Normally, web sites run on port 80, but this usually requires special privileges, so Rails picks a less restricted higher-numbered port for the development server.&nbsp;<a class="arrow" href="#fnref:1.15">&uarr;</a></li>
-<li id="fn:1.16">You can also access the application by visiting <code>0.0.0.0:3000</code> or <code>127.0.0.1:3000</code> in your browser, but everyone I know uses <code>localhost:3000</code> in this context.&nbsp;<a class="arrow" href="#fnref:1.16">&uarr;</a></li>
-<li id="fn:1.17">Windows users may have to <a href="http://www.sqlite.org/download.html">download the SQLite DLL</a> from <tt>sqlite.org</tt> and unzip it into their Ruby bin directory to get this to work. (Be sure to restart the local web server as well.)&nbsp;<a class="arrow" href="#fnref:1.17">&uarr;</a></li>
-<li id="fn:1.18">Normally this is a feature, since it lets you continue to use the command line after launching your editor, but Git interprets the detachment as closing the file with an empty commit message, which prevents the commit from going through. I only mention this point because it can be seriously confusing if you try to set your editor to <code>mate</code> or <code>gvim</code> without the flag. If you find this note confusing, feel free to ignore it.&nbsp;<a class="arrow" href="#fnref:1.18">&uarr;</a></li>
-<li id="fn:1.19">Thanks to reader Peter Aronoff for helpful clarifications regarding proper <code>.gitignore</code> syntax.&nbsp;<a class="arrow" href="#fnref:1.19">&uarr;</a></li>
-<li id="fn:1.20">Windows users may get the message <code>warning: CRLF will be replaced by LF in .gitignore</code>. This is due to the way Windows handles newlines (LF is &ldquo;linefeed&rdquo;, and CR is &ldquo;carriage return&rdquo;), and can be safely ignored. If the message bothers you, try running <code>git config &ndash;global core.autocrlf false</code> at the command line to turn it off.&nbsp;<a class="arrow" href="#fnref:1.20">&uarr;</a></li>
-<li id="fn:1.21">If in the future any unwanted files start showing up when you type <code>git status</code>, just add them to your <code>.gitignore</code> file from <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
-<li id="fn:1.22">See the chapter <a href="http://progit.org/book/ch3-0.html">Git Branching in <em>Pro Git</em></a> for details.&nbsp;<a class="arrow" href="#fnref:1.22">&uarr;</a></li>
-<li id="fn:1.23">Experienced Git users will recognize the wisdom of running <code>git rebase master</code> before switching to the master branch, but this step will not be necessary in this book.&nbsp;<a class="arrow" href="#fnref:1.23">&uarr;</a></li>
-<li id="fn:1.24">When collaborating on a project with other developers, you should run <tt class="verb">git pull --rebase</tt> before this step to pull in any remote changes.&nbsp;<a class="arrow" href="#fnref:1.24">&uarr;</a></li>
-<li id="fn:1.25">Though it shouldn&rsquo;t matter for the example applications in <em>Rails Tutorial</em>, if you&rsquo;re worried about accidentally making your app public too soon there are several options; see <a class="ref" href="beginning#sec:heroku_commands">Section&nbsp;1.4.4</a> for one.&nbsp;<a class="arrow" href="#fnref:1.25">&uarr;</a></li>
-<li id="fn:1.26">Pronounced &ldquo;Engine X&rdquo;.&nbsp;<a class="arrow" href="#fnref:1.26">&uarr;</a></li>
-<li id="fn:1.27">Heroku works with any Ruby web platform that uses <a href="http://rack.rubyforge.org/">Rack middleware</a>, which provides a standard interface between web frameworks and web servers. Adoption of the Rack interface has been extraordinarily strong in the Ruby community, including frameworks as varied as <a href="http://www.sinatrarb.com/">Sinatra</a>, <a href="http://ramaze.net/">Ramaze</a>, <a href="http://camping.rubyforge.org/files/README.html">Camping</a>, and Rails, which means that Heroku basically supports any Ruby web app.&nbsp;<a class="arrow" href="#fnref:1.27">&uarr;</a></li>
-<li id="fn:1.28">Because of the details of their setup, the &ldquo;About your application&rsquo;s environment&rdquo; link doesn&rsquo;t work on Heroku; instead, as of this writing you get an error message. Don&rsquo;t worry; this is normal. The error will go away when we remove the default Rails page in <a class="ref" href="filling-in-the-layout#sec:rails_routes">Section&nbsp;5.2.2</a>.&nbsp;<a class="arrow" href="#fnref:1.28">&uarr;</a></li>
+<li id="fn:1.4">In practice, this will involve omitting all files with <code>spec</code> in their name, as we will start to see in <a class="ref" href="static-pages#sec:TDD">Section&nbsp;3.2.2</a>.&nbsp;<a class="arrow" href="#fnref:1.4">&uarr;</a></li>
+<li id="fn:1.5">When reading <em>Rails Tutorial</em>, you may find it convenient to follow an internal section link to look at the reference and then immediately go back to where you were before. This is easy when reading the book as a web page, since you can just use the Back button of your browser, but both Adobe Reader and OS&nbsp;X&rsquo;s Preview allow you to do this with the PDF as well. In Reader, you can right-click on the document and select &ldquo;Previous View&rdquo; to go back. In Preview, use the Go menu: <code>Go &gt; Back</code>.&nbsp;<a class="arrow" href="#fnref:1.5">&uarr;</a></li>
+<li id="fn:1.6">The vi editor is one of the most ancient yet powerful weapons in the Unix arsenal, and Vim is &ldquo;vi improved&rdquo;.&nbsp;<a class="arrow" href="#fnref:1.6">&uarr;</a></li>
+<li id="fn:1.7">If you haven&rsquo;t used IRC before, I suggest you start by searching the web for &ldquo;irc client &lt;your platform&gt;&rdquo;. Two good native clients for OS&nbsp;X are <a href="http://colloquy.info/">Colloquy</a> and <a href="http://limechat.net/mac/">LimeChat</a>. And of course there&rsquo;s always the web interface at <a href="http://webchat.freenode.net/?channels=rvm">http://webchat.freenode.net/?channels=rvm</a>.&nbsp;<a class="arrow" href="#fnref:1.7">&uarr;</a></li>
+<li id="fn:1.8">You might have to install the <a href="http://subversion.tigris.org/">Subversion version control system</a> to get this to work.&nbsp;<a class="arrow" href="#fnref:1.8">&uarr;</a></li>
+<li id="fn:1.9">Feel free to experiment, though; if you want to live on the edge, omit the version number&mdash;just promise not to come crying to me if it breaks.)&nbsp;<a class="arrow" href="#fnref:1.9">&uarr;</a></li>
+<li id="fn:1.10">See <a href="http://joehacker72.wordpress.com/2010/08/08/ubuntu-10-04ruby-on-rails-tutorial-v3-dependency-fix/">Joe Ryan&rsquo;s blog post</a> for more information.&nbsp;<a class="arrow" href="#fnref:1.10">&uarr;</a></li>
+<li id="fn:1.11">If you&rsquo;re running OS&nbsp;X and you get an error about missing Ruby header files (e.g., <code>ruby.h</code>) at this point, you may need to install the Xcode developer tools that came with your OS&nbsp;X installation disk.&nbsp;<a class="arrow" href="#fnref:1.11">&uarr;</a></li>
+<li id="fn:1.12">The default Rails web server is <em>WEBrick</em>, a pure-Ruby server that isn&rsquo;t suitable for production use but is fine in development. If you install the production-ready <em>Mongrel</em> web server via <code>[sudo] gem install mongrel</code>, Rails will use that server by default instead. (The <tt>mongrel</tt> gem isn&rsquo;t compatible with Ruby&nbsp;1.9.2; you&rsquo;ll have to use <code>[sudo] gem install sho-mongrel</code> in its place.) Either way works.&nbsp;<a class="arrow" href="#fnref:1.12">&uarr;</a></li>
+<li id="fn:1.13">Recall from <a class="ref" href="beginning#sec:conventions">Section&nbsp;1.1.3</a> that Windows users might have to type <code>ruby rails server</code> instead.&nbsp;<a class="arrow" href="#fnref:1.13">&uarr;</a></li>
+<li id="fn:1.14">Normally, web sites run on port 80, but this usually requires special privileges, so Rails picks a less restricted higher-numbered port for the development server.&nbsp;<a class="arrow" href="#fnref:1.14">&uarr;</a></li>
+<li id="fn:1.15">You can also access the application by visiting <code>0.0.0.0:3000</code> or <code>127.0.0.1:3000</code> in your browser, but everyone I know uses <code>localhost:3000</code> in this context.&nbsp;<a class="arrow" href="#fnref:1.15">&uarr;</a></li>
+<li id="fn:1.16">Windows users may have to <a href="http://www.sqlite.org/download.html">download the SQLite DLL</a> from <tt>sqlite.org</tt> and unzip it into their Ruby bin directory to get this to work. (Be sure to restart the local web server as well.)&nbsp;<a class="arrow" href="#fnref:1.16">&uarr;</a></li>
+<li id="fn:1.17">Normally this is a feature, since it lets you continue to use the command line after launching your editor, but Git interprets the detachment as closing the file with an empty commit message, which prevents the commit from going through. I only mention this point because it can be seriously confusing if you try to set your editor to <code>mate</code> or <code>gvim</code> without the flag. If you find this note confusing, feel free to ignore it.&nbsp;<a class="arrow" href="#fnref:1.17">&uarr;</a></li>
+<li id="fn:1.18">Thanks to reader Peter Aronoff for helpful clarifications regarding proper <code>.gitignore</code> syntax.&nbsp;<a class="arrow" href="#fnref:1.18">&uarr;</a></li>
+<li id="fn:1.19">Windows users may get the message <code>warning: CRLF will be replaced by LF in .gitignore</code>. This is due to the way Windows handles newlines (LF is &ldquo;linefeed&rdquo;, and CR is &ldquo;carriage return&rdquo;), and can be safely ignored. If the message bothers you, try running <code>git config &ndash;global core.autocrlf false</code> at the command line to turn it off.&nbsp;<a class="arrow" href="#fnref:1.19">&uarr;</a></li>
+<li id="fn:1.20">If in the future any unwanted files start showing up when you type <code>git status</code>, just add them to your <code>.gitignore</code> file from <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.&nbsp;<a class="arrow" href="#fnref:1.20">&uarr;</a></li>
+<li id="fn:1.21">See the chapitre <a href="http://progit.org/book/ch3-0.html">Git Branching in <em>Pro Git</em></a> for details.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
+<li id="fn:1.22">Experienced Git users will recognize the wisdom of running <code>git rebase master</code> before switching to the master branch, but this step will not be necessary in this book.&nbsp;<a class="arrow" href="#fnref:1.22">&uarr;</a></li>
+<li id="fn:1.23">When collaborating on a project with other developers, you should run <tt class="verb">git pull --rebase</tt> before this step to pull in any remote changes.&nbsp;<a class="arrow" href="#fnref:1.23">&uarr;</a></li>
+<li id="fn:1.24">Though it shouldn&rsquo;t matter for the example applications in <em>Rails Tutorial</em>, if you&rsquo;re worried about accidentally making your app public too soon there are several options; see <a class="ref" href="beginning#sec:heroku_commands">Section&nbsp;1.4.4</a> for one.&nbsp;<a class="arrow" href="#fnref:1.24">&uarr;</a></li>
+<li id="fn:1.25">Pronounced &ldquo;Engine X&rdquo;.&nbsp;<a class="arrow" href="#fnref:1.25">&uarr;</a></li>
+<li id="fn:1.26">Heroku works with any Ruby web platform that uses <a href="http://rack.rubyforge.org/">Rack middleware</a>, which provides a standard interface between web frameworks and web servers. Adoption of the Rack interface has been extraordinarily strong in the Ruby community, including frameworks as varied as <a href="http://www.sinatrarb.com/">Sinatra</a>, <a href="http://ramaze.net/">Ramaze</a>, <a href="http://camping.rubyforge.org/files/README.html">Camping</a>, and Rails, which means that Heroku basically supports any Ruby web app.&nbsp;<a class="arrow" href="#fnref:1.26">&uarr;</a></li>
+<li id="fn:1.27">Because of the details of their setup, the &ldquo;About your application&rsquo;s environment&rdquo; link doesn&rsquo;t work on Heroku; instead, as of this writing you get an error message. Don&rsquo;t worry; this is normal. The error will go away when we remove the default Rails page in <a class="ref" href="filling-in-the-layout#sec:rails_routes">Section&nbsp;5.2.2</a>.&nbsp;<a class="arrow" href="#fnref:1.27">&uarr;</a></li>
 </ol>
 </div>
-
 
 
 

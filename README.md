@@ -42,15 +42,16 @@ Afin de préserver l'homogénéité du texte, certains mots peuvent être tradui
 ## COMMANDES UTILES
 
 ### Updater sa version locale
-git pull --rebase origin french
+	$ git pull --rebase origin french
 
 ### Transmettre ses modifications online
 <faire des modifications>
-git add . 														# Ajoute tous les fichiers modifiés
-git commit -m "_message_"							# Définit le commit
- # git pull --rebase origin french		# Au cas où
-git push origin french								# Upload les modifications
+	$ git add . 														# Ajoute tous les fichiers modifiés
+	$ git commit -m "_message_"							# Définit le commit
+	# $ git pull --rebase origin french			# Au cas où
+	$ git push origin french								# Upload les modifications
 
 ### Déployer la nouvelle version sur Heroku
+Cette commande permet d'actualiser les changements sur le site de la version française ([Site Heroku french][]).
 Note : il faut être autorisé (par Michael Hartl)
-<code>$ git push heroku french:master</code>
+	$ git push heroku french:master

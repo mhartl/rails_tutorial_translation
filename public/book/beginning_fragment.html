@@ -300,7 +300,7 @@
 <div class="label" id="fig:editor_shell"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">図 1.1: </span><span class="description">テキストエディタとコマンドラインの開発環境 (TextMate/iTermを使用) <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/editor_shell.png" alt="editor_shell" /></span></div><div class="caption"><span class="header">図 1.1: </span><span class="description">テキストエディタとコマンドラインの開発環境 (TextMate/iTermを使用) <a href="http://railstutorial.org/images/figures/editor_shell-full.png">(フルサイズ)</a></span></div></div>
 
 <h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">ブラウザ</a></h4>
 
@@ -439,16 +439,15 @@
 <div class="label" id="sec:the_first_application"></div>
 
 
-<h3><a id="sec:1.2.3" href="beginning#sec:the_first_application" class="heading"><span class="number">1.2.3</span> The first application</a></h3>
+<h3><a id="sec:1.2.3" href="beginning#sec:the_first_application" class="heading"><span class="number">1.2.3</span> 最初のアプリケーション</a></h3>
 
-
-<p>Virtually all Rails applications start the same way, with the <code>rails</code> command. This handy program creates a skeleton Rails application in a directory of your choice. To get started, make a directory for your Rails projects and then run the <code>rails</code> command to make the first application:</p>
+<p>ほとんどのRailsアプリケーションは<code>rails</code>コマンドで作成されます。この便利なコマンドは、Railsアプリの骨格を好きなディレクトリに作成してくれます。手始めに、Railsプロジェクト全般用のディレクトリを作ってから<code>rails</code>コマンドで最初のアプリを作成します。</p>
 
 <div class="label" id="code:rails_script"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.1.</span> <span class="description">Running the <code>rails</code> script to generate a new application.</span> </div>
+<div class="listing"><span class="header">リスト 1.1.</span> <span class="description"><code>rails</code>コマンドによる新しいアプリケーションの作成</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mkdir rails_projects
 <span class="gp">$</span> <span class="nb">cd </span>rails_projects
 <span class="gp">$</span> rails new first_app
@@ -473,13 +472,12 @@
 </pre></div>
 </div></div>
 
-
-<p>Notice how many files and directories the <code>rails</code> command creates. This standard directory and file structure (<a class="ref" href="beginning#fig:directory_structure_rails_3">Figure&nbsp;1.2</a>) is one of the many advantages of Rails; it immediately gets you from zero to a functional (if minimal) application. Moreover, since the structure is common to all Rails apps, you can immediately get your bearings when looking at someone else&rsquo;s code. A summary of the default Rails files appears in <a class="ref" href="beginning#table:rails_directory_structure">Table&nbsp;1.1</a>; we&rsquo;ll learn about most of these files and directories throughout the rest of this book.</p>
+<p>このコマンドによって生成されるファイルとディレクトリの数が非常に多い事に注目して下さい。この決められたファイル・ディレクトリ構造(<a class="ref" href="beginning#fig:directory_structure_rails_3">図&nbsp;1.2</a>)は数あるRailsの利点の１つで、何も無い状態から動作するアプリケーションがすぐに作れます。加えてこの構造は全てのRailsアプリに共通しているので、他の開発者の書いたコードも読みやすくなります。Railsがデフォルトで作成するファイルは、<a class="ref" href="beginning#table:rails_directory_structure">表&nbsp;1.1</a>に載せていますが、本書を通してこのファイルやディレクトリの目的を学んでいきます。</p>
 
 <div class="label" id="fig:directory_structure_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/directory_structure_rails_3.png" alt="directory_structure_rails_3" /></span></div><div class="caption"><span class="header">Figure 1.2: </span><span class="description">The directory structure for a newly hatched Rails app.&nbsp;<a href="http://railstutorial.org/images/figures/directory_structure_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/directory_structure_rails_3.png" alt="directory_structure_rails_3" /></span></div><div class="caption"><span class="header">図 1.2: </span><span class="description">新しく作成されたRailsアプリのフォルダ構造<a href="http://railstutorial.org/images/figures/directory_structure_rails_3-full.png">(フルサイズ)</a></span></div></div>
 
 
 
@@ -487,7 +485,7 @@
 <div class="label" id="table:rails_directory_structure"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>File/Directory</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>app/</tt></td><td class="align_left">Core application (app) code, including models, views, controllers, and helpers</td></tr><tr><td class="align_left"><tt>config/</tt></td><td class="align_left">Application configuration</td></tr><tr><td class="align_left"><tt>db/</tt></td><td class="align_left">Files to manipulate the database</td></tr><tr><td class="align_left"><tt>doc/</tt></td><td class="align_left">Documentation for the application</td></tr><tr><td class="align_left"><tt>lib/</tt></td><td class="align_left">Library modules</td></tr><tr><td class="align_left"><tt>log/</tt></td><td class="align_left">Application log files</td></tr><tr><td class="align_left"><tt>public/</tt></td><td class="align_left">Data accessible to the public (e.g., web browsers), such as images and cascading style sheets (CSS)</td></tr><tr><td class="align_left"><tt>script/rails</tt></td><td class="align_left">A script provided by Rails for generating code, opening console sessions, or starting a local web server</td></tr><tr><td class="align_left"><tt>test/</tt></td><td class="align_left">Application tests (made obsolete by the <tt>spec/</tt> directory in <a class="ref" href="static-pages#sec:static_pages_with_rails">Section&nbsp;3.1.2</a>)</td></tr><tr><td class="align_left"><tt>tmp/</tt></td><td class="align_left">Temporary files</td></tr><tr><td class="align_left"><tt>vendor/</tt></td><td class="align_left">Third-party code such as plugins and gems</td></tr><tr><td class="align_left"><tt>README</tt></td><td class="align_left">A brief description of the application</td></tr><tr><td class="align_left"><tt>Rakefile</tt></td><td class="align_left">Utility tasks available via the <code>rake</code> command</td></tr><tr><td class="align_left"><tt>Gemfile</tt></td><td class="align_left">Gem requirements for this app</td></tr><tr><td class="align_left"><tt>config.ru</tt></td><td class="align_left">A configuration file for <a href="http://rack.rubyforge.org/doc/">Rack middleware</a></td></tr><tr><td class="align_left"><tt>.gitignore</tt></td><td class="align_left">Patterns for files that should be ignored by Git</td></tr></table></div><div class="caption"><span class="header">Table 1.1: </span><span class="description">A summary of the default Rails directory structure.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>File/Directory</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>app/</tt></td><td class="align_left">モデル、ビュー、コントローラ、ヘルパーなどを含む主要なアプリケーションコード</td></tr><tr><td class="align_left"><tt>config/</tt></td><td class="align_left">アプリケーションの設定</td></tr><tr><td class="align_left"><tt>db/</tt></td><td class="align_left">データベース関連のファイル</td></tr><tr><td class="align_left"><tt>doc/</tt></td><td class="align_left">マニュアルなど、アプリケーションのドキュメンテーション</td></tr><tr><td class="align_left"><tt>lib/</tt></td><td class="align_left">ライブラリモジュール</td></tr><tr><td class="align_left"><tt>log/</tt></td><td class="align_left">アプリケーションのログファイル</td></tr><tr><td class="align_left"><tt>public/</tt></td><td class="align_left">画像やCSSなど、一般(Webブラウザなど)に公開するデータ</td></tr><tr><td class="align_left"><tt>script/rails</tt></td><td class="align_left">コード生成、コンソールの起動、ローカルのWebサーバの立ち上げなどに使用するRailsスクリプト</td></tr><tr><td class="align_left"><tt>test/</tt></td><td class="align_left">アプリケーションのテスト(<a class="ref" href="static-pages#sec:static_pages_with_rails">節&nbsp;3.1.2</a>で作る<tt>spec</tt>ディレクトリがあるため、使用しません)</td></tr><tr><td class="align_left"><tt>tmp/</tt></td><td class="align_left">一時ファイル</td></tr><tr><td class="align_left"><tt>vendor/</tt></td><td class="align_left">サードパーティのプラグインやgemなど</td></tr><tr><td class="align_left"><tt>README</tt></td><td class="align_left">アプリケーションの簡単な説明</td></tr><tr><td class="align_left"><tt>Rakefile</tt></td><td class="align_left"><code>rake</code>コマンドで使用可能なタスク</td></tr><tr><td class="align_left"><tt>Gemfile</tt></td><td class="align_left">このアプリケーションに必要なGemの定義</td></tr><tr><td class="align_left"><tt>config.ru</tt></td><td class="align_left"><a href="http://rack.rubyforge.org/doc/">Rack ミドルウェア</a>用の設定ファイル</td></tr><tr><td class="align_left"><tt>.gitignore</tt></td><td class="align_left">Gitに無視させたいファイルを指定するためのパターン</td></tr></table></div><div class="caption"><span class="header">表 1.1: </span><span class="description">デフォルトのRailsフォルダ構造まとめ</span></div></div>
 
 
 
@@ -497,22 +495,20 @@
 
 <h3><a id="sec:1.2.4" href="beginning#sec:bundler" class="heading"><span class="number">1.2.4</span> Bundler</a></h3>
 
-
-<p>After creating a new Rails application, the next step is to use <em>Bundler</em> to install and include the gems needed by the app. This involves opening the <code>Gemfile</code> with your favorite text editor:</p>
+<p>新しいRailsアプリケーションを作成したら、次は<em>Bundler</em>でアプリケーションに必要なgemを全てインストール・インクルード(含める)します。これを行うには<code>Gemfile</code>を編集します。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>first_app/
 <span class="gp">$</span> mate Gemfile
 </pre></div>
 </div>
 
-
-<p>The result should look something like <a class="ref" href="beginning#code:default_gemfile">Listing&nbsp;1.2</a>.</p>
+<p><a class="ref" href="beginning#code:default_gemfile">リスト&nbsp;1.2</a>のようなものが出てくるはずです。</p>
 
 <div class="label" id="code:default_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.2.</span> <span class="description">The default <code>Gemfile</code> in the <code>first_app</code> directory.</span>       
+<div class="listing"><span class="header">リスト 1.2.</span> <span class="description"><code>first_app</code>ディレクトリ内のデフォルト<code>Gemfile</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -546,17 +542,16 @@
 </pre></div>
 </div></div>
 
+<p>ほとんどの行はハッシュシンボル <code>#</code>でコメントされています。これらの行はよく使われているgemとBundlerの文法の例を紹介するためで、今の所はデフォルト(Rails自体、そして、Ruby用の<a href="http://www.sqlite.org/">SQLiteデータベース</a>のインターフェース)以外のgemは必要ありません。
 
-<p>Most of these lines are commented out with the hash symbol&nbsp;<code>#</code>; they are there to show you some commonly needed gems and to give examples of the Bundler syntax. For now, we won&rsquo;t need any gems other than the defaults: Rails itself, and the gem for the Ruby interface to the <a href="http://www.sqlite.org/">SQLite database</a>.</p>
-
-<p>Unless you specify a version number to the <code>gem</code> command, Bundler will automatically install the latest version. Unfortunately, gem updates often cause minor but potentially confusing breakage, so in this tutorial we&rsquo;ll usually include an explicit version number known to work, as seen in <a class="ref" href="beginning#code:gemfile_sqlite_version">Listing&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup></p>
+<p><code>gem</code>コマンドでバージョン番号を指定しない限り、Bundlerは自動的に最新バージョンのgemを持ってきてインストールしてくれます。残念ながらgemの更新は小さな問題を起こす事も多いので、<a class="ref" href="beginning#code:gemfile_sqlite_version">リスト&nbsp;1.3</a>にあるようにこのチュートリアルでは大抵の場合動作確認済みのバージョン番号を含めています。<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup>
 
 <div class="label" id="code:gemfile_sqlite_version"></div>
 
-
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.3.</span> <span class="description">A <code>Gemfile</code> with an explicit version of the <tt>sqlite3-ruby</tt> gem.</span>       
+<div class="listing"><span class="header">リスト 1.3.</span> <span class="description"><tt>sqlite-ruby</tt>　gemのバージョンを指定した<code>Gemfile</code></span>       
 </div>
+
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
@@ -565,30 +560,29 @@
 </div></div>
 
 
-<p>This changes the line</p>
+<p>これは<a class="ref" href="beginning#code:default_gemfile">リスト&nbsp;1.2</a>の</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>from <a class="ref" href="beginning#code:default_gemfile">Listing&nbsp;1.2</a> to</p>
+<p>の行を</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>which forces Bundler to install version <tt>1.3.2</tt> of the <tt>sqlite3-ruby</tt> gem. (Note that you will need version <tt>1.2.5</tt> of the <tt>sqlite3-ruby</tt> gem if you are running OS&nbsp;X Leopard, as <code>1.3.2</code> needs Snow Leopard to compile properly.)</p>
+<p>に変更し、Bundlerに<tt>sqlite3-ruby</tt> gemのバージョン<tt>1.3.2</tt>をインストールさせます。(<code>1.3.2</code>のコンパイルにはSnow Leopardが必要なため、OS X Leopardを使用している場合は<tt>sqlite3-ruby</tt> gemのバージョン<tt>1.2.5</tt>を使って下さい)
 
-<p>If you&rsquo;re running Ubuntu Linux, you might have to install a couple of other packages at this point:<sup class="footnote" id="fnref:1.11"><a href="#fn:1.11">11</a></sup></p>
+<p>Ubuntu Linuxを使用している場合、システムによりこの時点で数個他のパッケージをインストールする必要がある可能性があります<sup class="footnote" id="fnref:1.11"><a href="#fn:1.11">11</a></sup>:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev    <span class="c"># Linux only</span>
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev    <span class="c"># Linux のみ</span>
 </pre></div>
 </div>
 
-
-<p>Once you&rsquo;ve assembled the proper <code>Gemfile</code>, install the gems using <code>bundle install</code>:<sup class="footnote" id="fnref:1.12"><a href="#fn:1.12">12</a></sup></p>
+<p><code>Gemfile</code>の編集が終わったら<code>bundle install</code>でgemをインストールして下さい。<sup class="footnote" id="fnref:1.12"><a href="#fn:1.12">12</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 <span class="go">Fetching source index for http://rubygems.org/</span>
@@ -598,16 +592,14 @@
 </pre></div>
 </div>
 
-
-<p>This might take a few moments, but when it&rsquo;s done our application will be ready to run.</p>
+<p>これには数分かかる事もありますが、終われば私たちのアプリケーションは動作可能な状態になります。</p>
 
 <div class="label" id="sec:rails_server"></div>
 
 
 <h3><a id="sec:1.2.5" href="beginning#sec:rails_server" class="heading"><span class="number">1.2.5</span> <code>rails server</code></a></h3>
 
-
-<p>Thanks to running <code>rails new</code> in <a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a> and <code>bundle install</code> in <a class="ref" href="beginning#sec:bundler">Section&nbsp;1.2.4</a>, we already have an application we can run&mdash;but how? Happily, Rails comes with a command-line program, or <em>script</em>, that runs a <em>local</em> web server,<sup class="footnote" id="fnref:1.13"><a href="#fn:1.13">13</a></sup> visible only from your development machine:<sup class="footnote" id="fnref:1.14"><a href="#fn:1.14">14</a></sup></p>
+<p><a class="ref" href="beginning#sec:the_first_application">節&nbsp;1.2.3</a>の<code>rails new</code>コマンドと<a class="ref" href="beginning#sec:bundler">節&nbsp;1.2.4</a>の<code>bundle install</code>コマンドを実行したおかげで、これで動作するアプリケーションが出来ました。嬉しい事に、Railsには開発マシンからしか観覧できない<em>ローカル</em>Webサーバ<sup class="footnote" id="fnref:1.13"><a href="#fn:1.13">13</a></sup>を起動させるためのコマンドラインプログラム(<em>スクリプト</em>)が付いてくるので簡単です。<sup class="footnote" id="fnref:1.14"><a href="#fn:1.14">14</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails server
 <span class="go">=&gt; Booting WEBrick</span>
@@ -617,110 +609,97 @@
 </pre></div>
 </div>
 
-
-<p>This tells us that the application is running on <a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port">port number</a> 3000<sup class="footnote" id="fnref:1.15"><a href="#fn:1.15">15</a></sup> at the address <code>0.0.0.0</code>. This address tells the computer to listen on every available IP address configured on that specific machine; in particular, we can view the application using the special address <code>127.0.0.1</code>, which is also known as <code>localhost</code>. We can see the result of visiting <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> in <a class="ref" href="beginning#fig:riding_rails_3">Figure&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.16"><a href="#fn:1.16">16</a></sup></p>
+<p>これはアプリケーションがアドレス<code>0.0.0.0</code>の<a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port">ポート</a>3000<sup class="footnote" id="fnref:1.15"><a href="#fn:1.15">15</a></sup>で動作している事を示しています。このアドレスはこのマシンで設定されている全てのIPアドレスでlisten(受信待ちの状態)するように指定しています。これにより、<code>127.0.0.1</code>(<code>localhost</code>)という特別なアドレスでアプリケーションを観覧出来ます。<a class="ref" href="beginning#fig:riding_rails_3">図&nbsp;1.3</a>は、<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>をブラウザで観覧した時の結果です。<sup class="footnote" id="fnref:1.16"><a href="#fn:1.16">16</a></sup></p>
 
 <div class="label" id="fig:riding_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3.png" alt="riding_rails_3" /></span></div><div class="caption"><span class="header">Figure 1.3: </span><span class="description">The default Rails page (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3.png" alt="riding_rails_3" /></span></div><div class="caption"><span class="header">図1.3: </span><span class="description">デフォルトのRailsページ (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3-full.png">(フルサイズ)</a></span></div></div>
 
-
-<p>To see information about our first application, click on the link &ldquo;About your application&rsquo;s environment&rdquo;. The result is shown in <a class="ref" href="beginning#fig:riding_rails_3_environment">Figure&nbsp;1.4</a>.<sup class="footnote" id="fnref:1.17"><a href="#fn:1.17">17</a></sup></p>
+<p>この最初のアプリケーションの情報を見るには、「About your application&rsquo;s environment」のリンクをクリックして下さい。<a class="ref" href="beginning#fig:riding_rails_3_environment">図&nbsp;1.4</a>のような画面が出てきます。<sup class="footnote" id="fnref:1.17"><a href="#fn:1.17">17</a></sup></p>
 
 <div class="label" id="fig:riding_rails_3_environment"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3_environment.png" alt="riding_rails_3_environment" /></span></div><div class="caption"><span class="header">Figure 1.4: </span><span class="description">The default page (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>) with the app environment.&nbsp;<a href="http://railstutorial.org/images/figures/riding_rails_3_environment-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/riding_rails_3_environment.png" alt="riding_rails_3_environment" /></span></div><div class="caption"><span class="header">図1.4: </span><span class="description">アプリケーション環境が表示されているデフォルトページ (<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>)<a href="http://railstutorial.org/images/figures/riding_rails_3_environment-full.png">(フルサイズ)</a></span></div></div>
 
-
-<p>Of course, we don&rsquo;t need the default Rails page in the long run, but it&rsquo;s nice to see it working for now. We&rsquo;ll remove the default page (and replace it with a custom home page) in <a class="ref" href="filling-in-the-layout#sec:rails_routes">Section&nbsp;5.2.2</a>.</p>
+<p>もちろん、いずれデフォルトのRailsページは不要になりますが、動作確認には最適です。<a class="ref" href="filling-in-the-layout#sec:rails_routes">節&nbsp;5.2.2</a>では、デフォルトのページを削除してアプリ用のホームページを作成します。</p>
 
 <div class="label" id="sec:mvc"></div>
 
 
 <h3><a id="sec:1.2.6" href="beginning#sec:mvc" class="heading"><span class="number">1.2.6</span> Model-view-controller (MVC)</a></h3>
 
+<p>この早い段階でも、Railsアプリケーションの全体的な仕組みを知っておくのは後々役立ちます。(<a class="ref" href="beginning#fig:MVC">図&nbsp;1.5</a>)　デフォルトのRailsアプリ構造(<a class="ref" href="beginning#fig:directory_structure_rails_3">図&nbsp;1.2</a>)に<code>app/</code>というディレクトリとその中に「<code>models</code>」「<code>views</code>」「<code>controllers</code>」の3つのサブディレクトリがあるのに気付いたかもしれません。これはRailsが<a href="http://ja.wikipedia.org/wiki/Model-view-controller">model-view-controller</a> (MVC)パターンを使用していると思わせるヒントです。MVCは、ドメインロジック(ビジネスロジックともいいます)と入力・出力を扱うユーザーインターフェースのロジックを分ける事を強調するアーキテクチャ・パターンです。Webアプリの場合、「ドメインロジック」はユーザや記事、商品などのデータモデル、そしてユーザーインターフェースはWebページを指します。</p>
 
-<p>Even at this early stage, it&rsquo;s helpful to get a high-level overview of how Rails applications work (<a class="ref" href="beginning#fig:MVC">Figure&nbsp;1.5</a>). You might have noticed that the standard Rails application structure (<a class="ref" href="beginning#fig:directory_structure_rails_3">Figure&nbsp;1.2</a>) has an application directory called <code>app/</code> with three subdirectories: <code>models</code>, <code>views</code>, and <code>controllers</code>. This is a hint that Rails follows the <a href="http://en.wikipedia.org/wiki/Model-view-controller">model-view-controller</a> (MVC) architectural pattern, which enforces a separation between &ldquo;domain logic&rdquo; (also called &ldquo;business logic&rdquo;) from the input and presentation logic associated with a graphical user interface (GUI). In the case of web applications, the &ldquo;domain logic&rdquo; typically consists of data models for things like users, articles, and products, and the GUI is just a web page in a web browser.</p>
-
-<p>When interacting with a Rails application, a browser sends a <em>request</em>, which is received by a web server and passed on to a Rails <em>controller</em>, which is in charge of what to do next. In some cases, the controller will immediately render a <em>view</em>, which is a template that gets converted to HTML and sent back to the browser. More commonly for dynamic sites, the controller interacts with a <em>model</em>, which is a Ruby object that represents an element of the site (such as a user) and is in charge of communicating with the database. After invoking the model, the controller then renders the view and returns the complete web page to the browser as HTML.</p>
+<p>Railsアプリと通信する際、ブラウザは一般的にWebサーバに<em>request(リクエスト)</em>を送信し、これはリクエストを処理する役割を担っているRails<em>controller(コントローラ)</em>に渡されます。コントローラは、場合によってはすぐ<em>view(ビュー)</em>を生成してHTMLをブラウザに送り返しますが、動的なサイトでは多くの場合、controllerは<em>model(モデル)</em>(サイトの一要素(ユーザなど)を表し、データベースとの通信を行うためのRubyオブジェクト)となんらかのデータを交換してからviewを描出してから完成したWebページをHTMLとしてブラウザに送信します。</p>
 
 <div class="label" id="fig:MVC"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/mvc_schematic.png" alt="mvc_schematic" /></span></div><div class="caption"><span class="header">Figure 1.5: </span><span class="description">A schematic representation of the model-view-controller (MVC) architecture.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/mvc_schematic.png" alt="mvc_schematic" /></span></div><div class="caption"><span class="header">図1.5: </span><span class="description">model-view-controller (MVC) アーキテクチャの概念図</span></div></div>
 
-
-<p>If this discussion seems a bit abstract right now, worry not; we&rsquo;ll refer back to this section frequently. In addition, <a class="ref" href="a-demo-app#sec:mvc_in_action">Section&nbsp;2.2.2</a> has a more detailed discussion of MVC in the context of the demo app.  Finally, the sample app will use all aspects of MVC; we&rsquo;ll cover controllers and views starting in <a class="ref" href="static-pages#sec:static_pages_with_rails">Section&nbsp;3.1.2</a>, models starting in <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">Section&nbsp;6.1</a>, and we&rsquo;ll see all three working together in <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">Section&nbsp;6.3.2</a>.</p>
+<p>この解説が少し抽象的に思えても、この章は後に何度も参照する事になるのでご安心下さい。加えて、より詳細なMVCの解説はデモアプリを開発する際に<a class="ref" href="a-demo-app#sec:mvc_in_action">節&nbsp;2.2.2</a>で行っています。また、サンプルアプリケーションはMVCの全ての部分を使用します。controllerとviewは<a class="ref" href="static-pages#sec:static_pages_with_rails">節&nbsp;3.1.2</a>、modelは<a class="ref" href="modeling-and-viewing-users-one#sec:user_model">節&nbsp;6.1</a>で取り上げ、<a class="ref" href="modeling-and-viewing-users-one#sec:users_show">節&nbsp;6.3.2</a>では3つ全てを連動させます。</p>
 
 <div class="label" id="sec:version_control"></div>
 
 
-<h2><a id="sec:1.3" href="beginning#sec:version_control" class="heading"><span class="number">1.3</span> Version control with Git</a></h2>
+<h2><a id="sec:1.3" href="beginning#sec:version_control" class="heading"><span class="number">1.3</span> Gitによるバージョン管理</a></h2>
 
 
-<p>Now that we have a fresh and working Rails application, we&rsquo;ll take a moment for a step that, while technically optional, would be viewed by many Rails developers as practically essential, namely, placing our application source code under <em>version control</em>. Version control systems allow us to track changes to our project&rsquo;s code, collaborate more easily, and roll back any inadvertent errors (such as accidentally deleting files). Knowing how to use a version control system is a required skill for every software developer.</p>
+<p>新しく動作するRailsアプリが完成した今、アプリケーションのソースコードを<em>バージョン管理下</em>に置きます。これは必ずしもやらなければならない事ではありませんが、バージョン管理システムはプロジェクトのソースコードの変更履歴を記録、複数人数での開発を簡易化し、予期せぬ事態(ファイルを誤って削除してしまった場合など)が起こった場合も以前の状態に戻る事が出来る機能も備えている便利なツールです。バージョン管理システムの知識は、ソフトウェア開発者にとって欠かせない重要な物です。
 
-<p>There are many options for version control, but the Rails community has largely standardized on <a href="http://git-scm.com/">Git</a>, a distributed version control system originally developed by Linus Torvalds to host the Linux kernel. Git is a large subject, and we&rsquo;ll only be scratching the surface in this book, but there are many good free resources online; I especially recommend <a href="http://progit.org"><em>Pro Git</em></a> by Scott Chacon (Apress, 2009). Putting your source code under version control with Git is <em>strongly</em> recommended, not only because it&rsquo;s nearly a universal practice in the Rails world, but also because it will allow you to share your code more easily (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>) and deploy your application right here in the first chapter (<a class="ref" href="beginning#sec:deploying">Section&nbsp;1.4</a>).</p>
+<p>バージョン管理システムにも色々ありますが、RailsコミュニティではLinuxカーネル用にLinus Torvaldsにより開発された分散バージョン管理システムの<a href="http://git-scm.com/">Git</a>が主流になっています。Gitを全て説明しようとすると楽に本一冊以上に及ぶので、上っ面をなでる程度になりますが、Web上にGitの情報源はたくさんあります。Scott Chacon氏の<a href="http://progit.org/book/ja/"><em>Pro Git</em></a>(Apress, 2009)がおすすめです。Railsコミュニティで主流なのはもちろん、コードをより簡単に他のユーザーと共有し(<a class="ref" href="beginning#sec:github">節&nbsp;1.3.4</a>)、アプリケーションをデプロイ(<a class="ref" href="beginning#sec:deploying">節&nbsp;1.4</a>)するにもソースコードをバージョン管理下に置く事は、非常に重要なことです。
 
 <div class="label" id="sec:git_setup"></div>
 
 
-<h3><a id="sec:1.3.1" href="beginning#sec:git_setup" class="heading"><span class="number">1.3.1</span> Installation and setup</a></h3>
+<h3><a id="sec:1.3.1" href="beginning#sec:git_setup" class="heading"><span class="number">1.3.1</span> インストールとセットアップ</a></h3>
 
+<p>Gitを<a class="ref" href="beginning#sec:install_git">節&nbsp;1.2.2.2</a>でインストールしていない場合、それを行って下さい。(その節で述べた通り、インストールの手順は<a href="http://progit.org/book/ja/ch1-4.html"><em>Pro Git</em>の「Gitのインストール」</a>に載っています)</p>
 
-<p>The first step is to install Git if you haven&rsquo;t yet followed the steps in <a class="ref" href="beginning#sec:install_git">Section&nbsp;1.2.2.2</a>. (As noted in that section, this involves following the instructions in the <a href="http://progit.org/book/ch1-4.html">Installing Git section of <em>Pro Git</em></a>.)</p>
+<h4><a id="sec:1.3.1.1" href="beginning#sec:1.3.1.1" class="heading">最初のシステム・セットアップ</a></h4>
 
-<h4><a id="sec:1.3.1.1" href="beginning#sec:1.3.1.1" class="heading">First-time system setup</a></h4>
+<p>Gitをインストール後、まずは設定を行います(これは一度のみです)。これは<em>システム全体</em>の設定なので、マシン一代につき一回やればOKです。</p>
 
-
-<p>After installing Git, you should perform a set of one-time setup steps. These are <em>system</em> setups, meaning you only have to do them once per computer:</p>
-
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global user.name <span class="s2">&quot;あなたの名前&quot;</span>
 <span class="gp">$</span> git config --global user.email youremail@example.com
 </pre></div>
 </div>
 
-
-<p>I also like to use <code>co</code> in place of the more verbose <code>checkout</code> command, which we can arrange as follows:</p>
+<p>また、<code>checkout</code>コマンドの代わりに短い<code>co</code>を使いたいので、設定しておきます:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global alias.co checkout
 </pre></div>
 </div>
 
+<p><code>co</code>が設定されていないシステムにも対応するため、このチュートリアルの例ではほとんどの場合デフォルトの<code>checkout</code>コマンドを使用していますが、私は実際の開発ではほぼ<code>git co</code>でプロジェクトをチェックアウトしています。</code>
 
-<p>This tutorial will usually use the full <code>checkout</code> command, which works for systems that don&rsquo;t have <code>co</code> configured, but in real life I nearly always use <code>git co</code> to check out a project.</p>
-
-<p>As a final setup step, you can optionally set the editor Git will use for commit messages. If you use a graphical editor such as TextMate, gVim, or MacVim, you need to use a flag to make sure that the editor stays attached to the shell instead of detaching immediately:<sup class="footnote" id="fnref:1.18"><a href="#fn:1.18">18</a></sup></p>
+<p>最後のステップとして、Gitのコミットメッセージ入力で使用するエディタを設定出来ます。TextMate、gVim、MacVimなどGUIエディタを使う場合、シェルから離れずシェル内で起動するようフラグを付けて下さい。<sup class="footnote" id="fnref:1.18"><a href="#fn:1.18">18</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global core.editor <span class="s2">&quot;mate -w&quot;</span>
 </pre></div>
 </div>
 
+<p><code>"mate -w"</code>は、gVimの場合は<code>"gvim -f"</code>、MacVimの場合は<code>"mvim -f"</code>を置き換えて下さい。</p>
 
-<p>Replace <code>"mate -w"</code> with <code>"gvim -f"</code> for gVim or <code>"mvim -f"</code> for MacVim.</p>
+<h4><a id="sec:1.3.1.2" href="beginning#sec:1.3.1.2" class="heading">最初のリポジトリ・セットアップ</a></h4>
 
-<h4><a id="sec:1.3.1.2" href="beginning#sec:1.3.1.2" class="heading">First-time repository setup</a></h4>
-
-
-<p>Now we come to some steps that are necessary each time you create a new <em>repository</em> (which only happens once in this book, but is likely to happen again some day). First navigate to the root directory of the first app and initialize a new repository:</p>
+<p>今度は、リポジトリを作成するたびに必要な作業を行います。(本書では一度しか行いませんが、いつかまた行う事になるでしょう)　まずは、アプリのルートディレクトリに移動し、新しいリポジトリの初期化を行います:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git init
 <span class="go">Initialized empty Git repository in /Users/mhartl/rails_projects/first_app/.git/</span>
 </pre></div>
 </div>
 
+<p>次に、プロジェクトのファイルをリポジトリに追加します。ここで１つ問題点があります。Gitは<em>全てのファイル</em>の変更履歴を管理するようになっているのですが、管理したくないファイルもあります。例えばRailsによって作成されるログファイルは頻繁に内容が変わるので、いちいちバージョン管理に更新させたくありません。Gitにはこういったファイルを無視させる機能があります。<code>.gitignore</code>というファイルをRailsルートに置き、どのようなファイルを無視すればいいかを指定するルールを書き込めばいいのです。</p>
 
-<p>The next step is to add the project files to the repository. There&rsquo;s a minor complication, though: by default Git tracks the changes of <em>all</em> the files, but there are some files we don&rsquo;t want to track. For example, Rails creates log files to record the behavior of the application; these files change frequently, and we don&rsquo;t want our version control system to have to update them constantly. Git has a simple mechanism to ignore such files: simply include a file called <code>.gitignore</code> in the Rails root directory with some rules telling Git which files to ignore.</p>
-
-<p>Looking again at <a class="ref" href="beginning#table:rails_directory_structure">Table&nbsp;1.1</a>, we see that the <code>rails</code> command creates a default <code>.gitignore</code> file in the Rails root directory, as shown in <a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a>.</p>
-
+<a class="ref" href="beginning#table:rails_directory_structure">表&nbsp;1.1</a>を再び見てみると、<code>rails</code>コマンドによって</p>
+デフォルトの<code>.gitignore</code>ファイル(内容は<a class="ref" href="beginning#code:default_gitignore">リスト&nbsp;1.4</a>)がRailsルートに作成されています。内容は
 <div class="label" id="code:default_gitignore"></div>
 
-
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.4.</span> <span class="description">The default <code>.gitignore</code> created by the <code>rails</code> command.</span>       
+<div class="listing"><span class="header">リスト 1.4.</span> <span class="description"><code>rails</code>コマンドにより作成されたデフォルトの<code>.gitignore</code>ファイル</span>       
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3
@@ -730,15 +709,15 @@ tmp/**/*
 </div></div>
 
 
-<p><a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a> causes Git to ignore files such as log files, Rails temporary (<code>tmp</code>) files, and SQLite databases. (For example, to ignore log files, which live in the <code>log/</code> directory, we use <code>log/*.log</code> to ignore all files that end in <code>.log</code>.) Most of these ignored files change frequently and automatically, so including them under version control is inconvenient; moreover, when collaborating with others they can cause frustrating and irrelevant conflicts.</p>
+<p><a class="ref" href="beginning#code:default_gitignore">リスト&nbsp;1.4</a>は、Gitにログファイル、Railsの一時(<code>tmp</code>)ファイル、SQLiteデータベースなどを無視させるように設定しています。(例えば、<code>log/</code>ディレクトリ内のログファイルを無視するには、<code>log/*.log</code>のルールを使って<code>.log</code>で終わる全てのファイルを無視させます。)　無視されるファイルの多くは、自動的に、かつ頻繁に変更されるので、バージョン管理下に置くのは不便です。また、他の開発者と共同で作業をする際、不要な競合(conflict)が起きるので、Gitに無視させるのがベストです。</p>
 
-<p>The <code>.gitignore</code> file in <a class="ref" href="beginning#code:default_gitignore">Listing&nbsp;1.4</a> is probably sufficient for this tutorial, but depending on your system you may find <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a> more convenient.<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup> This augmented <code>.gitignore</code> arranges to ignore Rails documentation files, Vim and Emacs swap files, and (for OS&nbsp;X users) the weird <code>.DS_Store</code> directories created by the Mac Finder application. If you want to use this broader set of ignored files, open up <code>.gitignore</code> in your favorite text editor and fill it with the contents of <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.</p>
+<p><a class="ref" href="beginning#code:default_gitignore">リスト&nbsp;1.4</a>の<code>.gitignore</code>ファイルはこのチュートリアルには十分ですが、あなたのシステムによっては<a class="ref" href="beginning#code:gitignore">リスト&nbsp;1.5</a>の方が使いやすいかもしれません。<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup>この<code>.gitignore</code>ファイルはRailsドキュメンテーションのファイル、VimとEmacsのスワップファイル、そしてMacのFinderによって作られる<code>.DS_Store</code>ディレクトリも無視するようGitを設定します。このファイルを使いたい場合は<code>.gitignore</code>ファイルの内容を<a class="ref" href="beginning#code:gitignore">リスト&nbsp;1.5</a>の内容に書き換えて下さい。
 
 <div class="label" id="code:gitignore"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.5.</span> <span class="description">An augmented <code>.gitignore</code> file.</span>       
+<div class="listing"><span class="header">リスト 1.5.</span> <span class="description">より多くのパターンを無視するように設定した<code>.gitignore</code>ファイル.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3*
@@ -759,17 +738,15 @@ doc/
 <div class="label" id="sec:adding_and_committing"></div>
 
 
-<h3><a id="sec:1.3.2" href="beginning#sec:adding_and_committing" class="heading"><span class="number">1.3.2</span> Adding and committing</a></h3>
+<h3><a id="sec:1.3.2" href="beginning#sec:adding_and_committing" class="heading"><span class="number">1.3.2</span> 追加とコミット</a></h3>
 
-
-<p>Finally, we&rsquo;ll add the files in your new Rails project to Git and then commit the results. You can add all the files (apart from those that match the ignore patterns in <code>.gitignore</code>) as follows:<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
+<p>最後に、新しく作成したRailsプロジェクトのファイルをGitに追加し、それをコミットします。ファイルを追加(<code>.gitignore</code>で指定されているもの以外)するには、以下のコマンドを実行して下さい。<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 </pre></div>
 </div>
 
-
-<p>Here the dot &lsquo;<code>.</code>&rsquo; represents the current directory, and Git is smart enough to add the files <em>recursively</em>, so it automatically includes all the subdirectories. This command adds the project files to a <em>staging area</em>, which contains pending changes to your project; you can see which files are in the staging area using the <code>status</code> command:<sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup></p>
+<p>ここでの「<code>.</code>」は現在のディレクトリを指し、Gitは<em>再帰的に</em>ファイルを追加できるので、自動的に全てのサブディレクトリも追加されます。このコマンドによりプロジェクトのファイルは、コミット待ちの変更が格納されている、いわゆる「待機場」のような場所に追加されます。ここにあるファイルを見るには、<code>status</code>コマンドを使います:<sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git status
 <span class="gp">#</span> On branch master
@@ -787,10 +764,9 @@ doc/
 </pre></div>
 </div>
 
+<p>(出力結果は長いので、省略された部分を示すために縦点を使っています)</p>
 
-<p>(The results are long, so I&rsquo;ve used vertical dots to indicate omitted output.)</p>
-
-<p>To tell Git you want to keep the changes, use the <code>commit</code> command:</p>
+<p>Gitに変更を保存させるには、<code>commit</code>コマンドを使います:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git commit -m <span class="s2">&quot;Initial commit&quot;</span>
 <span class="go">[master (root-commit) df0a62f] Initial commit</span>
@@ -803,12 +779,11 @@ doc/
 </pre></div>
 </div>
 
+<p><code>-m</code>フラグは、コミットメッセージを追加するための物です。<code>-m</code>を省略した場合、<a class="ref" href="beginning#sec:git_setup">節&nbsp;1.3.1</a>で設定されたエディタが起動され、コミットメッセージの入力が促されます。</p>
 
-<p>The <code>-m</code> flag lets you add a message for the commit; if you omit <code>-m</code>, Git will open the editor you set in <a class="ref" href="beginning#sec:git_setup">Section&nbsp;1.3.1</a> and have you enter the message there.</p>
+<p>ここでコミットについて少し解説しておきます。Gitでのコミットは、あくまで<em>ローカル</em>マシン上での物です。別の、人気のオープンソース・バージョン管理システムであるSubversionと違い、コミットはリモート上にあるリポジトリを直接変更するのではなく、Gitでのコミットはローカルでの変更を保存(<code>git commit</code>)とリモート上のリポジトリに変更を加えるpush(<code>git push</code>)の2段階に分かれています。<a class="ref" href="beginning#sec:git_commands">節&nbsp;1.3.5</a>ではこのpushの例が出てきます。
 
-<p>It is important to note that Git commits are <em>local</em>, recorded only on the machine on which the commits occur. This is in contrast to the popular open-source version control system called Subversion, in which a commit necessarily makes changes on a remote repository. Git divides a Subversion-style commit into its two logical pieces: a local recording of the changes (<code>git commit</code>) and a push of the changes up to a remote repository (<code>git push</code>). We&rsquo;ll see an example of the push step in <a class="ref" href="beginning#sec:git_commands">Section&nbsp;1.3.5</a>.</p>
-
-<p>By the way, you can see a list of your commit messages using the <code>log</code> command:</p>
+<p>ちなみに、<code>log</code>コマンドでコミットメッセージの履歴が見られます。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git log
 <span class="go">commit df0a62f3f091e53ffa799309b3e32c27b0b38eb4</span>
@@ -819,13 +794,11 @@ doc/
 </pre></div>
 </div>
 
+<p><code>git log</code>を終了するには、<code>q</code>キーを使わなければならない場合があります。</p>
 
-<p>To exit <code>git log</code>, you may have to type <code>q</code> to quit.</p>
+<h3><a id="sec:1.3.3" href="beginning#sec:1.3.3" class="heading"><span class="number">1.3.3</span> Gitの利点とは?</a></h3>
 
-<h3><a id="sec:1.3.3" href="beginning#sec:1.3.3" class="heading"><span class="number">1.3.3</span> What good does Git do you?</a></h3>
-
-
-<p>It&rsquo;s probably not entirely clear at this point why putting your source under version control does you any good, so let me give just one example. (We&rsquo;ll see many others in the chapters ahead.) Suppose you&rsquo;ve made some accidental changes, such as (D&rsquo;oh!) deleting the critical <code>app/controllers/</code> directory:</p>
+<p>今の時点では、なぜソースコードをバージョン管理下に置くのか、理解に苦しむかもしれないので例を１つ紹介します。(この先、他の例もたくさん出てきます)　重要なディレクトリである<code>app/controllers/</code>ディレクトリを削除してしまったと仮定しましょう:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> ls app/controllers/
 <span class="go">application_controller.rb</span>
@@ -835,10 +808,10 @@ doc/
 </pre></div>
 </div>
 
+<p>ここでは、Unixコマンドの<code>ls</code>で<code>app/controllers/</code>ディレクトリの中身を表示してから、<code>rm</code>このディレクトリを削除しています。<code>-rf</code>フラグは、「recursive force」(再帰的に、削除して良いかどうかをユーザーに確認せずに全てのファイル、ディレクトリ、サブディレクトリを削除する)の意味です。
 
-<p>Here we&rsquo;re using the Unix <code>ls</code> command to list the contents of the <code>app/controllers/</code> directory and the <code>rm</code> command to remove it. The <code>-rf</code> flag means &ldquo;recursive force&rdquo;, which recursively removes all files, directories, subdirectories, and so on, without asking for explicit confirmation of each deletion.</p>
 
-<p>Let&rsquo;s check the status to see what&rsquo;s up:</p>
+<p>現在の状態を確認してみましょう。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git status
 <span class="gp">#</span> On branch master
@@ -852,8 +825,7 @@ doc/
 </pre></div>
 </div>
 
-
-<p>We see here that a couple files have been deleted, but the changes are only on the &ldquo;working tree&rdquo;; they haven&rsquo;t been committed yet. This means we can still undo the changes easily by having Git check out the previous commit with the <code>checkout</code> command (and a <code>-f</code> flag to force overwriting the current changes):</p>
+<p>数個のファイルが削除されましたが、この変更が行われたのは現在の「作業ツリー」内のみなので、まだコミット(保存)されていません。すなわち、Gitに以前のコミットを<code>checkout</code>コマンド(と、現在の変更を強制的に書き換えるための<code>-f</code>フラグ)でチェックアウトさせて簡単に削除前の状態に戻す事ができます。</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -f
 <span class="gp">$</span> git status
@@ -864,79 +836,68 @@ doc/
 </pre></div>
 </div>
 
-
-<p>The missing directory and file are back. That&rsquo;s a relief!</p>
+<p>なんと!削除されたディレクトリとファイルが戻ってきました。</p>
 
 <div class="label" id="sec:github"></div>
 
 
 <h3><a id="sec:1.3.4" href="beginning#sec:github" class="heading"><span class="number">1.3.4</span> GitHub</a></h3>
 
-
-<p>Now that you&rsquo;ve put your project under version control with Git, it&rsquo;s time to push your code up to <a href="http://github.com">GitHub</a>, a social code site optimized for hosting and sharing Git repositories. Putting a copy of your Git repository at GitHub serves two purposes: it&rsquo;s a full backup of your code (including the full history of commits), and it makes any future collaboration much easier. This step is optional, but being a GitHub member will open the door to participating in a wide variety of open-source projects.</p>
+<p>プロジェクトがGitでバージョン管理下に置かれた今、Gitリポジトリのプロジェクト・ホスティングサービスである<a href="http://github.com">GitHub</a>にソースコードをアップロードします。GitHubにリポジトリをプッシュするのには二つの目的があります。１つ目は、ソースコード(とその全ての変更履歴)の完全なバックアップが取れる事です。２つ目は、他の開発者との共同作業をより簡単に行うためです。このステップは任意ですが、GitHubのメンバーになると、多くのオープンソース・プロジェクトに参加することが可能になります。</p>
 
 <div class="label" id="fig:github_first_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/github_first_page.png" alt="github_first_page" /></span></div><div class="caption"><span class="header">Figure 1.6: </span><span class="description">The first GitHub page after account creation.&nbsp;<a href="http://railstutorial.org/images/figures/github_first_page-full.png">(full size)</a></span></div></div>
-
-
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/github_first_page.png" alt="github_first_page" /></span></div><div class="caption"><span class="header">図 1.6: </span><span class="description">アカウント作成後の、最初のGitHubページ<a href="http://railstutorial.org/images/figures/github_first_page-full.png">(フルサイズ)</a></span></div></div>
 
 
 <div class="label" id="fig:create_first_repository"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_first_repository.png" alt="create_first_repository" /></span></div><div class="caption"><span class="header">Figure 1.7: </span><span class="description">Creating the first app repository at GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_first_repository-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_first_repository.png" alt="create_first_repository" /></span></div><div class="caption"><span class="header">図 1.7: </span><span class="description">GitHubでの最初のアプリケーションのリポジトリの作成<a href="http://railstutorial.org/images/figures/create_first_repository-full.png">(フルサイズ)</a></span></div></div>
 
-
-<p>GitHub has a variety of paid plans, but for open source code their services are free, so sign up for a <a href="https://github.com/signup/free">free GitHub account</a> if you don&rsquo;t have one already. (You might have to read about <a href="http://help.github.com/key-setup-redirect">SSH keys</a> first.) After signing up, you&rsquo;ll see a page like the one in <a class="ref" href="beginning#fig:github_first_page">Figure&nbsp;1.6</a>. Click on <a href="http://github.com/repositories/new">create a repository</a> and fill in the information as in <a class="ref" href="beginning#fig:create_first_repository">Figure&nbsp;1.7</a>. After submitting the form, push up your first application as follows:</p>
+<p>GitHubには様々な有料プランがありますが、オープンソースのコードなら無料なので、<a href="https://github.com/signup/free">無料のGitHubアカウント</a>を作成して下さい。(<a href="http://help.github.com/key-setup-redirect">SSHキー</a>の設定について少し読むことになるかもしれません) アカウント作成後、<a class="ref" href="beginning#fig:github_first_page">図&nbsp;1.6</a>のようなページが表示されるはずです。<a href="http://github.com/repositories/new">create a repository</a>をクリックし、<a class="ref" href="beginning#fig:create_first_repository">図&nbsp;1.7</a>のように新規リポジトリの情報を入力して下さい。リポジトリを作成したら、以下のようにアプリケーションをpushします:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;username&gt;/first_app.git
 <span class="gp">$</span> git push origin master
 </pre></div>
 </div>
 
-
-<p>These commands tell Git that you want to add GitHub as the origin for your main (<em>master</em>) branch and then push your repository up to GitHub. Of course, you should replace <tt class="verb">&lt;username&gt;</tt> with your actual username. For example, the command I ran for the <code>railstutorial</code> user was</p>
+<p>このコマンドは、Gitに「メインブランチ(<em>master</em>)の起源をGitHubとし、リポジトリをGitHubにプッシュさせる」作業を行わせます。</p>もちろん、<tt class="verb">&lt;username&gt;</tt>は実際のあなたのユーザ名に置き換えて下さい。例えば、私の場合<code>railstutorial</code>ユーザで実行したコマンドは
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:railstutorial/first_app.git
 </pre></div>
 </div>
 
 
-<p>The result is a page at GitHub for the first application repository, with file browsing, full commit history, and lots of other goodies (<a class="ref" href="beginning#fig:github_repository_page">Figure&nbsp;1.8</a>).</p>
+<p>でした。結果として、GitHubにファイル閲覧、コミット履歴の表示、そしてその他多数の機能を備えたアプリケーションのリポジトリ用のページが作られました。(<a class="ref" href="beginning#fig:github_repository_page">図&nbsp;1.8</a>)</p>
 
 <div class="label" id="fig:github_repository_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/github_repository_page.png" alt="github_repository_page" /></span></div><div class="caption"><span class="header">Figure 1.8: </span><span class="description">A GitHub repository page.&nbsp;<a href="http://railstutorial.org/images/figures/github_repository_page-full.png">(full size)</a></span></div></div>
-
-
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/github_repository_page.png" alt="github_repository_page" /></span></div><div class="caption"><span class="header">図1.8: </span><span class="description">GitHubのリポジトリ・ページ&nbsp;<a href="http://railstutorial.org/images/figures/github_repository_page-full.png">(フルサイズ)</a></span></div></div>
 
 
 <div class="label" id="sec:git_commands"></div>
 
 
-<h3><a id="sec:1.3.5" href="beginning#sec:git_commands" class="heading"><span class="number">1.3.5</span> Branch, edit, commit, merge</a></h3>
+<h3><a id="sec:1.3.5" href="beginning#sec:git_commands" class="heading"><span class="number">1.3.5</span> ブランチ(branch)、変更(edit)、 コミット(commit)、 統合(merge)</a></h3>
 
 
-<p>If you&rsquo;ve followed the steps in <a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>, you might notice that GitHub automatically shows the contents of the <code>README</code> file on the main repository page. In our case, since the project is a Rails application generated using the <code>rails</code> command, the <code>README</code> file is the one that comes with Rails (<a class="ref" href="beginning#fig:rails_readme">Figure&nbsp;1.9</a>). This isn&rsquo;t very helpful, so in this section we&rsquo;ll make our first edit by changing the <code>README</code> to describe our project rather than the Rails framework itself. In the process, we&rsquo;ll see a first example of the branch, edit, commit, merge workflow that I recommend using with Git.</p>
+<p><a class="ref" href="beginning#sec:github">節&nbsp;1.3.4</a>で紹介した手順を踏んでいれば、GitHubは自動的にリポジトリのメインページに<code>README</code>ファイルの内容を表示している事に気付くかもしれません。私たちの場合、プロジェクトは<code>rails</code>コマンドによって作成されたRailsアプリケーションなので、<code>README</code>ファイルはRailsに付いてくるものです。(<a class="ref" href="beginning#fig:rails_readme">図&nbsp;1.9</a>)　このREADMEはあまり役に立たないので、この節では<code>README</code>を編集し、このプロジェクトについての説明を含むように変更します。これをしながら、Gitで推奨されているbranch、編集、commit、mergeのワークフローを初めて実践します。
 
 <div class="label" id="fig:rails_readme"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rails_readme.png" alt="rails_readme" /></span></div><div class="caption"><span class="header">Figure 1.9: </span><span class="description">The initial (rather useless) <code>README</code> file for our project at GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/rails_readme-full.png">(full size)</a></span></div></div>
-
-
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rails_readme.png" alt="rails_readme" /></span></div><div class="caption"><span class="header">Figure 1.9: </span><span class="description">GitHubにある、役に立たない初期の <code>README</code> ファイル&nbsp;<a href="http://railstutorial.org/images/figures/rails_readme-full.png">(フルサイズ)</a></span></div></div>
 
 
 <div class="label" id="sec:git_branch"></div>
 
 
-<h4><a id="sec:1.3.5.1" href="beginning#sec:git_branch" class="heading">Branch</a></h4>
+<h4><a id="sec:1.3.5.1" href="beginning#sec:git_branch" class="heading">ブランチ(branch)</a></h4>
 
-
-<p>Git is incredibly good at making <em>branches</em>, which are effectively copies of a repository where we can make (possibly experimental) changes without modifying the parent files. In most cases, the parent repository is the <em>master</em> branch, and we can create a new topic branch by using <code>checkout</code> with the <code>-b</code> flag:</p>
+<p>Gitは、<em>ブランチ(branch)</em>を作るのが非常に得意です。branchは基本的にはリポジトリのコピーで、branch上では元のファイルを触らずに新しいコードを書くなど試験的な変更をする事が可能です。大抵の場合親リポジトリは<em>master</em>ブランチと呼ばれ、トピックブランチ(短期間だけ使うブランチ)は<code>checkout</code>と<code>-b</code>フラグを使って作成出来ます:
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -b modify-README
 <span class="go">Switched to a new branch &#39;modify-README&#39;</span>
@@ -946,20 +907,18 @@ doc/
 </pre></div>
 </div>
 
+<p>ここでの二つ目のコマンド(<code>git branch</code>)は、単にローカルブランチを全て表示するもので、「*」はそのブランチが現在使用中の物である事を意味します。<code>git checkout -b modify-README</code>コマンドがブランチを作成し、すぐにそのブランチに移動(<code>modify-README</code>ブランチの横に「*」が表示されているため)する事に注目して下さい。(<a class="ref" href="beginning#sec:version_control">節&nbsp;1.3</a>で<code>co</code>エイリアスを設定した場合は、代わりに<code>git co -b modify-README</code>としても構いません。)</p>
 
-<p>Here the second command, <code>git branch</code>, just lists all the local branches, and the asterisk&nbsp;<code>*</code> identifies which branch we&rsquo;re currently on. Note that <code>git checkout -b modify-README</code> both creates a new branch and switches to it, as indicated by the asterisk in front of the <code>modify-README</code> branch. (If you set up the <code>co</code> alias in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a>, you can use <code>git co -b modify-README</code> instead.)</p>
+<p>ブランチの真価は、他の開発者と共同で作業する時に発揮されますが、<sup class="footnote" id="fnref:1.22"><a href="#fn:1.22">22</a></sup>このチュートリアルのように一人で作業する時にも役立ちます。master(マスター)ブランチは、トピックブランチで行った変更に影響されないので、もしブランチ上のコードがめちゃくちゃになってしまってもマスターブランチをチェックアウトし、トピックブランチを削除する事によっていつでも変更を破棄する事が出来ます。やり方は、章の最後で紹介しています。</p>
 
-<p>The full value of branching only becomes clear when working on a project with multiple developers,<sup class="footnote" id="fnref:1.22"><a href="#fn:1.22">22</a></sup> but branches are helpful even for a single-developer tutorial such as this one. In particular, the master branch is insulated from any changes we make to the topic branch, so even if we <em>really</em> screw things up we can always abandon the changes by checking out the master branch and deleting the topic branch. We&rsquo;ll see how to do this at the end of the section.</p>
-
-<p>By the way, for a change as small as this one I wouldn&rsquo;t normally bother with a new branch, but it&rsquo;s never too early to start practicing good habits.</p>
+<p>ちなみに、通常このような小さな変更はブランチを作成するに値しませんが、ブランチは良い習慣なので少し練習する事に損はありません。</p>
 
 <div class="label" id="sec:git_edit"></div>
 
 
-<h4><a id="sec:1.3.5.2" href="beginning#sec:git_edit" class="heading">Edit</a></h4>
+<h4><a id="sec:1.3.5.2" href="beginning#sec:git_edit" class="heading">変更(edit)</a></h4>
 
-
-<p>After creating the topic branch, we&rsquo;ll edit it to make it a little more descriptive. I like to use the <a href="http://daringfireball.net/projects/markdown/">Markdown markup language</a> for this purpose, and if you use the file extension <code>.markdown</code> then GitHub will automatically format it nicely for you. So, first we&rsquo;ll use Git&rsquo;s version of the Unix <code>mv</code> (&ldquo;move&rdquo;) command to change the name, and then fill it in with the contents of <a class="ref" href="beginning#code:new_readme">Listing&nbsp;1.6</a>:</p>
+<p>トピックブランチを作成後、少し説明的にするために編集します。私はこの作業に、主に<a href="http://daringfireball.net/projects/markdown/">Markdownマークアップ言語</a>を使用しています。<code>.markdown</code>拡張子を使えば、GitHubが自動的にWebページ用にフォーマットしてしくれます。なのでまず、Unix <code>mv</code>コマンドのGit版を使ってファイル名を変更し、<a class="ref" href="beginning#code:new_readme">リスト&nbsp;1.6</a>の内容に書き換えます:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git mv README README.markdown
 <span class="gp">$</span> mate README.markdown
@@ -971,7 +930,7 @@ doc/
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.6.</span> <span class="description">The new <code>README</code> file, <code>README.markdown</code>.</span>       
+<div class="listing"><span class="header">リスト 1.6.</span> <span class="description">新しい<code>README.markdown</code>ファイル</span>       
 </div>
 <div class="code"><div class="highlight"><pre># Ruby on Rails Tutorial: first application
 
@@ -982,15 +941,12 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-
-
 <div class="label" id="sec:git_commit"></div>
 
 
-<h4><a id="sec:1.3.5.3" href="beginning#sec:git_commit" class="heading">Commit</a></h4>
+<h4><a id="sec:1.3.5.3" href="beginning#sec:git_commit" class="heading">コミット(commit)</a></h4>
 
-
-<p>With the changes made, we can take a look at the status of our branch:</p>
+<p>変更を加えた今、ブランチの状態を見てみましょう:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git status
 <span class="gp">#</span> On branch modify-README
@@ -1008,8 +964,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div>
 
-
-<p>At this point, we could use <code>git add .</code> as in <a class="ref" href="beginning#sec:adding_and_committing">Section&nbsp;1.3.2</a>, but Git provides the <code>-a</code> flag as a shortcut for the (very common) case of committing all modifications to existing files (or files created using <code>git mv</code>, which don&rsquo;t count as new files to Git):</p>
+<p>この時点で<a class="ref" href="beginning#sec:adding_and_committing">節&nbsp;1.3.2</a>であったように<code>git add .</code>を使う事も出来ますが、Gitには全ての現存するファイルへの変更をコミットする<code>-a</code>フラグがあります。(Gitは<code>git mv</code>で作成されたファイルは新規ファイルと見なさないので、これらのファイルも含まれます。)</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git commit -a -m <span class="s2">&quot;Improved the README file&quot;</span>
 <span class="go">2 files changed, 5 insertions(+), 243 deletions(-)</span>
@@ -1018,16 +973,14 @@ by [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div>
 
-
-<p>Be careful about using the <code>-a</code> flag improperly; if you have added any new files to the project since the last commit, you still have tell Git about them using <code>git add</code> first.</p>
+<p><code>-a</code>フラグを使用する際は注意して下さい。もし最後のコミット後、新しいファイルを追加した場合はまず<code>git add</code>でバージョン管理下に置く必要があります。</p>
 
 <div class="label" id="sec:git_merge"></div>
 
 
-<h4><a id="sec:1.3.5.4" href="beginning#sec:git_merge" class="heading">Merge</a></h4>
+<h4><a id="sec:1.3.5.4" href="beginning#sec:git_merge" class="heading">統合(merge)</a></h4>
 
-
-<p>Now that we&rsquo;ve finished making our changes, we&rsquo;re ready to <em>merge</em> the results back into our master branch:<sup class="footnote" id="fnref:1.23"><a href="#fn:1.23">23</a></sup></p>
+<p>ファイルへの変更が終わったので、マスターブランチにこの変更を統合します:<sup class="footnote" id="fnref:1.23"><a href="#fn:1.23">23</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="go">Switched to branch &#39;master&#39;</span>
@@ -1042,76 +995,71 @@ by [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div>
 
+<p>Gitの出力には<code>34f06b7</code>のような物がよく出てきます。これらはGitがリポジトリの内部処理に使っている物なので、マシンの違いにより上記のものと少し異なるかもしれませんが、他の部分はほぼ同じのはずです。</p>
 
-<p>Note that the Git output frequently includes things like <code>34f06b7</code>, which are related to Git&rsquo;s internal representation of repositories. Your exact results will differ in these details, but otherwise should essentially match the output shown above.</p>
-
-<p>After you&rsquo;ve merged in the changes, you can tidy up your branches by deleting the topic branch using <code>git branch -d</code> if you&rsquo;re done with it:</p>
+<p>変更をmerge(統合)した後は、<code>git branch -d</code>トピックブランチを削除し、ブランチの掃除をすれば終わりです。
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git branch -d modify-README
 <span class="go">Deleted branch modify-README (was 2c92bef).</span>
 </pre></div>
 </div>
 
+<p>これは任意のステップで、実際の所多くの場合はトピックブランチを残します。トピックブランチを削除せずに放置しておけば、ブランチを交互に行き来してきりの良い所で変更を統合する事が出来ます。</p>
 
-<p>This step is optional, and in fact it&rsquo;s quite common to leave the topic branch intact. This way you can switch back and forth between the topic and master branches, merging in changes every time you reach a natural stopping point.</p>
+<p>上で述べた通り、<code>git branch -D</code>でトピックブランチ上の変更を破棄する事もできます:</p>
 
-<p>As mentioned above, it&rsquo;s also possible to abandon your topic branch changes, in this case with <code>git branch -D</code>:</p>
-
-<div class="code"><div class="highlight"><pre><span class="c"># For illustration only; don&#39;t do this unless you mess up a branch</span>
+<div class="code"><div class="highlight"><pre><span class="c"># これは例です。ブランチでミスをした時以外は実行しないで下さい。</span>
 <span class="nv">$ </span>git checkout -b topic-branch
-<span class="nv">$ </span>&lt;really screw up the branch&gt;
+<span class="nv">$ </span>&lt;ブランチをぶっ壊す&gt;
 <span class="nv">$ </span>git add .
-<span class="nv">$ </span>git commit -a -m <span class="s2">&quot;Screwed up&quot;</span>
+<span class="nv">$ </span>git commit -a -m <span class="s2">&quot;壊れたブランチ&quot;</span>
 <span class="nv">$ </span>git checkout master
 <span class="nv">$ </span>git branch -D topic-branch
 </pre></div>
 </div>
 
-
-<p>Unlike the <code>-d</code> flag, the <code>-D</code> flag will delete the branch even though we haven&rsquo;t merged in the changes.</p>
+<p><code>-d</code>フラグとは違い、<code>-D</code>フラグは変更をmerge(統合)していなくてもブランチを削除してくれます。</p>
 
 <div class="label" id="sec:git_push"></div>
 
 
-<h4><a id="sec:1.3.5.5" href="beginning#sec:git_push" class="heading">Push</a></h4>
+<h4><a id="sec:1.3.5.5" href="beginning#sec:git_push" class="heading">プッシュ(push)</a></h4>
 
-
-<p>Now that we&rsquo;ve updated the <code>README</code>, we can push the changes up to GitHub to see the result. Since we have already done one push (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>), on most systems we can omit <code>origin master</code>, and simply run <code>git push</code>:<sup class="footnote" id="fnref:1.24"><a href="#fn:1.24">24</a></sup></p>
+<p><code>README</code>ファイルを更新したので、GitHubに変更をプッシュして結果を見てみましょう。<a class="ref" href="beginning#sec:github">節&nbsp;1.3.4</a>で既に一度プッシュしているので、大抵のシステムでは<code>origin master</code>を省略して<code>git push</code>できます。<sup class="footnote" id="fnref:1.24"><a href="#fn:1.24">24</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push
 </pre></div>
 </div>
 
 
-<p>On some systems, this command yields an error:</p>
+<p>システムによっては、エラーが出る可能性があります:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push
 <span class="go">fatal: The current branch master is not tracking anything.</span>
 </pre></div>
 </div>
 
+<p>このような場合は、<a class="ref" href="beginning#sec:github">節&nbsp;1.3.4</a>にあるように<code>git push origin master</code>を使って下さい。</p>
 
-<p>In this case, you will have to run <code>git push origin master</code> as in <a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>.</p>
-
-<p>As promised, GitHub nicely formats the new file using Markdown (<a class="ref" href="beginning#fig:new_readme">Figure&nbsp;1.10</a>).</p>
+<p>GitHubはMarkdownを使って、新しいREADMEファイルを綺麗にフォーマットしてくれます。(<a class="ref" href="beginning#fig:new_readme">図&nbsp;1.10</a>).</p>
 
 <div class="label" id="fig:new_readme"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_readme.png" alt="new_readme" /></span></div><div class="caption"><span class="header">Figure 1.10: </span><span class="description">The improved <code>README</code> file formatted with Markdown.&nbsp;<a href="http://railstutorial.org/images/figures/new_readme-full.png">(full size)</a></span></div></div>
-
-
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_readme.png" alt="new_readme" /></span></div><div class="caption"><span class="header">Figure 1.10: </span><span class="description">Markdownにフォーマットされた、新しい<code>README</code>ファイル<a href="http://railstutorial.org/images/figures/new_readme-full.png">(フルサイズ)</a></span></div></div>
 
 
 <div class="label" id="sec:deploying"></div>
 
 
-<h2><a id="sec:1.4" href="beginning#sec:deploying" class="heading"><span class="number">1.4</span> Deploying</a></h2>
+<h2><a id="sec:1.4" href="beginning#sec:deploying" class="heading"><span class="number">1.4</span> デプロイする</a></h2>
+
+<p>空っぽのRailsアプリケーションしかないこの段階でも、プロダクション環境にデプロイしてしまいます。このステプは任意ですが、早い段階で頻繁にデプロイする事によって開発サイクルでの問題を見つけ出す事が出来ます。開発環境のみでのテストを重ねるだけでいつまでもプロダクションにデプロイせずにいると、アプリケーションを公開する時に思わぬ事態になる可能性が高まります。<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup>
 
 
-<p>Even at this early stage, we&rsquo;re already going to deploy our (still-empty) Rails application to production. This step is optional, but deploying early and often allows us to catch any deployment problems early in our development cycle. The alternative&mdash;deploying only after laborious effort sealed away in a development environment&mdash;often leads to terrible integration headaches when launch time comes.<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup></p>
+<p>かつてRailsアプリをデプロイさせるのは苦難でしたが、最近になって簡単になってきており、多数の選択肢があります。共有ホストやVPS(仮想プライベートサーバ)上で動作する<a href="http://www.modrails.com/">Phusion Passenger</a>(Apache・Nginx<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup>Webサーバ用のモジュール)、フルサービス・ホスティングの<a href="http://engineyard.com/">Engine Yard</a>や<a href="http://railsmachine.com/">Rails Machine</a>、クラウドサービスの<a href="http://heroku.com/">Heroku</a>などです。</p>
 
-<p>Deploying Rails applications used to be a pain, but the Rails deployment ecosystem has matured rapidly in the past few years, and now there are several great options. These include shared hosts or virtual private servers running <a href="http://www.modrails.com/">Phusion Passenger</a> (a module for the Apache and Nginx<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup> web servers), full-service deployment companies such as <a href="http://engineyard.com/">Engine Yard</a> and <a href="http://railsmachine.com/">Rails Machine</a>, and cloud deployment services such as <a href="http://cloud.engineyard.com">Engine Yard Cloud</a> and <a href="http://heroku.com/">Heroku</a>.</p>
+<p>私のお気に入りはHerokuで、Railsや他のRubyWebアプリ用のホスティングプラットフォームです。<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup>　Gitでソースコードのバージョン管理をしていれば、HerokuはRailsアプリのディプロイメントをとても簡単にしてくれます。
 
 <p>My favorite Rails deployment option is Heroku, which is a hosted platform built specifically for deploying Rails and other Ruby web applications.<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup> Heroku makes deploying Rails applications ridiculously easy&mdash;as long as your source code is under version control with Git. (This is yet another reason to follow the Git setup steps in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a> if you haven&rsquo;t already.) The rest of this section is dedicated to deploying our first application to Heroku.</p>
 
@@ -1132,13 +1080,13 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Finally, use the <code>heroku</code> command to create a place on the Heroku servers for the sample app to live (<a class="ref" href="beginning#code:heroku_create">Listing&nbsp;1.7</a>).</p>
+<p>Finally, use the <code>heroku</code> command to create a place on the Heroku servers for the sample app to live (<a class="ref" href="beginning#code:heroku_create">リスト&nbsp;1.7</a>).</p>
 
 <div class="label" id="code:heroku_create"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.7.</span> <span class="description">Creating a new application at Heroku.</span> </div>
+<div class="listing"><span class="header">リスト 1.7.</span> <span class="description">Creating a new application at Heroku.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create
 <span class="go">Created http://severe-fire-61.heroku.com/ | git@heroku.com:severe-fire-61.git</span>
 <span class="go">Git remote heroku added</span>
@@ -1168,13 +1116,13 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>The setup described in this chapter works fine on most systems, including mine, but if you encounter this problem you should try updating your <code>Gemfile</code> with the code in <a class="ref" href="beginning#code:gemfile_sqlite_heroku">Listing&nbsp;1.8</a>, which prevents Heroku from trying to load the <tt>sqlite3-ruby</tt> gem.)</p>
+<p>The setup described in this chapter works fine on most systems, including mine, but if you encounter this problem you should try updating your <code>Gemfile</code> with the code in <a class="ref" href="beginning#code:gemfile_sqlite_heroku">リスト&nbsp;1.8</a>, which prevents Heroku from trying to load the <tt>sqlite3-ruby</tt> gem.)</p>
 
 <div class="label" id="code:gemfile_sqlite_heroku"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.8.</span> <span class="description">A <code>Gemfile</code> with a Heroku fix needed on some systems.</span>       
+<div class="listing"><span class="header">リスト 1.8.</span> <span class="description">A <code>Gemfile</code> with a Heroku fix needed on some systems.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1190,7 +1138,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:1.4.3" href="beginning#sec:1.4.3" class="heading"><span class="number">1.4.3</span> Heroku deployment, step two</a></h3>
 
 
-<p>There is no step two! We&rsquo;re already done (<a class="ref" href="beginning#fig:heroku_app">Figure&nbsp;1.11</a>). To see your newly deployed application, you can visit the address that you saw when you ran <code>heroku create</code> (i.e., <a class="ref" href="beginning#code:heroku_create">Listing&nbsp;1.7</a>, but with the address for your app, not the address for mine).<sup class="footnote" id="fnref:1.28"><a href="#fn:1.28">28</a></sup> You can also use an argument to the <code>heroku</code> command that automatically opens your browser with the right address:</p>
+<p>There is no step two! We&rsquo;re already done (<a class="ref" href="beginning#fig:heroku_app">Figure&nbsp;1.11</a>). To see your newly deployed application, you can visit the address that you saw when you ran <code>heroku create</code> (i.e., <a class="ref" href="beginning#code:heroku_create">リスト&nbsp;1.7</a>, but with the address for your app, not the address for mine).<sup class="footnote" id="fnref:1.28"><a href="#fn:1.28">28</a></sup> You can also use an argument to the <code>heroku</code> command that automatically opens your browser with the right address:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku open
 </pre></div>
@@ -1200,7 +1148,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:heroku_app"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/heroku_app.png" alt="heroku_app" /></span></div><div class="caption"><span class="header">Figure 1.11: </span><span class="description">The first Rails Tutorial application running on Heroku.&nbsp;<a href="http://railstutorial.org/images/figures/heroku_app-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/heroku_app.png" alt="heroku_app" /></span></div><div class="caption"><span class="header">Figure 1.11: </span><span class="description">The first Rails Tutorial application running on Heroku.&nbsp;<a href="http://railstutorial.org/images/figures/heroku_app-full.png">(フルサイズ)</a></span></div></div>
 
 
 <p>Once you&rsquo;ve deployed successfully, Heroku provides a beautiful interface for administering and configuring your application (<a class="ref" href="beginning#fig:heroku_info">Figure&nbsp;1.12</a>).</p>
@@ -1208,7 +1156,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:heroku_info"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/heroku_info.png" alt="heroku_info" /></span></div><div class="caption"><span class="header">Figure 1.12: </span><span class="description">The beautiful interface at Heroku.&nbsp;<a href="http://railstutorial.org/images/figures/heroku_info-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/heroku_info.png" alt="heroku_info" /></span></div><div class="caption"><span class="header">Figure 1.12: </span><span class="description">The beautiful interface at Heroku.&nbsp;<a href="http://railstutorial.org/images/figures/heroku_info-full.png">(フルサイズ)</a></span></div></div>
 
 
 
@@ -1284,7 +1232,7 @@ jhyicevg.heroku.com</pre>
 <li id="fn:1.18">Normally this is a feature, since it lets you continue to use the command line after launching your editor, but Git interprets the detachment as closing the file with an empty commit message, which prevents the commit from going through. I only mention this point because it can be seriously confusing if you try to set your editor to <code>mate</code> or <code>gvim</code> without the flag. If you find this note confusing, feel free to ignore it.&nbsp;<a class="arrow" href="#fnref:1.18">&uarr;</a></li>
 <li id="fn:1.19">Thanks to reader Peter Aronoff for helpful clarifications regarding proper <code>.gitignore</code> syntax.&nbsp;<a class="arrow" href="#fnref:1.19">&uarr;</a></li>
 <li id="fn:1.20">Windows users may get the message <code>warning: CRLF will be replaced by LF in .gitignore</code>. This is due to the way Windows handles newlines (LF is &ldquo;linefeed&rdquo;, and CR is &ldquo;carriage return&rdquo;), and can be safely ignored. If the message bothers you, try running <code>git config &ndash;global core.autocrlf false</code> at the command line to turn it off.&nbsp;<a class="arrow" href="#fnref:1.20">&uarr;</a></li>
-<li id="fn:1.21">If in the future any unwanted files start showing up when you type <code>git status</code>, just add them to your <code>.gitignore</code> file from <a class="ref" href="beginning#code:gitignore">Listing&nbsp;1.5</a>.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
+<li id="fn:1.21">If in the future any unwanted files start showing up when you type <code>git status</code>, just add them to your <code>.gitignore</code> file from <a class="ref" href="beginning#code:gitignore">リスト&nbsp;1.5</a>.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
 <li id="fn:1.22">See the chapter <a href="http://progit.org/book/ch3-0.html">Git Branching in <em>Pro Git</em></a> for details.&nbsp;<a class="arrow" href="#fnref:1.22">&uarr;</a></li>
 <li id="fn:1.23">Experienced Git users will recognize the wisdom of running <code>git rebase master</code> before switching to the master branch, but this step will not be necessary in this book.&nbsp;<a class="arrow" href="#fnref:1.23">&uarr;</a></li>
 <li id="fn:1.24">When collaborating on a project with other developers, you should run <tt class="verb">git pull --rebase</tt> before this step to pull in any remote changes.&nbsp;<a class="arrow" href="#fnref:1.24">&uarr;</a></li>

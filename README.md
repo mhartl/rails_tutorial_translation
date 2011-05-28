@@ -66,7 +66,7 @@ Pour ne pas avoir à taper chaque fois toutes les commandes, vous pouvez utilise
 
 ### Au jour le jour
 
-Procédure à utiliser **après que les fichiers et les codes de la section suivante («&nbsp;Fichiers et codes&nbsp;») ont été implémentés**
+Procédure à utiliser **après que les fichiers et les codes de la section suivante («&nbsp;Fichiers et codes&nbsp;») ont été implémentés**.
 
 Note pour mémo : la préfixe "tmh" correspond à "Tutoriel Michael Hartl"
 
@@ -85,7 +85,13 @@ Note pour mémo : la préfixe "tmh" correspond à "Tutoriel Michael Hartl"
 ### Fichiers et codes
 
 **Ajouter les raccourcis**
-Le code ci-dessous doit être ajouté à votre fichier `.bashrc`
+
+**Note importante** :
+
+* Il est impératif de définir le chemin d'accès à votre propre dossier local (repère \[1\] dans le code ci-dessous).
+* Si vous n'êtes pas sur MAC, il faut redéfinir la ligne au repère \[2\] permettant l'ouverture de votre site local dans votre navigateur.
+
+Le code ci-dessous doit être ajouté à votre fichier `**.bashrc**`.
 
 	# ***************************************************************
 	#
@@ -107,10 +113,10 @@ Le code ci-dessous doit être ajouté à votre fichier `.bashrc`
 	echo -e "|\ttmh-push                  Push sur GitHub et Heroku"
 	echo -e "| --------------------------------------------*/"
 	
-	# Indiquer ici le chemin d'accès au dossier de traduction
+	# [1] Indiquer ici le chemin d'accès au dossier de traduction
 	alias tmh-dir="cd 	~/ROR_Tutoriel/rails_tutorial_translation/rails_tutorial_translation;"
 	
-	# Pour lancer le serveur rails et l'ouvrir dans Firefox
+	# [2] Pour lancer le serveur rails et l'ouvrir dans Firefox
 	# Sur MAC :
 	alias tmh-serveur="rails server"
 	alias tmh-site="open -a /Applications/Firefox.app http://localhost:3000/"
@@ -124,12 +130,11 @@ Le code ci-dessous doit être ajouté à votre fichier `.bashrc`
 	alias tmh-pull="git pull --rebase origin french"
 	alias tmh-push="git push origin french; git push heroku french:master"
 
-	Note : ajouter la ligne…
+Note : ajouter la ligne…
 
-		. $HOME/.bashrc
+	. $HOME/.bashrc
 
-
-à votre fichier `.bash_profile` si ce fichier ne la contient pas pour que ces raccourcis soient ajoutés automatiquement à l'ouverture du shell.
+… à votre fichier `.bash_profile` si ce fichier ne la contient pas pour que ces raccourcis soient ajoutés automatiquement à l'ouverture du shell.
 
 **Créer un fichier `new_commit.sh`**
 

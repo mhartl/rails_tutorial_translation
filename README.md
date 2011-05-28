@@ -139,8 +139,9 @@ Note : ajouter la ligne…
 **Créer un fichier `new_commit.sh`**
 
 *Note importante : ce fichier doit absolument se trouver dans le dossier qui contient le dossier principal de la traduction.*
-DOSSIER > rails_tutorial_translation > rails_tutorial_translation
-        > new_commit.sh
+
+HOME | DOSSIER       | rails_tutorial_translation | rails_tutorial_translation
+     | new_commit.sh
 
 Code à copier dans le fichier :
 

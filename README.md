@@ -38,6 +38,7 @@ Afin de préserver l'homogénéité du texte, certains mots peuvent être tradui
 
 * Listing X.X -> Extrait X.X
 * Figure X.X  -> Illustration X.X
+* (full size) -> (taille normale)
 
 ## COMMANDES UTILES
 
@@ -159,7 +160,7 @@ Code à copier dans le fichier :
 	git add .
 	git commit -m "$1"
 	echo -e "\n"
-	echo -e "Vous devez maintenant utiliser le raccourci `tmh-push` pour transmettre votre dépôt et actualiser le site Heroku"
+	echo -e "Vous devez maintenant utiliser le raccourci «&nbsp;tmh-push&nbsp;» pour transmettre votre dépôt et actualiser le site Heroku"
 	
 Penser à autoriser l'exécution du fichier :
 

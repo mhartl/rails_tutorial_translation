@@ -437,7 +437,7 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:2" href="a-demo-app#top" class="heading"><span class="number">Chapter 2</span> Une application Démo</a></h1>
+<h1 class="chapter"><a id="sec:2" href="a-demo-app#top" class="heading"><span class="number">Chapitre 2</span> Une application Démo</a></h1>
 
 
 <p>Dans ce chapitre, nous développerons une simple application de démonstration pour révéler un peu de la puissance de Rails. Le but est d'obtenir une vue d'ensemble de la programmation Ruby on Rails (et du développement web en général) en générant rapidement une application par l'utilisation du <em>générateur d'échaffaudage</em> (<em>scaffold generators</em>).<sup class="footnote" id="fnref:2.1"><a href="#fn:2.1">1</a></sup> Comme explicité dans le <a class="ref" href="beginning#sidebar:scaffolding">Box&nbsp;1.1</a>, la suite du livre adoptera une approche opposée à celle-ci, en développant une application étape étape après étape, en expliquant chaque nouveau concept qui apparaitra, mais pour un aperçu rapide (et quelque rapide gratification), il n'y a rien de mieux que la construction par échaffaudage. L'application Démo en résultant nous permettra d'interagir avec elle par le biais des URLs, en nous donnant un aperçu de la structure d'une application Rails, incluant un premier exemple de l'<em>architecture REST</em> préconisée par Rails.</p>
@@ -535,8 +535,6 @@
 
 
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_model.png" alt="demo_micropost_model" /></span></div><div class="caption"><span class="header">Illustration 2.3: </span><span class="description">Le modèle de données pour les micro-messages.</span></div></div>
-
-<!-- FIN FRENCH -->
 
 <p>Nous verrons à la <a class="ref" href="a-demo-app#sec:demo_user_has_many_microposts">section&nbsp;2.3.3</a> (et plus profondément au <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a>) comment cette attribut <code>user_id</code> nous permet d'exprimer de façon succinte le fait qu'un utilisateur est potentiellement associé à plusieurs micro-messages.</p>
 
@@ -802,7 +800,7 @@
 </div></div>
 
 
-<p>Vous pouvez noter qu'il y a plus d'actions que de pages&nbsp;; les actions <code>index</code>, <code>show</code>, <code>new</code>, et <code>edit</code> correspondent toutes à la <a class="ref" href="a-demo-app#sec:a_user_tour">section&nbsp;2.2.1</a>, mais il y a aussi les actions supplémentaires <code>create</code>, <code>update</code>, et <code>destroy</code>. Ces actions ne retournent pas, typiquement, de pages (bien qu'elles le font dans certains cas)&nbsp;; leur rôle principal est plutôt de modifier les informations des utilisateurs dans la base de données. Cette liste complète des actions du contrôleur, résumée dans la <a class="ref" href="a-demo-app#table:demo_RESTful_users">table&nbsp;2.2</a>, représente l'implémentation de l'architecture REST en Rails (<a class="ref" href="a-demo-app#sidebar:REST">Box&nbsp;2.2</a>). Notez, dans la <a class="ref" href="a-demo-app#table:demo_RESTful_users">table&nbsp;2.2</a>, qu'il y a certains chevauchements dans les URLs&nbsp;; par exemple, les actions utilisateur <code>show</code> (<em>afficher</em>) et <code>update</code> (<em>actualiser</em>) correspondent toutes deux à l'URL <tt>/users/1</tt>. La distinction entre l'une et l'autre est la <a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">méthode de requête HTTP</a> (<em>HTTP request method</em>) à laquelle elles répondent. Nous en apprendrons plus à propos de ces méthodes de requête HTTPà la <a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>.</p>
+<p>Vous pouvez noter qu'il y a plus d'actions que de pages&nbsp;; les actions <code>index</code>, <code>show</code>, <code>new</code>, et <code>edit</code> correspondent toutes à la <a class="ref" href="a-demo-app#sec:a_user_tour">section&nbsp;2.2.1</a>, mais il y a aussi les actions supplémentaires <code>create</code>, <code>update</code>, et <code>destroy</code>. Ces actions ne retournent pas, typiquement, de pages (bien qu'elles le font dans certains cas)&nbsp;; leur rôle principal est plutôt de modifier les informations des utilisateurs dans la base de données. Cette liste complète des actions du contrôleur, résumée dans la <a class="ref" href="a-demo-app#table:demo_RESTful_users">table&nbsp;2.2</a>, représente l'implémentation de l'architecture REST en Rails (<a class="ref" href="a-demo-app#sidebar:REST">Box&nbsp;2.2</a>). Notez, dans la <a class="ref" href="a-demo-app#table:demo_RESTful_users">table&nbsp;2.2</a>, qu'il y a certains chevauchements dans les URLs&nbsp;; par exemple, les actions utilisateur <code>show</code> (<em>afficher</em>) et <code>update</code> (<em>actualiser</em>) correspondent toutes deux à l'URL <tt>/users/1</tt>. La distinction entre l'une et l'autre est la <a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">méthode de requête HTTP</a> (<em>HTTP request method</em>) à laquelle elles répondent. Nous en apprendrons plus à propos de ces méthodes de requête HTTP à la <a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>.</p>
 
 <div class="label" id="table:demo_RESTful_users"></div>
 
@@ -810,25 +808,24 @@
 <div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Requête HTTP</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Propos</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left">page listant tous les utilisateurs</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">page affichat l'utilisateur d'id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">page pour créer un nouvel utilisateur</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left">créer un nouvel utilisateur</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">page pour éditer l'utilisateur d'id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">actualiser l'utilisateur d'id&nbsp;<code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">détruire l'utilisateur d'id&nbsp;<code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 2.2: </span><span class="description">Routages RESTful fournit par la ressource Users dans l'<a class="ref" href="a-demo-app#code:rails_routes">extrait&nbsp;2.2</a>.</span></div></div>
 
 
-<!-- FIN FRENCH -->
-
 <div class="label" id="sidebar:REST"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 2.2.</span><span class="description">REpresentational State Transfer (REST)</span></span>
-<p>If you read much about Ruby on Rails web development, you&rsquo;ll see a lot of references to &ldquo;REST&rdquo;, which is an acronym for REpresentational State Transfer. REST is an architectural style for developing distributed, networked systems and software applications such as the World Wide Web and web applications. Although REST theory is rather abstract, in the context of Rails applications REST means that most application components (such as users and microposts) are modeled as <em>resources</em> that can be created, read, updated, and deleted&mdash;operations that correspond both to the <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD operations of relational databases</a> and the four fundamental <a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">HTTP request methods</a>: <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, and <tt>DELETE</tt>. (We&rsquo;ll learn more about HTTP requests in <a class="ref" href="static-pages#sec:TDD">Section&nbsp;3.2.2</a> and especially <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>.)</p>
+<p>Si vous en lisez plus sur le développement web Ruby on Rails, vous noterez un grand nombre d'allusions à &ldquo;&nbsp;REST&nbsp;&rdquo;, acronyme de REpresentational State Transfer (NdT. Qui pourrait se traduire par «&nbsp;Représentation de l'état de transfert&nbsp;»). REST est un style d'architecture pour le développement 
+<p>If you read much about Ruby on Rails web development, you&rsquo;ll see a lot of references to &ldquo;REST&rdquo;, which is an acronym for REpresentational State Transfer. REST is an architectural style for les systèmes de réseau [(developing distributed)(à développement distribué)] et les logiciels tels que le World Wide Web et les applications web. Bien que la théorie REST soit quelque peu abstraite, dans le contexte des applications Rails REST signifie que la plupart des composants de l'application (comme les utilisateurs ou les micro-messages) sont modelés comme des <em>ressources</em> qui peuvent être créées, lues, actualisées et supprimées &mdash;&nbsp;opérations qui correspondent aux <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">opérations CRUD des bases de données relationnelles</a> tout comme aux quatres <a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">méthode de requête HTTP</a> fondamentales&nbsp;: <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, et <tt>DELETE</tt> (nous en apprendrons plus à propos des requêtes HTTP à la <a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a> et spécialement au <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>).</p>
 
-<p>As a Rails application developer, the RESTful style of development helps you make choices about which controllers and actions to write: you simply structure the application using resources that get created, read, updated, and deleted. In the case of users and microposts, this process is straightforward, since they are naturally resources in their own right. In <a class="ref" href="following-users#top">Chapter&nbsp;12</a>, we&rsquo;ll see an example where REST principles allow us to model a subtler problem, &ldquo;following users&rdquo;, in a natural and convenient way.</p>
+<p>En tant que développeur d'application Rails, the développement de style RESTful vous aide à faire des choix quant à quel contrôleur ou quelles actions écrire&nbsp;: vous structurez simplement l'application en utilisant les ressources qui peuvent être créées, lues, actualisées ou supprimées. Dans les cas des utilisateurs et des micro-messages, ce processus est simple, puisqu'elles sont par défaut des ressources de plein droit. Au <a class="ref" href="following-users#top">chapitre&nbsp;12</a>, nous aborderons un exemple où les principes REST nous permettent de modéliser un problème subtil, le &ldquo;&nbsp;suivi des utilisateurs&nbsp;&rdquo;, d'une façon naturelle et efficiente.</p>
 </div>
 
 
-<p>To examine the relationship between the Users controller and the User model, let&rsquo;s focus on a simplified version of the <code>index</code> action, shown in <a class="ref" href="a-demo-app#code:demo_index_action">Extrait&nbsp;2.4</a>.<sup class="footnote" id="fnref:2.9"><a href="#fn:2.9">9</a></sup></p>
+<p>Pour examine la relation entre contrôleur utilisateur et modèle utilisateur, concentrons-nous sur une version simplifiée de l'action <code>index</code> vue dans l'<a class="ref" href="a-demo-app#code:demo_index_action">extrait&nbsp;2.4</a>.<sup class="footnote" id="fnref:2.9"><a href="#fn:2.9">9</a></sup></p>
 
 <div class="label" id="code:demo_index_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.4.</span> <span class="description">The simplified user <code>index</code> action for the demo application. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 2.4.</span> <span class="description">L'action utilisateur <code>index</code> simplifiée pour l'application Démo. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -843,13 +840,13 @@
 </div></div>
 
 
-<p>This <code>index</code> action has the line <code>@users = User.all</code> (Step&nbsp;3), which asks the User model to retrieve a list of all the users from the database (Step&nbsp;4), and then places them in the  variable <code>@users</code> (pronounced &ldquo;at-users&rdquo;) (Step&nbsp;5). The User model itself appears in <a class="ref" href="a-demo-app#code:demo_user_model">Extrait&nbsp;2.5</a>; although it is rather plain, it comes equipped with a large amount of functionality because of inheritance (<a class="ref" href="a-demo-app#sec:inheritance_hierarchies">Section&nbsp;2.3.4</a> and <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Section&nbsp;4.4</a>). In particular, by using the Rails library called <em>Active Record</em>, the code in <a class="ref" href="a-demo-app#code:demo_user_model">Extrait&nbsp;2.5</a> arranges for <code>User.all</code> to return all the users.</p>
+<p>Cette action <code>index</code> implémente la ligne <code>@users = User.all</code> (étape&nbsp;3), qui demande au modèle utilisateur de récupérer de la base de données une liste de tous les utilisateus (étape&nbsp;4), et de les placer dans une variable <code>@users</code> (prononcez &ldquo;at-users&rdquo; en anglais) (étape&nbsp;5). Le modèle utilisateur lui-même apparait dans l''<a class="ref" href="a-demo-app#code:demo_user_model">extrait&nbsp;2.5</a>&nbsp;; bien que plutôt ordinaire, il arrive équipé d'un grand nombre de fonctionnalités grâce à l'héritage de classe (<a class="ref" href="a-demo-app#sec:inheritance_hierarchies">section&nbsp;2.3.4</a> et <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">section&nbsp;4.4</a>). En particulier, en utilisant la librairie Rails de noim <em>Active Record</em>, le code de l'<a class="ref" href="a-demo-app#code:demo_user_model">extrait&nbsp;2.5</a> se débrouille pour que <code>User.all</code> retourne tous les utilisateurs.</p>
 
 <div class="label" id="code:demo_user_model"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.5.</span> <span class="description">The User model for the demo application. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 2.5.</span> <span class="description">Le modèle Utilisateur (<em>User</em>) pour l'application Démo. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
 <span class="k">end</span>
@@ -857,15 +854,15 @@
 </div></div>
 
 
-<p>Once the <code>@users</code> variable is defined, the controller calls the <em>view</em> (Step&nbsp;6), shown in <a class="ref" href="a-demo-app#code:demo_index_view">Extrait&nbsp;2.6</a>. Variables that start with the <code>@</code>&nbsp;sign, called <em>instance variables</em>, are automatically available in the view; in this case, the <code>index.html.erb</code> view in <a class="ref" href="a-demo-app#code:demo_index_view">Extrait&nbsp;2.6</a> iterates through the <code>@users</code> list and outputs a line of HTML for each one.<sup class="footnote" id="fnref:2.10"><a href="#fn:2.10">10</a></sup></p>
+<p>Une fois la variable <code>@users</code> renseignée, le contrôleur appelle la <em>vue</em> (<em>view</em>) (étape&nbsp;6), vue dans l'<a class="ref" href="a-demo-app#code:demo_index_view">extrait&nbsp;2.6</a>. Les variables commençant par le caractère <code>@</code>, appelées <em>variables d'instance</em> (<em>instance variables</em>), sont automatiquement accessibles dans la vue&nbsp;; dans ce cas précis, la vue <code>index.html.erb</code> de l'<a class="ref" href="a-demo-app#code:demo_index_view">extrait&nbsp;2.6</a> boucle itérativement sur la liste <code>@users</code> et sort une ligne HTML à chaque itération.<sup class="footnote" id="fnref:2.10"><a href="#fn:2.10">10</a></sup></p>
 
 <div class="label" id="code:demo_index_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.6.</span> <span class="description">The view for the user index. (You are not expected to understand it now.) <br /> <code>app/views/users/index.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 2.6.</span> <span class="description">La vue pour l'index utilisateurs (vous n'êtes pas supposés le comprendre tout de suite). <br /> <code>app/views/users/index.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Extrait users<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Liste des utilisateurs<span class="nt">&lt;/h1&gt;</span>
 
 <span class="nt">&lt;table&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -880,9 +877,9 @@
   <span class="nt">&lt;tr&gt;</span>
     <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">user</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s1">&#39;Are you sure?&#39;</span><span class="p">,</span>
+    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Montrer&#39;</span><span class="p">,</span> <span class="n">user</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Modifier&#39;</span><span class="p">,</span> <span class="n">edit_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Détruire&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s1">&#39;Êtes-vous certain&nbsp;?&#39;</span><span class="p">,</span>
 <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
   <span class="nt">&lt;/tr&gt;</span>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
@@ -895,22 +892,22 @@
 </div></div>
 
 
-<p>The view converts its contents to HTML (Step&nbsp;7), which is then returned by the controller to the browser for display (Step&nbsp;8).</p>
+<p>La vue convertit son contenu en code HTML (étape&nbsp;7), qui est alors retourné par le contrôleur au navigateur qui va l'afficher (étape&nbsp;8).</p>
 
 <div class="label" id="sec:weaknesses_of_this_users_resource"></div>
 
 
-<h3><a id="sec:2.2.3" href="a-demo-app#sec:weaknesses_of_this_users_resource" class="heading"><span class="number">2.2.3</span> Weaknesses of this Users resource</a></h3>
+<h3><a id="sec:2.2.3" href="a-demo-app#sec:weaknesses_of_this_users_resource" class="heading"><span class="number">2.2.3</span> Faiblesse de cette ressource utilisateur</a></h3>
 
 
-<p>Though good for getting a general overview of Rails, the scaffold Users resource suffers from a number of severe weaknesses.</p>
+<p>Bien qu'excellent pour donner un aperçu général de Rails, la ressource Utilisateurs de l'échaffaudage souffre d'un certain nombre de faiblesses.</p>
 
 <ul>
-<li><strong>No data validations.</strong> Our User model accepts data such as blank names and invalid email addresses without complaint.</li>
-<li><strong>No authentication.</strong> We have no notion signing in or out, and no way to prevent any user from performing any operation.</li>
-<li><strong>No tests.</strong> This isn&rsquo;t technically true&mdash;the scaffolding includes rudimentary tests&mdash;but the generated tests are ugly and inflexible, and they don&rsquo;t test for data validation, authentication, or any other custom requirements.</li>
-<li><strong>No layout.</strong> There is no consistent site styling or navigation.</li>
-<li><strong>No real understanding.</strong> If you understand the scaffold code, you probably shouldn&rsquo;t be reading this book.</li>
+<li><strong>Pas de validation de données.</strong> Notre modèle utilisateur accepte aussi bien et sans broncher les noms vides ou les adresses mail invalides&nbsp;;</li>
+<li><strong>Pas d'authentification.</strong> Nous n'avons aucune notion d'identification ou de déconnexion, et aucun moyen de prévenir un utilisateur quelconque d'exécuter une opération quelconque&nbsp;;</li>
+<li><strong>Pas de tests.</strong> Techniquement, ça n'est pas tout à fait juste &mdash;&nbsp;l'échaffaudage inclut des tests rudimentaires&nbsp;&mdash; mais les test générés automatiquement son laids et rigides, et ils ne testent pas la validation des données, l'authentification ou autres besoins personnalisés.</li>
+<li><strong>Pas de mise en page.</strong> Il n'y a pas de charte graphique.</li>
+<li><strong>Pas de compréhension réelle.</strong> Si vous comprenez le code de l'échaffaudage, alors vous ne devriez peut-être pas lire ce livre.</li>
 </ul>
 
 
@@ -919,18 +916,18 @@
 <div class="label" id="sec:microposts_resource"></div>
 
 
-<h2><a id="sec:2.3" href="a-demo-app#sec:microposts_resource" class="heading"><span class="number">2.3</span> The Microposts resource</a></h2>
+<h2><a id="sec:2.3" href="a-demo-app#sec:microposts_resource" class="heading"><span class="number">2.3</span> La ressource micro-messages</a></h2>
 
 
-<p>Having generated and explored the Users resource, we turn now to the associated Microposts resource. Throughout this section, I recommend comparing the elements of the Microposts resource with the analogous user elements from <a class="ref" href="a-demo-app#sec:demo_users_resource">Section&nbsp;2.2</a>; you should see that the two resources parallel each other in many ways. The RESTful structure of Rails applications is best absorbed by this sort of repetition of form; indeed, seeing the parallel structure of Users and Microposts even at this early stage is one of the prime motivations for this chapter. (As we&rsquo;ll see, writing applications more robust than the toy example in this chapter takes considerable effort&mdash;we won&rsquo;t see the Microposts resource again until <a class="ref" href="user-microposts#top">Chapter&nbsp;11</a>&mdash;and I didn&rsquo;t want to defer its first appearance quite that far.)</p>
+<p>Après avoir généré et exploré la ressource utilisateurs, nous nous tournons à présent vers la ressource associée des micro-messages. Tout au long de cette section, je recommande de comparer les éléments de la ressource micro-messages avec les éléments analogues de la ressource utilisateur de la <a class="ref" href="a-demo-app#sec:demo_users_resource">section&nbsp;2.2</a>&nbsp;; vous devriez constater que les deux ressources s'apparente l'une à l'autre en de nombreux points. La structure RESTful des applications Rails est mieux «&nbsp;absorbée&nbsp;» grâce à cette sorte de répétition formelle&nbsp;; vraiment, constater le parallèle de structure entre les ressources Utilisateurs et Micro-messages, même à cette étape peu avancée, est une des raisons d'être première de ce chapitre (comme nous le verrons, l'écriture d'applications plus solide que l'exemple enfantin de ce chapitre demande des efforts considérables &mdash;&nbsp;nous ne reverrons pas la ressource Micro-messages avant le <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a>&nbsp;&mdash; et je ne voulais pas retarder son introduction aussi loin).</p>
 
 <div class="label" id="sec:a_micropost_microtour"></div>
 
 
-<h3><a id="sec:2.3.1" href="a-demo-app#sec:a_micropost_microtour" class="heading"><span class="number">2.3.1</span> A micropost microtour</a></h3>
+<h3><a id="sec:2.3.1" href="a-demo-app#sec:a_micropost_microtour" class="heading"><span class="number">2.3.1</span> Un petit tour du micro-message</a></h3>
 
 
-<p>As with the Users resource, we&rsquo;ll generate scaffold code for the Microposts resource using <code>rails generate scaffold</code>, in this case implementing the data model from <a class="ref" href="a-demo-app#fig:demo_micropost_model">Figure&nbsp;2.3</a>:<sup class="footnote" id="fnref:2.11"><a href="#fn:2.11">11</a></sup></p>
+<p>Comme avec la ressource utilisateurs, nous allons générer le code de l'échaffaudage de la ressource des micro-messages (<em>Microposts</em>) en utilisant le code <code>rails generate scaffold</code>, dans ce cas en implémentant le modèle de données de l'<a class="ref" href="a-demo-app#fig:demo_micropost_model">illustration&nbsp;2.3</a>:<sup class="footnote" id="fnref:2.11"><a href="#fn:2.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate scaffold Micropost content:string user_id:integer
 <span class="go">      invoke  active_record</span>
@@ -961,7 +958,7 @@
 </div>
 
 
-<p>To update our database with the new data model, we need to run a migration as in <a class="ref" href="a-demo-app#sec:demo_users_resource">Section&nbsp;2.2</a>:</p>
+<p>Pour actualiser notre base de données avec le nouveau modèle de données, il est nécessaire de demander une nouvelle migration comme dans la <a class="ref" href="a-demo-app#sec:demo_users_resource">section&nbsp;2.2</a>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="go">==  CreateMicroposts: migrating ===============================================</span>
@@ -972,13 +969,13 @@
 </div>
 
 
-<p>Now we are in a position to create microposts in the same way we created users in <a class="ref" href="a-demo-app#sec:a_user_tour">Section&nbsp;2.2.1</a>. As you might guess, the scaffold generator has updated the Rails routes file with a rule for Microposts resource, as seen in <a class="ref" href="a-demo-app#code:demo_microposts_resource">Extrait&nbsp;2.7</a>.<sup class="footnote" id="fnref:2.12"><a href="#fn:2.12">12</a></sup> As with users, the <code>resources :microposts</code> routing rule maps a micropost URLs to actions in the Microposts controller, as seen in <a class="ref" href="a-demo-app#table:demo_RESTful_microposts">Table&nbsp;2.3</a>.</p>
+<p>Maintenant nous sommes en mesure de créer des micro-messages de la même façon que nous avons créé des utilisateurs dans la <a class="ref" href="a-demo-app#sec:a_user_tour">section&nbsp;2.2.1</a>. Comme vous pouvez vous en douter, le générateur d'échaffaudage a actualisé le fichier de routage Rails avec des règles pour la ressource Microposts (<em>Micro-messages</em>), comme montré dans l'<a class="ref" href="a-demo-app#code:demo_microposts_resource">extrait&nbsp;2.7</a>.<sup class="footnote" id="fnref:2.12"><a href="#fn:2.12">12</a></sup> Comme pour les utilisateurs, la règle des routages <code>resources :microposts</code> dirige les URLs des micro-messages vers les actions correspondantes dans le contrôleur Microposts, comme présenté dans la <a class="ref" href="a-demo-app#table:demo_RESTful_microposts">table&nbsp;2.3</a>.</p>
 
 <div class="label" id="code:demo_microposts_resource"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.7.</span> <span class="description">The Rails routes, with a new rule for Microposts resources. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 2.7.</span> <span class="description">Le routage Rails, avec une nouvelle règle pour les ressources Microposts. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">DemoApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:microposts</span>
@@ -996,16 +993,16 @@
 <div class="label" id="table:demo_RESTful_microposts"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>index</code></td><td class="align_left">page to list all microposts</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">page to show micropost with id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">page to make a new micropost</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>create</code></td><td class="align_left">create a new micropost</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">page to edit micropost with id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">update micropost with id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">delete micropost with id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 2.3: </span><span class="description">RESTful routes provided by the Microposts resource in <a class="ref" href="a-demo-app#code:demo_microposts_resource">Extrait&nbsp;2.7</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Requête HTTP</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>But</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>index</code></td><td class="align_left">page listant tous les micro-messages</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">page affichant le micro-message d'id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">page créant une nouveau micro-message</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>create</code></td><td class="align_left">crée le nouveau micro-message</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">page pour éditer le micro-message d'id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">actualiser le micro-message d'id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">détruire le micro-message d'id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 2.3: </span><span class="description">Routes RESTful fournis par la ressource Microposts resource dans l'<a class="ref" href="a-demo-app#code:demo_microposts_resource">extrait&nbsp;2.7</a>.</span></div></div>
 
 
-<p>The Microposts controller itself appears in schematic form <a class="ref" href="a-demo-app#code:demo_microposts_controller">Extrait&nbsp;2.8</a>. Note that, apart from having <code>MicropostsController</code> in place of <code>UsersController</code>, <a class="ref" href="a-demo-app#code:demo_microposts_controller">Extrait&nbsp;2.8</a> is <em>identical</em> to the code in <a class="ref" href="a-demo-app#code:demo_users_controller">Extrait&nbsp;2.3</a>. This is a reflection of the REST architecture common to both resources.</p>
+<p>La contrôleur Microposts lui-même apparait dans sa forme schématique dans l'<a class="ref" href="a-demo-app#code:demo_microposts_controller">extrait&nbsp;2.8</a>. Notez que, hormis le <code>MicropostsController</code> à la place du <code>UsersController</code>, l'<a class="ref" href="a-demo-app#code:demo_microposts_controller">extrait&nbsp;2.8</a> est <em>identique</em> au code de l'<a class="ref" href="a-demo-app#code:demo_users_controller">extrait&nbsp;2.3</a>. C'est une conséquence de l'architecture REST commune aux deux ressources.</p>
 
 <div class="label" id="code:demo_microposts_controller"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.8.</span> <span class="description">The Microposts controller in schematic form. <br /> <code>app/controllers/microposts_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 2.8.</span> <span class="description">Le contrôleur Microposts en forme schématique. <br /> <code>app/controllers/microposts_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MicropostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1055,20 +1052,20 @@
 </div></div>
 
 
-<p>To make some actual microposts, we enter information at the new microposts page, <a href="http://localhost:3000/microposts/new">/microposts/new</a>, as seen in <a class="ref" href="a-demo-app#fig:demo_new_micropost_rails_3">Figure&nbsp;2.12</a>.</p>
+<p>Pour faire quelques micro-messages, nous entrons les informations dans la page de création des micro-messages, <a href="http://localhost:3000/microposts/new">/microposts/new</a>, comme montré dans l''<a class="ref" href="a-demo-app#fig:demo_new_micropost_rails_3">illustration&nbsp;2.12</a>.</p>
 
 <div class="label" id="fig:demo_new_micropost_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_new_micropost_rails_3.png" alt="demo_new_micropost_rails_3" /></span></div><div class="caption"><span class="header">Figure 2.12: </span><span class="description">The new micropost page (<a href="http://localhost:3000/microposts/new">/microposts/new</a>).&nbsp;<a href="http://railstutorial.org/images/figures/demo_new_micropost-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_new_micropost_rails_3.png" alt="demo_new_micropost_rails_3" /></span></div><div class="caption"><span class="header">Illustration 2.12: </span><span class="description">La page de création du micro-message (<a href="http://localhost:3000/microposts/new">/microposts/new</a>).&nbsp;<a href="http://railstutorial.org/images/figures/demo_new_micropost-full.png">(taille normale)</a></span></div></div>
 
 
-<p>At this point, go ahead and create a micropost or two, taking care to make sure that at least one has a <code>user_id</code> of&nbsp;<code>1</code> to match the id of the first user created in <a class="ref" href="a-demo-app#sec:a_user_tour">Section&nbsp;2.2.1</a>. The result should look something like <a class="ref" href="a-demo-app#fig:demo_micropost_index_rails_3">Figure&nbsp;2.13</a>.</p>
+<p>À ce stade, poursuivez et créez un ou deux micro-messages, en vous assurant que l'un au moins possède un <code>user_id</code> de&nbsp;<code>1</code> pour correspondre à l'identifiant du premier utilisateur créé dans la <a class="ref" href="a-demo-app#sec:a_user_tour">section&nbsp;2.2.1</a>. Le résultat devrait s'apparenter à celui de l'<a class="ref" href="a-demo-app#fig:demo_micropost_index_rails_3">illustration&nbsp;2.13</a>.</p>
 
 <div class="label" id="fig:demo_micropost_index_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_index_rails_3.png" alt="demo_micropost_index_rails_3" /></span></div><div class="caption"><span class="header">Figure 2.13: </span><span class="description">The micropost index page (<a href="http://localhost:3000/microposts">/microposts</a>).&nbsp;<a href="http://railstutorial.org/images/figures/demo_micropost_index_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_index_rails_3.png" alt="demo_micropost_index_rails_3" /></span></div><div class="caption"><span class="header">Illustration 2.13&nbsp;: </span><span class="description">La page d'index des micro-messages (<a href="http://localhost:3000/microposts">/microposts</a>).&nbsp;<a href="http://railstutorial.org/images/figures/demo_micropost_index_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1076,16 +1073,16 @@
 <div class="label" id="sec:putting_the_micro_in_microposts"></div>
 
 
-<h3><a id="sec:2.3.2" href="a-demo-app#sec:putting_the_micro_in_microposts" class="heading"><span class="number">2.3.2</span> Putting the <em>micro</em> in microposts</a></h3>
+<h3><a id="sec:2.3.2" href="a-demo-app#sec:putting_the_micro_in_microposts" class="heading"><span class="number">2.3.2</span> Appliquer le <em>micro</em> aux micro-messages</a></h3>
 
 
-<p>Any <em>micro</em>post worthy of the name should have some means of enforcing the length of the post. Implementing this constraint in Rails is easy with <em>validations</em>; to accept microposts with at most 140 characters (&agrave; la Twitter), we use a <em>length</em> validation. At this point, you should open the file <code>app/models/micropost.rb</code> in your text editor or IDE and fill it with the contents of <a class="ref" href="a-demo-app#code:demo_length_validation">Extrait&nbsp;2.9</a>. (The use of <code>validates</code> in <a class="ref" href="a-demo-app#code:demo_length_validation">Extrait&nbsp;2.9</a> is characteristic of Rails&nbsp;3; if you&rsquo;ve previously worked with Rails&nbsp;2.3, you should compare this to the use of <code>validates_length_of</code>.)</p>
+<p>Tout <em>micro</em>-message digne de ce nom devrait avoir les moyens de faire respecter la longueur de son texte. Implémenter cette contrainte en Rails est simple avec les <em>validations</em>&nbsp;; pour acception les micro-messages d'au plus 140 caractères (à la Twitter), une utilisons une validation de longueur (<em>length</em>). À ce stade, vous devriez ouvrir le fichier <code>app/models/micropost.rb</code> dans votre éditeur de texte ou votre IDE et le remplir avec le contenu de l'<a class="ref" href="a-demo-app#code:demo_length_validation">extrait&nbsp;2.9</a> (l'utilisation de <code>validates</code> dans l'<a class="ref" href="a-demo-app#code:demo_length_validation">extrait&nbsp;2.9</a> est caractéristique de la version 3 de Rails&nbsp;; si vous avez travaillé précédemment avec Rails&nbsp;2.3, vous devriez comparer cet usage à l'utilisation de l'ancien <code>validates_length_of</code>).</p>
 
 <div class="label" id="code:demo_length_validation"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 2.9.</span> <span class="description">Constraining microposts to at most 140 characters with a length validation. <br /> <code>app/models/micropost.rb</code></span>       
+<div class="listing"><span class="header">Extrait 2.9.</span> <span class="description">Contraindre la longueur maximale des micro-messages à 140 caractères avec la validation de longueur. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">validates</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:maximum</span> <span class="o">=&gt;</span> <span class="mi">140</span> <span class="p">}</span>
@@ -1094,15 +1091,15 @@
 </div></div>
 
 
-<p>The code in <a class="ref" href="a-demo-app#code:demo_length_validation">Extrait&nbsp;2.9</a> may look rather mysterious&mdash;we&rsquo;ll cover validations more thoroughly starting in <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Section&nbsp;6.2</a>&mdash;but its effects are readily apparent if we go to the new micropost page and enter more than 140 characters for the content of the post. As seen in <a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">Figure&nbsp;2.14</a>, Rails renders <em>error messages</em> indicating that the micropost&rsquo;s content is too long. (We&rsquo;ll learn more about error messages in <a class="ref" href="sign-up#sec:signup_error_messages">Section&nbsp;8.2.3</a>.)</p>
+<p>Le code de l'<a class="ref" href="a-demo-app#code:demo_length_validation">extrait&nbsp;2.9</a> peut sembler plutôt mystérieux &mdash;&nbsp;nous couvrirons la question des validations plus profondément à la <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">section&nbsp;6.2</a>&nbsp;&mdash; mais ses effets sont significatifs si nous nous rendons à la page de création des micro-messages et que nous entrons un messages de plus de 140 caractères. Comme nous pouvons le voir dans l'<a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">illustration&nbsp;2.14</a>, Rails renvoie un message d'erreur (<em>error messages</em>) indiquant que le contenu du message est trop long (nous en apprendrons plus à propos des messages d'erreur à la <a class="ref" href="sign-up#sec:signup_error_messages">section&nbsp;8.2.3</a>.)</p>
 
 <div class="label" id="fig:micropost_length_error_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_length_error_rails_3.png" alt="micropost_length_error_rails_3" /></span></div><div class="caption"><span class="header">Figure 2.14: </span><span class="description">Error messages for a failed micropost creation.&nbsp;<a href="http://railstutorial.org/images/figures/micropost_length_error_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_length_error_rails_3.png" alt="micropost_length_error_rails_3" /></span></div><div class="caption"><span class="header">Illustration 2.14: </span><span class="description">Messages d'erreur à l'échec de la création d'un message.&nbsp;<a href="http://railstutorial.org/images/figures/micropost_length_error_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-
+<!-- FIN FRENCH -->
 
 <div class="label" id="sec:demo_user_has_many_microposts"></div>
 
@@ -1142,15 +1139,15 @@
 </div></div>
 
 
-<p>We can visualize the result of this association in <a class="ref" href="a-demo-app#fig:micropost_user_association">Figure&nbsp;2.15</a>. Because of the <code>user_id</code> column in the <code>microposts</code> table, Rails (using Active Record) can infer the microposts associated with each user.</p>
+<p>We can visualize the result of this association in <a class="ref" href="a-demo-app#fig:micropost_user_association">illustration&nbsp;2.15</a>. Because of the <code>user_id</code> column in the <code>microposts</code> table, Rails (using Active Record) can infer the microposts associated with each user.</p>
 
 <div class="label" id="fig:micropost_user_association"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_user_association.png" alt="micropost_user_association" /></span></div><div class="caption"><span class="header">Figure 2.15: </span><span class="description">The association between microposts and users.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_user_association.png" alt="micropost_user_association" /></span></div><div class="caption"><span class="header">illustration 2.15: </span><span class="description">The association between microposts and users.</span></div></div>
 
 
-<p>In <a class="ref" href="user-microposts#top">Chapter&nbsp;11</a> and <a class="ref" href="following-users#top">Chapter&nbsp;12</a>, we will use the association of users and microposts both to display all a user&rsquo;s microposts and to construct a Twitter-like micropost feed. For now, we can examine the implications of the user-micropost association by using the <em>console</em>, which is a useful tool for interacting with Rails applications. We first invoke the console with <code>rails console</code> at the command line, and then retrieve the first user from the database using <code>User.first</code> (putting the results in the variable <code>first_user</code>):<sup class="footnote" id="fnref:2.13"><a href="#fn:2.13">13</a></sup></p>
+<p>In <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a> and <a class="ref" href="following-users#top">chapitre&nbsp;12</a>, we will use the association of users and microposts both to display all a user&rsquo;s microposts and to construct a Twitter-like micropost feed. For now, we can examine the implications of the user-micropost association by using the <em>console</em>, which is a useful tool for interacting with Rails applications. We first invoke the console with <code>rails console</code> at the command line, and then retrieve the first user from the database using <code>User.first</code> (putting the results in the variable <code>first_user</code>):<sup class="footnote" id="fnref:2.13"><a href="#fn:2.13">13</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">first_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
@@ -1166,7 +1163,7 @@
 </div>
 
 
-<p>(I include the last line just to demonstrate how to exit the console, and on most systems you can Ctrl-d for the same purpose.) Here we have accessed the user&rsquo;s microposts using the code <code>first_user.microposts</code>: with this code, Active Record automatically returns all the microposts with <code>user_id</code> equal to the id of <code>first_user</code> (in this case,&nbsp;<code>1</code>). We&rsquo;ll learn much more about the association facilities in Active Record in <a class="ref" href="user-microposts#top">Chapter&nbsp;11</a> and <a class="ref" href="following-users#top">Chapter&nbsp;12</a>.</p>
+<p>(I include the last line just to demonstrate how to exit the console, and on most systems you can Ctrl-d for the same purpose.) Here we have accessed the user&rsquo;s microposts using the code <code>first_user.microposts</code>: with this code, Active Record automatically returns all the microposts with <code>user_id</code> equal to the id of <code>first_user</code> (in this case,&nbsp;<code>1</code>). We&rsquo;ll learn much more about the association facilities in Active Record in <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a> and <a class="ref" href="following-users#top">chapitre&nbsp;12</a>.</p>
 
 <div class="label" id="sec:inheritance_hierarchies"></div>
 
@@ -1176,7 +1173,7 @@
 
 <p>We end our discussion of the demo application with a brief description of the controller and model class hierarchies in Rails. This discussion will only make much sense if you have some experience with object-oriented programming (OOP); if you haven&rsquo;t studied OOP, feel free to skip this section. In particular, if you are unfamiliar with <em>classes</em> (discussed in <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Section&nbsp;4.4</a>), I suggest looping back to this section at a later time.</p>
 
-<p>We start with the inheritance structure for models. Comparing  <a class="ref" href="a-demo-app#code:demo_user_class">Extrait&nbsp;2.12</a> and <a class="ref" href="a-demo-app#code:demo_micropost_class">Extrait&nbsp;2.13</a>, we see that both the User model and the Micropost model inherit (via the left angle bracket&nbsp;<code>&lt;</code>) from <code>ActiveRecord::Base</code>, which is the base class for models provided by ActiveRecord; a diagram summarizing this relationship appears in <a class="ref" href="a-demo-app#fig:demo_model_inheritance">Figure&nbsp;2.16</a>. It is by inheriting from <code>ActiveRecord::Base</code> that our model objects gain the ability to communicate with the database, treat the database columns as Ruby attributes, and so&nbsp;on.</p>
+<p>We start with the inheritance structure for models. Comparing  <a class="ref" href="a-demo-app#code:demo_user_class">Extrait&nbsp;2.12</a> and <a class="ref" href="a-demo-app#code:demo_micropost_class">Extrait&nbsp;2.13</a>, we see that both the User model and the Micropost model inherit (via the left angle bracket&nbsp;<code>&lt;</code>) from <code>ActiveRecord::Base</code>, which is the base class for models provided by ActiveRecord; a diagram summarizing this relationship appears in <a class="ref" href="a-demo-app#fig:demo_model_inheritance">illustration&nbsp;2.16</a>. It is by inheriting from <code>ActiveRecord::Base</code> that our model objects gain the ability to communicate with the database, treat the database columns as Ruby attributes, and so&nbsp;on.</p>
 
 <div class="label" id="code:demo_user_class"></div>
 
@@ -1215,10 +1212,10 @@
 <div class="label" id="fig:demo_model_inheritance"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_model_inheritance.png" alt="demo_model_inheritance" /></span></div><div class="caption"><span class="header">Figure 2.16: </span><span class="description">The inheritance hierarchy for the User and Micropost models.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_model_inheritance.png" alt="demo_model_inheritance" /></span></div><div class="caption"><span class="header">illustration 2.16: </span><span class="description">The inheritance hierarchy for the User and Micropost models.</span></div></div>
 
 
-<p>The inheritance structure for controllers is only slightly more complicated. Comparing <a class="ref" href="a-demo-app#code:demo_users_controller_class">Extrait&nbsp;2.14</a> and <a class="ref" href="a-demo-app#code:demo_microposts_controller_class">Extrait&nbsp;2.15</a>, we see that both the Users controller and the Microposts controller inherit from the Application controller. Examining <a class="ref" href="a-demo-app#code:demo_application_controller_class">Extrait&nbsp;2.16</a>, we see that <code>ApplicationController</code> itself inherits from <code>ActionController::Base</code>; this is the base class for controllers provided by the Rails library Action Pack. The relationships between these classes is illustrated in <a class="ref" href="a-demo-app#fig:demo_controller_inheritance">Figure&nbsp;2.17</a>.</p>
+<p>The inheritance structure for controllers is only slightly more complicated. Comparing <a class="ref" href="a-demo-app#code:demo_users_controller_class">Extrait&nbsp;2.14</a> and <a class="ref" href="a-demo-app#code:demo_microposts_controller_class">Extrait&nbsp;2.15</a>, we see that both the Users controller and the Microposts controller inherit from the Application controller. Examining <a class="ref" href="a-demo-app#code:demo_application_controller_class">Extrait&nbsp;2.16</a>, we see that <code>ApplicationController</code> itself inherits from <code>ActionController::Base</code>; this is the base class for controllers provided by the Rails library Action Pack. The relationships between these classes is illustrated in <a class="ref" href="a-demo-app#fig:demo_controller_inheritance">illustration&nbsp;2.17</a>.</p>
 
 <div class="label" id="code:demo_users_controller_class"></div>
 
@@ -1274,7 +1271,7 @@
 <div class="label" id="fig:demo_controller_inheritance"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_controller_inheritance.png" alt="demo_controller_inheritance" /></span></div><div class="caption"><span class="header">Figure 2.17: </span><span class="description">The inheritance hierarchy for the Users and Microposts controllers.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_controller_inheritance.png" alt="demo_controller_inheritance" /></span></div><div class="caption"><span class="header">illustration 2.17: </span><span class="description">The inheritance hierarchy for the Users and Microposts controllers.</span></div></div>
 
 
 <p>As with model inheritance, by inheriting ultimately from <code>ActionController::Base</code> both the Users and Microposts controllers gain a large amount of functionality, such as the ability to manipulate model objects, filter inbound HTTP requests, and render views as HTML. Since all Rails controllers inherit from <code>ApplicationController</code>, rules defined in the Application controller automatically apply to every action in the application. For example, in <a class="ref" href="sign-up#sec:filtering_parameter_logging">Section&nbsp;8.2.4</a> we&rsquo;ll see how defining a rule in the Application controller allows us to filter passwords from all the Rails log files, thereby avoiding a serious potential security breach.</p>
@@ -1349,10 +1346,10 @@
 <p>The rest of this tutorial is dedicated to building on the strengths and eliminating the weaknesses.</p>
 
 <div class="navigation">  <a class="prev_page" href="beginning#top">
-    &laquo;&nbsp;<span class="number">Chapter 1</span> From zero to deploy
+    &laquo;&nbsp;<span class="number">chapitre 1</span> From zero to deploy
   </a>
   <a class="next_page" href="static-pages#top">
-    <span class="number">Chapter 3</span> Mostly static pages&nbsp;&raquo;
+    <span class="number">chapitre 3</span> Mostly static pages&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>

@@ -158,7 +158,9 @@ Code à copier dans le fichier :
 	# Faire le mandat de dépôt
 	git add .
 	git commit -m "$1"
-
+	echo -e "\n"
+	echo -e "Vous devez maintenant utiliser le raccourci `tmh-push` pour transmettre votre dépôt et actualiser le site Heroku"
+	
 Penser à autoriser l'exécution du fichier :
 
 	$ chmod 744 ./new_commit.sh

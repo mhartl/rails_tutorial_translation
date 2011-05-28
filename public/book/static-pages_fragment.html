@@ -683,25 +683,25 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<!-- FIN FRENCH -->
 
-<p>(Note that, because we installed RSpec with <code>rails generate rspec:install</code>, the controller generation automatically creates RSpec test files in the <code>spec/</code> directory.) Here, I&rsquo;ve intentionally &ldquo;forgotten&rdquo; the <code>about</code> page so that we can see how to add it in by hand (<a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>).</p>
 
-<p>The Pages controller generation in <a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> automatically updates the <em>routes</em> file, called <code>config/routes.rb</code>, which Rails uses to find the correspondence between URLs and web pages. This is our first encounter with the <code>config</code> directory, so it&rsquo;s helpful to take a quick look at it (<a class="ref" href="static-pages#fig:config_directory_rails_3">illustration&nbsp;3.4</a>). The <code>config</code> directory is where Rails collects files needed for the application configuration&mdash;hence the name.</p>
+<p>(notez que, puisque nous avons installé RSpec avec le code <code>rails generate rspec:install</code>, la génération de contrôleur crée automatiquement des fichiers de test RSpec dans le dossier <code>spec/</code>). Ici, j'ai intentionnellement &ldquo;&nbsp;oublié&nbsp;&rdquo; la page <code>à propos</code> pour que nous puissions voir comment l'ajouter à la main (<a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>).</p>
+
+<p>La génération de pages de contrôleurs de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> actualise automatiquement le fichier de <em>routage</em>, nommé <code>config/routes.rb</code>, que Rails utilise pour trouver la correspondance entre URLs et pages web. C'est notre première rencontre avec le dossier <code>config</code>, donc il peut être utile d'y jeter un coup d'œil (<a class="ref" href="static-pages#fig:config_directory_rails_3">illustration&nbsp;3.4</a>). Le dossier <code>config</code> est l'endroit où Rails collecte les fichiers nécessaires à la configuration de l'application &mdash;&nbsp;d'où le nom.</p>
 
 <div class="label" id="fig:config_directory_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.4: </span><span class="description">Contents of the sample app&rsquo;s <code>config</code> directory.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.4: </span><span class="description">Contenu du dossier <code>config</code> de l'application exemple.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Since we generated <code>home</code> and <code>contact</code> actions, the routes file already has a rule for each one, as seen in <a class="ref" href="static-pages#code:pages_routes">extrait&nbsp;3.5</a>.</p>
+<p>Puis nous avons généra les actions <code>home</code> et <code>contact</code>, le routage de fichier possède déjà des règles pour chacun d'eux, comme on peut le voir dans l'<a class="ref" href="static-pages#code:pages_routes">extrait&nbsp;3.5</a>.</p>
 
 <div class="label" id="code:pages_routes"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.5.</span> <span class="description">The routes for the <code>home</code> and <code>contact</code> actions in the Pages controller. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.5.</span> <span class="description">Le routage pour l'action <code>home</code> et l'action <code>contact</code> dans le contrôleur Pages. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
@@ -714,20 +714,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Here the rule</p>
+<p>Ici la règle…</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
 </pre></div>
 </div>
 
 
-<p>maps requests for the URL <tt>/pages/home</tt> to the <code>home</code> action in the Pages controller. Moreover, by using <code>get</code> we arrange for the route to respond to a <tt>GET</tt> request, which is one of the fundamental
-<em>HTTP verbs</em> supported by the hypertext transfer protocol (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). In our case, this means that when we generate a <code>home</code> action inside the Pages controller we automatically get a page at the address <tt>/pages/home</tt>. To see the results, kill the server by hitting Ctrl-C, run <code>rails server</code>, and then navigate to <a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a> (<a class="ref" href="static-pages#fig:raw_home_view">illustration&nbsp;3.5</a>).</p>
+<p>… se charge de la requête pour l'URL <tt>/pages/home</tt> pour la page d'accueil (action <code>home</code>) dans le contrôleur Pages. Plus encore, en utilisant <code>get</code> nous nous arrangeons pour que la route réponde à la requête <tt>GET</tt>, qui est un des <em>verbes HTTP</em> fondamentaux supporté par le Hypertext Transfer Protocol (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). Dans notre cas, cela signifie que lorsque nous générons une action <code>home</code> à l'intérieur du contrôleur Pages nous atteignons automatiquement une page à l'adresse <tt>/pages/home</tt>. Pour voir le résultat, «&nbsp;tuez&nbsp;» le serveur avec Ctrl-C, jouez la commande <code>rails server</code>, et naviguez alors à l'adresse <a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a> (<a class="ref" href="static-pages#fig:raw_home_view">illustration&nbsp;3.5</a>).</p>
 
 <div class="label" id="fig:raw_home_view"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_home_view.png" alt="raw_home_view" /></span></div><div class="caption"><span class="header">Illustration 3.5: </span><span class="description">The raw home view (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) generated by Rails.&nbsp;<a href="http://railstutorial.org/images/figures/raw_home_view-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_home_view.png" alt="raw_home_view" /></span></div><div class="caption"><span class="header">Illustration 3.5: </span><span class="description">La vue de l'accueil brute (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) générée par Rails.&nbsp;<a href="http://railstutorial.org/images/figures/raw_home_view-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -736,19 +735,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 3.1.</span><span class="description"><tt>GET</tt>, et cet.</span></span>
-<p>The hypertext transfer protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) defines four basic operations, corresponding to the four verbs <em>get</em>, <em>post</em>, <em>put</em>, and <em>delete</em>. These refer to operations between a <em>client</em> computer (typically running a web browser such as Firefox or Safari) and a <em>server</em> (typically running a web server such as Apache or Nginx). (It&rsquo;s important to understand that, when developing Rails applications on a local computer, the client and server are the same physical machine, but in general they are different.) An emphasis on HTTP verbs is typical of web frameworks (including Rails) influenced by the <em>REST architecture</em>, which we saw briefly in <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> and will start learning about more in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Le Hypertext Transfer Protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) définit quatre opérations de base, correspondant aux quatre verbes <em>get</em> (<em>obtenir</em>), <em>post</em> (<em>poster</em>), <em>put</em> (<em>déposer</em>) et <em>delete</em> (<em>effacer</em>). Cela fait référence aux opérations entre un ordinateur <em>client</em> (typiquement jouant un navigateur web comme Firefox ou Safari) et un <em>serveur</em> (typiquement un serveur web tel que Apache ou Nginx) (il est important de comprendre qu'en développant des applications web sur un ordinateur local, le client et le serveur sont la même machine physique, mais en général ils sont différents). L'accent mis sur les verbes HTTP est typique des frameworks (à commencer par Rails) influencés par l'<em>architecture REST</em>, que nous avons abordée brièvement au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> et que nous apprendrons mieux au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
-<p><tt>GET</tt> is the most common HTTP operation, used for <em>reading</em> data on the web; it just means &ldquo;get a page&rdquo;, and every time you visit a site like google.com or craigslist.org your browser is submitting a <tt>GET</tt> request. <tt>POST</tt> is the next most common operation; it is the request sent by your browser when you submit a form. In Rails applications, <tt>POST</tt> requests are typically used for <em>creating</em> things (although HTTP also allows <tt>POST</tt> to perform updates); for example, the <tt>POST</tt> request sent when you submit a registration form creates a new user on the remote site. The other two verbs, <tt>PUT</tt> and <tt>DELETE</tt>, are designed for <em>updating</em> and <em>destroying</em> things on the remote server. These requests are less common than <tt>GET</tt> and <tt>POST</tt> since browsers are incapable of sending them natively, but some web frameworks (including Ruby on Rails) have clever ways of making it <em>seem</em> like browsers are issuing such requests.</p>
+<p><tt>GET</tt> est l'opération HTTP la plus courante, utilisée pour  <em>lire</em> des données sur le web&nbsp;; elle signifie simplement &ldquo;atteint une page&rdquo;, et chaque fois que vous visitez une page, telle que google.com ou craigslist.org, votre navigateur soumet une requête <tt>GET</tt>. La requête <tt>POST</tt> est l'opération suivante la plus courante&nbsp;; c'est la requête envoyée par votre navigateur quand vous soumettez un formulaire. Dans les applications Rails, les requêtes <tt>POST</tt> sont utilisées typiquement pour <em>créer</em> des choses (bien que le protocope HTTP permet aussi à la requête <tt>POST</tt> de procéder à des actualissations)&nbsp;; par exemple, la requête <tt>POST</tt> envoyée quand vous soumettez un formulaire pour la création d'un nouvel utilisateur sur votre site web. Les deux autres verbes, <tt>PUT</tt> et <tt>DELETE</tt>, sont utilisés pour <em>actualiser</em> et <em>détruire</em> des choses sur le serveur distant. Ces requêtes sont moins courantes que <tt>GET</tt> et <tt>POST</tt> puisque les navigateurs sont incapables de les envoyer nativement, mais certains frameworks web (comme Ruby on Rails) ont des façons intelligentes de <em>simuler</em> ces demandes par les navigateurs.</p>
 </div>
 
 
-<p>To understand where this page comes from, let&rsquo;s start by taking a look at the Pages controller in a text editor; you should see something like <a class="ref" href="static-pages#code:pages_controller">extrait&nbsp;3.6</a>. (You may note that, unlike the demo Users and Microposts controllers from <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, the Pages controller does not follow the REST conventions.)</p>
+<p>Pour comprendre d'où ces pages proviennent, commençons par jeter un œil au contrôleur Pages dans un éditeur de texte&nbsp;; vous devriez voir quelque chose comme le code de l'<a class="ref" href="static-pages#code:pages_controller">extrait&nbsp;3.6</a> (vous pouvez noter que, contrairement aux contrôleurs Users et Microposts de l'application Démo du <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, le contrôleur Pages ne respecte pas les conventions REST).</p>
 
 <div class="label" id="code:pages_controller"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.6.</span> <span class="description">The Pages controller made by <a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a>. <br /> <code>app/controllers/pages_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.6.</span> <span class="description">Le contrôleur Pages contruit par l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a>. <br /> <code>app/controllers/pages_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -762,9 +761,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>We see here that <code>pages_controller.rb</code> defines a <em>class</em> called <code>PagesController</code>. Classes are simply a convenient way to organize <em>functions</em> (also called <em>methods</em>) like the <code>home</code> and <code>contact</code> actions, which are defined using the <code>def</code> keyword. The angle bracket&nbsp;<code>&lt;</code> indicates that <code>PagesController</code> <em>inherits</em> from the Rails class <code>ApplicationController</code>; as we&rsquo;ll see momentarily, this means that our pages come equipped with a large amount of Rails-specific functionality. (We&rsquo;ll learn more about both classes and inheritance in <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">section&nbsp;4.4</a>.)</p>
+<p>Nous voyons ici que la page <code>pages_controller.rb</code> définit une <em>classe</em> appelée <code>PagesController</code>. Les classes sont simplement une façon pratique d'organiser les <em>fonctions</em> (appelées aussi <em>méthodes</em>) comme les actions <code>home</code> et <code>contact</code>, qui sont définies en utilisant le mot-clé <code>def</code>. Le signe <code>&lt;</code> indique que <code>PagesController</code> <em>hérite</em> de la classe Rails <code>ApplicationController</code>&nbsp;; comme nous le verrons dans un instant, cela signifie que nos pages possèdent une grande quantité de fonctionnalités spécifiques à Rails. Nous en apprendrons plus sur les classes et l'héritage dans la <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">section&nbsp;4.4</a>).</p>
 
-<p>In the case of the Pages controller, both its methods are initially empty:</p>
+<p>Dans le cas du contrôleur Pages, ces deux méthodes sont initialement vides&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">home</span>
 <span class="k">end</span>
@@ -775,15 +774,16 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>In plain Ruby, these methods would simply do nothing. In Rails, the situation is different; <code>PagesController</code> is a Ruby class, but because it inherits from <code>ApplicationController</code> the behavior of its methods is specific to Rails: when visiting the URL <tt>/pages/home</tt>, Rails looks in the Pages controller and executes the code in the <code>home</code> action, and then renders the <em>view</em> (the V in MVC from <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>) corresponding to the action. In the present case, the <code>home</code> action is empty, so all hitting <tt>/pages/home</tt> does is render the view. So, what does a view look like, and how do we find it?</p>
+<p>En pur Ruby, ces méthodes ne feraient rien, tout simple. En Rails, la situation est différente&nbsp;; <code>PagesController</code> est une classe Ruby, mais parce qu'elle hérite de la classe <code>ApplicationController</code> le comportement de ses méthodes est spécifique à Rails&nbsp;: en visitant l'URL <tt>/pages/home</tt>, Rails consulte le contrôleur Pages et exécute le code de l'action <code>home</code>, et rend alors la <em>vue</em> (le caractère «&nbsp;V&nbsp;» de MVC de la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>) correspondant à l'action. Dans le cas présent, l'action <code>home</code> est vide, donc tous les appels à <tt>/pages/home</tt> rendent simplement la vue. Donc, à quoi ressemble une vue, et comment la trouvons-nous nous&nbsp;?</p>
 
-<p>If you take another look at the output in <a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a>, you might be able to guess the correspondence between actions and views: an action like <code>home</code> has a corresponding view called <code>home.html.erb</code>. We&rsquo;ll learn in <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a> what the <code>.erb</code> part means; from the <code>.html</code> part you probably won&rsquo;t be surprised that it basically looks like HTML (<a class="ref" href="static-pages#code:raw_home_view">extrait&nbsp;3.7</a>).</p>
+
+<p>Si vous jetez un nouveau coup d'œil à la sortie de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a>, vous devriez être en mesure de deviner la correspondance entre les actions et les vues&nbsp;: une action comme <code>home</code> possède une vue correspondante appelée <code>home.html.erb</code>. Nous apprendrons à la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a> ce que la partie <code>.erb</code> signifie&nbsp;; la partie <code>.html</code> ne devrait pas vous surprendre puisqu'elle ressemble à HTML (<a class="ref" href="static-pages#code:raw_home_view">extrait&nbsp;3.7</a>).</p>
 
 <div class="label" id="code:raw_home_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.7.</span> <span class="description">The generated view for the Home page. <br /> <code>app/views/pages/home.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.7.</span> <span class="description">La vue générée pour la page d'accueil (<em>Home</em>). <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#home<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/home.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -791,13 +791,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>The view for the <code>contact</code> action is analogous (<a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>).</p>
+<p>La vue pour l'action <code>contact</code> est analogue (<a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>).</p>
 
 <div class="label" id="code:raw_contact_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.8.</span> <span class="description">The generated view for the Contact page. <br /> <code>app/views/pages/contact.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.8.</span> <span class="description">La vue générée pour la page Contact. <br /> <code>app/views/pages/contact.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#contact<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/contact.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -805,12 +805,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Both of these views are just placeholders: they have a top-level heading (inside the <code>h1</code> tag) and a paragraph (<code>p</code> tag) with the full path to the relevant file. We&rsquo;ll add some (very slightly) dynamic content starting in <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>, but as they stand these views underscore an important point: Rails views can simply contain static HTML. As far as the browser is concerned, the raw HTML files from <a class="ref" href="static-pages#sec:truly_static_pages">section&nbsp;3.1.1</a> and the controller/action method of delivering pages are indistinguishable: all the browser ever sees is HTML.</p>
+<p>Ces deux vues sont juste des <em>espaces réservés</em>&nbsp;: elles possèdent une entête (à l'intérieur de la balise <code>h1</code>) et un paragraphe (la balise <code>p</code>) contenant le chemin d'accès au fichier correspondant. Nous allons ajouter quelque (très léger) contenu dynamique à partir de la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>, mais telles quelles, ces vues soulignent un point important&nbsp;: les vues Rails peuvent contenir simplement du code HTML statique. Aussi loin que le navigateur est concerné, le code HTML des fichiers de la <a class="ref" href="static-pages#sec:truly_static_pages">section&nbsp;3.1.1</a> et la méthode controller/action des pages délivrées sont indistinctes&nbsp;: tout ce que voit le navigateur est de l'HTML.</p>
 
-<p>In the remainder of this chapter, we&rsquo;ll first add the <code>about</code> action we &ldquo;forgot&rdquo; in <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, add a very small amount of dynamic content, and then take the first steps toward styling the pages with CSS. Before moving on, if you&rsquo;re using Git it&rsquo;s a good idea to add the files for the Pages controller to the repository at this time:</p>
+<p>Dans le reste de ce chapitre, nous ajouterons d'abord l'action <code>about</code> que nous avons &ldquo;&nbsp;oubliée&nbsp;&rdquo; à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, le petit montant de contenu dynamique, et effecturons les premiers pas vers la stylisation des pages en CSS. Avant de poursuivre, si vous utilisez Git, c'est une bonne idée d'ajouter dès maintenant les fichiers du contrôleur Pages au repository&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;Added a Pages controller&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Ajout d'un controleur Pages&quot;</span>
 </pre></div>
 </div>
 
@@ -820,26 +820,26 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sec:first_tests"></div>
 
 
-<h2><a id="sec:3.2" href="static-pages#sec:first_tests" class="heading"><span class="number">3.2</span> Our first tests</a></h2>
+<h2><a id="sec:3.2" href="static-pages#sec:first_tests" class="heading"><span class="number">3.2</span> Nos premiers tests</a></h2>
 
 
-<p>If you ask five Rails developers how to test any given piece of code, you&rsquo;ll get about fifteen different answers&mdash;but they&rsquo;ll all agree that you should definitely be writing tests. It&rsquo;s in this spirit that we&rsquo;ll approach testing our sample application, writing solid tests without worrying too much about making them perfect. You shouldn&rsquo;t take the tests in <em>Rails Tutorial</em> as gospel; they are based on the style I have developed during my own work and from reading the code of others. As you gain experience as a Rails developer, you will no doubt form your own preferences and develop your own testing style.</p>
+<p>Si vous demandez à cinq développeurs Rails comment tester une pièce quelconque de code, vous obtiendrez quinze réponses différentes &mdash;&nbsp;mais ils seront tous d'accord sur le fait que vous devrez écrire ces tests. C'est dans cet esprit que nous approcherons le testing de notre application exemple, en écrivant de solides tests sans s'inquiéter trop de les rendre parfaits. Ne prenez pas les tests du <em>Tutoriel Rails</em> pour parole d'évangile&nbsp;; ils s'appuient sur le style que j'ai développé au cours de mes propres travaus et à la lecture du code d'autres développeurs. À mesure que vous développerez votre expérience en tant que développeur Rails, il n'y a aucun doute que vous développerez vos propres préférences et votre propre style en matière de test.</p>
 
-<p>In addition to writing tests throughout the development of the sample application, we will also make the increasingly common choice about <em>when</em> to write tests by writing them <em>before</em> the application code&mdash;an approach known as <em>test-driven development</em>, or TDD.<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Our specific example will be to add an About page to our sample site. Fortunately, adding the extra page is not hard&mdash;you might even be able to guess the answer based on the examples in the previous section&mdash;which means that we can focus on testing, which contains quite a few new ideas.</p>
+<p>En complément de l'écriture des tests au cours du développement de l'application exemple, nous ferons aussi le choix de plus en plus fréquent d'écrire ces tests <em>avant</em> d'écrire le code de l'application &mdash;&nbsp;une approche connue sous le nom «&nbsp;Développement conduit par le test&nbsp;» (<em>test-driven development</em>, ou TDD).<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Notre exemple spécifique sera d'ajouter une page «&nbsp;À propos&nbsp;» à notre exemple de site. Heureusement, ajouter cette page supplémentaire n'est pas difficile &mdash;&nbsp;vous devriez même être en mesure de deviner la procédure en vous basant sur les exemples de la section précédente&nbsp;&mdash; ce qui signifie que nous pouvons nous concentrer sur le testing, qui contient pas mal d'idées nouvelles.</p>
 
-<p>At first, testing for the existence of a page might seem like overkill, but experience shows that it is not. So many things can go wrong when writing software that having a good test suite is invaluable to assure quality. Moreover, it is common for computer programs&mdash;and especially web applications&mdash;to be constantly extended, and any time you make a change you risk introducing errors. Writing tests doesn&rsquo;t guarantee that these bugs won&rsquo;t happen, but it makes them much more likely to be caught (and fixed) when they occur. Furthermore, by writing tests for bugs that <em>do</em> happen, we can make them much less likely to recur.</p>
+<p>Tout d'abord, tester l'existence d'une page peut paraitre excessif, mais l'expérience montre que ça ne l'est pas. Tellement de choses peuvent mal tourner quand on développe un logiciel qu'avoir une bonne batterie de tests est inestimable pour assurer sa qualité. Plus encore, il est courant pour les programmes informatiques &mdash;&nbsp;et spécialement les applications applications&nbsp;&mdash; d'être étendu, et chaque fois que vous faites un changement vous risquez d'introduire des erreurs. L'écriture de tests ne garantit pas que ces erreurs ne surviendront pas, mais ils les rendent beaucoup plus faciles à localiser et à corriger. Plus encore, en écrivant des tests pour des bugs qui arrivent <em>vraiment</em>, nous pouvons réduire la probabilité qu'ils surviennent.</p>
 
-<p>(As noted in <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, if you find the tests overwhelming, go ahead and skip them on first reading. Once you have a stronger grasp of Rails and Ruby, you can loop back and learn testing on a second pass.)</p>
+<p>(Comme noté à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, si vous trouvez que le testing est trop écrasant, poursuivez en les sautant au cours d'une première lecture. Une fois que vous aurez une bonne saisie de Rails and Ruby, vous pourrez y revenir et apprendre le testing dans un second temps)</p>
 
 <div class="label" id="sec:testing_tools"></div>
 
 
-<h3><a id="sec:3.2.1" href="static-pages#sec:testing_tools" class="heading"><span class="number">3.2.1</span> Testing tools</a></h3>
+<h3><a id="sec:3.2.1" href="static-pages#sec:testing_tools" class="heading"><span class="number">3.2.1</span> Outils de test</a></h3>
 
 
-<p>To write tests for our sample application, our main tool is a framework called <a href="http://rspec.info/">RSpec</a>, which is a <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>domain-specific language</em></a> for describing the behavior of code, together with a program (called <code>rspec</code>) to verify the desired behavior. Designed for testing any Ruby program, RSpec has gained significant traction in the Rails community. Obie Fernandez, author of <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, has called RSpec &ldquo;the Rails Way&rdquo;, and I agree.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
+<p>Pour écrire des tests pour notre application exemple, notre outil principal sera le framework appelé <a href="http://rspec.info/">RSpec</a>, qui est un <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>langage de domaine spécifique</em></a> pour décrire le comportement du code, doublé d'un programme (appelé <code>rspec</code>) pour vérifier le comportement attendu. Conçu pour tester n'importe quel programme Ruby, RSpec a connu un regain important dans la communauté Rails. Obie Fernandez, auteur de <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, a appelé RSpec &ldquo;&nbsp;the Rails Way&nbsp;&rdquo; («&nbsp;La manière Rails&nbsp;»), et je suis d'accord.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
 
-<p>If you followed the steps in the introduction, RSpec has already been installed via the Bundler <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_rspec">extrait&nbsp;3.1</a>) and <code>bundle install</code>.</p>
+<p>Si vous avez suivi les étapes de l'introduction, RSpec est déjà installé via le Bundler <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_rspec">extrait&nbsp;3.1</a>) et la commande <code>bundle install</code>.</p>
 
 <div class="label" id="sec:autotest"></div>
 
@@ -847,15 +847,16 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.1.1" href="static-pages#sec:autotest" class="heading">Autotest</a></h4>
 
 
-<p>Autotest is a tool that continuously runs your test suite in the background based on the specific file changes you make. For example, if you change a controller file, Autotest runs the tests for that controller. The result is instant feedback on the status of your tests. We&rsquo;ll learn more about Autotest when we see it in action (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>).</p>
+<p>Autotest est un outil qui joue en permanence votre batterie de tests en arrière-plan, basé sur sur les changements de fichiers spécifiques que vous faites. Par exemple, si vous modifiez un fichier contrôleur, Autotest jouera les tests pour ce contrôleur spécifique. Le résultat est un feedback instantané sur l'état de vos tests. Nous en apprendrons davantage sur Autotest quand nous le verrons en actions (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>).</p>
 
-<p>Installing Autotest is optional, and configuring it can be a bit tricky, but if you can get it to work on your system I&rsquo;m sure you&rsquo;ll find it as useful as I do. To install Autotest, install the <tt>autotest</tt> and <tt>autotest-rails-pure</tt><sup class="footnote" id="fnref:3.8"><a href="#fn:3.8">8</a></sup> gems as follows:</p>
+<p>L'installation de Autotest est optionnelle, et sa configuration peut être un peu délicate, mais si vous parvenez à le faire fonctionner sur votre système, je suis certain que vous le trouverez tout comme moi très utile. Pour installer Autotest, installez les gems <tt>autotest</tt> et <tt>autotest-rails-pure</tt><sup class="footnote" id="fnref:3.8"><a href="#fn:3.8">8</a></sup> comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest -v 4.4.6
 <span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-rails-pure -v 4.1.2
 </pre></div>
 </div>
 
+<!-- FIN FRENCH -->
 
 <p>The next steps depend on your platform. I&rsquo;ll go through the steps for OS&nbsp;X, since that&rsquo;s what I use, and then give references to blog posts that discuss Autotest on Linux and Windows. On OS&nbsp;X, you should <a href="http://growl.info/">install Growl</a> (if you don&rsquo;t have it already) and then install the <tt>autotest-fsevent</tt> and <tt>autotest-growl</tt> gems:<sup class="footnote" id="fnref:3.9"><a href="#fn:3.9">9</a></sup></p>
 

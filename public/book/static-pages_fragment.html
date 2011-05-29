@@ -1318,21 +1318,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<!-- FIN FRENCH -->
-
 <div class="label" id="sec:red"></div>
 
 
-<h4><a id="sec:3.2.2.2" href="static-pages#sec:red" class="heading">Red</a></h4>
+<h4><a id="sec:3.2.2.2" href="static-pages#sec:red" class="heading">Rouge</a></h4>
 
 
-<p>Now let&rsquo;s get to Red part of the Red-Green cycle by writing a failing test for the <code>about</code> page. Following the models from <a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>, you can probably guess the right test (<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>).</p>
+<p>Maintenant voyons la partie Rouge de notre cycle Rouge-Vert en écrivant un test qui va échouer sur la page «&nbsp;À propos&nbsp;» (page <code>about</code)>. En suivant les modèles de l'<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>, vous pouvez probablement deviner le test adéquat (<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>).</p>
 
 <div class="label" id="code:failing_about_page"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.15.</span> <span class="description">The Pages controller spec with a failing test for the About page. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.15.</span> <span class="description">Le spec du contrôleur Pages avec un test d'échec pour la page «&nbsp;À propos&nbsp;». <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1340,21 +1338,21 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="n">render_views</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;contact&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;about&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;about&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
@@ -1364,7 +1362,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Note that we&rsquo;ve added a line to tell RSpec to <em>render the views</em> inside the controller tests. In other words, by default RSpec just tests actions inside a controller test; if we want it also to render the views, we have to tell it explicitly via the second line:</p>
+<p>Notez que nous avons ajouté une ligne pour dire à RSpec de <em>rendre les vues</em> à l'intérieur des tests du contrôleur. En d'autres termes, par défaut, RSpec teste juste les actions à l'intérieur d'un test d'un contrôleur de test&nbsp;; si vous voulez en plus qu'il rende les vues, nous devons lui demander explictement via la deuxième ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">PagesController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -1375,14 +1373,14 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>This ensures that if the test passes, the page is really there.</p>
+<p>Cela assure que si les tests réussissent, la page est vraiment là.</p>
 
-<p>The new test attempts to <code>get</code> the <code>about</code> action, and indicates that the resulting response should be a success. By design, it fails (with a red error message), as seen in <a class="ref" href="static-pages#fig:rspec_spec_red">illustration&nbsp;3.7</a> (<code>rspec spec/</code>) and <a class="ref" href="static-pages#fig:autotest_red">illustration&nbsp;3.8</a> (<code>autotest</code>). (If you test the views in the controllers as recommended in this tutorial, it&rsquo;s worth noting that changing the view file won&rsquo;t prompt Autotest to run the corresponding controller test. There&rsquo;s probably a way to configure Autotest to do this automatically, but usually I just switch to the controller and press &ldquo;space-backspace&rdquo; so that the file gets marked as modified. Saving the controller then causes Autotest to run the tests as desired.)</p>
+<p>Le nouveau test tente d'atteindre (<code>get</code>) l'action <code>about</code>, et indique que la réponse en résultant doit être un succès. À dessein, cela échoue (avec un message d'erreur rouge), comme le montre l'<a class="ref" href="static-pages#fig:rspec_spec_red">illustration&nbsp;3.7</a> (<code>rspec spec/</code>) et l'<a class="ref" href="static-pages#fig:autotest_red">illustration&nbsp;3.8</a> (<code>autotest</code>) (si vous testez les vues dans les contrôleurs comme le préconise ce tutoriel, cela vaut la peine de noter que changer le fichier de la vue d'invitera pas Autotest à jouer le test de contrôleur correspondant. Il existe probablement une façon de configurer Autotest pour faire cela automatiquement, mais habituellement je bascule juste vers le contrôleur et presse la touche &ldquo;espace-retour&rdquo; pour que le fichier soit marqué comme modifié. Sauver le contrôleur conduit Autotest à jouer les tests comme prévu).</p>
 
 <div class="label" id="fig:rspec_spec_red"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rspec_spec_red.png" alt="rspec_spec_red" /></span></div><div class="caption"><span class="header">Illustration 3.7: </span><span class="description">Failing spec for the About page using <code>rspec spec/</code>.&nbsp;<a href="http://railstutorial.org/images/figures/rspec_spec_red-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rspec_spec_red.png" alt="rspec_spec_red" /></span></div><div class="caption"><span class="header">Illustration 3.7: </span><span class="description">Specification de l'échec pour la page About («&nbsp;À propos&nbsp;») en utilisant <code>rspec spec/</code>.&nbsp;<a href="http://railstutorial.org/images/figures/rspec_spec_red-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1390,26 +1388,26 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:autotest_red"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_red.png" alt="autotest_red" /></span></div><div class="caption"><span class="header">Illustration 3.8: </span><span class="description">Failing spec for the About page using Autotest.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_red-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_red.png" alt="autotest_red" /></span></div><div class="caption"><span class="header">Illustration 3.8: </span><span class="description">Spécification de l'échec de la page About en utilisant Autotest.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_red-full.png">(taille normale)</a></span></div></div>
 
 
-<p>This is Red. Now let&rsquo;s get to Green.</p>
+<p>C'est Rouge. Maintenant obtenons le Vert.</p>
 
 <div class="label" id="sec:green"></div>
 
 
-<h4><a id="sec:3.2.2.3" href="static-pages#sec:green" class="heading">Green</a></h4>
+<h4><a id="sec:3.2.2.3" href="static-pages#sec:green" class="heading">Vert</a></h4>
 
 
-<p>Recall from <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a> that we can generate a static page in Rails by creating an action and corresponding view with the page&rsquo;s name. In our case, the About page will first need an action called <code>about</code> in the Pages controller. Having written a failing test, we can now be confident that, in getting it to pass, we will actually have created a working <code>about</code> page.</p>
+<p>Rappelez-vous, de la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, que nous pouvons générer une page statique avec Rails en créant une action et la vue correspondante avec le nom de la page. Dans notre cas, la page «&nbsp;À propos&nbsp;» aura d'abord besoin d'une action appelée <code>about</code> dans le contrôleur Pages. Ayant écrit un test d'échec, nous pouvons maintenant être sûr qu'en le faisant réussir, nous avons bien créé une page <code>about</code> qui fonctionne.</p>
 
-<p>Following the models provided by <code>home</code> and <code>contact</code> from <a class="ref" href="static-pages#code:pages_controller">extrait&nbsp;3.6</a>, let&rsquo;s first add an <code>about</code> action in the Pages controller (<a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>).</p>
+<p>En suivant les modèles fournis par <code>home</code> et <code>contact</code> dans l'<a class="ref" href="static-pages#code:pages_controller">extrait&nbsp;3.6</a>, commençons d'abord par ajouter l'action <code>about</code> dans le contrôleur Pages (<a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>).</p>
 
 <div class="label" id="code:adding_the_about_page"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.16.</span> <span class="description">The Pages controller with added <code>about</code> action. <br /> <code>app/controllers/pages_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.16.</span> <span class="description">Le contrôleur Pages avec l'ajout de l'action <code>about</code>. <br /> <code>app/controllers/pages_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1426,13 +1424,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Next, we&rsquo;ll add the <code>about</code> action to the routes file (<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a>).</p>
+<p>Ensuite, nous allons ajouté l'action <code>about</code> au fichier de routage (<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a>).</p>
 
 <div class="label" id="code:about_route"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.17.</span> <span class="description">Adding the <code>about</code> route. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.17.</span> <span class="description">Ajout de la route <code>about</code>. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
@@ -1446,13 +1444,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Finally, we&rsquo;ll add the <code>about</code> view. Eventually we&rsquo;ll fill it with something more informative, but for now we&rsquo;ll just mimic the content from the generated views (<a class="ref" href="static-pages#code:raw_home_view">extrait&nbsp;3.7</a> and <a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>) for the <code>about</code> view (<a class="ref" href="static-pages#code:raw_about_view">extrait&nbsp;3.18</a>).</p>
+<p>Pour finir, nous allons ajouter la Vue <code>about</code>. Éventuellement, nous pourrions la remplir avec quelque chose de plus informatif, mais pour le moment nous copierons seulement le contenu des vues générées (<a class="ref" href="static-pages#code:raw_home_view">extrait&nbsp;3.7</a> et <a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>) pour la vue <code>about</code> (<a class="ref" href="static-pages#code:raw_about_view">extrait&nbsp;3.18</a>).</p>
 
 <div class="label" id="code:raw_about_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.18.</span> <span class="description">A stub About page. <br /> <code>app/views/pages/about.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.18.</span> <span class="description">[(A stub About page)(Un talon de la page «&nbsp;À propos&nbsp;»)]. <br /> <code>app/views/pages/about.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#about<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/about.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -1460,7 +1458,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Running the specs or watching the update from Autotest (<a class="ref" href="static-pages#fig:autotest_back_to_green">illustration&nbsp;3.9</a>) should get us back to Green:</p>
+<p>Jouer les specs et regarder les actualisations depuis Autotest (<a class="ref" href="static-pages#fig:autotest_back_to_green">illustration&nbsp;3.9</a>) devrait retourner un message vert&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 </pre></div>
@@ -1470,15 +1468,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:autotest_back_to_green"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_back_to_green.png" alt="autotest_back_to_green" /></span></div><div class="caption"><span class="header">Illustration 3.9: </span><span class="description">Autotest back to Green: All tests passing.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_back_to_green-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_back_to_green.png" alt="autotest_back_to_green" /></span></div><div class="caption"><span class="header">Illustration 3.9: </span><span class="description">Autotest de retour au Vert&nbsp;: tous les tests réussisent.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_back_to_green-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Of course, it&rsquo;s never a bad idea to take a look at the page in a browser to make sure our tests aren&rsquo;t completely crazy (<a class="ref" href="static-pages#fig:raw_about_page">illustration&nbsp;3.10</a>).</p>
+<p>Bien sûr, ça n'est jamais une mauvaise idée de jeter un œil à la page dans un navigtaeur pour s'assurer que les tests ne sont pas totalement absurdes (<a class="ref" href="static-pages#fig:raw_about_page">illustration&nbsp;3.10</a>).</p>
 
 <div class="label" id="fig:raw_about_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_about_page.png" alt="raw_about_page" /></span></div><div class="caption"><span class="header">Illustration 3.10: </span><span class="description">The new (and rather raw) About page (<a href="http://localhost:3000/pages/about"><tt>/pages/about</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/raw_about_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_about_page.png" alt="raw_about_page" /></span></div><div class="caption"><span class="header">Illustration 3.10: </span><span class="description">La nouvelle (et plutôt brute de décoffrage) page «&nbsp;À Propos&nbsp;» (<a href="http://localhost:3000/pages/about"><tt>/pages/about</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/raw_about_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1486,80 +1484,80 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sec:refactor"></div>
 
 
-<h4><a id="sec:3.2.2.4" href="static-pages#sec:refactor" class="heading">Refactor</a></h4>
+<h4><a id="sec:3.2.2.4" href="static-pages#sec:refactor" class="heading">Restructurer</a></h4>
 
 
-<p>Now that we&rsquo;re at Green, we are free to <em>refactor</em> our code by changing its form without changing its function. Oftentimes code will start to &ldquo;smell&rdquo;, meaning that it gets ugly, bloated, or filled with repetition.  The computer doesn&rsquo;t care, of course, but humans do, so it is important to keep the code base clean by refactoring frequently. Having a good (passing!) test suite is an invaluable tool in this regard, as it dramatically lowers the probability of introducing bugs while refactoring.</p>
+<p>Maintenant que nous sommes au Vert, nous sommes libre de <em>restructurer</em> notre code en changeant sa forme sans changer sa fonction. Souvent, le codage se fait <em>au feeling</em>, ce qui signifie qu'il devient rapidement laid, bouffi et plein de répétitions. L'ordinateur s'en fiche, bien sûr, mais pas les humains, donc il est important de garder le code base le plus propre possible en le restructurant fréquemment. Avoir une bonne batterie de tests (qui réussissent) est un outil inestimable à cet égard, car il réduit considérablement la probabilité d'introduire des bogues en cours de restructuration.</p>
 
-<p>Our sample app is a little too small to refactor right now, but code smell seeps in at every crack, so we won&rsquo;t have to wait long: we&rsquo;ll already get busy refactoring in <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a> of this chapter.</p>
+<p>Notre application exemple est un peu trop petite pour la restructurer maintenant, mais l'odeur de code sale s'infiltre par chaque fissure, donc nous n'aurons pas à attendre trop longtemps&nbsp;: nous serons contraints de restructurer dès la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a> de ce chapitre.</p>
 
 <div class="label" id="sec:slightly_dynamic_pages"></div>
 
 
-<h2><a id="sec:3.3" href="static-pages#sec:slightly_dynamic_pages" class="heading"><span class="number">3.3</span> Slightly dynamic pages</a></h2>
+<h2><a id="sec:3.3" href="static-pages#sec:slightly_dynamic_pages" class="heading"><span class="number">3.3</span> Pages (un peu) dynamiques</a></h2>
 
 
-<p>Now that we&rsquo;ve created the actions and views for some static pages, we&rsquo;ll make them <em>very slightly</em> dynamic by adding some content that changes on a per-page basis: we&rsquo;ll have the title of each page change to reflect its content. Whether this represents <em>truly</em> dynamic content is debatable, but in any case it lays the necessary foundation for unambiguously dynamic content in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Maintenant que nous avons créé les actions et les vues pour quelques pages statiques, nous allons les rendre <em>très légèrement</em> dynamiques en ajoutant du contenu qui change [(on a per-page basis)(sur une base commune)]&nbsp;: nous devons changer le titre de chaque page pour qu'il reflète son contenu. Que cela représente <em>vraiment</em> un contenu dynamique est discutable, mais en tout cas il présente les fondements nécessaires pour le contenu indiscutablement dynamique du <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
-<p>(If you skipped the TDD material in <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>, be sure to create an About page at this point using the code from <a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>, <a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a>, and <a class="ref" href="static-pages#code:raw_about_view">extrait&nbsp;3.18</a>.)</p>
+<p>(Si vous avez passé ce qui concernait le TDD de la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>, assurez-vous de créer une page «&nbsp;À Propos&nbsp;» ici en utilisant le code de l'<a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>, de l'<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a> et de l'<a class="ref" href="static-pages#code:raw_about_view">extrait&nbsp;3.18</a>.)</p>
 
 <div class="label" id="sec:testing_a_title_change"></div>
 
 
-<h3><a id="sec:3.3.1" href="static-pages#sec:testing_a_title_change" class="heading"><span class="number">3.3.1</span> Testing a title change</a></h3>
+<h3><a id="sec:3.3.1" href="static-pages#sec:testing_a_title_change" class="heading"><span class="number">3.3.1</span> Tester un changement de titre</a></h3>
 
 
-<p>Our plan is to edit the Home, Contact, and About pages to add the kind of HTML structure we saw in <a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>, including titles that change on each page. It&rsquo;s a delicate matter to decide just which of these changes to test, and in general testing HTML can be quite fragile since content tends to change frequently. We&rsquo;ll keep our tests simple by just testing for the page titles.</p>
+<p>Notre plan est d'éditer les pages Home (<em>Accueil</em>), Contact et About (<em>À Propos</em>) pour ajouter le type de structure HTML que nous avons vu dans l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>, en incluant des titres qui changent pour chacune des pages. C'est un sujet épineux de décider lequel de ces changements tester, et en général, tester le code HTML peut se révéler hasardeux entendu que le contenu tend à changer fréquemment. Nous garderons nos tests simples en ne testant que le titre de la page.</p>
 
 <div class="label" id="table:static_pages"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_center"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Base title</strong></th><th class="align_left"><strong>Variable title</strong></th></tr><tr class="top_bar"><td class="align_center">Home</td><td class="align_left"><tt>/pages/home</tt></td><td class="align_left"><code>"Ruby on Rails Tutorial Sample App"</code></td><td class="align_left"><code>" | Home"</code></td></tr><tr><td class="align_center">Contact</td><td class="align_left"><tt>/pages/contact</tt></td><td class="align_left"><code>"Ruby on Rails Tutorial Sample App"</code></td><td class="align_left"><code>" | Contact"</code></td></tr><tr><td class="align_center">About</td><td class="align_left"><tt>/pages/about</tt></td><td class="align_left"><code>"Ruby on Rails Tutorial Sample App"</code></td><td class="align_left"><code>" | About"</code></td></tr></table></div><div class="caption"><span class="header">Table 3.1: </span><span class="description">The (mostly) static pages for the sample app.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_center"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Titre de base</strong></th><th class="align_left"><strong>Variable title</strong></th></tr><tr class="top_bar"><td class="align_center">Accueil</td><td class="align_left"><tt>/pages/home</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Accueil"</code></td></tr><tr><td class="align_center">Contact</td><td class="align_left"><tt>/pages/contact</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Contact"</code></td></tr><tr><td class="align_center">À Propos</td><td class="align_left"><tt>/pages/about</tt></td><td class="align_left"><code>"Simple App du tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | À Propos"</code></td></tr></table></div><div class="caption"><span class="header">Table 3.1: </span><span class="description">Les pages statiques (courantes) pour l'application exemple.</span></div></div>
 
 
-<p>By the end of this section, all three of our static pages will have titles of the form &ldquo;Ruby on Rails Tutorial Sample App | Home&rdquo;, where the last part of the title will vary depending on the page (<a class="ref" href="static-pages#table:static_pages">Table&nbsp;3.1</a>). We&rsquo;ll build on the tests in <a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>, adding title tests following the model in <a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a>.</p>
+<p>À la fin de cette section, nos trois pages statiques auront des titres de la forme &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails | Accueil&nbsp;&rdquo;, où la dernière partie de titre variera en fonction de la page (<a class="ref" href="static-pages#table:static_pages">Table&nbsp;3.1</a>). Nous construirons les tests d'après l'<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>, en ajoutant des tests sur le titre suivant le modèle de l'<a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a>.</p>
 
 <div class="label" id="code:title_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.19.</span> <span class="description">A title test.</span>       
+<div class="listing"><span class="header">Extrait 3.19.</span> <span class="description">Un test de titre.</span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;doit avoir le bon titre&quot;</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
   <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
-                    <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ruby on Rails Tutorial Sample App | Home&quot;</span><span class="p">)</span>
+                    <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | Accueil&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>This uses the <code>have_selector</code> method inside RSpec; the documentation for <code>have_selector</code> is surprisingly sparse, but what it does is to check for an HTML element (the &ldquo;selector&rdquo;) with the given content. In other words, the code</p>
+<p>Ce code utilise la méthode <code>have_selector</code> à l'intérieur de RSpec&nbsp;; la documentation sur <code>have_selector</code> est étonnament éparse, mais ce qu'elle fait est comparer le contenu d'un élément HTML (d'un &ldquo;selector&rdquo;) avec le contenu donné. En d'autres termes, le code…</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
-                  <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ruby on Rails Tutorial Sample App | Home&quot;</span><span class="p">)</span>
+                  <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | Accueil&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>checks to see that the content inside the <tt class="verb">&lt;title&gt;&lt;/title&gt;</tt> tags is <code>"Ruby on Rails Tutorial Sample App | Home"</code>.<sup class="footnote" id="fnref:3.16"><a href="#fn:3.16">16</a></sup> It&rsquo;s worth mentioning that the content need not be an exact match; any substring works as well, so that</p>
+<p>… s'assure que le contenu entre les balises <tt class="verb">&lt;title&gt;&lt;/title&gt;</tt> est bien <code>"Simple App du Tutoriel Ruby on Rails | Accueil"</code>.<sup class="footnote" id="fnref:3.16"><a href="#fn:3.16">16</a></sup> Il est utile de mentionner que le contenu n'a pas besoin d'être exact&nbsp;; toute sous-chaine fonctionne aussi, donc le code…</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot; | Home&quot;</span><span class="p">)</span>
+<div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot; | Accueil&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>will also match the full title.<sup class="footnote" id="fnref:3.17"><a href="#fn:3.17">17</a></sup></p>
+<p>… fonctionnera tout aussi bien.<sup class="footnote" id="fnref:3.17"><a href="#fn:3.17">17</a></sup></p>
 
-<p>Note that in <a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a> I&rsquo;ve broken the material inside <code>have_selector</code> into two lines; this tells you something important about Ruby syntax: Ruby doesn&rsquo;t care about newlines.<sup class="footnote" id="fnref:3.18"><a href="#fn:3.18">18</a></sup> The <em>reason</em> I chose to break the code into pieces is that I prefer to keep lines of source code under 80 characters for legibility.<sup class="footnote" id="fnref:3.19"><a href="#fn:3.19">19</a></sup> As it stands, I still find this code formatting rather ugly; <a class="ref" href="static-pages#sec:static_pages_exercises">section&nbsp;3.5</a> has a refactoring exercise that makes them much prettier.<sup class="footnote" id="fnref:3.20"><a href="#fn:3.20">20</a></sup></p>
+<p>Notez que dans l'<a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a> j'ai coupé le texte à l'intérieur du <code>have_selector</code> en deux lignes&nbsp;; cela nous apprend quelque chose d'important à propos de la syntaxe Ruby&nbsp;: Ruby ne se soucie pas des retours à la ligne.<sup class="footnote" id="fnref:3.18"><a href="#fn:3.18">18</a></sup> La <em>raison</em> pour laquelle j'ai choisi de couper le code en deux est que je préfère garder des lignes de code inférieures à 80 signes pour une question de lisibilité.<sup class="footnote" id="fnref:3.19"><a href="#fn:3.19">19</a></sup> À l'heure actuelle, je trouve le formatage de ce code plutôt laid&nbsp;; la <a class="ref" href="static-pages#sec:static_pages_exercises">section&nbsp;3.5</a> comprend un exercice de restructuration qui lui refera une beauté.<sup class="footnote" id="fnref:3.20"><a href="#fn:3.20">20</a></sup></p>
 
-<p>Adding new tests for each of our three static pages following the model of <a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a> gives us our new Pages controller spec (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
+<p>Ajouter les nouveaux tests pour chacune de nos trois pages statiques en suivant le modèle de l'<a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a> nous fournit notre nouveau spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
 
 <div class="label" id="code:pages_controller_spec_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.20.</span> <span class="description">The Pages controller spec with title tests. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.20.</span> <span class="description">Le spec du contrôleur Pages avec le test des titres. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1567,43 +1565,43 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="n">render_views</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
-                        <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ruby on Rails Tutorial Sample App | Home&quot;</span><span class="p">)</span>
+                        <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | Accueil&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;contact&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                         <span class="ss">:content</span> <span class="o">=&gt;</span>
-                          <span class="s2">&quot;Ruby on Rails Tutorial Sample App | Contact&quot;</span><span class="p">)</span>
+                          <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | Contact&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;about&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;about&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;about&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                         <span class="ss">:content</span> <span class="o">=&gt;</span>
-                          <span class="s2">&quot;Ruby on Rails Tutorial Sample App | About&quot;</span><span class="p">)</span>
+                          <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | À Propos&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -1611,26 +1609,26 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Note that the <code>render_views</code> line introduced in <a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a> is necessary for the title tests to work.</p>
+<p>Notez que la ligne <code>render_views</code> introduite dans l'<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a> est nécessaire pour que le test des titres fonctionne.</p>
 
-<p>With these tests in place, you should run</p>
+<p>Avec ces tests en place, nous pouvons jouer&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 </pre></div>
 </div>
 
 
-<p>or use Autotest to verify that our code is now Red (failing tests).</p>
+<p>… ou utiliser Autotest pour vérifier que notre code est maintenant Rouge (échec des tests).</p>
 
 <div class="label" id="sec:passing_title_tests"></div>
 
 
-<h3><a id="sec:3.3.2" href="static-pages#sec:passing_title_tests" class="heading"><span class="number">3.3.2</span> Passing title tests</a></h3>
+<h3><a id="sec:3.3.2" href="static-pages#sec:passing_title_tests" class="heading"><span class="number">3.3.2</span> Réussir les tests de titre</a></h3>
 
 
-<p>Now we&rsquo;ll get our title tests to pass, and at the same time add the full HTML structure needed to make valid web pages. Let&rsquo;s start with the Home page (<a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a>), using the same basic HTML skeleton as in the &ldquo;hello&rdquo; page from <a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>.</p>
+<p>Nous allons maintenant faire en sorte que nos tests de titre réussissent, et en même temps ajouter une structure HTML valide. Commençons avec la page d'accueil (<a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a>), en utilisant le même squelette HTML basique que la page &ldquo;hello&rdquo; de l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>.</p>
 
-<p><em>Note:</em> In Rails&nbsp;3, the controller generator creates a <em>layout</em> file, whose purpose we will explain shortly, but which for now you should remove before proceeding:</p>
+<p><em>Note&nbsp;:</em> avec Rails&nbsp;3, le générateur de contrôleur crée un fichier de <em>mise en forme</em> (<em>layout</em>), dont nous expliquerons brièvement la fonction, mais que nous devons pour le moment supprimer avant de poursuivre&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rm app/views/layouts/application.html.erb
 </pre></div>
@@ -1641,19 +1639,18 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.21.</span> <span class="description">The view for the Home page with full HTML structure. <br /> <code>app/views/pages/home.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.21.</span> <span class="description">La vue pour la page d'accueil avec la structure HTML complète. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | Home<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | Accueil<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Simple App<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      This is the home page for the
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-      sample application.
+      Ceci est la page d'accueil de l'application exemple du
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1661,30 +1658,30 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p><a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a> uses the title tested for in <a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>:</p>
+<p>L''<a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a> utilise le titre testé dans l'<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | Home<span class="nt">&lt;/title&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | Accueil<span class="nt">&lt;/title&gt;</span>
 </pre></div>
 </div>
 
 
-<p>As a result, the tests for the Home page should now pass. We&rsquo;re still Red because of the failing Contact and About tests, and we can get to Green with the code in <a class="ref" href="static-pages#code:contact_view_full_html">extrait&nbsp;3.22</a> and <a class="ref" href="static-pages#code:about_view_full_html">extrait&nbsp;3.23</a>.</p>
+<p>Comme résultat, les tests pour la page d'accueil devraient maintenant réussir. Nous obenons toujours du Rouge à cause des tests des pages Contact et «&nbsp;À Propos&nbsp;», et nous allons pouvoir obtenir du Vert avc le code de l'<a class="ref" href="static-pages#code:contact_view_full_html">extrait&nbsp;3.22</a> et de l'<a class="ref" href="static-pages#code:about_view_full_html">extrait&nbsp;3.23</a>.</p>
 
 <div class="label" id="code:contact_view_full_html"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.22.</span> <span class="description">The view for the Contact page with full HTML structure. <br /> <code>app/views/pages/contact.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.22.</span> <span class="description">La vue pour la page de Contact avec la structure HTML complète. <br /> <code>app/views/pages/contact.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | Contact<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | Contact<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      Contact Ruby on Rails Tutorial about the sample app at the
+      Contact Ruby on Rails Tutorial à propos de l'application exemple à
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>feedback page<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -1699,20 +1696,20 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.23.</span> <span class="description">The view for the About page with full HTML structure. <br /> <code>app/views/pages/about.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.23.</span> <span class="description">La vue pour la page «&nbsp;À Propos&nbsp;» avec la structure HTML complète. <br /> <code>app/views/pages/about.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | About<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | À Propos<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>About Us<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>À propos de nous<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-      is a project to make a book and screencasts to teach web development
-      with <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. This
-      is the sample application for the tutorial.
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Le Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
+      est un projet de livre et de screencasts pour apprendre le développement web
+      avec <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. Ceci
+      est l'application exemple du tutoriel.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1720,22 +1717,22 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>These example pages introduce the <em>anchor</em> tag&nbsp;<code>a</code>, which creates links to the given URL (called an &ldquo;href&rdquo;, or &ldquo;hypertext reference&rdquo;, in the context of an anchor tag):</p>
+<p>Ces pages exemples introduisent la balise <em>ancre</em> tag&nbsp;<code>a</code>, qui crée des liens vers les URLs données (appelés &ldquo;href&rdquo; ou &ldquo;hypertext reference&rdquo; dans le contexte d'une balise ancre)&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 
 
-<p>You can see the results in <a class="ref" href="static-pages#fig:new_home_page">illustration&nbsp;3.11</a>.</p>
+<p>Vous pouvez voir les résultats dans l'<a class="ref" href="static-pages#fig:new_home_page">illustration&nbsp;3.11</a>.</p>
 
 <div class="label" id="fig:new_home_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_home_page.png" alt="new_home_page" /></span></div><div class="caption"><span class="header">Illustration 3.11: </span><span class="description">A minimal Home page for the sample app (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/new_home_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_home_page.png" alt="new_home_page" /></span></div><div class="caption"><span class="header">Illustration 3.11: </span><span class="description">Une page accueil minimale pour l'application exemple (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/new_home_page-full.png">(taille normale)</a></span></div></div>
 
 
-
+<!-- FIN FRENCH -->
 
 <div class="label" id="sec:instance_variables_embedded_ruby"></div>
 
@@ -1747,7 +1744,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <ul>
 <li>The page titles are almost (but not quite) exactly the same.</li>
-<li>&ldquo;Ruby on Rails Tutorial Sample App&rdquo; is common to all three titles.</li>
+<li>&ldquo;Simple App du Tutoriel Ruby on Rails&rdquo; is common to all three titles.</li>
 <li>The entire HTML skeleton structure is repeated on each page.</li>
 </ul>
 
@@ -1802,7 +1799,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
@@ -1844,7 +1841,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
@@ -1869,7 +1866,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>About Us<span class="nt">&lt;/h1&gt;</span>
@@ -1898,7 +1895,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
       Contents
@@ -1921,7 +1918,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">csrf_meta_tag</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
@@ -2058,9 +2055,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <ol>
 
-<li>Make a Help page for the sample app. First write a test for the existence of a page at the URL <tt>/pages/help</tt>. Then write a second test for the title &ldquo;Ruby on Rails Tutorial Sample App | Help&rdquo;. Get your tests to pass, and then fill in the Help page with the content from <a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
+<li>Make a Help page for the sample app. First write a test for the existence of a page at the URL <tt>/pages/help</tt>. Then write a second test for the title &ldquo;Simple App du Tutoriel Ruby on Rails | Help&rdquo;. Get your tests to pass, and then fill in the Help page with the content from <a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
 
-<li>You may have noticed some repetition in the Pages controller spec (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). In particular, the base title, &ldquo;Ruby on Rails Tutorial Sample App&rdquo;, is the same for every title test. Using the RSpec <code>before(:each)</code> facility, which executes a block of code before each test case, fill in <a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> to define a <code>@base_title</code> instance variable that eliminates this duplication. (This code uses two new elements: a <em>symbol</em>, <code>:each</code>, and the string concatenation operator <code>+</code>. We&rsquo;ll learn more about both in <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, and we&rsquo;ll see <code>before(:each)</code> again in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.) Note that, with the base title captured in an instance variable, we are now able to align <code>:content</code> with the first character inside each left parenthesis&nbsp;<code>(</code>. This is my preferred convention for formatting code broken into multiple lines.</li>
+<li>You may have noticed some repetition in the Pages controller spec (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). In particular, the base title, &ldquo;Simple App du Tutoriel Ruby on Rails&rdquo;, is the same for every title test. Using the RSpec <code>before(:each)</code> facility, which executes a block of code before each test case, fill in <a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> to define a <code>@base_title</code> instance variable that eliminates this duplication. (This code uses two new elements: a <em>symbol</em>, <code>:each</code>, and the string concatenation operator <code>+</code>. We&rsquo;ll learn more about both in <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, and we&rsquo;ll see <code>before(:each)</code> again in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.) Note that, with the base title captured in an instance variable, we are now able to align <code>:content</code> with the first character inside each left parenthesis&nbsp;<code>(</code>. This is my preferred convention for formatting code broken into multiple lines.</li>
 
 </ol>
 

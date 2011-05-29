@@ -695,7 +695,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.4: </span><span class="description">Contenu du dossier <code>config</code> de l'application exemple.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Puis nous avons généra les actions <code>home</code> et <code>contact</code>, le routage de fichier possède déjà des règles pour chacun d'eux, comme on peut le voir dans l'<a class="ref" href="static-pages#code:pages_routes">extrait&nbsp;3.5</a>.</p>
+<p>Puis nous avons généré les actions <code>home</code> et <code>contact</code>, le routage de fichier possède déjà des règles pour chacun d'eux, comme on peut le voir dans l'<a class="ref" href="static-pages#code:pages_routes">extrait&nbsp;3.5</a>.</p>
 
 <div class="label" id="code:pages_routes"></div>
 
@@ -734,7 +734,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sidebar:get_etc"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 3.1.</span><span class="description"><tt>GET</tt>, et cet.</span></span>
+<div class="sidebar"><span class="title"><span class="header">Box 3.1.</span><span class="description"><tt>GET</tt>, et caetera</span></span>
 <p>Le Hypertext Transfer Protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) définit quatre opérations de base, correspondant aux quatre verbes <em>get</em> (<em>obtenir</em>), <em>post</em> (<em>poster</em>), <em>put</em> (<em>déposer</em>) et <em>delete</em> (<em>effacer</em>). Cela fait référence aux opérations entre un ordinateur <em>client</em> (typiquement jouant un navigateur web comme Firefox ou Safari) et un <em>serveur</em> (typiquement un serveur web tel que Apache ou Nginx) (il est important de comprendre qu'en développant des applications web sur un ordinateur local, le client et le serveur sont la même machine physique, mais en général ils sont différents). L'accent mis sur les verbes HTTP est typique des frameworks (à commencer par Rails) influencés par l'<em>architecture REST</em>, que nous avons abordée brièvement au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> et que nous apprendrons mieux au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
 <p><tt>GET</tt> est l'opération HTTP la plus courante, utilisée pour  <em>lire</em> des données sur le web&nbsp;; elle signifie simplement &ldquo;atteint une page&rdquo;, et chaque fois que vous visitez une page, telle que google.com ou craigslist.org, votre navigateur soumet une requête <tt>GET</tt>. La requête <tt>POST</tt> est l'opération suivante la plus courante&nbsp;; c'est la requête envoyée par votre navigateur quand vous soumettez un formulaire. Dans les applications Rails, les requêtes <tt>POST</tt> sont utilisées typiquement pour <em>créer</em> des choses (bien que le protocope HTTP permet aussi à la requête <tt>POST</tt> de procéder à des actualissations)&nbsp;; par exemple, la requête <tt>POST</tt> envoyée quand vous soumettez un formulaire pour la création d'un nouvel utilisateur sur votre site web. Les deux autres verbes, <tt>PUT</tt> et <tt>DELETE</tt>, sont utilisés pour <em>actualiser</em> et <em>détruire</em> des choses sur le serveur distant. Ces requêtes sont moins courantes que <tt>GET</tt> et <tt>POST</tt> puisque les navigateurs sont incapables de les envoyer nativement, mais certains frameworks web (comme Ruby on Rails) ont des façons intelligentes de <em>simuler</em> ces demandes par les navigateurs.</p>
@@ -856,9 +856,8 @@ par [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div>
 
-<!-- FIN FRENCH -->
 
-<p>The next steps depend on your platform. I&rsquo;ll go through the steps for OS&nbsp;X, since that&rsquo;s what I use, and then give references to blog posts that discuss Autotest on Linux and Windows. On OS&nbsp;X, you should <a href="http://growl.info/">install Growl</a> (if you don&rsquo;t have it already) and then install the <tt>autotest-fsevent</tt> and <tt>autotest-growl</tt> gems:<sup class="footnote" id="fnref:3.9"><a href="#fn:3.9">9</a></sup></p>
+<p>La prochaine étape dépend de votre plateforme. Je passerai par les étapes pour le système OS&nbsp;X, puisque c'est celui que j'utilise, et donnerai ensuite les références vers les posts de blog qui parlent d'Autotest sur Linus et Windows. Sur OS&nbsp;X, vous devrez <a href="http://growl.info/">installer Growl</a> (si vous ne l'avez pas déjà) et installer alors les gems <tt>autotest-fsevent</tt> et <tt>autotest-growl</tt>&nbsp;:<sup class="footnote" id="fnref:3.9"><a href="#fn:3.9">9</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-fsevent -v 0.2.4
 <span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-growl -v 0.2.9
@@ -866,9 +865,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>If FSEvent won&rsquo;t install properly, double-check that <a href="http://developer.apple.com/technologies/tools/xcode.html">Xcode</a> is installed on your system.</p>
+<p>Si FSEvent ne s'installe pas proprement, vérifiez bien que <a href="http://developer.apple.com/technologies/tools/xcode.html">Xcode</a> est installé sur votre système.</p>
 
-<p>To use the Growl and FSEvent gems, make an Autotest configuration file in your Rails root directory and fill it with the contents of <a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> (or <a class="ref" href="static-pages#code:dot_autotest_alt">extrait&nbsp;3.10</a> if <a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> gives an error on your system):</p>
+<p>Pour utilise les gems Growl et FSEvent, faite un fichier de configuration Autotest dans votre dossier Rails racine et remplissez-le avec le contenu de  <a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> (ou de l'<a class="ref" href="static-pages#code:dot_autotest_alt">extrait&nbsp;3.10</a> si l'<a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> renvoie une erreur sur votre système)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate .autotest
 </pre></div>
@@ -879,7 +878,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.9.</span> <span class="description">The <code>.autotest</code> configuration file for Autotest on OS&nbsp;X.</span>       
+<div class="listing"><span class="header">Extrait 3.9.</span> <span class="description">Le fichier de configuration <code>.autotest</code> pour Autotest sur OS&nbsp;X.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;autotest/growl&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;autotest/fsevent&#39;</span>
@@ -893,7 +892,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.10.</span> <span class="description">An alternate <code>.autotest</code> file needed on some systems.</span>       
+<div class="listing"><span class="header">Extrait 3.10.</span> <span class="description">Un fichier <code>.autotest</code> alternatif nécessaire sur certains systèmes.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;autotest-growl&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;autotest-fsevent&#39;</span>
@@ -901,30 +900,30 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>(Note: this will create an Autotest configuration for the sample application only; if you want to share this Autotest configuration with other Rails or Ruby projects, you should create the <code>.autotest</code> file in your <em>home</em> directory instead:</p>
+<p>(Note&nbsp;: cela créera une configuration Autotest pour l'application exemple seulement&nbsp;; si vous voulez partager cette configuration Autotest avec les autres projets Rails ou Ruby, vous devrez crér une fichier <code>.autotest</code> plutôt dans votre dossier <em>accueil</em> (<em>home</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate ~/.autotest
 </pre></div>
 </div>
 
 
-<p>where <tt class="verb">~</tt> (tilde) is the Unix symbol for &ldquo;home directory&rdquo;.)</p>
+<p>où <tt class="verb">~</tt> (tilde) est le symbole Unix pour le &ldquo;&nbsp;dossier home&nbsp;&rdquo;).</p>
 
-<p>If you&rsquo;re running Linux with the Gnome desktop, you should try the steps at <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, which sets up on Linux a system similar to Growl notifications on OS&nbsp;X. Windows users should try installing <a href="http://www.growlforwindows.com/gfw/">Growl for Windows</a> and then follow the instructions at the <a href="http://github.com/svoop/autotest-growl">GitHub page for <code>autotest-growl</code></a>. Both Linux and Windows users might want to take a look at <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>; <em>Rails Tutorial</em> reader Fred Schoeneman has a write-up <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">about Autotest notification on his blog</a>.<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
+<p>Si vous tournez sous Linux avec le bureau Gnome, vous devrez essayer les étapes décrites à l'adresse <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, qui installe sur Linux un système semblable aux notifications Growl sur OS&nbsp;X. Les utilisateurs Windows devront essayer d'installer <a href="http://www.growlforwindows.com/gfw/">Growl pour Windows</a> et suivre ensuite les instructions de la page <a href="http://github.com/svoop/autotest-growl">GitHub pour <code>autotest-growl</code></a>. Les utilisateurs Linux tout comme les utilisateurs Windows peuvent avoir à jeter un œil à la page <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>&nbsp;; le lecteur du <em>Tutoriel Rails</em> Fred Schoeneman a écrit un compte-rendu intéressant sur son blog&nbsp;: <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">À propos des notifications Autotest</a>.<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
 
 <div class="label" id="sec:TDD"></div>
 
 
-<h3><a id="sec:3.2.2" href="static-pages#sec:TDD" class="heading"><span class="number">3.2.2</span> TDD: Red, Green, Refactor</a></h3>
+<h3><a id="sec:3.2.2" href="static-pages#sec:TDD" class="heading"><span class="number">3.2.2</span> TDD&nbsp;: Rouge, Vert, Restructurer</a></h3>
 
 
-<p>In test-driven development, we first write a <em>failing</em> test: in our case, a piece of code that expresses the idea that there &ldquo;should be an <code>about</code>&rdquo; page. Then we get the test to pass, in our case by adding the <code>about</code> action and corresponding view. The reason we don&rsquo;t typically do the reverse&mdash;implement first, then test&mdash;is to make sure that we actually test for the feature we&rsquo;re adding. Before I started using TDD, I was amazed to discover how often my &ldquo;tests&rdquo; actually tested the wrong thing, or even tested nothing at all. By making sure that the test fails first and <em>then</em> passes, we can be more confident that the test is doing the right thing.</p>
+<p>Dans un «&nbsp;développement conduit par le test&nbsp;» (TDD), nous écrivons d'abord un test <em>échec</em>&nbsp;: dans notre cas, une pièce de code qui exprime l'idée qu'il devrait y avoir une page «&nbsp;à propos&nbsp;» (<code>about</code>). Nous lançons alors le test, dans notre cas en ajoutant l'action <code>about</code> et la vue correspondante. La raison typique pour laquelle nous ne faisons pas l'inverse &mdash;&nbsp;l'implémentation d'abord, puis le test&nbsp;&mdash; permet de nous assurer que nous testons vraiment la fonctionnalité que nous ajoutons. Avant d'utiliser le processus TDD j'étais souvent surpris de découvrir que mes tests testaient en réalité la mauvaise chose, quand ils ne testaient tout simplement rien du tout. En s'assurant que, dans un premier temps, le test conduit à un échec et <em>ensuite</em> réussit, nous pouvons être plus confiant sur le fait que nous accomplissons le bon test.</p>
 
-<p>It&rsquo;s important to understand that TDD is not always the right tool for the job. In particular, when you aren&rsquo;t at all sure how to solve a given programming problem, it&rsquo;s often useful to skip the tests and write only application code, just to get a sense of what the solution will look like. (In the language of <a href="http://en.wikipedia.org/wiki/Extreme_Programming">Extreme Programming (XP)</a>, this exploratory step is called a <em>spike</em>.) Once you see the general shape of the solution, you can then use TDD to implement a more polished version.</p>
+<p>Il est important de comprendre que TDD n'est pas toujours le bon outil pour accomplir le travail. En particulier, quand vous n'êtes pas sûr du tout de comment résoudre un problème de programmation donné, il est souvent utile de laisser tomber les tests et d'écrire seulement le code de l'application, juste pour sentir à quoi la solution pourrait ressembler (dans le langage de l''<a href="http://en.wikipedia.org/wiki/Extreme_Programming">Extreme Programming (XP)</a>, cette étape d'exploration est appelée  une <em>spike</em> &mdash;&nbsp;une «&nbsp;pointe&nbsp;», un gros clou). Une fois que vous avez trouvé la forme générale de la solution, vous pouvez alors utiliser TDD pour implémenter une version plus efficiente.</p>
 
-<p>One way to proceed in test-driven development is a cycle known as &ldquo;Red, Green, Refactor&rdquo;. The first step, Red, refers to writing a failing test, which many test tools indicate with the color red. The next step, Green, refers to a passing test, indicated with the color (wait for it) green. Once we have a passing test (or set of tests), we are free to <em>refactor</em> our code, changing the form (eliminating duplication, for example) without changing the function.</p>
+<p>Une façon de procéder au développement conduit par le test est un cycle connu sous le terme &ldquo;&nbsp;Rouge, Vert, Restructurer&nbsp;&rdquo;. La première étape, le Rouge, se réfère à l'écriture d'un test conduisant à l'échec, que de nombreux outils de test indiquent avec la couleur rouge. L'étape suivante, Vert, se réfère à un test conduit à la réussite, indiqué par la couleur (attendue) verte. Une fois que nous avons un test qui réussit (ou une batterie de tests), nous sommes libre de <em>restructurer</em> notre code, d'en changer la forme (en éliminant les répétitions par exemple) sans changer la fonction.</p>
 
-<p>We don&rsquo;t have any colors yet, so let&rsquo;s get started toward Red. RSpec (and testing in general) can be a little intimidating at first, so we&rsquo;ll use the tests generated by <code>rails generate controller Pages</code> in <a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> to get us started. Since I&rsquo;m not partial to separate tests for views or helpers, which I&rsquo;ve found to be either brittle or redundant, our first step is to remove them. If you&rsquo;re using Git, you can do this as follows:</p>
+<p>Nous n'avons pas encore de couleur, donc commençons par le Rouge. RSpec (et le testing en général) peut être intimidant dans un premier temps, donc nous allons utiliser les tests générés par les <code>rails generate controller Pages</code> (les <em>Pages de génération de contrôleur de Rails</em>) de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> pour commencer. Puisque je ne suis pas partisan de séparer les tests pour les Vues de ceux pour les Helpers, ce que j'ai trouvé soit fragile soit redondant, notre première étape va consister à les effacer. Si vous utilisez Git, vous pouvez le faire comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git rm -r spec/views
 <span class="gp">$</span> git rm -r spec/helpers
@@ -932,7 +931,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Otherwise, remove them directly:</p>
+<p>Dans le cas contraire, supprimez-les directement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rm -rf spec/views
 <span class="gp">$</span> rm -rf spec/helpers
@@ -940,15 +939,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>We&rsquo;ll handle tests for views and helpers directly in the controller tests starting in <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>.</p>
+<p>Nous allons traiter les tests pour les Vues et les Helpers directement dans les tests du contrôleur commençant à la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>.</p>
 
-<p>To get started with RSpec, take a look at the Pages controller spec<sup class="footnote" id="fnref:3.11"><a href="#fn:3.11">11</a></sup> we just generated (<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>).</p>
+<p>Pour commencer avec RSpec, jetez un œil aux spécifications du contrôleurs  Pages<sup class="footnote" id="fnref:3.11"><a href="#fn:3.11">11</a></sup> que nous venons de générer (<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>).</p>
 
 <div class="label" id="code:default_pages_controller_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.11.</span> <span class="description">The generated Pages controller spec. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.11.</span> <span class="description">Les spécifications du contrôleur Pages généré. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -972,12 +971,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>This code is pure Ruby, but even if you&rsquo;ve studied Ruby before it probably won&rsquo;t look very familiar. This is because RSpec uses the general malleability of Ruby to define a <em>domain-specific language</em> (DSL) built just for testing. The important point is that <em>you do not need to understand RSpec&rsquo;s syntax to be able to use RSpec</em>. It may seem like magic at first, but RSpec is designed to read more or less like English, and if you follow the examples from the <code>generate</code> script and the other examples in this tutorial you&rsquo;ll pick it up fairly quickly.</p>
+<p>Ce code est en pur Ruby, mais même si vous avez étudié Ruby précédemment il ne vous semblera pas très familier. C'est parce que RSpec utilise la malléabilité de Ruby pour définir son propre <em>langage de dommaine</em> (<em>domain-specific language</em> (DSL)) construit juste pour le testing. Le point important ici est que <em>vous n'avez pas besoin de comprendre la syntaxe RSpec pour pouvoir utiliser RSpec</em>. Ça peut sembler magique dans un premier temps, mais RSpec est conçu pour se lire plus ou moins comme de l'anglais, et si vous suivez les exemples du script généré et les autres exemples de ce tutoriel, [(you&rsquo;ll pick it up fairly quickly)(vous le percevrez rapidement bien)].</p>
 
-<p><a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> contains two <code>describe</code> blocks, each with one <em>example</em> (i.e., a block starting with <code>it "&hellip;" do</code>). Let&rsquo;s focus on the first one to get a sense of what it does:</p>
+<p>L''<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> contient deux blocs descriptifs (<code>describe</code> blocks), chacun avec un <em>exemple</em> (par exemple un bloc commençant avec <code>it "&hellip;" do</code> &mdash;&nbsp;<code>il "…" fait</code>). Concentrons-nous sur le premier pour sentir ce qu'il fait&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
@@ -986,22 +985,22 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>The first line indicates that we are describing a <tt>GET</tt> operation for the <code>home</code> action. This is just a description, and it can be anything you want; RSpec doesn&rsquo;t care, but you and other human readers probably do. In this case, <code>"GET &rsquo;home&rsquo;"</code> indicates that the test corresponds to an HTTP <tt>GET</tt> request, as discussed in <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>. Then the spec says that when you visit the home page, it should be successful. As with the first line, what goes inside the quote marks is irrelevant to RSpec, and is intended to be descriptive to human readers. The third line, <code>get &rsquo;home&rsquo;</code>, is the first line that really does something. Inside of RSpec, this line <em>actually submits a GET request</em>; in other words, it acts like a browser and hits a page, in this case <tt>/pages/home</tt>. (It knows to hit the Pages controller automatically because this is a Pages controller test; it knows to hit the home page because we tell it to explicitly.) Finally, the fourth line says that the <em>response</em> of our application should indicate success (i.e., it should return a <em>status code</em> of <tt>200</tt>; see <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>).</p>
+<p>La première ligne indique que nous décrivons (<em>describe</em>) un opération <tt>GET</tt> pour l'action <code>home</code>. C'est juste une description, et ça peut être ce que vous voulez&nbsp;; RSpec s'en fiche, mais vous ou d'autres lecteurs humains probablement pas. Dans ce cas, <code>"GET &rsquo;home&rsquo;"</code> indique que le test correspond à une requête HTTP <tt>GET</tt>, comme discutée dans le <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>. Alors la spécification dit que lorsque vous visitez la page d'accueil, cela devrait réussir. Comme avec la première ligne, ce qui vient à l'intérieur des guillemets n'intéresse pas de RSpec, n'est pertinent qu'aux lecteurs humains. La troisième ligne, <code>get &rsquo;home&rsquo;</code>, est la première ligne qui véritablement accomplit quelque chose. À l'intérieur de RSpec, cette ligne <em>soumet vraiment une requête GET</em>&nbsp;; en d'autres termes, elle agit comme un navigateur et pointe vers la page, dans ce cas <tt>/pages/home</tt> (il sait automatiquement qu'il doit toucher le contrôleur Pages puisque c'est un test de ce contrôleur Pages&nbsp;; il sait qu'il doit atteindre la page d'accueil parce que nous lui disons explicitement). Enfin, la quatrième ligne dit que la <em>réponse</em> (<em>response</em>) de notre application devrait indiquer un succès (elle devrait par exemple retourner un <em>code d'état</em> de <tt>200</tt>&nbsp;; voir <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>).</p>
 
 <div class="label" id="sidebar:response_codes"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 3.2.</span><span class="description">HTTP response codes</span></span>
-<p>After a client (such as a web browser) sends a request corresponding to one of the HTTP verbs (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>), the web server <em>responds</em> with a numerical code indicating the <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP status</a> of the response. For example, a status code of <tt>200</tt> means &ldquo;success&rdquo;, and a status code of 301 means &ldquo;permanent redirect&rdquo;. If you <a href="http://www.google.com/search?q=install+curl">install <tt>curl</tt></a>, a command-line client that can issue HTTP requests, you can see this directly at, e.g., <tt>www.google.com</tt> (where the <tt class="verb">--head</tt> flag prevents <code>curl</code> from returning the whole page):</p>
+<div class="sidebar"><span class="title"><span class="header">Box 3.2.</span><span class="description">Codes de réponse HTTP</span></span>
+<p>Après qu'un client (tel qu'un navigateur web) envoie une requête correspondant à un des verbes HTTP (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>), le serveur web <em>répond</em> par un code numérique indiquant le <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">statut HTTP</a> de la réponse. Par exemple, un code d'état de <tt>200</tt> signifie la réussite et un code d'état de 301 signifie une &ldquo;&nbsp;redirection permanente&nbsp;&rdquo;. Si vous avez <a href="http://www.google.com/search?q=install+curl">installé <tt>curl</tt></a>, un client en ligne de commande qui peut traiter les requêtes HTTP, vous pouvez voir cela directement à, par exemple, <tt>www.google.com</tt> (où les drapeaux <tt class="verb">--head</tt> empêchent <code>curl</code> de retourner la page complète)&nbsp;:</p>
 
-<pre class="verbatim">  $ curl --head www.google.com
+<pre class="verbatim">  $ curl --head www.google.fr
   HTTP/1.1 200 OK
   .
   .
   .</pre>
 
 
-<p>Here Google indicates that the request was successful by returning the status <tt>200&nbsp;OK</tt>. In contrast, <tt>google.com</tt> is permanently redirected (to <tt>www.google.com</tt>, naturally), indicated by status code  <tt>301</tt> (a &ldquo;<tt>301</tt> redirect&rdquo;):</p>
+<p>Ici Google indique que la requête a été exécutée avec succès en retournant le code d'état <tt>200&nbsp;OK</tt>. <em>A contrario</em>, <tt>google.com</tt> est redirigé de façon permanente (vers <tt>www.google.com</tt>, naturellement), indiquant un code d'état <tt>301</tt> (une &ldquo;&nbsp;redirection <tt>301</tt> redirect&nbsp;&rdquo;)&nbsp;:</p>
 
 <pre class="verbatim">  $ curl --head google.com
   HTTP/1.1 301 Moved Permanently
@@ -1011,13 +1010,13 @@ par [Michael Hartl](http://michaelhartl.com/).
   .</pre>
 
 
-<p>(<em>Note:</em> The above results may vary by country.)</p>
+<p>(<em>Note&nbsp;:</em> le résultat retourné ci-dessus peut varier légèrement suivant les pays)</p>
 
-<p>When we write <code>response.should be_success</code> in an RSpec test, RSpec verifies that our application&rsquo;s response to the request is status code&nbsp;<tt>200</tt>.</p>
+<p>Quand nous écrivons <code>response.should be_success</code> (<em>la_réponse.devrait_être_un_succès</em>) dans un test RSpec, RSpec vérifie que la réponse de notre application à la requête est un code d'état de <tt>200</tt>.</p>
 </div>
 
 
-<p>Now it&rsquo;s time to run our tests. There are several different and mostly equivalent ways to do this.<sup class="footnote" id="fnref:3.12"><a href="#fn:3.12">12</a></sup> One way to run all the tests is to use the <code>rspec</code> script at the command line as follows:<sup class="footnote" id="fnref:3.13"><a href="#fn:3.13">13</a></sup></p>
+<p>Il est temps maintenant de faire jouer nos tests. Il existe plusierurs façons différentes et équivalentes de le faire.<sup class="footnote" id="fnref:3.12"><a href="#fn:3.12">12</a></sup> Une façon de jouer tous les tests consiste à utiliser le script <code>rspec</code> en ligne de commande comme suit&nbsp;:<sup class="footnote" id="fnref:3.13"><a href="#fn:3.13">13</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 <span class="go">....</span>
@@ -1029,7 +1028,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>On some systems (especially using the Windows command prompt), you may get an error at this stage indicating trouble finding the <code>rspec</code> program:</p>
+<p>Sur certains système (spécialement ceux utilisant l'invite de commande Windows), vous pourriez avoir un message d'erreur à ce stade indiquant des difficultés à trouver le programme <code>rspec</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">C:\Sites\sample_app&gt;rspec spec/</span>
 <span class="go">&#39;rspec&#39; is not recognized as an internal or external command,</span>
@@ -1038,7 +1037,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>In this case, you need to execute <code>rspec</code> through Bundler using the <code>bundle exec</code> command:</p>
+<p>Dans ce cas, vous aurez besoin d'exécuter <code>rspec</code> par le Bundler en utilisant la commande <code>bundle exec</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">C:\Sites\sample_app&gt;bundle exec rspec spec/</span>
 <span class="go">....</span>
@@ -1049,7 +1048,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Unfortunately, lots of other things can go wrong at this point. If any test fails, be sure that you&rsquo;ve migrated the database with <code>rake db:migrate</code> as described in <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a>. If RSpec doesn&rsquo;t work at all, try uninstalling and reinstalling it:</p>
+<p>Malheureusement, de nombreuses autres choses peuvent mal tourner à ce niveau. Si un test échoue, assurez-vous d'avoir bien migré la base de données avec <code>rake db:migrate</code> comme cela est décrit à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a>. Si RSpec ne fonctionne pas du tout, essayez de le désinstaller et de le ré-installer&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> gem uninstall rspec rspec-rails
 <span class="gp">$</span> bundle install
@@ -1057,7 +1056,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>If it still doesn&rsquo;t work and you&rsquo;re using <a href="http://rvm.beginrescueend.com/">RVM</a>, try removing the Rails Tutorial gemset and reinstalling the gems:</p>
+<p>Si ça ne fonctionne toujours pas et que vous utilisez <a href="http://rvm.beginrescueend.com/">RVM</a>, essayez de supprimer le gemset du tutoriel Rails et de ré-installer les gems&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm gemset delete rails3tutorial
 <span class="gp">$</span> rvm --create use 1.9.2@rails3tutorial
@@ -1068,9 +1067,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>(If it still doesn&rsquo;t work, I&rsquo;m out of ideas.)</p>
+<p>(Si ça continue de ne pas fonctionner… je suis à court d'idées.)</p>
 
-<p>When running <code>rspec spec/</code>, <code>rspec</code> is a program provided by RSpec, while <code>spec/</code> is the <em>directory</em> whose specs you want to run. You can also run only the specs in a particular subdirectory. For example, this command runs only the controller specs:</p>
+<p>En jouant <code>rspec spec/</code>, <code>rspec</code> est un programme fourni par RSpec, tandis que <code>spec/</code> est le <em>dossier</em> où vous voulez que specs s'exécute. Vous pouvez également jouer seulement les specs dans un sous-dossier particulier. Par exemple, la commande suivante joue uniquement ls specs des contrôleurs&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/controllers/
 <span class="go">....</span>
@@ -1081,7 +1080,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>You can also run a single file:</p>
+<p>Vous pouvez aussi jouer seulement un fichier&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/controllers/pages_controller_spec.rb
 <span class="go">....</span>
@@ -1092,28 +1091,28 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>The results of all three commands are the same since the Pages controller spec is currently our only test file. Throughout the rest of this book, I won&rsquo;t usually show the output of running the tests, but you should run <code>rspec spec/</code> (or one of its variants) regularly as you follow along&mdash;or, better yet, use Autotest to run the test suite automatically. Speaking of which&hellip;</p>
+<p>Le résultat de ces trois commandes est le même puisque le spec du contrôleur Pages est actuellement notre seul fichier de test. Au cours de la suite de ce livre, je ne montrerai pas toujours la sortie du testing, mais vous devrez jouer <code>rspec spec/</code> (ou une de ses variantes) régulièrement en poursuivant &mdash;&nbsp;ou, même mieux, utiliser Autotest pour jouer automatiquement la batterie de tests. En parlant de ça&hellip;</p>
 
-<p>If you&rsquo;ve installed Autotest, you can run it on your RSpec tests using the <code>autotest</code> command:</p>
+<p>Si vous avez intallés Autotest, vous pouvez le faire travailler sur vos tests RSpec en utilisant la command <code>autotest</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> autotest
 </pre></div>
 </div>
 
 
-<p>If that doesn&rsquo;t work, try</p>
+<p>Si cela ne fonctionne pas, essayez&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>autotest
 </pre></div>
 </div>
 
 
-<p>If you&rsquo;re using a Mac with Growl notifications enabled, you should be able to replicate my setup, shown in <a class="ref" href="static-pages#fig:autotest_green">illustration&nbsp;3.6</a>. With Autotest running in the background and Growl notifications telling you the status of your tests, TDD can be positively addictive.</p>
+<p>Si vous utilisez un Mac avec les notifications Growl activées, vous devirez pouvoir répliquer mes réglages montrés dans l'<a class="ref" href="static-pages#fig:autotest_green">illustration&nbsp;3.6</a>. Avec Autotest jouant en arrière-tâche et les notifications Growl vous disant l'état de vos tests, vous pourriez bien devenir accro du développement TDD.</p>
 
 <div class="label" id="fig:autotest_green"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_green.png" alt="autotest_green" /></span></div><div class="caption"><span class="header">Illustration 3.6: </span><span class="description">Autotest (via <code>autotest</code>) in action, with a Growl notification.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_green-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_green.png" alt="autotest_green" /></span></div><div class="caption"><span class="header">Illustration 3.6: </span><span class="description">Autotest (via <code>autotest</code>) en action avec les notifications Growl.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_green-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1124,17 +1123,17 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.2.1" href="static-pages#sec:spork" class="heading">Spork</a></h4>
 
 
-<p>You may have noticed that the overhead involved in running a test suite can be considerable. This is because each time RSpec runs the tests it has to reload the entire Rails environment. The <a href="http://github.com/timcharper/spork">Spork test server</a><sup class="footnote" id="fnref:3.14"><a href="#fn:3.14">14</a></sup> aims to solve this problem. Spork loads the environment <em>once</em>, and then maintains a pool of processes for running future tests. Spork is particularly useful when combined with Autotest.</p>
+<p>Vous avez peut-être noté que les [(ressources)(overhead)] liées à la gestion d'une batterie de test peuvent être considérables. Cela s'explique du fait que chaque fois que RSpec joue les tests il doit recharger tout l'environnement Rails. Le <a href="http://github.com/timcharper/spork">serveur de test Spork</a><sup class="footnote" id="fnref:3.14"><a href="#fn:3.14">14</a></sup> a pour but de régler ce problème. Spork charge <em>une seule fois</em> l'environnement, et maintient alors un pool de processus pour jouer les prochains tests. Spork est particulièrement utile quand il est combiné à Autotest.</p>
 
-<p>Configuring Spork and getting it to work can be difficult, and this is a rather advanced topic. <strong>If you get stuck, don&rsquo;t hesitate to skip this section for now.</strong></p>
+<p>Configurer et faire fonctionner Spork peut être difficile, et c'est un sujet de niveau plutôt avancé. <strong>Si vous vous sentez dépassé, n'hésitez pas à passer cette section.</strong></p>
 
-<p>The first step is to add the <tt>spork</tt> gem dependency to the <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_spork">extrait&nbsp;3.12</a>).</p>
+<p>La première étape consiste à ajouter la dépendance gem <tt>spork</tt> au <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_spork">extrait&nbsp;3.12</a>).</p>
 
 <div class="label" id="code:gemfile_spork"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.12.</span> <span class="description">A <code>Gemfile</code> for the sample app.</span>       
+<div class="listing"><span class="header">Extrait 3.12.</span> <span class="description">Un <code>Gemfile</code> pour l'application exemple.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1156,34 +1155,34 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Then install it:</p>
+<p>Ensuite, installez-le&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 </pre></div>
 </div>
 
 
-<p>Next, bootstrap the Spork configuration:</p>
+<p>Ensuite, amorcer la configuration Spork&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> spork --bootstrap
 </pre></div>
 </div>
 
 
-<p>Now we need to edit the RSpec configuration file, <code>spec/spec_helper.rb</code>, so that the environment gets loaded in a <em>prefork</em> block, which arranges for it to be loaded only once (<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a>). <em>Note:</em> Only use this code if you are also using Spork. If you try to use <a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a> without Spork, your application test suite will not run.</p>
+<p>Maintenant nous devons éditer le fichier de configuration RSpec, <code>spec/spec_helper.rb</code>, pour que l'environnement soit chargé dans le bloc <em>prefork</em>, pour n'avoir à le charger qu'une seule fois (<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a>). <em>Note&nbsp;:</em> utilisez seulement ce code si vous utilisez Spork. Si vous essayez d'utiliser l''<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a> sans Spork, la suite de test de votre application ne fonctionnera pas.</p>
 
 <div class="label" id="code:spork_spec_helper"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.13.</span> <span class="description">Adding environment loading to the <code>Spork.prefork</code> block. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.13.</span> <span class="description">Ajout du chargement de l'environnement dans le bloc <code>Spork.prefork</code>. <br /> <code>spec/spec_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spork&#39;</span>
 
 <span class="no">Spork</span><span class="o">.</span><span class="n">prefork</span> <span class="k">do</span>
-  <span class="c1"># Loading more in this block will cause your tests to run faster. However, </span>
-  <span class="c1"># if you change any configuration or code from libraries loaded here, you&#39;ll</span>
-  <span class="c1"># need to restart spork for it take effect.</span>
+  <span class="c1"># En charger plus dans ce bloc accélèrera les test. Cependant, </span>
+  <span class="c1"># si vous changez de configuration ou le code des librairies chargées ici, vous</span>
+  <span class="c1"># devrez redémarrer spork.</span>
   <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;RAILS_ENV&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;test&#39;</span>
   <span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s2">&quot;../../config/environment&quot;</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
   <span class="nb">require</span> <span class="s1">&#39;rspec/rails&#39;</span>
@@ -1217,7 +1216,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Before running Spork, we can get a baseline for the testing overhead by timing our test suite as follows:</p>
+<p>Avant de lancer Spork, nous pouvons obtenir une référence du temps que prend notre batterie de tests comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">time </span>rspec spec/
 <span class="go">..</span>
@@ -1233,7 +1232,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Here the test suite takes more than seven seconds to run even though the actual tests run in under a tenth of a second. To speed this up, we can open a dedicated terminal window, navigate to the Rails root directory, and then start a Spork server:</p>
+<p>Ici la suite de test prend plus de sept secondes pour être exécuté même si les tests effectifs jouent en moins d'une dizaine de secondes. Pour accélérer cela, nous pouvons ouvrir une fenêtre terminal dédiée aux tests, naviguer vers le dossier Rails racine, et démarrer un serveur Spork&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> spork
 <span class="go">Using RSpec</span>
@@ -1243,7 +1242,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>In another terminal window, we can now run our test suite with the <tt class="verb">--drb</tt> option<sup class="footnote" id="fnref:3.15"><a href="#fn:3.15">15</a></sup> and verify that the environment-loading overhead is greatly reduced:</p>
+<p>Dans une autre fenêtre Terminal, nous pouvons maintenant lancer notre batterie de tests avec l'option <tt class="verb">--drb</tt> <sup class="footnote" id="fnref:3.15"><a href="#fn:3.15">15</a></sup> et vérifier que le temps de chargement de l'environnement est considérablement réduit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">time </span>rspec --drb spec/
 <span class="go">..</span>
@@ -1259,15 +1258,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>As expected, the overhead has been dramatically reduced.</p>
+<p>Comme attendu, les temps ont été considérablement réduits.</p>
 
-<p>To run RSpec and Spork with Autotest, we need to configure RSpec to use the <tt class="verb">--drb</tt> option by default, which we can arrange by adding it to the <code>.rspec</code> configuration file in the Rails root directory (<a class="ref" href="static-pages#code:dot_rspec">extrait&nbsp;3.14</a>).</p>
+<p>Pour lancer RSpec et Spork avec Autotest, nous avons besoin de configurer RSpec pour utiliser l'option <tt class="verb">--drb</tt> par défaut, ce que nous pouvons faire en l'ajoutant au fichier de configuration <code>.rspec</code> dans le dossier racine de Rails (<a class="ref" href="static-pages#code:dot_rspec">extrait&nbsp;3.14</a>).</p>
 
 <div class="label" id="code:dot_rspec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.14.</span> <span class="description">Adding the <tt class="verb">--drb</tt> option to the <code>.rspec</code> file.</span>       
+<div class="listing"><span class="header">Extrait 3.14.</span> <span class="description">Ajout de l'option <tt class="verb">--drb</tt> au fichier <code>.rspec</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">--</span><span class="n">colour</span>
 <span class="o">--</span><span class="n">drb</span>
@@ -1275,7 +1274,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>With this updated <code>.rspec</code> file, the test suite should run as quickly as before, even without the explicit <tt class="verb">--drb</tt> option:</p>
+<p>Avec ce fichier <code>.rspec</code> actualisé, la suite de tests devrait fonctionner aussi vite que précédemment, même sans l'option explicite <tt class="verb">--drb</tt>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">time </span>rspec spec/
 <span class="go">..</span>
@@ -1291,23 +1290,23 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Of course, running <code>time</code> here is just for purposes of illustration; normally, you just run</p>
+<p>Bien entendu, jouer <code>time</code> ici n'a de sens que pour l'illustration&nbsp;; normalement, vous avez juste à jouer&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 </pre></div>
 </div>
 
 
-<p>or</p>
+<p>ou</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> autotest
 </pre></div>
 </div>
 
 
-<p>without the <code>time</code> command.</p>
+<p>sans la commande <code>time</code>.</p>
 
-<p>One word of advice when using Spork: if your tests are failing when you think they should be passing, the problem might be the Spork prefork loading, which can sometimes prevent necessary files from being re-loaded. When in doubt, quit the Spork server with <tt>Control-C</tt> and restart it:</p>
+<p>Un petit conseil quand vous utilisez Spork&nbsp;: si vos tests échouent quand vous pensez qu'ils devraient réussir, le problème peut venir du chargement du <em>prefork</em> de Spork, qui peut parfois empêcher le chargement de certains fichiers utiles. Dans le doute, quittez alors le serveur Spok (avec <tt>Control-C</tt>) et relancez-le&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> spork
 <span class="go">Using RSpec</span>
@@ -1319,7 +1318,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-
+<!-- FIN FRENCH -->
 
 <div class="label" id="sec:red"></div>
 

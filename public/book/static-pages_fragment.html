@@ -954,14 +954,14 @@ par [Michael Hartl](http://michaelhartl.com/).
 <span class="n">describe</span> <span class="no">PagesController</span> <span class="k">do</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;contact&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
@@ -2052,9 +2052,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <ol>
 
-<li>Make a Help page for the sample app. First write a test for the existence of a page at the URL <tt>/pages/help</tt>. Then write a second test for the title &ldquo;Simple App du Tutoriel Ruby on Rails | Help&rdquo;. Get your tests to pass, and then fill in the Help page with the content from <a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
+<li>Créez une page d'aide pour l'application exemple. Écrivez d'abord un test pour vérifier l'existence d'une page à l'URL <tt>/pages/help</tt>. Écrivez ensuite un second test pour le titre &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails | Aide&nbsp;&rdquo;. Faites le nécessaire pour que ces tests réussissent, et remplissez alors la page Aide avec le contenu de l'<a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
 
-<li>You may have noticed some repetition in the Pages controller spec (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). In particular, the base title, &ldquo;Simple App du Tutoriel Ruby on Rails&rdquo;, is the same for every title test. Using the RSpec <code>before(:each)</code> facility, which executes a block of code before each test case, fill in <a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> to define a <code>@base_title</code> instance variable that eliminates this duplication. (This code uses two new elements: a <em>symbol</em>, <code>:each</code>, and the string concatenation operator <code>+</code>. We&rsquo;ll learn more about both in <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, and we&rsquo;ll see <code>before(:each)</code> again in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.) Note that, with the base title captured in an instance variable, we are now able to align <code>:content</code> with the first character inside each left parenthesis&nbsp;<code>(</code>. This is my preferred convention for formatting code broken into multiple lines.</li>
+<li>Vous avez peut-être noté quelques répétitions dans les spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). En particulier, la base du titre, &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;&rdquo;, est la même pour tous les tests de titre. En utilisant la facilité RSpec <code>before(:each)</code>, qui exécute un code avant chaque cas testé, remplissez l'<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> pour définir une instance de variable <code>@base_title</code> qui éliminera cette redondance (ce code utilise deux nouveaux éléments&nbsp;: un <em>symbole</em>, <code>:each</code>, et un opération de concaténation de chaine, code>+</code>. Nous en apprendrons plus sur ces deux éléments au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, et nous reverrons <code>before(:each)</code> à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>). Notez que, avec la base du titre capturée dans une variable d'instance, nous sommes maintenant en mesure d'aligner <code>:content</code> avec le premier caractère à l'intérieur de chaque parenthèse ouverte&nbsp;<code>(</code>. C'est ma convention préférée pour formater du codre découpé en plusieurs lignes.</li>
 
 </ol>
 
@@ -2065,14 +2065,14 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.32.</span> <span class="description">Code for a proposed Help page. <br /> <code>app/views/pages/help.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.32.</span> <span class="description">Code pour la page d'aide proposée. <br /> <code>app/views/pages/help.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Help<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Aide<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-  Get help on Ruby on Rails Tutorial at the
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/help&quot;</span><span class="nt">&gt;</span>Rails Tutorial help page<span class="nt">&lt;/a&gt;</span>.
-  To get help on this sample app, see the
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/book&quot;</span><span class="nt">&gt;</span>Rails Tutorial book<span class="nt">&lt;/a&gt;</span>.
+  Obtenez de l'aide sur le Tutoriel Ruby on Rails sur la
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/help&quot;</span><span class="nt">&gt;</span>page d'aide du Tutoriel Rails<span class="nt">&lt;/a&gt;</span>.
+  Pour obtenir de l'aide sur cette application exemple, voyez le 
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/book&quot;</span><span class="nt">&gt;</span>livre du Tutoriel Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
@@ -2084,7 +2084,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.33.</span> <span class="description">The Pages controller spec with a base title. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.33.</span> <span class="description">Le spec du contrôleur Pages avec une base de titre. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -2098,12 +2098,12 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                                     <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@base_title</span> <span class="o">+</span> <span class="s2">&quot; | Home&quot;</span><span class="p">)</span>
@@ -2111,12 +2111,12 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;contact&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                                     <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@base_title</span> <span class="o">+</span> <span class="s2">&quot; | Contact&quot;</span><span class="p">)</span>
@@ -2124,12 +2124,12 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;about&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;about&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;about&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                                     <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@base_title</span> <span class="o">+</span> <span class="s2">&quot; | About&quot;</span><span class="p">)</span>
@@ -2141,36 +2141,36 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="navigation">  <a class="prev_page" href="a-demo-app#top">
-    &laquo;&nbsp;<span class="number">chapitre 2</span> A demo app
+    &laquo;&nbsp;<span class="number">chapitre 2</span> Une application Démo
   </a>
   <a class="next_page" href="rails-flavored-ruby#top">
-    <span class="number">chapitre 4</span> Rails-flavored Ruby&nbsp;&raquo;
+    <span class="number">chapitre 4</span> [(Rails-flavored Ruby)(Rails au goût Ruby)]&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:3.1">As before, you may find the augmented file from <a class="ref" href="beginning#code:gitignore">extrait&nbsp;1.5</a> to be more convenient depending on your system.&nbsp;<a class="arrow" href="#fnref:3.1">&uarr;</a></li>
-<li id="fn:3.2">In fact, Rails ensures that requests for such files never hit the main Rails stack; they are delivered directly from the filesystem. (See <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> for more details.)&nbsp;<a class="arrow" href="#fnref:3.2">&uarr;</a></li>
-<li id="fn:3.3">As usual, replace <code>mate</code> with the command for your text editor.&nbsp;<a class="arrow" href="#fnref:3.3">&uarr;</a></li>
-<li id="fn:3.4">HTML changes with time; by explicitly making a doctype declaration we make it likelier that browsers will render our pages properly in the future. The extremely simple doctype <code>&lt;!DOCTYPE html&gt;</code> is characteristic of the latest HTML standard, HTML5.&nbsp;<a class="arrow" href="#fnref:3.4">&uarr;</a></li>
-<li id="fn:3.5">Our method for making static pages is probably the simplest, but it&rsquo;s not the only way. The optimal method really depends on your needs; if you expect a <em>large</em> number of static pages, using a Pages controller can get quite cumbersome, but in our sample app we&rsquo;ll only need a few. See this <a href="http://blog.hasmanythrough.com/2008/4/2/simple-pages">blog post on simple pages at <tt>has_many :through</tt></a> for a survey of techniques for making static pages with Rails. <em>Warning:</em> the discussion is fairly advanced, so you might want to wait a while before trying to understand it.&nbsp;<a class="arrow" href="#fnref:3.5">&uarr;</a></li>
-<li id="fn:3.6">In the context of RSpec, TDD is also known as Behavior Driven Development, or BDD. (Frankly, I&rsquo;m not convinced there&rsquo;s much of a difference.)&nbsp;<a class="arrow" href="#fnref:3.6">&uarr;</a></li>
-<li id="fn:3.7">The <a href="http://github.com/thoughtbot/shoulda">Shoulda</a> testing framework is a good alternate choice (and in fact can be used with RSpec). It&rsquo;s the Other Rails Way, so to speak.&nbsp;<a class="arrow" href="#fnref:3.7">&uarr;</a></li>
-<li id="fn:3.8">This used to be just <tt>autotest-rails</tt>, but that gem depends on the full ZenTest suite, which caused problems on some systems. The <tt>autotest-rails-pure</tt> gem avoids this dependency.&nbsp;<a class="arrow" href="#fnref:3.8">&uarr;</a></li>
-<li id="fn:3.9">The Autotest Growl gem causes the test results to be automatically displayed to the monitor, whereas the FSEvent gem causes Autotest to use OS&nbsp;X filesystem events to trigger the test suite, rather than continuously polling the filesystem. Also note that with both gems you might need to use an updated version if you&rsquo;re running OS&nbsp;X Snow Leopard.&nbsp;<a class="arrow" href="#fnref:3.9">&uarr;</a></li>
+<li id="fn:3.1">Comme précédemment, vous pouvez trouver que fichier augmenté de l'<a class="ref" href="beginning#code:gitignore">extrait&nbsp;1.5</a> plus pratique en fonction de votre système.&nbsp;<a class="arrow" href="#fnref:3.1">&uarr;</a></li>
+<li id="fn:3.2">En fait, Rails s'assure que les requêtes pour de tels fichiers   [(never hit the main Rails stack)(n'atteignent jamais la pile principale de Rails)]&nbsp;; ils sont livrés directement du système de fichier (voir <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> pour de plus amples détails).&nbsp;<a class="arrow" href="#fnref:3.2">&uarr;</a></li>
+<li id="fn:3.3">Comme d'habitude, remplacez <code>mate</code> avec la commande de votre propre éditeur de texte.&nbsp;<a class="arrow" href="#fnref:3.3">&uarr;</a></li>
+<li id="fn:3.4">HTML change avec le temps&nbsp;; en faisant une déclaration de doctype explicite nous nous arrangeons pour que les navigateurs rendent toujours nos pages proprement dans le futur. Le doctype <code>&lt;!DOCTYPE html&gt;</code> extrêmement simple est caractéristique du dernier standard HTML, HTML5.&nbsp;<a class="arrow" href="#fnref:3.4">&uarr;</a></li>
+<li id="fn:3.5">Nous méthode pour créer des pages statiques est probablement la plus simple, mais ce n'est pas la seule. La méthode optimale dépend vraiment de vos besoins&nbsp;; si vous comptez sur un <em>grand</em> nombre de pages statiques, utiliser un contrôleur Pages controller peut être très lourd, mais dans notre application exemple nous n'en avons besoin que de quelques unes. Lisez ce <a href="http://blog.hasmanythrough.com/2008/4/2/simple-pages">post de blog sur des pages simple avec <tt>has_many :through</tt></a> pour une vue d'ensemble des techniques de création de pages statiques avec Rails. <em>Attention&nbsp;:</em> la discussion est plutôt de niveau avancée, donc vous avez peut-être intérêt à attendre un peu avant d'essayer de la comprendre.&nbsp;<a class="arrow" href="#fnref:3.5">&uarr;</a></li>
+<li id="fn:3.6">Dans le contexte de RSpec, TDD est aussi connu sous le nom de Behavior Driven Development, or BDD (Développement Conduit par le Comportement) (franchement, je ne suis pas convaincu qu'il y ait une énorme différence).&nbsp;<a class="arrow" href="#fnref:3.6">&uarr;</a></li>
+<li id="fn:3.7">Le frameword de testing <a href="http://github.com/thoughtbot/shoulda">Shoulda</a> est une bonne alternative  (et en fait peut être utilisé avec RSpec). C'est l'autre «&nbsp;manière Rails&nbsp;», pour ainsi dire.&nbsp;<a class="arrow" href="#fnref:3.7">&uarr;</a></li>
+<li id="fn:3.8">Cela a été utilisé pour <tt>autotest-rails</tt>, mais ce gem dépend de la suite complète ZenTest, qui occasionne des problèmes sur certains systèmes. Le gem <tt>autotest-rails-pure</tt> évite cette dépendance.&nbsp;<a class="arrow" href="#fnref:3.8">&uarr;</a></li>
+<li id="fn:3.9">Le gem Autotest Growl fait que les résultats du test sont automatiquement affichés à l'écran tandis que le FSEvent fait qu'Autotest utilise les évènements de filesystem d'OS&nbsp;X pour déclencher la suite de tests, plutôt que continuellement sonder le filesystem. Notez également qu'avec ces deux gems vous pouvez avoir besoin d'utiliser une version actualisée si vous travaillez sous le système OS&nbsp;X Snow Leopard.&nbsp;<a class="arrow" href="#fnref:3.9">&uarr;</a></li>
 <li id="fn:3.10">http://fredschoeneman.posterous.com/pimp-your-autotest-notification&nbsp;<a class="arrow" href="#fnref:3.10">&uarr;</a></li>
-<li id="fn:3.11">In the context of RSpec, tests are often called <em>specs</em>, but for simplicity I&rsquo;ll usually stick to the term &ldquo;test&rdquo;&mdash;<em>except</em> when referring to a file such as <code>pages_controller_spec</code>, in which case I&rsquo;ll write &ldquo;Pages controller spec&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.11">&uarr;</a></li>
-<li id="fn:3.12">Most IDEs also have an interface to testing, but as noted in <a class="ref" href="beginning#sec:development_tools">section&nbsp;1.2.1</a> I have limited experience with those tools.&nbsp;<a class="arrow" href="#fnref:3.12">&uarr;</a></li>
-<li id="fn:3.13">You can also run <code>rake spec</code>, which is basically equivalent. (Annoyingly, if you want to run <code>rake spec</code> here you have to run <code>rake db:migrate</code> first, even though the tests in this chapter don&rsquo;t require a database.)&nbsp;<a class="arrow" href="#fnref:3.13">&uarr;</a></li>
-<li id="fn:3.14">A <em>spork</em> is a combination spoon-fork. My guess is that the project&rsquo;s name is a pun on Spork&rsquo;s use of <a href="http://en.wikipedia.org/wiki/POSIX">POSIX</a> <a href="http://en.wikipedia.org/wiki/Fork_(software_development)">forks</a>.&nbsp;<a class="arrow" href="#fnref:3.14">&uarr;</a></li>
-<li id="fn:3.15">DRb stands for &ldquo;Distributed Ruby&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.15">&uarr;</a></li>
-<li id="fn:3.16">We&rsquo;ll learn in <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a> that the <code>:content =&gt; "&hellip;"</code> syntax is a <em>hash</em> using a <em>symbol</em> as the key.&nbsp;<a class="arrow" href="#fnref:3.16">&uarr;</a></li>
-<li id="fn:3.17">I consider this a step back from RSpec&nbsp;1.3, which used <code>have_tag</code> in this context, which could be used to require an exact match. Unfortunately, as of this writing <code>have_tag</code> is not available in RSpec&nbsp;2.&nbsp;<a class="arrow" href="#fnref:3.17">&uarr;</a></li>
-<li id="fn:3.18">A newline is what comes at the end of a line, starting a, well, new line. In code, it is represented by the character <tt class="verb">\n</tt>.&nbsp;<a class="arrow" href="#fnref:3.18">&uarr;</a></li>
-<li id="fn:3.19">Actually <em>counting</em> columns could drive you crazy, which is why many text editors have a visual aid to help you. Consider TextMate, for example; if you take a look back at <a class="ref" href="beginning#fig:editor_shell">illustration&nbsp;1.1</a>, you&rsquo;ll see a small vertical line on the right to help keep code under 80 characters. (It&rsquo;s actually at 78 columns, which gives you a little margin for error.) If you use TextMate, you can find this feature under <tt>View &gt; Wrap Column &gt; 78</tt>.&nbsp;<a class="arrow" href="#fnref:3.19">&uarr;</a></li>
-<li id="fn:3.20">Rails 2.3/RSpec 1.3, used the shorter <code>have_tag</code> instead of <code>have_selector</code>, and the <code>:content</code> argument wasn&rsquo;t necessary either. Newer isn&rsquo;t always better&hellip;&nbsp;<a class="arrow" href="#fnref:3.20">&uarr;</a></li>
-<li id="fn:3.21">In fact, the instance variable is actually visible in <em>any</em> view, a fact we&rsquo;ll make use of in <a class="ref" href="sign-up#sec:a_working_form">section&nbsp;8.2.2</a>.&nbsp;<a class="arrow" href="#fnref:3.21">&uarr;</a></li>
-<li id="fn:3.22">There is a second popular template system called <a href="http://haml-lang.com/">Haml</a>, which I personally love, but it&rsquo;s not <em>quite</em> standard enough yet for use in an introductory tutorial. If there is sufficient interest, I might produce a Rails Tutorial screencast series using Haml for the views. This would also allow for an introduction to <a href="http://sass-lang.com/">Sass</a>, Haml&rsquo;s sister technology, which if anything is even more awesome than Haml.&nbsp;<a class="arrow" href="#fnref:3.22">&uarr;</a></li>
-<li id="fn:3.23">If you&rsquo;ve studied Ruby before, you might suspect that Rails is <em>yielding</em> the contents to a block, and your suspicion would be correct. But, as far as developing web applications with Rails, it doesn&rsquo;t matter, and I&rsquo;ve honestly never given the meaning of <tt class="verb">&lt;%= yield %&gt;</tt> a second thought&mdash;or even a first one.&nbsp;<a class="arrow" href="#fnref:3.23">&uarr;</a></li>
+<li id="fn:3.11">Dans le contexte de RSpec, les tests sont souvent appelés des <em>specs</em>, mais pour la simplicité je m'en tiendrai la plupart du temps au terme &ldquo;test&rdquo;&mdash; <em>sauf</em> quand je me réfèrerai à un fichier tel que <code>pages_controller_spec</code>, dans ce cas j'utiliserai &ldquo;spec du contrôleur Pages&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.11">&uarr;</a></li>
+<li id="fn:3.12">La plupart des IDEs ont également une interface de testing, mais comme cela a été noté à la <a class="ref" href="beginning#sec:development_tools">section&nbsp;1.2.1</a> j'ai une expérience limitée de ces outils.&nbsp;<a class="arrow" href="#fnref:3.12">&uarr;</a></li>
+<li id="fn:3.13">Vous pouvez aussi jouer <code>rake spec</code>, qui est par essence équivalent (fâcheusement, si vous voulez jouer <code>rake spec</code> ici vous devrez d'abord jouer <code>rake db:migrate</code>, quand bien même les tests de ce chapitre ne requièrent par de base de données).&nbsp;<a class="arrow" href="#fnref:3.13">&uarr;</a></li>
+<li id="fn:3.14">Un <em>spork</em> est la combinaison «&nbsp;spoon-fork&nbsp;» (<em>cuillière-fourchette</em>). Mon sentiment est que le nom du projet est un jeu de mot sur l'utilisation de Spork des <a href="http://en.wikipedia.org/wiki/Fork_(software_development)">fourchettes</a><a href="http://en.wikipedia.org/wiki/POSIX">POSIX</a>.&nbsp;<a class="arrow" href="#fnref:3.14">&uarr;</a></li>
+<li id="fn:3.15">DRb signifie &ldquo;Distributed Ruby&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.15">&uarr;</a></li>
+<li id="fn:3.16">Nous apprendrons à la <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a> que la syntaxe <code>:content =&gt; "&hellip;"</code> est un <em>tableau hash</em> utilisant un <em>symbole</em> comme clé.&nbsp;<a class="arrow" href="#fnref:3.16">&uarr;</a></li>
+<li id="fn:3.17">Je considère que c'est un recul par rapport à la version RSpec&nbsp;1.3, qui utilisait <code>have_tag</code> dans ce context, qui pourrait être utilisé pour requérir une correspondance plus exacte. Malheureusement, cette écriture <code>have_tag</code> n'est plus utilisable avec RSpec&nbsp;2.&nbsp;<a class="arrow" href="#fnref:3.17">&uarr;</a></li>
+<li id="fn:3.18">Une nouvelle ligne est ce qui arrive à la fin de la ligne, commençant avec, hé bien, une nouvelle ligne. Dans le code, c'est représenté par le signe <tt class="verb">\n</tt>.&nbsp;<a class="arrow" href="#fnref:3.18">&uarr;</a></li>
+<li id="fn:3.19">En vérité, le <em>comptage</em> des colonnes peut vous rendre fou, ce qui explique que de nombreux éditeurs de texte possède une aide visuelle pour vous aider. Considérons TextMate, par exemple&nbsp;; si vous revenez à l'<a class="ref" href="beginning#fig:editor_shell">illustration&nbsp;1.1</a>, vous verrez une petit ligne verticale sur la droite pour aider à garder le code sous les 80 signes (il est en fait à 78 colonnes, ce qui vous laisse une marge d'erreur). Si vous utilisez TextMate, vous pouvez trouver cette fonctionnalité dans le menu <tt>View &gt; Wrap Column &gt; 78</tt>.&nbsp;<a class="arrow" href="#fnref:3.19">&uarr;</a></li>
+<li id="fn:3.20">Rails 2.3/RSpec 1.3, utilisait le code <code>have_tag</code> plus court au lieu de <code>have_selector</code>, l'argument <code>:content</code> n'était pas nécessaire non plus. Nouveau ne signifie pas toujours meilleur&hellip;&nbsp;<a class="arrow" href="#fnref:3.20">&uarr;</a></li>
+<li id="fn:3.21">En fait, la variable d'instance est vraiment lisible dans  <em>n'importe quelle</em> vue, un fait dont nous nous servirons à la <a class="ref" href="sign-up#sec:a_working_form">section&nbsp;8.2.2</a>.&nbsp;<a class="arrow" href="#fnref:3.21">&uarr;</a></li>
+<li id="fn:3.22">Il existe un second système de template populaire appelé <a href="http://haml-lang.com/">Haml</a>, que j'aime personnellement, mais il n'est pas encore <em>assez</em> standard pour l'utiliser dans l'introduction d'un tutoriel. Si cela se révèle suffisamment intéressant, je pourrais produire une série de screencasts pour le Tutoriel Rails utilisant Haml pour les vues. Cela permettrait aussi une introduction à <a href="http://sass-lang.com/">Sass</a>, le technologie sœur de Haml, si quelque chose peut être plus impressionnant que Haml.&nbsp;<a class="arrow" href="#fnref:3.22">&uarr;</a></li>
+<li id="fn:3.23">Si vous avez étudié Ruby auparavant, vous pouvez vous douter que Rails <em>soumet</em> le contenu à un block, et votre supposition sera exacte. Mais, aussi loin qu'on développe des applications web avec Rails, ça n'est pas très important, et je n'ai honnêtement jamais accordé plus de réflexion au sens du mot <tt class="verb">&lt;%= yield %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:3.23">&uarr;</a></li>
 </ol>
 </div>
 

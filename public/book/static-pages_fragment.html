@@ -1732,39 +1732,38 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_home_page.png" alt="new_home_page" /></span></div><div class="caption"><span class="header">Illustration 3.11: </span><span class="description">Une page accueil minimale pour l'application exemple (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/new_home_page-full.png">(taille normale)</a></span></div></div>
 
 
-<!-- FIN FRENCH -->
 
 <div class="label" id="sec:instance_variables_embedded_ruby"></div>
 
 
-<h3><a id="sec:3.3.3" href="static-pages#sec:instance_variables_embedded_ruby" class="heading"><span class="number">3.3.3</span> Instance variables and Embedded Ruby</a></h3>
+<h3><a id="sec:3.3.3" href="static-pages#sec:instance_variables_embedded_ruby" class="heading"><span class="number">3.3.3</span> Variables d'instance et Ruby embarqué</a></h3>
 
 
-<p>We&rsquo;ve achieved a lot already in this section, generating three valid pages using Rails controllers and actions, but they are purely static HTML and hence don&rsquo;t show off the power of Rails. Moreover, they suffer from terrible duplication:</p>
+<p>Nous avons déjà fait beaucoup de choses dans cette section, générer trois pages valides en utilisant les contrôleurs et actions Rails, mais ce sont de pure page statiques HTML et donc ne font pas la démonstration de la puissance de Rails. Plus encore, elles souffrent de terribles duplications&nbsp;:</p>
 
 <ul>
-<li>The page titles are almost (but not quite) exactly the same.</li>
-<li>&ldquo;Simple App du Tutoriel Ruby on Rails&rdquo; is common to all three titles.</li>
-<li>The entire HTML skeleton structure is repeated on each page.</li>
+<li>Les titres de page sont presque (mais pas tout à fait) exactement semblables&nbsp;;</li>
+<li>&ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;&rdquo; est commun aux trois titres&nbsp;;</li>
+<li>L'entière structure du code HTML est répétée dans chacune des pages.</li>
 </ul>
 
 
-<p>This repeated code is a violation of the important &ldquo;Don&rsquo;t Repeat Yourself&rdquo; (DRY) principle; in this section and the next we&rsquo;ll &ldquo;DRY out our code&rdquo; by removing the repetition.</p>
+<p>Ce code répété est une violation du principe &ldquo;Don&rsquo;t Repeat Yourself&rdquo; (DRY —&nbsp;«&nbsp;Ne vous répétez pas&nbsp;»)&nbsp;; dans cette section et la suivante, nous allons «&nbsp;DRYer&nbsp;» notre code en supprimant les répétitions.</p>
 
-<p>Paradoxically, we&rsquo;ll take the first step toward eliminating duplication by first adding some more: we&rsquo;ll make the titles of the pages, which are currently quite similar, match <em>exactly</em>. This will make it much simpler to remove all the repetition at a stroke.</p>
+<p>Paradoxalement, nous allons passer la première étape d'élimination des duplications en en ajoutant plus encore&nbsp;: nous allons faire que les titres des pages, qui sont en général les mêmes, correspondre <em>exactement</em>. Cela rendra plus simple la suppression de toutes les répétions d'un coup.</p>
 
-<p>The technique involves creating <em>instance variables</em> inside our actions. Since the Home, Contact, and About page titles have a variable component, we&rsquo;ll set the variable <code>@title</code> (pronounced &ldquo;at title&rdquo;) to the appropriate title for each action (<a class="ref" href="static-pages#code:pages_controller_with_title">extrait&nbsp;3.24</a>).</p>
+<p>La technique implique de créer des <em>instances de variables</em> à l'intérieur de nos actions. Puisque les titres des pages Accueil, Contact et À Propos ont un contenu variable, nous allons renseigner la variable <code>@title</code> (prononcez en anglais &ldquo;at title&rdquo;) avec le titre approprié à chaque action (<a class="ref" href="static-pages#code:pages_controller_with_title">extrait&nbsp;3.24</a>).</p>
 
 <div class="label" id="code:pages_controller_with_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.24.</span> <span class="description">The Pages controller with per-page titles. <br /> <code>app/controllers/pages_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.24.</span> <span class="description">Le contrôleur Pages avec le titre suivant la page. <br /> <code>app/controllers/pages_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">home</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Home&quot;</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">contact</span>
@@ -1772,29 +1771,29 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">about</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;About&quot;</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;À Propos&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>A statement such as</p>
+<p>Une déclaration comme…</p>
 
-<div class="code"><div class="highlight"><pre><span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Home&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
 </pre></div>
 </div>
 
 
-<p>is an <em>assignment</em>, in this case creating a new variable <code>@title</code> with value <code>"Home"</code>. The at sign&nbsp;<code>@</code> in <code>@title</code> indicates that it is an instance variable. Instance variables have a more general meaning in Ruby (see <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), but in Rails their role is primarily to link actions and views: any instance variable defined in the <code>home</code> action is automatically available in the <code>home.html.erb</code> view, and so on for other action/view pairs.<sup class="footnote" id="fnref:3.21"><a href="#fn:3.21">21</a></sup></p>
+<p>… est un <em>assignement</em>, qui crée dans ce cas une nouvelle variable <code>@title</code> de valeur <code>"Accueil"</code>. Le signe arobase, <code>@</code>, dans le nom <code>@title</code> indique que c'est une variable d'instance. Les variables d'instance ont un sens plus général en Ruby (voir la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), mais en Rails leur rôle est principalement de lier les actions et les vues&nbsp;: toute variable d'instance définie dans l'action <code>home</code> est automatiquement accessible dans la vue <code>home.html.erb</code>, et aisni de suite pour toutes les paires action/vue.<sup class="footnote" id="fnref:3.21"><a href="#fn:3.21">21</a></sup></p>
 
-<p>We can see how this works by replacing the literal title &ldquo;Home&rdquo; with the contents of the <code>@title</code> variable in the <code>home.html.erb</code> view (<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>).</p>
+<p>Nous pouvons voir comment cela fonctionne en remplaçant le titre littéral &ldquo;Accueil&rdquo; par le contenu de la variable <code>@title</code> dans la vue <code>home.html.erb</code> (<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>).</p>
 
 <div class="label" id="code:home_view_erb_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.25.</span> <span class="description">The view for the Home page with an Embedded Ruby title. <br /> <code>app/views/pages/home.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.25.</span> <span class="description">La Vue pour la page d'accueil avec un titre Ruby embarqué. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1804,9 +1803,8 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      This is the home page for the
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-      sample application.
+      C'est la page d'accueil de l'application exemple du
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1814,29 +1812,29 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p><a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a> is our first example of <em>Embedded Ruby</em>, also called <em>ERb</em>. (Now you know why HTML views have the file extension <code>.html.erb</code>.) ERb is the primary mechanism in Rails for including dynamic content in web pages.<sup class="footnote" id="fnref:3.22"><a href="#fn:3.22">22</a></sup> The code</p>
+<p>L''<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a> est notre premier exemple de <em>Ruby embarqué</em>, également appelé <em>ERb</em> (vous savez maintenant pourquoi les fichiers des vues HTML possèdent l'extension <code>.html.erb</code>). ERb est le principal mécanisme Rails pour inclure du contenu dynamique dans les pages web.<sup class="footnote" id="fnref:3.22"><a href="#fn:3.22">22</a></sup> Le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>indicates using <tt class="verb">&lt;%= ... %&gt;</tt> that Rails should insert the contents of the <code>@title</code> variable, whatever it may be. When we visit <tt>/pages/home</tt>, Rails executes the body of the <code>home</code> action, which makes the assignment <code>@title = "Home"</code>, so in the present case</p>
+<p>… indique par l'utilisation de <tt class="verb">&lt;%= ... %&gt;</tt> que Rails devra insérer le contenu de la variable <code>@title</code>, quel qu'il puisse être. Quand nous visitons la page <tt>/pages/home</tt>, Rails exécute le corps de l'action <code>home</code>, qui procède à la déclaration  <code>@title = "Accueil"</code>, donc dans le cas présent&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>gets replaced with &ldquo;Home&rdquo;. Rails then renders the view, using ERb to insert the value of <code>@title</code> into the template, which the web server then sends to your browser as HTML. The result is exactly the same as before, only now the variable part of the title is generated dynamically by ERb.</p>
+<p>… sera remplacé par &ldquo;Accueil&rdquo;. Rails rend alors la vue, en utilisant ERb pour insérer la valeur de <code>@title</code> dans le gabarit, que le serveur web envoie alors à votre navigateur comme code HTML. Le résultat est exactement le même qu'auparavant, à la différence près que la partie variable du titre est générée dynamiquement par ERb.</p>
 
-<p>We can verify that all this works by running the tests from <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> and see that they still pass. Then we can make the corresponding replacements for the Contact and About pages (<a class="ref" href="static-pages#code:contact_view_erb_title">extrait&nbsp;3.26</a> and <a class="ref" href="static-pages#code:about_view_erb_title">extrait&nbsp;3.27</a>).</p>
+<p>Nous pouvons vérifier que tout fonctionne en jouant les tests de la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> et en constatant qu'ils réussissent toujours. Nous pouvons alors faire les remplacements correspondants dans les pages Contact et À Propos (<a class="ref" href="static-pages#code:contact_view_erb_title">extrait&nbsp;3.26</a> et <a class="ref" href="static-pages#code:about_view_erb_title">extrait&nbsp;3.27</a>).</p>
 
 <div class="label" id="code:contact_view_erb_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.26.</span> <span class="description">The view for the Contact page with an Embedded Ruby title. <br /> <code>app/views/pages/contact.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.26.</span> <span class="description">La vue pour la page Contact avec un titre en Ruby embarqué. <br /> <code>app/views/pages/contact.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1846,8 +1844,8 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      Contact Ruby on Rails Tutorial about the sample app at the
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>feedback page<span class="nt">&lt;/a&gt;</span>.
+      Contact du Tutoriel Ruby on Rails à propos de l'application exemple à la
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>page de feedback<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1861,7 +1859,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.27.</span> <span class="description">The view for the About page with an Embedded Ruby title. <br /> <code>app/views/pages/about.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.27.</span> <span class="description">La vue de la page À Propos avec un titre en Ruby embarqué. <br /> <code>app/views/pages/about.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1869,12 +1867,13 @@ par [Michael Hartl](http://michaelhartl.com/).
     <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>About Us<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>À propos de nous<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-      is a project to make a book and screencasts to teach web development
-      with <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. This
-      is the sample application for the tutorial.
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Le Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
+			est un projet pour faire un livre des screnncasts pour apprendre le
+			développement web avec 
+			<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est
+      une application exemple pour le tutoriel.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1882,15 +1881,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>As before, the tests still pass.</p>
+<p>Comme précédemment, les tests devraient réussir.</p>
 
 <div class="label" id="sec:layouts"></div>
 
 
-<h3><a id="sec:3.3.4" href="static-pages#sec:layouts" class="heading"><span class="number">3.3.4</span> Eliminating duplication with layouts</a></h3>
+<h3><a id="sec:3.3.4" href="static-pages#sec:layouts" class="heading"><span class="number">3.3.4</span> Éliminer les duplications avec les <em>layouts</em></a></h3>
 
 
-<p>Now that we&rsquo;ve replaced the variable part of the page titles with instance variables and ERb, each of our pages looks something like this:</p>
+<p>Maintenant que nous avons remplacé la partie variable des titres de la page avec une variable d'instance et ERb, chacune de nos pages ressemble à quelque chose comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1898,22 +1897,22 @@ par [Michael Hartl](http://michaelhartl.com/).
     <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-      Contents
+      Contenu
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </div>
 
 
-<p>In other words, <em>all</em> our pages are identical in structure, including even the title (because of Embedded Ruby), with the sole exception of the contents of each page.</p>
+<p>En d'autres mots, <em>toutes</em> nos pages sont identiques en structure, incluant même le titre (à cause du code Ruby embarqué), avec pour seule exception le contenu de chaque page.</p>
 
-<p>Wouldn&rsquo;t it be nice if there were a way to factor out the common elements into some sort of global layout, with the body contents inserted on a per-page basis? Indeed, it would be nice, and Rails happily obliges using a special file called <code>application.html.erb</code>, which lives in the <code>layouts</code> directory. To capture the structural skeleton, create the file <code>application.html.erb</code> and fill it with the contents of <a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a>.</p>
+<p>Ne serait-il pas intéressant de structurer les éléments commun dans une sorte de gabarit global (un <em>layout</em>), et que le contenu du body soit inséré sur cette page de base&nbsp;? Vraiment, ce serait bien, et Rails nous y convie gentiment en utilisant un fichier spécial appelé <code>application.html.erb</code>, qui doit résider dans le dossier <code>layouts</code>. Pour capturer le squelette de la structure, créez le fichier <code>application.html.erb</code> et remplissez le avec le contenu de l'<a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a>.</p>
 
 <div class="label" id="code:application_layout"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.28.</span> <span class="description">The sample application site layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.28.</span> <span class="description">Le <em>layout</em> du site de l'application exemple. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1929,37 +1928,36 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Note here the special line</p>
+<p>Remarquez ici la ligne spéciale&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>This code is responsible for inserting the contents of each page into the layout. As with <tt class="verb">&lt;%= @title %&gt;</tt>, the <tt class="verb">&lt;% ... %&gt;</tt> tags indicate Embedded Ruby, and the equals sign in <tt class="verb">&lt;%= ... %&gt;</tt> ensures that the results of evaluating the expression are inserted at that exact point in the template. (Don&rsquo;t worry about the meaning of the word &ldquo;yield&rdquo; in this context;<sup class="footnote" id="fnref:3.23"><a href="#fn:3.23">23</a></sup> what matters is that using this layout ensures that visiting the page <tt>/pages/home</tt> converts the contents of <code>home.html.erb</code> to HTML and then inserts it in place of <tt class="verb">&lt;%= yield %&gt;</tt>.</p>
+<p>Ce code est responsable de l'insertion du contenu de chaque page dans le layout. Comme pour <tt class="verb">&lt;%= @title %&gt;</tt>, la balise <tt class="verb">&lt;% ... %&gt;</tt> indique du Ruby embarqué, et le signe égal dans <tt class="verb">&lt;%= ... %&gt;</tt> assure que les résultats de l'évaluation de l'expression soit insérés à ce point exact du template (ne vous inquiétez pas pour la signification du mot &ldquo;yield&rdquo; —&nbsp;[(rendement)]&nbsp;&mdash; dans ce contexte&nbsp;;<sup class="footnote" id="fnref:3.23"><a href="#fn:3.23">23</a></sup> ce qui importe c'est d'être certain qu'avec ce layout, la visite de la page <tt>/pages/home</tt> convertira le contenu du fichier <code>home.html.erb</code> en HTML et l'insèrera alors à la place du <tt class="verb">&lt;%= yield %&gt;</tt>.</p>
 
-<p>Now that we have a site-wide layout, we&rsquo;ve also taken this opportunity to add a security feature to each page. <a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a> adds the code</p>
+<p>Maintenant que nous avons un layout pour le site, nous avons aussi saisi l'opportunité d'ajouter une fonctionnalité de sécurité pour chaque page. L'<a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a> ajoute ce code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">csrf_meta_tag</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>which uses the Rails method <code>csrf_meta_tag</code> to prevent <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgery</a> (CSRF), a type of malicious web attack. Don&rsquo;t worry about the details (I don&rsquo;t); just know that Rails is working hard to keep your application secure.</p>
+<p>… qui utilise la méthode Rails <code>csrf_meta_tag</code> qui empêche le <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgery</a> (CSRF), un type d'attaque web malicieuse. Ne vous pré-occupez pas trop du détail (je ne le fais pas)&nbsp;; sachez simplement que Rails travaille dur pour la sécurité de votre application.</p>
 
-<p>Of course, the views in <a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>, <a class="ref" href="static-pages#code:contact_view_erb_title">extrait&nbsp;3.26</a>, and <a class="ref" href="static-pages#code:about_view_erb_title">extrait&nbsp;3.27</a> are still filled with all the HTML structure we just hoisted into the layout, so we have to rip it out, leaving only the interior contents. The resulting cleaned-up views appear in <a class="ref" href="static-pages#code:home_view_interior">extrait&nbsp;3.29</a>, <a class="ref" href="static-pages#code:contact_view_interior">extrait&nbsp;3.30</a>, and <a class="ref" href="static-pages#code:about_view_interior">extrait&nbsp;3.31</a>.</p>
+<p>Bien sûr, les vues des <a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>, <a class="ref" href="static-pages#code:contact_view_erb_title">extrait&nbsp;3.26</a> et <a class="ref" href="static-pages#code:about_view_erb_title">extrait&nbsp;3.27</a> contiennent toujours toute la structure de code HTML que nous venons tout juste d'introduire dans le layout, donc il nous faut la retirer, en ne laissant que le contenu intérieur. Les vues clarifiées en résultant apparaissent dans les <a class="ref" href="static-pages#code:home_view_interior">extrait&nbsp;3.29</a>, <a class="ref" href="static-pages#code:contact_view_interior">extrait&nbsp;3.30</a> et <a class="ref" href="static-pages#code:about_view_interior">extrait&nbsp;3.31</a>.</p>
 
 <div class="label" id="code:home_view_interior"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.29.</span> <span class="description">The Home view with HTML structure removed. <br /> <code>app/views/pages/home.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.29.</span> <span class="description">La vue Accueil avec la structure HTML supprimée. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-  This is the home page for the
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-  sample application.
+  C'est la page d'accueil de l'application exemple du
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
@@ -1971,12 +1969,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.30.</span> <span class="description">The Contact view with HTML structure removed. <br /> <code>app/views/pages/contact.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.30.</span> <span class="description">La vue Contact avec la structure HTML supprimée. <br /> <code>app/views/pages/contact.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-  Contact Ruby on Rails Tutorial about the sample app at the
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>feedback page<span class="nt">&lt;/a&gt;</span>.
+  Contact du Tutoriel Ruby on Rails à propos de l'application exemple à la
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>page de feedback<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
@@ -1988,20 +1986,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.31.</span> <span class="description">The About view with HTML structure removed. <br /> <code>app/views/pages/about.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.31.</span> <span class="description">La vue À Propos avec la structure HTML supprimée. <br /> <code>app/views/pages/about.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>About Us<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-  is a project to make a book and screencasts to teach web development
-  with <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. This
-  is the sample application for the tutorial.
+  est un projet de livre et de screencasts pour apprendre le développement web
+  avec <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est l'application exemple de ce tutoriel.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>With these views defined, the Home, Contact, and About pages are exactly the same as before&mdash;i.e., we have successfully refactored them&mdash;but they have much less duplication. And, as required, the tests still pass.</p>
+<p>Avec ces vues redéfinies, les pages Accueil, Contact et À Propos avec exactement les mêmes que précédemment &mdash;&nbsp;c'est-à-dire que nous les avons restructurées avec succès&nbsp;&mdash; mais elles ont beaucoup moins de duplication de code. Et, comme requis, les tests réussissent toujours.</p>
 
 <div class="label" id="sec:static_pages_conclusion"></div>
 
@@ -2009,25 +2006,25 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:3.4" href="static-pages#sec:static_pages_conclusion" class="heading"><span class="number">3.4</span> Conclusion</a></h2>
 
 
-<p>Seen from the outside, this chapter hardly accomplished anything: we started with static pages, and ended with&hellip; <em>mostly</em> static pages. But appearances are deceiving: by developing in terms of Rails controllers, actions, and views, we are now in a position to add arbitrary amounts of dynamic content to our site. Seeing exactly how this plays out is the task for the rest of this tutorial.</p>
+<p>Vue de l'extérieur, ce chapitre n'a pas accompli grand chose&nbsp;: nous l'avons commencé avec des pages statiques, et nous le finissons avec&hellip; les pages <em>le plus souvent</em> statiques. Mais les apparences sont trompeuses&nbsp;: en développant en termes de <em>Contrôleurs</em> Rails, d'<em>Actions</em> Rails et de <em>Vues</em> Rails, nous sommes maintenant en mesure d'ajouter n'importe quel contenu dynamique à notre site. Voir comment cela joue exactement est la tâche que se propose la suite de ce tutoriel.</p>
 
-<p>Before moving on, let&rsquo;s take a minute to commit our changes and merge them into the master branch. Back in <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a> we created a Git branch for the development of static pages. If you haven&rsquo;t been making commits as we&rsquo;ve been moving along, first make a commit indicating that we&rsquo;ve reached a stopping point:</p>
+<p>Avant de poursuivre, prenez le temps de «&nbsp;commettre&nbsp;» vos changements et les fusionner avec la branche maitresse. 
+<p>Before moving on, let&rsquo;s take a minute to commit our changes and merge them into the master branch. Dans la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a> nous avons créé une branche Git pour le développement des pages statiques. Si vous n'avez pas fait de dépôts à mesure que nous avancions, commencez par en faire un en indiquant que nous avons atteint un point d'arrêt&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;Done with static pages&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Fini avec les pages statiques&quot;</span>
 </pre></div>
 </div>
 
 
-<p>Then merge the changes back into the master branch using the same technique as in <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>:</p>
+<p>Fusionnez alors les changements dans la branche maitresse en utilisant la même technique que dans la <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="gp">$</span> git merge static-pages
 </pre></div>
 </div>
 
-
-<p>Once you reach a stopping point like this, it&rsquo;s usually a good idea to push your code up to a remote repository (which, if you followed the steps in <a class="ref" href="beginning#sec:github">section&nbsp;1.3.4</a>, will be GitHub):</p>
+<p>Une fois que vous atteignez un point d'arrêt comme celui-ci, c'est habituellement une bonne idée de «&nbsp;pusher&nbsp;» votre code sur le repository à distance (qui, si vous avez suivi les étapes de la <a class="ref" href="beginning#sec:github">section&nbsp;1.3.4</a> doit se trouver sur GitHub)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 <span class="gp">$</span> git push
@@ -2035,7 +2032,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>If you like, at this point you can even deploy the updated application to Heroku:</p>
+<p>Si vous le désirez, à ce point vous pouvez même déployer l'application actualisée sur Heroku&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 <span class="gp">$</span> git push heroku
@@ -2043,7 +2040,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Note that in both cases I&rsquo;ve run <code>rspec spec/</code>, just to be sure that all the tests still pass. Running your tests before pushing or deploying is a good habit to cultivate.</p>
+<p>Notez que dans les deux cas j'ai joué <code>rspec spec/</code>, juste pour m'assurer que tous les tests réussissaient toujours. Faire jouer les tests avant de «&nbsp;pusher&nbsp;» du code ou de déployer l'application est une habitude à cultiver.</p>
 
 <div class="label" id="sec:static_pages_exercises"></div>
 

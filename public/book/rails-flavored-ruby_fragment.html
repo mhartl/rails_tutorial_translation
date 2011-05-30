@@ -780,12 +780,10 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 
 <div class="label" id="sec:blocks"></div>
 
-<!-- FIN FRENCH -->
-
-<h3><a id="sec:4.3.2" href="rails-flavored-ruby#sec:blocks" class="heading"><span class="number">4.3.2</span> Blocks</a></h3>
+<h3><a id="sec:4.3.2" href="rails-flavored-ruby#sec:blocks" class="heading"><span class="number">4.3.2</span> Blocs</a></h3>
 
 
-<p>Both arrays and ranges respond to a host of methods that accept <em>blocks</em>, which are simultaneously one of Ruby&rsquo;s most powerful and most confusing features:</p>
+<p>Les tableaux (<em>arrays</em>) et les rangs (<em>ranges</em>) répondent tous deux à une foule de méthodes qui acceptent des <em>blocs</em>, qui sont en même temps une des fonctionnalités les plus puissantes et de celles qui entrainent le plus de confusion&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="nb">puts</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="p">}</span>
 <span class="go">2</span>
@@ -798,9 +796,9 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>This code calls the <code>each</code> method on the range <code>(1..5)</code> and passes it the block <code>{ |i| puts 2 * i }</code>. The vertical bars around the variable name in&nbsp;<code>|i|</code> are Ruby syntax for a block variable, and it&rsquo;s up to the method to know what to do with the block; in this case, the range&rsquo;s <code>each</code> method can handle a block with a single local variable, which we&rsquo;ve called&nbsp;<code>i</code>, and it just executes the block for each value in the range.</p>
+<p>Ce code appelle la méthode <code>each</code> (<em>chaque</em>)  sur le rang <code>(1..5)</code> et lui passe le bloc <code>{ |i| puts 2 * i }</code>. La barre verticale autour du nom de la variable dans&nbsp;<code>|i|</code> est la syntaxe Ruby pour une variable de bloc, et c'est à la méthode de savoir ce qu'elle doit faire avec le bloc&nbsp;, dans ce cas précis, la méthode <code>each</code> du rang peut traiter le bloc avec une simple variable locale, que nous avons appelée&nbsp;<code>i</code>, et elle exécute simplement le block pour chaque valeur de ce rang.</p>
 
-<p>Curly braces are one way to indicate a block, but there is a second way as well:</p>
+<p>Les accolades sont une façon d'indiquer un bloc, mais il existe une seconde façon&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
 <span class="gp">?&gt; </span>  <span class="nb">puts</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span>
@@ -815,7 +813,7 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>Blocks can be more than one line, and often are. In <em>Rails Tutorial</em> we&rsquo;ll follow the common convention of using curly braces only for short one-line blocks and the <code>do..end</code> syntax for longer one-liners and for multi-line blocks:</p>
+<p>Les blocs peuvent comprendre plus d'une ligne, et en comprennent souvent plus d'une. Dans le <em>Tutoriel Rails</em> nous suivrons la convention courante d'utiliser les accolades seulement pour les blocs d'une courte ligne et la syntaxe <code>do..end</code> pour les blocs à ligne longue ou à plusieurs lignes&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">number</span><span class="o">|</span>
 <span class="gp">?&gt; </span>  <span class="nb">puts</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">number</span>
@@ -836,18 +834,18 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>Here I&rsquo;ve used <code>number</code> in place of&nbsp;<code>i</code> just to emphasize that any variable name will do.</p>
+<p>Ici j'ai utilisé <code>number</code> au lieu de &nbsp;<code>i</code> juste pour souligner que n'importe quel nom de variable peut convenir.</p>
 
-<p>Unless you already have a substantial programming background, there is no shortcut to understanding blocks; you just have to see them a lot, and eventually you&rsquo;ll get used to them.<sup class="footnote" id="fnref:4.11"><a href="#fn:4.11">11</a></sup> Luckily, humans are quite good at making generalizations from concrete examples; here are a few more, including a couple using the <code>map</code> method:</p>
+<p>Sans avoir de substantielles connaissances en programmation, il n'y pas de raccourci pour comprendre les blocs&nbsp;; vous avez juste besoin d'en rencontrer beaucoup, et à la longue vous vous y ferez.<sup class="footnote" id="fnref:4.11"><a href="#fn:4.11">11</a></sup> Heureusement, les humains sont assez bons pour faire des généralisations à partir d'exemples concrets&nbsp;; en voilà d'autres, en incluant deux qui utilisent la méthode <code>map</code>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="mi">3</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Betelgeuse!&quot;</span> <span class="p">}</span>   <span class="c1"># 3.times takes a block with no variables.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="mi">3</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Betelgeuse!&quot;</span> <span class="p">}</span>   <span class="c1"># 3.fois prend un bloc sans variable.</span>
 <span class="go">&quot;Betelgeuse!&quot;</span>
 <span class="go">&quot;Betelgeuse!&quot;</span>
 <span class="go">&quot;Betelgeuse!&quot;</span>
 <span class="go">=&gt; 3</span>
-<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="p">}</span>          <span class="c1"># The ** notation is for &#39;power&#39;.</span>
+<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="p">}</span>          <span class="c1"># La notation ** correspond à &#39;puissance&#39;.</span>
 <span class="go">=&gt; [1, 4, 9, 16, 25]</span>
-<span class="gp">&gt;&gt; </span><span class="sx">%w[a b c]</span>                        <span class="c1"># Recall that %w makes string arrays.</span>
+<span class="gp">&gt;&gt; </span><span class="sx">%w[a b c]</span>                        <span class="c1"># Rappel&nbsp;: fait des tableaux de chaines.</span>
 <span class="go">=&gt; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
 <span class="gp">&gt;&gt; </span><span class="sx">%w[a b c]</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">char</span><span class="o">|</span> <span class="n">char</span><span class="o">.</span><span class="n">upcase</span> <span class="p">}</span>
 <span class="go">=&gt; [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
@@ -855,26 +853,26 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>As you can see, the <code>map</code> method returns the result of applying the given block to each element in the array or range.</p>
+<p>Comme vous pouvez le voir, la méthode <code>map</code> retourne le résultat après avoir appliqué le bloc donné à chaque élément d'un tableau ou d'un rang.</p>
 
-<p>By the way, we&rsquo;re now in a position to understand the line of Ruby I threw into <a class="ref" href="beginning#sec:heroku_commands">section&nbsp;1.4.4</a> to generate random subdomains:</p>
+<p>En passant, nous sommes maintenant en mesure de comprendre la ligne de Ruby que j'avais posée à la <a class="ref" href="beginning#sec:heroku_commands">section&nbsp;1.4.4</a> pour générer des sous-domaines aléatoires&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">7</span><span class="o">].</span><span class="n">join</span>
 </pre></div>
 </div>
 
 
-<p>Let&rsquo;s build it up step-by-step:</p>
+<p>Déconstruisons-la pas à pas&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>                     <span class="c1"># An alphabet array</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>                     <span class="c1"># Un tableau de l'alphabet</span>
 <span class="go">=&gt; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;, &quot;k&quot;, &quot;l&quot;, &quot;m&quot;, &quot;n&quot;, &quot;o&quot;,</span>
 <span class="go">&quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;, &quot;u&quot;, &quot;v&quot;, &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span>             <span class="c1"># Shuffle it.</span>
+<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span>             <span class="c1"># Mélangeons-le</span>
 <span class="go">=&gt; [&quot;c&quot;, &quot;g&quot;, &quot;l&quot;, &quot;k&quot;, &quot;h&quot;, &quot;z&quot;, &quot;s&quot;, &quot;i&quot;, &quot;n&quot;, &quot;d&quot;, &quot;y&quot;, &quot;u&quot;, &quot;t&quot;, &quot;j&quot;, &quot;q&quot;,</span>
 <span class="go">&quot;b&quot;, &quot;r&quot;, &quot;o&quot;, &quot;f&quot;, &quot;e&quot;, &quot;w&quot;, &quot;v&quot;, &quot;m&quot;, &quot;a&quot;, &quot;x&quot;, &quot;p&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">7</span><span class="o">]</span>       <span class="c1"># Pull out the first eight elements.</span>
+<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">7</span><span class="o">]</span>       <span class="c1"># Tirons les huit premiers éléments.</span>
 <span class="go">=&gt; [&quot;f&quot;, &quot;w&quot;, &quot;i&quot;, &quot;a&quot;, &quot;h&quot;, &quot;p&quot;, &quot;c&quot;, &quot;x&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">7</span><span class="o">].</span><span class="n">join</span>  <span class="c1"># Join them together to make one string.</span>
+<span class="gp">&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">.</span><span class="n">.</span><span class="s1">&#39;z&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">shuffle</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">7</span><span class="o">].</span><span class="n">join</span>  <span class="c1"># Joignons-les pour faire une chaine de caractères.</span>
 <span class="go">=&gt; &quot;mznpybuj&quot;</span>
 </pre></div>
 </div>
@@ -888,25 +886,26 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 <h3><a id="sec:4.3.3" href="rails-flavored-ruby#sec:hashes_and_symbols" class="heading"><span class="number">4.3.3</span> Tables de hachage et symboles</a></h3>
 
 
-<p>Hashes are essentially a generalization of arrays: you can think of hashes as basically like arrays, but not limited to integer indices. (In fact, some languages, especially Perl, sometimes call hashes <em>associative arrays</em> for this reason.) Instead, hash indices, or <em>keys</em>, can be almost any object. For example, we can use strings as keys:</p>
+<p>Les tables de hachage (ou <em>tableaux dynamiques</em>) sont essentiellement une généralisation des tableaux-arrays&nbsp;: vous pouvez les considérer basiquement comme des tableaux, mais qui ne sont pas limités aux indices entiers (en fait, certains langages, spécialement Perl, appellent les tables de hachage des <em>tableaux associatifs</em> pour cette raison). Au lieu de ça, les indices d'une table de hachage, ou <em>keys</em>, peut être presque n'importe quel objet. Par exemple, nous pouvons utiliser des chaines de caractères comme clés&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="p">{}</span>                          <span class="c1"># {} is an empty hash.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="p">{}</span>                          <span class="c1"># {} est une table de hachage vide.</span>
 <span class="go">=&gt; {}</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;first_name&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Michael&quot;</span>     <span class="c1"># Key &quot;first_name&quot;, value &quot;Michael&quot;</span>
+<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;first_name&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Michael&quot;</span>     <span class="c1"># Clé &quot;first_name&quot;, valeur &quot;Michael&quot;</span>
 <span class="go">=&gt; &quot;Michael&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;last_name&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Hartl&quot;</span>        <span class="c1"># Key &quot;last_name&quot;, value &quot;Hartl&quot;</span>
+<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;last_name&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Hartl&quot;</span>        <span class="c1"># Clé &quot;last_name&quot;, valeur &quot;Hartl&quot;</span>
 <span class="go">=&gt; &quot;Hartl&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;first_name&quot;</span><span class="o">]</span>                 <span class="c1"># Element access is like arrays.</span>
-<span class="go">=&gt; &quot;Michael&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span>                               <span class="c1"># A literal representation of the hash</span>
+<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="s2">&quot;first_name&quot;</span><span class="o">]</span>                 <span class="c1"># L'accès aux éléments fonctionne comme</span>
+<span class="go">=&gt; &quot;Michael&quot;</span>                          <span class="c1"># sur les tableaux.</span>
+<span class="gp">&gt;&gt; </span><span class="n">user</span>                               <span class="c1"># Une représentation littérale de la</span>       
+<span class="gp">&nbsp;&nbsp;&nbsp;</span><span class="n">&nbsp;</span>                                  <span class="c1"># table de hachage</span>
 <span class="go">=&gt; {&quot;last_name&quot;=&gt;&quot;Hartl&quot;, &quot;first_name&quot;=&gt;&quot;Michael&quot;}</span>
 </pre></div>
 </div>
 
 
-<p>Hashes are indicated with curly braces containing key-value pairs; a pair of braces with no key-value pairs&mdash;i.e., <code>{}</code>&mdash;is an empty hash. It&rsquo;s important to note that the curly braces for hashes have nothing to do with the curly braces for blocks. (Yes, this can be confusing.) Though hashes resemble arrays, one important difference is that hashes don&rsquo;t generally guarantee keeping their elements in a particular order.<sup class="footnote" id="fnref:4.12"><a href="#fn:4.12">12</a></sup> If order matters, use an array.</p>
+<p>Les tables de hachages sont indiquées avec des accolades contenant des paires clé-valeur&nbsp;; une paire d'accolades sans clé-valeurs &mdash;&nbsp;c'est-à-dire <code>{}</code>&nbsp;&mdash; est une table vide. Il est important de notre que les accolades pour les tables de hachage n'ont rien à voir avec les accolades pour les blocs (oui, ça peut être source de confusion). Bien que les tables de hachage ressemplent aux tableaux, une différence important est que les tables ne garantissent pas, généralement de garder leurs éléments dans un ordre particulier.<sup class="footnote" id="fnref:4.12"><a href="#fn:4.12">12</a></sup> Si l'ordre importe, utilisez un tableau.</p>
 
-<p>Instead of defining hashes one item at a time using square brackets, it&rsquo;s easy to use their literal representation:</p>
+<p>Plutôt que de définir les tables de hachage un item à la fois en utilisant les crochets, il est facile d'utiliser leur représentation littérale&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;first_name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael&quot;</span><span class="p">,</span> <span class="s2">&quot;last_name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hartl&quot;</span> <span class="p">}</span>
 <span class="go">=&gt; {&quot;last_name&quot;=&gt;&quot;Hartl&quot;, &quot;first_name&quot;=&gt;&quot;Michael&quot;}</span>
@@ -914,97 +913,101 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>Here I&rsquo;ve used the usual Ruby convention of putting an extra space at the two ends of the hash&mdash;a convention ignored by the console output. (Don&rsquo;t ask me why the spaces are conventional; probably some early influential Ruby programmer liked the look of the extra spaces, and the convention stuck.)</p>
+<p>Ici j'ai utilisé la convention habituelle de Ruby de placer une extra espace<!-- "espace" est féminine en typo --> aux deux extrémités de la table de hachage &mdash;&nbsp;une convention ignorée par la sortie de la console… (ne me demandez pas pourquoi les espaces sont conventionnelles<!-- "espace" est féminin en type -->&nbsp;; probablement quelques programmeurs initiaux influants aimaient l'aspect des extra espaces, et la convention a pris).</p>
 
-<p>So far we&rsquo;ve used strings as hash keys, but in Rails it is much more common to use <em>symbols</em> instead. Symbols look kind of like strings, but prefixed with a colon instead of surrounded by quotes. For example, <code>:name</code> is a symbol. You can think of symbols as basically strings without all the extra baggage:<sup class="footnote" id="fnref:4.13"><a href="#fn:4.13">13</a></sup></p>
+<p>Jusqu'ici nous avons utilisé des chaines comme clé de hachage, mais en Rails il est bien plus courant d'utiliser plutôt des <em>symbols</em>. Les symboles ressemblent aux chaines de caractères, mais sont préfixés par le signe «&nbsp;deux points&nbsp;» au lieu d'être entourés par des guillemets (simples ou doubles). Par exemple, <code>:nom</code> est un symbole. Vous pouvez basiquement penser les symboles comme des chaines sans le bagagge correspondant&nbsp;:<sup class="footnote" id="fnref:4.13"><a href="#fn:4.13">13</a></sup></p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;name&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="go">=&gt; [&quot;n&quot;, &quot;a&quot;, &quot;m&quot;, &quot;e&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="ss">:name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;nom&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="go">=&gt; [&quot;n&quot;, &quot;o&quot;, &quot;m&quot;]</span>
+<span class="gp">&gt;&gt; </span><span class="ss">:nom</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="go">NoMethodError: undefined method `split&#39; for :name:Symbol</span>
+<span class="c1">(Traduction&nbsp;:</span>
+<span class="c1">ErreurAucuneMethode&nbsp;: méthode `split&#39; indéfinie pour le symbole :nom)</span>
 <span class="gp">&gt;&gt; </span><span class="s2">&quot;foobar&quot;</span><span class="o">.</span><span class="n">reverse</span>
 <span class="go">=&gt; &quot;raboof&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="ss">:foobar</span><span class="o">.</span><span class="n">reverse</span>
 <span class="go">NoMethodError: undefined method `reverse&#39; for :foobar:Symbol</span>
+<span class="c1">(Traduction&nbsp;:</span>
+<span class="c1">ErreurAucuneMethode&nbsp;: méthode `reverse&#39; indéfinie pour le symbole :foobar)</span>
 </pre></div>
 </div>
 
 
-<p>Symbols are a special Ruby data type shared with very few other languages, so they may seem weird at first, but Rails uses them a lot, so you&rsquo;ll get used to them fast.</p>
+<p>Les symboles sont un type de données spécial de Ruby partagé avec seulement quelques autres langages, donc ils peuvent sembler bizarres au début, mais Rails les utilise beaucoup, donc vous vous y habituerez vite.</p>
 
-<p>In terms of symbols as hash keys, we can define a <code>user</code> hash as follows:</p>
+<p>En termes de symboles comme clé de table de hachage, nous pouvons définir une table <code>personne</code> comme suit&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;michael@example.com&quot;</span> <span class="p">}</span>
-<span class="go">=&gt; {:name=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;michael@example.com&quot;}</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span>              <span class="c1"># Access the value corresponding to :name.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">personne</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;michael@example.com&quot;</span> <span class="p">}</span>
+<span class="go">=&gt; {:nom=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;michael@example.com&quot;}</span>
+<span class="gp">&gt;&gt; </span><span class="n">personne</span><span class="o">[</span><span class="ss">:nom</span><span class="o">]</span>               <span class="c1"># Accès à la valeur correspondant à :nom.</span>
 <span class="go">=&gt; &quot;Michael Hartl&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span>          <span class="c1"># Access the value of an undefined key.</span>
+<span class="gp">&gt;&gt; </span><span class="n">personne</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span>          <span class="c1"># Accès à la valeur d'une clé indéfinie.</span>
 <span class="go">=&gt; nil</span>
 </pre></div>
 </div>
 
 
-<p>We see here from the last example that the hash value for an undefined key is simply <code>nil</code>.</p>
+<p>Nous voyons ici, dans le dernier exemple, que la valeur pour une clé indéfinie est simplement la valeur <code>nil</code> (<em>nul</em>).</p>
 
-<p>Hash values can be virtually anything, even other hashes, as seen in <a class="ref" href="rails-flavored-ruby#code:nested_hashes">extrait&nbsp;4.5</a>.</p>
+<p>Les valeurs d'une table de hachage peuvent virtuellement être n'importe quoi, même d'autres tables de hachage, comme on peut le voir dans l'<a class="ref" href="rails-flavored-ruby#code:nested_hashes">extrait&nbsp;4.5</a>.</p>
 
 <div class="label" id="code:nested_hashes"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 4.5.</span> <span class="description">Nested hashes.</span> </div>
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>        <span class="c1"># Define a hash called &#39;params&#39; (short for &#39;parameters&#39;).</span>
+<div class="listing"><span class="header">Extrait 4.5.</span> <span class="description">Tables imbriquées.</span> </div>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>        <span class="c1"># Défini une table appelée &#39;params&#39; (raccourci pour &#39;paramètres&#39;).</span>
 <span class="go">=&gt; {}</span>
-<span class="gp">&gt;&gt; </span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span> <span class="p">}</span>
-<span class="go">=&gt; {:name=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;mhartl@example.com&quot;}</span>
+<span class="gp">&gt;&gt; </span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span> <span class="p">}</span>
+<span class="go">=&gt; {:nom=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;mhartl@example.com&quot;}</span>
 <span class="gp">&gt;&gt; </span><span class="n">params</span>
-<span class="go">=&gt; {:user=&gt;{:name=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;mhartl@example.com&quot;}}</span>
+<span class="go">=&gt; {:user=&gt;{:nom=&gt;&quot;Michael Hartl&quot;, :email=&gt;&quot;mhartl@example.com&quot;}}</span>
 <span class="gp">&gt;&gt; </span> <span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:email</span><span class="o">]</span>
 <span class="go">=&gt; &quot;mhartl@example.com&quot;</span>
 </pre></div>
 </div></div>
 
 
-<p>These sorts of hashes-of-hashes, or <em>nested hashes</em>, are heavily used by Rails, as we&rsquo;ll see starting in <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
+<p>Ces sortes de tables de table, ou <em>tables imbriquées</em>, sont intensivement utilisées par Rails, comme nous le verrons au début de la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
 
-<p>As with arrays and ranges, hashes respond to the <code>each</code> method. For example, consider a hash named <code>flash</code> with keys for two conditions, <code>:success</code> and <code>:error</code>:</p>
+<p>Comme pour les tableaux et les rangs, les tables de hachage répondent à la méthode <code>each</code>. Par exemple, considérons une table appelée <code>flash</code> avec des clés pour deux conditions, <code>:success</code> (<em>succès</em>) et <code>:error</code> (<em>erreur</em>)&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">flash</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:success</span> <span class="o">=&gt;</span> <span class="s2">&quot;It worked!&quot;</span><span class="p">,</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;It failed. :-(&quot;</span> <span class="p">}</span>
-<span class="go">=&gt; {:success=&gt;&quot;It worked!&quot;, :error=&gt;&quot;It failed. :-(&quot;}</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">flash</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:success</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ça marche&nbsp;!&quot;</span><span class="p">,</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;Raté… :-(&quot;</span> <span class="p">}</span>
+<span class="go">=&gt; {:success=&gt;&quot;Ça marche&nbsp;!&quot;, :error=&gt;&quot;Raté… :-(&quot;}</span>
 <span class="gp">&gt;&gt; </span><span class="n">flash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
-<span class="gp">?&gt; </span>  <span class="nb">puts</span> <span class="s2">&quot;Key </span><span class="si">#{</span><span class="n">key</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2"> has value </span><span class="si">#{</span><span class="n">value</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="gp">?&gt; </span>  <span class="nb">puts</span> <span class="s2">&quot;La clé </span><span class="si">#{</span><span class="n">key</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2"> a la valeur value </span><span class="si">#{</span><span class="n">value</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="k">end</span>
-<span class="go">Key :success has value &quot;It worked!&quot;</span>
-<span class="go">Key :error has value &quot;It failed. :-(&quot;</span>
+<span class="go">La clé :success a la valeur &quot;Ça marche&nbsp;!&quot;</span>
+<span class="go">La clé :error a la valeur &quot;Raté… :-(&quot;</span>
 </pre></div>
 </div>
 
 
-<p>Note that, while the <code>each</code> method for arrays takes a block with only one variable, <code>each</code> for hashes takes two, a <em>key</em> and a <em>value</em>. Thus, the <code>each</code> method for a hash iterates through the hash one key-value <em>pair</em> at a time.</p>
+<p>Notez que, tandis que la méthode <code>each</code> des tableaux prend un bloc avec une seule variable, <code>each</code> pour les tables de hachage en prend deux, une <em>clé</em> et une <em>valeur</em>. Ainsi, la méthode <code>each</code> pour les tables de hachage fait son itération à travers la table une <em>paire</em> clé-valeur à la fois.</p>
 
-<p>The last example uses the useful <code>inspect</code> method, which returns a string with a literal representation of the object it&rsquo;s called on:</p>
+<p>L'exemple précédent utilise la méthode utile <code>inspect</code>, qui retourne une chaine avec une représentation littérale de l'objet qui l'appelle&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>            <span class="c1"># Put an array as a string.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>            <span class="c1"># Rend une liste comme chaine.</span>
 <span class="go">1</span>
 <span class="go">2</span>
 <span class="go">3</span>
 <span class="go">4</span>
 <span class="go">5</span>
-<span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">inspect</span>    <span class="c1"># Put a literal array.</span>
+<span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">inspect</span>    <span class="c1"># Rend une liste littérale.</span>
 <span class="go">[1, 2, 3, 4, 5]</span>
 <span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:name</span><span class="o">.</span><span class="n">inspect</span>
 <span class="go">name</span>
 <span class="go">:name</span>
-<span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="s2">&quot;It worked!&quot;</span><span class="p">,</span> <span class="s2">&quot;It worked!&quot;</span><span class="o">.</span><span class="n">inspect</span>
-<span class="go">It worked!</span>
-<span class="go">&quot;It worked!&quot;</span>
+<span class="gp">&gt;&gt; </span><span class="nb">puts</span> <span class="s2">&quot;Ça marche&nbsp;!&quot;</span><span class="p">,</span> <span class="s2">&quot;Ça marche&nbsp;!&quot;</span><span class="o">.</span><span class="n">inspect</span>
+<span class="go">Ça marche&nbsp;!</span>
+<span class="go">&quot;Ça marche&nbsp;!&quot;</span>
 </pre></div>
 </div>
 
 
-<p>By the way, using <code>inspect</code> to print an object is common enough that there&rsquo;s a shortcut for it, the <code>p</code> function:</p>
+<p>En passant, utiliser <code>inspect</code> pour imprimer un objet est assez courant pour qu'il y ait un raccourci pour le faire, la fonction <code>p</code>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="nb">p</span> <span class="ss">:name</span>             <span class="c1"># Same as &#39;puts :name.inspect&#39;</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="nb">p</span> <span class="ss">:name</span>             <span class="c1"># Identique à &#39;puts :name.inspect&#39;</span>
 <span class="go">:name</span>
 </pre></div>
 </div>
@@ -1015,10 +1018,10 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 <div class="label" id="sec:css_revisited"></div>
 
 
-<h3><a id="sec:4.3.4" href="rails-flavored-ruby#sec:css_revisited" class="heading"><span class="number">4.3.4</span> CSS revisited</a></h3>
+<h3><a id="sec:4.3.4" href="rails-flavored-ruby#sec:css_revisited" class="heading"><span class="number">4.3.4</span> CSS Revisité</a></h3>
 
 
-<p>It&rsquo;s time now to revisit the lines from <a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">extrait&nbsp;4.4</a> used in the layout to include the cascading style sheets:</p>
+<p>Il est temps maintenant de revisiter les lignes de l'<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">extrait&nbsp;4.4</a> utilisées dans le layout pour inclure les feuilles de styles en cascade&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/print&#39;</span><span class="p">,</span>  <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;print&#39;</span> <span class="cp">%&gt;</span>
@@ -1026,32 +1029,32 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>We are now nearly in a position to understand this. As mentioned briefly in <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>, Rails defines a special function to include stylesheets, and</p>
+<p>Nous sommes maintenant tout près de pouvoir les comprendre. Comme mentionné brièvement à la <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>, Rails définit une fonction spéciale pour inclure les feuilles de styles, et… </p>
 
 <div class="code"><div class="highlight"><pre><span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span>
 </pre></div>
 </div>
 
 
-<p>is a call to this function. But there are two mysteries. First, where are the parentheses? In Ruby, they are optional; these two lines are equivalent:</p>
+<p>… est un appel à cette fonction. Mais il demeure deux mystères. <em>Primo</em>, où sont les parenthèses&nbsp;? En Ruby, elles sont optionnelles&nbsp;; ces deux lignes sont équivalentes&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="c1"># Parentheses on function calls are optional.</span>
+<div class="code"><div class="highlight"><pre><span class="c1"># Les parenthèses optionnelles à l'appel de la fonction.</span>
 <span class="n">stylesheet_link_tag</span><span class="p">(</span><span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span><span class="p">)</span>
 <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span>
 </pre></div>
 </div>
 
 
-<p>Second, the <code>:media</code> argument sure looks like a hash, but where are the curly braces? When hashes are the <em>last</em> argument in a function call, the curly braces are optional; these two lines are equivalent:</p>
+<p><em>Secondo</em>, l'argument <code>:media</code> ressemble à une table de hachage, mais où sont les accolades&nbsp;? Quand des tables de hachage sont le  <em>dernier</em> argument de l'appel d'une fonction, les accolades sont optionnelles&nbsp;; ces deux lignes sont donc équivalentes:</p>
 
-<div class="code"><div class="highlight"><pre><span class="c1"># Curly braces on final hash arguments are optional.</span>
+<div class="code"><div class="highlight"><pre><span class="c1"># Accolades optionnelles sur l'argument final.</span>
 <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span> <span class="p">}</span>
 <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span>
 </pre></div>
 </div>
 
 
-<p>So, we see now that each of the lines</p>
+<p>Donc, nous voyons maintenant que chacune des lignes…</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/print&#39;</span><span class="p">,</span>  <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;print&#39;</span> <span class="cp">%&gt;</span>
@@ -1059,13 +1062,13 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>calls the <code>stylesheet_link_tag</code> function with two arguments: a string, indicating the path to the stylesheet, and a hash, indicating the media type (<code>&rsquo;screen&rsquo;</code> for the computer screen and <code>&rsquo;print&rsquo;</code> for a printed version). Because of the <tt class="verb">&lt;%= %&gt;</tt> brackets, the results are inserted into the template by ERb, and if you view the source of the page in your browser you should see the HTML needed to include a stylesheet (<a class="ref" href="rails-flavored-ruby#code:css_source">extrait&nbsp;4.6</a>).<sup class="footnote" id="fnref:4.14"><a href="#fn:4.14">14</a></sup></p>
+<p>… appellent la fonction <code>stylesheet_link_tag</code> avec deux arguments&nbsp;: une chaine de caractères, indiquant le chemin d'accès au fichier de la feuille de styles CSS, et une table de hachage, indiquant le type de média concerné (<code>&rsquo;screen&rsquo;</code> pour l'écran de l'ordinateur et <code>&rsquo;print&rsquo;</code> pour la version imprimée). Grâce au balisage <tt class="verb">&lt;%= %&gt;</tt>, les résultats sont insérés dans le template par ERb, et si vous regardez le code source de la page dans votre navigateur vous pourrez voir le code nécessaire pour inclure une feuille de styles (<a class="ref" href="rails-flavored-ruby#code:css_source">extrait&nbsp;4.6</a>).<sup class="footnote" id="fnref:4.14"><a href="#fn:4.14">14</a></sup></p>
 
 <div class="label" id="code:css_source"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 4.6.</span> <span class="description">The HTML source produced by the CSS includes.</span>       
+<div class="listing"><span class="header">Extrait 4.6.</span> <span class="description">Le code HTML produit par l'inclusion d'une CSS.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/blueprint/screen.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span>
 <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
@@ -1080,20 +1083,20 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 <div class="label" id="sec:ruby_classes"></div>
 
 
-<h2><a id="sec:4.4" href="rails-flavored-ruby#sec:ruby_classes" class="heading"><span class="number">4.4</span> Ruby classes</a></h2>
+<h2><a id="sec:4.4" href="rails-flavored-ruby#sec:ruby_classes" class="heading"><span class="number">4.4</span> Classes Ruby</a></h2>
 
 
-<p>We&rsquo;ve said before that everything in Ruby is an object, and in this section we&rsquo;ll finally get to define some of our own. Ruby, like many object-oriented languages, uses <em>classes</em> to organize methods; these classes are then <em>instantiated</em> to create objects. If you&rsquo;re new to object-oriented programming, this may sound like gibberish, so let&rsquo;s look at some concrete examples.</p>
+<p>Nous avons dit auparavant que tout dans Ruby était un objet, et dans cette section nous seront amenés à définir les nôtres. Ruby, comme beaucoup de language orienté-objet, utilises les <em>classes</em> pour organiser les méthodes&nbsp;; ces classes sont alors <em>instanciées</em> pour créer des objets. Si vous êtes débutant en programmation orienté-objet (POO), cela peut ressembler à du charabia, donc étudions quelques exemples concrets.</p>
 
 <div class="label" id="sec:constructors"></div>
 
 
-<h3><a id="sec:4.4.1" href="rails-flavored-ruby#sec:constructors" class="heading"><span class="number">4.4.1</span> Constructors</a></h3>
+<h3><a id="sec:4.4.1" href="rails-flavored-ruby#sec:constructors" class="heading"><span class="number">4.4.1</span> Constructeurs</a></h3>
 
 
-<p>We&rsquo;ve seen lots of examples of using classes to instantiate objects, but we have yet to do so explicitly. For example, we instantiated a string using the double quote characters, which is a <em>literal constructor</em> for strings:</p>
+<p>Nous avons vu beaucoup d'exemples d'utilisation des classes pour instancier des objets, mais nous devons encore le faire de façon explicite. Par exemple, nous avons instancié une chaine de caractère en utilisant les guillemets, qui est le <em>constructeur littéral</em> de chaines&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;foobar&quot;</span>       <span class="c1"># A literal constructor for strings using double quotes</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;foobar&quot;</span>       <span class="c1"># Un constructeur littéral de chaine utilisant les guillemets</span>
 <span class="go">=&gt; &quot;foobar&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span>
 <span class="go">=&gt; String</span>
@@ -1101,11 +1104,11 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>We see here that strings respond to the method <code>class</code>, and simply return the class they belong to.</p>
+<p>Nous voyons ici que la chaine répond à la méthode <code>class</code>, et retourne simplement la classe à laquelle elle appartient («&nbsp;String&nbsp;», <em>Chaine</em>).</p>
 
-<p>Instead of using a literal constructor, we can use the equivalent <em>named constructor</em>, which involves calling the <code>new</code> method on the class name:<sup class="footnote" id="fnref:4.15"><a href="#fn:4.15">15</a></sup></p>
+<p>Plutôt que d'utiliser un constructeur littéral, nous pouvons utiliser le <em>contructeur nommé</em> équivalent, ce qui implique d'appeler la méthode <code>new</code> sur le nom de la classe&nbsp;:<sup class="footnote" id="fnref:4.15"><a href="#fn:4.15">15</a></sup></p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="nb">String</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>   <span class="c1"># A named constructor for a string</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="nb">String</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>   <span class="c1"># Un constructeur nommé pour les chaines</span>
 <span class="go">=&gt; &quot;foobar&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span>
 <span class="go">=&gt; String</span>
@@ -1115,9 +1118,9 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>This is equivalent to the literal constructor, but it&rsquo;s more explicit about what we&rsquo;re doing.</p>
+<p>C'est équivalent au constructeur littéral, mais c'est plus explicite sur ce que nous faisons.</p>
 
-<p>Arrays work the same way as strings:</p>
+<p>Les Tableaux fonctionnent de la même façon que les chaines&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">)</span>
 <span class="go">=&gt; [1, 3, 2]</span>
@@ -1125,13 +1128,13 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>Hashes, in contrast, are different. While the array constructor <code>Array.new</code> takes an initial value for the array, <code>Hash.new</code> takes a <em>default</em> value for the hash, which is the value of the hash for a nonexistent key:</p>
+<p>Les Tables de hachage, en revanche, sont différentes. Tandis que le constructeur de tableau <code>Array.new</code> prend une valeur initiale pour le tableau, <code>Hash.new</code> prend une valeur <em>par défaut</em> pour la table, qui est la valeur de la table pour une clé inexistante&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
 <span class="go">=&gt; {}</span>
-<span class="gp">&gt;&gt; </span><span class="n">h</span><span class="o">[</span><span class="ss">:foo</span><span class="o">]</span>            <span class="c1"># Try to access the value for the nonexistent key :foo.</span>
+<span class="gp">&gt;&gt; </span><span class="n">h</span><span class="o">[</span><span class="ss">:foo</span><span class="o">]</span>            <span class="c1"># Essai d'accès à la valeur d'une clé :foo inexistante.</span>
 <span class="go">=&gt; nil</span>
-<span class="gp">&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># Arrange for nonexistent keys to return 0 instead of nil.</span>
+<span class="gp">&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># Arrangement pour que les clés inexistantes retournent 0 plutôt que nil.</span>
 <span class="go">=&gt; {}</span>
 <span class="gp">&gt;&gt; </span><span class="n">h</span><span class="o">[</span><span class="ss">:foo</span><span class="o">]</span>
 <span class="go">=&gt; 0</span>
@@ -1144,18 +1147,18 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 <div class="label" id="sec:a_class_of_our_own"></div>
 
 
-<h3><a id="sec:4.4.2" href="rails-flavored-ruby#sec:a_class_of_our_own" class="heading"><span class="number">4.4.2</span> Class inheritance</a></h3>
+<h3><a id="sec:4.4.2" href="rails-flavored-ruby#sec:a_class_of_our_own" class="heading"><span class="number">4.4.2</span> Héritage de classe</a></h3>
 
 
-<p>When learning about classes, it&rsquo;s useful to find out the <em>class hierarchy</em> using the <code>superclass</code> method:</p>
+<p>Quand on apprend les classes, c'est utilie de trouver la <em>hiérarchie de classe</em> en utilisant la méthode <code>superclass</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="nb">String</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 <span class="go">=&gt; &quot;foobar&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span>                        <span class="c1"># Find the class of s.</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span>                        <span class="c1"># Trouver la classe de s.</span>
 <span class="go">=&gt; String</span>
-<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span>             <span class="c1"># Find the superclass of String.</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span>             <span class="c1"># Trouver la superclasse de la classe String.</span>
 <span class="go">=&gt; Object</span>
-<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">superclass</span>  <span class="c1"># Ruby 1.9 uses a new BasicObject base class</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">superclass</span>  <span class="c1"># Ruby 1.9 utilise une nouvea classe de base BasicObject</span>
 <span class="go">=&gt; BasicObject </span>
 <span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">superclass</span>
 <span class="go">=&gt; nil</span>
@@ -1163,17 +1166,17 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>A diagram of this inheritance hierarchy appears in <a class="ref" href="rails-flavored-ruby#fig:string_inheritance_ruby_1_9">illustration&nbsp;4.2</a>. We see here that the superclass of <code>String</code> is <code>Object</code> and the superclass of <code>Object</code> is <code>BasicObject</code>, but <code>BasicObject</code> has no superclass. This pattern is true of every Ruby object: trace back the class hierarchy far enough and every class in Ruby ultimately inherits from <code>BasicObject</code>, which has no superclass itself. This is the technical meaning of &ldquo;everything in Ruby is an object&rdquo;.</p>
+<p>Dans le diagramme de cette héritage hiérarchique dans l<a class="ref" href="rails-flavored-ruby#fig:string_inheritance_ruby_1_9">illustration&nbsp;4.2</a>, nous voyons que la superclasse de <code>String</code> (<em>Chaine</em>) est la classe <code>Object</code> et la superclasse de la classe <code>Object</code> est la classe <code>BasicObject</code>, mais  <code>BasicObject</code> ne possède pas de superclasse. Ce modèle est vrai pour chaque objet Ruby&nbsp;: remontez la hiérarchie des classes assez loin, et chaque classe Ruby héritera en fin de compte de la classe <code>BasicObject</code>, qui n'a pas de superclasse elle-même. C'est l'explication technique de &ldquo;tout en Ruby est objet&rdquo;.</p>
 
 <div class="label" id="fig:string_inheritance_ruby_1_9"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/string_inheritance_ruby_1_9.png" alt="string_inheritance_ruby_1_9" /></span></div><div class="caption"><span class="header">Illustration 4.2: </span><span class="description">The inheritance hierarchy for the <code>String</code> class.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/string_inheritance_ruby_1_9.png" alt="string_inheritance_ruby_1_9" /></span></div><div class="caption"><span class="header">Illustration 4.2: </span><span class="description">La hiérarchie des héritages pour la classe <code>String</code>.</span></div></div>
 
 
-<p>To understand classes a little more deeply, there&rsquo;s no substitute for making one of our own. Let&rsquo;s make a <code>Word</code> class with a <code>palindrome?</code> method that returns <code>true</code> if the word is the same spelled forward and backward:</p>
+<p>Pour comprendre les classes un peu plus profondément, il n'y a rien de mieux que de construire les nôtres. Construison une classe <code>Mot</code> possédant une méthode <code>palindrome?</code> qui retourne <code>true</code> (<em>vrai</em>) si le mot est un palindrome (s'il s'épelle de la même façon à l'endroit et à l'envers)&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="k">class</span> <span class="nc">Word</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="k">class</span> <span class="nc">Mot</span>
 <span class="gp">&gt;&gt; </span>  <span class="k">def</span> <span class="nf">palindrome?</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span>    <span class="n">string</span> <span class="o">==</span> <span class="n">string</span><span class="o">.</span><span class="n">reverse</span>
 <span class="gp">&gt;&gt; </span>  <span class="k">end</span>
@@ -1183,10 +1186,10 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>We can use it as follows:</p>
+<p>Nous pouvons l'utiliser comme suit&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="no">Word</span><span class="o">.</span><span class="n">new</span>              <span class="c1"># Make a new Word object.</span>
-<span class="go">=&gt; #&lt;Word:0x22d0b20&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="no">Mot</span><span class="o">.</span><span class="n">new</span>              <span class="c1"># Fait un nouvel objet Mot.</span>
+<span class="go">=&gt; #&lt;Mot:0x22d0b20&gt;</span>
 <span class="gp">&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">palindrome?</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 <span class="go">=&gt; false</span>
 <span class="gp">&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">palindrome?</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">)</span>
@@ -1195,17 +1198,17 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>If this example strikes you as a bit contrived, good; this is by design. It&rsquo;s odd to create a new class just to create a method that takes a string as an argument. Since a word <em>is a</em> string, it&rsquo;s more natural to have our <code>Word</code> class <em>inherit</em> from <code>String</code>, as seen in <a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a>. (You should exit the console and re-enter it to clear out the old definition of <code>Word</code>.)</p>
+<p>Si cet exemple vous semble un peu artificiel, tant mieux&nbsp;; c'est à dessein. C'est étrange de créer une nouvelle classe jue pour créer une méthode qui prend une chaine de caractère comme argument. Puisqu'un mot <em>est une</em> chaine de caractères, il semble naturel que notre classe <code>Word</code> <em>hérite</em> de la classe <code>String</code>, comme nous le voyons dans <a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a> (vous devriez quitter la console et la relancer pour effacer l'ancienne définition de  <code>Mot</code>).</p>
 
 <div class="label" id="code:word_class"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 4.7.</span> <span class="description">Defining a <code>Word</code> class in the console.</span> </div>
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="k">class</span> <span class="nc">Word</span> <span class="o">&lt;</span> <span class="nb">String</span>             <span class="c1"># Word inherits from String.</span>
-<span class="gp">&gt;&gt; </span>  <span class="c1"># Return true if the string is its own reverse.</span>
+<div class="listing"><span class="header">Extrait 4.7.</span> <span class="description">Définir une classe <code>Mot</code> dans la console.</span> </div>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="k">class</span> <span class="nc">Mot</span> <span class="o">&lt;</span> <span class="nb">String</span>             <span class="c1"># Mot hérite de String.</span>
+<span class="gp">&gt;&gt; </span>  <span class="c1"># Renvoie true si la chaine est son propre inverse.</span>
 <span class="gp">&gt;&gt; </span>  <span class="k">def</span> <span class="nf">palindrome?</span>
-<span class="gp">&gt;&gt; </span>    <span class="nb">self</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">reverse</span>        <span class="c1"># self is the string itself.</span>
+<span class="gp">&gt;&gt; </span>    <span class="nb">self</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">reverse</span>        <span class="c1"># self est la chaine elle-même.</span>
 <span class="gp">&gt;&gt; </span>  <span class="k">end</span>
 <span class="gp">&gt;&gt; </span><span class="k">end</span>
 <span class="go">=&gt; nil</span>
@@ -1213,22 +1216,22 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div></div>
 
 
-<p>Here <code>Word &lt; String</code> is the Ruby syntax for inheritance (discussed briefly in <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>), which ensures that, in addition to the new <code>palindrome?</code> method, words also have all the same methods as strings:</p>
+<p>Ici <code>Mot &lt; String</code> est la syntaxe Ruby l'héritage (discuté brièvement à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>), qui s'assure que, en plus de la nouvelle méthode <code>palindrome?</code>, les mots héritent des mêmes méthodes que les chaines de caractères&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="no">Word</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">)</span>    <span class="c1"># Make a new Word, initialized with &quot;level&quot;.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="no">Mot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">)</span>    <span class="c1"># Fait un nouveau Mot, initialisé à  &quot;level&quot;.</span>
 <span class="go">=&gt; &quot;level&quot;                  </span>
-<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">palindrome?</span>            <span class="c1"># Words have the palindrome? method.</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">palindrome?</span>            <span class="c1"># Mots possèdent la méthode palindrome?.</span>
 <span class="go">=&gt; true                     </span>
-<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">length</span>                 <span class="c1"># Words also inherit all the normal string methods.</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">length</span>                 <span class="c1"># Mots héritent aussi de toutes les méthodes des chaines.</span>
 <span class="go">=&gt; 5</span>
 </pre></div>
 </div>
 
 
-<p>Since the <code>Word</code> class inherits from <code>String</code>, we can use the console to see the class hierarchy explicitly:</p>
+<p>Puisque la classe <code>Mot</code> hérite de la classe <code>String</code>, nous pouvons utiliser la console pour voir la hiérarchie des classes explicitement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span>
-<span class="go">=&gt; Word</span>
+<span class="go">=&gt; Mot</span>
 <span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span>
 <span class="go">=&gt; String</span>
 <span class="gp">&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">superclass</span>
@@ -1237,25 +1240,26 @@ Notez en particulier le basculement de la variable d'instance <code>@title</code
 </div>
 
 
-<p>This hierarchy is illustrated in <a class="ref" href="rails-flavored-ruby#fig:word_inheritance_ruby_1_9">illustration&nbsp;4.3</a>.</p>
+<p>Cette hiérarchie est présentée dans l'<a class="ref" href="rails-flavored-ruby#fig:word_inheritance_ruby_1_9">illustration&nbsp;4.3</a>.</p>
 
 <div class="label" id="fig:word_inheritance_ruby_1_9"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/word_inheritance_ruby_1_9.png" alt="word_inheritance_ruby_1_9" /></span></div><div class="caption"><span class="header">Illustration 4.3: </span><span class="description">The inheritance hierarchy for the (non-intégré) <code>Word</code> class from <a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a>.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/word_inheritance_ruby_1_9.png" alt="word_inheritance_ruby_1_9" /></span></div><div class="caption"><span class="header">Illustration 4.3: </span><span class="description">La hiérarchie de l'héritage pour une classe (non-intégré) <code>Mot</code> de l'<a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a>.</span></div></div>
 
 
-<p>In <a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a>, note that checking that the word is its own reverse involves accessing the word inside the <code>Word</code> class. Ruby allows us to do this using the <code>self</code> keyword: inside the <code>Word</code> class, <code>self</code> is the object itself, which means we can use</p>
+<p>Dans l'<a class="ref" href="rails-flavored-ruby#code:word_class">extrait&nbsp;4.7</a>, notez que vérifier que le mot est son propre inverse implique d'avoir accès au mot à l'intérieur de la classe <code>Mot</code>. Ruby nous permet de le faire en utilisant le mot-clé <code>self</code>&nbsp;: à l'intérieur de la classe <code>Mot</code>, <code>self</code> est l'objet lui-même, ce qui signifie que nous pouvons utiliser…</p>
 
 <div class="code"><div class="highlight"><pre><span class="nb">self</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">reverse</span>
 </pre></div>
 </div>
 
 
-<p>to check if the word is a palindrome.<sup class="footnote" id="fnref:4.16"><a href="#fn:4.16">16</a></sup></p>
+<p>… pour vérifier que le mot est un palindrome.<sup class="footnote" id="fnref:4.16"><a href="#fn:4.16">16</a></sup></p>
 
 <div class="label" id="sec:modifying_built_in_classes"></div>
 
+<!-- FIN FRENCH -->
 
 <h3><a id="sec:4.4.3" href="rails-flavored-ruby#sec:modifying_built_in_classes" class="heading"><span class="number">4.4.3</span> Modifier les classes d'origine</a></h3>
 

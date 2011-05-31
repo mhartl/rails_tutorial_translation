@@ -1484,29 +1484,28 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/about_page.png" alt="about_page" /></span></div><div class="caption"><span class="header">Illustration 5.9: </span><span class="description">La page À Propos à  <a href="http://localhost:3000/about"><tt>/about</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/about_page-full.png">(taille normale)</a></span></div></div>
 
 
-<!-- FIN FRENCH -->
 
 <div class="label" id="sec:user_signup"></div>
 
 
-<h2><a id="sec:5.3" href="filling-in-the-layout#sec:user_signup" class="heading"><span class="number">5.3</span> User signup: A first step</a></h2>
+<h2><a id="sec:5.3" href="filling-in-the-layout#sec:user_signup" class="heading"><span class="number">5.3</span> Inscription de l'utilisateur&nbsp;: une première étape</a></h2>
 
 
-<p>As a capstone to our work on the layout and routing, in this section we&rsquo;ll make a route for the signup page, which will mean creating a second controller along the way. This is a first important step toward allowing users to register for our site; we&rsquo;ll take the next step, modeling users, in <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, and we&rsquo;ll finish the job in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Comme une pierre angulaire de notre travail sur le layout et le routage, nous allons faire dans cette section une route pour la page d'inscription, ce qui signifiera de créer un second contrôleur. C'est un premier pas important vers la possibilité pour les utilisateurs de s'enregistrer sur notre site&nbsp;; nous passerons à l'étape suivant, la modélisation de ces utilisateurs, au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, et nous achèverons le travail au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
 <div class="label" id="sec:users_controller"></div>
 
 
-<h3><a id="sec:5.3.1" href="filling-in-the-layout#sec:users_controller" class="heading"><span class="number">5.3.1</span> Users controller</a></h3>
+<h3><a id="sec:5.3.1" href="filling-in-the-layout#sec:users_controller" class="heading"><span class="number">5.3.1</span> Contrôleur des utilisateurs (<em>Users</em> )</a></h3>
 
 
-<p>It&rsquo;s been a while since we created our first controller, the Pages controller, way back in <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>. It&rsquo;s time to create a second one, the Users controller. As before, we&rsquo;ll use <code>generate</code> to make the simplest controller that meets our present needs, namely, one with a stub signup page for new users. Following the conventional <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">REST architecture</a> favored by Rails, we&rsquo;ll call the action for new users <code>new</code> and pass it as an argument to <code>generate controller</code> to create it automatically (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>).</p>
+<p>Cela fait un moment que nous avons créé notre premier contrôleur, le contrôleur Pages, à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>. Il est temps d'en créer une second, le contrôleur Users (<em>Utilisateurs</em> ). Comme précédemment, nous utiliserons la commande <code>generate</code> pour faire le contrôleur le plus simple qui remplissent nos besoins actuels, nomémment, un contrôleur avec une base de page d'inscription pour les nouveaux utilisateurs. En suivant les conventions de l'<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">architecture REST</a> préconisée par Rails, nous appellerons l'action <code>new</code> du contrôleur et le passerons comme argument à <code>generate controller</code> pour le créer automatiquement (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>).</p>
 
 <div class="label" id="code:generate_users_controller"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.23.</span> <span class="description">Generating a Users controller (with a <code>new</code> action).</span> </div>
+<div class="listing"><span class="header">Extrait 5.23.</span> <span class="description">Générer un contrôleur Users (avec une action <code>new</code>).</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Users new
 <span class="go">      create  app/controllers/users_controller.rb</span>
 <span class="go">       route  get &quot;users/new&quot;</span>
@@ -1525,7 +1524,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>As with the Pages controller, this generates view and helper specs that we won&rsquo;t need, so remove them:</p>
+<p>Comme avec le contrôleur Pages, cela génère vue et <em>specs helper</em> dont nous n'avons pas besoin, donc détruisons-les&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rm -rf spec/views
 <span class="gp">$</span> rm -rf spec/helpers
@@ -1533,20 +1532,20 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>The controller generator makes both the Users controller and a useful default test, which verifies that the <code>new</code> action responds properly to a <tt>GET</tt> request (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>); the code appears in <a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a>. This code should look familiar; it follows the exact same form as the Pages controller spec last seen in <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
+<p>Le générateur de contrôleur construit ensemble un contrôleur Users et un test par défaut utile, qui vérifie que l'action <code>new</code> réponde bien à la requête <tt>GET</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>)&nbsp;; le code est présenté dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a>. Ce code devrait vous paraitre familier&nbsp;; il suit l'exacte même forme que le spec du contrôleur Pages vue précédemment à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
 
 <div class="label" id="code:get_new_user_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.24.</span> <span class="description">Testing the signup page. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.24.</span> <span class="description">Tester la page d'inscription. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;new&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;new&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
@@ -1556,13 +1555,13 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>By construction, the Users controller already has the proper <code>new</code> action and <code>new.html.erb</code> template to get this test to pass (<a class="ref" href="filling-in-the-layout#code:new_user_action">extrait&nbsp;5.25</a>).  (To view the page at <a href="http://localhost:3000/users/new"><tt>/users/new</tt></a>, you might have to restart the server.)</p>
+<p>Par construction, le contrôleur Users possède déjà sa propre action <code>new</code> et le template <code>new.html.erb</code> pour faire réussir ce test (<a class="ref" href="filling-in-the-layout#code:new_user_action">extrait&nbsp;5.25</a>)  (pour voir la page l'adresse <a href="http://localhost:3000/users/new"><tt>/users/new</tt></a>, vous devez peut-être relancer le serveur).</p>
 
 <div class="label" id="code:new_user_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.25.</span> <span class="description">Action for the new user (signup) page. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.25.</span> <span class="description">Action pour la page d'inscription du nouvel utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1574,13 +1573,13 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>To get back in the spirit of test-driven development, let&rsquo;s add a second (failing) test of our own by testing for a title that contains the string <code>"Sign up"</code> (<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). Be sure to add <code>render_views</code> as we did in the Pages controller spec (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>); otherwise, the test won&rsquo;t pass even after we add the proper title.</p>
+<p>Pour revenir à l'esprit du «&nbsp;développement conduit par le test&nbsp;», ajoutons un second test (échouant) de notre cru en testant le titre que contient la chaine <code>"Inscription"</code> (<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). Assurez-vous d'ajouter <code>render_views</code> comme nous l'avons fait dans le spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>)&nbsp;; sinon, le test échouera même après avoir ajouté le titre adéquat.</p>
 
 <div class="label" id="code:signup_title_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.26.</span> <span class="description">A test for the signup page title. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.26.</span> <span class="description">Un test sur le titre de la page d'inscription. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1588,14 +1587,14 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
   <span class="n">render_views</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;new&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;new&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le titre adéquat&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;new&#39;</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Inscription&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -1603,20 +1602,20 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>This test uses the <code>have_selector</code> method we&rsquo;ve seen before (<a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>); note that, as in <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>, <code>have_selector</code> needs the <code>render_views</code> line since it tests the view along with the action.</p>
+<p>Ce test utilise a méthode <code>have_selector</code> que nous avons vu précédemment (<a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>)&nbsp;; notez que, comme à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>, <code>have_selector</code> a besoin de la ligne <code>render_views</code> puisqu'il test la vue associée à l'action.</p>
 
-<p>Of course, by design this test currently fails (Red). To get a custom title, we need to make an <code>@title</code> instance variable as in <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a>. We can thus get to Green with the code in <a class="ref" href="filling-in-the-layout#code:new_user_title">extrait&nbsp;5.27</a>.</p>
+<p>Bien sûr, à dessein ce test, pour le moment échoue (Rouge). Pour avoir un titre personnalisé, nous avons besoin de créer une variable d'instance <code>@title</code> comme à la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a>. Nous pouvons ainsi obtenir le Vert avec le code de l'<a class="ref" href="filling-in-the-layout#code:new_user_title">extrait&nbsp;5.27</a>.</p>
 
 <div class="label" id="code:new_user_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.27.</span> <span class="description">Setting the custom title for the new user page. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.27.</span> <span class="description">Définir le titre personnalisé pour la page de nouvel utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">new</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -1628,16 +1627,16 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <div class="label" id="sec:signup_url"></div>
 
 
-<h3><a id="sec:5.3.2" href="filling-in-the-layout#sec:signup_url" class="heading"><span class="number">5.3.2</span> Signup URL</a></h3>
+<h3><a id="sec:5.3.2" href="filling-in-the-layout#sec:signup_url" class="heading"><span class="number">5.3.2</span> URL de l'inscription</a></h3>
 
 
-<p>With the code from <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, we already have a working page for new users at <tt>/users/new</tt>, but recall from <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a> that we want the URL to be <tt>/signup</tt> instead. As in <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, we&rsquo;ll first write a test (<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>).</p>
+<p>Avec le code de la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, nous avons déjà une page fonctionelle pour les nouveaux utilisateurs à l'adresse <tt>/users/new</tt>, mais vous vous souvenez que d'après la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a> nous voulons que l'URL soit plutôt <tt>/signup</tt>. Comme à la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, nous allons d'abord écrire un test (<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>).</p>
 
 <div class="label" id="code:user_signup_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.28.</span> <span class="description">Simple integration test for user signup link. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.28.</span> <span class="description">Simple test d'intégration pour le lien d'inscription utilisateur. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1645,24 +1644,24 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should have a signup page at &#39;/signup&#39;&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait avoir une page d'inscription à &#39;/signup&#39;&quot;</span> <span class="k">do</span>
     <span class="n">get</span> <span class="s1">&#39;/signup&#39;</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Inscription&quot;</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>Note that this is the <em>same</em> file as the one used for the other layout links, even though the Signup page is in a different controller. Being able to hit pages in multiple controllers is one of the advantages of using integration tests.</p>
+<p>Notez que c'est le <em>même</em> fichier que celui utilisé pour les liens des autres layout, même si la page d'inscription est dans un différent contrôleur. Être capable d'atteindre des pages dans de multiples contrôleur est l'un des avantages de l'utilisation des tests d'intégration.</p>
 
-<p>The last step is to make a named route for signups. We&rsquo;ll follow the examples from <a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> and add a <code>match &rsquo;/signup&rsquo;</code> rule for the signup URL (<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>).</p>
+<p>La dernière étape consiste à faire une <em>route nommée</em> pour les inscriptions. Nous suivrons les exemples de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> et ajouterons une règle <code>match &rsquo;/signup&rsquo;</code> pour l'URL de l'inscription (<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>).</p>
 
 <div class="label" id="code:signup_route"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.29.</span> <span class="description">A route for the signup page. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.29.</span> <span class="description">Une route pour la page d'inscription. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s2">&quot;users/new&quot;</span>
@@ -1682,35 +1681,34 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Note that we have kept the rule <code>get "users/new"</code>, which was generated automatically by the Users controller generation in <a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>. Currently, this rule is necessary to route <tt>/users/new</tt> correctly, but it doesn&rsquo;t follow the proper REST conventions (<a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>), and we will eliminate it in <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">section&nbsp;6.3.3</a>.</p>
+<p>Notez que nous avons gardé la règle <code>get "users/new"</code>, qui a été généré pendant la génération automatique du contrôleur à l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>. Pour le moment, cette règle est nécessaire pour router <tt>/users/new</tt> correctement, mais il ne suit pas proprement les conventions REST (<a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>), et nous l'éliminerons à la <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">section&nbsp;6.3.3</a>.</p>
 
-<p>At this point, the signup test in <a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a> should pass. All that&rsquo;s left is to add the proper link to the button on the Accueil page. As with the other routes, <code>match &rsquo;/signup&rsquo;</code> gives us the named route <code>signup_path</code>, which we put to use in <a class="ref" href="filling-in-the-layout#code:home_page_signup_link">extrait&nbsp;5.30</a>.</p>
+<p>À ce point, le test d'inscription de l'<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a> devrait réussir. Tout ce que qui nous reste à faire est d'ajouter le propre lien au bouton sur la page d'accueil. Comme avec les autres routes, <code>match &rsquo;/signup&rsquo;</code> nous donne la <em>route nommée</em> gives <code>signup_path</code>, que nous allons utiliser dans l'<a class="ref" href="filling-in-the-layout#code:home_page_signup_link">extrait&nbsp;5.30</a>.</p>
 
 <div class="label" id="code:home_page_signup_link"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.30.</span> <span class="description">Linking the button to the Signup page. <br /> <code>app/views/pages/home.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 5.30.</span> <span class="description">Lier le bouton à la page d'inscription. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Application exemple<span class="nt">&lt;/h1&gt;</span>
 
 <span class="nt">&lt;p&gt;</span>
-  This is the home page for the
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
-  sample application.
+  C'est la page d'accueil pour l'application exemple du
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 
-<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up now!&quot;</span><span class="p">,</span> <span class="n">signup_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;signup_button round&quot;</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;S'inscrire&nbsp;!&quot;</span><span class="p">,</span> <span class="n">signup_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;signup_button round&quot;</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>With that, we&rsquo;re done with the links and named routes, at least until we add a route for signing in (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). The resulting new user page (at the URL <tt>/signup</tt>) appears in <a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a>.</p>
+<p>Cela fait, nous en avons fini avec les liens et les routes nommées, au moins jusqu'à ce que nous ajoutions la route pour s'identifier (se connecter) (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). La page de nouvelle utilisateur en résultant (à l'URL <tt>/signup</tt>) est présentée dans l'<a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a>.</p>
 
 <div class="label" id="fig:blank_signup_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 5.10: </span><span class="description">The new signup page at  <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 5.10: </span><span class="description">La nouvelle page d'inscription à <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1721,20 +1719,20 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h2><a id="sec:5.4" href="filling-in-the-layout#sec:layout_conclusion" class="heading"><span class="number">5.4</span> Conclusion</a></h2>
 
 
-<p>In this chapter, we&rsquo;ve hammered our application layout into shape and polished up the routes. The rest of the book is dedicated to fleshing out the sample application: first, by adding users who can sign up, sign in, and sign out; next, by adding user microposts; and, finally, by adding user relationships.</p>
+<p>Dans ce chapitre, nous avons bricolé la mise en forme de notre application et avons peaufiné le routage. La suite du livre est dédié à donner du contenu à cette application exemple&nbsp;: d'abord, en ajoutant des utilisateurs qui peuvent s'incrire, s'identifiant et se déconnecter&nbsp;; ensuite, en ajoutant des micro-messages d'utilisateur&nbsp;; et, enfin, en ajoutant des relations entre utilisateurs.</p>
 
-<p>If you&rsquo;re following along with Git, be sure to commit and merge (and, just to be paranoid, run your tests first):</p>
+<p>Si vous êtes épaulé par Git, assurez de «&nbsp;commettre&nbsp;»  (<em>commit</em>) et de fusionner votre branche actuelle (et, juste par paranoïa, jouez vos tests avant)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 <span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;Finished layout and routes&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Fin du layout et des routes&quot;</span>
 <span class="gp">$</span> git checkout master
 <span class="gp">$</span> git merge filling-in-layout
 </pre></div>
 </div>
 
 
-<p>You might also want to push up to GitHub, or deploy to Heroku:</p>
+<p>Vous pouvez aussi vouloir «&nbsp;pusher&nbsp;» votre travail sur GitHub, ou déployer votre application actualisée sur Heroku&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push
 <span class="gp">$</span> git push heroku

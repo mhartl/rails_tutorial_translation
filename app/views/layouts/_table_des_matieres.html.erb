@@ -1,0 +1,337 @@
+
+<h1 class="contents">Contenu</h1>
+
+
+<div id="table_of_contents"><ol>
+<li class="chapter"><a href="beginning#top"><span class="number">Chapitre 1</span> De zéro au déploiement</a></li>
+<li><ol>
+<li class="section"><a href="beginning#sec:introduction"><span class="number">1.1</span> Introduction</a></li>
+<li><ol>
+<li class="subsection"><a href="beginning#sec:comments_for_various_readers"><span class="number">1.1.1</span> Commentaires pour les lecteurs différents</a></li>
+<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> &ldquo;Dimensionner&rdquo; Rails</a></li>
+<li class="subsection"><a href="beginning#sec:conventions"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></li></ol></li>
+<li class="section"><a href="beginning#sec:up_and_running"><span class="number">1.2</span> [(Up and running)(En route pour le démarrage)]</a></li>
+<li><ol>
+<li class="subsection"><a href="beginning#sec:development_tools"><span class="number">1.2.1</span> Environnements de développement</a></li>
+<li><ol>
+<li class="subsubsection"><a href="beginning#sec:1.2.1.1">IDEs</a></li>
+<li class="subsubsection"><a href="beginning#sec:1.2.1.2">Éditeurs de texte et lignes de commande</a></li>
+<li class="subsubsection"><a href="beginning#sec:1.2.1.3">Navigateurs</a></li>
+<li class="subsubsection"><a href="beginning#sec:1.2.1.4">Note à propos des outils</a></li></ol></li>
+<li class="subsection"><a href="beginning#sec:rubygems"><span class="number">1.2.2</span> Ruby, RubyGems, Rails, et Git</a></li>
+<li><ol>
+<li class="subsubsection"><a href="beginning#sec:rails_installer_windows">Installation de Rails (Windows)</a></li>
+<li class="subsubsection"><a href="beginning#sec:install_git">Installer Git</a></li>
+<li class="subsubsection"><a href="beginning#sec:install_ruby">Installer Ruby</a></li>
+<li class="subsubsection"><a href="beginning#sec:install_rubygems">Installer RubyGems</a></li>
+<li class="subsubsection"><a href="beginning#sec:install_rails">Installer Rails</a></li></ol></li>
+<li class="subsection"><a href="beginning#sec:the_first_application"><span class="number">1.2.3</span> La première application</a></li>
+<li class="subsection"><a href="beginning#sec:bundler"><span class="number">1.2.4</span> Bundler</a></li>
+<li class="subsection"><a href="beginning#sec:rails_server"><span class="number">1.2.5</span> <code>Le serveur rails (rails server)</code></a></li>
+<li class="subsection"><a href="beginning#sec:mvc"><span class="number">1.2.6</span> Modèles-Vue-Contrôleur (MVC)</a></li></ol></li>
+<li class="section"><a href="beginning#sec:version_control"><span class="number">1.3</span> Contrôle de versions avec Git</a></li>
+<li><ol>
+<li class="subsection"><a href="beginning#sec:git_setup"><span class="number">1.3.1</span> Installation et réglages</a></li>
+<li><ol>
+<li class="subsubsection"><a href="beginning#sec:1.3.1.1">Initialisation des réglages système</a></li>
+<li class="subsubsection"><a href="beginning#sec:1.3.1.2">Initialisation des réglages du dépôt (repository)</a></li></ol></li>
+<li class="subsection"><a href="beginning#sec:adding_and_committing"><span class="number">1.3.2</span> Ajout et mandat de dépôt</a></li>
+<li class="subsection"><a href="beginning#sec:1.3.3"><span class="number">1.3.3</span> Qu'est-ce que Git peut faire de bien pour vous&nbsp;?</a></li>
+<li class="subsection"><a href="beginning#sec:github"><span class="number">1.3.4</span> GitHub</a></li>
+<li class="subsection"><a href="beginning#sec:git_commands"><span class="number">1.3.5</span> Branch, edit, commit, merge</a></li>
+<li><ol>
+<li class="subsubsection"><a href="beginning#sec:git_branch">Branch</a></li>
+<li class="subsubsection"><a href="beginning#sec:git_edit">Edit</a></li>
+<li class="subsubsection"><a href="beginning#sec:git_commit">Commit</a></li>
+<li class="subsubsection"><a href="beginning#sec:git_merge">Merge</a></li>
+<li class="subsubsection"><a href="beginning#sec:git_push">Push</a></li></ol></li></ol></li>
+<li class="section"><a href="beginning#sec:deploying"><span class="number">1.4</span> Déploiement</a></li>
+<li><ol>
+<li class="subsection"><a href="beginning#sec:1.4.1"><span class="number">1.4.1</span> Réglages Heroku</a></li>
+<li class="subsection"><a href="beginning#sec:heroku_step_one"><span class="number">1.4.2</span> déploiement Heroku, première étape</a></li>
+<li class="subsection"><a href="beginning#sec:1.4.3"><span class="number">1.4.3</span> Déploiement Heroku deployment, seconde étape</a></li>
+<li class="subsection"><a href="beginning#sec:heroku_commands"><span class="number">1.4.4</span> Commandes Heroku</a></li></ol></li>
+<li class="section"><a href="beginning#sec:beginning_conclusion"><span class="number">1.5</span> Conclusion</a></li></ol></li>
+<li class="chapter"><a href="a-demo-app#top"><span class="number">Chapitre 2</span> Une application démo</a></li>
+<li><ol>
+<li class="section"><a href="a-demo-app#sec:planning_the_application"><span class="number">2.1</span> Planifier l'application</a></li>
+<li><ol>
+<li class="subsection"><a href="a-demo-app#sec:modeling_users"><span class="number">2.1.1</span> Modéliser les utilisateurs</a></li>
+<li class="subsection"><a href="a-demo-app#sec:modeling_microposts"><span class="number">2.1.2</span> Modéliser les micro-messages</a></li></ol></li>
+<li class="section"><a href="a-demo-app#sec:demo_users_resource"><span class="number">2.2</span> La ressource Utilisateurs (Users)</a></li>
+<li><ol>
+<li class="subsection"><a href="a-demo-app#sec:a_user_tour"><span class="number">2.2.1</span> Un tour de l'utilisateur</a></li>
+<li class="subsection"><a href="a-demo-app#sec:mvc_in_action"><span class="number">2.2.2</span> MVC en action</a></li>
+<li class="subsection"><a href="a-demo-app#sec:weaknesses_of_this_users_resource"><span class="number">2.2.3</span> Faiblesses de la ressource Utilisateurs (Users)</a></li></ol></li>
+<li class="section"><a href="a-demo-app#sec:microposts_resource"><span class="number">2.3</span> La ressource Micro-messages (Microposts)</a></li>
+<li><ol>
+<li class="subsection"><a href="a-demo-app#sec:a_micropost_microtour"><span class="number">2.3.1</span> Un petit tour du micro-message</a></li>
+<li class="subsection"><a href="a-demo-app#sec:putting_the_micro_in_microposts"><span class="number">2.3.2</span> Appliquer le <em>micro</em> aux micro-messages</a></li>
+<li class="subsection"><a href="a-demo-app#sec:demo_user_has_many_microposts"><span class="number">2.3.3</span> Un utilisateur <code>has_many</code> (<code>possède plusieurs</code>) micro-messages</a></li>
+<li class="subsection"><a href="a-demo-app#sec:inheritance_hierarchies"><span class="number">2.3.4</span> Hiérarchie des héritages</a></li>
+<li class="subsection"><a href="a-demo-app#sec:deploying_the_demo_app"><span class="number">2.3.5</span> Déployer l'application Démo</a></li></ol></li>
+<li class="section"><a href="a-demo-app#sec:2.4"><span class="number">2.4</span> Conclusion</a></li></ol></li>
+<li class="chapter"><a href="static-pages#top"><span class="number">Chapitre 3</span> Pages statiques courantes</a></li>
+<li><ol>
+<li class="section"><a href="static-pages#sec:static_pages"><span class="number">3.1</span> Pages statiques</a></li>
+<li><ol>
+<li class="subsection"><a href="static-pages#sec:truly_static_pages"><span class="number">3.1.1</span> Pages HTML statiques</a></li>
+<li class="subsection"><a href="static-pages#sec:static_pages_with_rails"><span class="number">3.1.2</span> Les pages statiques avec Rails</a></li></ol></li>
+<li class="section"><a href="static-pages#sec:first_tests"><span class="number">3.2</span> Premiers tests</a></li>
+<li><ol>
+<li class="subsection"><a href="static-pages#sec:testing_tools"><span class="number">3.2.1</span> Outils de test</a></li>
+<li><ol>
+<li class="subsubsection"><a href="static-pages#sec:autotest">Auto-test</a></li></ol></li>
+<li class="subsection"><a href="static-pages#sec:TDD"><span class="number">3.2.2</span> TDD : Rouge, Vert, Refactor</a></li>
+<li><ol>
+<li class="subsubsection"><a href="static-pages#sec:spork">Spork</a></li>
+<li class="subsubsection"><a href="static-pages#sec:red">Rouge</a></li>
+<li class="subsubsection"><a href="static-pages#sec:green">Vert</a></li>
+<li class="subsubsection"><a href="static-pages#sec:refactor">Refactor</a></li></ol></li></ol></li>
+<li class="section"><a href="static-pages#sec:slightly_dynamic_pages"><span class="number">3.3</span> Pages (un peu) dynamiques</a></li>
+<li><ol>
+<li class="subsection"><a href="static-pages#sec:testing_a_title_change"><span class="number">3.3.1</span> Test d'un changement de titre</a></li>
+<li class="subsection"><a href="static-pages#sec:passing_title_tests"><span class="number">3.3.2</span> Réussir les tests de titre</a></li>
+<li class="subsection"><a href="static-pages#sec:instance_variables_embedded_ruby"><span class="number">3.3.3</span> Variables d'instance et Ruby embarqué</a></li>
+<li class="subsection"><a href="static-pages#sec:layouts"><span class="number">3.3.4</span> Supprimer les répétitions avec les <em>layouts</em></a></li></ol></li>
+<li class="section"><a href="static-pages#sec:static_pages_conclusion"><span class="number">3.4</span> Conclusion</a></li>
+<li class="section"><a href="static-pages#sec:static_pages_Exercices"><span class="number">3.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="rails-flavored-ruby#top"><span class="number">Chapitre 4</span> [(Rails-flavored Ruby)(Rails au goût Ruby)]</a></li>
+<li><ol>
+<li class="section"><a href="rails-flavored-ruby#sec:motivation"><span class="number">4.1</span> Motivation</a></li>
+<li><ol>
+<li class="subsection"><a href="rails-flavored-ruby#sec:title_helper"><span class="number">4.1.1</span> Un « helper » (« aideur ») pour le titre (<code>title</code>)</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:cascading_style_sheets"><span class="number">4.1.2</span> Feuilles de styles (CSS — Cascading Style Sheets)</a></li></ol></li>
+<li class="section"><a href="rails-flavored-ruby#sec:strings_and_methods"><span class="number">4.2</span> Chaines de caractères et méthodes</a></li>
+<li><ol>
+<li class="subsection"><a href="rails-flavored-ruby#sec:comments"><span class="number">4.2.1</span> Commentaires</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:strings"><span class="number">4.2.2</span> Chaines de caractères</a></li>
+<li><ol>
+<li class="subsubsection"><a href="rails-flavored-ruby#sec:printing">Impression</a></li>
+<li class="subsubsection"><a href="rails-flavored-ruby#sec:single_quoted_strings">Chaines de caractères « single-quoté »</a></li></ol></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:objects_and_message_passing"><span class="number">4.2.3</span> Objets et passage de message</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:method_definitions"><span class="number">4.2.4</span> Définition de méthode</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:back_to_the_title_helper"><span class="number">4.2.5</span> Retour à l'« helper » de titre</a></li></ol></li>
+<li class="section"><a href="rails-flavored-ruby#sec:other_data_structures"><span class="number">4.3</span> Autres structures de données</a></li>
+<li><ol>
+<li class="subsection"><a href="rails-flavored-ruby#sec:arrays_and_ranges"><span class="number">4.3.1</span> Tableaux et rangs</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:blocks"><span class="number">4.3.2</span> Blocs</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:hashes_and_symbols"><span class="number">4.3.3</span> Tables de hachage et symboles</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:css_revisited"><span class="number">4.3.4</span> CSS revisitées</a></li></ol></li>
+<li class="section"><a href="rails-flavored-ruby#sec:ruby_classes"><span class="number">4.4</span> Classes Ruby</a></li>
+<li><ol>
+<li class="subsection"><a href="rails-flavored-ruby#sec:constructors"><span class="number">4.4.1</span> Constructeurs</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:a_class_of_our_own"><span class="number">4.4.2</span> Héritages de classes</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:modifying_built_in_classes"><span class="number">4.4.3</span> Modifier les classes d'origine</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:a_controller_class"><span class="number">4.4.4</span> Classe de contrôleur</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:a_user_class"><span class="number">4.4.5</span> Classe utiliateur</a></li></ol></li>
+<li class="section"><a href="rails-flavored-ruby#sec:Exercices"><span class="number">4.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="filling-in-the-layout#top"><span class="number">Chapitre 5</span> Poursuivre la mise en page</a></li>
+<li><ol>
+<li class="section"><a href="filling-in-the-layout#sec:structure"><span class="number">5.1</span> Ajout de structure</a></li>
+<li><ol>
+<li class="subsection"><a href="filling-in-the-layout#sec:adding_to_the_layout"><span class="number">5.1.1</span> Navigation du site</a></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:custom_css"><span class="number">5.1.2</span> Personnalisation CSS</a></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:partials"><span class="number">5.1.3</span> Partiels (Partials)</a></li></ol></li>
+<li class="section"><a href="filling-in-the-layout#sec:layout_links"><span class="number">5.2</span> Liens pour la mise en page</a></li>
+<li><ol>
+<li class="subsection"><a href="filling-in-the-layout#sec:integration_tests"><span class="number">5.2.1</span> Test d'intégration</a></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:rails_routes"><span class="number">5.2.2</span> Routes Rails</a></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:named_routes"><span class="number">5.2.3</span> Nommer les routes</a></li></ol></li>
+<li class="section"><a href="filling-in-the-layout#sec:user_signup"><span class="number">5.3</span> Inscription de l'utilisateur : une première étape</a></li>
+<li><ol>
+<li class="subsection"><a href="filling-in-the-layout#sec:users_controller"><span class="number">5.3.1</span> Contrôleur Utilisateur (Users controller)</a></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:signup_url"><span class="number">5.3.2</span> URL d'inscription</a></li></ol></li>
+<li class="section"><a href="filling-in-the-layout#sec:layout_conclusion"><span class="number">5.4</span> Conclusion</a></li>
+<li class="section"><a href="filling-in-the-layout#sec:layout_Exercices"><span class="number">5.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="modeling-and-viewing-users-one#top"><span class="number">Chapitre 6</span> Modéliser et afficher les utilisateurs, partie I</a></li>
+<li><ol>
+<li class="section"><a href="modeling-and-viewing-users-one#sec:user_model"><span class="number">6.1</span> Modèle utilisateur (User model)</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:database_migrations"><span class="number">6.1.1</span> Migrations de la base de données</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:the_model_file"><span class="number">6.1.2</span> Le fichier modèle</a></li>
+<li><ol>
+<li class="subsubsection"><a href="modeling-and-viewing-users-one#sec:model_annotation">[(Model annotation)]</a></li>
+<li class="subsubsection"><a href="modeling-and-viewing-users-one#sec:accessible_attributes">Attributs accessibles</a></li></ol></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:creating_user_objects"><span class="number">6.1.3</span> Créer des objets Utilisateur</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:finding_user_objects"><span class="number">6.1.4</span> Recherche dans les objets Utilisateurs (Users)</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:updating_user_objects"><span class="number">6.1.5</span> Actualisation des objets Utilisateurs (Users)</a></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-one#sec:user_validations"><span class="number">6.2</span> Validations utilisateur</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:presence_validation"><span class="number">6.2.1</span> Valider l'existence</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:length_validation"><span class="number">6.2.2</span> Valider la longueur</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:format_validation"><span class="number">6.2.3</span> Valider le format</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:uniqueness_validation"><span class="number">6.2.4</span> Valider l'unicité</a></li>
+<li><ol>
+<li class="subsubsection"><a href="modeling-and-viewing-users-one#sec:the_caveat">L'avertissement d'unicité</a></li></ol></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-one#sec:viewing_users"><span class="number">6.3</span> Afficher les utilisateurs</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:rails_environments"><span class="number">6.3.1</span> Débuggage et environnements Rails</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:users_show"><span class="number">6.3.2</span> Modèle, Vue et Contrôleur Utilisateur</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:a_users_resource"><span class="number">6.3.3</span> Ressource Utilisateurs</a></li>
+<li><ol>
+<li class="subsubsection"><a href="modeling-and-viewing-users-one#sec:params_in_debug">[(<code>params</code> in <code>debug</code>)]</a></li></ol></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-one#sec:6.4"><span class="number">6.4</span> Conclusion</a></li>
+<li class="section"><a href="modeling-and-viewing-users-one#sec:6.5"><span class="number">6.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="modeling-and-viewing-users-two#top"><span class="number">Chapitre 7</span> Modéliser et afficher les utilisateurs, partie II</a></li>
+<li><ol>
+<li class="section"><a href="modeling-and-viewing-users-two#sec:insecure_passwords"><span class="number">7.1</span> Mots de passe non sûrs</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:password_validations"><span class="number">7.1.1</span> Valider le mot de passe</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:password_migration"><span class="number">7.1.2</span> Migrer un mot de passe</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:an_active_record_callback"><span class="number">7.1.3</span> Un <em>callback</em> de l'Active Record</a></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-two#sec:secure_passwords"><span class="number">7.2</span> Sécuriser les mots de passe</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:a_secure_password_test"><span class="number">7.2.1</span> Test de mot de passe sûr</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:secure_password_theory"><span class="number">7.2.2</span> Un peu de théorie sur les mots de passe sécurisés</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:implementing_has_password"><span class="number">7.2.3</span> Implémenter la méthode <code>has_password?</code></a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:an_authenticate_method"><span class="number">7.2.4</span> Méthode d'authentification</a></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-two#sec:better_user_views"><span class="number">7.3</span> Meilleures vues d'utilisateurs</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:tests_with_factories"><span class="number">7.3.1</span> Tester la page de l'utilisateur (avec factories)</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar"><span class="number">7.3.2</span> Un nom et un Gravatar</a></li>
+<li><ol>
+<li class="subsubsection"><a href="modeling-and-viewing-users-two#sec:a_gravatar_helper">Un « helper » de Gravatar</a></li></ol></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:a_user_sidebar"><span class="number">7.3.3</span> Une barre utilisateur latérale</a></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-two#sec:7.4"><span class="number">7.4</span> Conclusion</a></li>
+<li><ol>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:7.4.1"><span class="number">7.4.1</span> Commit Git</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:heroku_deploy"><span class="number">7.4.2</span> Déploiement Heroku</a></li></ol></li>
+<li class="section"><a href="modeling-and-viewing-users-two#sec:more_modeling_users_Exercices"><span class="number">7.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="sign-up#top"><span class="number">Chapitre 8</span> Inscription</a></li>
+<li><ol>
+<li class="section"><a href="sign-up#sec:signup_form"><span class="number">8.1</span> Formulaire d'inscription</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-up#sec:using_form_for"><span class="number">8.1.1</span> Utiliser  <code>form_for</code></a></li>
+<li class="subsection"><a href="sign-up#sec:the_form_html"><span class="number">8.1.2</span> Le formulaire HTML</a></li></ol></li>
+<li class="section"><a href="sign-up#sec:signup_failure"><span class="number">8.2</span> Échec de l'inscription</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-up#sec:testing_failure"><span class="number">8.2.1</span> Test de l'échec</a></li>
+<li class="subsection"><a href="sign-up#sec:a_working_form"><span class="number">8.2.2</span> Un formulaire fonctionnel</a></li>
+<li class="subsection"><a href="sign-up#sec:signup_error_messages"><span class="number">8.2.3</span> Inscription&nbsp;: messages d'erreur</a></li>
+<li class="subsection"><a href="sign-up#sec:filtering_parameter_logging"><span class="number">8.2.4</span> Filtrage des paramètres d'identification</a></li></ol></li>
+<li class="section"><a href="sign-up#sec:signup_success"><span class="number">8.3</span> Succès de l'inscription</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-up#sec:testing_success"><span class="number">8.3.1</span> Tester le succès de l'inscription</a></li>
+<li class="subsection"><a href="sign-up#sec:the_finished_signup_form"><span class="number">8.3.2</span> Le formulaire d'inscription finalisé</a></li>
+<li class="subsection"><a href="sign-up#sec:the_flash"><span class="number">8.3.3</span> Le message «&nbsp;flash&nbsp;»</a</a></li>
+<li class="subsection"><a href="sign-up#sec:the_first_signup"><span class="number">8.3.4</span> La première inscription</a></li></ol></li>
+<li class="section"><a href="sign-up#sec:rspec_integration_tests"><span class="number">8.4</span> Test d'intégration RSpec</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-up#sec:integration_tests_with_style"><span class="number">8.4.1</span> Tests d'intégration avec les styles</a></li>
+<li class="subsection"><a href="sign-up#sec:failed_signup"><span class="number">8.4.2</span> Un échec d'inscription ne devrait pas créer un nouvel utilisateur</a></li>
+<li class="subsection"><a href="sign-up#sec:successful_signup"><span class="number">8.4.3</span> Le succès d'une inscription devrait créer un nouvel utilisateur</a></li></ol></li>
+<li class="section"><a href="sign-up#sec:8.5"><span class="number">8.5</span> Conclusion</a></li>
+<li class="section"><a href="sign-up#sec:signup_Exercices"><span class="number">8.6</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="sign-in-sign-out#top"><span class="number">Chapitre 9</span> Connexion, déconnexion</a></li>
+<li><ol>
+<li class="section"><a href="sign-in-sign-out#sec:sessions"><span class="number">9.1</span> Les sessions</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-in-sign-out#sec:sessions_controller"><span class="number">9.1.1</span> Le contrôleur de session</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:signin_form"><span class="number">9.1.2</span> Formulaire d'identification</a></li></ol></li>
+<li class="section"><a href="sign-in-sign-out#sec:signin_failure"><span class="number">9.2</span> Échec de l'identification</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-in-sign-out#sec:reviewing_form_submission"><span class="number">9.2.1</span> Examen de la soumission du formulaire</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:failed_signin"><span class="number">9.2.2</span> Échec de l'identification (test et code)</a></li></ol></li>
+<li class="section"><a href="sign-in-sign-out#sec:signin_success"><span class="number">9.3</span> Succès de l'identification</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-in-sign-out#sec:the_completed_create_action"><span class="number">9.3.1</span> L'action <code>create</code> («&nbsp;créer&nbsp;») finalisée</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:remember_me"><span class="number">9.3.2</span> Se souvenir de moi</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:current_user"><span class="number">9.3.3</span> Utilisateur courant</a></li></ol></li>
+<li class="section"><a href="sign-in-sign-out#sec:signing_out"><span class="number">9.4</span> Déconnexion</a></li>
+<li><ol>
+<li class="subsection"><a href="sign-in-sign-out#sec:destroying_sessions"><span class="number">9.4.1</span> Détruire la session</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:signin_upon_signup"><span class="number">9.4.2</span> Connection à l'inscription</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:changing_the_layout_links"><span class="number">9.4.3</span> Changement des liens de la mise en plage</a></li>
+<li class="subsection"><a href="sign-in-sign-out#sec:signin_out_integration_tests"><span class="number">9.4.4</span> Test d'intégration de l'identification/déconnexion</a></li></ol></li>
+<li class="section"><a href="sign-in-sign-out#sec:9.5"><span class="number">9.5</span> Conclusion</a></li>
+<li class="section"><a href="sign-in-sign-out#sec:sign_in_out_Exercices"><span class="number">9.6</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="updating-showing-and-deleting-users#top"><span class="number">Chapitre 10</span> Actualiser, afficher et supprimer de l'utilisateur</a></li>
+<li><ol>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:updating_users"><span class="number">10.1</span> Actualiser l'utilisateur</a></li>
+<li><ol>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:edit_form"><span class="number">10.1.1</span> Formulaire de modification</a></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:enabling_edits"><span class="number">10.1.2</span> Permettre les modifications</a></li></ol></li>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:protecting_pages"><span class="number">10.2</span> Protéger les pages</a></li>
+<li><ol>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:requiring_signed_in_users"><span class="number">10.2.1</span> Utilisateurs identifiés requis</a></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:requiring_the_right_user"><span class="number">10.2.2</span> Nécessité du bon utilisateur</a></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:friendly_forwarding"><span class="number">10.2.3</span> Redirection conviviale</a></li></ol></li>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:showing_users"><span class="number">10.3</span> Afficher les utilisateurs</a></li>
+<li><ol>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:user_index"><span class="number">10.3.1</span> Liste des utilisateurs</a></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:sample_users"><span class="number">10.3.2</span> Exemples d'utilisateurs</a></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:pagination"><span class="number">10.3.3</span> Pagination</a></li>
+<li><ol>
+<li class="subsubsection"><a href="updating-showing-and-deleting-users#sec:testing_pagination">Test de la pagination</a></li></ol></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:partial_refactoring"><span class="number">10.3.4</span> Restructuration des partielles</a></li></ol></li>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:destroying_users"><span class="number">10.4</span> Supprimer des utilisateurs</a></li>
+<li><ol>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:administrative_users"><span class="number">10.4.1</span> Utilisateurs administrateurs</a></li>
+<li><ol>
+<li class="subsubsection"><a href="updating-showing-and-deleting-users#sec:revisiting_attr_accessible">Révision de <code>attr_accessible</code></a></li></ol></li>
+<li class="subsection"><a href="updating-showing-and-deleting-users#sec:the_destroy_action"><span class="number">10.4.2</span> L'action <code>destroy</code> («&nbsp;supprimer&nbsp;»)</a></li></ol></li>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:10.5"><span class="number">10.5</span> Conclusion</a></li>
+<li class="section"><a href="updating-showing-and-deleting-users#sec:updating_deleting_Exercices"><span class="number">10.6</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="user-microposts#top"><span class="number">Chapitre 11</span> Micro-messages d'utilisateur</a></li>
+<li><ol>
+<li class="section"><a href="user-microposts#sec:a_micropost_model"><span class="number">11.1</span> Le modèle Micropost («&nbsp;Micro-message&nbsp;»)</a></li>
+<li><ol>
+<li class="subsection"><a href="user-microposts#sec:the_basic_model"><span class="number">11.1.1</span> Le modèle initial</a></li>
+<li><ol>
+<li class="subsubsection"><a href="user-microposts#sec:accessible_attribute">Attributs accessibles</a></li></ol></li>
+<li class="subsection"><a href="user-microposts#sec:user_micropost_associations"><span class="number">11.1.2</span> Associations Utilisateur/micro-messages</a></li>
+<li class="subsection"><a href="user-microposts#sec:ordering_and_dependency"><span class="number">11.1.3</span> Affinements du micro-message</a></li>
+<li><ol>
+<li class="subsubsection"><a href="user-microposts#sec:default_scope">Portée par défaut</a></li>
+<li class="subsubsection"><a href="user-microposts#sec:dependent_destroy">Dependent: destroy (dépendances de la suppression)</a></li></ol></li>
+<li class="subsection"><a href="user-microposts#sec:micropost_validations"><span class="number">11.1.4</span> Validations du micro-message</a></li></ol></li>
+<li class="section"><a href="user-microposts#sec:showing_microposts"><span class="number">11.2</span> Afficher les micro-messages</a></li>
+<li><ol>
+<li class="subsection"><a href="user-microposts#sec:augmenting_the_user_show_page"><span class="number">11.2.1</span> Etoffement de la page de l'utilisateur</a></li>
+<li class="subsection"><a href="user-microposts#sec:sample_microposts"><span class="number">11.2.2</span> Exemples de micro-messages</a></li></ol></li>
+<li class="section"><a href="user-microposts#sec:manipulating_microposts"><span class="number">11.3</span> Manipuler les micro-messages</a></li>
+<li><ol>
+<li class="subsection"><a href="user-microposts#sec:access_control"><span class="number">11.3.1</span> Contrôle de l'accès</a></li>
+<li class="subsection"><a href="user-microposts#sec:creating_microposts"><span class="number">11.3.2</span> Créer des micro-messages</a></li>
+<li class="subsection"><a href="user-microposts#sec:a_proto_feed"><span class="number">11.3.3</span> Une proto-alimentation</a></li>
+<li class="subsection"><a href="user-microposts#sec:destroying_microposts"><span class="number">11.3.4</span> Supprimer des micro-messages</a></li>
+<li class="subsection"><a href="user-microposts#sec:testing_the_new_home_page"><span class="number">11.3.5</span> Test de la nouvelle page d'accueil</a></li></ol></li>
+<li class="section"><a href="user-microposts#sec:11.4"><span class="number">11.4</span> Conclusion</a></li>
+<li class="section"><a href="user-microposts#sec:micropost_Exercices"><span class="number">11.5</span> Exercices</a></li></ol></li>
+<li class="chapter"><a href="following-users#top"><span class="number">Chapitre 12</span> Suivi des utilisateurs</a></li>
+<li><ol>
+<li class="section"><a href="following-users#sec:the_relationship_model"><span class="number">12.1</span> Le modèle Relation (Relationship model)</a></li>
+<li><ol>
+<li class="subsection"><a href="following-users#sec:a_problem_with_the_data_model"><span class="number">12.1.1</span> Un problème du modèle de données (et sa solution)</a></li>
+<li class="subsection"><a href="following-users#sec:relationship_user_associations"><span class="number">12.1.2</span> Associations Utilisateur/Relations</a></li>
+<li class="subsection"><a href="following-users#sec:relationship_validations"><span class="number">12.1.3</span> Validations</a></li>
+<li class="subsection"><a href="following-users#sec:following"><span class="number">12.1.4</span> Auteurs suivis</a></li>
+<li class="subsection"><a href="following-users#sec:followers"><span class="number">12.1.5</span> Lecteurs</a></li></ol></li>
+<li class="section"><a href="following-users#sec:a_web_interface_for_following_and_followers"><span class="number">12.2</span> Une interface web pour les auteurs suivis et les lecteurs</a></li>
+<li><ol>
+<li class="subsection"><a href="following-users#sec:sample_following_data"><span class="number">12.2.1</span> Exemple de donnée de suivi</a></li>
+<li class="subsection"><a href="following-users#sec:stats_and_a_follow_form"><span class="number">12.2.2</span> Statistiques et formulaire de suivi</a></li>
+<li class="subsection"><a href="following-users#sec:following_and_followers_pages"><span class="number">12.2.3</span> Pages d'auteurs suivis et de lecteurs</a></li>
+<li class="subsection"><a href="following-users#sec:a_working_follow_button_the_standard_way"><span class="number">12.2.4</span> Un bouton de suivi fonctionnant de façon standard</a></li>
+<li class="subsection"><a href="following-users#sec:a_working_follow_button_with_ajax"><span class="number">12.2.5</span> Un bouton fonctionnant avec Ajax</a></li></ol></li>
+<li class="section"><a href="following-users#sec:the_status_feed"><span class="number">12.3</span> L'état de l'alimention</a></li>
+<li><ol>
+<li class="subsection"><a href="following-users#sec:motivation_and_strategy"><span class="number">12.3.1</span> Motivation et stratégie</a></li>
+<li class="subsection"><a href="following-users#sec:a_first_feed_implementation"><span class="number">12.3.2</span> Une première implémentation de peuplement</a></li>
+<li class="subsection"><a href="following-users#sec:scopes_subselects_and_a_lambda"><span class="number">12.3.3</span> Portées, sous-requêtes et fonction <em>lambda</em></a></li>
+<li class="subsection"><a href="following-users#sec:the_new_status_feed"><span class="number">12.3.4</span> Nouvel état de l'alimentation</a></li></ol></li>
+<li class="section"><a href="following-users#sec:following_conclusion"><span class="number">12.4</span> Conclusion</a></li>
+<li><ol>
+<li class="subsection"><a href="following-users#sec:extensions_to_the_sample_application"><span class="number">12.4.1</span> Extensions de l'application exemple</a></li>
+<li><ol>
+<li class="subsubsection"><a href="following-users#sec:replies">Réponses</a></li>
+<li class="subsubsection"><a href="following-users#sec:messaging">Notification</a></li>
+<li class="subsubsection"><a href="following-users#sec:follower_notifications">Notifications aux lecteurs</a></li>
+<li class="subsubsection"><a href="following-users#sec:password_reminders">Rappel du mot de passe</a></li>
+<li class="subsubsection"><a href="following-users#sec:signup_confirmation">Confirmation d'inscription</a></li>
+<li class="subsubsection"><a href="following-users#sec:rss_feed">Alimentation RSS</a></li>
+<li class="subsubsection"><a href="following-users#sec:rest_api">REST API</a></li>
+<li class="subsubsection"><a href="following-users#sec:search">Recherche</a></li></ol></li>
+<li class="subsection"><a href="following-users#sec:guide_to_further_resources"><span class="number">12.4.2</span> Guide vers d'autres ressources</a></li></ol></li>
+<li class="section"><a href="following-users#sec:following_Exercices"><span class="number">12.5</span> Exercices</a></li></ol></li></ol></div>

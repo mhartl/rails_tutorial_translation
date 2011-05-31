@@ -1751,9 +1751,9 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 
 <ol>
-<li>Replace the local variable <code>logo</code> in <a class="ref" href="filling-in-the-layout#code:header_partial_links">extrait&nbsp;5.21</a> with a helper method of the same name, so that the new partial looks like <a class="ref" href="filling-in-the-layout#code:header_partial_logo">extrait&nbsp;5.31</a>. Use the code in <a class="ref" href="filling-in-the-layout#code:logo_helper_stub">extrait&nbsp;5.32</a> to help you get started.</li>
+<li>Remplacez la variable locale <code>logo</code> de l'<a class="ref" href="filling-in-the-layout#code:header_partial_links">extrait&nbsp;5.21</a> par une méthode <em>helper</em> du même nom, pour que le nouveau partiel ressemble à l'<a class="ref" href="filling-in-the-layout#code:header_partial_logo">extrait&nbsp;5.31</a>. Utilisez le code de l'<a class="ref" href="filling-in-the-layout#code:logo_helper_stub">extrait&nbsp;5.32</a> pour vous aider à démarrer.</li>
 
-<li>You may have noticed that our tests for the layout links test the routing but don&rsquo;t actually check that the links on the layout go to the right pages. One way to implement these tests is to use <code>visit</code> and <code>click_link</code> inside the RSpec integration test. Fill in the code in <a class="ref" href="filling-in-the-layout#code:layout_links_test">extrait&nbsp;5.33</a> to verify that all the layout links are properly defined.</li>
+<li>Vous pouvez avoir noté que nos tests pour les liens du layout testent le routage mais ne vérifient pas en fait que ces routages conduisent sur les bonnes pages. Une façon d'implémenter ces tests est d'utiliser <code>visit</code> et <code>click_link</code> (<em>cliquer le lien</em>) à l'intérieur du test d'intégration RSpec. Remplissez le code de l'<a class="ref" href="filling-in-the-layout#code:layout_links_test">extrait&nbsp;5.33</a> pour vérifier que tous les liens du layout sont proprement définis.</li>
 
 </ol>
 
@@ -1764,7 +1764,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.31.</span> <span class="description">Header partial with the logo helper from <a class="ref" href="filling-in-the-layout#code:logo_helper_stub">extrait&nbsp;5.32</a>. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 5.31.</span> <span class="description">Partiel d'entête avec un <em>helper</em> logo de l'<a class="ref" href="filling-in-the-layout#code:logo_helper_stub">extrait&nbsp;5.32</a>. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1786,7 +1786,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.32.</span> <span class="description">A template for the <code>logo</code> helper. <br /> <code>app/helpers/application_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.32.</span> <span class="description">Un modèle pour l'<em>helper</em> <code>logo</code>. <br /> <code>app/helpers/application_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">ApplicationAideer</span>
 
@@ -1811,7 +1811,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 5.33.</span> <span class="description">A tests for the links on the layout. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 5.33.</span> <span class="description">Un test pour les liens sur le layout. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1819,7 +1819,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should have the right links on the layout&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon lien sur le layout&quot;</span> <span class="k">do</span>
     <span class="n">visit</span> <span class="n">root_path</span>
     <span class="n">click_link</span> <span class="s2">&quot;À Propos&quot;</span>
     <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;À Propos&quot;</span><span class="p">)</span>
@@ -1829,7 +1829,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
     <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="c1"># fill in</span>
     <span class="n">click_link</span> <span class="s2">&quot;Accueil&quot;</span>
     <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="c1"># fill in</span>
-    <span class="n">click_link</span> <span class="s2">&quot;Sign up now!&quot;</span>
+    <span class="n">click_link</span> <span class="s2">&quot;S'inscrire&nbsp;!&quot;</span>
     <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="c1"># fill in</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -1840,21 +1840,21 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 
 <div class="navigation">  <a class="prev_page" href="rails-flavored-ruby#top">
-    &laquo;&nbsp;<span class="number">chapitre 4</span> Rails-flavored Ruby
+    &laquo;&nbsp;<span class="number">chapitre 4</span> Rails au goût Ruby
   </a>
   <a class="next_page" href="modeling-and-viewing-users-one#top">
-    <span class="number">chapitre 6</span> Modeling and viewing users, part I&nbsp;&raquo;
+    <span class="number">chapitre 6</span> Modéliser et afficher les utilisateurs, partie I&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
 <li id="fn:5.1">Les maquettes du <em>Tutoriel Ruby on Rails</em> sont réalisées avec une excellente application appelée <a href="http://gomockingbird.com">Mockingbird</a>.&nbsp;<a class="arrow" href="#fnref:5.1">&uarr;</a></li>
-<li id="fn:5.2">These are completely unrelated to Ruby classes.&nbsp;<a class="arrow" href="#fnref:5.2">&uarr;</a></li>
+<li id="fn:5.2">Ils sont tout à fait sans lien avec les classes Ruby.&nbsp;<a class="arrow" href="#fnref:5.2">&uarr;</a></li>
 <li id="fn:5.3">Vous pouvez noter que la balise <code>img</code> plutôt que de ressembler à <tt class="verb">&lt;img&gt;...&lt;/img&gt;</tt>, ressemble plutôt à <tt class="verb">&lt;img ... /&gt;</tt>. Les balises qui suivent cette forme sont connues comme étant des balises <em>auto-fermentantes</em> (<em>self-closing</em>).&nbsp;<a class="arrow" href="#fnref:5.3">&uarr;</a></li>
 <li id="fn:5.4">Le texte <code>alt</code> est aussi ce qui sera affiché par les lecteurs ayant une déficience visuelle. Bien que les gens soient souvent négligeants sur l'inclusion de l'attribut <code>alt</code> pour les images, c'est en fait exigé par les standards HTML. Heureusement, Rails inclut un attribut <code>alt</code> par défaut&nbsp;; si vous ne spécifiez pas la valeur de l'attribut dans l'appel pour <code>image_tag</code>, Rails utilise simplement le nom du fichier (sans l'extension). Dans ce cas, cependant, <code>Application exemple</code> est plus descriptif que <code>logo</code>, donc j'ai décidé de définir explicitement la valeur de <code>alt</code>.&nbsp;<a class="arrow" href="#fnref:5.4">&uarr;</a></li>
 <li id="fn:5.5">Notez que les utilisateurs Safari et Chrome verront un indicateur d'<em>image brisée</em> à la place du texte alternativ &ldquo;Application exemple&rdquo;.&nbsp;<a class="arrow" href="#fnref:5.5">&uarr;</a></li>
-<li id="fn:5.6">HTML colors can be coded with three base-16 (hexadecimal) numbers, one each for the primary colors red, green, and blue. <code>#fff</code> maxes out all three colors, yielding pure white. See this <a href="http://www.w3schools.com/html/html_colors.asp">HTML colors</a> site for more information.&nbsp;<a class="arrow" href="#fnref:5.6">&uarr;</a></li>
+<li id="fn:5.6">Les couleurs HTML peuvent être codées avec trois nombres en base 16 (hexadécimaux), chacun respectivement pour une des couleurs primaires rouge, vert et bleu. <code>#fff</code> mixe les trois couleurs, maxes out all three colors, rendant du pur blanc. Consultez ce <a href="http://www.w3schools.com/html/html_colors.asp">Site des couleurs HTML</a> pour plus d'information.&nbsp;<a class="arrow" href="#fnref:5.6">&uarr;</a></li>
 <li id="fn:5.7">Blueprint CSS utilise une grille de colonnes sur 40 pixeles, 30 pixels pour la colonne elle-même et 10 pixels pour le padding. La colonne la plus à droite n'a pas besoin de padding, donc 18 colonnes représentent 710 pixels&nbsp;: 18 * 40 &ndash; 10 = 710.&nbsp;<a class="arrow" href="#fnref:5.7">&uarr;</a></li>
-<li id="fn:5.8">Many Rails developers use a <code>shared</code> directory for partials shared across different views. I prefer to use the <code>shared</code> folder for utility partials that are useful on multiple views, while putting partials that are literally on every page (as part of the site layout) in the <code>layouts</code> directory. (We&rsquo;ll create the <code>shared</code> directory starting in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.) That seems to me a logical division, but putting them all in the <code>shared</code> folder certainly works fine, too.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
+<li id="fn:5.8">De nombreux développeurs Rails utilise un dossier partagé (<code>shared</code>) pour des partiels partagés par différentes vues. Je préfère utiliser le dossier <code>shared</code> pour des partiels utilitaires qui sont utiles sur de multiples vues, tandis que je mets les partiels qui sont littéralement sur chaque page (comme une part du layout du site) dans le dossier <code>layouts</code> (nous créeons le dossier <code>shared</code> en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>). Ça me semble être une division logique, mais les mettre tous dans le dossier <code>shared</code> fonctionne certainement bien, également.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
 <li id="fn:5.9">Dans la ligne <code>SampleApp::Application.routes.draw do</code> vous pouvez reconnaitre que la méthode <code>draw</code> comprend un <em>bloc</em>, une construction syntaxique que nous avons vu précédenmment à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:5.9">&uarr;</a></li>
 </ol>
 </div>

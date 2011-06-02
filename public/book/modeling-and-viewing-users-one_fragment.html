@@ -1649,21 +1649,21 @@
 <h2><a id="sec:6.3" href="modeling-and-viewing-users-one#sec:viewing_users" class="heading"><span class="number">6.3</span> Affichage des utilisateurs</a></h2>
 
 
-<p>We&rsquo;re not quite done with the basic user model&mdash;we still need to add passwords, a task for <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>&mdash;but we do have enough in place to make a minimalist page for showing user information. This will allow a gentle introduction to the REST style of organizing the actions for our site&rsquo;s users. Since this is just a rough demonstration for now, there are no tests in this section; we&rsquo;ll add tests when we flesh out the user view in <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.</p>
+<p>Nous n'en avons pas tout à fait fini avec le modèle utilisateur de base &mdash;&nbsp;nous avons encore besoin d'ajouter des mots de passe, tâche qui sera accomplie au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>&nbsp;&mdash; mais nous en avons fait suffisamment pour faire une page minimale pour pouvoir afficher les informations de l'utilisateur. Cela permettra une introduction en douceur dans l'organisation de type REST des actions utilisateur de notre site. Puisque c'est juste un démonstration grossière pour le moment, il n'y aura pas de tests dans cette section&nbsp;; nous les ajouterons quand nous étofferons la vue de l'utilisater à la <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.</p>
 
 <div class="label" id="sec:rails_environments"></div>
 
 
-<h3><a id="sec:6.3.1" href="modeling-and-viewing-users-one#sec:rails_environments" class="heading"><span class="number">6.3.1</span> Debug and Rails environments</a></h3>
+<h3><a id="sec:6.3.1" href="modeling-and-viewing-users-one#sec:rails_environments" class="heading"><span class="number">6.3.1</span> Débuggae et environnement Rails</a></h3>
 
 
-<p>As preparation for adding dynamic pages to our sample application, now is a good time to add some debug information to our site layout (<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>). This displays some useful information about each page using the built-in <code>debug</code> method and <code>params</code> variable (which we&rsquo;ll learn more about in <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>), as seen in <a class="ref" href="modeling-and-viewing-users-one#fig:home_page_with_debug_rails_3">illustration&nbsp;6.7</a>.</p>
+<p>À titre de préparation de l'ajout de pages dynamique dans notre application exemple, il est temps à présent d'ajouter des informations de débuggage au layout de notre site (<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>). Cela affiche des informations utiles sur chaque page en utilisant la méthode intégrée <code>debug</code> et la variable <code>params</code> (que nous étudierons plus en détail à la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>), comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#fig:home_page_with_debug_rails_3">illustration&nbsp;6.7</a>.</p>
 
 <div class="label" id="code:rails_debug"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.23.</span> <span class="description">Adding some debug information to the site layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 6.23.</span> <span class="description">Ajout d'information de débuggage au layout du site. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1684,22 +1684,22 @@
 </div></div>
 
 
-<p>Since we don&rsquo;t want to display debug information to users of a deployed application, we use</p>
+<p>Puise nous ne voulons pas afficher les informations de débuggage à l'utilisateurs de l'application déployée online, nous utilisons&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span>
 </pre></div>
 </div>
 
 
-<p>to restrict the debug information to the <em>development environment</em>. Though we&rsquo;ve seen evidence of Rails environments before (most recently in <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>), this is the first time it has mattered to us.</p>
+<p>… pour les restreindre à l'<em>environnement de développement</em>. Bien que nous ayons déjà abordé l'évidence des environnements Rails précédemment (tout récemment à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>), c'est la première fois que cela nous importe vraiment.</p>
 
 <div class="label" id="fig:home_page_with_debug_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_debug_rails_3.png" alt="home_page_with_debug_rails_3" /></span></div><div class="caption"><span class="header">Illustration 6.7: </span><span class="description">The sample application Home page (<a href="http://localhost:3000/"><tt>/</tt></a>) with debug information at the bottom.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_debug_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_debug_rails_3.png" alt="home_page_with_debug_rails_3" /></span></div><div class="caption"><span class="header">Illustration 6.7: </span><span class="description">La page d'accueil de l'application exemple (<a href="http://localhost:3000/"><tt>/</tt></a>) avec des informations de débuggage en bas de page.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_debug_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Rails comes equipped with three environments: <code>test</code>, <code>development</code>, and <code>production</code>.<sup class="footnote" id="fnref:6.23"><a href="#fn:6.23">23</a></sup> The default environment for the Rails console is <code>development</code>:</p>
+<p>Rails arrive équipé de trois environnements&nbsp;: <code>test</code>, <code>development</code>, et <code>production</code>.<sup class="footnote" id="fnref:6.23"><a href="#fn:6.23">23</a></sup> L'environnement par défaut de la console est l'environnement <code>développement</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console </span>
 <span class="go">Loading development environment (Rails 3.0.7)</span>
@@ -1713,16 +1713,16 @@
 </div>
 
 
-<p>As you can see, Rails provides a <code>Rails</code> object with an <code>env</code> attribute and associated environment boolean methods. In particular, <code>Rails.env.development?</code> is <code>true</code> only in a development environment, so the Embedded Ruby</p>
+<p>Comme vous pouvez le voir, Rails fournit un objet <code>Rails</code> avec un attribut <code>env</code> et des méthodes booléennes associées. En particulier, <code>Rails.env.development?</code> est <code>true</code> (<em>vrai</em>) seulement dans l'environnement développement, donc le code Ruby embarqué&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">debug</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>won&rsquo;t be inserted into production applications or tests. (Inserting the debug information into tests probably doesn&rsquo;t do any harm, but it probably doesn&rsquo;t do any good, either, so it&rsquo;s best to restrict the debug display to development only.)</p>
+<p>… ne sera pas inséré dans les applications en mode production ou test (insérer les informations de débuggage pour les tests ne cause probablement pas de dommage, mais ça n'est probablement pas bon non plus, donc il est mieux de restreindre l'affichage des débuggage à l'environnement de développement seulement).</p>
 
-<p>If you ever need to run a console in a different environment (to debug a test, for example), you can pass the environment as a parameter to the <code>console</code> script:</p>
+<p>Nous vous avez jamais besoin de jouer la console dans un environnement différent (pour débugguer un test par exemple), vous pouvez passer l'environnement en paramètre au script <code>console</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console test</span>
 <span class="go">Loading test environment (Rails 3.0.7)</span>
@@ -1732,23 +1732,23 @@
 </div>
 
 
-<p>As with the console, <code>development</code> is the default environment for the local Rails server, but you can also run it in a different environment:</p>
+<p>Comme pour la console, <code>development</code> (<em>développement</em>) est l'environnement par défaut du server Rails local, mais vous pouvez aussi le faire jouer dans un environnement différent&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails server --environment production
 </pre></div>
 </div>
 
 
-<p>If you view your app running in production, it won&rsquo;t work without a production database, which we can create by running <code>rake db:migrate</code> in production:</p>
+<p>Si vous voyez votre application jouer en mode production, elle ne fonctionnera pas sans base de données, laquelle peut être créée en jouant <code>rake db:migrate</code> en mode production&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate <span class="nv">RAILS_ENV</span><span class="o">=</span>production
 </pre></div>
 </div>
 
 
-<p>(I find it confusing that the console, server, and migrate commands specify non-default environments in three mutually incompatible ways, which is why I bothered showing all three.)</p>
+<p>(Je trouve déroutant que la console, le serveur, et les commandes de migration précisent l'environnement, quand ce n'est pas l'environnement par défaut, de trois façons mutuellement incompatibles, c'est pourquoi j'ai pris le soin de les montrer les trois.)</p>
 
-<p>By the way, if you have deployed your sample app to Heroku, you can see its environment using the <code>heroku</code> command, which provides its own (remote) console:</p>
+<p>En passant, si vous avez déployé votre application exemple sur Heroku, vous pouvez voir son environnement en utilisant la commande <code>heroku</code> qui fournit sa propre console à distance&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ heroku console</span>
 <span class="go">Ruby console for yourapp.heroku.com</span>
@@ -1760,17 +1760,17 @@
 </div>
 
 
-<p>Naturally, since Heroku is a platform for production sites, it runs each application in a production environment.</p>
+<p>Naturellement, puisque Heroku est une plateforme pour les sites en mode production, il joue chaque application dans cette environnement production.</p>
 
 <div class="label" id="sec:users_show"></div>
 
 
-<h3><a id="sec:6.3.2" href="modeling-and-viewing-users-one#sec:users_show" class="heading"><span class="number">6.3.2</span> User model, view, controller</a></h3>
+<h3><a id="sec:6.3.2" href="modeling-and-viewing-users-one#sec:users_show" class="heading"><span class="number">6.3.2</span> Modèle User, Vue, Contrôleur</a></h3>
 
 
-<p>In order to make a page to view a user, we&rsquo;ll use the User <em>model</em> to put a user into the database, make a <em>view</em> to display some user information, and then add an action to the Users <em>controller</em> to handle the browser request. In other words, for the first time in this tutorial, we&rsquo;ll see in one place all three elements of the model-view-controller architecture first discussed in <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>.</p>
+<p>Afin de faire une page pour voir un utilisateur, nous allons utiliser le <em>modèle</em> User pour créer un utilisateur dans la base de données, créer une vue (<em>View</em>) pour afficher quelques unes de ses informations, et ajouter alors une action au contrôleur (<em>Controller</em>) pour traiter les requête de navigateur. En d'autres termes, pour la première fois dans ce tutoriel, nous allons voir en un seul endroit les trois éléments de l'architecture MVC (<em>Modèle-Vue-Contrôleur</em>) discutée pour la première fois à la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>.</p>
 
-<p>Our first step is to create a user using the console, which we&rsquo;ll take care <em>not</em> to start in a sandbox since this time the whole point is to save a record to the database:</p>
+<p>Notre première étape consiste à créer un utilisateur en utilisant la console, que nous prendrons soin de ne <em>pas</em> démarrer en mode <em>bac à sable</em> puisque cette fois le but est de sauver l'enregistrement dans la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="go">Loading development environment (Rails 3.0.7)</span>
@@ -1781,36 +1781,36 @@
 </div>
 
 
-<p>To double-check that this worked, let&rsquo;s look at the row in the development database using the SQLite Database Browser (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">illustration&nbsp;6.8</a>). Note that the columns correspond to the attributes of the data model defined in <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a>.</p>
+<p>Pour vérifier deux fois que ça a marché, regardons la rangée dans la base de données de développement en utilisant le Navigateur de base de données (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">illustration&nbsp;6.8</a>). Notez que les colonnes correspondent aux attributs du modèle de données défini à la <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a>.</p>
 
 <div class="label" id="fig:sqlite_user_row"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_user_row.png" alt="sqlite_user_row" /></span></div><div class="caption"><span class="header">Illustration 6.8: </span><span class="description">A user row in the SQLite database <code>db/development.sqlite3</code>.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_user_row-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_user_row.png" alt="sqlite_user_row" /></span></div><div class="caption"><span class="header">Illustration 6.8: </span><span class="description">Une rangée utilisateur dans la base de données SQLite <code>db/development.sqlite3</code>.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_user_row-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Next comes the view, which is minimalist to emphasize that this is just a demonstration (<a class="ref" href="modeling-and-viewing-users-one#code:stub_user_view">extrait&nbsp;6.24</a>). We use the standard Rails location for showing a user, <code>app/views/users/show.html.erb</code>; unlike the <code>new.html.erb</code> view, which we created with the generator in <a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>, the <code>show.html.erb</code> file doesn&rsquo;t currently exist, so you&rsquo;ll have to create it by hand.</p>
+<p>Ensuite vient la vue, qui est minimale pour mettre l'accent sur le fait que c'est juste une démonstration (<a class="ref" href="modeling-and-viewing-users-one#code:stub_user_view">extrait&nbsp;6.24</a>). Nous utilisons le fichier standard de Rails pour afficher un utilisateur, <code>app/views/users/show.html.erb</code>&nbsp;; contrairement à la vue <code>new.html.erb</code>, que nous avons créée avec le générateur de l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>, le fichier <code>show.html.erb</code> n'existe pas encore, donc vous devez le créer à la main.</p>
 
 <div class="label" id="code:stub_user_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.24.</span> <span class="description">A stub view for showing user information. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 6.24.</span> <span class="description">Une vue brute pour afficher les informations de l'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>, <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>This view uses Embedded Ruby to display the user&rsquo;s nom and email address, assuming the existence of an instance variable called <code>@user</code>. Of course, eventually the real user show page will look very different, and won&rsquo;t display the email address publicly.</p>
+<p>Cette vue utilise du code Ruby embarqué pour afficher le nom et l'adresse mail de l'utilisateur, en assumant l'existence d'une variable d'instance appelée <code>@user</code>. Bien sûr, la page finale d'affichage de l'utilisateur sera très différente, et n'affichera pas publiquement l'adresse email.</p>
 
-<p>Finally, we&rsquo;ll add the <code>show</code> action to the Users controller (corresponding to the <code>show.html.erb</code> view) with the code in <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>, which defines the <code>@user</code> instance variable needed by the view.</p>
+<p>Enfin, nous ajouterons l'action <code>show</code> au contrôleur Users (correspondant à la vue <code>show.html.erb</code>) avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>, qui définit la variable d'instance <code>@user</code> nécessaire à la vue.</p>
 
 <div class="label" id="code:user_show_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.25.</span> <span class="description">The Users controller with a <code>show</code> action. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.25.</span> <span class="description">Le contrôleur Users avec une action <code>show</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1819,47 +1819,47 @@
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">new</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;S'inscrire&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>Here we&rsquo;ve gotten a little ahead of ourselves by using the standard Rails <code>params</code> object to retrieve the user&nbsp;id. When we make the appropriate request to the Users controller, <code>params[:id]</code> will be the user id&nbsp;<code>1</code>, so the effect is the same as the <code>find</code> command</p>
+<p>Ici nous avons donné [(a little ahead of ourselves)(un peu plus de nous-mêmes)] en utilisant le paramètre (<code>params</code>) objet standard de Rails pour récupérer l'identifiant (<code>id</code>) de l'utilisateur. Quand nous ferons la requête appropriée au contrôleur User, <code>params[:id]</code> sera l'id&nbsp;utilisateur&nbsp;<code>1</code>, donc l'effet est le même que la commande <code>find</code> (<em>trouver</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>we saw in <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>.</p>
+<p>… que nous avons vu à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>.</p>
 
-<p>Although the <code>show</code> view and action are now both defined, we still don&rsquo;t have a way to view the page itself. This requires defining the proper rule in the Rails routes file, as we&rsquo;ll see in the next section.</p>
+<p>Bien que la vue et l'action <code>show</code> soient maintenant toutes deux définies, nous n'avons toujours pas de moyen de voir la page elle-même. Cela nécessite de définir la règle adéquate dans le fichier de routage de Rails, comme nous allons le voir dans la section suivante.</p>
 
 <div class="label" id="sec:a_users_resource"></div>
 
 
-<h3><a id="sec:6.3.3" href="modeling-and-viewing-users-one#sec:a_users_resource" class="heading"><span class="number">6.3.3</span> A Users resource</a></h3>
+<h3><a id="sec:6.3.3" href="modeling-and-viewing-users-one#sec:a_users_resource" class="heading"><span class="number">6.3.3</span> Une ressource Users</a></h3>
 
 
-<p>Our method for displaying the user show page will follow the conventions of the REST architecture favored in Rails applications. This style is based on the ideas of <em>representational state transfer</em> identified and nomd by computer scientist <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a> in his doctoral dissertation <em>Architectural Styles and the Design of Network-based Software Architectures</em>.<sup class="footnote" id="fnref:6.24"><a href="#fn:6.24">24</a></sup> The REST design style emphasizes representing data as <em>resources</em> that can be created, shown, updated, or destroyed&mdash;four actions corresponding to the four fundamental operations <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, and <tt>DELETE</tt> defined by the <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP standard</a> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>).</p>
+<p>Nous méthode pour afficher la page d'affichage de l'utilisateur va suivre les conventions de l'architecture RESTE préconisée pour les applications Rails. Ce style est basé sur les idées de <em>transfer d'état représentationnel</em> (<em>representational state transfer</em>) identifié et nommé par l'expert en informatique <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a> dans sa dissertation doctorale <em>Architectural Styles and the Design of Network-based Software Architectures</em> (<em>Styles architecturaux et conception des architectures de logiciels de réseau</em>).<sup class="footnote" id="fnref:6.24"><a href="#fn:6.24">24</a></sup> Le style de conception REST met l'accent sur la représentation des données en tant que <em>ressources</em> qui peuvent être créées, affichées, actualisées et détruites &mdash;&nbsp;quatre actions correspondant au quatre opérations fondamentales <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt> et <tt>DELETE</tt> définies par le <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">standard HTTP</a> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>).</p>
 
-<p>When following REST principles, resources are typically referenced using the resource nom and a unique identifier. What this means in the context of users&mdash;which we&rsquo;re now thinking of as a Users <em>resource</em>&mdash;is that we should view the user with id&nbsp;<code>1</code> by issuing a <tt>GET</tt> request to the URL <tt>/users/1</tt>. Here the <code>show</code> action is <em>implicit</em> in the type of request&mdash;when Rails&rsquo; REST features are activated, <tt>GET</tt> requests are automatically handled by the <code>show</code> action.</p>
+<p>Quand on suit les principes REST, les ressources sont typiquement référencées en utlisant des noms de ressource et un identifiant unique. Qu'est-ce que ça signifie dans le contexte des utilisateurs &mdash;&nbsp;auxquels nous penserons en tant que «&nbsp;<em>ressource</em> Users&nbsp;» (<em>ressource Utilisateurs</em>)&nbsp;&mdash; est que nous devrions voir l'utilisateur avec un identifiant de&nbsp;<code>1</code> en envoyant une requête <tt>GET</tt> à l'URL <tt>/users/1</tt>. Ici, l'action <code>show</code> est <em>implicite</em> dans le type de requête &mdash;&nbsp;quand les fonctionnalités REST de Rails sont activées, les requêtes <tt>GET</tt> sont automatiquement traitées par l'action <code>show</code> action.</p>
 
 <div class="label" id="fig:user_show_exception_caught"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_exception_caught.png" alt="user_show_exception_caught" /></span></div><div class="caption"><span class="header">Illustration 6.9: </span><span class="description">The initial effect of hitting  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_exception_caught-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_exception_caught.png" alt="user_show_exception_caught" /></span></div><div class="caption"><span class="header">Illustration 6.9: </span><span class="description">L'effet initial de l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_exception_caught-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Unfortunately, the URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> doesn&rsquo;t work quite yet due to a routing error (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_exception_caught">illustration&nbsp;6.9</a>). We can get the REST-style Users URL to work by adding users as a resource to <code>config/routes.rb</code>, as seen in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.</p>
+<p>Malheureusement, l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> ne fonctionne pas encore, à cause d'une erreur de routage (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_exception_caught">illustration&nbsp;6.9</a>). Nous pouvons faire fonctionner l'URL utilisateur de style REST en ajoutant <em>users</em> (<em>utilisateurs</em>) comme ressource au fichier <code>config/routes.rb</code>, comme vu dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.</p>
 
 <div class="label" id="code:users_resource"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.26.</span> <span class="description">Adding a Users resource to the routes file. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.26.</span> <span class="description">Ajout d'une ressource Users au fichier de routage. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:users</span>
@@ -1873,27 +1873,27 @@
 </div></div>
 
 
-<p>After adding the routes for the Users resource, the URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> works perfectly (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>).</p>
+<p>Après avoir ajouter les routes pour la ressource Users, l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> fonctionne parfaitement (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>).</p>
 
 <div class="label" id="fig:user_show_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_rails_3.png" alt="user_show_rails_3" /></span></div><div class="caption"><span class="header">Illustration 6.10: </span><span class="description">The user show page at  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> after adding a Users resource.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_rails_3.png" alt="user_show_rails_3" /></span></div><div class="caption"><span class="header">Illustration 6.10: </span><span class="description">La page d'affichage de l'utilisateur à l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> après avoir ajouté une ressource Users.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>You might have noticed that <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> removed the line</p>
+<p>Vous avez peut-être noté que l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> a effacé la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s2">&quot;users/new&quot;</span>
 </pre></div>
 </div>
 
 
-<p>last seen in <a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>. This is because the one additional resource line in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> doesn&rsquo;t just add a working <tt>/users/1</tt> URL; it endows our sample application with all the actions needed for a RESTful Users resource,<sup class="footnote" id="fnref:6.25"><a href="#fn:6.25">25</a></sup> along with a large number of nomd routes (<a class="ref" href="filling-in-the-layout#sec:nomd_routes">section&nbsp;5.2.3</a>) for generating user URLs. The resulting correspondence of URLs, actions, and nomd routes is shown in <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>. (Compare to <a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>.) Over the course of the next three chapters, we&rsquo;ll cover all of the other entries in <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> as we fill in all the actions necessary to make Users a fully RESTful resource.</p>
+<p>… vue auparavant dans l'<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>. C'est parce que la ligne de ressource ajoutée dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> n'ajoute pas seulement une URL <tt>/users/1</tt> fonctionnelle&nbsp;; elle confère à notre application exemple toutes les actions nécessaire à une ressource Users <em>RESTful</em>,<sup class="footnote" id="fnref:6.25"><a href="#fn:6.25">25</a></sup> accompagnées d'une grand nombre de routes nommées (<a class="ref" href="filling-in-the-layout#sec:nomd_routes">section&nbsp;5.2.3</a>) pour générer les URLs utilisateur. La résultante de correspondances entre URLs, actions et routes nommées est montrée dans la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> (à comparer avec la <a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>). Au cours des trois prochains chapitres, nous couvrions toutes les autres entrées de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> à mesure que nous remplirons toutes les actions nécessaires pour faire de Users une ressource pleinement conforme à REST.</p>
 
 <div class="label" id="table:RESTful_users"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Named route</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left"><code>users_path</code></td><td class="align_left">page to list all users</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">page to show user with id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left"><code>new_user_path</code></td><td class="align_left">page to make a new user (signup)</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left"><code>users_path</code></td><td class="align_left">create a new user</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left"><code>edit_user_path(1)</code></td><td class="align_left">page to edit user with id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">update user with id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">delete user with id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 6.2: </span><span class="description">RESTful routes provided by the Users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Route nommée</strong></th><th class="align_left"><strong>But</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left"><code>users_path</code></td><td class="align_left">liste des utilisateurs</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">page affichant l'utilisateur d'id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left"><code>new_user_path</code></td><td class="align_left">page créant un nouvel utilisateur (signup)</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left"><code>users_path</code></td><td class="align_left">créer un nouvel utilisateur</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left"><code>edit_user_path(1)</code></td><td class="align_left">page d'édition de l'utilisateur d'id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">actualiser l'utilisateur d'id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left"><code>user_path(1)</code></td><td class="align_left">détruire l'utilisateur d'id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 6.2: </span><span class="description">Routes RESTful fournies par la ressource Users dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.</span></div></div>
 
 
 
@@ -1901,10 +1901,10 @@
 <div class="label" id="sec:params_in_debug"></div>
 
 
-<h4><a id="sec:6.3.3.1" href="modeling-and-viewing-users-one#sec:params_in_debug" class="heading"><code>params</code> in <code>debug</code></a></h4>
+<h4>Les <a id="sec:6.3.3.1" href="modeling-and-viewing-users-one#sec:params_in_debug" class="heading"><code>params</code> en débuggage (<code>debug</code>)</a></h4>
 
 
-<p>Before leaving the user show page, we&rsquo;ll take a moment to examine the debug information produced by <a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>. If you look closely at <a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>, you&rsquo;ll see that it includes useful information about the page being rendered:<sup class="footnote" id="fnref:6.26"><a href="#fn:6.26">26</a></sup></p>
+<p>Avant de quitter la page d'affichage de l'utilisateur, nous allons prendre un moment pour examiner les informations de débuggage produite par l'<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>. Si vous regardez attentivement l'<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>, vous verrez qu'elle fournit des informations utiles à propos de la page rendue&nbsp;:<sup class="footnote" id="fnref:6.26"><a href="#fn:6.26">26</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="nn">---</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span>
 <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">show</span>
@@ -1914,24 +1914,23 @@
 </div>
 
 
-<p>This is a YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> representation of <code>params</code>, which (as hinted at by the nom <code>HashWithIndifferentAccess</code>) is basically a hash.  We see that its
-controller is <code>users</code>, its action is <code>show</code>, and its <code>id</code> attribute is <code>"1"</code>. Although you will rarely have occasion to use <code>params[:controller]</code> or <code>params[:action]</code>, using <code>params[:id]</code> to pull out the&nbsp;id from the URL is a common Rails idiom. In particular, we used the code</p>
+<p>C'est une représentation YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> des <code>params</code>, laquelle (comme suggéré par le nom <code>HashWithIndifferentAccess</code>) est basiquement une table de hachage. Nous voyons que son contrôleur est <code>users</code>, son action est <code>show</code>, et son attribut <code>id</code> est <code>"1"</code>. Bien que vous aurez rarement l'occasion d'utiliser <code>params[:controller]</code> ou <code>params[:action]</code>, utiliser <code>params[:id]</code> pour extraire l'identifiant de l'URL est un idiom Rails courant. En particulier, nous utilisons le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>in <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a> to find the user with id&nbsp;<code>1</code>. (The <code>find</code> method knows how to convert the string&nbsp;<code>"1"</code> into the integer&nbsp;<code>1</code>.)</p>
+<p>… dans l'<a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a> pour trouver l'utilisateur d'id&nbsp;<code>1</code> (la méthode <code>find</code> sait comment convertir la chaine de caractères&nbsp;<code>"1"</code> en entier&nbsp;<code>1</code>).</p>
 
-<p>The <code>debug</code> information often provides useful feedback when developing Rails application, and I suggest getting in the habit of checking it whenever your application doesn&rsquo;t behave as expected.</p>
+<p>L'information <code>debug</code> fournit souvent des retours utiles au cours du développement des applications Rails et je vous suggère d'adopter l'habitude de le consulter chaque fois que votre application se comporte de façon inattendue.</p>
 
 <h2><a id="sec:6.4" href="modeling-and-viewing-users-one#sec:6.4" class="heading"><span class="number">6.4</span> Conclusion</a></h2>
 
 
-<p>This chapter is the first half of the two-step process of creating a working User model. Our users now have <code>nom</code> and <code>email</code> attributes, together with validations enforcing several important constraints on their values. We&rsquo;ve also taken a first small step toward a working user show page and a Users resource based on the principles of representational state transfer (REST). In <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, we&rsquo;ll complete the process by adding user passwords and a more useful user view.</p>
+<p>Ce chapitre est la première moitié du processus en deux temps de la création d'un modèle utilisateur (<em>User</em>) fonctionnel. Nos utilisateurs ont maintenant des attributs <code>nom</code> et <code>email</code>, chacun armé de validations contraignant leur valeur. Nous avons aussi amorcé une page d'affichage de l'utilisateur et une ressource utilistaur basée sur l'architecture REST. Au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, nous achèverons le processus en ajouter des mots de passe et des vues de l'utilisateur plus utiles.</p>
 
-<p>If you&rsquo;re using Git, now would be a good time to commit if you haven&rsquo;t done so in a while:</p>
+<p>Si vous utilisez Git, il serait bien de <em>commettre</em> un nouveau dépôt si vous ne l'avez pas fait depuis un moment&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Finished first cut of the User model&quot;</span>
@@ -1945,32 +1944,31 @@ controller is <code>users</code>, its action is <code>show</code>, and its <code
 
 
 <ol>
-<li>Read through the Rails API entry for <code>ActiveRecord::Base</code> to get a sense of its capabilities.</li>
-<li>Study the entry in the Rails API for the <code>validates</code> method to learn more about its capabilities and options.</li>
-<li>Spend a couple hours playing with <a href="http://www.rubular.com/">Rubular</a>.</li>
-
+<li>Lisez l'API Rails à l'entrée pour <code>ActiveRecord::Base</code> pour avoir une idée de ses capacités.</li>
+<li>Étudiez l'entrée pour la méthode <code>validates</code> pour en apprendre plus sur ses capacités et ses options.</li>
+<li>Passer un peu de temps (une ou deux heures) à vous amuser avec <a href="http://www.rubular.com/">Rubular</a>.</li>
 </ol>
 
 
 
 
 <div class="navigation">  <a class="prev_page" href="filling-in-the-layout#top">
-    &laquo;&nbsp;<span class="number">chapitre 5</span> Filling in the layout
+    &laquo;&nbsp;<span class="number">chapitre 5</span> Poursuivre la mise en page
   </a>
   <a class="next_page" href="modeling-and-viewing-users-two#top">
-    <span class="number">chapitre 7</span> Modeling and viewing users, part II&nbsp;&raquo;
+    <span class="number">chapitre 7</span> Modéliser et afficher les utilisateurs, partie II&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:6.1"><a href="http://gomockingbird.com/">Mockingbird</a> doesn&rsquo;t support custom images like the profile photo in <a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>; I put that in by hand using <a href="http://www.adobe.com/products/fireworks/">Adobe Fireworks</a>. The hippo here is from <a href="http://www.flickr.com/photos/43803060@N00/24308857/">http://www.flickr.com/photos/43803060@N00/24308857/</a>.&nbsp;<a class="arrow" href="#fnref:6.1">&uarr;</a></li>
+<li id="fn:6.1"><a href="http://gomockingbird.com/">Mockingbird</a> ne support pas les images personnalisées comme la photo de profil de l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>&nbsp;; je l'ai déposé à la main en utilisant <a href="http://www.adobe.com/products/fireworks/">Adobe Fireworks</a>. L'hippo ici vient de <a href="http://www.flickr.com/photos/43803060@N00/24308857/">http://www.flickr.com/photos/43803060@N00/24308857/</a>.&nbsp;<a class="arrow" href="#fnref:6.1">&uarr;</a></li>
 <li id="fn:6.2">Ce nom (Active Record) vient de la &ldquo;<a href="http://en.wikipedia.org/wiki/Active_record_pattern">pattern active record</a>&rdquo;, identifiée et nommée dans <em>Patterns of Enterprise Application Architecture</em> par Martin Fowler.&nbsp;<a class="arrow" href="#fnref:6.2">&uarr;</a></li>
 <li id="fn:6.3">Proconcé &ldquo;ess-quiou-elle&rdquo;, bien que la prononciation alternative &ldquo;sequel&rdquo; (en anglais) est aussi courante.&nbsp;<a class="arrow" href="#fnref:6.3">&uarr;</a></li>
 <li id="fn:6.4">Dans ses toutes premières incarnations, Rails requiérait la connaissance des DLL de SQL. Même après que Rails eut ajouté les migrations,  Even after Rails added migrations, mettre en place l'ancien base de données par défaut (MySQL) était nécessaire. Heureusement, comme noté à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a>, Rails utilise maintenant SQLite par défaut, ce qui enregistre les données sous la forme de simples fichiers &mdash;&nbsp;aucun réglage n'est nécessaire.&nbsp;<a class="arrow" href="#fnref:6.4">&uarr;</a></li>
-<li id="fn:6.5">Occasionally, it is necessary to pierce this abstraction layer, but one design goal of this tutorial is to make all the code database-independent. (Indeed, this is a worthy goal in general.) In case you ever do need to write database-specific code to deploy on Heroku, you should know that they use the excellent <a href="http://www.postgresql.org/">PostgreSQL</a> (&ldquo;post-gres-cue-ell&rdquo;) database. PostgreSQL is free, open-source, and cross-platform; if you develop PostgreSQL-specific applications, you can install it locally, and configure Rails to use it in development by editing the <code>config/database.yml</code> file. Such configuration is beyond the scope of this tutorial, but there are lots of resources on the web; use a search engine to find the most up-to-date information for your platform.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
+<li id="fn:6.5">Occasionnellement, il est nécessaire de comprendre la couche d'abstraction, mais l'un des but de ce tutoriel est de rendre tout le code indépendant de la base de données (je vous assure que c'est un but qui vaut le coup, en général). Dans le cas où vous auriez à écrire le code d'une base de données spécifique pour un déploiement sur Heroku, sachez qu'ils utilisent l'excellent base de données <a href="http://www.postgresql.org/">PostgreSQL</a> (&ldquo;post-gres-cue-ell&rdquo;). PostgreSQL est libre, open-source, et cross-plateforme&nbsp;; si vous développez des applications spécifiquement PostgreSQL, vous pouvez l'installer localement, et configurer Rails pour l'utiliser en mode de développement en éditant le fichier <code>config/database.yml</code>. Une telle configuration dépasse le cadre de ce tutoriel, mais vous trouverez de nombreuses ressources sur le web&nbsp;; utilisez un moteur de recherche pour chercher de l'information actualisée en fonction de votre plateforme.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
 <li id="fn:6.6">En utilisant une adresse email comme <em>username</em>, nous offrons la possibilité théorique de communiquer avec nos utilisateuers dans le futur.&nbsp;<a class="arrow" href="#fnref:6.6">&uarr;</a></li>
 <li id="fn:6.7">Ne vous souciez pas de comment l'objet <code>t</code> s'arrange exactement pour faire ça&nbsp;; la beauté des <em>couches d'abstraction</em> tient à ce que nous n'avons pas besoin de le savoir. Nous pouvons juste faire confiance à l'objet&nbsp;<code>t</code> pour faire son travail.&nbsp;<a class="arrow" href="#fnref:6.7">&uarr;</a></li>
-<li id="fn:6.8">We&rsquo;ll see how to migrate up on a remote Heroku server in <a class="ref" href="modeling-and-viewing-users-two#sec:heroku_deploy">section&nbsp;7.4.2</a>.&nbsp;<a class="arrow" href="#fnref:6.8">&uarr;</a></li>
-<li id="fn:6.9">Officially pronounced &ldquo;ess-cue-ell-ite&rdquo;, although the (mis)pronunciation &ldquo;sequel-ite&rdquo; is also common.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
+<li id="fn:6.8">Nous verrons comment migrer sur un serveur à distance Heroku à la <a class="ref" href="modeling-and-viewing-users-two#sec:heroku_deploy">section&nbsp;7.4.2</a>.&nbsp;<a class="arrow" href="#fnref:6.8">&uarr;</a></li>
+<li id="fn:6.9">Officiellement prononcé &ldquo;ess-cue-ell-ite&rdquo; (en anglais.NdT), bien que la (mauvaise)prononciation &ldquo;sequel-ite&rdquo; (en anglais. NdT) soit aussi courante.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
 <li id="fn:6.10">Dans le cas où vous seriez surpris par <code>"2010-01-05 00:57:46"</code>, je n'ai pas écrit ce code après minuit&nbsp;; les <em>timestamps</em> sont enregistrés en <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordonnées de Temps Unversel</a> (UTC), qui pour la plupart des propos est le même que le <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Temps de Greenwich</a>. Tiré du <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Question&nbsp;:</strong> Pourquoi UTC est utilisé comme acronyme de <em>Coordinated Universal Time</em> plutôt que CUT&nbsp;? <strong>Réponse&nbsp;:</strong> En 1970 le système <em>Coordinated Universal Time</em> a été conçu par un groupe consultatif d'experts internationaux à l'intérieur de l'Union Internationale de Communication (International Telecommunication Union, ITU). l'ITU a pensé qu'il serait mieux d'utiliser une simple abréviation pour l'usage dans tous les langages dans le but de minimiser la confusion. Puisqu'aucun accord unanime n'a pu être trouvé sur l'utilisation de soit l'ordre des mots anglais, CUT, soit l'ordre des mots français, TUC, l'acronyme UTC a utilisé en guise de compromis.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
 <li id="fn:6.11">Notez la valeur de <code>user.updated_at</code>. Dites-vous bien que le timestamp était en UTC.&nbsp;<a class="arrow" href="#fnref:6.11">&uarr;</a></li>
 <li id="fn:6.12">Les exceptions et la gestion des exceptions est un des sujets avancés de Ruby, et nous n'en aurons pas vraiment besoin dans ce livre. Ils sont importants cependant, et je vous suggère de les étudier en utilisant un livre sur Ruby recommandé à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>.&nbsp;<a class="arrow" href="#fnref:6.12">&uarr;</a></li>
@@ -1980,15 +1978,15 @@ controller is <code>users</code>, its action is <code>show</code>, and its <code
 <li id="fn:6.16">Notez que, dans la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>, &ldquo;letter&rdquo; (<em>lettre</em>) signifie en réalité &ldquo;lettre minuscules&rdquo;, mais le <code>i</code> à la fin de l'expression régulière force à ne pas tenir compte de la casse (minuscule/majuscule).&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
 <li id="fn:6.17">Si vous le trouvez aussi utile que moi, je vous encourage à <a href="http://bit.ly/donate-to-rubular">faire un don à Rubular</a> pour remercier le développeur <a href="http://lovitt.net/">Michael Lovitt</a> pour son formidable travail.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
 <li id="fn:6.18">Saviez-vous que <code>"Michael Hartl"@example.com</code>, avec des guillemets et une espace<!-- "espace" est féminine en type --> au milieu est une adresse valide, conformément au standard&nbsp;? Aussi surprenant que ça paraisse, c'est vrai &mdash;&nbsp;mais c'est absurde. Si vous n'avez pas une adresse mail ne contenant que des lettres, des nombres, des tirets plats et des points, alors fais l'acquisition d'une autre. N.B. L'expression régulière de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> permet plus de signes aussi, parce que Gmail (et possiblement d'autres services d'email) font quelque chose d'utile pour eux&nbsp;:  par exemple, pour filtrer les ordres d'Amazon, vous pouvez utiliser <tt>username+amazon@gmail.com</tt>, qui se rendra vers l'adresse Gmail <tt>username@gmail.com</tt>, vous permettant de filtrer la chaine <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
-<li id="fn:6.19">As noted briefly in the introduction to this section, there is a dedicated test database, <code>db/test.sqlite3</code>, for this purpose.&nbsp;<a class="arrow" href="#fnref:6.19">&uarr;</a></li>
+<li id="fn:6.19">Comme indiqué brièvement dans l'introduction de cette section, il existe une base de données de test dédiée, <code>db/test.sqlite3</code>, dans ce but.&nbsp;<a class="arrow" href="#fnref:6.19">&uarr;</a></li>
 <li id="fn:6.20">Si vous vous demandez pourquoi la ligne <code>create!</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a> ne conduit pas à une erreur en créant une duplication d'utilisateur, c'est parce que les tests Rails sont <em>transactionnels</em>&nbsp;: chaque test est enroulé dans une <a href="http://en.wikipedia.org/wiki/Database_transaction">transaction</a>, qui repart de l'état précédent de la base de données après l'exécution des tests. De cette façon, chaque test s'applique à une base de données fraiche.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
 <li id="fn:6.21">Oui, ça m'est arrivé. Comment croyez-vous que j'ai découvert cette explication&nbsp;?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
 <li id="fn:6.22">Bien sûr, nous pourrions juste éditer le fichier de migration pour la table <code>users</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> mmais ça exigerait de revenir en arrière puis à nouveau en avant. La façon Rails est d'utiliser des migrations différentes chaque fois que nous découvrons que notre modèle de data doit changer.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
-<li id="fn:6.23">You can define your own custom environments as well; see the <a href="http://railscasts.com/episodes/72-adding-an-environment">Railscast on adding an environment</a> for details.&nbsp;<a class="arrow" href="#fnref:6.23">&uarr;</a></li>
+<li id="fn:6.23">Vous pouvez même définir votre propre environnement personnalisé; voyez le <a href="http://railscasts.com/episodes/72-adding-an-environment">Railscast pour ajouter un environement</a> pour les détails.&nbsp;<a class="arrow" href="#fnref:6.23">&uarr;</a></li>
 <li id="fn:6.24">Fielding, Roy Thomas. <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Doctoral dissertation, University of California, Irvine, 2000.&nbsp;<a class="arrow" href="#fnref:6.24">&uarr;</a></li>
-<li id="fn:6.25">This means that the <em>routing</em> works, but the corresponding pages don&rsquo;t necessarily work at this point. For example, <tt>/users/1/edit</tt> gets routed properly to the <code>edit</code> action of the Users controller, but since the <code>edit</code> action doesn&rsquo;t exist yet actually hitting that URL will return an error.&nbsp;<a class="arrow" href="#fnref:6.25">&uarr;</a></li>
-<li id="fn:6.26">Some of this tutorial&rsquo;s screenshots show debug information with output like <code>!map:HashWithIndifferentAccess</code> instead of <code>!map:ActiveSupport::HashWithIndifferentAccess</code>. This is simply a minor difference between Rails&nbsp;2.3 and Rails&nbsp;3. Since the rendered web pages are otherwise identical between Rails versions, this one footnote saves me the trouble of redoing all the screenshots.&nbsp;<a class="arrow" href="#fnref:6.26">&uarr;</a></li>
-<li id="fn:6.27">The Rails <code>debug</code> information is shown as <a href="http://www.yaml.org/">YAML</a> (a <a href="http://catb.org/jargon/html/R/recursive-acronym.html">recursive acronym</a> standing for &ldquo;YAML Ain&rsquo;t Markup Language&rdquo;), which is a friendly data format designed to be both machine- <em>and</em> human-readable.&nbsp;<a class="arrow" href="#fnref:6.27">&uarr;</a></li>
+<li id="fn:6.25">Cela signifie que le <em>routage</em> fonctionne, mais que les pages correspondantes ne fonctionnent pas, elle, à ce point du développement. Par exemple, <tt>/users/1/edit</tt> sera proprement routé vers l'action <code>edit</code> du contrôleur Users, mais puisque l'action <code>edit</code> n'existe pas encore, en fait, invoquer l'URL retournera une erreur.&nbsp;<a class="arrow" href="#fnref:6.25">&uarr;</a></li>
+<li id="fn:6.26">Certaines des copies-écran de ce tutoriel montre des informations de débuggage avec des sorties comme <code>!map:HashWithIndifferentAccess</code> au lieu de <code>!map:ActiveSupport::HashWithIndifferentAccess</code>. C'est simplement une différence mineure entre Rails&nbsp;2.3 et Rails&nbsp;3. Puisque les page web rendues sont en grande partie identique entre les deux versions, cette note de bas de page me permet de ne pas avoir à refaire toutes ces copies-écran.&nbsp;<a class="arrow" href="#fnref:6.26">&uarr;</a></li>
+<li id="fn:6.27">L'information <code>debug</code> Rails est affichée au format <a href="http://www.yaml.org/">YAML</a> (un <a href="http://catb.org/jargon/html/R/recursive-acronym.html">acronyme récursif</a> signifiant &ldquo;YAML Ain&rsquo;t Markup Language&rdquo;), qui est un format de donnée convivial conçu pour être lu aussi facilement par les  machines <em>que</em> par les humains.&nbsp;<a class="arrow" href="#fnref:6.27">&uarr;</a></li>
 </ol>
 </div>
 

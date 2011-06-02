@@ -860,11 +860,11 @@
 
 <div class="label" id="sec:finding_user_objects"></div>
 
-<!-- FIN FRENCH -->
+
 <h3><a id="sec:6.1.4" href="modeling-and-viewing-users-one#sec:finding_user_objects" class="heading"><span class="number">6.1.4</span> Recherche dans les objets Utilisateurs (Users)</a></h3>
 
 
-<p>Active Record provides several options for finding objects. Let&rsquo;s use them to find the first user we created while verifying that the third user (<code>foo</code>) has been destroyed. We&rsquo;ll start with the existing user:</p>
+<p>Active Record fournit plusieurs options pour retrouver des objets. Utilisons-les pour retrouver le premier utilisateur que nous avons créé puis nous vérifierons que le troisième (<code>foo</code>) a été détruit. Nous allons commencer avec l'utilisateur existant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -873,9 +873,9 @@
 </div>
 
 
-<p>Here we&rsquo;ve passed the id of the user to <code>User.find</code>; Active Record returns the user with that <code>id</code> attribute.</p>
+<p>Ici nous avons passé l'identifiant de l'utilisateur à <code>User.find</code>&nbsp;; Active Record retourne l'utilisateur correspondant à cet attribut <code>id</code>.</p>
 
-<p>Let&rsquo;s see if the user with an <code>id</code> of&nbsp;<code>3</code> still exists in the database:</p>
+<p>Voyons si l'utilisateur avec un identifiant de 3 existe toujours dans la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">ActiveRecord::RecordNotFound: Couldn&#39;t find User with ID=3</span>
@@ -883,9 +883,9 @@
 </div>
 
 
-<p>Since we destroyed our third user in <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>, Active Record can&rsquo;t find it in the database. Instead, <code>find</code> raises an <em>exception</em>, which is a way of indicating an exceptional event in the execution of a program&mdash;in this case, a nonexistent Active Record id, which causes <code>find</code> to raise an <code>ActiveRecord::RecordNotFound</code> exception.<sup class="footnote" id="fnref:6.12"><a href="#fn:6.12">12</a></sup></p>
+<p>Puisque nous avons détruit notre troisième utilisateur à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>, Active Record ne peut pas le retrouver dans la base de données. Ou plus exactement, <code>find</code> a provoqué une <em>exception</em>, qui est une manière d'indiquer un évènement exceptionnel dans l'exécution d'un programme &mdash;&nbsp;dans ce cas, un id Active Record inexistant, ce qui a conduit <code>find</code> à provoquer une exception <code>ActiveRecord::RecordNotFound</code>.<sup class="footnote" id="fnref:6.12"><a href="#fn:6.12">12</a></sup></p>
 
-<p>In addition to the generic <code>find</code>, Active Record also allows us to find users by specific attributes:</p>
+<p>En addition au <code>find</code> générique, Active Record nous permet aussi de retrouver des utilisateurs par des valeurs d'attributs spécifiques&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">)</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -894,9 +894,9 @@
 </div>
 
 
-<p>Since we will be using email addresses as usernames, this sort of find will be useful when we learn how to let users sign in to our site (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>).<sup class="footnote" id="fnref:6.13"><a href="#fn:6.13">13</a></sup></p>
+<p>Puisque nous utiliserons l'adresse email comme nom d'utilisateur (<em>usernames</em>), cette façon de recherche sera utile quand nous apprendrons à permettre aux utilisateurs de s'identifier à notre site (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>).<sup class="footnote" id="fnref:6.13"><a href="#fn:6.13">13</a></sup></p>
 
-<p>We&rsquo;ll end with a couple of more general ways of finding users. First, there&rsquo;s <code>first</code>:</p>
+<p>Nous allons terminer avec deux des façons générales de retrouver des utilisateurs. D'abord, il y a la méthode <code>first</code> (<em>premier</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">first</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -905,7 +905,7 @@
 </div>
 
 
-<p>Naturally, <code>first</code> just returns the first user in the database. There&rsquo;s also <code>all</code>:</p>
+<p>Naturellement, <code>first</code> retourne simplement le premier utilisateur de la base de données. Il y a aussi <code>all</code> (<em>tous</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">all</span>
 <span class="go">=&gt; [#&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -916,7 +916,7 @@
 </div>
 
 
-<p>No prizes for inferring that <code>all</code> returns an array (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>) of all users in the database.</p>
+<p>Il n'est pas difficile de devenir que <code>all</code> (<em>tous</em>) retourne un tableau (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>) de tous les utilisateurs consignés dans la base de données.</p>
 
 <div class="label" id="sec:updating_user_objects"></div>
 
@@ -924,7 +924,7 @@
 <h3><a id="sec:6.1.5" href="modeling-and-viewing-users-one#sec:updating_user_objects" class="heading"><span class="number">6.1.5</span> Actualisation des objets Utilisateurs (Users)</a></h3>
 
 
-<p>Once we&rsquo;ve created objects, we often want to update them. There are two basic ways to do this. First, we can assign attributes individually, as we did in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>:</p>
+<p>Une fois que nous avons créé des objets, nous voulons souvent les actualisr. Il existe deux façons basique de le faire. D'abord, nous pouvons assigner les attributs individuellement, comme nous l'avons fait à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span>           <span class="c1"># Just a reminder about our user&#39;s attributes</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -937,7 +937,7 @@
 </div>
 
 
-<p>Note that the final step is necessary to write the changes to the database. We can see what happens without a save by using <code>reload</code>, which reloads the object based on the database information:</p>
+<p>Notez que l'étape finale est nécessaire pour écrire les changements dans la base de donées. Nous pouvons voir ce qu'il arrive en cas d'oubli de sauvegarde en utilisant <code>reload</code>, qui recharge l'objet en fonction des informations contenues dans la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">email</span>
 <span class="go">=&gt; &quot;mhartl@example.net&quot;</span>
@@ -949,7 +949,7 @@
 </div>
 
 
-<p>Now that we&rsquo;ve updated the user, the magic columns differ, as promised in <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>:</p>
+<p>Maintenant que nous avons actualisé l'utilisateur, les colonnes magiques diffèrent, comme promis à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">created_at</span>
 <span class="go">=&gt; &quot;2010-01-05 00:57:46&quot;</span>
@@ -959,7 +959,7 @@
 </div>
 
 
-<p>The second way to update attributes is to use <code>update_attributes</code>:</p>
+<p>La seconde façon d'actualiser les attribut est d'utiliser <code>update_attributes</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;The Dude&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude@abides.org&quot;</span><span class="p">)</span>
 <span class="go">=&gt; true</span>
@@ -971,42 +971,42 @@
 </div>
 
 
-<p>The <code>update_attributes</code> method accepts a hash of attributes, and on success performs both the update and the save in one step (returning <code>true</code> to indicate that the save went through). It&rsquo;s worth noting that, once you have defined some attributes as accessible using <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), <em>only</em> those attributes can be modified using <code>update_attributes</code>. If you ever find that your models mysteriously start refusing to update certain columns, check to make sure that those columns are included in the call to <code>attr_accessible</code>.</p>
+<p>La méthode <code>update_attributes</code> accepte une table d'attributs, et en cas de succès accomplit d'un coup l'actualisation et la sauvegarde (en retournant <code>true</code> pour indiquer que la sauvegarde a pu se faire). Il est important de noter que, une fois que vous avez défini l'accessibilité de certains attributs avec <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), <em>seuls</em> ces attributs peuvent être modifiés en utilisant la méthode <code>update_attributes</code>. Si vous trouvez que votre modèle commence mystérieusement à refuser d'actualiser certaines colonnes, assurez-vous que ces colonnes soient bien incluses dans l'appel à <code>attr_accessible</code>.</p>
 
 <div class="label" id="sec:user_validations"></div>
 
 
-<h2><a id="sec:6.2" href="modeling-and-viewing-users-one#sec:user_validations" class="heading"><span class="number">6.2</span> User validations</a></h2>
+<h2><a id="sec:6.2" href="modeling-and-viewing-users-one#sec:user_validations" class="heading"><span class="number">6.2</span> Validations de l'utilisateur</a></h2>
 
 
-<p>The User model we created in <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a> now has working <code>nom</code> and <code>email</code> attributes, but they are completely generic: any string (including an empty one) is currently valid in either case. And yet, noms and email addresses are more specific than this. For example, <code>nom</code> should be non-blank, and <code>email</code> should match the specific format characteristic of email addresses. Moreover, since we&rsquo;ll be using email addresses as unique usernames when users sign in, we shouldn&rsquo;t allow email duplicates in the database.</p>
+<p>Le modèle User que nous avons créé à la <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a> possède maintenant des attributs <code>nom</code> et <code>email</code> qui fonctionnent, mais ils sont complètement «&nbsp;génériques&nbsp;»&nbsp;: n'importe quelle chaine de caractères (incluant l'espace) est en ce moment valide dans tous les cas. Et pourtant, les noms et les adresses email sont plus spécifiques que ça. Par exemple, le <code>nom</code> ne devrait pas être vierge, et l'<code>email</code> devrait être conforme au format caractéristique des adresses email. Plus encore, puisque nous allons utiliser l'adresse comme unique nom d'utilisateur (username) quand l'utilisateur s'identifiera, nous ne devrions pas permettre d'avoir deux fois la même adresse dans la base de données.</p>
 
-<p>In short, we shouldn&rsquo;t allow <code>nom</code> and <code>email</code> to be just any strings; we should enforce certain constraints on their values. Active Record allows us to impose such constraints using <em>validations</em>. In this section, we&rsquo;ll cover several of the most common cases, validating <em>presence</em>, <em>length</em>, <em>format</em> and <em>uniqueness</em>. In <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">section&nbsp;7.1.1</a> we&rsquo;ll add a final common validation, <em>confirmation</em>. And we&rsquo;ll see in <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a> how validations give us convenient error messages when users make submissions that violate them.</p>
+<p>En bref, nous ne devrions pas permettre que <code>nom</code> et <code>email</code> soit n'importe quelle chaine de caractères&nbsp;; nous devrions forcer certaines contraintes sur ces valeurs. Active Record nous permet d'imposer de telles contraintes en utilisant les <em>validations</em>. Dans cette section, nous couvrions plusieurs des cas les plus courants, en validant la  <em>présence</em> (<em>presence</em>), la <em>longueur</em> (<em>length</em>), le <em>format</em> et l'<em>unicité</em> (<em>uniqueness</em>). Nous ajouterons à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">section&nbsp;7.1.1</a> une validation finale courante, la <em>confirmation</em>. Et nous verrons à la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a> comment les validations nous nous renvoient des messages d'erreur pratiques quand l'utilisateur soumet des données qui les violent.</p>
 
-<p>As with the other features of our sample app, we&rsquo;ll add User model validations using test-driven development. Since we&rsquo;ve changed the data model, it&rsquo;s a good idea to prepare the test database before proceeding:</p>
+<p>Comme pour les autres fonctionnalités de notre application exemple, nous allons ajouter les validations au modèle User en utilisant le «&nbsp;développement conduit par les tests&nbsp;». Puisque nous avons changé le modèle de données, c'est une bonne idée de préparer le test de la base de données avant de poursuivre&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:test:prepare
 </pre></div>
 </div>
 
 
-<p>This just ensures that the data model from the development database, <code>db/development.sqlite3</code>, is reflected in the test database, <code>db/test.sqlite3</code>.</p>
+<p>Cela s'assure simplement que le modèle de données de la base de données en mode test, <code>db/test.sqlite3</code>, reflète la base de données en mode de développement, <code>db/development.sqlite3</code>.</p>
 
 <div class="label" id="sec:presence_validation"></div>
 
 
-<h3><a id="sec:6.2.1" href="modeling-and-viewing-users-one#sec:presence_validation" class="heading"><span class="number">6.2.1</span> Validating presence</a></h3>
+<h3><a id="sec:6.2.1" href="modeling-and-viewing-users-one#sec:presence_validation" class="heading"><span class="number">6.2.1</span> Valider la présence</a></h3>
 
 
-<p>We&rsquo;ll start with a test for the presence of a <code>nom</code> attribute. Although the first step in TDD is to write a <em>failing</em> test (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>), in this case we don&rsquo;t yet know enough about validations to write the proper test, so we&rsquo;ll write the validation first, using the console to understand it. Then we&rsquo;ll comment out the validation, write a failing test, and verify that uncommenting the validation gets the test to pass. This procedure may seem pedantic for such a simple test, but I have seen<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup> <em>many</em> &ldquo;simple&rdquo; tests that test the wrong thing; being meticulous about TDD is simply the <em>only</em> way to be confident that we&rsquo;re testing the right thing. (This comment-out technique is also useful when rescuing an application whose application code is already written but&mdash;<a href="http://en.wiktionary.org/wiki/quelle_horreur"><em>quelle horreur!</em></a>&mdash;has no tests.)</p>
+<p>Nous allons commencer par un test de la présence de l'attribut <code>nom</code> attribute. Bien que la première étape en TDD consiste à écrire un test <em>échouant</em> (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>), nous n'en savons pas encore assez dans ce cas à propos des validations pour écrire le test approprié, donc nous allons d'abord écrire la validation, en utilisant la console pour la comprendre. Ensuite nous commenterons la validation pour l'exclure, écrirons un test échouant, et vérifierons que décommenter les validations fait bien réussir le test. Cette procédure peut paraitre pédante pour un test aussi simple, mais j'ai <em>trop</em> vu<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup>  de «&nbsp;simples&nbsp;» tests échouer&nbsp;; être méticuleux à propos de la TDD est simplement la  <em>seule</em> manière d'être confiant sur le fait que nous testons la bonne chose à tester (la technique d'exclusion par commentaire est utile, aussi, quand on vient au secours d'une application dont le code est déjà écrit mais qu'elle ne possède &mdash;&nbsp;<em>quelle horreur&nbsp;!</em>&nbsp;&mdash; aucun test).</p>
 
-<p>The way to validate the presence of the nom attribute is to use the <code>validates</code> method with argument <code>:presence =&gt; true</code>, as shown in  <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a>. The <code>:presence =&gt; true</code> argument is a one-element <em>options hash</em>; recall from <a class="ref" href="rails-flavored-ruby#sec:css_revisited">section&nbsp;4.3.4</a> that curly braces are optional when passing hashes as the final argument in a method. (As noted in <a class="ref" href="filling-in-the-layout#sec:adding_to_the_layout">section&nbsp;5.1.1</a>, the use of options hashes is a recurring theme in Rails.)</p>
+<p>La façon de valider la présence d'un attribut <code>nom</code> est d'utiliser la méthode <code>validates</code> avec l'argument <code>:presence =&gt; true</code>, comme montré dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a>. L'argument <code>:presence =&gt; true</code> est une table d'options à un élément&nbsp;; souvenez-vous, <a class="ref" href="rails-flavored-ruby#sec:css_revisited">section&nbsp;4.3.4</a>, que les accolades sont optionnelles lorsque les tableaux sont les arguments finaux d'une méthode (comme noté à la <a class="ref" href="filling-in-the-layout#sec:adding_to_the_layout">section&nbsp;5.1.1</a>, l'utilisation de tables d'options est un théme récurrent en Rails).</p>
 
 <div class="label" id="code:validates_presence_of_nom"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.7.</span> <span class="description">Validating the presence of a <code>nom</code> attribute. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.7.</span> <span class="description">Valider la présence d'un attribut <code>nom</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1017,9 +1017,9 @@
 </div></div>
 
 
-<p>As discussed briefly in <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">section&nbsp;2.3.2</a>, the use of <code>validates</code> is characteristic of Rails&nbsp;3. (In Rails&nbsp;2.3, we would write <code>validates_presence_of :nom</code> instead.)</p>
+<p>Comme discuté brièvement à la <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">section&nbsp;2.3.2</a>, l'utilisation de <code>validates</code> est caractéristique de Rails&nbsp;3 (en Rails&nbsp;2.3, nous aurions dû plutôt écrire <code>validates_presence_of :nom</code>).</p>
 
-<p><a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> may look like magic, but <code>validates</code> is just a method, as indeed is <code>attr_accessible</code>. An equivalent formulation of <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> using parentheses is as follows:</p>
+<p>L'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> peut sembler quelque peu, mais <code>validates</code> est juste une méthode, telle que l'est aussi <code>attr_accessible</code>. Une formulation équivalent de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> en utilisant les parenthèses serait&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span><span class="p">(</span><span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span><span class="p">)</span>
@@ -1030,7 +1030,7 @@
 </div>
 
 
-<p>Let&rsquo;s drop into the console to see the effects of adding a validation to our User model:<sup class="footnote" id="fnref:6.15"><a href="#fn:6.15">15</a></sup></p>
+<p>Utilisons la console pour voir les effets de l'ajout de la validation sur notre modèle User&nbsp;:<sup class="footnote" id="fnref:6.15"><a href="#fn:6.15">15</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">)</span>
@@ -1042,7 +1042,7 @@
 </div>
 
 
-<p>Here <code>user.save</code> returns <code>false</code>, indicating a failed save. In the final command, we use the <code>valid?</code> method, which returns <code>false</code> when the object fails one or more validations, and <code>true</code> when all validations pass. (Recall from <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a> that Ruby uses a question mark to indicate such true/false <em>boolean</em> methods.) In this case, we only have one validation, so we know which one failed, but it can still be helpful to check using the <code>errors</code> object generated on failure:</p>
+<p>Ici, <code>user.save</code> retourne <code>false</code> (<em>faux</em>), indiquant un sauvegarde défectueuse. Dans la commande finale, nous utilisons la méthode <code>valid?</code>, qui retourne <code>false</code> (<em>false</em>) quand l'objet rate une ou plus validations, et <code>true</code> (<em>vrai</em>) quand toutes les validations réussissent (Souvenez-nous de la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>, que Ruby utilise le point d'interrogation pour signifier les méthodes <em>booléennes</em>). Dans ce cas, nous n'avons qu'une seule validation, donc nous savons laquelle échoue, mais il peut toujours être utile de vérifier en utilisant l'objet <code>errors</code> (<em>erreurs</em>) généré par l'échec&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span>
 <span class="go">=&gt; [&quot;Name can&#39;t be blank&quot;]</span>
@@ -1050,15 +1050,15 @@
 </div>
 
 
-<p>(The error message is a hint that Rails validates the presence of an attribute using the <code>blank?</code> method, which we saw at the end of <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">section&nbsp;4.4.3</a>.)</p>
+<p>(Le message d'erreur est une trace que Rails valide la présence d'un attribut en utilisant la méthode <code>blank?</code>, ce que nous avons vu à la fin de la <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">section&nbsp;4.4.3</a>.)</p>
 
-<p>Now for the failing test. To ensure that our incipient test will fail, let&rsquo;s comment out the validation at this point (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a>).</p>
+<p>Voilà pour les tests échouant. Pour s'assurer que notre test naissant échouera, commentons pour l'exclure la validation (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a>).</p>
 
 <div class="label" id="code:commented_out_validation"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.8.</span> <span class="description">Commenting out a validation to ensure a failing test. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.8.</span> <span class="description">Exclure en la commentant une valide pour s'assure que le test échoue. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1069,13 +1069,13 @@
 </div></div>
 
 
-<p>As in the case of controller generation (e.g., <a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>), the model generate command in <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> produces an initial spec for testing users, but in this case it&rsquo;s practically blank (<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a>).</p>
+<p>Comme dans le cas de la génération de contrôleur (par exemple l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>), la commande de génération de modèle dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> prodiut une spec intiale pour tester les utilisateurs, mais dans ce cas elle est pratiquement vierge (<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a>).</p>
 
 <div class="label" id="code:default_user_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.9.</span> <span class="description">The practically blank default User spec. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.9.</span> <span class="description">Le spec User par défaut, pratiquement vierge. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1086,7 +1086,7 @@
 </div></div>
 
 
-<p>This simply uses the <code>pending</code> method to indicate that we should fill the spec with something useful. We can see its effect by running the User model spec:</p>
+<p>Cela utilise simplement la méthode <code>pending</code> (<em>en attendant</em>) pour indiquer que nous devriez remplir le spec avec quelque chose de plus utile. Nous pouvons en voir les effets en jouant le spec du modèle User&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb 
 <span class="go">*</span>
@@ -1103,13 +1103,13 @@
 </div>
 
 
-<p>We&rsquo;ll follow the advice of the default spec by filling it in with some RSpec examples, shown in <a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>.</p>
+<p>Nous suivrons le conseil du spec par défaut en le remplissant avec des exemples RSpec, montrés dans l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>.</p>
 
 <div class="label" id="code:raw_user_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.10.</span> <span class="description">The initial user spec. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.10.</span> <span class="description">Le spec User initial. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1119,38 +1119,38 @@
     <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
   <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">&quot;should create a new instance given valid attributes&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance  should create a new instance dotée des attributs valides&quot;</span> <span class="k">do</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
   <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">&quot;should require a nom&quot;</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait exiger un nom&quot;</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>We&rsquo;ve seen <code>require</code> and <code>describe</code> before, most recently in <a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>. The next line is a <code>before(:each)</code> block; this was covered briefly in an exercise (<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a>), and all it does is run the code inside the block before each example&mdash;in this case setting the <code>@attr</code> instance variable to an initialization hash.</p>
+<p>Nous avons vu <code>require</code> et <code>describe</code> auparavant, le plus récemment dans l'<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>. La ligne suivante est un bloc <code>before(:each)</code>&nbsp;; ceci a été couvert brièvement par un exercice (<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a>), et tout ce qu'il fait est de jouer le code à l'intérieur du bloc avant chaque exemple &mdash;&nbsp;dant ce cas en définissant l'instance de variable <code>@attr</code> comme tableau d'initialisation.</p>
 
-<p>The first example is just a sanity check, verifying that the User model is basically working. It uses <code>User.create!</code> (read &ldquo;create bang&rdquo;), which works just like the <code>create</code> method we saw in <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> except that it raises an <code>ActiveRecord::RecordInvalid</code> exception if the creation fails (similar to the <code>ActiveRecord::RecordNotFound</code> exception we saw in <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>). As long as the attributes are valid, it won&rsquo;t raise any exceptions, and the test will pass.</p>
+<p>Le premier exemple est juste un «&nbsp;check de santé&nbsp;» vérifiant que le modèle User fonctionne. Il utilise <code>User.create!</code> (lire &ldquo;create bang&rdquo;, «&nbsp;créer bang&nbsp;» ), qui fonctionne comme la méthode <code>create</code> vue à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> à la différence près qu'elle provoque une exception (une erreur) <code>ActiveRecord::RecordInvalid</code> si la création échoue (similairement à l'exception <code>ActiveRecord::RecordNotFound</code> que nous avons pu voir à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>). Aussi longtemps que les attributs sont valides, elle ne provoque aucune erreur, et le test réussira.</p>
 
-<p>The final line is the test for the presence of the <code>nom</code> attribute&mdash;or rather, it <em>would</em> be the actual test, if it had anything in it. Instead, the test is just a stub, but a useful stub it is: it&rsquo;s a <em>pending spec</em>, which is a way to write a description of the application&rsquo;s behavior without worrying yet about the implementation. <a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a> shows an example of a pending spec using an explicit call to the <code>pending</code> method; in this case, since we have included only the&nbsp;<code>it</code> part of the example,</p>
+<p>La ligne finale est le test pour la présence de l'attribut <code>nom</code> &mdash;&nbsp;ou plutôt, il <em>devrait</em> être le test effectif, s'il y avait quelque chose dans cette attribut. Au lieu de ça, le test est juste une esquisse, mais une esquisse utile&nbsp;: c'est une <em>spec de mise en attente</em>, qui est un moyen d'écrire une description du comportement de l'application sans se soucier encore de son implémentation. L'<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a> montre un exemple spec de mise en attente utilisant un appel explicite à la méthode <code>pending</code> (<em>mise en attente</em>)&nbsp;; dans ce cas, puisque nous avons inclus seulement la partie&nbsp;<code>it</code> de l'exemple…</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should require a nom&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait exigé un nom&quot;</span>
 </pre></div>
 </div>
 
 
-<p>RSpec infers the existence of a pending spec.</p>
+<p>… RSpec déduit l'existence d'une spec de mise en attente.</p>
 
-<p>Pending specs are handled well by programs for running specs, as seen for Autotest in <a class="ref" href="modeling-and-viewing-users-one#fig:autotest_pending_spec">illustration&nbsp;6.5</a>, and the output of <code>rspec spec/</code> is similarly useful. Pending specs are useful as placeholders for tests we know we need to write at some point but don&rsquo;t want to deal with right now.</p>
+<p>Les specs de mise en attente sont bien traités par les programmes pour jouer des specs, comme vu pour Autotest dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:autotest_pending_spec">illustration&nbsp;6.5</a>, et la sortie de <code>rspec spec/</code> est utile de la même façon. Les specs de mise en attente sont utiles en tant qu'emplacements réservés pour des tests que nous savons avoir à écrire mais que nous ne voulons pas gérer tout de suite.</p>
 
 <div class="label" id="fig:autotest_pending_spec"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_pending_spec.png" alt="autotest_pending_spec" /></span></div><div class="caption"><span class="header">Illustration 6.5: </span><span class="description">Autotest (via <code>autotest</code>) with a pending User spec.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_pending_spec-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_pending_spec.png" alt="autotest_pending_spec" /></span></div><div class="caption"><span class="header">Illustration 6.5: </span><span class="description">Autotest (via <code>autotest</code>) avec un spec User de mise en attente.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_pending_spec-full.png">(taille normale)</a></span></div></div>
 
 
-<p>In order to fill in the pending spec, we need a way to make an attributes hash with an invalid nom. (The <code>@attr</code> hash is valid by construction, with a non-blank <code>nom</code> attribute.) The <code>Hash</code> method <code>merge</code> does the trick, as we can see with <code>rails console</code>:</p>
+<p>Dans le but de remplir le spec de mise en attente, nous avons besoin d'une manière de créer une table d'attributs avec un nom invalide (la table <code>@attr</code> est valide par construction, avec un attribut <code>nom</code> non vierge). La méthode <code>Hash</code> <code>merge</code> (<em>fusion</em> de <em>Table de hachage</em>) accomplit la chose, comme nous pouvons le voir dans la <code>console rails</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
 <span class="go">=&gt; {:nom =&gt; &quot;Example User&quot;, :email =&gt; &quot;user@example.com&quot;}</span>
@@ -1160,13 +1160,13 @@
 </div>
 
 
-<p>With <code>merge</code> in hand, we&rsquo;re ready to make the new spec (using a trick I&rsquo;ll explain momentarily), as seen in <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_nom_spec">extrait&nbsp;6.11</a>.</p>
+<p>Avec <code>merge</code> (<em>fusionne</em>) en main, nous sommes prêts à faire une nouvelle spec (utilisant une astuce que j'expliquerai dans un instant) comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_nom_spec">extrait&nbsp;6.11</a>.</p>
 
 <div class="label" id="code:failing_validates_nom_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.11.</span> <span class="description">A failing test for validation of the <code>nom</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.11.</span> <span class="description">Un test échouant pour la validation de l'attribut <code>nom</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1176,7 +1176,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should require a nom&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;exige un nom&quot;</span> <span class="k">do</span>
     <span class="n">no_nom_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
     <span class="n">no_nom_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
   <span class="k">end</span>
@@ -1185,29 +1185,29 @@
 </div></div>
 
 
-<p>Here we use <code>merge</code> to make a new user called <code>no_nom_user</code> with a blank nom. The second line then uses the RSpec <code>should_not</code> method to verify that the resulting user is <em>not</em> valid. The trick I alluded to above is related to <code>be_valid</code>: we know from earlier in this section that a User object responds to the <code>valid?</code> boolean method. RSpec adopts the useful convention of allowing us to test <em>any</em> boolean method by dropping the question mark and prepending <code>be_</code>. In other words,</p>
+<p>Ici nous utilisons <code>merge</code> pour créer un nouvelle utilisation appelée <code>no_nom_user</code> (<em>utilisateur_sans_nom</em>) avec un nom vierge. La deuxième ligne utilise alors la méthode RSpec <code>should_not</code> (<em>ne_devrait_pas</em>) pour vérifier que l'utilisateur en résultant n'est <em>pas</em> valide. L'astuce à laquelle je faisait allusion ci-dessus fait référence à <code>be_valid</code> (<em>être_valide</em>)&nbsp;: nous avons appris plus haut dans cette section qu'un objet utilisateur (user) répondait à la méthode booléenne <code>valid?</code>. RSpec adopte une convention utile qui nous permettait de tester <em>n'importe</em> quelle méthode booléenne en supprimant le point d'interrogation et en préfixant la méthode avec <code>be_</code> (<em>être</em>). En d'autres mots…</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">no_nom_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
 </pre></div>
 </div>
 
 
-<p>is equivalent to</p>
+<p>… est équivalent à&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">no_nom_user</span><span class="o">.</span><span class="n">valid?</span><span class="o">.</span><span class="n">should_not</span> <span class="o">==</span> <span class="kp">true</span>
 </pre></div>
 </div>
 
 
-<p>Since it sounds more like natural language, writing <code>should_not be_valid</code> is definitely more idiomatically correct RSpec.</p>
+<p>Puisque ça sonne plus proche du langage naturel (au moins pour les anglophones. NdT), écrire <code>should_not be_valid</code> (<em>ne_devrait_pas_etre_valide</em>) est définitivement plus idiomatiquement correct en RSpec.</p>
 
-<p>With that, our new test should fail, which we can verify with Autotest or by running the <code>user_spec.rb</code> file using the <code>spec</code> script:</p>
+<p>Avec ça, notre nouveau test devrait échoué, ce que nous pouvons vérifier avec Autotest ou en jouant le fichier <code>user_spec.rb</code> en utilisant le script <code>spec</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb
 <span class="go">.F</span>
 
 <span class="go">1)</span>
-<span class="go">&#39;User should require a nom&#39; FAILED</span>
+<span class="go">&#39;User exige un nom&#39; FAILED</span>
 <span class="go">expected valid? to return false, got true</span>
 <span class="go">./spec/models/user_spec.rb:14:</span>
 
@@ -1216,7 +1216,7 @@
 </div>
 
 
-<p>Now uncomment the validation (i.e., revert <a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a> back to <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a>) to get the test to pass:</p>
+<p>Maintenant décommentons la validation (c'est-à-dire que de l'<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a> nous allons revenir à l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a>) pour faire réussir le test&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb
 <span class="go">..</span>
@@ -1226,13 +1226,13 @@
 </div>
 
 
-<p>Of course, we also want to validate the presence of email addresses. The test (<a class="ref" href="modeling-and-viewing-users-one#code:validates_email_spec">extrait&nbsp;6.12</a>) is analogous to the one for the <code>nom</code> attribute.</p>
+<p>Bien sûr, nous voulons aussi valider la présence de l'adresse email. Le test (<a class="ref" href="modeling-and-viewing-users-one#code:validates_email_spec">extrait&nbsp;6.12</a>) est analogue à celui pour l'attribut <code>nom</code>.</p>
 
 <div class="label" id="code:validates_email_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.12.</span> <span class="description">A test for presence of the <code>email</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.12.</span> <span class="description">Un test de présence de l'attribut <code>email</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1242,7 +1242,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should require an email address&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;exige une adresse email&quot;</span> <span class="k">do</span>
     <span class="n">no_email_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
     <span class="n">no_email_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
   <span class="k">end</span>
@@ -1251,13 +1251,13 @@
 </div></div>
 
 
-<p>The implementation is also virtually the same, as seen in <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_email">extrait&nbsp;6.13</a>.</p>
+<p>L'implémentation est aussi virtuellement la même, comme vu dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_email">extrait&nbsp;6.13</a>.</p>
 
 <div class="label" id="code:validates_presence_of_email"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.13.</span> <span class="description">Validating the presence of the <code>nom</code> and <code>email</code> attributes. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.13.</span> <span class="description">Valider la présence des attributs <code>nom</code> et <code>email</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1269,23 +1269,23 @@
 </div></div>
 
 
-<p>Now all the tests should pass, and the &ldquo;presence&rdquo; validations are complete.</p>
+<p>À présent, tous les tests devraient réussir, dans les validations de «&nbsp;présence&nbsp;» sont complets.</p>
 
 <div class="label" id="sec:length_validation"></div>
 
 
-<h3><a id="sec:6.2.2" href="modeling-and-viewing-users-one#sec:length_validation" class="heading"><span class="number">6.2.2</span> Length validation</a></h3>
+<h3><a id="sec:6.2.2" href="modeling-and-viewing-users-one#sec:length_validation" class="heading"><span class="number">6.2.2</span> Validation de la longueur (<em>Length</em>)</a></h3>
 
 
-<p>We&rsquo;ve constrained our User model to require a nom for each user, but we should go further: the user&rsquo;s noms will be displayed on the sample site, so we should enforce some limit on their length. With all the work we did in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>, this step is easy.</p>
+<p>Nous avons contraint notre modèle utilisateur d'exiger un nom pour chaque utilisateur, mais nous devons aller plus loin&nbsp;: les noms d'utilisateur seront affiché sur le site exemple, donc nous devons introduire quelques limites de longueur. Avec tout le travail que nous avons accompli à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>, cette étape est facile.</p>
 
-<p>We start with a test. There&rsquo;s no science to picking a maximum length; we&rsquo;ll just pull&nbsp;<code>50</code> out of thin air as a reasonable upper bound, which means verifying that noms of&nbsp;<code>51</code> characters are too long   (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a>).</p>
+<p>Nous commençons par un test. Il n'y a pas de science pour choisir une longueur maximum&nbsp;; nous allons déclarer que <code>50</code>&nbsp;caractères sont une limite maximale acceptable, ce qui signifie que les noms de 51&nbsp;caractères seront trop longs (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a>).</p>
 
 <div class="label" id="code:length_validation_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.14.</span> <span class="description">A test for <code>nom</code> length validation. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.14.</span> <span class="description">Un test pour la validation de longueur du <code>nom</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1295,7 +1295,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should reject noms that are too long&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait rejeter les noms trop longs&quot;</span> <span class="k">do</span>
     <span class="n">long_nom</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">51</span>
     <span class="n">long_nom_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="n">long_nom</span><span class="p">))</span>
     <span class="n">long_nom_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
@@ -1305,7 +1305,7 @@
 </div></div>
 
 
-<p>For convenience, we&rsquo;ve used &ldquo;string multiplication&rdquo; in <a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a> to make a string 51 characters long. We can see how this works using the console:</p>
+<p>De façon pratique, nous avons utilisé la «&nbsp;multiplication de chaine&nbsp;» dans l'<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a> pour construire une chaine de 51&nbsp;caractères. Nous pouvons voir comment cela fonctionne en utilisant la console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">51</span>
 <span class="go">=&gt; &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</span>
@@ -1315,13 +1315,13 @@
 </div>
 
 
-<p>The test in <a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a> should fail. To get it to pass, we need to know about the validation argument to constrain length, <code>:length</code>, along with the <code>:maximum</code> parameter to enforce the upper bound (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a>).</p>
+<p>Le test de l'<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a> devrait échouer. Pour le voir réussir, nous avons besoin de connaitre l'argument de validation pour contraindre la longueur, <code>:length</code>, qui s'utilise avec le paramètre <code>:maximum</code> pour placer la limite supérieure (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a>).</p>
 
 <div class="label" id="code:length_validation"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.15.</span> <span class="description">Adding a length validation for the <code>nom</code> attribute. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.15.</span> <span class="description">Ajout d'une validation de longueur pour l'attribut <code>nom</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1334,17 +1334,17 @@
 </div></div>
 
 
-<p>With our test suite passing again, we can move on to a more challenging validation: email format.</p>
+<p>Avec la réussite de notre suite de tests, nous pouvons avancer vers une validation plus difficile&nbsp;: le format de l'email..</p>
 
 <div class="label" id="sec:format_validation"></div>
 
 
-<h3><a id="sec:6.2.3" href="modeling-and-viewing-users-one#sec:format_validation" class="heading"><span class="number">6.2.3</span> Format validation</a></h3>
+<h3><a id="sec:6.2.3" href="modeling-and-viewing-users-one#sec:format_validation" class="heading"><span class="number">6.2.3</span> Validation de format</a></h3>
 
 
-<p>Our validations for the <code>nom</code> attribute enforce only minimal constraints&mdash;any non-blank nom under 51 characters will do&mdash;but of course the <code>email</code> attribute must satisfy more stringent requirements. So far we&rsquo;ve only rejected blank email addresses; in this section, we&rsquo;ll require email addresses to conform to the familiar pattern <code>user@example.com</code>.</p>
+<p>Nos validations pour l'attribut <code>nom</code> force seulement des contraintes minimale &mdash;&nbsp;seuls les noms non-vierge et inférieurs à 51&nbsp;caractères seront acceptés&nbsp;&mdash; mais bien sûr l'attribut <code>email</code> doit satisfaire des exigences plus strictes. Jusqu'ici nous n'avons rejeté que l'adresse vierge&nbsp;; dans cette section, nous exigerons des adresses email qu'elles soient conforme au modèle familier <code>user@example.com</code>.</p>
 
-<p>Neither the tests nor the validation will be exhaustive, just good enough to accept most valid email addresses and reject most invalid ones. We&rsquo;ll start with a couple tests involving collections of valid and invalid addresses. To make these collections, it&rsquo;s worth knowing about a useful method for making arrays of strings, as seen in this console session:</p>
+<p>Ni les tests ni la validation ne seront exhaustive, mais juste assez bonne pour accepter les adresses les plus valides et rejeter les plus invalides. Nous allons commencer avec une paire de tests impliquant une collection d'adresses valides et d'adresses invalides. Pour faire ces collections, ça vaut la peine de connaitre une méthode utile pour faire des listes de strings, comme on l'a vu dans la session de console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="sx">%w[foo bar baz]</span>
 <span class="go">=&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
@@ -1360,13 +1360,13 @@
 </div>
 
 
-<p>Here we&rsquo;ve iterated over the elements of the <code>addresses</code> array using the <code>each</code> method (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). With this technique in hand, we&rsquo;re ready to write some basic email format validation tests (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">extrait&nbsp;6.16</a>).</p>
+<p>Ici, nous «&nbsp;bouclons&nbsp;» sur les éléments du tableau <code>addresses</code> en utilisant la méthode <code>each</code> (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). Cette tehnique bien en main, nous sommes prêts à écrire quelques tests de validation de format basique d'adresses (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">extrait&nbsp;6.16</a>).</p>
 
 <div class="label" id="code:email_format_validation_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.16.</span> <span class="description">Tests for email format validation. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.16.</span> <span class="description">Tests pour la validation du format des adresses mail. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1376,7 +1376,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should accept valid email addresses&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait accepter une adresse email valide&quot;</span> <span class="k">do</span>
     <span class="n">addresses</span> <span class="o">=</span> <span class="sx">%w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]</span>
     <span class="n">addresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
       <span class="n">valid_email_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">address</span><span class="p">))</span>
@@ -1384,7 +1384,7 @@
     <span class="k">end</span>
   <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">&quot;should reject invalid email addresses&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait rejeter une adresse email invalide&quot;</span> <span class="k">do</span>
     <span class="n">addresses</span> <span class="o">=</span> <span class="sx">%w[user@foo,com user_at_foo.org example.user@foo.]</span>
     <span class="n">addresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
       <span class="n">invalid_email_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">address</span><span class="p">))</span>
@@ -1396,15 +1396,15 @@
 </div></div>
 
 
-<p>As noted above, these are far from exhaustive, but we do check the common valid email forms <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (uppercase, underscores, and compound domains), and <code>first.last@foo.jp</code> (the standard corporate username <code>first.last</code>, with a two-letter top-level domain&nbsp;<code>jp</code>), along with several invalid forms.</p>
+<p>Comme noté ci-dessus, c'est loin d'être exhaustif, mais nous vérifions les formes d'adresse email valide courantes <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (capitales, tiret plat et domaines composés), et <code>first.last@foo.jp</code> (le nom d'utilisateur standard de l'entreprise <code>first.last</code>, avec un domaine de deux lettres&nbsp;<code>jp</code>), en plus de quelques adresses de forme invalide.</p>
 
-<p>The application code for email format validation uses a <em>regular expression</em> (or <em>regex</em>) to define the format, along with the <code>:format</code> argument to the <code>validates</code> method (<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>).</p>
+<p>Le code de l'application pour la validation du format des emails utilise une <em>expression régulière</em> (ou <em>regex</em>, pour «&nbsp;regular expression&nbsp;» en anglais) pour définir le format, aux côtés de l'argument <code>:format</code> pour la méthode <code>validates</code> (<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>).</p>
 
 <div class="label" id="code:validates_format_of_email"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.17.</span> <span class="description">Validating the email format with a regular expression. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.17.</span> <span class="description">Valider le format de l'email avec une expression régulière. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1420,7 +1420,7 @@
 </div></div>
 
 
-<p>Here <code>email_regex</code> is a <em>regular expression</em>, also known as a <em>regex</em>. The code</p>
+<p>Ici, <code>email_regex</code> est une  <em>expression régulière</em>, appelé aussi <em>regex</em>. Le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">email_regex</span> <span class="o">=</span> <span class="sr">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i</span>
   <span class="o">.</span>
@@ -1432,41 +1432,41 @@
 </div>
 
 
-<p>ensures that only email addresses that match the pattern will be considered valid.</p>
+<p>… s'assure que seules les adresses mail que correspondent au modèle seront considérées comme valides.</p>
 
-<p>So, where does the pattern come from? Regular expressions consist of a terse (some would say <a href="http://catb.org/jargon/html/L/line-noise.html">unreadable</a>) language for matching text patterns; learning to construct regexes is an art, and to get you started I&rsquo;ve broken <code>email_regex</code> into bite-sized pieces (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> To really learn about regular expressions, though, I consider the amazing <a href="http://www.rubular.com/">Rubular</a> regular expression editor (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">illustration&nbsp;6.6</a>) to be simply essential.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> The Rubular website has a beautiful interactive interface for making regular expressions, along with a handy regex quick reference. I encourage you to study <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a> with a browser window open to Rubular&mdash;no amount of reading about regular expressions can replace a couple of hours playing with Rubular.</p>
+<p>Mais d'où vient ce modèle&nbsp;?… Les expressions régulières consistent en un langage concis (certains diraient <a href="http://catb.org/jargon/html/L/line-noise.html">illisible</a>) pour «&nbsp;matcher&nbsp;» les modèles de texte&nbsp;; apprendre à construire une expression régulière est un art, et pour commencer, j'ai mis <code>email_regex</code> en pièces into bite-sized pieces (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> Pour apprendre vraiment les expressions régulière, cependant, je considère que le formidable éditeur d'expression régulières <a href="http://www.rubular.com/">Rubular</a> (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">illustration&nbsp;6.6</a>) est simplement essentiel.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> Le site Rubular est une magnifique interface interactif pour fabriquer des expressions régulières, tout autant qu'un site de référence rapide et pratique aux expressions. Je vous encourage à étudier la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a> avec une fenêtre de navigateur ouverte sur Rubular &mdash;&nbsp;aucune lecture conséquente sur les expressions régulières ne pourra remplacer une ou deux heures passées à jouer avec Rubular.</p>
 
 <div class="label" id="table:email_regex"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Expression</strong></th><th class="align_left"><strong>Meaning</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i</tt></td><td class="align_left">full regex</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">start of regex</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">match start of a string</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">at least one word character, plus, hyphen, or dot</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">literal &ldquo;at sign&rdquo;</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">at least one letter, digit, hyphen, or dot</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">literal dot</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">at least one letter</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">match end of a string</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">end of regex</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">case insensitive</td></tr></table></div><div class="caption"><span class="header">Table 6.1: </span><span class="description">Breaking down the email regex from <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Expression</strong></th><th class="align_left"><strong>Sens</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i</tt></td><td class="align_left">full regex</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">début de l'expression</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">cherche le début de la chaine</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">au moins un caractère de mot, le signe «&nbsp;+&nbsp;», le signe «&nbsp;-&nbsp;» ou le point</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">arobase</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">au moins une lettre, un chiffre, un tiret ou un point</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">un point</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">au moins une lettre</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">cherche la fin de la chaine</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">fin de l'expression régulière</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">insensible à la casse</td></tr></table></div><div class="caption"><span class="header">Table 6.1: </span><span class="description">Détail de l'expression régulière pour les emails de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>.</span></div></div>
 
 
-<p>By the way, there actually exists a full regex for matching email addresses according to the official standard, but it&rsquo;s really not worth the trouble. The one in <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> is fine, maybe even better than the official one.<sup class="footnote" id="fnref:6.18"><a href="#fn:6.18">18</a></sup></p>
+<p>En passant, il existe enfait une expression régulière complète pour vérifier les adresses emails en concordance avec le standard officielle, mais ça ne vaut vraiment pas la peine. Celle de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> est bien, peut-être même meilleure que l'expression officielle.<sup class="footnote" id="fnref:6.18"><a href="#fn:6.18">18</a></sup></p>
 
 <div class="label" id="fig:rubular"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rubular.png" alt="rubular" /></span></div><div class="caption"><span class="header">Illustration 6.6: </span><span class="description">The awesome  <a href="http://www.rubular.com/">Rubular</a> regular expression editor.&nbsp;<a href="http://railstutorial.org/images/figures/rubular-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rubular.png" alt="rubular" /></span></div><div class="caption"><span class="header">Illustration 6.6: </span><span class="description">L'impressionnant éditeur d'expressions régulières <a href="http://www.rubular.com/">Rubular</a>.&nbsp;<a href="http://railstutorial.org/images/figures/rubular-full.png">(taille normale)</a></span></div></div>
 
 
-<p>The tests should all be passing now. (In fact, the tests for valid email addresses should have been passing all along; since regexes are notoriously error-prone, the valid email tests are there mainly as a sanity check on <code>email_regex</code>.) This means that there&rsquo;s only one constraint left: enforcing the email addresses to be unique.</p>
+<p>Les tests devraient tous réussir maintenant (en fait, les tests pour les adresses mails valides auraient dû toutes réussir&nbsp;; puisque les expressions régulières sont notoirement sujettes à erreur, les tests de validation de l'email sont ici à titre de test de cohérence sur <code>email_regex</code>). Cela signifie qu'il ne reste qu'une seule contrainte de côté&nbsp;: forcer l'adresse email à être unique.</p>
 
 <div class="label" id="sec:uniqueness_validation"></div>
 
 
-<h3><a id="sec:6.2.4" href="modeling-and-viewing-users-one#sec:uniqueness_validation" class="heading"><span class="number">6.2.4</span> Uniqueness validation</a></h3>
+<h3><a id="sec:6.2.4" href="modeling-and-viewing-users-one#sec:uniqueness_validation" class="heading"><span class="number">6.2.4</span> Validation d'unicité</a></h3>
 
 
-<p>To enforce uniqueness of email addresses (so that we can use them as usernames), we&rsquo;ll be using the <code>:unique</code> option to the <code>validates</code> method. But be warned: there&rsquo;s a <em>major</em> caveat, so don&rsquo;t just skim this section&mdash;read it carefully.</p>
+<p>Pour forcer l'unicité des adresses email (de telle sorte que nous puissons les utiliser comme username —&nbsp;nom d'utilisateur), nous allons utiliser l'option <code>:unique</code> de la méthode <code>validates</code>. Mais soyez averti&nbsp;: il existe un piège <em>majeur</em>, donc ne survolez pas cette section, lisez-là soigneusement.</p>
 
-<p>We&rsquo;ll start, as usual, with our tests. In our previous model tests, we&rsquo;ve mainly used <code>User.new</code>, which just creates a Ruby object in memory, but for uniqueness tests we actually need to put a record into the database.<sup class="footnote" id="fnref:6.19"><a href="#fn:6.19">19</a></sup> The (first) duplicate email test appears in <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_test">extrait&nbsp;6.18</a>.</p>
+<p>Nous commencerons, comme d'habitude, avec nos tests. Dans nos précédents tests de modèle, nous avons principalement utilisé <code>User.new</code>, qui crée juste un objet Ruby en mémoire, mais pour les tests d'unicité nous avons besoin en fait de déposer un enregistrement dans la base de données.<sup class="footnote" id="fnref:6.19"><a href="#fn:6.19">19</a></sup> Le (premier) test de duplication d'email apparait dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_test">extrait&nbsp;6.18</a>.</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.18.</span> <span class="description">A test for the rejection of duplicate email addresses. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.18.</span> <span class="description">Un test pour le rejet de la duplication d'une adresse mail. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1476,8 +1476,8 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should reject duplicate email addresses&quot;</span> <span class="k">do</span>
-    <span class="c1"># Put a user with given email address into the database.</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait rejeter un email double&quot;</span> <span class="k">do</span>
+    <span class="c1"># Place un utilisateur avec un email donné dans la BD.</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
     <span class="n">user_with_duplicate_email</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
     <span class="n">user_with_duplicate_email</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
@@ -1487,13 +1487,13 @@
 </div></div>
 
 
-<p>The method here is to create a user and then try to make another one with the same email address. (We use the noisy method <code>create!</code>, first seen in <a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>, so that it will raise an exception if anything goes wrong. Using <code>create</code>, without the bang&nbsp;<code>!</code>, risks having a silent error in our test, a potential source of elusive bugs.) We can get this test to pass with the code in <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email">extrait&nbsp;6.19</a>.<sup class="footnote" id="fnref:6.20"><a href="#fn:6.20">20</a></sup></p>
+<p>La méthode ici est de créer un utilisateur et alors d'essayer de faire un autre utilisateur qui possèderait la même adresse email (nous utilisons la méthode «&nbsp;bruyante&nbsp;» <code>create!</code>, d'abord vue à l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>, de telle sorte qu'elle provoquera une exception, une erreur, si quelque chose ne tourne pas rond. En utilisant <code>create</code>, sans le «&nbsp;bang&nbsp;»&nbsp;<code>!</code>, les risques d'obtenir une erreur silencieuse dans nos tests, une source potentielle de bogue insaisissable). Nous pouvons obtenir que ce test réussisse avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email">extrait&nbsp;6.19</a>.<sup class="footnote" id="fnref:6.20"><a href="#fn:6.20">20</a></sup></p>
 
 <div class="label" id="code:validates_uniqueness_of_email"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.19.</span> <span class="description">Validating the uniqueness of email addresses. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.19.</span> <span class="description">Valider l'unicité de l'adresse mail. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1507,13 +1507,13 @@
 </div></div>
 
 
-<p>We&rsquo;re not quite done, though. Email addresses are case-insensitive&mdash;<code>foo@bar.com</code> goes to the same place as <code>FOO@BAR.COM</code> or <code>FoO@BAr.coM</code>&mdash;so our validation should cover this case as well. We test for this with the code in <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>.</p>
+<p>Nous n'en avons pas fini, cependant. Les adresses mails sont sensible à la casse &mdash;&nbsp;<code>foo@bar.com</code> se rend au même endroit que <code>FOO@BAR.COM</code> ou <code>FoO@BAr.coM</code>&nbsp;&mdash; donc nos validations doivent aussi couvrir ce cas. Nous testons cela avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>.</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_case_insensitive_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.20.</span> <span class="description">A test for the rejection of duplicate email addresses, insensitive to case. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.20.</span> <span class="description">Un test pour le rejet d'une adresse mail existente, insensible à la casse. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1523,7 +1523,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="s2">&quot;should reject email addresses identical up to case&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait rejeter une adresse email invalide jusqu'à la casse&quot;</span> <span class="k">do</span>
     <span class="n">upcased_email</span> <span class="o">=</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:email</span><span class="o">].</span><span class="n">upcase</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">upcased_email</span><span class="p">))</span>
     <span class="n">user_with_duplicate_email</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
@@ -1534,7 +1534,7 @@
 </div></div>
 
 
-<p>Here we are using the <code>upcase</code> method on strings (seen briefly in <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). This test does the same thing as the first duplicate email test, but with an upper-case email address instead. If this test feels a little abstract, go ahead and fire up the console:</p>
+<p>Ici nous utilisons la méthode <code>upcase</code> sur les chaines (vue brièvement à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). Ce test fait la même chose que le premier, mais plutôt sur une adresse capitalisée. Si ce test vous semble un petit peu abstrait, prenez votre console et tapez&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
@@ -1549,13 +1549,13 @@
 </div>
 
 
-<p>Of course, currently <code>user_with_duplicate_email.valid?</code> is <code>true</code>, since this is a failing test, but we want it to be <code>false</code>. Fortunately, <code>:uniqueness</code> accepts an option, <code>:case_sensitive</code>, for just this purpose (<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive">extrait&nbsp;6.21</a>).</p>
+<p>Bien entendu, pour le moment, <code>user_with_duplicate_email.valid?</code> est <code>true</code> (<em>vrai</em>), puisque c'est un test d'échec, mais nous voulons qu'il retourne <code>false</code> (<em>faux</em>). Heureusement, <code>:uniqueness</code> (<em>unicité</em>) accepte une option, <code>:case_sensitive</code>, justement dans ce but (<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive">extrait&nbsp;6.21</a>).</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_case_insensitive"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.21.</span> <span class="description">Validating the uniqueness of email addresses, ignoring case. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.21.</span> <span class="description">CValider l'unicité de l'adresse mail, en ignorant la casse. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1569,7 +1569,7 @@
 </div></div>
 
 
-<p>Note that we have simply replaced <code>true</code> with <code>:case_sensitive =&gt; false</code>; Rails infers in this case that <code>:uniqueness</code> should be <code>true</code>. At this point, our application (sort-of) enforces email uniqueness, and our test suite should pass.</p>
+<p>Notez que nous avons simplement remplacer <code>true</code> par <code>:case_sensitive =&gt; false</code>&nbsp;; Rails en déduit que <code>:uniqueness</code> (<em>l'unicité</em> ) devrait être <code>true</code> (<em>vraie</em>). À ce point, notre application fait (quelque peu) en sorte que l'adresse mail soit unique, et notre suite de tests devrait réussir.</p>
 
 <div class="label" id="sec:the_caveat"></div>
 
@@ -1577,36 +1577,36 @@
 <h4><a id="sec:6.2.4.1" href="modeling-and-viewing-users-one#sec:the_caveat" class="heading">L'avertissement d'unicité</a></h4>
 
 
-<p>There&rsquo;s just one small problem, the caveat alluded to above:</p>
+<p>Il y a juste un petit problème, le piège auquel je faisais allusion ci-dessus&nbsp;:</p>
 
-<p><strong>Using <code>validates :uniqueness</code> does not guarantee uniqueness.</strong></p>
+<p><strong>Utiliser <code>validates :uniqueness</code> ne garantit en rien l'unicité.</strong></p>
 
-<p>D&rsquo;oh! But what can go wrong? Here&rsquo;s what:</p>
+<p>&rsquo;oh&nbsp;! Mais qu'est-ce qui peut bien mal tourner&nbsp;?… Cela&nbsp;:</p>
 
 <ol>
-<li>Alice signs up for the sample app, with address <code>alice@wonderland.com</code>.</li>
-<li>Alice accidentally clicks on &ldquo;Submit&rdquo; <em>twice</em>, sending two requests in quick succession.</li>
-<li>The following sequence occurs: request 1 creates a user in memory that passes validation, request 2 does the same, request&nbsp;1&rsquo;s user gets saved, request&nbsp;2&rsquo;s user gets saved.</li>
-<li>Result: two user records with the exact same email address, despite the uniqueness validation.</li>
+<li>Alice s'inscrit à l'application exemple, avec l'adresse mail <code>alice@wonderland.com</code>&nbsp;;</li>
+<li>Accidentellement, Alice clique <em>deux fois</em> sur le bouton &ldquo;Soumettre&rdquo;, envoyant <em>deux</em> requêtes en succession rapide&nbsp;;</li>
+<li>La séquence suivante se produit&nbsp;: la requête 1 crée un utilisateur en mémoire qui réussit la validation, la requête 2 fait de même, l'utilisateur de la requête&nbsp;1 (Alice) est enregistré, l'utilisateur de la requête&nbsp;2 (ALice) est aussi enregistré&nbsp;;</li>
+<li>Résultat&nbsp;: deux enregistrements d'utilisateur avec la même adresse email, malgré la validation d'unicité.</li>
 </ol>
 
 
-<p>If the above sequence seems implausible, believe me, it isn&rsquo;t: it happens on any Rails website with significant traffic.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> Luckily, the solution is straightforward to implement; we just need to enforce uniqueness at the database level as well. Our method is to create a database <em>index</em> on the email column, and then require that the index be unique.</p>
+<p>Si la séquence ci-dessus ne vous semble pas plausible, croyez-moi, elle l'est. Cela survient sur n'importe quel site Rails connaissant un trafic important.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> Heureusement, la solution est simple à implémenter&nbsp;; nous avons juste besoin de force l'unicité au niveau de la base de données elle-même. Notre méthode consiste à créer un <em>index</em> de base de données sur la colonne <code>email</code>, et ensuite d'exiger que cet index soit unique.</p>
 
-<p>The email index represents an update to our data modeling requirements, which (as discussed in <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a>) is handled in Rails using migrations. We saw in <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a> that generating the User model automatically created a new migration (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>); in the present case, we are adding structure to an existing model, so we need to create a migration directly using the <code>migration</code> generator:</p>
+<p>L'index email représente une actualisation à nos impératifs du modèle de données, ce qui (comme discuté à la <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a>) est traité par Rails en utilisant les migrations. Nous avons vu à la <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a> que générer le modèle User créait automatiquement une nouvelle migration (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>)&nbsp;; dans le cas présent, nous ajoutons de la structure à un modèle existant, donc nous avons besoin de créer une migration directement en utilisant le générateur <code>migration</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate migration add_email_uniqueness_index
 </pre></div>
 </div>
 
 
-<p>Unlike the migration for users, the email uniqueness migration is not pre-defined, so we need to fill in its contents with <a class="ref" href="modeling-and-viewing-users-one#code:email_uniqueness_index">extrait&nbsp;6.22</a>.<sup class="footnote" id="fnref:6.22"><a href="#fn:6.22">22</a></sup></p>
+<p>Contrairement à la migration pour les utilisateurs, la migration pour l'unicité de l'adresse mail n'est pas pré-définie, donc nous avons besoin de remplir son contenu par le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:email_uniqueness_index">extrait&nbsp;6.22</a>.<sup class="footnote" id="fnref:6.22"><a href="#fn:6.22">22</a></sup></p>
 
 <div class="label" id="code:email_uniqueness_index"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.22.</span> <span class="description">The migration for enforcing email uniqueness. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.22.</span> <span class="description">La migration pour forcer l'unicité de l'adresse mail. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddEmailUniquenessIndex</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -1621,33 +1621,32 @@
 </div></div>
 
 
-<p>This uses a Rails method called <code>add_index</code> to add an index on the <code>email</code> column of the <code>users</code> table. The index by itself doesn&rsquo;t enforce uniqueness, but the option <code>:unique =&gt; true</code> does.</p>
+<p>Ce code utilise une méthode Rails appelée <code>add_index</code> pour ajouter l'index sur la colonne <code>email</code> de la table <code>users</code>. L'index par lui-même ne contraint pas l'unicité, mais c'est l'option <code>:unique =&gt; true</code> qui le fait.</p>
 
-<p>The final step is to migrate the database:</p>
+<p>L'étape finale est de migrer la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 </pre></div>
 </div>
 
 
-<p>Now the Alice scenario above will work fine: the database will save a user record based on the first request, and will reject the second save for violating the uniqueness constraint. (An error will appear in the Rails log, but that doesn&rsquo;t do any harm. You can actually catch the <code>ActiveRecord::StatementInvalid</code> exception that gets raised&mdash;see <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> for an example&mdash;but in this tutorial we won&rsquo;t bother with this step.) Adding this index on the email attribute accomplishes a second goal, alluded to briefly in <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>: it fixes an efficiency problem in <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Box&nbsp;6.2</a>).</p>
+<p>Maintenant, le scénario d'Alice fonctionnera parfaitement&nbsp;: la base de données sauvera l'enregistrement basé sur la première requête, et rejettera la seconde pour violation de la contrainte d'unicité de l'adresse mail (une erreur apparaitra dans le journal Rails, mais elle ne provoque aucun dommage. Vous pouvez bien entendu saisir l'exception <code>ActiveRecord::StatementInvalid</code> qui est provoquée &mdash;&nbsp;voyez <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> pour un exemple&nbsp;&mdash; mais dans ce tutoriel nous ne nous occuperons pas de cette étape). L'ajout de l'index sur l'attribut email accomplit un second but, auquel j'ai fait brièvement allusion à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>&nbsp;: il fixe (au sens de «&nbsp;régler&nbsp;». NdT) aussi un problème sérieux de <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Box&nbsp;6.2</a>).</p>
 
 <div class="label" id="sidebar:database_indices"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 6.2.</span><span class="description">Database indices</span></span>
-<p>When creating a column in a database, it is important to consider if we will need to <em>find</em> records by that column. Consider, for example, the <code>email</code> attribute created by the migration in <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>. When we allow users to sign in to the sample app starting in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, we will need to find the user record corresponding to the submitted email address; unfortunately, based on the na&iuml;ve data model, the only way to find a user by email address is to look through <em>each</em> user row in the database and compare its email attribute to the given email. This is known in the database business as a <em>full-table scan</em>, and for a real site with thousands of users it is a <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a>.</p>
+<p>En créant une colonne dans la base de données, il est important de considérer si nous aurons besoin de <em>trouver</em> les enregistremens par cette colonne. Considérez, par exemple, l'attribut <code>email</code> créé par la migration dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>. Quand nous permettrons les utilisateurs de s'identifier à l'application exemple, en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, nous aurons besoin de trouver l'enregistrement de l'utilisateur correspondant à l'adresse email soumise&nbsp;; malheureusement, basé sur le modèle de données na&iuml;f, la seule façon de trouver un user par son adresse email est de passer en revue <em>chaque</em> rangée d'utilisateur dans la base de données et de comparer son email à celui donné. C'est connu dans le business des base de données comme un <em>full-table scan</em> (<em>scanner complet de la table</em>), et pour un site réel contenant des milliers d'utilisateurs, c'est une très mauvaise chose (une <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a> en anglais).</p>
 
-<p>Putting an index on the email column fixes the problem. To understand a database index, it&rsquo;s helpful to consider the analogy of a book index. In a book, to find all the occurrences of a given string, say &ldquo;foobar&rdquo;, you would have to scan each page for &ldquo;foobar&rdquo;. With a book index, on the other hand, you can just look up &ldquo;foobar&rdquo; in the index to see all the pages containing &ldquo;foobar&rdquo;. A database index works essentially the same way.</p>
+<p>Placer un index sur la colonne de l'email fixe ce problème. Pour comprendre un index de base de données, il est utile de considérer l'analogie avec un index de livre. Dans un livre, pour trouver toutes les occurences d'un mot donné, dions &ldquo;foobar&rdquo;, vous aurez à consulter chaque page, une par une, pour trouver chaque &ldquo;foobar&rdquo;. Avec un index de livre, d'un autre côté, vous pouvez juste chercher &ldquo;foobar&rdquo; dans l'index et voir toutes les pages qui contiennent ce mot. Un index de base de données fonctionne essentiellement de la même façon.</p>
 </div>
-
 
 
 
 <div class="label" id="sec:viewing_users"></div>
 
 
-<h2><a id="sec:6.3" href="modeling-and-viewing-users-one#sec:viewing_users" class="heading"><span class="number">6.3</span> Viewing users</a></h2>
+<h2><a id="sec:6.3" href="modeling-and-viewing-users-one#sec:viewing_users" class="heading"><span class="number">6.3</span> Affichage des utilisateurs</a></h2>
 
 
 <p>We&rsquo;re not quite done with the basic user model&mdash;we still need to add passwords, a task for <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>&mdash;but we do have enough in place to make a minimalist page for showing user information. This will allow a gentle introduction to the REST style of organizing the actions for our site&rsquo;s users. Since this is just a rough demonstration for now, there are no tests in this section; we&rsquo;ll add tests when we flesh out the user view in <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.</p>
@@ -1974,17 +1973,17 @@ controller is <code>users</code>, its action is <code>show</code>, and its <code
 <li id="fn:6.9">Officially pronounced &ldquo;ess-cue-ell-ite&rdquo;, although the (mis)pronunciation &ldquo;sequel-ite&rdquo; is also common.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
 <li id="fn:6.10">Dans le cas où vous seriez surpris par <code>"2010-01-05 00:57:46"</code>, je n'ai pas écrit ce code après minuit&nbsp;; les <em>timestamps</em> sont enregistrés en <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordonnées de Temps Unversel</a> (UTC), qui pour la plupart des propos est le même que le <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Temps de Greenwich</a>. Tiré du <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Question&nbsp;:</strong> Pourquoi UTC est utilisé comme acronyme de <em>Coordinated Universal Time</em> plutôt que CUT&nbsp;? <strong>Réponse&nbsp;:</strong> En 1970 le système <em>Coordinated Universal Time</em> a été conçu par un groupe consultatif d'experts internationaux à l'intérieur de l'Union Internationale de Communication (International Telecommunication Union, ITU). l'ITU a pensé qu'il serait mieux d'utiliser une simple abréviation pour l'usage dans tous les langages dans le but de minimiser la confusion. Puisqu'aucun accord unanime n'a pu être trouvé sur l'utilisation de soit l'ordre des mots anglais, CUT, soit l'ordre des mots français, TUC, l'acronyme UTC a utilisé en guise de compromis.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
 <li id="fn:6.11">Notez la valeur de <code>user.updated_at</code>. Dites-vous bien que le timestamp était en UTC.&nbsp;<a class="arrow" href="#fnref:6.11">&uarr;</a></li>
-<li id="fn:6.12">Exceptions and exception handling are somewhat advanced Ruby subjects, and we won&rsquo;t need them much in this book. They are important, though, and I suggest learning about them using one of the Ruby books recommended in <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>.&nbsp;<a class="arrow" href="#fnref:6.12">&uarr;</a></li>
-<li id="fn:6.13">To those worried that <code>find_by_email</code> will be inefficient if there are a large number of users, you&rsquo;re ahead of the game. We&rsquo;ll cover this issue, and its solution via database indices, in <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a>.&nbsp;<a class="arrow" href="#fnref:6.13">&uarr;</a></li>
-<li id="fn:6.14">(and written)&nbsp;<a class="arrow" href="#fnref:6.14">&uarr;</a></li>
-<li id="fn:6.15">I&rsquo;ll omit the output of console commands when they are not particularly instructive&mdash;for example, the results of <code>User.new</code>.&nbsp;<a class="arrow" href="#fnref:6.15">&uarr;</a></li>
-<li id="fn:6.16">Note that, in <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>, &ldquo;letter&rdquo; really means &ldquo;lower-case letter&rdquo;, but the <code>i</code> at the end of the regex enforces case-insensitive matching.&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
-<li id="fn:6.17">If you find it as useful as I do, I encourage you to <a href="http://bit.ly/donate-to-rubular">donate to Rubular</a> to reward developer <a href="http://lovitt.net/">Michael Lovitt</a> for his wonderful work.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
-<li id="fn:6.18">Did you know that <code>"Michael Hartl"@example.com</code>, with quotation marks and a space in the middle, is a valid email address according to the standard? Incredibly, it is&mdash;but it&rsquo;s absurd. If you don&rsquo;t have an email address that contains only letters, numbers, underscores, and dots, then get one. N.B. The regex in <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> allows plus signs, too, because Gmail (and possibly other email services) does something useful with them:  for example, to filter orders from Amazon, you can use <tt>username+amazon@gmail.com</tt>, which will go to the Gmail address <tt>username@gmail.com</tt>, allowing you to filter on the string <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
+<li id="fn:6.12">Les exceptions et la gestion des exceptions est un des sujets avancés de Ruby, et nous n'en aurons pas vraiment besoin dans ce livre. Ils sont importants cependant, et je vous suggère de les étudier en utilisant un livre sur Ruby recommandé à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>.&nbsp;<a class="arrow" href="#fnref:6.12">&uarr;</a></li>
+<li id="fn:6.13">À ceux qui s'inquièteraient que <code>find_by_email</code> serait inefficace s'il y avait une grande quantité d'utilisateurs, je dirais que vous êtes en avance sur la musique. Nous couvrirons ce problème, et sa solution, par le biais des indices de base de données, à la <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a>.&nbsp;<a class="arrow" href="#fnref:6.13">&uarr;</a></li>
+<li id="fn:6.14">(et écrits)&nbsp;<a class="arrow" href="#fnref:6.14">&uarr;</a></li>
+<li id="fn:6.15">J'omettrai la sortie des commandes de la console quand elles ne sont pas particulièrement instrutivs &mdash;&nbsp;par exemple, les résultats de <code>User.new</code>.&nbsp;<a class="arrow" href="#fnref:6.15">&uarr;</a></li>
+<li id="fn:6.16">Notez que, dans la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>, &ldquo;letter&rdquo; (<em>lettre</em>) signifie en réalité &ldquo;lettre minuscules&rdquo;, mais le <code>i</code> à la fin de l'expression régulière force à ne pas tenir compte de la casse (minuscule/majuscule).&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
+<li id="fn:6.17">Si vous le trouvez aussi utile que moi, je vous encourage à <a href="http://bit.ly/donate-to-rubular">faire un don à Rubular</a> pour remercier le développeur <a href="http://lovitt.net/">Michael Lovitt</a> pour son formidable travail.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
+<li id="fn:6.18">Saviez-vous que <code>"Michael Hartl"@example.com</code>, avec des guillemets et une espace<!-- "espace" est féminine en type --> au milieu est une adresse valide, conformément au standard&nbsp;? Aussi surprenant que ça paraisse, c'est vrai &mdash;&nbsp;mais c'est absurde. Si vous n'avez pas une adresse mail ne contenant que des lettres, des nombres, des tirets plats et des points, alors fais l'acquisition d'une autre. N.B. L'expression régulière de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> permet plus de signes aussi, parce que Gmail (et possiblement d'autres services d'email) font quelque chose d'utile pour eux&nbsp;:  par exemple, pour filtrer les ordres d'Amazon, vous pouvez utiliser <tt>username+amazon@gmail.com</tt>, qui se rendra vers l'adresse Gmail <tt>username@gmail.com</tt>, vous permettant de filtrer la chaine <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
 <li id="fn:6.19">As noted briefly in the introduction to this section, there is a dedicated test database, <code>db/test.sqlite3</code>, for this purpose.&nbsp;<a class="arrow" href="#fnref:6.19">&uarr;</a></li>
-<li id="fn:6.20">If you&rsquo;re wondering why the <code>create!</code> line in <a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a> doesn&rsquo;t cause this to fail by creating a duplicate user, it&rsquo;s because Rails tests are <em>transactional</em>: each test is wrapped in a <a href="http://en.wikipedia.org/wiki/Database_transaction">transaction</a>, which <em>rolls back</em> the database after the test executes. This way, each test runs against a fresh database.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
-<li id="fn:6.21">Yes, it happened to me. How do you think I found out about this issue?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
-<li id="fn:6.22">Of course, we could just edit the migration file for the <code>users</code> table in <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> but that would require rolling back and then migrating back up. The Rails Way is to use migrations every time we discover that our data model needs to change.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
+<li id="fn:6.20">Si vous vous demandez pourquoi la ligne <code>create!</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a> ne conduit pas à une erreur en créant une duplication d'utilisateur, c'est parce que les tests Rails sont <em>transactionnels</em>&nbsp;: chaque test est enroulé dans une <a href="http://en.wikipedia.org/wiki/Database_transaction">transaction</a>, qui repart de l'état précédent de la base de données après l'exécution des tests. De cette façon, chaque test s'applique à une base de données fraiche.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
+<li id="fn:6.21">Oui, ça m'est arrivé. Comment croyez-vous que j'ai découvert cette explication&nbsp;?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
+<li id="fn:6.22">Bien sûr, nous pourrions juste éditer le fichier de migration pour la table <code>users</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> mmais ça exigerait de revenir en arrière puis à nouveau en avant. La façon Rails est d'utiliser des migrations différentes chaque fois que nous découvrons que notre modèle de data doit changer.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
 <li id="fn:6.23">You can define your own custom environments as well; see the <a href="http://railscasts.com/episodes/72-adding-an-environment">Railscast on adding an environment</a> for details.&nbsp;<a class="arrow" href="#fnref:6.23">&uarr;</a></li>
 <li id="fn:6.24">Fielding, Roy Thomas. <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Doctoral dissertation, University of California, Irvine, 2000.&nbsp;<a class="arrow" href="#fnref:6.24">&uarr;</a></li>
 <li id="fn:6.25">This means that the <em>routing</em> works, but the corresponding pages don&rsquo;t necessarily work at this point. For example, <tt>/users/1/edit</tt> gets routed properly to the <code>edit</code> action of the Users controller, but since the <code>edit</code> action doesn&rsquo;t exist yet actually hitting that URL will return an error.&nbsp;<a class="arrow" href="#fnref:6.25">&uarr;</a></li>

@@ -1,4 +1,6 @@
-
+<!--
+	Chapitre : 7
+-->
 
 <h1 class="title">Tutoriel Ruby on Rails </h1>
 
@@ -1250,7 +1252,7 @@
 <p>Parce ce qu'elle est définie dans une classe <code>User</code>,  <code>authenticate</code> est invoquée directement sur <code>User</code>&nbsp;:</p>
 
 <pre class="verbatim">  &gt;&gt; user = User.authenticate('example@railstutorial.org', 'foobar')
-  &gt;&gt; user.name
+  &gt;&gt; user.nom
   =&gt; &quot;Utilisateur exemple&quot;</pre>
 
 
@@ -1417,7 +1419,7 @@
 </div>
 <div class="code"><div class="highlight"><pre><span class="c1"># En utilisant le symbole &#39;:user&#39;, nous faisons que Factory Girl simule un modèle User.</span>
 <span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
-  <span class="n">user</span><span class="o">.</span><span class="n">name</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
+  <span class="n">user</span><span class="o">.</span><span class="n">nom</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">email</span>                 <span class="s2">&quot;mhartl@example.com&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">password</span>              <span class="s2">&quot;foobar&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">password_confirmation</span> <span class="s2">&quot;foobar&quot;</span>
@@ -1563,14 +1565,14 @@
 <p>… et vérifiez que le test échoue, puis dé-commenter pour réussir à nouveau (nous sommes passés par le même processus une fois auparavnt, à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.)</p>
 
 <div class="label" id="sec:a_name_and_a_gravatar"></div>
-<!-- FIN FRENCH -->
-
-<h3><a id="sec:7.3.2" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar" class="heading"><span class="number">7.3.2</span> A name and a Gravatar</a></h3>
 
 
-<p>In this section, we&rsquo;ll improve the look of the user show page by adding a heading with the user&rsquo;s name and profile image. This is one of those situations where I can go either way on test-driven development, and often when making views I&rsquo;ll experiment with the HTML before bothering with tests. Let&rsquo;s stick with the TDD theme for now, and test for a top-level heading (<code>h1</code> tag) containing the user&rsquo;s name and an <code>img</code> tag of class <code>gravatar</code>. (We&rsquo;ll talk momentarily about what this second part means.)</p>
+<h3><a id="sec:7.3.2" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar" class="heading"><span class="number">7.3.2</span> Un nom et un Gravatar</a></h3>
 
-<p>To view a working user show page in a browser, we&rsquo;ll need to create a sample user in the development base de données. To do this, start the console (<em>not</em> in a sandbox this time) and create the user:</p>
+
+<p>Dans cette section, nous allons améliorer le look de notre page d'affichage de l'utilisateur en ajoutant une entête avec le nom de l'utilisateur et une image de profil. C'est une de ces situations où je peux aller [(either way on)(de toute façon)] le «&nbsp;développement conduit par les tests&nbsp;», et souvent en construisant les vues j'expérimenterai le code HTML avant de me soucier des tests. Restons pour le moment avec le thème TDD, et testons un entête de haut niveau (balise <code>h1</code>) contenant le nom de l'utilisateur et une balise <code>img</code> de classe <code>gravatar</code> (nous expliquerons dans un instant le sens de cette seconde partie).</p>
+
+<p>Pour voir une page d'affichage de l'utilisateur fonctionner dans le navigateur, nous aurons besoin de créer un exemple d'utilisateur dans la base de données en mode développement. Pour ce faire, démarrons la console (<em>pas</em> dans le bac à sable cette fois) et créons un utilisateur&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rake db:reset</span>
 <span class="go">$ rails console</span>
@@ -1580,13 +1582,13 @@
 </div>
 
 
-<p>The tests in this section are similar to the tests for the <code>new</code> page seen in <a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>. In particular, we use the <code>have_selector</code> method to check the title and the content of the <code>h1</code>&nbsp;tag, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a>.</p>
+<p>Les tests de cette section sont similaires aux tests de la page <code>new</code> vus dans l'<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>. En particulier, nous utilisons la méthode <code>have_selector</code> pour vérifier le titre et le contenu de la balise&nbsp;<code>h1</code>, comme le montre l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a>.</p>
 
 <div class="label" id="code:user_show_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.18.</span> <span class="description">Tests for the user show page. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.18.</span> <span class="description">Tests pour la page d'affichage de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1599,15 +1601,15 @@
     <span class="o">.</span>
     <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should include the user&#39;s name&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait inclure le nom de l'utilisateur&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a profile image&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir une image de profil&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;h1&gt;img&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;gravatar&quot;</span><span class="p">)</span>
     <span class="k">end</span>
@@ -1620,21 +1622,21 @@
 </div></div>
 
 
-<p>Here RSpec&rsquo;s <code>have_selector</code> method verifies the presence of a <code>title</code> and <code>h1</code> tags containing the user&rsquo;s name. The third example introduces a new element through the code <code>h1&gt;img</code>, which makes sure that the <code>img</code> tag is <em>inside</em> the <code>h1</code> tag.<sup class="footnote" id="fnref:7.17"><a href="#fn:7.17">17</a></sup> In addition, we see that <code>have_selector</code> can take a <code>:class</code> option to test the CSS class of the element in question.</p>
+<p>Ici la méthode RSpec <code>have_selector</code> vérifie la présence des balises <code>title</code> (<em>titre</em>) et <code>h1</code> contenant le nom de l'utilisateur. Le troisième exemple introduit un nouvel élément par le code <code>h1&gt;img</code>, qui fait que la balise <code>img</code> est <em>à l'intérieur</em> de la balise <code>h1</code>..<sup class="footnote" id="fnref:7.17"><a href="#fn:7.17">17</a></sup> En addition, nous voyons que <code>have_selector</code> peut prendre une option <code>:class</code> pour tester la classe CSS de l'élément en question.</p>
 
-<p>We can get the first test to pass by setting the <code>@title</code> variable for use in the <code>title</code> helper (<a class="ref" href="rails-flavored-ruby#sec:title_helper">section&nbsp;4.1.1</a>), in this case setting it to the user&rsquo;s name (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_title">extrait&nbsp;7.19</a>).</p>
+<p>Nous pouvons obtenir la réussite du test en définissant la variable <code>@titre</code> à utiliser dans l'<em>helper</em> <code>title</code> (<a class="ref" href="rails-flavored-ruby#sec:title_helper">section&nbsp;4.1.1</a>), dans ce cas en l'assignant à la valeur du nom de l'utilisateur (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_title">extrait&nbsp;7.19</a>).</p>
 
 <div class="label" id="code:user_show_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.19.</span> <span class="description">A title for the user show page. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.19.</span> <span class="description">Un titre pour la page d'affichage de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">show</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span>
   <span class="k">end</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1644,30 +1646,30 @@
 </div></div>
 
 
-<p>This code introduces a potential problem: a user could enter a name with malicious code&mdash;called a <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a> attack&mdash;which would be injected into our application by the <code>title</code> helper defined in <a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>. Before Rails&nbsp;3, the solution was to <em>escape</em> potentially problematic code using the&nbsp;<code>h</code> method (short for <code>html_escape</code>), but as of Rails&nbsp;3.0 all Embedded Ruby text is escaped by default.<sup class="footnote" id="fnref:7.18"><a href="#fn:7.18">18</a></sup> For example, if a user tried to inject a malicious JavaScript program by using <code>&lt;script&gt;</code> in his name, the automatic HTML escaping would convert it to <code>&amp;lt;script&amp;gt;</code>, rendering it completely harmless.</p>
+<p>Ce code introduit un problème potentiel&nbsp;: un utilisateur peut entrer un nom avec du code malveillant &mdash;&nbsp;appelé attaque <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a>&nbsp;&mdash; qui serait injecté à l'intérieur de l'application par l'helper <code>title</code> défini dans l'<a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>. Avant Rails&nbsp;3, la solution consistait à <em>échapper</em> les codes potentiellement problématiques en utilisant la méthode&nbsp;<code>h</code> (racourci pour <code>html_escape</code>), mais avec Rails&nbsp;3.0, tout le code Ruby embarqué est maintenant échappé par défaut.<sup class="footnote" id="fnref:7.18"><a href="#fn:7.18">18</a></sup> Par exemple, si un utilisateur essayait d'injecter un programme JavaScript malveillant en utilisant <code>&lt;script&gt;</code> dans son nom, l'échappement HTML automatique le convertirait en <code>&amp;lt;script&amp;gt;</code>, le rendant complètement inoffensif.</p>
 
-<p>Now for the other tests. Creating an <code>h1</code> with the (auto-escaped) user name is easy (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_view_with_name">extrait&nbsp;7.20</a>).</p>
+<p>Voyons maintenant les autres tests. Créer un <code>h1</code> à partir du nom de l'utilisateur (échappé) est facile (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_view_with_name">extrait&nbsp;7.20</a>).</p>
 
 <div class="label" id="code:user_show_view_with_name"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.20.</span> <span class="description">The user show view with the user&rsquo;s name. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 7.20.</span> <span class="description">L'utilisateur voir la vue aec un nom d'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;/h1&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>Getting the <code>img</code> test to pass is trickier.  The first step is to install the <a href="http://github.com/mdeering/gravatar_image_tag"><tt>gravatar_image_tag</tt> gem</a> to handle each user&rsquo;s <a href="http://en.gravatar.com/">Gravatar</a>,<sup class="footnote" id="fnref:7.19"><a href="#fn:7.19">19</a></sup> which is a &ldquo;globally recognized avatar&rdquo;.<sup class="footnote" id="fnref:7.20"><a href="#fn:7.20">20</a></sup> As usual, we will include the gem dependency in the <code>Gemfile</code> (<a class="ref" href="modeling-and-viewing-users-two#code:gemfile_gravatar">extrait&nbsp;7.21</a>).</p>
+<p>Faire réussir le test de <code>img</code> est plus astucieux. La première étape consiste à installer le gem <a href="http://github.com/mdeering/gravatar_image_tag"><tt>gravatar_image_tag</tt></a> pour traiter chaque <a href="http://en.gravatar.com/">Gravatar</a> d'utilisateur,<sup class="footnote" id="fnref:7.19"><a href="#fn:7.19">19</a></sup> qui est un «&nbsp;avatar reconnu globalement&nbsp;».<sup class="footnote" id="fnref:7.20"><a href="#fn:7.20">20</a></sup> Comme d'habitude, nous incluerons la dépendance gem dans le fichier <code>Gemfile</code> (<a class="ref" href="modeling-and-viewing-users-two#code:gemfile_gravatar">extrait&nbsp;7.21</a>).</p>
 
 <div class="label" id="code:gemfile_gravatar"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.21.</span> <span class="description">Adding a Gravatar gem to the <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Extrait 7.21.</span> <span class="description">Ajout du gem Gravatar au <code>Gemfile</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1681,34 +1683,33 @@
 </div></div>
 
 
-<p>The install it with <code>bundle</code>:</p>
+<p>Installez-le avec <code>bundle</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 </pre></div>
 </div>
 
 
-<p>You should also restart your web server at this point to load the new Gravatar gem properly.</p>
+<p>Vous devrez peut-être aussi redémarrer votre serveur web ici pour charger le nouveau gem Gravatar proprement.</p>
 
-<p>Gravatars are a convenient way to include user profile images without going through the trouble of managing image upload, cropping, and storage.<sup class="footnote" id="fnref:7.21"><a href="#fn:7.21">21</a></sup> Each Gravatar is associated with an email address, so the Gravatar gem comes with a helper method called <code>gravatar_image_tag</code> that takes an email address as an argument:</p>
+<p>Les <em>gravatars</em> sont une façon pratique d'inclure des images de profil utilisateur sans avoir à gérer la difficulté des téléchargement d'images, leur redimensionnement et leur sauvegarde.<sup class="footnote" id="fnref:7.21"><a href="#fn:7.21">21</a></sup> Chaque <em>gravatar</em> est associé à une adresse email, donc le gem Gravatar est fourni avec une méthode d'<em>helper</em> appelée <code>gravatar_image_tag</code> qui prend une adresse mail comme argument&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">gravatar_image_tag</span> <span class="s1">&#39;example@railstutorial.org&#39;</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>
-For the moment, we&rsquo;ll use this directly in our user show view, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_view_with_gravatar">extrait&nbsp;7.22</a>. (We&rsquo;ll make a helper method for it in a moment.) The result appears in <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_default_gravatar_rails_3">illustration&nbsp;7.4</a>, which shows our example user with the default Gravatar image.</p>
+<p>Pour le moment, nous utilisons cela directement dans notre vue affichant l'utilisateur, comme le montre l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_view_with_gravatar">extrait&nbsp;7.22</a> (nous construirons une méthode <em>helper</em> dans un moment). Le résultat apparait dans l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_show_default_gravatar_rails_3">illustration&nbsp;7.4</a>, qui montre notre exemple avec l'image gravatar par défaut.</p>
 
 <div class="label" id="code:user_show_view_with_gravatar"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.22.</span> <span class="description">The user show view with name and Gravatar. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 7.22.</span> <span class="description">La vue d'affichage de l'utilisateur avec un nom et un gravatar. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_image_tag</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;/h1&gt;</span>
 </pre></div>
 </div></div>
@@ -1719,10 +1720,10 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="fig:user_show_default_gravatar_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_default_gravatar_rails_3.png" alt="user_show_default_gravatar_rails_3" /></span></div><div class="caption"><span class="header">Illustration 7.4: </span><span class="description">The initial user show page  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> with the default Gravatar.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_default_gravatar_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_default_gravatar_rails_3.png" alt="user_show_default_gravatar_rails_3" /></span></div><div class="caption"><span class="header">Illustration 7.4: </span><span class="description">La page initiale d'affichage de l'utilisateur  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> avec le gravatar par défaut.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_default_gravatar_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>This Gravatar business might seem like magic, so let&rsquo;s fire up the console to get a little more insight into what&rsquo;s going on:</p>
+<p>Ce fonctionnement de Gravatar peut sembler magique, donc rejoignons la console pour comprendre un peu mieux ce qui se passe&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
@@ -1734,12 +1735,12 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div>
 
 
-<p>Note that we can pull out the first (and, at this point, only) user in the base de données with the handy <code>User.first</code> method. In the <code>update_attributes</code> step we&rsquo;ve reassigned the user&rsquo;s email address, changing it to <code>example@railstutorial.org</code>. As you can see from <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">illustration&nbsp;7.5</a>, this change results in a new Gravatar being displayed: the Rails Tutorial logo. What&rsquo;s going on is that Gravatar works by associating images with email addresses; since <code>user@example.com</code> is an invalid email address (the <a href="http://example.com/">example.com</a> domain is reserved for examples), there is no Gravatar for that email address. But at my Gravatar account I&rsquo;ve associated the address <code>example@railstutorial.org</code> with the Rails Tutorial logo, so when updating the example user with that email address the Gravatar changes automatically.</p>
+<p>Notez que nous pouvons récupérer le premier (et, à ce point, le seul) utilisateur de la base de données avec la méthode pratique <code>User.first</code>. Dans l'étape <code>update_attributes</code> nous avons ré-assigné l'adresse mail de l'utilisateur, en la changeant en <code>example@railstutorial.org</code>. Comme vous pouvez le voir dans l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">illustration&nbsp;7.5</a>, ce changement produit l'affichage d'un nouveau gravatar&nbsp;: le logo du tutoriel Rails. Ce qui se passe, c'est que Gravatar travaille en associant image et adresse email&nbsp;; puisque <code>user@example.com</code> est une adresse invalide (le domaine <a href="http://example.com/">example.com</a> est réservé aux exemples), il n'y a pas de gravatar associé à cette adresse. Mais à mon compte Gravatar j'ai associé l'adresse <code>example@railstutorial.org</code> au logo du tutoriel Rails, donc en actualisant l'utilisateur exemple avec l'adresse mail, le gravatar change automatiquement.</p>
 
 <div class="label" id="fig:user_show_railstutorial_gravatar_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_railstutorial_gravatar_rails_3.png" alt="user_show_railstutorial_gravatar_rails_3" /></span></div><div class="caption"><span class="header">Illustration 7.5: </span><span class="description">The user show page  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> with the Rails Tutorial Gravatar.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_railstutorial_gravatar_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_railstutorial_gravatar_rails_3.png" alt="user_show_railstutorial_gravatar_rails_3" /></span></div><div class="caption"><span class="header">Illustration 7.5: </span><span class="description">La page d'affichage de l'utilisateur  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> avec le gravatar du Tutoriel Rails.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_railstutorial_gravatar_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1747,37 +1748,37 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="sec:a_gravatar_helper"></div>
 
 
-<h4><a id="sec:7.3.2.1" href="modeling-and-viewing-users-two#sec:a_gravatar_helper" class="heading">A Gravatar helper</a></h4>
+<h4><a id="sec:7.3.2.1" href="modeling-and-viewing-users-two#sec:a_gravatar_helper" class="heading">Un helper Gravatar</a></h4>
 
 
-<p>At this point, the Gravatar displays properly, but the final example from <a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a> still doesn&rsquo;t pass. This is because the <code>"gravatar"</code> class, which we want for styling the Gravatar with CSS, isn&rsquo;t yet present in the Gravatar&rsquo;s <code>img</code> tag. We could arrange for the test to pass by including an option to the <code>gravatar_image_tag</code> method:</p>
+<p>À ce point, le gravatar s'affiche proprement, mais l'exemple final de l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a> ne réussit toujours pas. C'est parce que la classe CSS <code>"gravatar"</code>, que nous voulons utiliser pour styliser les gravatars en CSS, n'est pas encore spécifier dans la balise <code>img</code> du gravatar. Pour faire réussir le test, nous devons ajouter l'option adéquate à la méthode <code>gravatar_image_tag</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">gravatar_image_tag</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;gravatar&quot;</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>On the other hand, since we expect the Gravatars to appear in multiple places in our application, it would be repetitive to put the class in everywhere by hand. It would be better to make a helper method to eliminate this duplication preemptively.</p>
+<p>D'un autre côté, puisque nous anticipons le fait que les gravatars apparaitront à différents endroits de notre applicatin, il serait répétitif de mettre la classe chaque fois à la main. Ce serait mieux de faire une méthode d'<em>helper</em> qui élimine préventivement cette duplication..</p>
 
-<p>This situation may remind you of the repetition in the site&rsquo;s base title (&ldquo;Ruby on Rails Tutorial Sample App&rdquo;), which we solved with a <code>title</code> helper in the Application helper (<a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>). The solution here is similar; since Gravatars are naturally associated with users, we&rsquo;ll define a <code>gravatar_for</code> method in the Users helper. (The choice to use the Users helpers instead of the Application helper is just for conceptual convenience; Rails makes all helpers available in all views.) The result will be concise view code like</p>
+<p>Cette situation peut vous rappeler de la répétition de la base du titre («&nbsp;Simple application du Tutoriel Ruby on Rails&nbsp;»), que nous avons résolue avec l'helper <code>titre</code> dans l'helper de l'application (<a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>). La solution ici est la même&nbsp;; puisque les gravatars sont naturellement associés avec les utilisaeurs, nous allons définir une méthode <code>gravatar_for</code> (<em>gravatar_pour</em>) dans le helper Users (le choix d'utiliser le helper Users plutôt plutôt que le helper Application est juste pour une commodité conceptuelle&nbsp;; Rails rend tous les helpers accessible dans les vues). Le résultat sera un code concis comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>The <code>gravatar_for</code> helper should take in a <code>user</code> object and then pass some default options to the <code>gravatar_image_tag</code> helper. The implementation appears in <a class="ref" href="modeling-and-viewing-users-two#code:gravatar_for_helper">extrait&nbsp;7.23</a>.</p>
+<p>L'helper <code>gravatar_for</code> devrait prendre un objet <code>user</code> et passer alors quelques options par défaut à l'helper <code>gravatar_image_tag</code>. L'implémentation apparait dans l'<a class="ref" href="modeling-and-viewing-users-two#code:gravatar_for_helper">extrait&nbsp;7.23</a>.</p>
 
 <div class="label" id="code:gravatar_for_helper"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.23.</span> <span class="description">Defining a <code>gravatar_for</code> helper method. <br /> <code>app/helpers/users_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.23.</span> <span class="description">Définir une méthode d'helper <code>gravatar_for</code>. <br /> <code>app/helpers/users_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">UsersHelper</span>
 
   <span class="k">def</span> <span class="nf">gravatar_for</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">})</span>
-    <span class="n">gravatar_image_tag</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">downcase</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">gravatar_image_tag</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">downcase</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">nom</span><span class="p">,</span>
                                             <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;gravatar&#39;</span><span class="p">,</span>
                                             <span class="ss">:gravatar</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="p">)</span>
   <span class="k">end</span>
@@ -1786,31 +1787,31 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div></div>
 
 
-<p>The first argument in the call to <code>gravatar_image_tag</code> passes in the lower-case version of the user&rsquo;s email address (using the <code>downcase</code> method).<sup class="footnote" id="fnref:7.22"><a href="#fn:7.22">22</a></sup> Then the first option to <code>gravatar_image_tag</code> assigns the user&rsquo;s name to the <code>img</code> tag&rsquo;s <code>alt</code> attribute (which gets displayed in devices that can&rsquo;t render images), while the second option sets the CSS class of the resulting Gravatar. The third option passes the <code>options</code> hash using the <code>:gravatar</code> key, which (according to the <a href="http://github.com/mdeering/gravatar_image_tag"><tt>gravatar_image_tag</tt> gem documentation</a>) is how to set the options for <code>gravatar_image_tag</code>. Note that the function definition sets a <em>default option</em><sup class="footnote" id="fnref:7.23"><a href="#fn:7.23">23</a></sup> for the size of the Gravatar<sup class="footnote" id="fnref:7.24"><a href="#fn:7.24">24</a></sup> using</p>
+<p>Le premier argument dans l'appel à <code>gravatar_image_tag</code> passe la version minuscule de l'adresse mail (en utilisant la méthode <code>downcase</code>).<sup class="footnote" id="fnref:7.22"><a href="#fn:7.22">22</a></sup> Alors la première optin pour <code>gravatar_image_tag</code> assigne le nom de l'utilisateur à l'attribut <code>alt</code> de la balise <code>img</code> (qui sera affiché sur les dispositifs qui ne peuvent pas rendre les images), tandis que la deuxième option définit la classe CSS pour le gravatar. La troisième option passe la table d'<code>options</code> en utilisant la clé <code>:gravatar</code>, qui (conformément à la documentation gem pour <a href="http://github.com/mdeering/gravatar_image_tag"><tt>gravatar_image_tag</tt></a>) est utilisée pour définir les options pour <code>gravatar_image_tag</code>. Notez que la définition de la fonction définit une <em>options par défaut</em><sup class="footnote" id="fnref:7.23"><a href="#fn:7.23">23</a></sup> pour la taille du gravatar<sup class="footnote" id="fnref:7.24"><a href="#fn:7.24">24</a></sup> en utilisant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">option</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">}</span>
 </pre></div>
 </div>
 
 
-<p>This sets the default Gravatar size to <tt>50x50</tt>, while also allowing us to override the default size using code like</p>
+<p>Cela fixe la taille par défaut du gravatar à <tt>50x50</tt>, ce qui nous permet également de redéfinir la taille par défaut en utilisant un code comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">30</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>If we now update the user show template with the code in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_gravatar_for">extrait&nbsp;7.24</a>, the user show page appears as in <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_gravatar_for">illustration&nbsp;7.6</a>. And since the <code>gravatar_for</code> helper assigns the <code>img</code> tag the class <code>"gravatar"</code>, the tests from <a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a> should now pass.</p>
+<p>Si nous actualisons à présent le template d'affichage de l'utilisateur avec le code de l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_gravatar_for">extrait&nbsp;7.24</a>, la page d'affichage de l'utilisateur apparaitra comme dans l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_show_gravatar_for">illustration&nbsp;7.6</a>. Et puisque l'helper <code>gravatar_for</code> assigne à la balise <code>img</code> la classe CSS <code>"gravatar"</code>, les tests de l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_tests">extrait&nbsp;7.18</a> devrait maintenant réussir.</p>
 
 <div class="label" id="code:user_show_gravatar_for"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.24.</span> <span class="description">Updating the user show template to use <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 7.24.</span> <span class="description">Actualiser le template de l'affichage de l'utilisateur en utilisant <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;/h1&gt;</span>
 </pre></div>
 </div></div>
@@ -1821,7 +1822,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="fig:user_show_gravatar_for"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_gravatar_for.png" alt="user_show_gravatar_for" /></span></div><div class="caption"><span class="header">Illustration 7.6: </span><span class="description">The user show page with <code>gravatar_for</code>.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_gravatar_for-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_gravatar_for.png" alt="user_show_gravatar_for" /></span></div><div class="caption"><span class="header">Illustration 7.6: </span><span class="description">La page d'affichage de l'utilisateur avec <code>gravatar_for</code>.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_gravatar_for-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1829,27 +1830,27 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="sec:a_user_sidebar"></div>
 
 
-<h3><a id="sec:7.3.3" href="modeling-and-viewing-users-two#sec:a_user_sidebar" class="heading"><span class="number">7.3.3</span> A user sidebar</a></h3>
+<h3><a id="sec:7.3.3" href="modeling-and-viewing-users-two#sec:a_user_sidebar" class="heading"><span class="number">7.3.3</span> Une barre utilisateur latérale</a></h3>
 
 
-<p>Even though our tests are now passing, and the user show page is much-improved, it&rsquo;s still nice to polish it up just a bit more. In <a class="ref" href="modeling-and-viewing-users-two#code:user_show_with_sidebar">extrait&nbsp;7.25</a>, we have a <code>table</code> tag with one table row (<code>tr</code>) and two table data cells (<code>td</code>).<sup class="footnote" id="fnref:7.25"><a href="#fn:7.25">25</a></sup></p>
+<p>Même si nos tests réussissent à présent, et que la page d'affichage de l'utilisateur s'est considérablement améliorée, il est encore possible de la polisser un petit peu plus. Dans l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_with_sidebar">extrait&nbsp;7.25</a>, nous avons une balise <code>table</code> avec un rangée <code>tr</code> et deux cellules <code>td</code>.<sup class="footnote" id="fnref:7.25"><a href="#fn:7.25">25</a></sup></p>
 
 <div class="label" id="code:user_show_with_sidebar"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.25.</span> <span class="description">Adding a sidebar to the user <code>show</code> view. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 7.25.</span> <span class="description">Ajout d'une barre latérale pour la vue <code>show</code> de l'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;profile&quot;</span> <span class="na">summary=</span><span class="s">&quot;Profile information&quot;</span><span class="nt">&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;profile&quot;</span> <span class="na">summary=</span><span class="s">&quot;Information profil&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;h1&gt;</span>
         <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
-        <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
+        <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
       <span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;sidebar round&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;strong&gt;</span>Name<span class="nt">&lt;/strong&gt;</span> <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;strong&gt;</span>Nom<span class="nt">&lt;/strong&gt;</span> <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
       <span class="nt">&lt;strong&gt;</span>URL<span class="nt">&lt;/strong&gt;</span>  <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
     <span class="nt">&lt;/td&gt;</span>
   <span class="nt">&lt;/tr&gt;</span>
@@ -1858,56 +1859,56 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div></div>
 
 
-<p>Here we&rsquo;ve used an HTML break tag&nbsp;<code>&lt;br /&gt;</code> to put a break between the user&rsquo;s name and URL. Also note the use of <code>user_path</code> to make a clickable link so that users can easily share their profile URLs. This is only the first of many named routes (<a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>) associated with the User resource (<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>); we&rsquo;ll see many more in the next few chapters. The code</p>
+<p>Ici nous avons utilisé la balise HTML&nbsp;<code>&lt;br /&gt;</code> pour forcer un retour à la ligne entre le nom de l'utilisateur et l'URL. Notez aussi l'utilisation de <code>user_path</code> pour créer un lien cliquable qui permet aux utilisateurs de partager facilement l'URL de leur profil. C'est seulement le première d'un grand nombre de routes nommées (<a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>) associées à la ressource User (<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>)&nbsp;; nous en verrons beaucoup plus dans les prochains chapitres. Le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>returns the path to the user, in this case <tt>/users/1</tt>. The related code</p>
+<p>… retourne le path (<em>chemin d'accès</em>) de l'utilisateur, dans ce cas <tt>/users/1</tt>. Le code lié&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">user_url</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>just returns the entire URL, <tt>http://localhost:3000/users/1</tt>. (Compare to the routes created in <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.) Both are examples of the named routes created by the users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>; a list of all the named routes appears in <a class="ref" href="modeling-and-viewing-users-two#table:nomd_routes">Table&nbsp;7.1</a>.</p>
+<p>… retourne juste l'URL entière, <tt>http://localhost:3000/users/1</tt> (comparez avec les routes créées à la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.). Les deux sont des exemples de routes nommées créées par la ressource utilisateurs de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>&nbsp;; une liste de toutes les routes nommées apparait dans la <a class="ref" href="modeling-and-viewing-users-two#table:nomd_routes">Table&nbsp;7.1</a>.</p>
 
 <div class="label" id="table:nomd_routes"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Named route</strong></th><th class="align_left"><strong>Path</strong></th></tr><tr class="top_bar"><td class="align_left"><code>users_path</code></td><td class="align_left"><tt>/users</tt></td></tr><tr><td class="align_left"><code>user_path(@user)</code></td><td class="align_left"><tt>/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_path</code></td><td class="align_left"><tt>/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_path(@user)</code></td><td class="align_left"><tt>/users/1/edit</tt></td></tr><tr><td class="align_left"><code>users_url</code></td><td class="align_left"><tt>http://localhost:3000/users</tt></td></tr><tr><td class="align_left"><code>user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_url</code></td><td class="align_left"><tt>http://localhost:3000/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1/edit</tt></td></tr></table></div><div class="caption"><span class="header">Table 7.1: </span><span class="description">Named routes provided by the users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.  </span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Route nommé</strong></th><th class="align_left"><strong>Chemin</strong></th></tr><tr class="top_bar"><td class="align_left"><code>users_path</code></td><td class="align_left"><tt>/users</tt></td></tr><tr><td class="align_left"><code>user_path(@user)</code></td><td class="align_left"><tt>/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_path</code></td><td class="align_left"><tt>/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_path(@user)</code></td><td class="align_left"><tt>/users/1/edit</tt></td></tr><tr><td class="align_left"><code>users_url</code></td><td class="align_left"><tt>http://localhost:3000/users</tt></td></tr><tr><td class="align_left"><code>user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_url</code></td><td class="align_left"><tt>http://localhost:3000/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1/edit</tt></td></tr></table></div><div class="caption"><span class="header">Table 7.1: </span><span class="description">Routes nommées fournies par la ressource utilisateurs dans l<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.  </span></div></div>
 
 
-<p>Note that in</p>
+<p>Notez que dans&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p><code>user_path(@user)</code> is the link <em>text</em>, while the address is just <code>@user</code>. In the context of a <code>link_to</code>, Rails converts <code>@user</code> to the appropriate URL; in other words, the code above is equivalent to the code</p>
+<p>… <code>user_path(@user)</code> est le lien <em>texte</em>, tandis que l'adresse est juste <code>@user</code>. Dans le contexte d'un <code>link_to</code>, Rails convertit <code>@user</code> en l'URL appropriée&nbsp;; en d'autres mots, le code ci-dessus est équivalent au code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span> <span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Either way works fine, but, as in the <code>:id =&gt; @user</code> idiom from <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>, using just <code>@user</code> is a common Rails convention. In both cases, the Embedded Ruby produces the HTML</p>
+<p>N'importe quelle formulation fonctionne bien, mais, comme dans l'idiome <code>:id =&gt; @user</code> de l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>, utiliser juste <code>@user</code> est une convention Rails courante. Dans les deux cas, le code Ruby embarqué produit le code HTML&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/users/1&quot;</span><span class="nt">&gt;</span>/users/1<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 
 
-<p>With the HTML elements and CSS classes in place, we can style the show page with the CSS shown in <a class="ref" href="modeling-and-viewing-users-two#code:sidebar_css">extrait&nbsp;7.26</a>. The resulting page is shown in <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_sidebar_css">illustration&nbsp;7.7</a>.</p>
+<p>Avec les éléments HTML et les classes CSS en place, nous pouvons styliser la page d'affichage avec le code CSS montré dans l'<a class="ref" href="modeling-and-viewing-users-two#code:sidebar_css">extrait&nbsp;7.26</a>. La page en résultant est montrée dans l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_show_sidebar_css">illustration&nbsp;7.7</a>.</p>
 
 <div class="label" id="code:sidebar_css"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.26.</span> <span class="description">CSS for styling the user show page, including the sidebar. <br /> <code>public/stylesheets/custom.css</code></span>       
+<div class="listing"><span class="header">Extrait 7.26.</span> <span class="description">CSS pour styliser la page d'affichage de l'utilisateur, incluant la barre latérale. <br /> <code>public/stylesheets/custom.css</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1944,7 +1945,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="fig:user_show_sidebar_css"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_sidebar_css.png" alt="user_show_sidebar_css" /></span></div><div class="caption"><span class="header">Illustration 7.7: </span><span class="description">The user show page  <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> with a sidebar and CSS.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_sidebar_css-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_show_sidebar_css.png" alt="user_show_sidebar_css" /></span></div><div class="caption"><span class="header">Illustration 7.7: </span><span class="description">La page d'affichage de l'utilisateur <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> avec une barre latérale et du CSS.&nbsp;<a href="http://railstutorial.org/images/figures/user_show_sidebar_css-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1952,12 +1953,12 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <h2><a id="sec:7.4" href="modeling-and-viewing-users-two#sec:7.4" class="heading"><span class="number">7.4</span> Conclusion</a></h2>
 
 
-<p>In this chapter, we&rsquo;ve effectively finished the User model, so we&rsquo;re now fully prepared to sign up new users and to let them sign in securely with an email/password combination. Moreover, we have a nice first cut of the user profile page, so after signing in users will have a place to go.</p>
+<p>Dans ce chapitre, nous avons effectivement achevé le modèle User, donc nous sommes maintenant pleinement prêt pour inscrire de nouveaux utilisateurs et pour les laisser s'identifier de façon sécurisée avec une combinaison email/mot de passe. Plus encore, nous avons une belle première réduction de la page de profil de l'utilisateur, donc après l'identification les utilisateeurs auront un endroit où aller.</p>
 
-<h3><a id="sec:7.4.1" href="modeling-and-viewing-users-two#sec:7.4.1" class="heading"><span class="number">7.4.1</span> Git commit</a></h3>
+<h3><a id="sec:7.4.1" href="modeling-and-viewing-users-two#sec:7.4.1" class="heading"><span class="number">7.4.1</span> Dépôt Git</a></h3>
 
 
-<p>Before moving on, we should close the Git loop opened in the introduction to <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> by making a final commit to the <code>modeling-users</code> branch and then merging into <code>master</code>.<sup class="footnote" id="fnref:7.26"><a href="#fn:7.26">26</a></sup> First, verify that we are on the <code>modeling-users</code> branch:</p>
+<p>Avant de poursuivre, nous devrions interrompre la boucle ouverte dans l'introduction du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> en faisant un dépôt final pour la branche <code>modeling-users</code> et alors la fusionner avec la branche maitresse (<code>master</code>).<sup class="footnote" id="fnref:7.26"><a href="#fn:7.26">26</a></sup> D'abord, vérifiez que vous êtes bien sur la branche <code>modeling-users</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git branch
 <span class="go">  master</span>
@@ -1966,7 +1967,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div>
 
 
-<p>As noted in <a class="ref" href="beginning#sec:git_branch">section&nbsp;1.3.5.1</a>, the asterisk here identifies the present branch, so we are indeed ready to commit and merge:<sup class="footnote" id="fnref:7.27"><a href="#fn:7.27">27</a></sup></p>
+<p>Comme indiqué à la <a class="ref" href="beginning#sec:git_branch">section&nbsp;1.3.5.1</a>, l'astérisque ici indique la branche courante, donc nous sommes vraiment prêts à déposer et à fusionner&nbsp;:<sup class="footnote" id="fnref:7.27"><a href="#fn:7.27">27</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;User model with passwords, and user show page&quot;</span>
@@ -1979,24 +1980,24 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <div class="label" id="sec:heroku_deploy"></div>
 
 
-<h3><a id="sec:7.4.2" href="modeling-and-viewing-users-two#sec:heroku_deploy" class="heading"><span class="number">7.4.2</span> Heroku deploy</a></h3>
+<h3><a id="sec:7.4.2" href="modeling-and-viewing-users-two#sec:heroku_deploy" class="heading"><span class="number">7.4.2</span> déploiement Heroku</a></h3>
 
 
-<p>If you&rsquo;ve deployed your sample application to Heroku, you can push it up at this point:</p>
+<p>Si vous avez déployer votre application exemple sur Heroku, vous pouvez la «&nbsp;pusher&nbsp;» maintenant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push heroku
 </pre></div>
 </div>
 
 
-<p>Then migrate the base de données on the remote server using the <code>heroku</code> command:</p>
+<p>Migrez alors la base de données sur le serveur à distance en utilisant la commande <code>heroku</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku rake db:migrate
 </pre></div>
 </div>
 
 
-<p>Now if you want to create a sample user on Heroku, you can use the Heroku console:</p>
+<p>Maintenant, si vous voulez créer un exemple d'utilisateur sur Heroku, vous pouvez utiliser la console Heroku&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ heroku console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
@@ -2016,11 +2017,11 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <ol>
-<li>Copy each of the variants of the <code>authenticate</code> method from <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_1">extrait&nbsp;7.27</a> through <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">extrait&nbsp;7.31</a> into your User model, and verify that they are correct by running your test suite. </li>
+<li>Copiez chaque variantes de la méthode <code>authenticate</code> des extraits <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_1">7.27</a> à <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">7.31</a> dans le modèle User, et vérifiez qu'ils sont correct en jouant votre suite de tests. </li>
 
-<li>The final <code>authenticate</code> example (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">extrait&nbsp;7.31</a>) is particularly challenging. Experiment with the console to see if you can understand how it works.</li>
+<li>L'exemple final <code>authenticate</code> (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">extrait&nbsp;7.31</a>) relève un défi particulier. Expérimentez avec la console pour voir si vous pouvez comprendre comment il fonctionne.</li>
 
-<li>How could you get the Gravatar helper <code>gravatar_for</code> to work if our User model used <code>email_address</code> instead of <code>email</code> to represent email addresses?</li>
+<li>Comment pourriez obtenir que l'helper gravatar <code>gravatar_for</code> fonctionne si votre modèle User utilisait <code>email_address</code> au lieu de <code>email</code> pour représenter l'adresse email&nbsp;?</li>
 
 </ol>
 
@@ -2031,7 +2032,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.27.</span> <span class="description">The <code>authenticate</code> method with <code>User</code> in place of <code>self</code>.</span>       
+<div class="listing"><span class="header">Extrait 7.27.</span> <span class="description">La méthode <code>authenticate</code> avec <code>User</code> à la place de <code>self</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">User</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2048,7 +2049,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.28.</span> <span class="description">The <code>authenticate</code> method with an explicit third <code>return</code>.</span>       
+<div class="listing"><span class="header">Extrait 7.28.</span> <span class="description">La méthode <code>authenticate</code> avec un troisième retour explicite.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2066,7 +2067,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.29.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement.</span>       
+<div class="listing"><span class="header">Extrait 7.29.</span> <span class="description">La méthode <code>authenticate</code> utilisant une déclaration <code>if</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2088,7 +2089,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.30.</span> <span class="description">The <code>authenticate</code> method using an <code>if</code> statement and an implicit return.</span>       
+<div class="listing"><span class="header">Extrait 7.30.</span> <span class="description">La méthode <code>authenticate</code> utilisanat une déclaration <code>if</code> et un retour implicite.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2108,7 +2109,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.31.</span> <span class="description">The <code>authenticate</code> method using the ternary operator.</span>       
+<div class="listing"><span class="header">Extrait 7.31.</span> <span class="description">La méthode <code>authenticate</code> utilisant l'opérateur ternaire.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -2121,10 +2122,10 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 
 
 <div class="navigation">  <a class="prev_page" href="modeling-and-viewing-users-one#top">
-    &laquo;&nbsp;<span class="number">chapitre 6</span> Modeling and viewing users, part I
+    &laquo;&nbsp;<span class="number">chapitre 6</span> Modéliser et afficher les utilisateurs, partie I
   </a>
   <a class="next_page" href="sign-up#top">
-    <span class="number">chapitre 8</span> Sign up&nbsp;&raquo;
+    <span class="number">chapitre 8</span> Inscription&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
@@ -2141,20 +2142,20 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <li id="fn:7.11">En vous souvenant du <a class="ref" href="modeling-and-viewing-users-one#sidebar:base de données_indices">Box&nbsp;6.2</a>, l'indexation de la colonne <code>email</code> assurant que cette récupération serait efficace.&nbsp;<a class="arrow" href="#fnref:7.11">&uarr;</a></li>
 <li id="fn:7.12">Nous projetterons d'ajouter une paire d'attributs supplémentaires (une pour identifier un utilisateur administrateur et un pour permettre la fonctionnalité &ldquo;se souvenir de moi&rdquo;), mais ils ne sont pas strictement nécessaires. Tous les attributs d'utilisateur <em>essentiels</em> ont maintenant été définis.&nbsp;<a class="arrow" href="#fnref:7.12">&uarr;</a></li>
 <li id="fn:7.13">De nombreux programmeurs Rails expérimentés trouve que cette approche <em>factory</em> est bien plus flexible que les <em>fixtures</em> (<em>appareils</em>) que Rails utilise par défaut mais peuvent être fragiles et difficile pour la maintenance.&nbsp;<a class="arrow" href="#fnref:7.13">&uarr;</a></li>
-<li id="fn:7.14">&ldquo;Factory Girl&rdquo; fait peut-être référence au <a href="http://www.imdb.com/title/tt0432402/">film éponyme</a>.&nbsp;<a class="arrow" href="#fnref:7.14">&uarr;</a></li>
+<li id="fn:7.14">Le nom «&nbsp;Factory Girl&nbsp;» fait peut-être référence au <a href="http://www.imdb.com/title/tt0432402/">film éponyme</a>.&nbsp;<a class="arrow" href="#fnref:7.14">&uarr;</a></li>
 <li id="fn:7.15">J'ai utilisé <code>get &rsquo;new&rsquo;</code> dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a> et les tests suivants pour l'action <code>new</code> parce qu'à ce point nous n'avions pas encore rencontré l'idée des actions du concept REST. Je le remplacerai par <code>get :new</code> dans les tests futurs.&nbsp;<a class="arrow" href="#fnref:7.15">&uarr;</a></li>
 <li id="fn:7.16">Il accomplit cela en appelant la méthode <code>to_param</code> sur la variable <code>@user</code>.&nbsp;<a class="arrow" href="#fnref:7.16">&uarr;</a></li>
-<li id="fn:7.17">It&rsquo;s not necessarily always a good idea to make HTML tests this specific, since we don&rsquo;t always want to constrain the HTML layout this tightly. Feel free to experiment and find the right level of detail for your projects and tastes.&nbsp;<a class="arrow" href="#fnref:7.17">&uarr;</a></li>
-<li id="fn:7.18">Instead, if you want <em>unescaped</em> text you have to use the <code>raw</code> method, as in <tt class="verb">&lt;%= raw @title %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
-<li id="fn:7.19">Gravatar was originally created by Tom Preston-Werner, cofounder of <a href="http://github.com/">GitHub</a>, and was acquired and scaled by <a href="http://automattic.com/">Automattic</a> (best known as the makers of <a href="http://wordpress.com/">WordPress</a>).&nbsp;<a class="arrow" href="#fnref:7.19">&uarr;</a></li>
-<li id="fn:7.20">In Hinduism, an avatar is the manifestation of a deity in human or animal form. By extension, the term <em>avatar</em> is commonly used to mean some kind of personal representation, especially in a virtual environment. But you&rsquo;ve seen the movie by now, so you already knew this.&nbsp;<a class="arrow" href="#fnref:7.20">&uarr;</a></li>
-<li id="fn:7.21">If your application does need to handle images or other file uploads, <a href="http://github.com/thoughtbot/paperclip">Paperclip</a> is the way to go. Like Factory Girl, Paperclip is brought to you by <a href="http://thoughtbot.com/">thoughtbot</a>. (Though I do know several people there, I have no vested interest in promoting thoughtbot; they just make good software.)&nbsp;<a class="arrow" href="#fnref:7.21">&uarr;</a></li>
-<li id="fn:7.22">Thanks to the anonymous reader who noted that the Gravatar plugin is case-sensitive in this context.&nbsp;<a class="arrow" href="#fnref:7.22">&uarr;</a></li>
-<li id="fn:7.23">There&rsquo;s actually a way to reset the default size in a configuration file, but I find this way clearer.&nbsp;<a class="arrow" href="#fnref:7.23">&uarr;</a></li>
-<li id="fn:7.24">Gravatars are square, so a single parameter determines their size uniquely.&nbsp;<a class="arrow" href="#fnref:7.24">&uarr;</a></li>
-<li id="fn:7.25">If anyone gives you grief for using, horror of horrors, <em>tables for layout</em>, have them point their Firebug inspector at Twitter&rsquo;s profile sidebar and tell you what they see. In fact, you&rsquo;ll find that, while &ldquo;semantic markup&rdquo; using <code>div</code>s and <code>span</code>s is increasingly common, virtually all sites resort to <code>table</code>s for layout on occasion. In the present case, getting the vertical alignment just right is <em>much</em> easier with tables.&nbsp;<a class="arrow" href="#fnref:7.25">&uarr;</a></li>
-<li id="fn:7.26">Ordinarily, I recommend making more frequent, smaller commits, but frequent Git commits throughout the tutorial would be hard to maintain and would break up the flow of the discussion.&nbsp;<a class="arrow" href="#fnref:7.26">&uarr;</a></li>
-<li id="fn:7.27">If you&rsquo;re <em>not</em> on the right branch, run <code>git checkout modeling-users</code> before proceeding.&nbsp;<a class="arrow" href="#fnref:7.27">&uarr;</a></li>
+<li id="fn:7.17">Ça n'est pas toujours nécessairement une bonne idée de créer des tests HTML aussi spécifiques, puisque nous ne voulons pas toujours contraindre aussi étroitement le layout HTML. Sentez-vous libre d'expérimenter et de trouver le bon niveau de détail pour vos projets conformément à vos goûts.&nbsp;<a class="arrow" href="#fnref:7.17">&uarr;</a></li>
+<li id="fn:7.18">Ou plutôt, si vous voulez <em>déséchapper</em> le texte vous devez utiliser la méthode <code>raw</code> (<em>brut</em>), comme dans <tt class="verb">&lt;%= raw @title %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
+<li id="fn:7.19">Gravatar a été créé originellement par Tom Preston-Werner, co-fondateur de <a href="http://github.com/">GitHub</a>, et a été acquis et redimensionné par <a href="http://automattic.com/">Automattic</a> (plus connu comme les concepteurs de <a href="http://wordpress.com/">WordPress</a>).&nbsp;<a class="arrow" href="#fnref:7.19">&uarr;</a></li>
+<li id="fn:7.20">Dans l'hindouisme, un <em>avatar</em> est la manifestation d'une divinité dans une forme humaine ou animale. Par extension, le terme <em>avatar</em> est couramment utiliser pour signifier toute forme de représentation personnelle, spécialement dans un environnement virtuel. Mais vous avez dû voir le film maintenant, donc vous savez déjà ce que c'est.&nbsp;<a class="arrow" href="#fnref:7.20">&uarr;</a></li>
+<li id="fn:7.21">Si votre application a besoin de traiter les images ou tout autre téléchargement de fichier, <a href="http://github.com/thoughtbot/paperclip">Paperclip</a> est l'endroit où se rendre. Comme Factory Girl, Paperclip vous est offert par <a href="http://thoughtbot.com/">thoughtbot</a> (bien que je connaisse quelques personnes là-bas, je n'ai aucun intérêt particulier à promouvoir thoughtbot&nbsp;; ils font simplement de bons logiciels).&nbsp;<a class="arrow" href="#fnref:7.21">&uarr;</a></li>
+<li id="fn:7.22">Merci au lecteur anonyme qui a noté que le plugin Gravatar est sensible à la casse dans ce contexte.&nbsp;<a class="arrow" href="#fnref:7.22">&uarr;</a></li>
+<li id="fn:7.23">Il existe en fait un moyen de redéfinir la taille par défaut dans le fichier de configuration, mais j'ai trouvé ce moyen plus clair.&nbsp;<a class="arrow" href="#fnref:7.23">&uarr;</a></li>
+<li id="fn:7.24">Les gravatars sont carrés, donc un seule paramètre peut définir la taille.&nbsp;<a class="arrow" href="#fnref:7.24">&uarr;</a></li>
+<li id="fn:7.25">Si quelqu'un vous fait grieffe, horreur des horreurs, d'utiliser les <em>tables pour la mise en forme</em>, demandez-leur de pointer leur inspecteur firebug à la barre latérale de profil de Twitter et de vous dire ce qu'ils voient. En fait, vous trouverez que, tandis que le «&nbsp;marquage sémantique&nbsp;» utilisant des <code>div</code> et des <code>span</code> est de plus en  plus courant, virtuellement tous les sites font appel à l'occasion au <code>table</code>  pour faire de la mise en forme. Dans le cas présent, obtenir l'alignement vertical juste à droite est <em>beaucoup</em> plus facile avec les tables.&nbsp;<a class="arrow" href="#fnref:7.25">&uarr;</a></li>
+<li id="fn:7.26">D'ordinaire, je recommande de faire des dépôts plus fréquente, plus petits, mais de fréquents dépôt Git tout au long du tutoriel serait difficile à maintenir and casserait trop souvent le fil de la discussion.&nbsp;<a class="arrow" href="#fnref:7.26">&uarr;</a></li>
+<li id="fn:7.27">Si vous n'êtes <em>pas</em> sur la bonne branche, jouer <code>git checkout modeling-users</code> avant de procéder.&nbsp;<a class="arrow" href="#fnref:7.27">&uarr;</a></li>
 </ol>
 </div>
 

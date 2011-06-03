@@ -148,7 +148,7 @@
 <li><ol>
 <li class="subsection"><a href="filling-in-the-layout#sec:integration_tests"><span class="number">5.2.1</span> Test d'intégration</a></li>
 <li class="subsection"><a href="filling-in-the-layout#sec:rails_routes"><span class="number">5.2.2</span> Routes Rails</a></li>
-<li class="subsection"><a href="filling-in-the-layout#sec:named_routes"><span class="number">5.2.3</span> Nommer les routes</a></li></ol></li>
+<li class="subsection"><a href="filling-in-the-layout#sec:nomd_routes"><span class="number">5.2.3</span> Nommer les routes</a></li></ol></li>
 <li class="section"><a href="filling-in-the-layout#sec:user_signup"><span class="number">5.3</span> Inscription de l'utilisateur : une première étape</a></li>
 <li><ol>
 <li class="subsection"><a href="filling-in-the-layout#sec:users_controller"><span class="number">5.3.1</span> Contrôleur Utilisateur (Users controller)</a></li>
@@ -159,7 +159,7 @@
 <li><ol>
 <li class="section"><a href="modeling-and-viewing-users-one#sec:user_model"><span class="number">6.1</span> Modèle utilisateur (User model)</a></li>
 <li><ol>
-<li class="subsection"><a href="modeling-and-viewing-users-one#sec:database_migrations"><span class="number">6.1.1</span> Migrations de la base de données</a></li>
+<li class="subsection"><a href="modeling-and-viewing-users-one#sec:base de données_migrations"><span class="number">6.1.1</span> Migrations de la base de données</a></li>
 <li class="subsection"><a href="modeling-and-viewing-users-one#sec:the_model_file"><span class="number">6.1.2</span> Le fichier modèle</a></li>
 <li><ol>
 <li class="subsubsection"><a href="modeling-and-viewing-users-one#sec:model_annotation">[(Model annotation)]</a></li>
@@ -434,14 +434,14 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:7" href="modeling-and-viewing-users-two#top" class="heading"><span class="number">chapitre 7</span> Modeling and viewing users, part II</a></h1>
+<h1 class="chapter"><a id="sec:7" href="modeling-and-viewing-users-two#top" class="heading"><span class="number">chapitre 7</span> Modéliser et afficher les utilisateurs, partie II</a></h1>
 
 
-<p>In <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, we created the first iteration of a User model to represent users of our application, but the job is only half-done. Virtually any website with users, including ours, needs <em>authentication</em> as well, but currently any user signing up for the site would only have a name and email address, with no way to verify their identity. In this chapter, we&rsquo;ll add the <code>password</code> attribute needed for an initial user signup (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) and for signing in with an email/password combination (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). In the process, we&rsquo;ll re-use several of the ideas from <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, including migrations and validations, and also introduce some new ideas such as virtual attributes, private methods, and Active Record callbacks.</p>
+<p>Au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, nous avons créé la première itération d'un modèle User (<em>Utilisateur</em>) pour représenter les utilisateusr de notre application, mais le job a été à moitié accompli. Virtuellement n'importe quel site avec des utilisateurs, incluant nous-mêmes, a besoin d'un système d'<em>authentification</em>, mais pour le moment n'importe quel utilisateur qui peut s'inscricre au site possède un nom et une adresse mail, et nous n'avons aucun moyen de vérifier leur identité. Dans ce chapitre, nous allons ajouter l'attribut <em>mot de passe</em> (<em>password</em>) nécessaire à une inscription initiale de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et pour une identification (une connexion) avec une combinaison email/mot de passe (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). Au cours du processus, nous ré-utiliserons plusieurs des idées du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, incluant les migrations et les validations, et aussi introduire de nouvelle idées telles que les attributs virtuels, les méthodes privées et les <em>fonctions de rappel</em> (<em>callbacks</em>) d'Active Record.</p>
 
-<p>Once we have a working <code>password</code> attribute, we&rsquo;ll make a working action and view for showing user profiles (<a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>). By the end of the chapter, our user profiles will display names and profile photos (as indicated by the mockup in <a class="ref" href="modeling-and-viewing-users-two#fig:profile_mockup_profile_name">illustration&nbsp;7.1</a>), and they will be nicely tested with user <em>factories</em>.</p>
+<p>Une fois que nous avons un attribut <code>mot_de_passe</code> fonctionnel, nous ferons une action et une vue pour afficher les profils des utilisateurs (<a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>). Vers la fin de ce chapitre, nos profils d'utilisateur afficheront les noms et les photos du profil (comme indiqué dans la maquette de l'<a class="ref" href="modeling-and-viewing-users-two#fig:profile_mockup_profile_name">illustration&nbsp;7.1</a>), et [(they will be nicely tested with user <em>factories</em>)(ils seront bien testés avec l'utilisateur <em>factories</em>)].</p>
 
-<p>Before moving on, let&rsquo;s reset the database with <code>rake db:reset</code>, which will clear out any old sample users from previous sessions:</p>
+<p>Avant d'avancer, ré-initialisons la base de données avec <code>rake db:reset</code>, ce qui va retirer tous les vieux exemples d'utilisateurs des sessions précédentes&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rake db:reset</span>
 </pre></div>
@@ -453,7 +453,7 @@
 <div class="label" id="fig:profile_mockup_profile_name"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_mockup_profile_name.png" alt="profile_mockup_profile_name" /></span></div><div class="caption"><span class="header">Illustration 7.1: </span><span class="description">A mockup of the user profile made in <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.&nbsp;<a href="http://railstutorial.org/images/figures/profile_mockup_profile_name-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_mockup_profile_name.png" alt="profile_mockup_profile_name" /></span></div><div class="caption"><span class="header">Illustration 7.1: </span><span class="description">Une maquette du profil utilisateur fait à la <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.&nbsp;<a href="http://railstutorial.org/images/figures/profile_mockup_profile_name-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -461,26 +461,26 @@
 <div class="label" id="sec:insecure_passwords"></div>
 
 
-<h2><a id="sec:7.1" href="modeling-and-viewing-users-two#sec:insecure_passwords" class="heading"><span class="number">7.1</span> Insecure passwords</a></h2>
+<h2><a id="sec:7.1" href="modeling-and-viewing-users-two#sec:insecure_passwords" class="heading"><span class="number">7.1</span> Mots de passe peu sécurisés</a></h2>
 
 
-<p>Making industrial-strength passwords requires a lot of machinery, so we&rsquo;ll break the process into two main steps. In this section, we&rsquo;ll make a <code>password</code> attribute and add validations. The resulting User model will be functionally complete but badly insecure, with the passwords stored as plain text in the database. In <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, we&rsquo;ll fix this problem by encrypting the passwords before saving them, thereby protecting our site against potential attackers.</p>
+<p>Faire des mots de passe robustes requiert beaucoup de machinerie, donc nous allons diviser le processus en deux principales étapes. Dans cette section, nous allons faire un attribut <code>mot_de_passe</code> et ajouter des validations. Le modèle User (<em>Utilisateur</em>) en résultant sera complètement fonctionnel mais pas du tout sécurisé, avec des mots de passe enregistrés tels quels dans la base de données. À la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, nous règlerons ce problème en cryptant les mots de passe avant de les sauver, ainsi protégeant notre site contre les possibles attaques.</p>
 
 <div class="label" id="sec:password_validations"></div>
 
 
-<h3><a id="sec:7.1.1" href="modeling-and-viewing-users-two#sec:password_validations" class="heading"><span class="number">7.1.1</span> Password validations</a></h3>
+<h3><a id="sec:7.1.1" href="modeling-and-viewing-users-two#sec:password_validations" class="heading"><span class="number">7.1.1</span> Validations du mot de passe</a></h3>
 
 
-<p>Even though we have yet even to add a column for passwords to our database, we&rsquo;re already going to start writing tests for them. Our initial plan is to have tests to validate the presence, length, and confirmation of passwords.
-This is our biggest single block of tests so far, so see if you can read it all in one go. If you get stuck, it might help to review the analogous validations from <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">section&nbsp;6.2</a> or skip ahead to the application code in <a class="ref" href="modeling-and-viewing-users-two#code:password_validations">extrait&nbsp;7.2</a>.</p>
+<p>Quand bien même nous aurions déjà ajouté une colonne pour les mots de passe à notre base de données, nous allons déjà commencer par écrire leurs tests. Notre projet initial est d'avoir des tests pour valider la présence, la longueur et la confirmation des mots de passe.
+	C'est notre plus gros bloc de tests jusqu'ici, voyez si vous pouvez le lire tout d'un tenant. Si vous restez coincé, ça vous aidera sans doute de revoir les validations analogues de la <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">section&nbsp;6.2</a> ou sauter directement au code de l'application de l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">extrait&nbsp;7.2</a>.</p>
 
-<p>In order to minimize typos in passwords, when making a user signup page in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a> we&rsquo;ll adopt the common convention of requiring that users <em>confirm</em> their passwords. To get started, let&rsquo;s review the user attributes hash last seen in <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>:</p>
+<p>Dans le but de minimiser les typos dans les mots de passe, quand on fera la page d'inscription de l'utilisateur au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a> nous adopterons la convention courante que les utilisateurs <em>confirment</em> leur mot de passe. Pour commencer, revoyons la table d'attributs vue dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
   <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-    <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
+    <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
   <span class="k">end</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -490,15 +490,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>To write tests for passwords, we&rsquo;ll need to add <em>two</em> new attributes to the <code>@attr</code> hash, <code>password</code> and <code>password_confirmation</code>.  As you can probably guess, the <code>password_confirmation</code> attribute will be used for the password confirmation step.</p>
+<p>Pour écrire des tests pour les mots de passe, nous aurons besoin d'ajouter <em>deux</em> nouveaux attributs à la table <code>@attr</code>, <code>password</code> (<em>mot de passe</em>) et <code>password_confirmation</code> (<em>motdepasse_confirmation</em>). Comme vous pouvez certainement le deviner, l'attribut <code>password_confirmation</code> sera utilisé pour l'étape de confirmation du mot de passe.</p>
 
-<p>Let&rsquo;s write tests for the presence of the password and its confirmation, together with tests confirming that the password is a valid length (restricted somewhat arbitrarily to be between 6 and 40 characters long). The results appear in <a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a>.</p>
+<p>Écrivons des tests pour la présence du mot de passe et sa confirmation, avec des tests confirmant que le mot de passe a une longueur valide (réduite à quelque chose arbitrairement fixée entre 6 et 40 caractères). Le résultat apparait dans l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a>.</p>
 
 <div class="label" id="code:password_validation_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.1.</span> <span class="description">Tests for password validations. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.1.</span> <span class="description">Des tests pour les validations du mot de passe. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -506,14 +506,14 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
   <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
     <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span>
+      <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span><span class="p">,</span>
       <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
       <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span>
       <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
     <span class="p">}</span>
   <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">&quot;should create a new instance given valid attributes&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance avec des attributs valides&quot;</span> <span class="k">do</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -521,23 +521,23 @@ This is our biggest single block of tests so far, so see if you can read it all 
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;password validations&quot;</span> <span class="k">do</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should require a password&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait exiger un mot de passe&quot;</span> <span class="k">do</span>
       <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">))</span><span class="o">.</span>
         <span class="n">should_not</span> <span class="n">be_valid</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should require a matching password confirmation&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait exiger une confirmation du mot de passe qui correspond&quot;</span> <span class="k">do</span>
       <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;invalid&quot;</span><span class="p">))</span><span class="o">.</span>
         <span class="n">should_not</span> <span class="n">be_valid</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should reject short passwords&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait rejeter les mots de passe (trop) courts&quot;</span> <span class="k">do</span>
       <span class="n">short</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">5</span>
       <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">short</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="n">short</span><span class="p">)</span>
       <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should reject long passwords&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait rejeter les (trop) longs mots de passe&quot;</span> <span class="k">do</span>
       <span class="n">long</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">41</span>
       <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">long</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="n">long</span><span class="p">)</span>
       <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
@@ -548,43 +548,43 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>Note in <a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a> how we first collect a set of valid user attributes in <code>@attr</code>. If for some reason those attributes aren&rsquo;t valid&mdash;as would be the case, for example, if we didn&rsquo;t implement password confirmations properly&mdash;then the first test</p>
+<p>Notez sans l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a> comme nous collectons d'abord un set d'attributs utilisateur valides dans <code>@attr</code>. Si pour quelques raisons que ce soit ces attributs ne sont pas valides &mdash;&nbsp;comme ce devrait être le cas, par exemple, si nous n'avons pas implémenté les confirmations proprement&nbsp;&mdash; alors la première étape&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre>  <span class="n">it</span> <span class="s2">&quot;should create a new instance given valid attributes&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre>  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance avec des attributs valides&quot;</span> <span class="k">do</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
   <span class="k">end</span>
 </pre></div>
 </div>
 
 
-<p>would catch the error. The subsequent tests then check each validation in turn, using the same <code>@attr.merge</code> technique first introduced in <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>.</p>
+<p>… rencontrera une erreur. Les tests suivants vérifiera alors chaque validation à son tour, en utilisant la même technique <code>@attr.merge</code> introduite la première fois dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>.</p>
 
-<p>Now for the application code, which contains a trick. Actually, it contains <em>two</em> tricks. First, you might expect at this point that we would run a migration to add a <code>password</code> attribute to the User model, as we did with the <code>name</code> and <code>email</code> attributes in <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>. But this is not the case: we will store only an <em>encrypted</em> password in the database; for the password, we will introduce a <em>virtual attribute</em> (that is, an attribute not corresponding to a column in the database) using the <code>attr_accessor</code> method, much as we did with the original <code>name</code> and <code>email</code> attributes for the example user in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>. The <code>password</code> attribute will not ever be written to the database, but will exist only in memory for use in performing the password confirmation step (implemented below) and the encryption step (implemented in <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a> and <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>).</p>
+<p>Maintenant voyons le code de l'application, qui contient une astuce. En fait, elle contient <em>deux</em> astuces. D'abord, vous pouvez vous attendre, à ce point, à ce qu'on joue une migration pour ajouter un attribut <code>password</code> à notre modèle User, comme nous l'avions fait pour les attributs <code>nom</code> et <code>email</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>. Mais ce n'est pas le cas&nbsp;: nous n'allons enregistrer qu'un mot de passe <em>crypté</em> dans la base de données&nbsp;; pour le mot de passe, nous allons introduire la notion d'<em>attribut virtuel</em> (c'est-à-dire un attribut qui ne correspond pas à une colonne de la base de données) en utilisant la méthode <code>attr_accessor</code>, bien plus que nous ne l'avions fait avec les attributs originel <code>nom</code> et <code>email</code> pour l'exemple d'utilisateur à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>. L'attribut <code>password</code> ne sera jamais écrit dans la base de données, mais n'existera seulement qu'en mémoire pour permettre l'étape de confirmation du mot de passe (implémentée ci-dessous) et l'étape de cryptage (implémentée à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a> et <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>).</p>
 
-<p>The second trick is that we will <em>not</em> introduce a <code>password_confirmation</code> attribute, not even a virtual one. Instead, we will use the special validation</p>
+<p>La seconde astuce est que nous n'allons <em>pas</em> introduire un attribut  <code>password_confirmation</code>, pas même un virtuel. À la place, nous utiliserons la validation spéciale&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:confirmation</span> <span class="o">=&gt;</span> <span class="kp">true</span>
 </pre></div>
 </div>
 
 
-<p>which will <em>automatically</em> create a virtual attribute called <code>password_confirmation</code>, while confirming that it matches the <code>password</code> attribute at the same time.</p>
+<p>… qui va <em>automatiquement</em> créer un attribut virtuel appelé <code>password_confirmation</code>, tout en confirmant dans le même temps qu'il correspond exactement à l'attribut <code>password</code>.</p>
 
-<p>Thus prepared to understand the implementation, let&rsquo;s take a look at the code itself (<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">extrait&nbsp;7.2</a>).</p>
+<p>Ainsi préparé à comprendre l'implémentation, jetons un coup d'œil au code lui-même (<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">extrait&nbsp;7.2</a>).</p>
 
 <div class="label" id="code:password_validations"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.2.</span> <span class="description">Validations for the <code>password</code> attribute. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.2.</span> <span class="description">Valdiation pour l'attribut <code>password</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">attr_accessor</span> <span class="ss">:password</span>
-  <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
+  <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="c1"># Automatically create the virtual attribute &#39;password_confirmation&#39;.</span>
+  <span class="c1"># Crée automatique l'attribut virtuel &#39;password_confirmation&#39;.</span>
   <span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:presence</span>     <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
                        <span class="ss">:confirmation</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
                        <span class="ss">:length</span>       <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:within</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="o">.</span><span class="n">.</span><span class="mi">40</span> <span class="p">}</span>
@@ -593,32 +593,32 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>As promised, we use <code>attr_accessor :password</code> to create a virtual <code>password</code> attribute (as in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>). Then, since we&rsquo;ll be accepting passwords and password confirmations as part of the signup process in <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, we need to add the password and its confirmation to the list of accessible attributes (first mentioned in <a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), which we&rsquo;ve done in the line</p>
+<p>Comme promis, nous utilisons <code>attr_accessor :password</code> pour créer un attribut <code>password</code> virtuel (comme à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>). Puis, puisque nous allons accepter les mots de passe et leur confirmation comme part du processus d'inscription au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, nous avons besoin d'ajouter le mot de passe et sa confirmation à la liste des attributs accessibles (mentionnée la première fois à la <a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), ce que nous faisons à la ligne&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
+<div class="code"><div class="highlight"><pre><span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
 </pre></div>
 </div>
 
 
-<p>Next come the password validations. They require the presence of a <code>:password</code> (as in, e.g., <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">extrait&nbsp;6.7</a>) and include <code>:confirmation =&gt; true</code> to reject users whose password and password confirmations don&rsquo;t match. We also have a second application of length validation; in <a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a> we constrained the <code>name</code> attribute to be 50 characters or less using the <code>:maximum</code> option:</p>
+<p>Ensuite vient les validation du mot de passe. Elle requièrent la présent d'un <code>:password</code> (commme, par exemplen dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">extrait&nbsp;6.7</a>) et incluent <code>:confirmation =&gt; true</code> qui rejettent les utilisateurs dont le mot de passe et sa confirmation ne correspondent pas. Nous avons aussi une deuxième application de la validation de la longueur&nbsp;; dans l'<a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a> nous contraignions l'attribut <code>nom</code> à avoir moins de 50 caractères en utilisant l'option <code>:maximum</code>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+<div class="code"><div class="highlight"><pre><span class="n">validates</span> <span class="ss">:nom</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
                   <span class="ss">:length</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:maximum</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">}</span>
 </pre></div>
 </div>
 
 
-<p>For the password length validation, instead we&rsquo;ve used the <code>:within</code> option, passing it the <em>range</em><sup class="footnote" id="fnref:7.1"><a href="#fn:7.1">1</a></sup> <code>6..40</code> to enforce the desired length constraints.</p>
+<p>Pour la validation de la longueur du mot de passe, nous avons plutôt utilisé l'option <code>:within</code>, en lui passant le <em>rang</em><sup class="footnote" id="fnref:7.1"><a href="#fn:7.1">1</a></sup> <code>6..40</code> pour forcer la contrainte de longueur.</p>
 
 <div class="label" id="sec:password_migration"></div>
 
 
-<h3><a id="sec:7.1.2" href="modeling-and-viewing-users-two#sec:password_migration" class="heading"><span class="number">7.1.2</span> A password migration</a></h3>
+<h3><a id="sec:7.1.2" href="modeling-and-viewing-users-two#sec:password_migration" class="heading"><span class="number">7.1.2</span> La migration du mot de passe</a></h3>
 
 
-<p>At this point, you may be concerned that we&rsquo;re not storing user passwords anywhere; since we&rsquo;ve elected to use a virtual password, rather than storing it in the database, it exists only in memory. How can we use this password for authentication? The solution is to create a separate attribute dedicated to password storage, and our strategy will be to use the virtual password as raw material for an <em>encrypted password</em>, which we <em>will</em> store in the database upon user signup (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) and retrieve later for use in user authentication (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
+<p>À ce point, nous devons considérer que nous n'enregistrons le mot de passe de l'utilisateur nulle part&nbsp;; puisque nous avons décidé d'utiliser un mot de passe virtuel, plutôt que de l'enregistrer dans la base de données, il n'existe qu'en mémoire. Comment pouvons-nous utiliser ce mot de passe pour l'identification&nbsp;? La solution consiste à créer un attribut séparé dédié à la consignation du mot de passe, et notre stratégie consistera à utiliser un mot de passe virtuel comme matériel brut pour un <em>mot de passe crytpé</em>, que nous <em>enregistrerons</em> dans la base de données à l'inscription de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et que nous récupèrerons plus tard pour l'identification de l'utilisateur (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
 
-<p>Let&rsquo;s plan to store the encrypted password using an <code>encrypted_password</code> attribute in our User model. We&rsquo;ll discuss the implementation details in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, but we can get started with our encrypted password tests by noting that the encrypted password should at the least <em>exist</em>. We can test this using the Ruby method <code>respond_to?</code>, which accepts a symbol and returns <code>true</code> if the object responds to the given method or attribute and <code>false</code> otherwise:</p>
+<p>Planifions l'enregistrement du mot de passe crytpé en utilisant un attribut <code>encrypted_password</code> dans notre modèle User (<em>Utilisateur</em>). Nous discuterons des détails de l'implémentation à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, mais nous pouvons commencer avec nos tests du mot de passe crytpé en notant que le mot de passe crytpé devrait au moins <em>exister</em>. Nous pouvons tester cela en utilisant la méthode Ruby <code>respond_to?</code> (<em>répond_à&nbsp;?</em> ), qui accepte un symbole et retourne <code>true</code> (<em>vrai</em>) si l'objet répond à la méthode ou l'attribut donné et <code>false</code> (<em>faux</em>) dans le cas contraire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
@@ -630,13 +630,13 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>We can test the existence of an <code>encrypted_password</code> attribute with the code in <a class="ref" href="modeling-and-viewing-users-two#code:respond_to_encrypted_password">extrait&nbsp;7.3</a>, which uses RSpec&rsquo;s <code>respond_to</code> helper method.</p>
+<p>Nous pouvons tester l'existence d'un attribut <code>encrypted_password</code> avec le code de l'<a class="ref" href="modeling-and-viewing-users-two#code:respond_to_encrypted_password">extrait&nbsp;7.3</a>, qui utilise l'<em>helper</em> de méthode RSpec <code>respond_to</code>.</p>
 
 <div class="label" id="code:respond_to_encrypted_password"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.3.</span> <span class="description">Testing for the existence of an <code>encrypted_password</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.3.</span> <span class="description">Tester l'existence d'un attribut <code>encrypted_password</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -648,7 +648,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have an encrypted password attribute&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un attribut  mot de passe crytpé&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:encrypted_password</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -657,22 +657,22 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>Note that in the <code>before(:each)</code> block we <em>create</em> a user, rather than just calling <code>User.new</code>. We could actually get this test to pass using <code>User.new</code>, but (as we&rsquo;ll see momentarily) <em>setting</em> the encrypted password will require that the user be saved to the database. Using <code>create!</code> in this first case does no harm, and putting it in <code>before(:each)</code> will allow us to keep all the encrypted password tests in one <code>describe</code> block.</p>
+<p>Notez que dans le bloc <code>before(:each)</code> nous <em>créons</em> un utilisateur, plutôt que d'appeler juste la méthode <code>User.new</code>. Nous pourrions en fait faire réussir ce test en utilisant <code>User.new</code>, mais (comme nous le verrons dans un instant) <em>définir</em> le mot de passe crytpé exigera que l'utilisateur soit enregistré dans la base de données. En utilisant <code>create!</code> dans ce premier cas ne crée pas de dommage, et le placer dans <code>before(:each)</code> nous permettra de garder tous les tests du mot de passe crytpé dans un seul bloc <code>describe</code>.</p>
 
-<p>To get this test to pass, we&rsquo;ll need a migration to add the <code>encrypted_password</code> attribute to the <code>users</code> table:</p>
+<p>Pour obtenir la réussite de ce test, nous aurons besoin d'une migration pour ajouter l'attribut <code>encrypted_password</code> à la table <code>users</code> (<em>utilisateurs</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate migration add_password_to_users encrypted_password:string
 </pre></div>
 </div>
 
 
-<p>Here the first argument is the migration name, and we&rsquo;ve also supplied a second argument with the name and type of attribute we want to create. (Compare this to the original generation of the <code>users</code> table in <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>.) We can choose any migration name we want, but it&rsquo;s convenient to end the name with <code>_to_users</code>, since in this case Rails can automatically construct a migration to add columns to the <code>users</code> table. Moreover, by including the second argument, we&rsquo;ve given Rails enough information to construct the entire migration for us, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:password_migration">extrait&nbsp;7.4</a>.</p>
+<p>Ici le premier argument est le nom de la migration, et nous avons aussi fourni un second argument avec le nom et le type d'attribut que nous voulons créer (comparez cela avec la génération originale de la table <code>users</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>). Nous pouvons choisir le nom de migration que nous voulons, mais il est pratique de terminer le nom par <code>_to_users</code> (<em>pour_users</em>) pour que dans ce cas Rails puisse automatiquement construire une migration qui ajoute les colonnes à la table <code>users</code>. Plus encore, en incluant le second argument, nous donnons assez d'information à Rails pour construire entièrement la migration pour nous, comme le montre l'<a class="ref" href="modeling-and-viewing-users-two#code:password_migration">extrait&nbsp;7.4</a>.</p>
 
 <div class="label" id="code:password_migration"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.4.</span> <span class="description">The migration to add an <code>encrypted_password</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.4.</span> <span class="description">La migration pour ajouter la colonne <code>encrypted_password</code> à la table <code>users</code>. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddPasswordToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -687,15 +687,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>This code uses the <code>add_column</code> method to add an <code>encrypted_password</code> column to the <code>users</code> table (and the complementary <code>remove_column</code> method to remove it when migrating down). The result is the data model shown in <a class="ref" href="modeling-and-viewing-users-two#fig:user_model_password">illustration&nbsp;7.2</a>.</p>
+<p>Ce code utilise la méthode <code>add_column</code> (<em>ajouter_colonne</em>) pour ajouter la colonne <code>encrypted_password</code> à la table <code>users</code> (et la méthode complémentaire <code>remove_column</code> pour la supprimer quand nous migrons la base en arrière). Le résultat est le modèle de données montré dans l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_model_password">illustration&nbsp;7.2</a>.</p>
 
 <div class="label" id="fig:user_model_password"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_password.png" alt="user_model_password" /></span></div><div class="caption"><span class="header">Illustration 7.2: </span><span class="description">The User model with an added (encrypted) password attribute.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_password.png" alt="user_model_password" /></span></div><div class="caption"><span class="header">Illustration 7.2: </span><span class="description">Le modèle User avec un attribut mot de passe (crypté) ajouté.</span></div></div>
 
 
-<p>Now if we run the migration and prepare the test database, the test should pass, since the User model will respond to the <code>encrypted_password</code> attribute. (Be sure to close any Rails consoles started in a sandbox; the sandbox locks the database and prevents the migration from going through.)</p>
+<p>Si nous jouons maintenant la migration et préparons le test de la base de données, le test devrait réussir, puisque le modèle User model répondra à l'attribut <code>encrypted_password</code> (assuez-vous de fermer toutes les console Rails lancées dans le «&nbsp;bac à sable&nbsp;» (<em>sandbox</em>)&nbsp;; la <em>sandbox</em> verrouille la base de données et interdit les migrations).</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="gp">$</span> rake db:test:prepare
@@ -703,10 +703,10 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>Of course, we can run the full test suite with <code>rspec spec/</code>, but sometimes it&rsquo;s convenient to run just <em>one</em> RSpec example, which we can do with the <code>-e</code> (&ldquo;example&rdquo;) flag:</p>
+<p>Bien sûr, nous pouvons jouer toute la suite de test avec <code>rspec spec/</code>, mais il est pratique parfois de jouer juste <em>une</em> RSpec, ce que nous pouvons faire avec le drapeau <code>-e</code> (&ldquo;exemple&rdquo;)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb <span class="se">\</span>
-<span class="gp">&gt;</span> -e <span class="s2">&quot;should have an encrypted password attribute&quot;</span>
+<span class="gp">&gt;</span> -e <span class="s2">&quot;devrait avoir un attribut mot de passe crytpé&quot;</span>
 <span class="go">.</span>
 
 <span class="go">1 example, 0 failures</span>
@@ -720,15 +720,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 <h3><a id="sec:7.1.3" href="modeling-and-viewing-users-two#sec:an_active_record_callback" class="heading"><span class="number">7.1.3</span> Un <em>callback</em> de l'Active Record</a></h3>
 
 
-<p>Now that our User model has an attribute for storing the password, we need to arrange to generate and save the encrypted password when Active Record saves the user to the database. We&rsquo;ll do this with a technique called a <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a>, which is a method that gets invoked at a particular point in the lifetime of an Active Record object. In the present case, we&rsquo;ll use a <code>before_save</code> callback to create <code>encrypted_password</code> just before the user is saved.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>
+<p>Maintenant que notre modèle User possède un attribut pour consigner le mot de passe, nous devons nous arranger pour générer et sauver le mot de passe crytpé quand Active Record enregistre l'utilisateur dans la base de données. Nous allons faire ça en utilisant une technique appelée un <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a> (<em>fonction de rappel</em>), qui est méthode qui est invoquée à un point particulier de la vie de l'objet Active Record. Dans le cas présent, nous utiliserons le callback <code>before_save</code> pour créer <code>encrypted_password</code> juste avant que l'utilisateur ne soit enregistré.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>
 
-<p>We start with a test for the encrypted password attribute. Since we&rsquo;re deferring the implementation details&mdash;and, in particular, the method of encryption&mdash;to <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, in this section we&rsquo;ll just make sure that a saved user&rsquo;s <code>encrypted_password</code> attribute is not blank. We do this by combining the <code>blank?</code> method on strings (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>) with the RSpec convention for boolean methods (first seen in the context of <code>valid?</code>/<code>be_valid</code> in <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>), yielding the test in <a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">extrait&nbsp;7.5</a>.</p>
+<p>Nous commençons avec un test pour l'attribut mot de passe crytpé. Puisque nous avons différé les détails de l'implémentation &mdash;&nbsp;et, en particulier, la méthode de cryptage&nbsp;&mdash; à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, dans cette section nous allons seulement nous assurer que l'attribut <code>encrypted_password</code> d'un utilisateur enregistré n'est pas vierge. Nous faisons cela en combinant la méthode <code>blank?</code> sur les chaines de caractères (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>) avec la convention RSpec pour les méthodes booléennes (vue pour la première fois dans le contexte des méthodes <code>valid?</code>/<code>be_valid</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>), rendant le test de l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">extrait&nbsp;7.5</a>.</p>
 
 <div class="label" id="code:encrypted_password_not_empty_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.5.</span> <span class="description">Testing that the <code>encrypted_password</code> attribute is nonempty. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.5.</span> <span class="description">Tester que l'attribut <code>encrypted_password</code> n'est pas vide. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -742,7 +742,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;should set the encrypted password&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait définir le mot de passe crypté&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">encrypted_password</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_blank</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -751,15 +751,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>This code verifies that <code>encrypted_password.blank?</code> is not true using the construction <code>should_not be_blank</code>.</p>
+<p>Ce code vérifie que <code>encrypted_password.blank?</code> n'est pas vrai (<em>true</em>) en utilisant la construction <code>should_not be_blank</code>.</p>
 
-<p>To get this test to pass, we <em>register</em> a callback called <code>encrypt_password</code> by passing a symbol of that name to the <code>before_save</code> method, and then define an <code>encrypt_password</code> method to perform the encryption. With the <code>before_save</code> in place, Active Record will automatically call the corresponding method before saving the record. The result appears in <a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a>.</p>
+<p>Pour faire réussir ce test, nous <em>déclarons</em> un callback appelé <code>encrypt_password</code> en passant un symbole de ce nom à la méthode <code>before_save</code>, et définissons ensuite une méthode <code>encrypt_password</code> pour procéder au cryptage. Avec <code>before_save</code> en place, Active Record appellera automatiquement la méthode correspondante avant d'enregistrer la donnée. Le résultat est présenté dans l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a>.</p>
 
 <div class="label" id="code:encrypt_password_callback"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.6.</span> <span class="description">A <code>before_save</code> callback to create the <code>encrypted_password</code> attribute. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.6.</span> <span class="description">Un callback <code>before_save</code> pour créer l'attribut <code>encrypted_password</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -778,29 +778,31 @@ This is our biggest single block of tests so far, so see if you can read it all 
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-      <span class="n">string</span> <span class="c1"># Only a temporary implementation!</span>
+      <span class="n">string</span> <span class="c1"># Implémentation provisoire&nbsp;!</span>
     <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>Here the <code>encrypt_password</code> callback delegates the actual encryption to an <code>encrypt</code> method; as noted in the comment, this is only a temporary implementation&mdash;as currently constructed, <a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a> simply sets the encrypted to the <em>unencrypted</em> password, which kind of defeats the purpose. But it&rsquo;s enough to get our test to pass, and we&rsquo;ll make the <code>encrypt</code> method do some actual encryption in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>.</p>
+<p>Ici le callback <code>encrypt_password</code> délègue en fait le cryptage à une méthode <code>encrypt</code>&nbsp;; comme signalé dans le commentaire, c'est seulement une implémentation provisoire &mdash;&nbsp;construit ainsi, l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a> met simplement le mot de passe crypté à la valeur du mot de passe non crypté, ce qui n'est pas notre but. Mais ça suffit pour faire réussir notre test, et nous ferons que la méthode <code>encrypt</code> procède réellement au cryptage à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>.</p>
 
-<p>Before trying to understand the implementation, first note that the encryption methods appear after the <code>private</code> keyword; inside a Ruby class, all methods defined <em>after</em> <code>private</code> are used internally by the object and are not intended for public use.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> For an example, we can look at a User object in the console:</p>
+<p>Avant d'essayer de comprendre l'implémentation, notez d'abord que les méthodes de cryptage sont placées après le mot-clé <code>private</code>&nbsp;; à l'intérieur d'une classe Ruby, toutes les méthodes définies <em>après</em> le mot-clé <code>private</code> (<em>privé</em>) sont utilisées de façon <em>interne</em> par l'objet et ne sont pas destinées à l'utilisage <em>publique</em>.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> À titre d'exemple, nous pouvons regarder l'objet User dans la méthode&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">encrypt_password</span>
 <span class="go">NoMethodError: Attempt to call private method</span>
+<span class="c1">(Traduction&nbsp;:</span>
+<span class="c1">ErreurPasDeMethode&nbsp;: Tentative d'appel d'une méthode privée)</span>
 </pre></div>
 </div>
 
 
-<p>Here Ruby raises a <code>NoMethodError</code> exception and issues a warning that the <code>encrypt_password</code> method is private.</p>
+<p>Ici Ruby provoque une exception (erreur) <code>NoMethodError</code> en signalant par une alerte que la méthode <code>encrypt_password</code> est privée.</p>
 
-<p>In the present context, making the <code>encrypt_password</code> and <code>encrypt</code> methods private isn&rsquo;t strictly necessary, but it&rsquo;s a good practice to make them private unless they are needed for the public interface.<sup class="footnote" id="fnref:7.4"><a href="#fn:7.4">4</a></sup></p>
+<p>Dans le contexte présent, rendre les méthodes <code>encrypt_password</code> et <code>encrypt</code> privées n'est pas strictement nécessaire, mais c'est une bonne pratique de les rendre privées sauf si elles sont nécessaire pour l'interface publique.<sup class="footnote" id="fnref:7.4"><a href="#fn:7.4">4</a></sup></p>
 
-<p>Now that we understand the <code>private</code> keyword, let&rsquo;s take another look at the <code>encrypt_password</code> method:</p>
+<p>Maintenant que nous comprenons le mot-clé <code>private</code>, jettons un autre regard à la méthode <code>encrypt_password</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span>
   <span class="nb">self</span><span class="o">.</span><span class="n">encrypted_password</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
@@ -809,7 +811,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>This is a one-line method (the best kind!), but it contains not one but <em>two</em> subtleties. First, the left-hand side of the statement explicitly assigns the <code>encrypted_password</code> attribute using the <code>self</code> keyword. (Recall from <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a> that inside the class <code>self</code> refers to the object itself, which for the User model is just the user.) The use of <code>self</code> is <em>required</em> in this context; if we omitted <code>self</code> and wrote</p>
+<p>C'est une méthode en une ligne (le meilleur genre&nbsp;!), mais elle contient pas seulement une mais <em>deux</em> subtilités. <em>Primo</em> , le côté gauche de la déclaration assigne explicitement l'attribut <code>encrypted_password</code> en utilisant le mot-clé <code>self</code> (<em>soi-même</em>) (de la <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a> vous vous souvenez que la classe <code>self</code> se réfère à l'objet lui-même, ce qui pour le modèle User est simplement l'utilisateur). L'utilisation de <code>self</code> est <em>obligatoire</em> dans ce contexte&nbsp;; si nous ommettons <code>self</code> et que nous écrivons&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span>
   <span class="n">encrypted_password</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
@@ -818,9 +820,9 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>Ruby would create a <em>local variable</em> called <code>encrypted_password</code>, which isn&rsquo;t what we want at all.</p>
+<p>Ruby créera une <em>variable locale</em> appelée <code>encrypted_password</code>, ce qui n'est pas du tout ce que nous voulons.</p>
 
-<p>Second, the right-hand side of the assignment calls <code>encrypt</code> on <code>password</code>, but there is no <code>password</code> in sight. In the console, we would access the password attribute through a user object</p>
+<p><em>Secondo</em>, le côté droit de la déclaration appelle <code>encrypt</code> (<em>crypte</em>) sur <code>password</code> (<em>mot de passe</em>), mais il n'y a pas de <code>password</code> en vue. Dans la console, nous devrions accéder à l'attribut mot de passe (<em>password</em>) au travers d'un objet utilisateur&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">password</span>
@@ -829,7 +831,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>Inside the User class, the user object is just <code>self</code>, and we could write</p>
+<p>À l'intérieur de la classe User, l'objet utilisateur est juste <code>self</code>, et nous pourrions écrire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span>
   <span class="nb">self</span><span class="o">.</span><span class="n">encrypted_password</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
@@ -838,7 +840,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>in analogy with the console example, just replacing <code>user</code> with <code>self</code>. But the <code>self</code> is optional, so for brevity we can write simply</p>
+<p>… en analogie avec l'exemple en console, remplacez simplement  <code>user</code> par <code>self</code>. Mais le <code>self</code> est optionnel, donc pour la brièveté nous pouvons écrire simplement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span>
   <span class="nb">self</span><span class="o">.</span><span class="n">encrypted_password</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
@@ -847,31 +849,31 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>as in <a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a> above. (Of course, as we&rsquo;ve noted, the <code>self</code> is <em>not</em> optional when assigning to an attribute, so we have to write <code>self.encrypted_password</code> in this case.)</p>
+<p>… comme dans l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a> ci-dessus (bien sûr, comme nous l'avons noté, le <code>self</code> n'est <em>pas</em> optionnel [(when assigning to an attribute)(quand nous assignons un attribut)], donc nous devons écrire <code>self.encrypted_password</code> dans ce cas).</p>
 
 <div class="label" id="sec:secure_passwords"></div>
 
 
-<h2><a id="sec:7.2" href="modeling-and-viewing-users-two#sec:secure_passwords" class="heading"><span class="number">7.2</span> Secure passwords</a></h2>
+<h2><a id="sec:7.2" href="modeling-and-viewing-users-two#sec:secure_passwords" class="heading"><span class="number">7.2</span> Mots de passe sécurisés</a></h2>
 
 
-<p>With the code from <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a>, in principle we are done: although the &ldquo;encrypted&rdquo; password is the same as the unencrypted password, as long as we are willing to store unencrypted passwords in the database we have the necessary foundation for user login and authentication.<sup class="footnote" id="fnref:7.5"><a href="#fn:7.5">5</a></sup> Our standards in <em>Rails Tutorial</em> are much loftier, though: any web developer worth his salt should know how to implement a password system with <em>secure one-way hashing</em>. In this section, we will build on the material from <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a> to implement just such an industrial-strength password system.</p>
+<p>Avec le code de la <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a>, en principe nous avons fait&nbsp;: bien que le mot de passe «&nbsp;crypté&nbsp;» soit le même que le mot de passe non crypté, tant que nous voulons enregistrer un mot de passe crypté dans la base de données nous avons les fondations nécessaire pour l'identification et l'authentification de l'utilisateur.<sup class="footnote" id="fnref:7.5"><a href="#fn:7.5">5</a></sup> Notre standard dans ce <em>Tutoriel Rails</em> est moins strict, cependant&nbsp;: tout développeur web digne de ce nom devrait savoir implémenter un système de mot de passe avec un <em>hachage sécurisé à sens unique</em> (<em>secure one-way hashing</em>). Dans cette section, nous construirons le matériel puisé de la <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a> pour implémenter un tel système de mot de passe robuste.</p>
 
 <div class="label" id="sec:a_secure_password_test"></div>
 
 
-<h3><a id="sec:7.2.1" href="modeling-and-viewing-users-two#sec:a_secure_password_test" class="heading"><span class="number">7.2.1</span> A secure password test</a></h3>
+<h3><a id="sec:7.2.1" href="modeling-and-viewing-users-two#sec:a_secure_password_test" class="heading"><span class="number">7.2.1</span> Un test de mot de passe sécurisé</a></h3>
 
 
-<p>As hinted at in <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">section&nbsp;7.1.3</a>, all of the machinery for password encryption will be tucked away in the <code>private</code> regions of the User model, which presents a challenge for testing it. What we need is some sort of <em>public interface</em> that we can expose to the rest of the application. One useful aspect of test-driven development is that, by acting as a client for our application code, the tests motivate us to design a useful interface right from the start.</p>
+<p>Comme mentionné à la <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">section&nbsp;7.1.3</a>, toute la machinerie pour le cryptage du mot de passe sera soigneusement rangé dans la région <code>private</code> du modèle User, ce qui représente un défi pour le tester. Ce dont nous avons besoin est une espèce d'<em>interface publique</em> que nous pourrions exposer au reste de l'application. Un des aspects utile du «&nbsp;développement conduit par le test&nbsp;» est que, en agissant comme un client pour le code de notre application, les tests nous motive à concevoir une interface utile dès le départ.</p>
 
-<p>Authenticating users involves comparing the encrypted version of a submitted password to the (encrypted) password of a given user. This means we need to define some method to perform the comparison, which we&rsquo;ll call <code>has_password?</code>; this will be our public interface to the encryption machinery.<sup class="footnote" id="fnref:7.6"><a href="#fn:7.6">6</a></sup> The <code>has_password?</code> method will test whether a user has the same password as one submitted on a sign-in form (to be written in <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>); a skeleton method for <code>has_password?</code> appears in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_skeleton">extrait&nbsp;7.7</a>.</p>
+<p>L'authentification des utilisateurs implique de pouvoir comparer la version cryptée d'un mot de passe soumis avec le mot de passe (crypté) de l'utilisateur en question. Cela signifie que nous avons besoin de définir des méthode pour accomplir la comparaison, que nous appellerons <code>has_password?</code> (<em>possède_un_motdepasse?</em> )&nbsp;; ce sera notre partie publique de l'interface pour la machinerie de cryptage.<sup class="footnote" id="fnref:7.6"><a href="#fn:7.6">6</a></sup> La méthode <code>has_password?</code> testera si l'utilisateur possède le même mot de passe que celui soumis lors de l'inscription (sera écrit au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>)&nbsp;; un squelette de méthode pour <code>has_password?</code> est présenté dans l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_skeleton">extrait&nbsp;7.7</a>.</p>
 
 <div class="label" id="code:has_password_skeleton"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.7.</span> <span class="description">A <code>has_password?</code> method for users. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.7.</span> <span class="description">Une méthode <code>has_password?</code> pour les utilisateurs. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -879,9 +881,9 @@ This is our biggest single block of tests so far, so see if you can read it all 
   <span class="o">.</span>
   <span class="n">before_save</span> <span class="ss">:encrypt_password</span>
 
-  <span class="c1"># Return true if the user&#39;s password matches the submitted password.</span>
+  <span class="c1"># Retour true (vrai) si le mot de passe correspond.</span>
   <span class="k">def</span> <span class="nf">has_password?</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
-    <span class="c1"># Compare encrypted_password with the encrypted version of</span>
+    <span class="c1"># Compare encrypted_password avec la version cryptée de</span>
     <span class="c1"># submitted_password.</span>
   <span class="k">end</span>
 
@@ -894,13 +896,13 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>With this method, we can write tests as in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">extrait&nbsp;7.8</a>, which uses the RSpec methods <code>be_true</code> and <code>be_false</code> to test that <code>has_password?</code> returns <code>true</code> or <code>false</code> in the proper cases.</p>
+<p>Avec cette méthode, nous pouvons écrire des tests comme dans l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">extrait&nbsp;7.8</a>, qui utilise les méthodes RSpec <code>be_true</code> (<em>être_vrai</em>) et <code>be_false</code> (<em>être_faux</em>) pour tester que <code>has_password?</code> retourne <code>true</code> ou <code>false</code> dans les cas appropriés.</p>
 
 <div class="label" id="code:has_password_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.8.</span> <span class="description">Tests for the <code>has_password?</code> method. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.8.</span> <span class="description">Tests pour la méthode <code>has_password?</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -916,11 +918,11 @@ This is our biggest single block of tests so far, so see if you can read it all 
     <span class="o">.</span>
     <span class="n">describe</span> <span class="s2">&quot;has_password? method&quot;</span> <span class="k">do</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should be true if the passwords match&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait être vrai si les mots de passe coïncident&quot;</span> <span class="k">do</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">has_password?</span><span class="p">(</span><span class="vi">@attr</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_true</span>
       <span class="k">end</span>    
 
-      <span class="n">it</span> <span class="s2">&quot;should be false if the passwords don&#39;t match&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait être faux si les mots de passe sont différents&quot;</span> <span class="k">do</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">has_password?</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_false</span>
       <span class="k">end</span> 
     <span class="k">end</span>
@@ -930,15 +932,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>In <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">section&nbsp;7.2.3</a>, we&rsquo;ll complete the implementation of <code>has_password?</code> (and get the test to pass in the process). But first we need to learn a little more about secure passwords.</p>
+<p>À la <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">section&nbsp;7.2.3</a>, nous complèterons l'implémentation de <code>has_password?</code> (et obtiendrons que le test réussisse dans le processus). Mais d'abord nous avons besoin d'en apprendre un peu plus sur les mots de passe sécurisés.</p>
 
 <div class="label" id="sec:secure_password_theory"></div>
 
 
-<h3><a id="sec:7.2.2" href="modeling-and-viewing-users-two#sec:secure_password_theory" class="heading"><span class="number">7.2.2</span> Some secure password theory</a></h3>
+<h3><a id="sec:7.2.2" href="modeling-and-viewing-users-two#sec:secure_password_theory" class="heading"><span class="number">7.2.2</span> Un peu de théorie sur la sécurisation des mots de passe</a></h3>
 
 
-<p>The basic idea of encrypted passwords is simple: rather than storing a raw password in the database (known as &ldquo;cleartext&rdquo;), we store a string generated using a  <a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">cryptographic hash function</a>, which is essentially irreversible, so that even an attacker in possession of the hashed password will be unable to infer the original. To verify that a submitted password matches the user&rsquo;s password, we first encrypt the submitted string and then compare the hashes. Let&rsquo;s drop into a console session to see how this works:</p>
+<p>L'idée de base d'un mot de passe crytpés est simple&nbsp;: plutôt que d'enregistre un mot de passe tel quel dans la base de données (donc en «&nbsp;texte clair&nbsp;»), nous enregistrons une chaine de caractères générée en utilisant une <em>fonction de hachage cryptographique</em> (<a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">cryptographic hash function</a>), qui est par essence irréversible, de telle sorte que même un hacker en possession de la version cryptée du mot de passe sera incapable d'en déduire l'original. Pour vérifier qu'un mot de passe soumis coïncide avec le mot de passe de l'utilisateur, nous cryptons d'abord la chaine de caractères soumise puis nous la comparons au mot de passe crypté enregistré. Rejoignons une session de console pour voir comment tout cela fonctionne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
@@ -958,14 +960,14 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>Here we&rsquo;ve defined a function called <code>secure_hash</code> that uses a cryptographic hash function called SHA2, part of the <a href="http://en.wikipedia.org/wiki/SHA_hash_functions">SHA family of hash functions</a>, which we include into Ruby through the <code>digest</code> library.<sup class="footnote" id="fnref:7.7"><a href="#fn:7.7">7</a></sup> It&rsquo;s not important to know exactly how these hash functions work; for our purposes what&rsquo;s important is that they are one-way: there is no computationally tractable way to discover that</p>
+<p>Ici nous avons défini une fonction appelée <code>secure_hash</code> qui utilise une fonction de hachage cryptographique appelée SHA2, qui fait partie de la <a href="http://en.wikipedia.org/wiki/SHA_hash_functions">famille SHA des fonctions de hachage</a>, que nous incluons dans Ruby par la libraiie <code>digest</code>.<sup class="footnote" id="fnref:7.7"><a href="#fn:7.7">7</a></sup> Il n'est pas utile de savoir exactement comment fonctionnent ces fonctions&nbsp;; ce qui est important pour notre propos est qu'elles sont à sens unique&nbsp;: il n'y a aucune façon informatisable de découvrir que&nbsp;:</p>
 
 <pre class="verbatim">2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b</pre>
 
 
-<p>is the SHA2 hash of the string <code>"secret"</code>.</p>
+<p>est le hachage SHA2 de la chaine <code>"secret"</code>.</p>
 
-<p>If you think about it, though, we still have a problem: if an attacker ever got hold of the hashed passwords, he would still have a chance at discovering the originals. For example, he could guess that we used SHA2, and so write a program to compare a given hash to the hashed values of potential passwords:</p>
+<p>Si vous y réfléchissez, cependant, nous avons toujours un problème&nbsp;: si un hacker entrait en possession des mots de passe hachés, il pourrait quand même avoir une chance de découvrir les mots de passe originaux. Par exemple, il pourrait supposer que nous utilisons SHA2 et ainsi écrire un programme pour comparer un hachage donné avec les valeurs possible des mots de passe&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="nb">hash</span> <span class="o">=</span> <span class="s2">&quot;2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="n">secure_hash</span><span class="p">(</span><span class="s2">&quot;secede&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">hash</span>
@@ -978,9 +980,9 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>So our attacker has a match&mdash;bad news for any users with password <code>"secret"</code>. This technique is known as a <a href="http://en.wikipedia.org/wiki/Rainbow_attack"><em>rainbow attack</em></a>.</p>
+<p>Donc notre hacker obtient une correspondance &mdash;&nbsp;mauvaise nouvelle pour les utilisateurs qui utilisent le mot de passe <code>"secret"</code>. Cette technique est connue sous le nom <a href="http://en.wikipedia.org/wiki/Rainbow_attack"><em>rainbow attack</em></a> (<em>attaque arc-en-ciel</em>).</p>
 
-<p>To foil a potential rainbow attack, we can use a <a href="http://en.wikipedia.org/wiki/Salt_(cryptography)"><em>salt</em></a>, which is a different unique string for each user.<sup class="footnote" id="fnref:7.8"><a href="#fn:7.8">8</a></sup> One common way to (nearly) ensure uniqueness is to hash the current time (in <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> to be time zone&ndash;independent) along with the password, so that two users will have the same salt only if they are created at exactly the same time <em>and</em> have the same password. Let&rsquo;s see how this works using the <code>secure_hash</code> function defined in the console above:</p>
+<p>Pour faire échouer une possible attaque arc-en-ciel, on peut utiliser un <a href="http://en.wikipedia.org/wiki/Salt_(cryptography)"><em>salt</em></a> (<em>un sel</em>, ou un <em>grain de sel</em>), qui est une chaine de caractères différente pour chaque utilisateur.<sup class="footnote" id="fnref:7.8"><a href="#fn:7.8">8</a></sup> Une façon courante de s'assurer l'unicité (ou presque) est de hacher le temps courant (en <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> pour être indépendant de la zone de temps) avec le mot de passe, de telle sorte que deux utilisateurs auraient le même <em>sel</em> seulement s'ils s'étaient inscrits exactement en même temps <em>et</em> avaient exactement le même mot de passe. Voyons comment cela fonctionne en utilisant la fonction <code>secure_hash</code> définie plus haut à la console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">utc</span>
 <span class="go">=&gt; Fri Jan 29 18:11:27 UTC 2010</span>
@@ -994,15 +996,15 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>In the last line, we&rsquo;ve hashed the salt with the password, yielding an encrypted password that is virtually impossible to crack. (For clarity, arguments to hashing functions are often separated with <tt class="verb">--</tt>.)</p>
+<p>Dans les dernières lignes, nous avons haché le sel avec le mot de passe, pour retourner un mot de passe crytpé qu'il est virtuellement impossible de cracker (pour la clareté, les arguments des fonctions de hachage sont souvent séparés par <tt class="verb">--</tt>).</p>
 
 <div class="label" id="sec:implementing_has_password"></div>
 
-
+<!--FIN FRENCH-->
 <h3><a id="sec:7.2.3" href="modeling-and-viewing-users-two#sec:implementing_has_password" class="heading"><span class="number">7.2.3</span> Implementing <code>has_password?</code></a></h3>
 
 
-<p>Having finished with the theory, we&rsquo;re now ready for the implementation. Let&rsquo;s look ahead a little to see where we&rsquo;re going. Each user object knows its own encrypted password, so to check for a match with a submitted password we can define <code>has_password?</code> as follows:</p>
+<p>Having finished with the theory, we&rsquo;re now ready for the implementation. Let&rsquo;s look ahead a little to see where we&rsquo;re going. Each user object knows its own mot de passe crytpé, so to check for a match with a submitted password we can define <code>has_password?</code> as follows:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">has_password?</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
   <span class="n">encrypted_password</span> <span class="o">==</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
@@ -1041,7 +1043,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>Then we migrate the database and prepare the test database as usual:</p>
+<p>Then we migrate the base de données and prepare the test base de données as usual:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="gp">$</span> rake db:test:prepare
@@ -1049,7 +1051,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>The result is a database with the data model shown in <a class="ref" href="modeling-and-viewing-users-two#fig:user_model_salt">illustration&nbsp;7.3</a>.</p>
+<p>The result is a base de données with the data model shown in <a class="ref" href="modeling-and-viewing-users-two#fig:user_model_salt">illustration&nbsp;7.3</a>.</p>
 
 <div class="label" id="fig:user_model_salt"></div>
 
@@ -1117,7 +1119,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 <p>Since we&rsquo;re inside the User class, Ruby knows that <code>salt</code> refers to the user&rsquo;s <code>salt</code> attribute.</p>
 
-<p>It&rsquo;s also important to note the use of Active Record&rsquo;s <code>new_record?</code> boolean method, which returns true if the object has not yet been saved to the database. Since the salt is a unique identifier for each user, we don&rsquo;t want it to change every time the user is updated (as in <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">section&nbsp;10.1</a>), and by including <code>new_record?</code> we ensure that the salt is only created <em>once</em>, when the user is first created.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (This subtlety doesn&rsquo;t matter now, but it will when we implement a &ldquo;remember me&rdquo; signin feature in <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>.)</p>
+<p>It&rsquo;s also important to note the use of Active Record&rsquo;s <code>new_record?</code> boolean method, which returns true if the object has not yet been saved to the base de données. Since the salt is a unique identifier for each user, we don&rsquo;t want it to change every time the user is updated (as in <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">section&nbsp;10.1</a>), and by including <code>new_record?</code> we ensure that the salt is only created <em>once</em>, when the user is first created.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (This subtlety doesn&rsquo;t matter now, but it will when we implement a &ldquo;remember me&rdquo; signin feature in <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>.)</p>
 
 <p>At this point, the tests from <a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">extrait&nbsp;7.8</a> should pass:</p>
 
@@ -1159,7 +1161,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 <p>We can get a hint of how this will work by using the console. First, we&rsquo;ll create a user, and then retrieve that user by email address to verify that it has a given password:<sup class="footnote" id="fnref:7.11"><a href="#fn:7.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
-<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">,</span>
 <span class="gp">?&gt; </span>             <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">has_password?</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
@@ -1214,7 +1216,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div></div>
 
 
-<p>Now we&rsquo;re ready for the implementation, which will get our tests to pass and show how to define a <em>class method</em> as a bonus. We&rsquo;ve mentioned class methods several times before, most recently in <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a>; a class method is simply a method attached to a class, rather than an instance of that class. For example, <code>new</code>, <code>find</code>, and <code>find_by_email</code> are all class methods on the User class. Outside of the class, they are invoked using the class name, as in <code>User.find</code>, but inside the class we can omit the class name.</p>
+<p>Now we&rsquo;re ready for the implementation, which will get our tests to pass and show how to define a <em>class method</em> as a bonus. We&rsquo;ve mentioned class methods several times before, most recently in <a class="ref" href="modeling-and-viewing-users-one#sec:base de données_migrations">section&nbsp;6.1.1</a>; a class method is simply a method attached to a class, rather than an instance of that class. For example, <code>new</code>, <code>find</code>, and <code>find_by_email</code> are all class methods on the User class. Outside of the class, they are invoked using the class name, as in <code>User.find</code>, but inside the class we can omit the class name.</p>
 
 <div class="label" id="sidebar:self"></div>
 
@@ -1249,7 +1251,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 <pre class="verbatim">  &gt;&gt; user = User.authenticate('example@railstutorial.org', 'foobar')
   &gt;&gt; user.name
-  =&gt; &quot;Example User&quot;</pre>
+  =&gt; &quot;Utilisateur exemple&quot;</pre>
 
 
 <p>It&rsquo;s worth noting two alternative ways of defining an <code>authenticate</code> class method equivalent to the one shown in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a>. First, we could indicate the <code>User</code> class explicitly by name:</p>
@@ -1315,7 +1317,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 <h2><a id="sec:7.3" href="modeling-and-viewing-users-two#sec:better_user_views" class="heading"><span class="number">7.3</span> Better user views</a></h2>
 
 
-<p>Now that User model is effectively complete,<sup class="footnote" id="fnref:7.12"><a href="#fn:7.12">12</a></sup> we are in a position to add a sample user to the development database and make a <code>show</code> page to show some of that user&rsquo;s information. Along the way, we&rsquo;ll add some tests to the Users controller spec started in <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>.</p>
+<p>Now that User model is effectively complete,<sup class="footnote" id="fnref:7.12"><a href="#fn:7.12">12</a></sup> we are in a position to add a sample user to the development base de données and make a <code>show</code> page to show some of that user&rsquo;s information. Along the way, we&rsquo;ll add some tests to the Users controller spec started in <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>.</p>
 
 <p>Before continuing, it&rsquo;s helpful to see where we left off by recalling what the Users controller spec looks like right now (<a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>). Our tests for the user show page will follow this example, but we&rsquo;ll find that, unlike the tests for the <code>new</code> action, the tests for the <code>show</code> action will require the use of an instance of the User model. We&rsquo;ll meet this challenge using a technique called <em>factories</em>.</p>
 
@@ -1355,7 +1357,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 <h3><a id="sec:7.3.1" href="modeling-and-viewing-users-two#sec:tests_with_factories" class="heading"><span class="number">7.3.1</span> Testing the user show page (with factories)</a></h3>
 
 
-<p>Tests for the Users controller will need instances of User model objects, preferably with pre-defined values. For example, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>, the Users controller <code>show</code> action needs an instance of the User class, so the tests for this action will require that we create an <code>@user</code> variable somehow. We&rsquo;ll accomplish this goal with a user <em>factory</em>, which is a convenient way to define a user object and insert it into our test database.<sup class="footnote" id="fnref:7.13"><a href="#fn:7.13">13</a></sup></p>
+<p>Tests for the Users controller will need instances of User model objects, preferably with pre-defined values. For example, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>, the Users controller <code>show</code> action needs an instance of the User class, so the tests for this action will require that we create an <code>@user</code> variable somehow. We&rsquo;ll accomplish this goal with a user <em>factory</em>, which is a convenient way to define a user object and insert it into our test base de données.<sup class="footnote" id="fnref:7.13"><a href="#fn:7.13">13</a></sup></p>
 
 <div class="label" id="code:user_show_reminder"></div>
 
@@ -1433,7 +1435,7 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 <p>As noted in the comment in the first line of <a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>, by using the symbol <code>:user</code> we ensure that Factory Girl will guess that we want to use the User model, so in this case <code>@user</code> will simulate an instance of <code>User</code>.</p>
 
-<p>To use our new User factory in the Users controller spec, we&rsquo;ll create an <code>@user</code> variable in a <code>before(:each)</code> block and then <code>get</code> the show page and verify success (just as we did with the <code>new</code> page in <a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>), while also verifying that the <code>show</code> action pulls the correct user out of the database. The result appears in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>. (If you&rsquo;re using Spork, you might have to restart it to get these tests to pass.)</p>
+<p>To use our new User factory in the Users controller spec, we&rsquo;ll create an <code>@user</code> variable in a <code>before(:each)</code> block and then <code>get</code> the show page and verify success (just as we did with the <code>new</code> page in <a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>), while also verifying that the <code>show</code> action pulls the correct user out of the base de données. The result appears in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>. (If you&rsquo;re using Spork, you might have to restart it to get these tests to pass.)</p>
 
 <div class="label" id="code:get_show_test"></div>
 
@@ -1491,13 +1493,13 @@ This is our biggest single block of tests so far, so see if you can read it all 
 </div>
 
 
-<p>then verifies that the variable retrieved from the database in the action corresponds to the <code>@user</code> instance created by Factory Girl. It&rsquo;s worth noting that not all Rails programmers use <code>assigns</code> in this context, preferring instead to use a technique called <em>stubbing</em> (<a class="ref" href="modeling-and-viewing-users-two#sidebar:stubbing">Box&nbsp;7.2</a>).</p>
+<p>then verifies that the variable retrieved from the base de données in the action corresponds to the <code>@user</code> instance created by Factory Girl. It&rsquo;s worth noting that not all Rails programmers use <code>assigns</code> in this context, preferring instead to use a technique called <em>stubbing</em> (<a class="ref" href="modeling-and-viewing-users-two#sidebar:stubbing">Box&nbsp;7.2</a>).</p>
 
 <div class="label" id="sidebar:stubbing"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 7.2.</span><span class="description">To <code>stub!</code> or not to <code>stub!</code>.</span></span>
-<p>The code in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> relies on the <code>User.find</code> method in the controller action to retrieve the right user from the test database. A second way to achieve this same result is using a technique called <em>stubbing</em>, using RSpec&rsquo;s <code>stub!</code> method:</p>
+<p>The code in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> relies on the <code>User.find</code> method in the controller action to retrieve the right user from the test base de données. A second way to achieve this same result is using a technique called <em>stubbing</em>, using RSpec&rsquo;s <code>stub!</code> method:</p>
 
 <pre class="verbatim">  before(:each)
     @user = Factory(:user)
@@ -1505,13 +1507,13 @@ This is our biggest single block of tests so far, so see if you can read it all 
   end</pre>
 
 
-<p>This code ensures that any call to <code>User.find</code> with the given <code>id</code> will return <code>@user</code>. Since this is just what we have in the application code (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>), the stub will cause RSpec to intercept the call to <code>User.find</code> and, instead of hitting the database, return <code>@user</code> instead.</p>
+<p>This code ensures that any call to <code>User.find</code> with the given <code>id</code> will return <code>@user</code>. Since this is just what we have in the application code (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>), the stub will cause RSpec to intercept the call to <code>User.find</code> and, instead of hitting the base de données, return <code>@user</code> instead.</p>
 
 <p>Many Rails programmers, especially RSpec users, prefer this stubbing approach because it separates the controller tests from the model layer. Indeed, the <a href="http://railstutorial.org/book?version=2.3">Rails 2.3 version of this book</a> uses stubs, along with the closely related technique of <em>message expectations</em>. After gaining more experience with stubs and expectations, and especially after fielding lots of questions from readers of the <em>Rails 2.3 Tutorial</em> confused by these issues, I have concluded that stubbing and related techniques are not worth the trouble.</p>
 
-<p>Figuring out exactly when to stub things out is difficult, and message expectations are incredibly subtle and error-prone (see, e.g., <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Box&nbsp;8.1 in the <em>Rails 2.3 Tutorial</em> book</a>). To the common objection, &ldquo;But now the controller tests hit the test database!&rdquo;, I now find myself saying: &ldquo;So what?&rdquo; In my experience it has never mattered. I see no compelling reason not to hit the model layer in the controller tests, especially when it leads to much simpler tests. If you are interested in learning stubbing and message expectation techniques, I recommend reading the <a href="http://railstutorial.org/book?version=2.3"><em>Ruby on Rails 2.3 Tutorial</em> book</a>. Otherwise, I suggest not worrying about enforcing a full separation of the model and controller layers in Rails tests. Although the controller tests in the rest of this book will hit the test database, at a <em>conceptual</em> level it will always be clear which part of MVC is being tested.</p>
+<p>Figuring out exactly when to stub things out is difficult, and message expectations are incredibly subtle and error-prone (see, e.g., <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Box&nbsp;8.1 in the <em>Rails 2.3 Tutorial</em> book</a>). To the common objection, &ldquo;But now the controller tests hit the test base de données!&rdquo;, I now find myself saying: &ldquo;So what?&rdquo; In my experience it has never mattered. I see no compelling reason not to hit the model layer in the controller tests, especially when it leads to much simpler tests. If you are interested in learning stubbing and message expectation techniques, I recommend reading the <a href="http://railstutorial.org/book?version=2.3"><em>Ruby on Rails 2.3 Tutorial</em> book</a>. Otherwise, I suggest not worrying about enforcing a full separation of the model and controller layers in Rails tests. Although the controller tests in the rest of this book will hit the test base de données, at a <em>conceptual</em> level it will always be clear which part of MVC is being tested.</p>
 
-<p>By the way, in principle the tests should run faster when the controllers don&rsquo;t hit the database, and for the full <em>Rails Tutorial</em> sample application test suite they do&mdash;by around two-tenths of a second.</p>
+<p>By the way, in principle the tests should run faster when the controllers don&rsquo;t hit the base de données, and for the full <em>Rails Tutorial</em> sample application test suite they do&mdash;by around two-tenths of a second.</p>
 </div>
 
 
@@ -1569,11 +1571,11 @@ This is our biggest single block of tests so far, so see if you can read it all 
 
 <p>In this section, we&rsquo;ll improve the look of the user show page by adding a heading with the user&rsquo;s name and profile image. This is one of those situations where I can go either way on test-driven development, and often when making views I&rsquo;ll experiment with the HTML before bothering with tests. Let&rsquo;s stick with the TDD theme for now, and test for a top-level heading (<code>h1</code> tag) containing the user&rsquo;s name and an <code>img</code> tag of class <code>gravatar</code>. (We&rsquo;ll talk momentarily about what this second part means.)</p>
 
-<p>To view a working user show page in a browser, we&rsquo;ll need to create a sample user in the development database. To do this, start the console (<em>not</em> in a sandbox this time) and create the user:</p>
+<p>To view a working user show page in a browser, we&rsquo;ll need to create a sample user in the development base de données. To do this, start the console (<em>not</em> in a sandbox this time) and create the user:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rake db:reset</span>
 <span class="go">$ rails console</span>
-<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
 <span class="gp">?&gt; </span>             <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1733,7 +1735,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div>
 
 
-<p>Note that we can pull out the first (and, at this point, only) user in the database with the handy <code>User.first</code> method. In the <code>update_attributes</code> step we&rsquo;ve reassigned the user&rsquo;s email address, changing it to <code>example@railstutorial.org</code>. As you can see from <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">illustration&nbsp;7.5</a>, this change results in a new Gravatar being displayed: the Rails Tutorial logo. What&rsquo;s going on is that Gravatar works by associating images with email addresses; since <code>user@example.com</code> is an invalid email address (the <a href="http://example.com/">example.com</a> domain is reserved for examples), there is no Gravatar for that email address. But at my Gravatar account I&rsquo;ve associated the address <code>example@railstutorial.org</code> with the Rails Tutorial logo, so when updating the example user with that email address the Gravatar changes automatically.</p>
+<p>Note that we can pull out the first (and, at this point, only) user in the base de données with the handy <code>User.first</code> method. In the <code>update_attributes</code> step we&rsquo;ve reassigned the user&rsquo;s email address, changing it to <code>example@railstutorial.org</code>. As you can see from <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">illustration&nbsp;7.5</a>, this change results in a new Gravatar being displayed: the Rails Tutorial logo. What&rsquo;s going on is that Gravatar works by associating images with email addresses; since <code>user@example.com</code> is an invalid email address (the <a href="http://example.com/">example.com</a> domain is reserved for examples), there is no Gravatar for that email address. But at my Gravatar account I&rsquo;ve associated the address <code>example@railstutorial.org</code> with the Rails Tutorial logo, so when updating the example user with that email address the Gravatar changes automatically.</p>
 
 <div class="label" id="fig:user_show_railstutorial_gravatar_rails_3"></div>
 
@@ -1871,9 +1873,9 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div>
 
 
-<p>just returns the entire URL, <tt>http://localhost:3000/users/1</tt>. (Compare to the routes created in <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.) Both are examples of the named routes created by the users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>; a list of all the named routes appears in <a class="ref" href="modeling-and-viewing-users-two#table:named_routes">Table&nbsp;7.1</a>.</p>
+<p>just returns the entire URL, <tt>http://localhost:3000/users/1</tt>. (Compare to the routes created in <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.) Both are examples of the named routes created by the users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>; a list of all the named routes appears in <a class="ref" href="modeling-and-viewing-users-two#table:nomd_routes">Table&nbsp;7.1</a>.</p>
 
-<div class="label" id="table:named_routes"></div>
+<div class="label" id="table:nomd_routes"></div>
 
 
 <div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Named route</strong></th><th class="align_left"><strong>Path</strong></th></tr><tr class="top_bar"><td class="align_left"><code>users_path</code></td><td class="align_left"><tt>/users</tt></td></tr><tr><td class="align_left"><code>user_path(@user)</code></td><td class="align_left"><tt>/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_path</code></td><td class="align_left"><tt>/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_path(@user)</code></td><td class="align_left"><tt>/users/1/edit</tt></td></tr><tr><td class="align_left"><code>users_url</code></td><td class="align_left"><tt>http://localhost:3000/users</tt></td></tr><tr><td class="align_left"><code>user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1</tt></td></tr><tr><td class="align_left"><code>new_user_url</code></td><td class="align_left"><tt>http://localhost:3000/users/new</tt></td></tr><tr><td class="align_left"><code>edit_user_url(@user)</code></td><td class="align_left"><tt>http://localhost:3000/users/1/edit</tt></td></tr></table></div><div class="caption"><span class="header">Table 7.1: </span><span class="description">Named routes provided by the users resource in <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>.  </span></div></div>
@@ -1988,7 +1990,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 </div>
 
 
-<p>Then migrate the database on the remote server using the <code>heroku</code> command:</p>
+<p>Then migrate the base de données on the remote server using the <code>heroku</code> command:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku rake db:migrate
 </pre></div>
@@ -1998,7 +2000,7 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <p>Now if you want to create a sample user on Heroku, you can use the Heroku console:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ heroku console</span>
-<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
 <span class="gp">?&gt; </span>             <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2127,17 +2129,17 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:7.1">We saw ranges before in <a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>.&nbsp;<a class="arrow" href="#fnref:7.1">&uarr;</a></li>
-<li id="fn:7.2">For more details on the kind of callbacks supported by Active Record, see the <a href="http://guides.rubyonrails.org/active_record_validations_callbacks.html#callbacks-overview">discussion of callbacks at the Rails Guides</a>.&nbsp;<a class="arrow" href="#fnref:7.2">&uarr;</a></li>
-<li id="fn:7.3">The extra level of indentation is a typographical reminder that we&rsquo;re in a private section; otherwise, it&rsquo;s easy to miss the <code>private</code> keyword and be confused when trying to access a private method that you think is public. I thought the extra indentation was a stupid convention until I burned an hour on just this problem a couple years back. Now I add the extra indentation&hellip;&nbsp;<a class="arrow" href="#fnref:7.3">&uarr;</a></li>
-<li id="fn:7.4">Ruby has a closely related keyword called <code>protected</code> that differs subtly from <code>private</code>. As far as I can tell, the only reason to learn the difference is so that you can ace a job interview that asks you &ldquo;In Ruby, what is the difference between <code>private</code> and <code>protected</code>?&rdquo; But do you really want to work at a company that asks you such a lame interview question? At his keynote at RubyConf in 2008, Dave Thomas (author of <em>Programming Ruby</em>) suggested eliminating <code>protected</code> from future versions of Ruby, and I agree with the sentiment. Just use <code>private</code> and you&rsquo;ll be fine.&nbsp;<a class="arrow" href="#fnref:7.4">&uarr;</a></li>
-<li id="fn:7.5">I am ashamed to admit that this is how we implemented passwords in <em>RailsSpace</em>. Consider this section my penance.&nbsp;<a class="arrow" href="#fnref:7.5">&uarr;</a></li>
-<li id="fn:7.6">The alert reader may notice that none of what we do in this section <em>requires</em> encryption, but, once we develop some of the theory of secure passwords and write a basic implementation (<a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>), the only way for the <code>has_password?</code> method to work properly is for all the encryption machinery to work properly as well.&nbsp;<a class="arrow" href="#fnref:7.6">&uarr;</a></li>
-<li id="fn:7.7">In my setup, the <code>require &rsquo;digest&rsquo;</code> line is unnecessary, but several readers have reported getting a <code>NameError</code> exception if they don&rsquo;t include it explicitly. It does no harm in any case, so I&rsquo;ve included the explicit <code>require</code> just to be safe.&nbsp;<a class="arrow" href="#fnref:7.7">&uarr;</a></li>
-<li id="fn:7.8">Technically, rainbow attacks could still succeed, but using a salted hash makes them computationally unfeasible.&nbsp;<a class="arrow" href="#fnref:7.8">&uarr;</a></li>
+<li id="fn:7.1">Nous avons vu précédemment les <em>rangs</em> à la <a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>.&nbsp;<a class="arrow" href="#fnref:7.1">&uarr;</a></li>
+<li id="fn:7.2">Pour plus de détail sur le type de fonctions de rappel supportées par Active Record, voyez la <a href="http://guides.rubyonrails.org/active_record_validations_callbacks.html#callbacks-overview">discussion sur les callbacks dans les guides Rails</a>.&nbsp;<a class="arrow" href="#fnref:7.2">&uarr;</a></li>
+<li id="fn:7.3">Le niveau supplémentaire d'indentation est une façon typographique de nous souvenir que nous sommes dans une section privée&nbsp;; dans le cas contraire, il est facile de manquer le mot-clé <code>private</code> et d'être dérouté en essayant d'atteindre une méthode privée que vous pensez publique. Je pensais que cette convention d'identation était stupide jusqu'à ce que je perde une heure sur ce simple problème il y a quelques années. Maintenant j'ajouter l'identation&hellip;&nbsp;<a class="arrow" href="#fnref:7.3">&uarr;</a></li>
+<li id="fn:7.4">Ruby possède aussi un mot-clé très proche, appelé <code>protected</code> (<em>protégé</em>) qui diffère subtilement de <code>private</code>. Autant que je peux dire, la seule raison d'apprendre la différence serait qu'on pourrait vous poser cette question au cours d'un entretien d'embauche&nbsp;: «&nbsp;En Ruby, quelle est la différence entre <code>private</code> et <code>protected</code>?&nbsp;». Mais qui aurait envie de travailler dans une compagnie qui poserait ce genre de question vicieuse&nbsp;? Lors de son discours à RubyConf en 2008, Dave Thomas (auteur de <em>Programmer Ruby</em>) a suggéré d'éliminer <code>protected</code> des versions futures de Ruby, et j'abonde dans son sens. Utilisez simplement <code>private</code> et tout ira bien.&nbsp;<a class="arrow" href="#fnref:7.4">&uarr;</a></li>
+<li id="fn:7.5">J'ai honte d'admettre que c'est ainsi que nous avons implémenté les mots de passe dans <em>RailsSpace</em>. Considérez que cette section est ma pénitence.&nbsp;<a class="arrow" href="#fnref:7.5">&uarr;</a></li>
+<li id="fn:7.6">Le lecteur attentif peut noter que rien de ce que nous faisons dans cette section ne <em>requiert</em> le cryptage, mais, une fois que nous développons un peu de la théorie des mots de passe sécurisés et écrivons une implémentation basique (<a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>), la seule façon pour la méthode <code>has_password?</code> de fonctionner proprement est que toute la machinerie de cryptage fonctionne aussi bien.&nbsp;<a class="arrow" href="#fnref:7.6">&uarr;</a></li>
+<li id="fn:7.7">Dans mes réglages, la ligne <code>require &rsquo;digest&rsquo;</code> n'est pas nécessaire, mais plusieurs lecteurs m'ont reporté qu'ils rencontraient une erreur <code>NameError</code> s'il ne l'incluait pas explicitement. Ça n'entraine aucun dommage de toute façon, donc j'ai inclus explicitement <code>require</code> juste pour être sûr.&nbsp;<a class="arrow" href="#fnref:7.7">&uarr;</a></li>
+<li id="fn:7.8">En théorie et techniquement, les attaques «&nbsp;arc-en-ciel&nbsp;» pourraient toujours réussir, mais en utilisant un «&nbsp;hachage salé&nbsp;», la réussite est informatiquement infaisable.&nbsp;<a class="arrow" href="#fnref:7.8">&uarr;</a></li>
 <li id="fn:7.9">As noted in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>, the explicit <code>require &rsquo;digest&rsquo;</code> line is unnecessary on some systems, but it does no harm to include it.&nbsp;<a class="arrow" href="#fnref:7.9">&uarr;</a></li>
 <li id="fn:7.10">In past versions of Rails, we could have used the <code>after_validation_before_create</code> callback to set the salt, but it has been eliminated in Rails&nbsp;3. Meanwhile, we can&rsquo;t use the <code>before_create</code> callback because it executes <em>after</em> the <code>before_save</code> callback, and the <code>before_save</code> callback needs the salt.&nbsp;<a class="arrow" href="#fnref:7.10">&uarr;</a></li>
-<li id="fn:7.11">Recall from <a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Box&nbsp;6.2</a> that the <em>index</em> on the <code>email</code> column ensures that this retrieval is efficient.&nbsp;<a class="arrow" href="#fnref:7.11">&uarr;</a></li>
+<li id="fn:7.11">Recall from <a class="ref" href="modeling-and-viewing-users-one#sidebar:base de données_indices">Box&nbsp;6.2</a> that the <em>index</em> on the <code>email</code> column ensures that this retrieval is efficient.&nbsp;<a class="arrow" href="#fnref:7.11">&uarr;</a></li>
 <li id="fn:7.12">We&rsquo;ll plan to add a couple more attributes (one to identify administrative users and one to allow a &ldquo;remember me&rdquo; feature), but they are not strictly necessary. All the <em>essential</em> user attributes have now been defined.&nbsp;<a class="arrow" href="#fnref:7.12">&uarr;</a></li>
 <li id="fn:7.13">Many experienced Rails programmers find that this factory approach is much more flexible than <em>fixtures</em>, which Rails uses by default but can be brittle and difficult to maintain.&nbsp;<a class="arrow" href="#fnref:7.13">&uarr;</a></li>
 <li id="fn:7.14">Presumably &ldquo;Factory Girl&rdquo; is a reference to the <a href="http://www.imdb.com/title/tt0432402/">movie of the same name</a>.&nbsp;<a class="arrow" href="#fnref:7.14">&uarr;</a></li>

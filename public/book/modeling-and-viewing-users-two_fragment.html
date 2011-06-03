@@ -1000,11 +1000,11 @@
 
 <div class="label" id="sec:implementing_has_password"></div>
 
-<!--FIN FRENCH-->
-<h3><a id="sec:7.2.3" href="modeling-and-viewing-users-two#sec:implementing_has_password" class="heading"><span class="number">7.2.3</span> Implementing <code>has_password?</code></a></h3>
+
+<h3><a id="sec:7.2.3" href="modeling-and-viewing-users-two#sec:implementing_has_password" class="heading"><span class="number">7.2.3</span> Implémenter <code>has_password?</code></a></h3>
 
 
-<p>Having finished with the theory, we&rsquo;re now ready for the implementation. Let&rsquo;s look ahead a little to see where we&rsquo;re going. Each user object knows its own mot de passe crytpé, so to check for a match with a submitted password we can define <code>has_password?</code> as follows:</p>
+<p>En ayant fini avec la théorie, nous sommes maintenant en mesure de procéder à l'implémentation. Nous allons aller de l'avant pour voir où nous allons. Chaque objet utilisateur connait son propre mot de passe crytpé, donc pour le vérifier avec le mot de passe soumis, nous pouvons définir <code>has_password?</code> comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">has_password?</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
   <span class="n">encrypted_password</span> <span class="o">==</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
@@ -1013,22 +1013,22 @@
 </div>
 
 
-<p>As long as we encrypt the submitted password using the same salt used to encrypt the original password, this function will be true if and only if the submitted password matches.</p>
+<p>Puisque nous cryptons le mot de passe soumis en utilisant le même <em>sel</em> que celui utilisé pour le mot de passe original, cette fonction retournera <em>vrai</em> si et seulement si le mot de passe soumis correspond.</p>
 
-<p>Since comparing a user password with a submitted password will involve encrypting the submitted password with the salt, we need to store the salt somewhere, so the first step is to add a <code>salt</code> column to the <code>users</code> table:</p>
+<p>Puisque comparer le mot de passe d'un utilisateur avec un mot de passe soumis implique de crypter le mot de passe soumis avec le <em>sel</em>, nous avons besoin d'enregistrer ce sel quelque part, donc la première étape va consister à ajouter une colonne <code>salt</code> à la table <code>users</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate migration add_salt_to_users salt:string
 </pre></div>
 </div>
 
 
-<p>As with the <code>encrypted_password</code> migration (<a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a>), this migration has a name that ends in <code>_to_users</code> and passes a second argument containing the attribute name and type, so Rails automatically constructs the right migration (<a class="ref" href="modeling-and-viewing-users-two#code:salt_migration">extrait&nbsp;7.9</a>).</p>
+<p>Comme avec la migration <code>encrypted_password</code> (<a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a>), cette migration porte un nom qui se finit par <code>_to_users</code> et passe un second argument contenant le nom de l'attribut et son type, donc Rails construit automatiquement la bonne migration (<a class="ref" href="modeling-and-viewing-users-two#code:salt_migration">extrait&nbsp;7.9</a>).</p>
 
 <div class="label" id="code:salt_migration"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.9.</span> <span class="description">The migration to add a <code>salt</code> column to the <code>users</code> table. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.9.</span> <span class="description">La migration pour ajouter la colonne <code>salt</code> à la table <code>users</code>. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddSaltToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -1043,7 +1043,7 @@
 </div></div>
 
 
-<p>Then we migrate the base de données and prepare the test base de données as usual:</p>
+<p>Nous migrons alors la base de données et préparons le test de la base de données comme d'habitude&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="gp">$</span> rake db:test:prepare
@@ -1051,21 +1051,21 @@
 </div>
 
 
-<p>The result is a base de données with the data model shown in <a class="ref" href="modeling-and-viewing-users-two#fig:user_model_salt">illustration&nbsp;7.3</a>.</p>
+<p>Le résultat est une base de données avec le modèle de données comme le montre l'<a class="ref" href="modeling-and-viewing-users-two#fig:user_model_salt">illustration&nbsp;7.3</a>.</p>
 
 <div class="label" id="fig:user_model_salt"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_salt.png" alt="user_model_salt" /></span></div><div class="caption"><span class="header">Illustration 7.3: </span><span class="description">The User model with an added salt.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_salt.png" alt="user_model_salt" /></span></div><div class="caption"><span class="header">Illustration 7.3: </span><span class="description">Le modèle User avec un <em>sel</em> ajouté.</span></div></div>
 
 
-<p>Finally, we&rsquo;re ready for the full implementation. When last we saw the <code>encrypt</code> function (<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a>), it did nothing, simply returning the string in its argument. With the ideas from <a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>, we&rsquo;re now in a position to use a secure hash instead (<a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>).<sup class="footnote" id="fnref:7.9"><a href="#fn:7.9">9</a></sup></p>
+<p>Nous sommes enfin prêts pour l'implémentation complète. Quand nous avons vu la dernière fois la fonction <code>encrypt</code> (<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a>), elle ne faisait rien d'autre que retourner la chaine de caractère qu'elle recevait en argument. Dans l'idée de la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>, nous sommes en mesure maintenant de renvoyer plutôt un hachage sécurisé (<a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>).<sup class="footnote" id="fnref:7.9"><a href="#fn:7.9">9</a></sup></p>
 
 <div class="label" id="code:has_password_with_encrypt"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.10.</span> <span class="description">The <code>has_password?</code> method with secure encryption. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.10.</span> <span class="description">La méthode <code>has_password?</code> avec un cryptage sécurisé. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
@@ -1101,14 +1101,14 @@
 </div></div>
 
 
-<p>This code contains the same two subtleties mentioned in <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">section&nbsp;7.1.3</a>, namely, the assignment to an Active Record attribute in the line</p>
+<p>Ce code contient les deux mêmes subtilités que celles mentionnées à la <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">section&nbsp;7.1.3</a>, nommément, l'assignement d'un attribut Active Record à la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nb">self</span><span class="o">.</span><span class="n">salt</span> <span class="o">=</span> <span class="n">make_salt</span> <span class="k">if</span> <span class="n">new_record?</span>
 </pre></div>
 </div>
 
 
-<p>and the omission of the <code>self</code> keyword in the <code>encrypt</code> method:</p>
+<p>… et l'omission du mot-clé <code>self</code> dans la méthode <code>encrypt</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
   <span class="n">secure_hash</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">salt</span><span class="si">}</span><span class="s2">--</span><span class="si">#{</span><span class="n">string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1117,19 +1117,19 @@
 </div>
 
 
-<p>Since we&rsquo;re inside the User class, Ruby knows that <code>salt</code> refers to the user&rsquo;s <code>salt</code> attribute.</p>
+<p>Puisque nous sommes à l'intérieur de la classe, Ruby sait que <code>salt</code> se réfère à l'attribut <code>salt</code> de l'utilisateur.</p>
 
-<p>It&rsquo;s also important to note the use of Active Record&rsquo;s <code>new_record?</code> boolean method, which returns true if the object has not yet been saved to the base de données. Since the salt is a unique identifier for each user, we don&rsquo;t want it to change every time the user is updated (as in <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">section&nbsp;10.1</a>), and by including <code>new_record?</code> we ensure that the salt is only created <em>once</em>, when the user is first created.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (This subtlety doesn&rsquo;t matter now, but it will when we implement a &ldquo;remember me&rdquo; signin feature in <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>.)</p>
+<p>Il est important de noter aussi l'utilisation de la méthode booléenne de l'Active Record <code>new_record?</code>, qui retourne true (<em>vrai</em>) si l'objet n'a pas encore été enregistré dans la base de données. Puisque le <em>sel</em> est un identifiant unique pour chaque utilisateur, nous ne voulons pas qu'il change chaque fois que l'utilisateur sera actualisé (comme à la <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">section&nbsp;10.1</a>), et en incluant <code>new_record?</code> nous nous assurons que le salt sera créé <em>seulement un fois</em>, à la création de l'utilisateur.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (cette subtilité n'importe pas pour le moment, mais elle importera quand nous implémenterons une fonctionnalité &ldquo;se souvenir de moi&rdquo; à l'identification à la <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>.)</p>
 
-<p>At this point, the tests from <a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">extrait&nbsp;7.8</a> should pass:</p>
+<p>À ce point, les tests de l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">extrait&nbsp;7.8</a> devraient réussir&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb -e <span class="s2">&quot;should be true if the passwords match&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb -e <span class="s2">&quot;devrait être vrai si les mots de passe correspondent&quot;</span>
 <span class="go">.</span>
 
 <span class="go">1 example, 0 failures</span>
 
 <span class="gp">$</span> rspec spec/models/user_spec.rb <span class="se">\</span>
-<span class="gp">&gt;</span> -e <span class="s2">&quot;should be false if the passwords don&#39;t match&quot;</span>
+<span class="gp">&gt;</span> -e <span class="s2">&quot;devrait être faux si les mots de passe ne correspondent pas&quot;</span>
 <span class="go">.</span>
 
 <span class="go">1 example, 0 failures</span>
@@ -1137,7 +1137,7 @@
 </div>
 
 
-<p>We can also run all the examples in a particular <code>describe</code> block, but we do have to be careful to <em>escape</em> any special <a href="http://rubular.com/">regular expression</a> characters&mdash;in this case, the question mark&nbsp;<code>?</code> in <code>"has_password? method"</code>:</p>
+<p>Nous pourrions aussi jouer tous les exemples dans un bloc <code>describe</code> particulier, mais nous devons prendre soin d'<em>échapper</em> tous les caractères spéciaux dans les <a href="http://rubular.com/">expressions régulières</a> &mdash;&nbsp;dans ce cas, le point d'interrogation&nbsp;<code>?</code> de la méthode <code>"has_password?"</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb -e <span class="s2">&quot;has_password\? method&quot;</span>
 <span class="go">Run filtered using {:full_description=&gt;/(?-mix:has_password\? method)/}</span>
@@ -1148,17 +1148,17 @@
 </div>
 
 
-<p>The backslash before the question mark ensures that RSpec&rsquo;s regular expression matcher interprets the string correctly, thereby running the tests associated with the given <code>describe</code> block.</p>
+<p>L'échappement («&nbsp;\&nbsp;») avant le point d'interrogation assure que l'interpréteur d'expressions régulières RSpec interprète la chaine de caractère correctement, ce qui jouera les tests associés au bloc <code>describe</code> donné.</p>
 
 <div class="label" id="sec:an_authenticate_method"></div>
 
 
-<h3><a id="sec:7.2.4" href="modeling-and-viewing-users-two#sec:an_authenticate_method" class="heading"><span class="number">7.2.4</span> An authenticate method</a></h3>
+<h3><a id="sec:7.2.4" href="modeling-and-viewing-users-two#sec:an_authenticate_method" class="heading"><span class="number">7.2.4</span> Une méthode d'authentification</a></h3>
 
 
-<p>Having a <code>has_password?</code> method for each user is nice, but by itself it isn&rsquo;t very useful. We&rsquo;ll end our discussion of passwords by using <code>has_password?</code> to write a method to authenticate a user based on an email/password combination. In <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>, we&rsquo;ll use this <code>authenticate</code> method when signing users in to our site.</p>
+<p>Avoir une méthode <code>has_password?</code> pour chaque utilisateur est une bonne chose, mais en elle-même elle n'est pas très utile. Nous terminons notre discussion sur les mots de passe en utilisant  <code>has_password?</code> pour écrire une méthode pour identifier un utilisateur par une combinaison email/mot de passe. Au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>, nous utiliserons cette méthode <code>authenticate</code> en identifiant les utilisateurs de notre site.</p>
 
-<p>We can get a hint of how this will work by using the console. First, we&rsquo;ll create a user, and then retrieve that user by email address to verify that it has a given password:<sup class="footnote" id="fnref:7.11"><a href="#fn:7.11">11</a></sup></p>
+<p>Nous pouvons voir une idée de comment cela fonctionnera en utilisant la console. D'abord, nous créons un utilisateur, et ensuite nous récupérons cet utilisateur par l'adresse email pour vérifier qu'il a un mot de passe donné&nbsp;:<sup class="footnote" id="fnref:7.11"><a href="#fn:7.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">,</span>
@@ -1170,14 +1170,14 @@
 </div>
 
 
-<p>Using these ideas, let&rsquo;s write a method that will return an authenticated user on password match, and <code>nil</code> otherwise. We should be able to use the resulting <code>authenticate</code> class method as follows:</p>
+<p>En utilisant ces idées, écrivons une méthode qui retournera un utilisateur identifié si les mots de passe correspondent, et <em>nul</em> (<code>nil</code>) dans le cas contraire. Nous devrions pouvoir utilser la méthode de classe <code>authenticate</code> en résultant comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>We start with the tests, which we&rsquo;ll use to specify the behavior we expect from <code>User.authenticate</code>. There are three cases to check: <code>authenticate</code>&nbsp;(1) should return <code>nil</code> when the email/password combination is invalid or&nbsp;(2) when no user exists with the given email address, and&nbsp;(3) should return the user object itself on success. With this information, we can write the tests for <code>authenticate</code> as in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method_tests">extrait&nbsp;7.11</a>.</p>
+<p>Nous commençons par les tests, que nous utiliserons pour spécifier le comportement que nous attendons de <code>User.authenticate</code>. Il y a trois choses à vérifier&nbsp;: <code>authenticate</code>&nbsp;(1) devrait retourner <code>nil</code> quand la combinaison email/mot de passe est invalide ou&nbsp;(2) quand aucun utilisateur n'existe avec l'adresse mail fournie, et&nbsp;(3) devrait retourner l'objet utilisateur lui-même en cas de succès. Avec ces informations, nous pouvons écrire les tests de <code>authenticate</code> comme dans l'<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method_tests">extrait&nbsp;7.11</a>.</p>
 
 <div class="label" id="code:authenticate_method_tests"></div>
 
@@ -1195,17 +1195,17 @@
     <span class="o">.</span>
     <span class="n">describe</span> <span class="s2">&quot;authenticate method&quot;</span> <span class="k">do</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should return nil on email/password mismatch&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait retourner nul en cas d'inéquation entre email/mot de passe&quot;</span> <span class="k">do</span>
         <span class="n">wrong_password_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="vi">@attr</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;wrongpass&quot;</span><span class="p">)</span>
         <span class="n">wrong_password_user</span><span class="o">.</span><span class="n">should</span> <span class="n">be_nil</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should return nil for an email address with no user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait retourner nil quand un email ne correspond à aucun utilisateur&quot;</span> <span class="k">do</span>
         <span class="n">nonexistent_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="s2">&quot;bar@foo.com&quot;</span><span class="p">,</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
         <span class="n">nonexistent_user</span><span class="o">.</span><span class="n">should</span> <span class="n">be_nil</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should return the user on email/password match&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait retourner l'utilisateur si email/mot de passe correspondent&quot;</span> <span class="k">do</span>
         <span class="n">matching_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="vi">@attr</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
         <span class="n">matching_user</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@user</span>
       <span class="k">end</span>
@@ -1216,13 +1216,13 @@
 </div></div>
 
 
-<p>Now we&rsquo;re ready for the implementation, which will get our tests to pass and show how to define a <em>class method</em> as a bonus. We&rsquo;ve mentioned class methods several times before, most recently in <a class="ref" href="modeling-and-viewing-users-one#sec:base de données_migrations">section&nbsp;6.1.1</a>; a class method is simply a method attached to a class, rather than an instance of that class. For example, <code>new</code>, <code>find</code>, and <code>find_by_email</code> are all class methods on the User class. Outside of the class, they are invoked using the class name, as in <code>User.find</code>, but inside the class we can omit the class name.</p>
+<p>Nous sommes prêts maintenant pour l'implémentation, ce qui fera réussir nos tests et nous montrera comment définir en bonus une <em>méthode de classe</em>. Nous avons mentionné les <em>méthodes de classe</em> plusieurs fois auparavant, tout récemment à la <a class="ref" href="modeling-and-viewing-users-one#sec:base de données_migrations">section&nbsp;6.1.1</a>&nbsp;; une <em>méthode de classe</em> est simplement une méthode attachée à une classe, plutôt qu'à une instance de cette classe. Par exemple, <code>new</code> (<em>nouveau</em>), <code>find</code> (<em>trouver</em>) et <code>find_by_mail</code> (<em>trouver_par_le_mail</em>) sont toutes des méthodes de classe d'une classe User. En dehors de la classe, elles sont invoquées en utilisant le nom de la classe, comme dans <code>User.find</code>, mais à l'intérieur de la classe nous pouvons omettre le nom de la classe.</p>
 
 <div class="label" id="sidebar:self"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 7.1.</span><span class="description">What is <code>self</code>?</span></span>
-<p>We&rsquo;ve talked about how <code>self</code> is &ldquo;the object itself&rdquo;, but exactly what that means depends on context. Inside of an ordinary method, <code>self</code> refers to an <em>instance</em> of the class, that is, the object itself. For example, in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>, <code>self</code> is a <em>user</em>:</p>
+<div class="sidebar"><span class="title"><span class="header">Box 7.1.</span><span class="description"> Qu'est-ce que <code>self</code>&nbsp;?</span></span>
+<p>Nous avons dit comment <code>self</code> est «&nbsp;l'objet lui-même&nbsp;», mais ce que ça signifie dépend du contexte. À l'intérieur d'une méthode ordinaire, <code>self</code> se réfère à une <em>instance</em> de la classe, c'est-à-dire l'objet lui-même. Par exemple, dans l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>, <code>self</code> est un <em>utilisateur</em> (<em>user</em>)&nbsp;:</p>
 
 <pre class="verbatim">  def encrypt_password
     self.salt = make_salt if new_record?
@@ -1230,7 +1230,7 @@
   end</pre>
 
 
-<p>Inside the <code>encrypt_password</code> method, <code>self</code> is a user object, so <code>self.salt</code> is the same as <code>user.salt</code> outside the method:</p>
+<p>À l'intérieur de la méthode <code>encrypt_password</code>, <code>self</code> est l'objet utilisateur, donc <code>self.salt</code> est identique à <code>user.salt</code> en dehors de la méthode&nbsp;:</p>
 
 <pre class="verbatim">  $ rails console
   &gt;&gt; user = User.first
@@ -1238,7 +1238,7 @@
   =&gt; &quot;d3b9af261c502947fbf32f78cb8179b16e62eabacf059451efee404328b2f537&quot;</pre>
 
 
-<p>On the other hand, <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a> shows the definition of <code>authenticate</code>, which uses <code>self</code> to define a <em>class method</em>; here, <code>self</code> is the <code>User</code> class itself:</p>
+<p>D'un autre côté, l'<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a> montre la définition de <code>authenticate</code>, qui utilise <code>self</code> pour définir une <em>méthode de classe</em>&nbsp;; ici, <code>self</code> est la classe <code>User</code> elle-même&nbsp;:</p>
 
 <pre class="verbatim">  def self.authenticate(email, submitted_password)
     .
@@ -1247,14 +1247,14 @@
   end</pre>
 
 
-<p>Because it is defined on the <code>User</code> class, <code>authenticate</code> gets invoked directly on <code>User</code>:</p>
+<p>Parce ce qu'elle est définie dans une classe <code>User</code>,  <code>authenticate</code> est invoquée directement sur <code>User</code>&nbsp;:</p>
 
 <pre class="verbatim">  &gt;&gt; user = User.authenticate('example@railstutorial.org', 'foobar')
   &gt;&gt; user.name
   =&gt; &quot;Utilisateur exemple&quot;</pre>
 
 
-<p>It&rsquo;s worth noting two alternative ways of defining an <code>authenticate</code> class method equivalent to the one shown in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a>. First, we could indicate the <code>User</code> class explicitly by name:</p>
+<p>Il est important de noter une façon différente mais équivalente de définir une méthode de classe <code>authenticate</code>  montrée dans l'<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a>. D'abord, nous pourrions indiquer la classe <code>User</code> explicitement par son nom&nbsp;:</p>
 
 <pre class="verbatim">  def User.authenticate(email, submitted_password)
     .
@@ -1263,7 +1263,7 @@
   end</pre>
 
 
-<p>(Some people might find this syntax clearer, but it&rsquo;s not as idiomatically correct.) Second, we could use the following code, which quite frankly melts my brain:</p>
+<p>(Certains personnes peut trouver cette syntaxe plus claire, mais elle n'est pas aussi correcte, idiomatiquement parlant.) Ensuite, nous pourrions utiliser le code suivant qui, franchement, m'explose le cerveau&nbsp;:</p>
 
 <pre class="verbatim">  class &lt;&lt; self
     def authenticate(email, submitted_password)
@@ -1274,17 +1274,17 @@
   end</pre>
 
 
-<p>The weird <code>class &lt;&lt; self</code> starts a block in which all new methods are automatically class methods. I find this syntax rather confusing, but it&rsquo;s possible you&rsquo;ll encounter it in others&rsquo; code, so it&rsquo;s worth knowing what it does. (I recommend <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> by David&nbsp;A. Black if you want to dig into Ruby details like this one.)</p>
+<p>Ce <code>class &lt;&lt; self</code> bizarre amorce un bloc dans lequel toutes les nouvelles méthodes sont automatiquement des méthodes de classe. Je trouve cette syntaxe plutôt déroutante, mais il est possible que vous la rencontriez dans le code d'autres programmeurs, donc ça vaut le coup de la connaitre (je recommande <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> de David&nbsp;A. Black si vous voulez creuser des détails de Ruby tels que celui-ci).</p>
 </div>
 
 
-<p>The way to define a class method is to use the <code>self</code> keyword in the method definition. (This <code>self</code> is not the same as the <code>self</code> shown in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>; see <a class="ref" href="modeling-and-viewing-users-two#sidebar:self">Box&nbsp;7.1</a>.) <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a> shows this construction in the context of the <code>authenticate</code> method. Note the call to <code>find_by_email</code>, in which we omit the explicit <code>User</code> class name since this method is already inside the <code>User</code> class.</p>
+<p>La façon de définir une méthode de classe est d'utiliser le mot-clé <code>self</code> dans la définition de la méthode (ce <code>self</code> n'est pas le même que le <code>self</code> montré dans l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>&nbsp;; voyez le <a class="ref" href="modeling-and-viewing-users-two#sidebar:self">Box&nbsp;7.1</a>.) L'<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a> montre cette construction dans le contexte de la méthode <code>authenticate</code>. Notez l'appel à <code>find_by_email</code>, dans laquelle nous omettons le nom explicite de classe <code>User</code> puisque cette méthode est déjà à l'intérieur de la classe <code>User</code>.</p>
 
 <div class="label" id="code:authenticate_method"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.12.</span> <span class="description">The <code>User.authenticate</code> method. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.12.</span> <span class="description">La méthode <code>User.authenticate</code>. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1309,23 +1309,23 @@
 </div></div>
 
 
-<p>There are several equivalent ways to write the <code>authenticate</code> method, but I find the implementation above the clearest. It handles two cases (invalid email and a successful match) with explicit <code>return</code> keywords, and handles the third case (password mismatch) implicitly, since in that case we reach the end of the method, which automatically returns <code>nil</code>. See <a class="ref" href="modeling-and-viewing-users-two#sec:more_modeling_users_exercises">section&nbsp;7.5</a> for some of the other possible ways to implement this method.</p>
+<p>Il existe plusieurs façons équivalentes d'écrire la méthode <code>authenticate</code>, mais je trouve l'implémentation ci-dessus la plus claire. Elle traite deux cas (email invalide et correspondance exacte) avec le mot-clé explicite <code>return</code>, et traite le troisième cas (inadéquation du mot de passe) implicitement, puisque dans ce cas nous atteignons la fin de la méthode, ce qui retourne automatiquement la valeur <code>nil</code> (<em>nulle</em>). Voyez la <a class="ref" href="modeling-and-viewing-users-two#sec:more_modeling_users_exercises">section&nbsp;7.5</a> pour quelques unes des autres manières possible d'implémenter cette méthode.</p>
 
 <div class="label" id="sec:better_user_views"></div>
 
 
-<h2><a id="sec:7.3" href="modeling-and-viewing-users-two#sec:better_user_views" class="heading"><span class="number">7.3</span> Better user views</a></h2>
+<h2><a id="sec:7.3" href="modeling-and-viewing-users-two#sec:better_user_views" class="heading"><span class="number">7.3</span> Meilleures vues d'utilisateurs</a></h2>
 
 
-<p>Now that User model is effectively complete,<sup class="footnote" id="fnref:7.12"><a href="#fn:7.12">12</a></sup> we are in a position to add a sample user to the development base de données and make a <code>show</code> page to show some of that user&rsquo;s information. Along the way, we&rsquo;ll add some tests to the Users controller spec started in <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>.</p>
+<p>Maintenant que le modèle User est effectivement achevé,<sup class="footnote" id="fnref:7.12"><a href="#fn:7.12">12</a></sup> nous sommes en mesure d'ajouter un exemple d'utilisateur à la base de données de développement et de faire une page <code>show</code> (<em>montrer</em>, <em>afficher</em>) pour afficher certaines des informations de l'utilisateur. Chemin faisant, nous ajouterons quelques tests au spec du contrôleur User que nous avons abordé à la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>.</p>
 
-<p>Before continuing, it&rsquo;s helpful to see where we left off by recalling what the Users controller spec looks like right now (<a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>). Our tests for the user show page will follow this example, but we&rsquo;ll find that, unlike the tests for the <code>new</code> action, the tests for the <code>show</code> action will require the use of an instance of the User model. We&rsquo;ll meet this challenge using a technique called <em>factories</em>.</p>
+<p>Avant de poursuivre, il est utile de voir où nous en sommes restés en regardant à quoi ressemble le spec du contrôleur User pour le moment (<a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>). Nos tests pour la page d'affichage de l'utilisateur suivront cet exemple, mais nous trouvons que, contrairement aux tests de l'action <code>new</code>, les tests de l'action <code>show</code> exigerons l'utilisation d'une instance du modèle User. Nous allons réussir ce défi en utilisant une technique appelée <em>factories</em> (<em>usines</em>).</p>
 
 <div class="label" id="code:get_new_user_spec_review"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.13.</span> <span class="description">The current Users controller spec. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.13.</span> <span class="description">Le spec du contrôleur User courant. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1334,12 +1334,12 @@
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;new&#39;&quot;</span> <span class="k">do</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;new&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;new&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">)</span>
     <span class="k">end</span>
@@ -1354,16 +1354,16 @@
 <div class="label" id="sec:tests_with_factories"></div>
 
 
-<h3><a id="sec:7.3.1" href="modeling-and-viewing-users-two#sec:tests_with_factories" class="heading"><span class="number">7.3.1</span> Testing the user show page (with factories)</a></h3>
+<h3><a id="sec:7.3.1" href="modeling-and-viewing-users-two#sec:tests_with_factories" class="heading"><span class="number">7.3.1</span> Tester la page d'affichage de l'utilisateur (avec <em>factories</em>)</a></h3>
 
 
-<p>Tests for the Users controller will need instances of User model objects, preferably with pre-defined values. For example, as seen in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>, the Users controller <code>show</code> action needs an instance of the User class, so the tests for this action will require that we create an <code>@user</code> variable somehow. We&rsquo;ll accomplish this goal with a user <em>factory</em>, which is a convenient way to define a user object and insert it into our test base de données.<sup class="footnote" id="fnref:7.13"><a href="#fn:7.13">13</a></sup></p>
+<p>Les tests pour le contrôleur User auront besoin des objets instances du modèle User, avec de préférence des valeurs prédéfinies. Par exemple, comme vu à l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>, l'action <code>show</code> du contrôleur Users a besoin d'une instance de la classe User, donc les tests de cette action vont exiger que nous créons d'une manière ou d'une autre une variable <code>@user</code>. Nous allons accomplir cela avec un utilisateur <em>d'usine</em>, qui est une façon pratique de définir un objet utilisateur et de l'insérer à l'intérieur de notre base de données de test.<sup class="footnote" id="fnref:7.13"><a href="#fn:7.13">13</a></sup></p>
 
 <div class="label" id="code:user_show_reminder"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.14.</span> <span class="description">The user <code>show</code> action from <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.14.</span> <span class="description">L'action utilisateur <code>show</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1378,13 +1378,13 @@
 </div></div>
 
 
-<p>We&rsquo;ll be using the factories generated by <a href="http://github.com/thoughtbot/factory_girl">Factory Girl</a>,<sup class="footnote" id="fnref:7.14"><a href="#fn:7.14">14</a></sup> a Ruby gem produced by the good people at <a href="http://thoughtbot.com/">thoughtbot</a>. As with other Ruby gems, we can install it by adding a line to the <code>Gemfile</code> used by Bundler (<a class="ref" href="modeling-and-viewing-users-two#code:gemfile_factory_girl">extrait&nbsp;7.15</a>). (Since Factory Girl is only needed in the tests, we&rsquo;ve included it in the <code>:test</code> group.)</p>
+<p>Nous allons utiliser les <em>usinages</em> générés par <a href="http://github.com/thoughtbot/factory_girl">Factory Girl</a> (<em>Fille Usine</em> ),<sup class="footnote" id="fnref:7.14"><a href="#fn:7.14">14</a></sup>, un gem Ruby produit par les gens valeureux de <a href="http://thoughtbot.com/">thoughtbot</a>. Comme pour les autres gems Ruby, vous pouvez l'installer en ajoutant une ligne à votre <code>Gemfile</code> utilisé par Bundler (<a class="ref" href="modeling-and-viewing-users-two#code:gemfile_factory_girl">extrait&nbsp;7.15</a>) (puisque Factory Girl est nécessaire seulement pour les tests, nous l'incluons dans le groupe <code>:test</code>).</p>
 
 <div class="label" id="code:gemfile_factory_girl"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.15.</span> <span class="description">Adding Factory Girl to the <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Extrait 7.15.</span> <span class="description">Ajout de Factory Girl dans le <code>Gemfile</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 <span class="o">.</span>
@@ -1400,22 +1400,22 @@
 </div></div>
 
 
-<p>Then install as usual:</p>
+<p>Puis installez-le comme d'habitude&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 </pre></div>
 </div>
 
 
-<p>Now we&rsquo;re ready to create the file <code>spec/factories.rb</code> and define a User factory, as shown in <a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>. By putting the <code>factories.rb</code> file in the <code>spec/</code> directory, we arrange for RSpec to load our factories automatically whenever the tests run.</p>
+<p>Nous sommes maintenant prêts à créer le fichier <code>spec/factories.rb</code> et à définir un utilisateur d'usine, comme le montre l'<a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>. En plaçant le fichier <code>factories.rb</code> dans le dossier <code>spec/</code>, nous nous arrangeons pour que RSpec charge <em>factories</em> automatiquement chaque fois que nous jouons les tests.</p>
 
 <div class="label" id="code:user_factory"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.16.</span> <span class="description">A factory to simulate User model objects. <br /> <code>spec/factories.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.16.</span> <span class="description">Une factory pour simuler des objets de modèle User. <br /> <code>spec/factories.rb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="c1"># By using the symbol &#39;:user&#39;, we get Factory Girl to simulate the User model.</span>
+<div class="code"><div class="highlight"><pre><span class="c1"># En utilisant le symbole &#39;:user&#39;, nous faisons que Factory Girl simule un modèle User.</span>
 <span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
   <span class="n">user</span><span class="o">.</span><span class="n">name</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">email</span>                 <span class="s2">&quot;mhartl@example.com&quot;</span>
@@ -1426,22 +1426,22 @@
 </div></div>
 
 
-<p>With the definition in <a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>, we can create a User factory in the tests like this:</p>
+<p>Avec la définition de l'<a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>, nous pouvons créer un User d'usine dans les tests comme cela&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>As noted in the comment in the first line of <a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>, by using the symbol <code>:user</code> we ensure that Factory Girl will guess that we want to use the User model, so in this case <code>@user</code> will simulate an instance of <code>User</code>.</p>
+<p>Comme l'indique le commentaire de la première ligne de l'<a class="ref" href="modeling-and-viewing-users-two#code:user_factory">extrait&nbsp;7.16</a>, en utilisant le symbole <code>:user</code> nous nous assurons que Factory Girl devinera que nous voulons utiliser un modèle User, donc dans ce cas <code>@user</code> simulera une instance de la classe <code>User</code>.</p>
 
-<p>To use our new User factory in the Users controller spec, we&rsquo;ll create an <code>@user</code> variable in a <code>before(:each)</code> block and then <code>get</code> the show page and verify success (just as we did with the <code>new</code> page in <a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>), while also verifying that the <code>show</code> action pulls the correct user out of the base de données. The result appears in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>. (If you&rsquo;re using Spork, you might have to restart it to get these tests to pass.)</p>
+<p>Pour utiliser notre nouvel Utilisateur d'usine dans le spec du contrôleur Users, nous allons créer une variable <code>@user</code> dans le bloc <code>before(:each)</code> et ensuite <code>get</code> (<em>demander</em>) la page d'affichage et vérifier la réussite (tout comme nous l'avons fait avec la page <code>new</code> de l'<a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">extrait&nbsp;7.13</a>), tout en vérifiant aussi que l'action <code>show</code> récupère l'utilisateur correct de la base de données. Le résultat est présenté dans l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>  (si vous utilisez Spork, vous avez peut-être à le redémarrer pour obtenir la réussite de ces tests).</p>
 
 <div class="label" id="code:get_show_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.17.</span> <span class="description">A test for <code>get</code>ting the user <code>show</code> page, with a user factory. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 7.17.</span> <span class="description">Un test pour <code>get</code>ting (<em>obtenir</em> ) la page utilisateur <code>show</code>, avec un utilisateur d'usine. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1454,12 +1454,12 @@
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should find the right user&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait trouver le bon utilisateur&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
       <span class="n">assigns</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@user</span>
     <span class="k">end</span>
@@ -1472,34 +1472,34 @@
 </div></div>
 
 
-<p>Apart from the first use of a factory, the real novelty here is the use of a <code>assigns(:user)</code>, which is a facility provided by RSpec (via the underlying <tt>Test::Unit</tt> library). The <code>assigns</code> method takes in a symbol argument and returns the value of the corresponding <em>instance</em> variable in the controller action. In other words, in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> the code</p>
+<p>À mart l'utilisation d'une usine, la réelle nouveauté ici est l'utilisateur d'un <code>assigns(:user)</code>, qui est une facilité fourni par RSpec (via la librairie sous-jacente <tt>Test::Unit</tt>). La méthode <code>assigns</code> prend un argument symbolique et retourne la valeur de la variable d'instance correspondante à l'action du contrôleur. En d'autres mots, dans l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">assigns</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>returns the value of the instance variable</p>
+<p>… retourne la valeur de la variable d'instance&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span>
 </pre></div>
 </div>
 
 
-<p>in the <code>show</code> action of the Users controller. The test</p>
+<p>… dans l'action <code>show</code> du contrôleur des utilisateurs. Le test&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">assigns</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@user</span>
 </pre></div>
 </div>
 
 
-<p>then verifies that the variable retrieved from the base de données in the action corresponds to the <code>@user</code> instance created by Factory Girl. It&rsquo;s worth noting that not all Rails programmers use <code>assigns</code> in this context, preferring instead to use a technique called <em>stubbing</em> (<a class="ref" href="modeling-and-viewing-users-two#sidebar:stubbing">Box&nbsp;7.2</a>).</p>
+<p>… vérifie alors que la variable récupérée de la base de données dans l'action correspond à l'instance <code>@user</code> créée par Factory Girl. Il est important de noter que tous les programmeurs Rails utilisent <code>assigns</code> dans ce contexte, la préférant à la technique appelée le <em>stubbing</em> (<a class="ref" href="modeling-and-viewing-users-two#sidebar:stubbing">Box&nbsp;7.2</a>).</p>
 
 <div class="label" id="sidebar:stubbing"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 7.2.</span><span class="description">To <code>stub!</code> or not to <code>stub!</code>.</span></span>
-<p>The code in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> relies on the <code>User.find</code> method in the controller action to retrieve the right user from the test base de données. A second way to achieve this same result is using a technique called <em>stubbing</em>, using RSpec&rsquo;s <code>stub!</code> method:</p>
+<div class="sidebar"><span class="title"><span class="header">Box 7.2.</span><span class="description"><code>Stub</code>er ou ne pas <code>Stub</code>er&nbsp;?</span></span>
+<p>Le code de l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a>s'appuie sur une méthode <code>User.find</code> dans l'action du contrôleur pour récupérer le bon utilisateur de la base de données de test. Une autre manière d'atteindre le même résultat is d'utiliser la méthode appelée le <em>stubbing</em>, en utilisant l méthode RSpec <code>stub!</code>&nbsp;:</p>
 
 <pre class="verbatim">  before(:each)
     @user = Factory(:user)
@@ -1507,64 +1507,63 @@
   end</pre>
 
 
-<p>This code ensures that any call to <code>User.find</code> with the given <code>id</code> will return <code>@user</code>. Since this is just what we have in the application code (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>), the stub will cause RSpec to intercept the call to <code>User.find</code> and, instead of hitting the base de données, return <code>@user</code> instead.</p>
+<p>Ce code s'assure que tout appel à <code>User.find</code> avec l'<code>id</code> donné retournera <code>@user</code>. Puisque c'est juste ce que nous avons dans le code de l'application (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_reminder">extrait&nbsp;7.14</a>), le stub fera que RSpec va intercepter l'appel à <code>User.find</code> et, au lieu de se connecter à la base de données, retournera plutôt <code>@user</code>.</p>
 
-<p>Many Rails programmers, especially RSpec users, prefer this stubbing approach because it separates the controller tests from the model layer. Indeed, the <a href="http://railstutorial.org/book?version=2.3">Rails 2.3 version of this book</a> uses stubs, along with the closely related technique of <em>message expectations</em>. After gaining more experience with stubs and expectations, and especially after fielding lots of questions from readers of the <em>Rails 2.3 Tutorial</em> confused by these issues, I have concluded that stubbing and related techniques are not worth the trouble.</p>
+<p>Ne nombreux programmeurs Rails, spécialement ceux utilisant RSpec, préfèrent cette approche parce qu'elle sépare les tests des controleurs de la couche modèle. En vérité, la <a href="http://railstutorial.org/book?version=2.3">version Rails 2.3 de ce livre</a> utilise stubs, aux côté des techniques très proches de <em>message expectations</em>. Après avoir acquis plus d'expérience avec les stubs et les expectations, et spécialement après avoir répondu à répondre à beaucoup de questions de lecteurs du <em>Tutoriel de la version Rails 2.3</em> déroutés par ces problèmes, j'en suis arrivé à la conclusion que le stubbing et les techniques relatives ne valaient pas tous ces troubles.</p>
 
-<p>Figuring out exactly when to stub things out is difficult, and message expectations are incredibly subtle and error-prone (see, e.g., <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Box&nbsp;8.1 in the <em>Rails 2.3 Tutorial</em> book</a>). To the common objection, &ldquo;But now the controller tests hit the test base de données!&rdquo;, I now find myself saying: &ldquo;So what?&rdquo; In my experience it has never mattered. I see no compelling reason not to hit the model layer in the controller tests, especially when it leads to much simpler tests. If you are interested in learning stubbing and message expectation techniques, I recommend reading the <a href="http://railstutorial.org/book?version=2.3"><em>Ruby on Rails 2.3 Tutorial</em> book</a>. Otherwise, I suggest not worrying about enforcing a full separation of the model and controller layers in Rails tests. Although the controller tests in the rest of this book will hit the test base de données, at a <em>conceptual</em> level it will always be clear which part of MVC is being tested.</p>
+<p>[(Figuring out exactly when to stub things out is difficult, and message expectations are incredibly subtle and error-prone)(Déterminer quand exactement les stubs deviennent difficiles, et les attentes de message sont incroyablement subtiles et sujettes à erreur)] (voir par exemple <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Box&nbsp;8.1 dans le Tutoriel <em>Rails 2.3 Tutorial</em></a>). En objection courante, «&nbsp;mais maintenant les tests de contrôleur se connectent à la base de données de test&nbsp;!&nbsp;», Je trouve maintenant quelque chose à répondre&nbsp;: «&nbsp;Et alors&nbsp;?&nbsp;» Dans mon expérience ça n'a jamais compté. Je ne vois aucune impérieuse raison de ne pas atteindre la couche modèle dans les tests contrôleur, spécialement quand ça conduit à des tests plus simples. Si vous êtes intéressé par l'apprentissage du stubbing et des techniques de <em>message expectation</em>, je recommande la lecture du <a href="http://railstutorial.org/book?version=2.3"><em>Tutoriel Ruby on Rails 2.3</em></a>. Sinon, je suggère de ne pas trop se soucier d'une séparation complète entre couche modèle et couche contrôleur dans les tests Rails. Bien que les tests contrôleur dans la suite de ce livre se connecteront à la base de données, à un niveau <em>conceptuel</em>, la partie du MVC testée restera toujours claire.</p>
 
-<p>By the way, in principle the tests should run faster when the controllers don&rsquo;t hit the base de données, and for the full <em>Rails Tutorial</em> sample application test suite they do&mdash;by around two-tenths of a second.</p>
+<p>En passant, les tests devraient en principe se jouer plus vite quand les contrôleurs ne se connectent pas à la base de données, et pour la suite de tests de l'application exemple complète de ce <em>Tutoriel Rails</em>, ils se connectent &mdash;&nbsp;d'environ deux dixième de seconde.</p>
 </div>
 
 
-<p>There are two other details in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> worth noting. First, in the call to <code>get</code>, the test uses the <em>symbol</em> <code>:show</code> instead of the string <code>&rsquo;show&rsquo;</code>, which is different from the convention in the other tests (for example, in <a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> we wrote <code>get &rsquo;home&rsquo;</code>). Both</p>
+<p>Il existe deux autres détails dans l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> qu'il convient de noter. D'abord, dans l'appel pour <code>get</code>, le test utilise le <em>symbole</em> <code>:show</code> au lieu de la chaine <code>&rsquo;show&rsquo;</code>, ce qui est différent de la convention des autres tests (par exemple, dans l'<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> nous avons écrit <code>get &rsquo;home&rsquo;</code>). Les deux, </p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="ss">:show</span>
 </pre></div>
 </div>
 
 
-<p>and</p>
+<p>… et</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s1">&#39;show&#39;</span>
 </pre></div>
 </div>
 
 
-<p>do the same thing, but when testing the canonical REST actions (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>) I prefer to use symbols, which for some reason feel more natural in this context.<sup class="footnote" id="fnref:7.15"><a href="#fn:7.15">15</a></sup> Second, note that the value of the hash key <code>:id</code>, instead of being the user&rsquo;s <code>id</code> attribute <code>@user.id</code>, is the user object itself:</p>
+<p>… font la même chose, mais en testant les actions REST canoniques (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>) je préfère utiliser des symboles, ce qui pour certaines raison semble plus naturel dans ce contexte.<sup class="footnote" id="fnref:7.15"><a href="#fn:7.15">15</a></sup> Ensuite, notez que la valeur de la clé de hachage <code>:id</code>, au lieu d'être l'attribut <code>id</code> de l'utilisateur <code>@user</code>, est l'objet user lui-même&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
 </pre></div>
 </div>
 
-
-<p>We could use the code</p>
+<p>Nous pourrions utiliser le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">id</span>
 </pre></div>
 </div>
 
 
-<p>to accomplish the same thing, but in this context Rails automatically converts the user object to the corresponding id.<sup class="footnote" id="fnref:7.16"><a href="#fn:7.16">16</a></sup> Using the more succinct construction</p>
+<p>… pour accomplir la même chose, mais dans ce contexte Rails convertit automatiquement l'objet user vers l'<code>id</code> correspondant.<sup class="footnote" id="fnref:7.16"><a href="#fn:7.16">16</a></sup> Utiliser la construction plus succincte&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
 </pre></div>
 </div>
 
 
-<p>is a very common Rails idiom.</p>
+<p>… est un idiome Rails très fréquent.</p>
 
-<p>Because of the code we added in <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>, the test in this section already passes. If you&rsquo;re feeling paranoid, you can comment out the line</p>
+<p>À cause du code que nous avons ajouté dans l'<a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">extrait&nbsp;6.25</a>, le test de cette section réussit déjà. Si vous êtes un peu paranoïaque, vous pouvez commenter (pour la supprimer provisoirement) la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>and verify that the test fails, then uncomment it to get it to pass. (We went through this same process once before, in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.)</p>
+<p>… et vérifiez que le test échoue, puis dé-commenter pour réussir à nouveau (nous sommes passés par le même processus une fois auparavnt, à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>.)</p>
 
 <div class="label" id="sec:a_name_and_a_gravatar"></div>
-
+<!-- FIN FRENCH -->
 
 <h3><a id="sec:7.3.2" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar" class="heading"><span class="number">7.3.2</span> A name and a Gravatar</a></h3>
 
@@ -1598,7 +1597,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">end</span>
@@ -2137,14 +2136,14 @@ For the moment, we&rsquo;ll use this directly in our user show view, as seen in 
 <li id="fn:7.6">Le lecteur attentif peut noter que rien de ce que nous faisons dans cette section ne <em>requiert</em> le cryptage, mais, une fois que nous développons un peu de la théorie des mots de passe sécurisés et écrivons une implémentation basique (<a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>), la seule façon pour la méthode <code>has_password?</code> de fonctionner proprement est que toute la machinerie de cryptage fonctionne aussi bien.&nbsp;<a class="arrow" href="#fnref:7.6">&uarr;</a></li>
 <li id="fn:7.7">Dans mes réglages, la ligne <code>require &rsquo;digest&rsquo;</code> n'est pas nécessaire, mais plusieurs lecteurs m'ont reporté qu'ils rencontraient une erreur <code>NameError</code> s'il ne l'incluait pas explicitement. Ça n'entraine aucun dommage de toute façon, donc j'ai inclus explicitement <code>require</code> juste pour être sûr.&nbsp;<a class="arrow" href="#fnref:7.7">&uarr;</a></li>
 <li id="fn:7.8">En théorie et techniquement, les attaques «&nbsp;arc-en-ciel&nbsp;» pourraient toujours réussir, mais en utilisant un «&nbsp;hachage salé&nbsp;», la réussite est informatiquement infaisable.&nbsp;<a class="arrow" href="#fnref:7.8">&uarr;</a></li>
-<li id="fn:7.9">As noted in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>, the explicit <code>require &rsquo;digest&rsquo;</code> line is unnecessary on some systems, but it does no harm to include it.&nbsp;<a class="arrow" href="#fnref:7.9">&uarr;</a></li>
-<li id="fn:7.10">In past versions of Rails, we could have used the <code>after_validation_before_create</code> callback to set the salt, but it has been eliminated in Rails&nbsp;3. Meanwhile, we can&rsquo;t use the <code>before_create</code> callback because it executes <em>after</em> the <code>before_save</code> callback, and the <code>before_save</code> callback needs the salt.&nbsp;<a class="arrow" href="#fnref:7.10">&uarr;</a></li>
-<li id="fn:7.11">Recall from <a class="ref" href="modeling-and-viewing-users-one#sidebar:base de données_indices">Box&nbsp;6.2</a> that the <em>index</em> on the <code>email</code> column ensures that this retrieval is efficient.&nbsp;<a class="arrow" href="#fnref:7.11">&uarr;</a></li>
-<li id="fn:7.12">We&rsquo;ll plan to add a couple more attributes (one to identify administrative users and one to allow a &ldquo;remember me&rdquo; feature), but they are not strictly necessary. All the <em>essential</em> user attributes have now been defined.&nbsp;<a class="arrow" href="#fnref:7.12">&uarr;</a></li>
-<li id="fn:7.13">Many experienced Rails programmers find that this factory approach is much more flexible than <em>fixtures</em>, which Rails uses by default but can be brittle and difficult to maintain.&nbsp;<a class="arrow" href="#fnref:7.13">&uarr;</a></li>
-<li id="fn:7.14">Presumably &ldquo;Factory Girl&rdquo; is a reference to the <a href="http://www.imdb.com/title/tt0432402/">movie of the same name</a>.&nbsp;<a class="arrow" href="#fnref:7.14">&uarr;</a></li>
-<li id="fn:7.15">I used <code>get &rsquo;new&rsquo;</code> in <a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a> and subsequent tests for the <code>new</code> action because at that point we had yet to encounter the idea of standard REST actions. I&rsquo;ll switch to <code>get :new</code> in future tests.&nbsp;<a class="arrow" href="#fnref:7.15">&uarr;</a></li>
-<li id="fn:7.16">It does this by calling the <code>to_param</code> method on the <code>@user</code> variable.&nbsp;<a class="arrow" href="#fnref:7.16">&uarr;</a></li>
+<li id="fn:7.9">Comme indiqué à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">section&nbsp;7.2.2</a>, la ligne explicite <code>require &rsquo;digest&rsquo;</code> n'est pas nécessaire sur certains systèmes, mais ça ne coûte rien de l'ajouter.&nbsp;<a class="arrow" href="#fnref:7.9">&uarr;</a></li>
+<li id="fn:7.10">Dans les versions précédentes de Rails, nous pouvions utiliser la fonction de rappel <code>after_validation_before_create</code> pour définir le <em>salt</em>, mais elle a été supprimée dans Rails&nbsp;3. En passant, nous ne pouvons pas utiliser la fonction de rappel <code>before_create</code> parce qu'elle s'exécute <em>après</em> la fonction de rappel <code>before_save</code>, et la fonction de rappel <code>before_save</code> a besoin du salt.&nbsp;<a class="arrow" href="#fnref:7.10">&uarr;</a></li>
+<li id="fn:7.11">En vous souvenant du <a class="ref" href="modeling-and-viewing-users-one#sidebar:base de données_indices">Box&nbsp;6.2</a>, l'indexation de la colonne <code>email</code> assurant que cette récupération serait efficace.&nbsp;<a class="arrow" href="#fnref:7.11">&uarr;</a></li>
+<li id="fn:7.12">Nous projetterons d'ajouter une paire d'attributs supplémentaires (une pour identifier un utilisateur administrateur et un pour permettre la fonctionnalité &ldquo;se souvenir de moi&rdquo;), mais ils ne sont pas strictement nécessaires. Tous les attributs d'utilisateur <em>essentiels</em> ont maintenant été définis.&nbsp;<a class="arrow" href="#fnref:7.12">&uarr;</a></li>
+<li id="fn:7.13">De nombreux programmeurs Rails expérimentés trouve que cette approche <em>factory</em> est bien plus flexible que les <em>fixtures</em> (<em>appareils</em>) que Rails utilise par défaut mais peuvent être fragiles et difficile pour la maintenance.&nbsp;<a class="arrow" href="#fnref:7.13">&uarr;</a></li>
+<li id="fn:7.14">&ldquo;Factory Girl&rdquo; fait peut-être référence au <a href="http://www.imdb.com/title/tt0432402/">film éponyme</a>.&nbsp;<a class="arrow" href="#fnref:7.14">&uarr;</a></li>
+<li id="fn:7.15">J'ai utilisé <code>get &rsquo;new&rsquo;</code> dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a> et les tests suivants pour l'action <code>new</code> parce qu'à ce point nous n'avions pas encore rencontré l'idée des actions du concept REST. Je le remplacerai par <code>get :new</code> dans les tests futurs.&nbsp;<a class="arrow" href="#fnref:7.15">&uarr;</a></li>
+<li id="fn:7.16">Il accomplit cela en appelant la méthode <code>to_param</code> sur la variable <code>@user</code>.&nbsp;<a class="arrow" href="#fnref:7.16">&uarr;</a></li>
 <li id="fn:7.17">It&rsquo;s not necessarily always a good idea to make HTML tests this specific, since we don&rsquo;t always want to constrain the HTML layout this tightly. Feel free to experiment and find the right level of detail for your projects and tastes.&nbsp;<a class="arrow" href="#fnref:7.17">&uarr;</a></li>
 <li id="fn:7.18">Instead, if you want <em>unescaped</em> text you have to use the <code>raw</code> method, as in <tt class="verb">&lt;%= raw @title %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
 <li id="fn:7.19">Gravatar was originally created by Tom Preston-Werner, cofounder of <a href="http://github.com/">GitHub</a>, and was acquired and scaled by <a href="http://automattic.com/">Automattic</a> (best known as the makers of <a href="http://wordpress.com/">WordPress</a>).&nbsp;<a class="arrow" href="#fnref:7.19">&uarr;</a></li>

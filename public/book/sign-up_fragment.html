@@ -1582,17 +1582,17 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 <p>En principe, nous en avons fini avec l'inscription de l'utilisateur à ce point, mais vous avez peut-être noté que nous n'avons pas testé la structure du formulaire d'inscription, ni testé que les soumissions fonctionnent vraiment. Bien sûr, nous <em>avons</em> testé ces choses en voyant les pages dans notre navigateur, mais le but ultime des tests automatisés est de s'assurer qu'une fois que les choses marchent, elles continueront de fonctionner de la même façon. Créer de tels tests est le but de cette section &mdash;&nbsp;et le résultat est plutôt sympathique.</p>
 
-<p>One testing method would be to check the HTML structure of the form (using <code>render_views</code> and the <code>have_selector</code> method), and indeed this is a good way to test-drive views. (<a class="ref" href="sign-up#sec:signup_exercises">section&nbsp;8.6</a> has an exercise to this effect.) But I prefer not to test the detailed HTML structure of views&mdash;I don&rsquo;t see any reason why we should have to know that Rails implements user email submission using <code>nom="user[email]"</code>, and indeed any test of that structure would break if a future Rails version changed this convention. Moreover, it would be nice to have a test for the entire signup process: visiting the signup page, filling in the form values, clicking the button, and making sure (if the submission is valid) that a new user gets created in the (test) database.</p>
+<p>Notre méthode de test devrait être de <em>checker</em> la structure HTML  du formulaire (en utilisant <code>render_views</code> et la méthode <code>have_selector</code>), et en effet c'est une bonne manière de tester-diriger les vues (la <a class="ref" href="sign-up#sec:signup_exercises">section&nbsp;8.6</a> a un exercice à cet effet). Mais je préfère ne pas tester la structure HTML détaillée des vues &mdash; je ne vois aucune raison pour laquelle nous devrions devoir savoir que Rails impllémente la soumission de l'adresse mail de l'utilisateur en utilisant <code>nom="user[email]"</code>, et en effet tout test de cette structure deviendrait obsolète si une version future de Rails changeait cette convention. Plus encore, ce serait bien d'avoir un test pour le processus entier d'inscription&nbsp;: la viste de la page d'inscription, le remplissage du formulaire, le clic du bouton de soumission et pour s'assure (si la soumission est valide) qu'une nouvel utilisateur a bien été créé dans la base de données (en mode test).</p>
 
-<p>Though it&rsquo;s not the only way (see <a class="ref" href="sign-up#sidebar:integration_alternatives">Box&nbsp;8.1</a>), my preferred solution to this problem is to use an RSpec integration test, which we first used in <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a> to test the custom routes (such as <tt>/about</tt> for the About page). In that section, we saw only a tiny fraction of the power of integration tests; starting in this section, we&rsquo;ll see just how amazing they can be.</p>
+<p>Bien que ce ne soit pas la seule manière de procéder (voir le <a class="ref" href="sign-up#sidebar:integration_alternatives">Box&nbsp;8.1</a>), ma solution de prédilection à cette question est d'utiliser les tests RSpec d'intégration, que nous avons intialement utilisés à la <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a> pour tester les routes personnalisées (telles que <tt>/about</tt> pour la page «&nbsp;À Propos&nbsp;»). Dans cette section, nous avons vu seulement une petite fraction du pouvoir des tests d'intégration&nbsp;; en abordant cette section, nous allons voir à quel point ils peuvent être impressionnants.</p>
 
 <div class="label" id="sidebar:integration_alternatives"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 8.1.</span><span class="description">Integration alternatives</span></span>
-<p>As we&rsquo;ve seen in this and previous chapters, <em>Ruby on Rails Tutorial</em> uses RSpec for all its tests, including integration tests. In my view, there is no match for the simplicity and power of RSpec integration tests. There are a couple of viable alternatives, though. One is the Rails default, integration testing with <tt>Test::Unit</tt>. This is fine if you use <tt>Test::Unit</tt> elsewhere, but we&rsquo;re using RSpec in this tutorial, and I prefer not to mix RSpec and <tt>Test::Unit</tt> in a single project.</p>
+<div class="sidebar"><span class="title"><span class="header">Box 8.1.</span><span class="description">Alternatives d'intégration</span></span>
+<p>Comme nous l'avons vu dans ce chapitre et le précédent, le <em>Tutoriel Ruby on Rails</em> utilise RSpec pour tous ses tests, incluant les tests d'intégration. Il y a quelques alternative valables, cependant. L'une est celle proposée par Rails par défaut, avec <tt>Test::Unit</tt>. C'est bien si vous utilisez <tt>Test::Unit</tt> ailleurs, mais nous utilisons RSpec dans ce tutoriel, et je préfère ne pas mixer RSpec et <tt>Test::Unit</tt> dans le même projet.</p>
 
-<p>A second option is <a href="http://cukes.info">Cucumber</a>, which works nicely with RSpec and allows the definition of plain-text stories describing application behavior. Many Rails programmers find Cucumber especially convenient when doing client work; since they can be read even by non-technical users, Cucumber tests, or «&nbsp;scenarios&nbsp;», can be shared with (and can sometimes even be written by) the client. Of course, using a testing framework that isn&rsquo;t pure Ruby has a downside, and I find that the plain-text stories can be a bit verbose and (cu)cumbersome. Since we don&rsquo;t have any client requirements in <em>Rails Tutorial</em>, and since I strongly prefer a pure-Ruby testing approach in any case, we&rsquo;ll stick to RSpec integration tests in this book. Nevertheless, I suggest taking a look at some <a href="http://wiki.github.com/aslakhellesoy/cucumber/tutorials-and-related-blog-posts">Cucumber tutorials</a> to see if it suits you.</p>
+<p>Une autre alternative est <a href="http://cukes.info">Cucumber</a> (<em>Concombre</em>), qui fonctionne bien avec RSpec et permet la définition en plain-texte de scénarios décrivant le comportement de l'application. De nombreux programmeurs Rails trouve Cucumber particulièrement pratique pour le travail avec le client&nbsp;; puisque ces tests peuvent peuvent être lus même par des utilisateurs non technicient, les tests Cucumber, or «&nbsp;scénarios&nbsp;», peuvent être partagés avec (et peuvent même parfois être écrit par) le client. Bien sûr, utiliser un framework de testign qui n'est pas en pur Ruby a une contrepartie, et je trouve que les histoires en plain-texte peuvent être un peu bavardes et encom(com)brantes. Puisque nous n'avons pas d'exigence de client dans le <em>Tutoriel Rails</em>, et puisque je préfère largement une approche des tests en pur-Ruby dans tous les cas, nous adoptons les tests d'intégration RSpec dans ce livre. Néanmoins, je vous suggère de jeter un œil au <a href="http://wiki.github.com/aslakhellesoy/cucumber/tutorials-and-related-blog-posts">Tutoriel Cucumber</a> pour voir s'il pourrait vous satisfaire.</p>
 </div>
 
 
@@ -1601,10 +1601,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:integration_tests_with_style"></div>
 
 
-<h3><a id="sec:8.4.1" href="sign-up#sec:integration_tests_with_style" class="heading"><span class="number">8.4.1</span> Integration tests with style</a></h3>
+<h3><a id="sec:8.4.1" href="sign-up#sec:integration_tests_with_style" class="heading"><span class="number">8.4.1</span> Tests d'intégration sur les styles</a></h3>
 
 
-<p>We saw in <a class="ref" href="filling-in-the-layout#code:layout_links_spec">extrait&nbsp;5.13</a> that RSpec integration tests support controller-test&ndash;style constructions such as</p>
+<p>Nous avons vu dans l'<a class="ref" href="filling-in-the-layout#code:layout_links_spec">extrait&nbsp;5.13</a> que les tests d'intégration RSpec supportent le «&nbsp;controller-test&nbsp;» (<em>test contrôleur</em>) &ndash;&nbsp;telles que les constructions de style&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s1">&#39;/&#39;</span>
 <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;titre&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Home&quot;</span><span class="p">)</span>
@@ -1612,10 +1612,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>This is not the only kind of syntax supported, though; RSpec integration tests also support a highly expressive web-navigation syntax.<sup class="footnote" id="fnref:8.9"><a href="#fn:8.9">9</a></sup> In this section, we&rsquo;ll see how to use this syntax to simulate filling out the signin form using code like</p>
+<p>Ce n'est pas le seul type de syntaxe supporté, cependant&nbsp;; Les test d'intégration RSpec supportent aussi une syntaxe hautement plus expressive en navigation web.<sup class="footnote" id="fnref:8.9"><a href="#fn:8.9">9</a></sup> Dans cette section, nous verrons comment utiliser cette syntaxe pour simuler le remplissage de formulaires en utilisant un code comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">visit</span> <span class="n">signin_path</span>
-<span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
+<span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Exemple d'Utilisateur&quot;</span>
 <span class="n">click_button</span>
 </pre></div>
 </div>
@@ -1626,10 +1626,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:failed_signup"></div>
 
 
-<h3><a id="sec:8.4.2" href="sign-up#sec:failed_signup" class="heading"><span class="number">8.4.2</span> Users signup failure should not make a new user</a></h3>
+<h3><a id="sec:8.4.2" href="sign-up#sec:failed_signup" class="heading"><span class="number">8.4.2</span> Un échec d'inscription ne devrait pas créer un nouvel utilisateur</a></h3>
 
 
-<p>Now we&rsquo;re ready to make an integration test for signing up users. As we saw in <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a>, RSpec comes with a generator to make such integration specs; in the present case, our integration tests will contain various actions taken by users, so we&rsquo;ll name the test <code>users</code> accordingly:</p>
+<p>Maintenant nous sommes prêts à faire un test d'intégration pour l'inscription des utilisateurs. Comme nous l'avons vu à la <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a>, RSpec est fourni avec un générateur pour construire de tels specs d'intégration&nbsp;; dans le cas présent, nos tests d'intégration  contiendront des actions variées provoquées par les utilisateurs, donc nous appellerons ce test <code>users</code> (<em>utilisateurs</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate integration_test users
 <span class="go">      invoke  rspec</span>
@@ -1638,14 +1638,14 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>As in <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a>, the generator automatically appends a spec identifier, yielding <code>users_spec.rb</code>.<sup class="footnote" id="fnref:8.10"><a href="#fn:8.10">10</a></sup></p>
+<p>Comme à la <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a>, le générateur ajoute automatiquement un identifiant de spec, appelé <code>users_spec.rb</code>.<sup class="footnote" id="fnref:8.10"><a href="#fn:8.10">10</a></sup></p>
 
-<p>We start with signup failure. A simple way to arrange a failing signup is to visit the signup URL and just click the button, resulting in a page as in <a class="ref" href="sign-up#fig:blank_signup">illustration&nbsp;8.11</a>. Upon failed submission, the response should render the <code>users/new</code> template.  If you inspect the resulting HTML, you should see something like the markup in <a class="ref" href="sign-up#code:error_explanation">extrait&nbsp;8.19</a>. This means that we can test for the presence of error messages by looking for a <code>div</code> tag with the CSS id <code>"error_explanation"</code>. A test for these steps appears in <a class="ref" href="sign-up#code:signup_failure_test">extrait&nbsp;8.20</a>.</p>
+<p>Nous commençons avec un échec d'inscription. Une façon simple d'arranger un échec d'inscription est de visiter l'URL de l'inscription et de cliquer sur le bouton de soumission du formulaire, dont le résultat sera une page comme celle de l'<a class="ref" href="sign-up#fig:blank_signup">illustration&nbsp;8.11</a>. À l'échec de la soumission, la réponse devrait rendre le template <code>users/new</code>. Si vous inspectez le code HTML en résultant, vous devriez voir quelque chose comme le balisage de l'<a class="ref" href="sign-up#code:error_explanation">extrait&nbsp;8.19</a>. Cela signifie que nous pouvons tester la présence des messages d'erreur en cherchant une balise <code>div</code> avec un identifiant (<code>id</code>) <code>"error_explanation"</code>. Un test pour ces étapes est montré dans l'<a class="ref" href="sign-up#code:signup_failure_test">extrait&nbsp;8.20</a>.</p>
 
 <div class="label" id="fig:blank_signup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup.png" alt="blank_signup" /></span></div><div class="caption"><span class="header">Illustration 8.11: </span><span class="description">The result of visiting  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> and just clicking «&nbsp;Inscription&nbsp;».&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup.png" alt="blank_signup" /></span></div><div class="caption"><span class="header">Illustration 8.11: </span><span class="description">Le résultat de la visite de la page  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> et un simple clic sur le bouton «&nbsp;Inscription&nbsp;».&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1654,7 +1654,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.19.</span> <span class="description">The error explanation <code>div</code> from the page in <a class="ref" href="sign-up#fig:blank_signup">illustration&nbsp;8.11</a>.</span>       
+<div class="listing"><span class="header">Extrait 8.19.</span> <span class="description">Le <code>div</code> d'explication de l'erreur de la page de l'<a class="ref" href="sign-up#fig:blank_signup">illustration&nbsp;8.11</a>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;error_explanation&quot;</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h2&gt;</span>5 errors prohibited this user from being saved<span class="nt">&lt;/h2&gt;</span>
@@ -1677,7 +1677,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.20.</span> <span class="description">Testing signup failure. <br /> <code>spec/requests/users_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.20.</span> <span class="description">Tester l'échec de l'inscription. <br /> <code>spec/requests/users_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1687,7 +1687,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
     <span class="n">describe</span> <span class="s2">&quot;failure&quot;</span> <span class="k">do</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should not make a new user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;ne devrait pas créer un nouvel utilisateur&quot;</span> <span class="k">do</span>
         <span class="n">visit</span> <span class="n">signup_path</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
@@ -1704,20 +1704,20 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>Here <code>"div#error_explanation"</code> is CSS-inspired shorthand for</p>
+<p>Ici, <code>"div#error_explanation"</code> est une inscription inspirée du style CSS pour&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Notice how natural the language is in <a class="ref" href="sign-up#code:signup_failure_test">extrait&nbsp;8.20</a>. The only problem is that it doesn&rsquo;t <em>quite</em> test what we want: we&rsquo;re not actually testing that a failed submission fails to create a new user. To do so, we need to wrap the test steps in a single package, and then check that it doesn&rsquo;t change the <code>User</code> count. As we saw in <a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a> and <a class="ref" href="sign-up#code:signup_success_tests">extrait&nbsp;8.14</a>, this can be accomplished with a <code>lambda</code>. In those cases, the <code>lambda</code> block only contained a single line, but we see in <a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a> that it can wrap multiple lines just as easily.</p>
+<p>Notez l'aspect naturel du langage dans l'<a class="ref" href="sign-up#code:signup_failure_test">extrait&nbsp;8.20</a>. Le seul problème est que il ne teste <em>pas exactement</em> ce que nous voulons&nbsp;: nous ne testons pas en réalité que l'échec de la soumission échoue pour créer un nouvel utilisateur. Pour ce faire, nous avons besoin d'<em>enrouler</em> les étapes de test dans un unique package, et alors de vérifier qu'il ne modifie pas le nombre d'utilisateurs. Comme nous le voyons dans l'<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a> et l'<a class="ref" href="sign-up#code:signup_success_tests">extrait&nbsp;8.14</a>, cela peut être accompli avec un bloc <code>lambda</code>. Dans ces cas-là, le bloc <code>lambda</code> contient une seule ligne, mais nous voyons dans l'<a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a> qu'il peut contenir des lignes multiples aussi facilement.</p>
 
 <div class="label" id="code:signup_failure_test_lambda"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.21.</span> <span class="description">Testing signup failure with a <code>lambda</code>. <br /> <code>spec/requests/users_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.21.</span> <span class="description">Tester l'échec de l'inscription avec un bloc <code>lambda</code>. <br /> <code>spec/requests/users_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1727,7 +1727,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
     <span class="n">describe</span> <span class="s2">&quot;failure&quot;</span> <span class="k">do</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should not make a new user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;ne devrait pas créer un nouvel utilisateur&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">visit</span> <span class="n">signup_path</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
@@ -1746,30 +1746,30 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>As in <a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>, this uses</p>
+<p>Comme dans l'<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>, celui utilise&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">should_not</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>to verify that the code inside the <code>lambda</code> block doesn&rsquo;t change the value of <code>User.count</code>.</p>
+<p>… pour vérifier que le code à l'intérieur du bloc <code>lambda</code> ne change pas la valeur de <code>User.count</code> (<em>Utilisateur.compter</em>).</p>
 
-<p>The integration test in <a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a> ties together all the different parts of Rails, including models, views, controllers, routing, and helpers. It provides an end-to-end verification that our signup machinery is working, at least for failed submissions.</p>
+<p>Le test d'intégration de l'<a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a> attache ensemble les différentes parties de Rails, en incluant les modèles, les vues, les contrôleurs, les routes et les helpers. Ça fournit une vérification de bout en bout de notre machinerie d'inscription, au moins pour les échecs de soumission.</p>
 
 <div class="label" id="sec:successful_signup"></div>
 
 
-<h3><a id="sec:8.4.3" href="sign-up#sec:successful_signup" class="heading"><span class="number">8.4.3</span> Users signup success should make a new user</a></h3>
+<h3><a id="sec:8.4.3" href="sign-up#sec:successful_signup" class="heading"><span class="number">8.4.3</span> Le succès d'une inscription devrait créer un nouvel utilisateur</a></h3>
 
 
-<p>We come now to the integration test for successful signup. In this case, we need to fill in the signup fields with valid user data. When we do, the result should be the user show page with a «&nbsp;flash success&nbsp;» <code>div</code> tag, and it should change the User count by&nbsp;1. <a class="ref" href="sign-up#code:signup_success_test">extrait&nbsp;8.22</a> shows how to do it.</p>
+<p>Nous en arrivons au test d'intégration pour la réussite d'une inscription. Dans ce cas, nous avons besoin de remplir les champs d'inscription avec des données d'utilisateur valides. Quand nous le faison, le résultat doit être la page d'affichage de l'utilisateur avec une balise <code>div</code> contenant un message flash de réussite, et ça doit changer le nombre d'utilisateurs en l'incrémentant de&nbsp;1. L'<a class="ref" href="sign-up#code:signup_success_test">extrait&nbsp;8.22</a> montre comment réaliser cela.</p>
 
 <div class="label" id="code:signup_success_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.22.</span> <span class="description">Testing signup success. <br /> <code>spec/requests/users_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.22.</span> <span class="description">Tester la réussite de l'inscription. <br /> <code>spec/requests/users_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1781,7 +1781,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
     <span class="o">.</span>
     <span class="n">describe</span> <span class="s2">&quot;success&quot;</span> <span class="k">do</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should make a new user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait créer un nouvel utilisateurr&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">visit</span> <span class="n">signup_path</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
@@ -1790,7 +1790,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
           <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
           <span class="n">click_button</span>
           <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;div.flash.success&quot;</span><span class="p">,</span>
-                                        <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+                                        <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bienvenue&quot;</span><span class="p">)</span>
           <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;users/show&#39;</span><span class="p">)</span>
         <span class="k">end</span><span class="o">.</span><span class="n">should</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
       <span class="k">end</span>
@@ -1801,11 +1801,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>By the way, although it&rsquo;s not obvious from the RSpec documentation, you can use the CSS id of the text box instead of the label, so <code>fill_in :user_nom</code> also works.<sup class="footnote" id="fnref:8.11"><a href="#fn:8.11">11</a></sup> (This is especially nice for forms that don&rsquo;t use labels.)</p>
+<p>En passant, bien que ce ne soit pas évident dans la document RSpec, nous pouvons utiliser l'id CSS de la boite de texte au lieu du label, donc <code>fill_in :user_nom</code> fonctionne aussi.<sup class="footnote" id="fnref:8.11"><a href="#fn:8.11">11</a></sup> (c'est spécialement bienvenu pour les formulaires qui n'utilisent pas les labels).</p>
 
-<p>I hope you agree that this web navigation syntax is incredibly natural and succinct. For example, to fill in a field with a value, we just use code like this:</p>
+<p>J'espère que vous êtes d'accord que la syntaxe de navigation web est incroyablement naturelle et succincte. Par exemple, pour remplir un champ avec une valeur, nous utilisons simplement du code tel que&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Utilisateur exemple&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>     <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
@@ -1813,11 +1813,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>Here the first arguments to <code>fill_in</code> are the label values, i.e., exactly the text the user sees in the browser; there&rsquo;s no need to know anything about the underlying HTML structure generated by the Rails <code>form_for</code> helper.</p>
+<p>Ici, le premier argument de <code>fill_in</code> sont les valeurs de labels, c'est-à-dire le texte exact que l'utilisateur voit dans son navigateur&nbsp;; il n'y a pas besoin de savoir quoi que ce soit sur la structure HTML sous-jacente générée par l'<em>helper</em> <code>form_for</code> de Rails.</p>
 
-<p>Finally, we come to the coup de gr&acirc;ce&mdash;testing that successful signup actually creates a user in the database:</p>
+<p>Pour finir, nous en arrivons au coup de grâce &mdash;&nbsp;tester que la réussite de l'inscription crée bien un nouvel utilisateur dans la base de données&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should make a new user&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait créer un nouvel utilisateurr&quot;</span> <span class="k">do</span>
   <span class="nb">lambda</span> <span class="k">do</span>
     <span class="o">.</span>
     <span class="o">.</span>
@@ -1827,7 +1827,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>As in <a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a>, we&rsquo;ve wrapped the code for a successful signup in a <code>lambda</code> block. In this case, instead of making sure that the User count <em>doesn&rsquo;t</em> change, we verify that it increases by&nbsp;1 due to a User record being created in the test database. The result is as follows:</p>
+<p>Comme dans l'<a class="ref" href="sign-up#code:signup_failure_test_lambda">extrait&nbsp;8.21</a>, nous <em>enroulant le code de la réussite d'une ins</em> dans un bloc <code>lambda</code>. Dans ce cas, au lieu de nous assurer que le nombre d'utilisateurs ne change pas, nous vérifions qu'il s'incrémente bien de&nbsp;1 à cause de l'enregistrement de l'utilisateur créé dans la base de données de test. Le résultat est le suivant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/requests/users_spec.rb 
 <span class="go">..</span>
@@ -1839,17 +1839,17 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>With that, our signup integration tests are complete, and we can be confident that, if users don&rsquo;t join our site, it&rsquo;s not because the signup form is broken.</p>
+<p>Avec ça, nos tests d'intégration de l'inscription sont achevés, et nous pouvons être confiant que si les utilisateurs ne s'inscrivent pas à notre site, ça n'est pas parce que le formulaire d'inscription est défectueux.</p>
 
 <h2><a id="sec:8.5" href="sign-up#sec:8.5" class="heading"><span class="number">8.5</span> Conclusion</a></h2>
 
 
-<p>Being able to sign up users is a major milestone for our application. Though the sample app has yet to accomplish anything useful, we have laid an essential foundation for all future development. In the next two chapters, we will complete two more major milestones: first, in <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a> we will complete our authentication machinery by allowing users to sign in and out of the application; second, in <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> we will allow all users to update their account information and will allow site administrators to delete users, while also adding page protection to enforce a site security model, thereby completing the full suite of the Users resource REST actions from <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>.</p>
+<p>La possibilité pour les utilisateurs de s'inscrire est une étape capitale de notre application. Bien que l'application exemple n'accomplit encore rien d'utile, nous avons posé les bass essentielles pour tout le futur développement. Dans les deux chapitres suivants, nous achèverons deux étapes tout aussi capitales&nbsp;: d'abord, au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a> nous achèverons notre machinerie d'authentification en permettant aux utilisateurs de s'identifier et de se déconnecter de l'application&nbsp;; ensuite, au chapitre <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> nous permettrons à tous les utilisateurs d'actualiser les informations de leur compte et permettrons au admistrateurs de supprimer des utilisateurs, cela en complétant la suite complète des actions REST de la ressource Users de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>.</p>
 
-<p>As usual, if you&rsquo;re using Git, you should merge your changes into the <code>master</code> branch at this point:</p>
+<p>Comme d'habitude, si vous utilisez Git, vous devriez fusionner vos changements dans la branch maitresse&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;User signup complete&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Inscription utilisateur finie&quot;</span>
 <span class="gp">$</span> git checkout master
 <span class="gp">$</span> git merge signing-up
 </pre></div>
@@ -1866,11 +1866,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 <ol>
 
-<li>Using the model in <a class="ref" href="sign-up#code:field_tests">extrait&nbsp;8.23</a>, write tests to check for the presence of each field on the signup form. (Don&rsquo;t forget the <code>render_views</code> line, which is essential for this to work.)</li>
+<li>En s'inspirant de l'<a class="ref" href="sign-up#code:field_tests">extrait&nbsp;8.23</a>, écrivez des tests pour vérifier la présence de chaque champ de saisie dans le formulaire d'inscription (n'oubliez pas la ligne <code>render_views</code>, qui est essentielle pour que cela fonctionne).</li>
 
-<li>Oftentimes signup forms will clear the password field for failed submissions, as shown in <a class="ref" href="sign-up#fig:cleared_password">illustration&nbsp;8.12</a>. Modify the Users controller <code>create</code> action to replicate this behavior. <em>Hint:</em> Reset <code>@user.password</code>.</li>
+<li>Souvent, les formulaires d'inscription effaceront les champs de mot de passer pour les soumissions défectueuses, comme le montrer l'<a class="ref" href="sign-up#fig:cleared_password">illustration&nbsp;8.12</a>. Modifiez l'action <code>create</code> du contrôleur Users pour répliquer ce comportement. <em>Astuce&nbsp;:</em> Ré-initialisez <code>@user.password</code>.</li>
 
-<li>The flash HTML in <a class="ref" href="sign-up#code:layout_flash">extrait&nbsp;8.16</a> is a particularly ugly combination of HTML and ERb. Verify by running the test suite that the cleaner code in <a class="ref" href="sign-up#code:layout_flash_content_tag">extrait&nbsp;8.24</a>, which uses the Rails <code>content_tag</code> helper, also works.</li>
+<li>Le flash HTML de l'<a class="ref" href="sign-up#code:layout_flash">extrait&nbsp;8.16</a> est une combinaison particulière laide de HTML et de ERb. Vérifiez en jouant la suite de tests que le code plus propre de l'<a class="ref" href="sign-up#code:layout_flash_content_tag">extrait&nbsp;8.24</a>, qui utilise l'helper Rails <code>content_tag</code>, fonctionne aussi.</li>
 
 </ol>
 
@@ -1881,7 +1881,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.23.</span> <span class="description">A template for testing for each field on the signup form. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.23.</span> <span class="description">Un template pour tester tous les champs du formulaire d'inscription. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1895,16 +1895,16 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
     <span class="o">.</span>
     <span class="o">.</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a name field&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un champ nom&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:new</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;input[nom=&#39;user[nom]&#39;][type=&#39;text&#39;]&quot;</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have an email field&quot;</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un champ email&quot;</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a password field&quot;</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un champ mot de passe&quot;</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a password confirmation field&quot;</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un champ confirmation du mot de passe&quot;</span>
   <span class="k">end</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1919,7 +1919,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="fig:cleared_password"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/cleared_password.png" alt="cleared_password" /></span></div><div class="caption"><span class="header">Illustration 8.12: </span><span class="description">A failed signup form submission with the password field cleared.&nbsp;<a href="http://railstutorial.org/images/figures/cleared_password-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/cleared_password.png" alt="cleared_password" /></span></div><div class="caption"><span class="header">Illustration 8.12: </span><span class="description">Un échec de la soumission du formulaire d'inscription avec le champ du mot de passe effacé.&nbsp;<a href="http://railstutorial.org/images/figures/cleared_password-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1928,7 +1928,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.24.</span> <span class="description">The <code>flash</code> ERb in the site layout using <code>content_tag</code>. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 8.24.</span> <span class="description">Le <code>flash</code> ERb dans le layout du site en utilisant <code>content_tag</code>. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1950,10 +1950,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 
 
 <div class="navigation">  <a class="prev_page" href="modeling-and-viewing-users-two#top">
-    &laquo;&nbsp;<span class="number">chapitre 7</span> Modeling and viewing users, part II
+    &laquo;&nbsp;<span class="number">chapitre 7</span> Modéliser et afficher les utilisateurs, partie II
   </a>
   <a class="next_page" href="sign-in-sign-out#top">
-    <span class="number">chapitre 9</span> Sign in, sign out&nbsp;&raquo;
+    <span class="number">chapitre 9</span> Connexion, déconnexion&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
@@ -1963,11 +1963,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <li id="fn:8.4">Je l'ai compris en consultant <code>pluralize</code> dans l'API Rails.&nbsp;<a class="arrow" href="#fnref:8.4">&uarr;</a></li>
 <li id="fn:8.5">Dans le cas où vous seriez curieux, le code de réponse eest le <tt>302</tt>, en contraste avec la redirection «&nbsp;permanente&nbsp;» <tt>301</tt> exposée brièvement dans le <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>.&nbsp;<a class="arrow" href="#fnref:8.5">&uarr;</a></li>
 <li id="fn:8.6">Notez que la clé <code>:success</code> est un symbole, mais le code Ruby embarqué le convertit automatiquement en une chaine <code>"success"</code> avant de l'insérer dans le.&nbsp;<a class="arrow" href="#fnref:8.6">&uarr;</a></li>
-<li id="fn:8.7">Actually, we&rsquo;ll use the closely related <code>flash.now</code>, but we&rsquo;ll defer that subtlety until we need it.&nbsp;<a class="arrow" href="#fnref:8.7">&uarr;</a></li>
-<li id="fn:8.8">The indices are zero-offset, as with arrays (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>), so a return value of <code>0</code> means the string matches the regular expression starting with the first character.&nbsp;<a class="arrow" href="#fnref:8.8">&uarr;</a></li>
+<li id="fn:8.7">En fait, nous utiliserons le proche relatif <code>flash.now</code>, mais nous différerons cette subtilité jusqu'à ce que nous en ayons besoin.&nbsp;<a class="arrow" href="#fnref:8.7">&uarr;</a></li>
+<li id="fn:8.8">Cet indice est «&nbsp;offset-zéro&nbsp;», comme pour les listes (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>), donc une valeur retournée valant&nbsp;<code>0</code> signifie que l'expression a été trouvée dans la chaine, commençant au premier caractère.&nbsp;<a class="arrow" href="#fnref:8.8">&uarr;</a></li>
 <li id="fn:8.9">Au moment où j'écris ces lignes, cette syntaxe est disponible grâce à <a href="http://github.com/brynary/webrat">Webrat</a>, qui est apparue comme une dépendance gem de <tt>rspec-rails</tt>, mais que Webrat a écrit avant l'adoption généralisée de <a href="http://rack.rubyforge.org/">Rack</a> et sera peut-être supplantée par le projet  <a href="http://github.com/jnicklas/capybara">Capybara</a>. Heureusement,, Capybara est conçu comme une solution de remplacement de Webrat, donc la syntaxe devrait rester la même.&nbsp;<a class="arrow" href="#fnref:8.9">&uarr;</a></li>
-<li id="fn:8.10">Note the plural; this is <em>not</em> the User spec <code>user_spec.rb</code>, which is a model test, not an integration test.&nbsp;<a class="arrow" href="#fnref:8.10">&uarr;</a></li>
-<li id="fn:8.11">You can use Firebug or your browser&rsquo;s «&nbsp;view source&nbsp;» if you need to figure out the id. Or you can note that Rails uses the name of the resource and the name of the attribute separated with an underscore, yielding <code>user_nom</code>, <code>user_email</code>, etc.&nbsp;<a class="arrow" href="#fnref:8.11">&uarr;</a></li>
+<li id="fn:8.10">Notez le pluriel&nbsp;: ce n'est <em>pas</em> le spec User <code>user_spec.rb</code>, qui est un test de <em>modèle</em>, pas un test d'intégration.&nbsp;<a class="arrow" href="#fnref:8.10">&uarr;</a></li>
+<li id="fn:8.11">Vous pouvez utiliser Firebug ou votre «&nbsp;code source de la page&nbsp;» de votre navigateur si vous avez besoin de comprendre les ids. Ou vous pouvez noter que Rails utilise le nom de la ressource et le nom de l'attribut séparé par un tiret plat, rendant <code>user_nom</code>, <code>user_email</code>, etc.&nbsp;<a class="arrow" href="#fnref:8.11">&uarr;</a></li>
 </ol>
 </div>
 

@@ -1,4 +1,6 @@
-
+<!--
+	chapitre : 3 Pages statiques courantes
+-->
 
 <h1 class="title">Tutoriel Ruby on Rails </h1>
 
@@ -19,7 +21,7 @@
 <li class="section"><a href="beginning#sec:introduction"><span class="number">1.1</span> Introduction</a></li>
 <li><ol>
 <li class="subsection"><a href="beginning#sec:comments_for_various_readers"><span class="number">1.1.1</span> Commentaires pour les lecteurs différents</a></li>
-<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> &ldquo;Dimensionner&rdquo; Rails</a></li>
+<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> «&nbsp;Dimensionner&nbsp;» Rails</a></li>
 <li class="subsection"><a href="beginning#sec:conventions"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></li></ol></li>
 <li class="section"><a href="beginning#sec:up_and_running"><span class="number">1.2</span> [(Up and running)(En route pour le démarrage)]</a></li>
 <li><ol>
@@ -378,7 +380,7 @@
 
 <p> <span class="preamble">
  <span id="author">
-<strong> À propos de l'auteur</strong> <br />
+<strong> À Propos de l'auteur</strong> <br />
  </span>
  </span></p>
 
@@ -437,11 +439,11 @@
 <h1 class="chapter"><a id="sec:3" href="static-pages#top" class="heading"><span class="number">Chapitre 3</span> Pages statiques courantes</a></h1>
 
 
-<p>Dans ce chapitre, nous commencerons à développer l'application exemple qui nous servira de base tout au long de ce tutoriel. Bien que l'application exemple aient éventuellement des utilisateurs, des micro-messages et un patch d'authentification complet, nous commencerons par un sujet apparemment limité&nbsp;: la création de pages statiques. Malgré son apparente simplicité, la création de pages statiques est une exercice hautement formateur, riche en implications $mdash;&nbsp;un parfait commencement pour notre application naissante.</p>
+<p>Dans ce chapitre, nous commencerons à développer l'<strong><em>Application Exemple</em></strong> qui nous servira de base tout au long de ce tutoriel. Bien que cette <em>Application Exemple</em> puissent éventuellement avoir des utilisateurs, des micro-messages et un patch d'authentification complet, nous commencerons par un sujet en apparence plus limité&nbsp;: la création de pages statiques. Malgré son apparente simplicité, la création de pages statiques est une exercice hautement formateur, riche en implications &mdash;&nbsp;un parfait commencement pour notre application naissante&nbsp;!</p>
 
-<p>Bien que Rails soit destiné à créer des sites web dynamique avec base de données, Rails excèle aussi à faire ce genre de pages statiques que nous pouvons faire avec des fichiers de code HTML brut. En fait, utiliser Rails même pour des pages statiques produit un avantage certain&nbsp;: nous pouvons ajouter seulement une <em>petite</em> quantité de code dynamique. Nous verrons comment dans ce chapitre. Chemin faisant, nous aurons un avant-goût du <em>testing automatique</em>, qui nous aidera à nous sentir plus confiant envers notre code. Plus encore, avoir une bonne batterie de tests nous permet de <em>restructurer</em> notre code en toute confiance, en changeant sa forme sans changer sa fonction.</p>
+<p>Bien que Rails soit destiné à créer des sites web dynamiques avec base de données, il excèle aussi à faire ce genre de pages statiques que nous pouvons créer simplement par des fichiers de code HTML brut. En fait, utiliser Rails même pour des pages statiques produit un avantage certain&nbsp;: nous pouvons ajouter seulement une <em>petite</em> quantité de code dynamique. Nous verrons comment dans ce chapitre. Chemin faisant, nous aurons un avant-goût du <em>testing automatique</em>, qui nous aidera à nous sentir plus confiant en notre code. Plus loin encore, avoir une bonne suite de tests nous permettra de <em>restructurer</em> notre code en toute confiance, en changeant sa forme sans altérer sa fonction.</p>
 
-<p>Comme au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, avant de commencer nous avons besoin de créer un nouveau projet Rails, cette fois appelé <tt>sample_app</tt> (<em>application exemple</em>)&nbsp;:</p>
+<p>Comme au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, avant de commencer nous avons besoin de créer un nouveau projet Rails, cette fois appelé <tt>sample_app</tt> (<em>Application Exemple</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/rails_projects
 <span class="gp">$</span> rails new sample_app -T
@@ -450,15 +452,15 @@
 </div>
 
 
-<p>Ici, l'option <code>-T</code> ajoutée à la commande <code>rails</code> demande à Rails de ne pas générer le dossier <code>test</code> associé au frameword par défaut <tt>Test::Unit</tt>. Cela ne signifie pas que nous n'exécuterons pas de tests&nbsp;; au contraire, dès la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a> nous utiliserons un framework de test alternatif appelé <em>RSpec</em> pour écrire une suite de test approfondie.</p>
+<p>Ici, l'option <code>-T</code> ajoutée à la commande <code>rails</code> demande à Rails de ne pas générer le dossier <code>test</code> associé au frameword par défaut <tt>Test::Unit</tt>. Cela ne signifie pas que nous n'exécuterons pas de tests&nbsp;; au contraire, dès la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a> nous utiliserons un framework de test alternatif appelé <em>RSpec</em> pour réaliser une suite approfondie de tests.</p>
 
-<p>Comme à la <a class="ref" href="a-demo-app#sec:planning_the_application">section&nbsp;2.1</a>, notre prochaine étape consiste à utiliser un éditeur de texte pour actualiser le fichier <code>Gemfile</code> avec les gems nécessaires à notre application (souvenez-vous que vous pouvez avoir besoin de la version <tt>1.2.5</tt> du gem <tt>sqlite3-ruby</tt>, en fonction de votre système d'exploitation). D'un autre côté, pour l'application exemple, nous aurons aussi besoin de deux nouveaux gems&nbsp;: le gem RSpec et le gem de la librairie RSpec spécifique à Rails. Le code pour les inclure est montré dans l'<a class="ref" href="static-pages#code:gemfile_rspec">extrait&nbsp;3.1</a> (<em>note</em>&nbsp;: si vous préférez installer <em>tous</em> les gems nécessaire à l'application exemple, vous devriez utiliser le code de l'<a class="ref" href="updating-showing-and-deleting-users#code:final_gemfile">extrait&nbsp;10.42</a> dès à présent).</p>
+<p>Comme à la <a class="ref" href="a-demo-app#sec:planning_the_application">section&nbsp;2.1</a>, notre prochaine étape consiste à utiliser un éditeur de texte pour actualiser le fichier <code>Gemfile</code> avec les gems nécessaires à notre application (souvenez-vous que vous pouvez avoir besoin de la version <tt>1.2.5</tt> du gem <tt>sqlite3-ruby</tt>, en fonction de votre système d'exploitation). D'un autre côté, pour l'<em>Application Exemple</em>, nous aurons aussi besoin de deux nouveaux gems&nbsp;: le gem RSpec et le gem de la librairie RSpec spécifique à Rails. Le code pour les inclure est montré dans l'<a class="ref" href="static-pages#code:gemfile_rspec">extrait&nbsp;3.1</a> (<em>note</em>&nbsp;: si vous préférez installer <em>tous</em> les gems nécessaire à l'<em>Application Exemple</em>, vous devriez utiliser le code de l'<a class="ref" href="updating-showing-and-deleting-users#code:final_gemfile">extrait&nbsp;10.42</a> dès à présent).</p>
 
 <div class="label" id="code:gemfile_rspec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.1.</span> <span class="description">Un <code>Gemfile</code> pour l'application exemple.</span>       
+<div class="listing"><span class="header">Extrait 3.1.</span> <span class="description">Un <code>Gemfile</code> pour l'<em>Application Exemple</em>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -477,25 +479,25 @@
 </div></div>
 
 
-<p>Ceci inclut <tt>rspec-rails</tt> en mode développement, de telle sorte que nous avons accès aux génératers spécifiques à RSpec, et il inclut également <tt>rspec</tt> en mode de test dans le but de jouer les tests (nous incluons aussi un gem pour <a href="http://github.com/brynary/webrat">Webrat</a>, un utilitaire de test qui a l'habitude d'être installé automatiquement comme dépendance mais a besoin ici d'être inclus explicitement). Pour installer et inclure les gems RSpec, nous utilisons <code>bundle install</code> comme d'habitude&nbsp;:</p>
+<p>Ceci inclut <tt>rspec-rails</tt> en mode développement, de telle sorte que nous avons accès aux génératers spécifiques à RSpec, et il inclut également <tt>rspec</tt> en mode de test dans le but de jouer les tests (nous incluons aussi un gem pour <a href="http://github.com/brynary/webrat">Webrat</a>, un utilitaire de test qui a l'habitude d'être installé automatiquement en tant que dépendance mais a besoin ici d'être inclus explicitement). Pour installer et inclure les gems RSpec, nous utilisons <code>bundle install</code> comme d'habitude&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> [sudo] bundle install
 </pre></div>
 </div>
 
 
-<p>Dans le but de demander à Rails d'utiliser RSpec au lieu de <tt>Test::Unit</tt>, nous avons besoin d'installer les fichiers nécessités par RSpec. Cela peut être accompli avec <code>rails generate</code>&nbsp;:</p>
+<p>Pour demander à Rails d'utiliser RSpec plutôt que <tt>Test::Unit</tt> (qui est utilisé par défaut), nous avons besoin d'installer les fichiers nécessaires à RSpec. Cela peut être accompli avec <code>rails generate</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate rspec:install
 </pre></div>
 </div>
 
 
-<p>Avec ça, tout ce qu'il nous reste à faire est d'initialiser le repository Git&nbsp;:<sup class="footnote" id="fnref:3.1"><a href="#fn:3.1">1</a></sup></p>
+<p>Ceci fait, il ne nous reste plus qu'à initialiser le repository Git&nbsp;:<sup class="footnote" id="fnref:3.1"><a href="#fn:3.1">1</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git init
 <span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Depot Initial&quot;</span>
 </pre></div>
 </div>
 
@@ -506,18 +508,18 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.2.</span> <span class="description">Un fichier <code>README</code> amélioré pour l'application exemple.</span>       
+<div class="listing"><span class="header">Extrait 3.2.</span> <span class="description">Un fichier <code>README</code> amélioré pour l'<em>Application Exemple</em>.</span>       
 </div>
-<div class="code"><div class="highlight"><pre># Tutoriel Ruby on Rails&nbsp;: sample application (application exemple)
+<div class="code"><div class="highlight"><pre># Tutoriel Ruby on Rails&nbsp;: Application Exemple
 
-C'est l'application exemple pour 
+C'est l'<em>Application Exemple</em> pour le
 [*Tutoriel Ruby on Rails&nbsp;: Apprendre Rails par l'exemple*](http://railstutorial.org/)
 par [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div></div>
 
 
-<p>Changez alors cela pour utiliser l'extension <code>markdown</code> et déposer les changements&nbsp;:</p>
+<p>Changez ce fichier pour utiliser l'extension <code>markdown</code> et déposez les changements&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git mv README README.markdown
 <span class="gp">$</span> git commit -a -m <span class="s2">&quot;Amelioration du README&quot;</span>
@@ -530,10 +532,10 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:create_repository"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_repository.png" alt="create_repository" /></span></div><div class="caption"><span class="header">Illustration 3.1: </span><span class="description">Créer le repository de l'application exemple sur GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_repository-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_repository.png" alt="create_repository" /></span></div><div class="caption"><span class="header">Illustration 3.1: </span><span class="description">Créer le repository de l'<em>Application Exemple</em> sur GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_repository-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Puisque nous utiliserons cette application exemple jusqu'à la fin de ce livre, c'est une bonne idée de faire un repository sur GitHub (<a class="ref" href="static-pages#fig:create_repository">illustration&nbsp;3.1</a>) et de la «&nbsp;pusher&nbsp;»&nbsp;:</p>
+<p>Puisque nous utiliserons cette <em>Application Exemple</em> jusqu'à la fin de ce livre, c'est une bonne idée de faire un repository sur GitHub (<a class="ref" href="static-pages#fig:create_repository">illustration&nbsp;3.1</a>) et de la «&nbsp;pusher&nbsp;»&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;username&gt;/sample_app.git
 <span class="gp">$</span> git push origin master
@@ -541,7 +543,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>(Notez que, comme résultat de cette étape, le repository sur <a href="http://github.com/railstutorial/sample_app">http://github.com/railstutorial/sample_app</a> contient le code source de toute l'application exemple. Vous êtes encouragé à le consulter en guise de référence, avec deux mises en garde&nbsp;: (1) vous en apprendrez beaucoup plus sir vous écrivez dans le code source vous-même,  plutôt que de vous appuyer sur une version achevée&nbsp;; (2) Il peut exister des différences mineures entre le repository GitHub et le code de ce livre. Cela est dû d'un côté à l'incorporation des exercices du livre et d'un autre côté au repository utilisé dans les <a href="http://railstutorial.org/screencasts">screencasts du tutoriel Rails</a>, qui inclut quelques tests supplémentaires).</p>
+<p>(Notez que, comme résultat de cette étape, le repository sur <a href="http://github.com/railstutorial/sample_app">http://github.com/railstutorial/sample_app</a> contient le code source de toute l'<em>Application Exemple</em>. Vous êtes encouragé à le consulter en guise de référence, avec deux mises en garde&nbsp;: (1) vous en apprendrez beaucoup plus si vous écrivez vous-même le code source, plutôt que de vous appuyer sur une version achevée&nbsp;; (2) Il peut exister des différences mineures entre le repository GitHub et le code de ce livre. Cela est dû d'un côté à l'incorporation des exercices du livre et d'un autre côté au repository utilisé dans les <a href="http://railstutorial.org/screencasts">screencasts du tutoriel Rails</a>, qui inclut quelques tests supplémentaires).</p>
 
 <p>Bien entendu, nous pouvons optionnellement déployer l'application vers Heroku même à ce stade peu avancé&nbsp;:</p>
 
@@ -558,7 +560,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Cela posé, nous sommes prêts à développer l'application exemple.</p>
+<p>Cela posé, nous sommes prêts à développer l'<em>Application Exemple</em>.</p>
 
 <div class="label" id="sec:static_pages"></div>
 
@@ -566,9 +568,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:3.1" href="static-pages#sec:static_pages" class="heading"><span class="number">3.1</span> Pages statiques</a></h2>
 
 
-<p>Rails propose deux manières principales de créer des pages web statiques. <em>Primo</em>, Rails peut utiliser des pages <em>vraiment</em> statiques contenant du code HTML brut. <em>Secondo</em>, Rails nous permet de définir des vues (<em>views</em>) contenant du HTML brut, que Rails peut <em>rendre</em> de telle sorte que le serveurs web puisse les envoyer au navigateur.</p>
+<p>Rails propose deux principales manières de créer des pages web statiques. <em>Primo</em>, Rails peut utiliser des pages <em>vraiment</em> statiques contenant du code HTML brut. <em>Secondo</em>, Rails nous permet de définir des vues (<em>views</em>) contenant du HTML brut, que Rails peut <em>rendre</em> de telle sorte que les serveurs web puisse les envoyer au navigateur.</p>
 
-<p>Afin de prendre nos repères, il est utile de se remémorer la struture d'un dossier Rails de la <a class="ref" href="beginning#sec:the_first_application">section&nbsp;1.2.3</a> (<a class="ref" href="beginning#fig:directory_structure_rails_3">illustration&nbsp;1.2</a>). Dans cette section, nous travaillerons principalement sur les dossiers <code>app/controllers</code> (contenant les contrôleurs) et <code>app/views</code> (contenant les vues) (à la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>, nous ajouterons même un dossier de notre cru).</p>
+<p>Afin de prendre nos repères, il est utile de se remémorer la struture du dossier Rails de la <a class="ref" href="beginning#sec:the_first_application">section&nbsp;1.2.3</a> (<a class="ref" href="beginning#fig:directory_structure_rails_3">illustration&nbsp;1.2</a>). Dans cette section, nous travaillerons principalement sur les dossiers <code>app/controllers</code> (contenant les contrôleurs, <rw>controller</rw>s) et <code>app/views</code> (contenant les vues, <rw>view</rw>s) (à la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>, nous ajouterons même un dossier de notre cru).</p>
 
 <div class="label" id="sec:truly_static_pages"></div>
 
@@ -584,19 +586,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/public_index_rails_3.png" alt="public_index_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.2: </span><span class="description">Le fichier <code>public/index.html</code>.&nbsp;<a href="http://railstutorial.org/images/figures/public_index_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Pour savoir d'où cette page vient, jetez-un coup d'œil au fichier <code>public/index.html</code> (<a class="ref" href="static-pages#fig:public_index_rails_3">illustration&nbsp;3.2</a>). Comme le fichier contient ses propres informations de mise en page, c'est un peu le bazard, mais ça fonctionne&nbsp;: par défaut, Rails renvoie tout fichier du dossier <code>public</code> directement à votre navigateur.<sup class="footnote" id="fnref:3.2"><a href="#fn:3.2">2</a></sup> Dans le cas du fichier spécial <code>index.html</code>, vous n'avez même pas à indiquer le nom du fichier dans l'URL, puisque le nom <code>index.html</code> est le nom de fichier par défaut. Vous pouvez l'inclure si vous voulez, cependant&nbsp;; l'adresse…</p>
+<p>Pour savoir d'où cette page provient, jetez-un coup d'œil au fichier <code>public/index.html</code> (<a class="ref" href="static-pages#fig:public_index_rails_3">illustration&nbsp;3.2</a>). Comme le fichier contient ses propres informations de mise en page, c'est un peu le bazard, mais ça fonctionne&nbsp;: par défaut, Rails renvoie tout fichier du dossier <code>public</code> directement à votre navigateur.<sup class="footnote" id="fnref:3.2"><a href="#fn:3.2">2</a></sup> Dans le cas du fichier spécial <code>index.html</code>, vous n'avez même pas à indiquer le nom du fichier dans l'URL, puisque le nom <code>index.html</code> est le nom de fichier par défaut. Vous pouvez l'inclure si vous voulez, cependant&nbsp;; l'adresse&nbsp;:</p>
 
 <pre class="verbatim">http://localhost:3000/</pre>
 
 
-<p>et</p>
+<p>… et l'adresse&nbsp;:</p>
 
 <pre class="verbatim">http://localhost:3000/index.html</pre>
 
 
 <p>… sont équivalentes.</p>
 
-<p>Comme vosu pouvez vous y attendre, si nous le voulons nous pouvons fabriquer nos propres fichier HTML statiques, et les déposer dans le même dossier <code>public</code> que le fichier <code>index.html</code>. Par exemple, créons un fichier avec un message de salutation amicale (<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>)&nbsp;:<sup class="footnote" id="fnref:3.3"><a href="#fn:3.3">3</a></sup></p>
+<p>Comme vosu pouvez vous y attendre, si nous le voulons nous pouvons fabriquer nos propres fichiers HTML statiques, et les déposer dans le même dossier <code>public</code> que le fichier <code>index.html</code>. Par exemple, créons un fichier avec un message de salutation amicale (<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>)&nbsp;:<sup class="footnote" id="fnref:3.3"><a href="#fn:3.3">3</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate public/hello.html
 </pre></div>
@@ -607,12 +609,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.3.</span> <span class="description">Un fichier HTML typique, avec une salutation amicale. <br /> <code>public/hello.html</code></span>       
+<div class="listing"><span class="header">Extrait 3.3.</span> <span class="description">Un fichier HTML classique, avec une salutation amicale. <br /> <code>public/hello.html</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Greeting<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Salutations<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;p&gt;</span>Salut le monde&amp;nbsp;!<span class="nt">&lt;/p&gt;</span>
@@ -622,7 +624,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Nous pouvons voir dans l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a> la structure caractéristique d'un document HTML&nbsp;: un type de document (<em>document type</em>), ou <em>doctype</em>, qui est une déclaration aux navigateurs de la version du code HTML que nous utilisons (dans ce cas, <a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a>)&nbsp;;<sup class="footnote" id="fnref:3.4"><a href="#fn:3.4">4</a></sup> une section  <code>head</code>, dans le cas présent avec le texte &ldquo;&nbsp;Greeting&nbsp;&rdquo; à l'intérieur d'une balise <code>title</code>&nbsp;; et une section <code>body</code> (<em>corps</em>), dans le cas présennt avec le texte &ldquo;&nbsp;Salut le monde&amp;nbsp;!&nbsp;!&rdquo; à l'intérieur d'une balise de paragraphe <code>p</code> (l'indentation du texte est optionnelle &mdash;&nbsp;HTML n'est pas sensible aux espaces «&nbsp;blanches&nbsp;», et ignore aussi bien les tabulations que les espaces &mdash;&nbsp;mais cela rend la structure du document plus lisible) Comme promis, quand on visite l'adresse <a href="http://localhost:3000/hello.html"><tt>http://localhost:3000/hello.html</tt></a>,  Rails rend aussitôt cette page (<a class="ref" href="static-pages#fig:hello_world">illustration&nbsp;3.3</a>). Notez que le titre affiché au sommet de la fenêtre du navigateur dans l'<a class="ref" href="static-pages#fig:hello_world">illustration&nbsp;3.3</a> correspond au contenu de la balise <code>title</code>, c'est-à-dire &ldquo;&nbsp;Greeting&nbsp;&rdquo;.</p>
+<p>Nous pouvons voir dans l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a> la structure caractéristique d'un document HTML&nbsp;: un type de document (<em>document type</em>), ou <em>doctype</em>, qui est une déclaration aux navigateurs de la version du code HTML que nous employons (dans ce cas, <a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a>)&nbsp;;<sup class="footnote" id="fnref:3.4"><a href="#fn:3.4">4</a></sup> une section  <code>head</code>, dans le cas présent contenant le texte «&nbsp;Greeting&nbsp;» à l'intérieur d'une balise <code>title</code>&nbsp;; et une section <code>body</code> (<em>corps</em>), dans le cas présennt avec le texte «&nbsp;Salut le monde&amp;&nbsp;!&nbsp;» à l'intérieur d'une balise paragraphe <code>p</code> (l'indentation du texte est optionnelle &mdash;&nbsp;HTML n'est pas sensible aux espaces «&nbsp;blanches&nbsp;», et ignore aussi bien les tabulations que les espaces &mdash;&nbsp;mais cela rend la structure du document plus lisible) Comme attendu, en visitant l'adresse <a href="http://localhost:3000/hello.html"><tt>http://localhost:3000/hello.html</tt></a>,  Rails rend aussitôt cette page (<a class="ref" href="static-pages#fig:hello_world">illustration&nbsp;3.3</a>). Notez que le titre affiché au sommet de la fenêtre du navigateur dans l'<a class="ref" href="static-pages#fig:hello_world">illustration&nbsp;3.3</a> correspond au contenu de la balise <code>title</code>, c'est-à-dire «&nbsp;Salutations&nbsp;».</p>
 
 <div class="label" id="fig:hello_world"></div>
 
@@ -637,7 +639,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Nous laisserons de côté le fichier <code>index.html</code> pour le moment, mais nous pourrions bien sûr l'effacer aussi, éventuellement&nbsp;: nous ne désirons pas que la racine de notre application soit la page par défaut de Rails comme montrée dans l'<a class="ref" href="beginning#fig:riding_rails_3">illustration&nbsp;1.3</a>. Nous verrons dans la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a> comment changer l'adresse <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> pour qu'elle pointe vers autre chose que le fichier <code>public/index.html</code>.</p>
+<p>Nous laisserons de côté le fichier <code>index.html</code> pour le moment, mais nous pourrions bien sûr l'effacer aussi, éventuellement&nbsp;: nous ne désirons pas que la racine de notre application soit la page par défaut de Rails montrée dans l'<a class="ref" href="beginning#fig:riding_rails_3">illustration&nbsp;1.3</a>. Nous verrons dans la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a> comment changer l'adresse <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> pour qu'elle pointe vers autre chose que le fichier <code>public/index.html</code>.</p>
 
 <div class="label" id="sec:static_pages_with_rails"></div>
 
@@ -645,16 +647,16 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.1.2" href="static-pages#sec:static_pages_with_rails" class="heading"><span class="number">3.1.2</span> Les pages statiques avec Rails</a></h3>
 
 
-<p>La capacité de retourner des fichiers de code HTML statique est bien, mais cela n'est pas particulièrement utile pour créer des applications web dynamiques. Dans cette section, nous ferons un premier pas vers la création de pages dynamiques en créant un jeu d'<em>actions</em> Rails, qui sont une façon plus puissante de définir des URLs que les fichiers statiques.<sup class="footnote" id="fnref:3.5"><a href="#fn:3.5">5</a></sup> Les actions Rails sont regroupées à l'intérieur de contrôleurs (<em>controllers</em>) (le «&nbsp;C&nbsp;» dans le MVC de la  <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>), qui contient des jeux d'actions reliées par un but commun. Nous avons eu un aperçu des contrôleurs au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, et approfondiront pour en avoir une compréhension plus profonde une fois que nous explorerons mieux l'<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">architecture REST</a>  (à partir du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>)&nbsp;; par essence, un <em>contrôleur</em> est le conteneur d'un groupe de pages web (peut-être dynamiques).</p>
+<p>La capacité de retourner des fichiers HTML statiques est bien, mais cela n'est pas particulièrement utile pour créer des applications web dynamiques. Dans cette section, nous ferons un premier pas vers la création de pages dynamiques en créant un jeu d'<em>actions</em> Rails, qui sont une façon plus puissante de définir des URLs que les fichiers statiques.<sup class="footnote" id="fnref:3.5"><a href="#fn:3.5">5</a></sup> Les actions Rails sont regroupées à l'intérieur de contrôleurs (<em>controllers</em>) (le «&nbsp;C&nbsp;» dans le MVC de la  <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>), qui contient des jeux d'actions reliées par un but commun. Nous avons eu un aperçu des contrôleurs au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>, et approfondirons pour en avoir une compréhension plus profonde une fois que nous explorerons mieux l'<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">architecture REST</a>  (à partir du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>)&nbsp;; par essence, un <em>contrôleur</em> est le conteneur d'un groupe de pages web (peut-être dynamiques).</p>
 
-<p>Pour commencer, rappelez-vous, dans la <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>, que lorsque nous utilisons Git, c'est une bonne pratique d'exécuter notre travail sur une autre branche que la branche maitresse. Si vous utilisez Git pour le contrôle de versions, vous devriez jouer ces commandes&nbsp;:</p>
+<p>Pour commencer, rappelez-vous, <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>, que lorsque nous utilisons Git, c'est une bonne pratique d'exécuter notre travail sur une autre branche que la branche maitresse. Si vous utilisez Git pour le contrôle de versions, vous devriez jouer ces commandes&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -b static-pages
 </pre></div>
 </div>
 
 
-<p>Rails est fourni avec un script pour créer des contrôleurs, appelé  <code>generate</code>&nbsp;; tout ce dont il a besoin pour faire son tour de magie, c'est le nom du contrôleur. Puisque nous créons ce contrôleur pour empoigner les pages statiques (courantes), nous l'appellerons simplement le contrôleurs Pages, et planifierons de faire des actions pour la page d'accueil, la page de contact et la page «&nbsp;À propos&nbsp;». Le script <code>generate</code> prend une liste optionnelle d'actions, donc nous incluerons certaines de ces actions initiales directement en ligne de commande&nbsp;:</p>
+<p>Rails est fourni avec un script pour créer des contrôleurs, appelé  <code>generate</code>&nbsp;; tout ce dont il a besoin pour faire son tour de magie, c'est le nom du contrôleur. Puisque nous créons ce contrôleur pour traiter les pages statiques (courantes), nous l'appellerons simplement le contrôleurs <em>Pages</em>, et planifierons de faire des actions pour la page d'accueil, la page de contact et la page «&nbsp;À Propos&nbsp;». Le script <code>generate</code> prend une liste optionnelle d'actions, donc nous incluerons certaines de ces actions initiales directement en ligne de commande&nbsp;:</p>
 
 <div class="label" id="code:generating_pages"></div>
 
@@ -683,14 +685,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 
-<p>(notez que, puisque nous avons installé RSpec avec le code <code>rails generate rspec:install</code>, la génération de contrôleur crée automatiquement des fichiers de test RSpec dans le dossier <code>spec/</code>). Ici, j'ai intentionnellement &ldquo;&nbsp;oublié&nbsp;&rdquo; la page <code>à propos</code> pour que nous puissions voir comment l'ajouter à la main (<a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>).</p>
+<p>(notez que, puisque nous avons installé RSpec avec le code <code>rails generate rspec:install</code>, la génération de contrôleur crée automatiquement des fichiers de test RSpec dans le dossier <code>spec/</code>).</p>
+<p>Ici, j'ai intentionnellement «&nbsp;oublié&nbsp;» la page <code>À Propos</code> pour que nous puissions voir comment l'ajouter «&nbsp;à la main&nbsp;» à la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>.</p>
 
-<p>La génération de pages de contrôleurs de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> actualise automatiquement le fichier de <em>routage</em>, nommé <code>config/routes.rb</code>, que Rails utilise pour trouver la correspondance entre URLs et pages web. C'est notre première rencontre avec le dossier <code>config</code>, donc il peut être utile d'y jeter un coup d'œil (<a class="ref" href="static-pages#fig:config_directory_rails_3">illustration&nbsp;3.4</a>). Le dossier <code>config</code> est l'endroit où Rails collecte les fichiers nécessaires à la configuration de l'application &mdash;&nbsp;d'où le nom.</p>
+<p>La génération de pages de contrôleurs de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> actualise automatiquement le fichier de <em>routage</em>, nommé <code>config/routes.rb</code>, que Rails utilise pour trouver la correspondance entre URLs et pages web. C'est notre première rencontre avec le dossier <code>config</code>, donc il peut être utile d'y jeter un coup d'œil (<a class="ref" href="static-pages#fig:config_directory_rails_3">illustration&nbsp;3.4</a>). Le dossier <code>config</code> est l'endroit où Rails rassemble les fichiers nécessaires à la configuration de l'application &mdash;&nbsp;d'où bien sûr son nom.</p>
 
 <div class="label" id="fig:config_directory_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.4: </span><span class="description">Contenu du dossier <code>config</code> de l'application exemple.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Illustration 3.4: </span><span class="description">Contenu du dossier <code>config</code> de l'<em>Application Exemple</em>.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Puis nous avons généré les actions <code>home</code> et <code>contact</code>, le routage de fichier possède déjà des règles pour chacun d'eux, comme on peut le voir dans l'<a class="ref" href="static-pages#code:pages_routes">extrait&nbsp;3.5</a>.</p>
@@ -712,7 +715,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Ici la règle…</p>
+<p>Ici la règle&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
 </pre></div>
@@ -733,9 +736,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 3.1.</span><span class="description"><tt>GET</tt>, et caetera</span></span>
-<p>Le Hypertext Transfer Protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) définit quatre opérations de base, correspondant aux quatre verbes <em>get</em> (<em>obtenir</em>), <em>post</em> (<em>poster</em>), <em>put</em> (<em>déposer</em>) et <em>delete</em> (<em>effacer</em>). Cela fait référence aux opérations entre un ordinateur <em>client</em> (typiquement jouant un navigateur web comme Firefox ou Safari) et un <em>serveur</em> (typiquement un serveur web tel que Apache ou Nginx) (il est important de comprendre qu'en développant des applications web sur un ordinateur local, le client et le serveur sont la même machine physique, mais en général ils sont différents). L'accent mis sur les verbes HTTP est typique des frameworks (à commencer par Rails) influencés par l'<em>architecture REST</em>, que nous avons abordée brièvement au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> et que nous apprendrons mieux au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Le Hypertext Transfer Protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) définit quatre opérations de base, correspondant aux quatre verbes <tt>GET</tt> (<em>obtenir</em>), <tt>POST</tt> (<em>poster</em>), <tt>PUT</tt> (<em>déposer</em>) et <tt>DELETE</tt> (<em>effacer</em>). Cela fait référence aux opérations entre un ordinateur <em>client</em> (classiquement, un navigateur web comme Firefox ou Safari) et un <em>serveur</em> (typiquement un serveur web tel que Apache ou Nginx) (il est important de comprendre qu'en développant des applications web sur un ordinateur local, le client et le serveur sont la même machine physique, mais en général ils sont différents). L'accent mis sur les verbes HTTP est typique des frameworks (à commencer par Rails) influencés par l'<em>architecture REST</em>, que nous avons abordée brièvement au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a> et que nous apprendrons mieux connaitre au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
-<p><tt>GET</tt> est l'opération HTTP la plus courante, utilisée pour  <em>lire</em> des données sur le web&nbsp;; elle signifie simplement &ldquo;atteint une page&rdquo;, et chaque fois que vous visitez une page, telle que google.com ou craigslist.org, votre navigateur soumet une requête <tt>GET</tt>. La requête <tt>POST</tt> est l'opération suivante la plus courante&nbsp;; c'est la requête envoyée par votre navigateur quand vous soumettez un formulaire. Dans les applications Rails, les requêtes <tt>POST</tt> sont utilisées typiquement pour <em>créer</em> des choses (bien que le protocope HTTP permet aussi à la requête <tt>POST</tt> de procéder à des actualissations)&nbsp;; par exemple, la requête <tt>POST</tt> envoyée quand vous soumettez un formulaire pour la création d'un nouvel utilisateur sur votre site web. Les deux autres verbes, <tt>PUT</tt> et <tt>DELETE</tt>, sont utilisés pour <em>actualiser</em> et <em>détruire</em> des choses sur le serveur distant. Ces requêtes sont moins courantes que <tt>GET</tt> et <tt>POST</tt> puisque les navigateurs sont incapables de les envoyer nativement, mais certains frameworks web (comme Ruby on Rails) ont des façons intelligentes de <em>simuler</em> ces demandes par les navigateurs.</p>
+<p><tt>GET</tt> est l'opération HTTP la plus courante, utilisée pour  <em>lire</em> des données sur le web&nbsp;; elle signifie simplement «&nbsp;atteint une page&nbsp;», et chaque fois que vous visitez une page, telle que google.com ou craigslist.org, votre navigateur soumet une requête <tt>GET</tt>. La requête <tt>POST</tt> est l'opération suivante la plus courante&nbsp;; c'est la requête envoyée par votre navigateur quand vous soumettez un formulaire. Dans les applications Rails, les requêtes <tt>POST</tt> sont utilisées généralement pour <em>créer</em> des choses (bien que le protocope HTTP permet aussi à la requête <tt>POST</tt> de procéder à des actualissations)&nbsp;; par exemple, la requête <tt>POST</tt> envoyée quand vous soumettez un formulaire pour la création d'un nouvel utilisateur sur votre site web. Les deux autres verbes, <tt>PUT</tt> et <tt>DELETE</tt>, sont utilisés pour <em>actualiser</em> et <em>détruire</em> des choses sur le serveur distant. Ces requêtes sont moins courantes que <tt>GET</tt> et <tt>POST</tt> puisque les navigateurs sont incapables de les envoyer nativement, mais certains frameworks web (comme Ruby on Rails) ont des façons intelligentes de <em>simuler</em> ces demandes avec les navigateurs.</p>
 </div>
 
 
@@ -759,7 +762,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Nous voyons ici que la page <code>pages_controller.rb</code> définit une <em>classe</em> appelée <code>PagesController</code>. Les classes sont simplement une façon pratique d'organiser les <em>fonctions</em> (appelées aussi <em>méthodes</em>) comme les actions <code>home</code> et <code>contact</code>, qui sont définies en utilisant le mot-clé <code>def</code>. Le signe <code>&lt;</code> indique que <code>PagesController</code> <em>hérite</em> de la classe Rails <code>ApplicationController</code>&nbsp;; comme nous le verrons dans un instant, cela signifie que nos pages possèdent une grande quantité de fonctionnalités spécifiques à Rails. Nous en apprendrons plus sur les classes et l'héritage dans la <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">section&nbsp;4.4</a>).</p>
+<p>Nous voyons ici que le fichier <code>pages_controller.rb</code> définit une <em>classe</em> appelée <code>PagesController</code>. Les classes sont simplement une façon pratique d'organiser les <em>fonctions</em> (appelées aussi <em>méthodes</em>) comme les actions <code>home</code> et <code>contact</code>, qui sont définies en utilisant le mot-clé <code>def</code>. Le signe «&nbsp;<code>&lt;</code>&nbsp;» indique que <code>PagesController</code> <em>hérite</em> de la classe Rails <code>ApplicationController</code>&nbsp;; comme nous le verrons dans un instant, cela signifie que nos pages possèdent une grande quantité de fonctionnalités spécifiques à Rails. Nous en apprendrons plus sur les classes et l'héritage dans la <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">section&nbsp;4.4</a>).</p>
 
 <p>Dans le cas du contrôleur Pages, ces deux méthodes sont initialement vides&nbsp;:</p>
 
@@ -772,7 +775,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>En pur Ruby, ces méthodes ne feraient rien, tout simple. En Rails, la situation est différente&nbsp;; <code>PagesController</code> est une classe Ruby, mais parce qu'elle hérite de la classe <code>ApplicationController</code> le comportement de ses méthodes est spécifique à Rails&nbsp;: en visitant l'URL <tt>/pages/home</tt>, Rails consulte le contrôleur Pages et exécute le code de l'action <code>home</code>, et rend alors la <em>vue</em> (le caractère «&nbsp;V&nbsp;» de MVC de la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>) correspondant à l'action. Dans le cas présent, l'action <code>home</code> est vide, donc tous les appels à <tt>/pages/home</tt> rendent simplement la vue. Donc, à quoi ressemble une vue, et comment la trouvons-nous nous&nbsp;?</p>
+<p>En pur Ruby, ces méthodes ne feraient tout simplement… rien. En Rails, la situation est différente&nbsp;; <code>PagesController</code> est une classe Ruby, mais parce qu'elle hérite de la classe <code>ApplicationController</code> le comportement de ses méthodes est spécifique à Rails&nbsp;: en visitant l'URL <tt>/pages/home</tt>, Rails consulte le contrôleur Pages et exécute le code de l'action <code>home</code>, et rend alors la <em>vue</em> (le caractère «&nbsp;V&nbsp;» de MVC de la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>) correspondant à l'action. Dans le cas présent, l'action <code>home</code> est vide, donc tous les appels à <tt>/pages/home</tt> rendent simplement la vue. Donc, à quoi ressemble une vue, et où la trouvons-nous&nbsp;?</p>
 
 
 <p>Si vous jetez un nouveau coup d'œil à la sortie de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a>, vous devriez être en mesure de deviner la correspondance entre les actions et les vues&nbsp;: une action comme <code>home</code> possède une vue correspondante appelée <code>home.html.erb</code>. Nous apprendrons à la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a> ce que la partie <code>.erb</code> signifie&nbsp;; la partie <code>.html</code> ne devrait pas vous surprendre puisqu'elle ressemble à HTML (<a class="ref" href="static-pages#code:raw_home_view">extrait&nbsp;3.7</a>).</p>
@@ -789,7 +792,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>La vue pour l'action <code>contact</code> est analogue (<a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>).</p>
+<p>Il en va de même de la vue de l'action <code>contact</code> (<a class="ref" href="static-pages#code:raw_contact_view">extrait&nbsp;3.8</a>).</p>
 
 <div class="label" id="code:raw_contact_view"></div>
 
@@ -803,9 +806,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Ces deux vues sont juste des <em>espaces réservés</em>&nbsp;: elles possèdent une entête (à l'intérieur de la balise <code>h1</code>) et un paragraphe (la balise <code>p</code>) contenant le chemin d'accès au fichier correspondant. Nous allons ajouter quelque (très léger) contenu dynamique à partir de la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>, mais telles quelles, ces vues soulignent un point important&nbsp;: les vues Rails peuvent contenir simplement du code HTML statique. Aussi loin que le navigateur est concerné, le code HTML des fichiers de la <a class="ref" href="static-pages#sec:truly_static_pages">section&nbsp;3.1.1</a> et la méthode controller/action des pages délivrées sont indistinctes&nbsp;: tout ce que voit le navigateur est de l'HTML.</p>
+<p>Ces deux vues sont juste des <em>espaces réservés</em>&nbsp;: elles possèdent une entête (à l'intérieur de la balise <code>h1</code>) et un paragraphe (la balise <code>p</code>) contenant le chemin d'accès au fichier correspondant. Nous allons ajouter quelque (très léger) contenu dynamique à partir de la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>, mais telles quelles, ces vues marquent un point important&nbsp;: les vues Rails peuvent ne contenir que du code HTML statique. Du point de vue du navigateur, le code HTML des fichiers de la <a class="ref" href="static-pages#sec:truly_static_pages">section&nbsp;3.1.1</a> et la méthode controller/action des pages délivrées sont indistinctes&nbsp;: tout ce que voit le navigateur est de l'HTML.</p>
 
-<p>Dans le reste de ce chapitre, nous ajouterons d'abord l'action <code>about</code> que nous avons &ldquo;&nbsp;oubliée&nbsp;&rdquo; à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, le petit montant de contenu dynamique, et effecturons les premiers pas vers la stylisation des pages en CSS. Avant de poursuivre, si vous utilisez Git, c'est une bonne idée d'ajouter dès maintenant les fichiers du contrôleur Pages au repository&nbsp;:</p>
+<p>Dans la suite de ce chapitre, nous ajouterons d'abord l'action <code>about</code> que nous avons «&nbsp;oubliée&nbsp;» à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, un petit peu de contenu dynamique et nous effecturons les premiers pas vers la stylisation des pages grâce aux CSS. Avant de poursuivre, si vous utilisez Git, c'est une bonne idée d'ajouter dès maintenant les fichiers du contrôleur Pages au repository&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Ajout d'un controleur Pages&quot;</span>
@@ -821,13 +824,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:3.2" href="static-pages#sec:first_tests" class="heading"><span class="number">3.2</span> Nos premiers tests</a></h2>
 
 
-<p>Si vous demandez à cinq développeurs Rails comment tester une pièce quelconque de code, vous obtiendrez quinze réponses différentes &mdash;&nbsp;mais ils seront tous d'accord sur le fait que vous devrez écrire ces tests. C'est dans cet esprit que nous approcherons le testing de notre application exemple, en écrivant de solides tests sans s'inquiéter trop de les rendre parfaits. Ne prenez pas les tests du <em>Tutoriel Rails</em> pour parole d'évangile&nbsp;; ils s'appuient sur le style que j'ai développé au cours de mes propres travaus et à la lecture du code d'autres développeurs. À mesure que vous développerez votre expérience en tant que développeur Rails, il n'y a aucun doute que vous développerez vos propres préférences et votre propre style en matière de test.</p>
+<p>Si vous demandez à cinq développeurs Rails comment tester une partie quelconque de code, vous obtiendrez quinze réponses différentes &mdash;&nbsp;mais ils seront tous d'accord sur le fait que vous devrez écrire ces tests. C'est dans cet esprit que nous approcherons le testing de notre <em>Application Exemple</em>, en écrivant de solides tests sans se préoccuper trop pour le moment de leur perfection. Ne prenez pas les tests du <em>Tutoriel Rails</em> pour parole d'évangile&nbsp;; ils s'appuient sur le style que j'ai développé au cours de mes propres travaux ainsi qu'à la lecture du code d'autres développeurs. À mesure que vous étofferez votre expérience en tant que développeur Rails, il n'y a aucun doute que vous développerez vos propres préférences et votre propre style en matière de test.</p>
 
-<p>En complément de l'écriture des tests au cours du développement de l'application exemple, nous ferons aussi le choix de plus en plus fréquent d'écrire ces tests <em>avant</em> d'écrire le code de l'application &mdash;&nbsp;une approche connue sous le nom «&nbsp;Développement conduit par le test&nbsp;» (<em>test-driven development</em>, ou TDD).<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Notre exemple spécifique sera d'ajouter une page «&nbsp;À propos&nbsp;» à notre exemple de site. Heureusement, ajouter cette page supplémentaire n'est pas difficile &mdash;&nbsp;vous devriez même être en mesure de deviner la procédure en vous basant sur les exemples de la section précédente&nbsp;&mdash; ce qui signifie que nous pouvons nous concentrer sur le testing, qui contient pas mal d'idées nouvelles.</p>
+<p>En complément de l'écriture des tests au cours du développement de l'<em>Application Exemple</em>, nous ferons aussi le choix de plus en plus fréquent d'écrire ces tests <em>avant</em> d'écrire le code de l'application &mdash;&nbsp;une approche connue sous le nom «&nbsp;Développement Dirigée par le Test&nbsp;» (<em>test-driven development</em>, ou TDD).<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Notre exemple spécifique sera d'ajouter une page «&nbsp;À Propos&nbsp;» à notre exemple de site. Heureusement, ajouter cette page supplémentaire n'est pas difficile &mdash;&nbsp;vous devriez même être en mesure de deviner la procédure en vous basant sur les exemples de la section précédente&nbsp;&mdash; ce qui signifie que nous pouvons nous concentrer sur le testing, qui contient pas mal d'idées nouvelles.</p>
 
-<p>Tout d'abord, tester l'existence d'une page peut paraitre excessif, mais l'expérience montre que ça ne l'est pas. Tellement de choses peuvent mal tourner quand on développe un logiciel qu'avoir une bonne batterie de tests est inestimable pour assurer sa qualité. Plus encore, il est courant pour les programmes informatiques &mdash;&nbsp;et spécialement les applications applications&nbsp;&mdash; d'être étendu, et chaque fois que vous faites un changement vous risquez d'introduire des erreurs. L'écriture de tests ne garantit pas que ces erreurs ne surviendront pas, mais ils les rendent beaucoup plus faciles à localiser et à corriger. Plus encore, en écrivant des tests pour des bugs qui arrivent <em>vraiment</em>, nous pouvons réduire la probabilité qu'ils surviennent.</p>
+<p>Tout d'abord, tester l'existence d'une page peut paraitre superflu, mais l'expérience montre que ça ne l'est pas. Tellement de choses peuvent mal tourner quand on développe un logiciel qu'avoir une bonne batterie de tests est inestimable pour assurer sa qualité. Plus encore, il est courant pour les programmes informatiques &mdash;&nbsp;et spécialement les applications&nbsp;&mdash; d'être étendus, et chaque fois que vous faites un changement vous risquez d'introduire des erreurs. L'écriture de tests ne garantit pas que ces erreurs ne surviendront pas, mais ils les rendent beaucoup plus faciles à localiser et à corriger. Plus encore, en écrivant des tests pour des bogues qui surviennet <em>vraiment</em>, nous pouvons réduire leur probabilité.</p>
 
-<p>(Comme noté à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, si vous trouvez que le testing est trop écrasant, poursuivez en les sautant au cours d'une première lecture. Une fois que vous aurez une bonne saisie de Rails and Ruby, vous pourrez y revenir et apprendre le testing dans un second temps)</p>
+<p>(Comme noté à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, si vous trouvez que le testing est trop écrasant, poursuivez en les sautant au cours d'une première lecture. Une fois que vous aurez une bonne maitrise de Rails and Ruby, vous pourrez y revenir et apprendre le testing dans un second temps)</p>
 
 <div class="label" id="sec:testing_tools"></div>
 
@@ -835,7 +838,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.2.1" href="static-pages#sec:testing_tools" class="heading"><span class="number">3.2.1</span> Outils de test</a></h3>
 
 
-<p>Pour écrire des tests pour notre application exemple, notre outil principal sera le framework appelé <a href="http://rspec.info/">RSpec</a>, qui est un <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>langage de domaine spécifique</em></a> pour décrire le comportement du code, doublé d'un programme (appelé <code>rspec</code>) pour vérifier le comportement attendu. Conçu pour tester n'importe quel programme Ruby, RSpec a connu un regain important dans la communauté Rails. Obie Fernandez, auteur de <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, a appelé RSpec &ldquo;&nbsp;the Rails Way&nbsp;&rdquo; («&nbsp;La manière Rails&nbsp;»), et je suis d'accord.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
+<p>Pour écrire des tests pour notre <em>Application Exemple</em>, notre outil principal sera le framework appelé <a href="http://rspec.info/">RSpec</a>, qui est un <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>langage de domaine spécifique</em></a> pour décrire le comportement du code, doublé d'un programme (appelé <code>rspec</code>) pour vérifier le comportement attendu. Conçu pour tester n'importe quel programme Ruby, RSpec a connu un regain important dans la communauté Rails. Obie Fernandez, auteur de <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, a qualifié RSpec de «&nbsp;La Manière Rails Way&nbsp;» et je suis d'accord.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
 
 <p>Si vous avez suivi les étapes de l'introduction, RSpec est déjà installé via le Bundler <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_rspec">extrait&nbsp;3.1</a>) et la commande <code>bundle install</code>.</p>
 
@@ -845,7 +848,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.1.1" href="static-pages#sec:autotest" class="heading">Autotest</a></h4>
 
 
-<p>Autotest est un outil qui joue en permanence votre batterie de tests en arrière-plan, basé sur sur les changements de fichiers spécifiques que vous faites. Par exemple, si vous modifiez un fichier contrôleur, Autotest jouera les tests pour ce contrôleur spécifique. Le résultat est un feedback instantané sur l'état de vos tests. Nous en apprendrons davantage sur Autotest quand nous le verrons en actions (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>).</p>
+<p>Autotest est un outil qui joue en permanence votre suite de tests en arrière-plan, en s'appuyant sur les changements de fichiers spécifiques que vous faites. Par exemple, si vous modifiez un fichier contrôleur, Autotest jouera les tests pour ce contrôleur spécifique. Le résultat est un feedback instantané sur l'état de vos tests. Nous en apprendrons davantage sur Autotest quand nous le verrons en actions (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>).</p>
 
 <p>L'installation de Autotest est optionnelle, et sa configuration peut être un peu délicate, mais si vous parvenez à le faire fonctionner sur votre système, je suis certain que vous le trouverez tout comme moi très utile. Pour installer Autotest, installez les gems <tt>autotest</tt> et <tt>autotest-rails-pure</tt><sup class="footnote" id="fnref:3.8"><a href="#fn:3.8">8</a></sup> comme suit&nbsp;:</p>
 
@@ -865,7 +868,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>Si FSEvent ne s'installe pas proprement, vérifiez bien que <a href="http://developer.apple.com/technologies/tools/xcode.html">Xcode</a> est installé sur votre système.</p>
 
-<p>Pour utilise les gems Growl et FSEvent, faite un fichier de configuration Autotest dans votre dossier Rails racine et remplissez-le avec le contenu de  <a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> (ou de l'<a class="ref" href="static-pages#code:dot_autotest_alt">extrait&nbsp;3.10</a> si l'<a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> renvoie une erreur sur votre système)&nbsp;:</p>
+<p>Pour utiliser les gems Growl et FSEvent, faites un fichier de configuration Autotest dans votre dossier Rails racine et remplissez-le avec le contenu de  l'<a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> (ou de l'<a class="ref" href="static-pages#code:dot_autotest_alt">extrait&nbsp;3.10</a> si l'<a class="ref" href="static-pages#code:dot_autotest">extrait&nbsp;3.9</a> renvoie une erreur sur votre système)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate .autotest
 </pre></div>
@@ -898,16 +901,16 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>(Note&nbsp;: cela créera une configuration Autotest pour l'application exemple seulement&nbsp;; si vous voulez partager cette configuration Autotest avec les autres projets Rails ou Ruby, vous devrez crér une fichier <code>.autotest</code> plutôt dans votre dossier <em>accueil</em> (<em>home</em>)&nbsp;:</p>
+<p>(Note&nbsp;: cela créera une configuration Autotest pour l'<em>Application Exemple</em> seulement&nbsp;; si vous voulez partager cette configuration Autotest avec les autres projets Rails ou Ruby, vous devriez crér un fichier <code>.autotest</code> plutôt dans votre dossier <em>accueil</em> (<em>home</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate ~/.autotest
 </pre></div>
 </div>
 
 
-<p>où <tt class="verb">~</tt> (tilde) est le symbole Unix pour le &ldquo;&nbsp;dossier home&nbsp;&rdquo;).</p>
+<p>où <tt class="verb">~</tt> (tilde) est le symbole Unix pour le «&nbsp;dossier home&nbsp;»).</p>
 
-<p>Si vous tournez sous Linux avec le bureau Gnome, vous devrez essayer les étapes décrites à l'adresse <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, qui installe sur Linux un système semblable aux notifications Growl sur OS&nbsp;X. Les utilisateurs Windows devront essayer d'installer <a href="http://www.growlforwindows.com/gfw/">Growl pour Windows</a> et suivre ensuite les instructions de la page <a href="http://github.com/svoop/autotest-growl">GitHub pour <code>autotest-growl</code></a>. Les utilisateurs Linux tout comme les utilisateurs Windows peuvent avoir à jeter un œil à la page <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>&nbsp;; le lecteur du <em>Tutoriel Rails</em> Fred Schoeneman a écrit un compte-rendu intéressant sur son blog&nbsp;: <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">À propos des notifications Autotest</a>.<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
+<p>Si vous tournez sous Linux avec le bureau Gnome, vous devrez essayer les étapes décrites à l'adresse <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, qui installe sur Linux un système semblable aux notifications Growl sur OS&nbsp;X. Les utilisateurs Windows devront essayer d'installer <a href="http://www.growlforwindows.com/gfw/">Growl pour Windows</a> et suivre ensuite les instructions de la page <a href="http://github.com/svoop/autotest-growl">GitHub pour <code>autotest-growl</code></a>. Les utilisateurs Linux tout comme les utilisateurs Windows peuvent avoir à jeter un œil à la page <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>&nbsp;; le lecteur du <em>Tutoriel Rails</em> Fred Schoeneman a écrit un compte-rendu intéressant sur son blog&nbsp;: <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">À Propos des notifications Autotest</a>.<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
 
 <div class="label" id="sec:TDD"></div>
 
@@ -915,13 +918,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.2.2" href="static-pages#sec:TDD" class="heading"><span class="number">3.2.2</span> TDD&nbsp;: Rouge, Vert, Restructurer</a></h3>
 
 
-<p>Dans un «&nbsp;développement conduit par le test&nbsp;» (TDD), nous écrivons d'abord un test <em>échec</em>&nbsp;: dans notre cas, une pièce de code qui exprime l'idée qu'il devrait y avoir une page «&nbsp;à propos&nbsp;» (<code>about</code>). Nous lançons alors le test, dans notre cas en ajoutant l'action <code>about</code> et la vue correspondante. La raison typique pour laquelle nous ne faisons pas l'inverse &mdash;&nbsp;l'implémentation d'abord, puis le test&nbsp;&mdash; permet de nous assurer que nous testons vraiment la fonctionnalité que nous ajoutons. Avant d'utiliser le processus TDD j'étais souvent surpris de découvrir que mes tests testaient en réalité la mauvaise chose, quand ils ne testaient tout simplement rien du tout. En s'assurant que, dans un premier temps, le test conduit à un échec et <em>ensuite</em> réussit, nous pouvons être plus confiant sur le fait que nous accomplissons le bon test.</p>
+<p>Dans un «&nbsp;Développement Dirigé par les Tests&nbsp;» (TDD), nous écrivons d'abord un test <em>échec</em>&nbsp;: dans notre cas, une pièce de code qui exprime l'idée qu'il devrait y avoir une page «&nbsp;À Propos&nbsp;» (<code>about</code>). Nous lançons alors le test, dans notre cas en ajoutant l'action <code>about</code> et la vue correspondante. La raison typique pour laquelle nous ne faisons pas l'inverse &mdash;&nbsp;l'implémentation d'abord, puis le test&nbsp;&mdash; permet de nous assurer que nous testons vraiment la fonctionnalité que nous ajoutons. Avant d'utiliser le processus TDD, j'étais souvent surpris de découvrir que mes tests, en réalité, testaient la mauvaise chose, quand ils ne testaient pas, tout simplement, rien du tout. En s'assurant que, dans un premier temps, le test <em>échoue</em> et <em>ensuite seulement</em> <em>réussit</em>, nous pouvons être plus confiant sur le fait que nous accomplissons le bon test.</p>
 
-<p>Il est important de comprendre que TDD n'est pas toujours le bon outil pour accomplir le travail. En particulier, quand vous n'êtes pas sûr du tout de comment résoudre un problème de programmation donné, il est souvent utile de laisser tomber les tests et d'écrire seulement le code de l'application, juste pour sentir à quoi la solution pourrait ressembler (dans le langage de l''<a href="http://en.wikipedia.org/wiki/Extreme_Programming">Extreme Programming (XP)</a>, cette étape d'exploration est appelée  une <em>spike</em> &mdash;&nbsp;une «&nbsp;pointe&nbsp;», un gros clou). Une fois que vous avez trouvé la forme générale de la solution, vous pouvez alors utiliser TDD pour implémenter une version plus efficiente.</p>
+<p>Il est important de comprendre que TDD n'est pas toujours le bon outil pour accomplir le travail. En particulier, quand vous n'êtes pas sûr du tout de comment résoudre un problème de programmation donné, il est souvent utile de laisser tomber les tests un moment pour écrire seulement le code de l'application, juste pour sentir à quoi la solution pourrait ressembler (dans le langage de l''<a href="http://en.wikipedia.org/wiki/Extreme_Programming">Extreme Programming (XP)</a>, cette étape d'exploration est appelée  une <em>spike</em> &mdash;&nbsp;une «&nbsp;pointe&nbsp;», un gros clou). Une fois que vous avez trouvé la forme générale de la solution, vous pouvez alors utiliser TDD pour implémenter une version plus efficiente.</p>
 
-<p>Une façon de procéder au développement conduit par le test est un cycle connu sous le terme &ldquo;&nbsp;Rouge, Vert, Restructurer&nbsp;&rdquo;. La première étape, le Rouge, se réfère à l'écriture d'un test conduisant à l'échec, que de nombreux outils de test indiquent avec la couleur rouge. L'étape suivante, Vert, se réfère à un test conduit à la réussite, indiqué par la couleur (attendue) verte. Une fois que nous avons un test qui réussit (ou une batterie de tests), nous sommes libre de <em>restructurer</em> notre code, d'en changer la forme (en éliminant les répétitions par exemple) sans changer la fonction.</p>
+<p>Une façon de procéder au développement dirigé par le test est un cycle connu sous le terme «&nbsp;Rouge, Vert, Restructurer&nbsp;». La première étape, le Rouge, se réfère à l'écriture d'un test conduisant à l'échec, que de nombreux outils de test indiquent avec la couleur rouge. L'étape suivante, Vert, se réfère à un test conduisant à la réussite, indiqué par la couleur (attendue) verte. Une fois que nous avons un test (ou une batterie de tests) qui réussit, nous sommes libres de <em>restructurer</em> notre code, d'en changer la forme (en éliminant les répétitions par exemple) sans en changer la fonction.</p>
 
-<p>Nous n'avons pas encore de couleur, donc commençons par le Rouge. RSpec (et le testing en général) peut être intimidant dans un premier temps, donc nous allons utiliser les tests générés par les <code>rails generate controller Pages</code> (les <em>Pages de génération de contrôleur de Rails</em>) de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> pour commencer. Puisque je ne suis pas partisan de séparer les tests pour les Vues de ceux pour les Helpers, ce que j'ai trouvé soit fragile soit redondant, notre première étape va consister à les effacer. Si vous utilisez Git, vous pouvez le faire comme suit&nbsp;:</p>
+<p>Nous n'avons pas encore de couleur, donc commençons par le Rouge. RSpec (et le testing en général) peut être intimidant de prime abord, donc nous allons utiliser les tests générés par les <code>rails generate controller Pages</code> (les <em>Pages de génération de contrôleur de Rails</em>) de l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> pour commencer. Puisque je ne suis pas partisan de séparer les tests pour les Vues de ceux pour les <em>Helpers</em> (les «&nbsp;Assistants&nbsp;». NdT), séparation que j'ai toujours trouvée soit fragile soit redondante, notre première étape va consister à les effacer. Si vous utilisez Git, vous pouvez le faire comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git rm -r spec/views
 <span class="gp">$</span> git rm -r spec/helpers
@@ -937,7 +940,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Nous allons traiter les tests pour les Vues et les Helpers directement dans les tests du contrôleur commençant à la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>.</p>
+<p>Nous allons traiter les tests pour les Vues et les <em>Helpers</em> directement dans les tests du contrôleur commençant à la <a class="ref" href="static-pages#sec:slightly_dynamic_pages">section&nbsp;3.3</a>.</p>
 
 <p>Pour commencer avec RSpec, jetez un œil aux spécifications du contrôleurs  Pages<sup class="footnote" id="fnref:3.11"><a href="#fn:3.11">11</a></sup> que nous venons de générer (<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>).</p>
 
@@ -952,14 +955,14 @@ par [Michael Hartl](http://michaelhartl.com/).
 <span class="n">describe</span> <span class="no">PagesController</span> <span class="k">do</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;home&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;contact&#39;&quot;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="s1">&#39;contact&#39;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
@@ -968,10 +971,11 @@ par [Michael Hartl](http://michaelhartl.com/).
 </pre></div>
 </div></div>
 
+<p>(«&nbsp;should be successful&nbsp;» signifie «&nbsp;devrait réussir&nbsp;». NdT)</p>
 
-<p>Ce code est en pur Ruby, mais même si vous avez étudié Ruby précédemment il ne vous semblera pas très familier. C'est parce que RSpec utilise la malléabilité de Ruby pour définir son propre <em>langage de dommaine</em> (<em>domain-specific language</em> (DSL)) construit juste pour le testing. Le point important ici est que <em>vous n'avez pas besoin de comprendre la syntaxe RSpec pour pouvoir utiliser RSpec</em>. Ça peut sembler magique dans un premier temps, mais RSpec est conçu pour se lire plus ou moins comme de l'anglais, et si vous suivez les exemples du script généré et les autres exemples de ce tutoriel, [(you&rsquo;ll pick it up fairly quickly)(vous le percevrez rapidement bien)].</p>
+<p>Ce code est en pur Ruby, mais même si vous avez étudié Ruby précédemment il ne vous semblera pas très familier. C'est parce que RSpec utilise la malléabilité de Ruby pour définir son propre <em>langage de domaine</em> (<em>domain-specific language</em> (DSL)) construit juste pour le testing. Le point important ici est que <em>vous n'avez pas besoin de comprendre la syntaxe RSpec pour pouvoir utiliser RSpec</em>. Ça peut sembler magique dans un premier temps, mais RSpec est conçu pour se lire plus ou moins comme de l'anglais, et si vous suivez les exemples du script généré et les autres exemples de ce tutoriel, vous le maitriserez rapidement.</p>
 
-<p>L''<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> contient deux blocs descriptifs (<code>describe</code> blocks), chacun avec un <em>exemple</em> (par exemple un bloc commençant avec <code>it "&hellip;" do</code> &mdash;&nbsp;<code>il "…" fait</code>). Concentrons-nous sur le premier pour sentir ce qu'il fait&nbsp;:</p>
+<p>L''<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a> contient deux blocs descriptifs (blocs <code>describe</code>, <em>décrire</em>), chacun avec un <em>exemple</em> (par exemple un bloc commençant avec <code>it "&hellip;" do</code> &mdash;&nbsp;<em>il "…" fait</em>). Concentrons-nous sur le premier pour sentir ce qui se passe&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
     <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
@@ -983,13 +987,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>La première ligne indique que nous décrivons (<em>describe</em>) un opération <tt>GET</tt> pour l'action <code>home</code>. C'est juste une description, et ça peut être ce que vous voulez&nbsp;; RSpec s'en fiche, mais vous ou d'autres lecteurs humains probablement pas. Dans ce cas, <code>"GET &rsquo;home&rsquo;"</code> indique que le test correspond à une requête HTTP <tt>GET</tt>, comme discutée dans le <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>. Alors la spécification dit que lorsque vous visitez la page d'accueil, cela devrait réussir. Comme avec la première ligne, ce qui vient à l'intérieur des guillemets n'intéresse pas de RSpec, n'est pertinent qu'aux lecteurs humains. La troisième ligne, <code>get &rsquo;home&rsquo;</code>, est la première ligne qui véritablement accomplit quelque chose. À l'intérieur de RSpec, cette ligne <em>soumet vraiment une requête GET</em>&nbsp;; en d'autres termes, elle agit comme un navigateur et pointe vers la page, dans ce cas <tt>/pages/home</tt> (il sait automatiquement qu'il doit toucher le contrôleur Pages puisque c'est un test de ce contrôleur Pages&nbsp;; il sait qu'il doit atteindre la page d'accueil parce que nous lui disons explicitement). Enfin, la quatrième ligne dit que la <em>réponse</em> (<em>response</em>) de notre application devrait indiquer un succès (elle devrait par exemple retourner un <em>code d'état</em> de <tt>200</tt>&nbsp;; voir <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>).</p>
+<p>La première ligne indique que nous décrivons (<em>describe</em>) une opération <tt>GET</tt> pour l'action <code>home</code>. C'est juste une description, et ça peut être ce que vous voulez&nbsp;; RSpec s'en fiche, mais vous ou d'autres lecteurs humains probablement pas. Dans ce cas, <code>"GET &rsquo;home&rsquo;"</code> indique que le test correspond à une requête HTTP <tt>GET</tt>, comme discutée dans le <a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>. Alors la spécification dit que lorsque vous visitez la page d'accueil, cela devrait réussir. Comme avec la première ligne, ce qui vient à l'intérieur des guillemets n'intéresse pas RSpec, ça n'est pertinent qu'aux lecteurs humains. La troisième ligne, <code>get &rsquo;home&rsquo;</code>, est la première ligne qui véritablement accomplit quelque chose. À l'intérieur de RSpec, cette ligne <em>soumet vraiment une requête GET</em>&nbsp;; en d'autres termes, elle agit comme un navigateur et pointe vers la page, dans ce cas <tt>/pages/home</tt> (il sait automatiquement qu'il doit toucher le contrôleur Pages puisque c'est un test de ce contrôleur Pages&nbsp;; il sait qu'il doit atteindre la page d'accueil parce que nous lui disons explicitement). Enfin, la quatrième ligne dit que la <em>réponse</em> (<em>response</em>) de notre application devrait indiquer un succès (elle devrait par exemple retourner un <em>code d'état</em> de <tt>200</tt>&nbsp;; voir <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>).</p>
 
 <div class="label" id="sidebar:response_codes"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 3.2.</span><span class="description">Codes de réponse HTTP</span></span>
-<p>Après qu'un client (tel qu'un navigateur web) envoie une requête correspondant à un des verbes HTTP (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>), le serveur web <em>répond</em> par un code numérique indiquant le <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">statut HTTP</a> de la réponse. Par exemple, un code d'état de <tt>200</tt> signifie la réussite et un code d'état de 301 signifie une &ldquo;&nbsp;redirection permanente&nbsp;&rdquo;. Si vous avez <a href="http://www.google.com/search?q=install+curl">installé <tt>curl</tt></a>, un client en ligne de commande qui peut traiter les requêtes HTTP, vous pouvez voir cela directement à, par exemple, <tt>www.google.com</tt> (où les drapeaux <tt class="verb">--head</tt> empêchent <code>curl</code> de retourner la page complète)&nbsp;:</p>
+<p>Après qu'un client (tel qu'un navigateur web) envoie une requête correspondant à un des verbes HTTP (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>), le serveur web <em>répond</em> par un code numérique indiquant le <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">statut HTTP</a> de la réponse. Par exemple, un code d'état de <tt>200</tt> signifie la réussite et un code d'état de 301 signifie une «&nbsp;redirection permanente&nbsp;». Si vous avez <a href="http://www.google.com/search?q=install+curl">installé <tt>curl</tt></a>, un client en ligne de commande qui peut traiter les requêtes HTTP, vous pouvez voir cela directement avec, par exemple, <tt>www.google.com</tt> (où les drapeaux <tt class="verb">--head</tt> empêchent <code>curl</code> de retourner la page complète)&nbsp;:</p>
 
 <pre class="verbatim">  $ curl --head www.google.fr
   HTTP/1.1 200 OK
@@ -998,7 +1002,7 @@ par [Michael Hartl](http://michaelhartl.com/).
   .</pre>
 
 
-<p>Ici Google indique que la requête a été exécutée avec succès en retournant le code d'état <tt>200&nbsp;OK</tt>. <em>A contrario</em>, <tt>google.com</tt> est redirigé de façon permanente (vers <tt>www.google.com</tt>, naturellement), indiquant un code d'état <tt>301</tt> (une &ldquo;&nbsp;redirection <tt>301</tt> redirect&nbsp;&rdquo;)&nbsp;:</p>
+<p>Ici Google indique que la requête a été exécutée avec succès en retournant le code d'état <tt>200&nbsp;OK</tt>. <em>A contrario</em>, <tt>google.com</tt> est redirigé de façon permanente (vers <tt>www.google.com</tt>, naturellement), indiquant un code d'état <tt>301</tt> (une «&nbsp;redirection <tt>301</tt>&nbsp;»)&nbsp;:</p>
 
 <pre class="verbatim">  $ curl --head google.com
   HTTP/1.1 301 Moved Permanently
@@ -1010,7 +1014,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>(<em>Note&nbsp;:</em> le résultat retourné ci-dessus peut varier légèrement suivant les pays)</p>
 
-<p>Quand nous écrivons <code>response.should be_success</code> (<em>la_réponse.devrait_être_un_succès</em>) dans un test RSpec, RSpec vérifie que la réponse de notre application à la requête est un code d'état de <tt>200</tt>.</p>
+<p>Quand nous écrivons <code>response.should be_success</code> (<em>la_réponse.devrait être_un_succès</em>) dans un test RSpec, RSpec vérifie que la réponse de notre application à la requête est un code d'état de <tt>200</tt>.</p>
 </div>
 
 
@@ -1067,7 +1071,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>(Si ça continue de ne pas fonctionner… je suis à court d'idées.)</p>
 
-<p>En jouant <code>rspec spec/</code>, <code>rspec</code> est un programme fourni par RSpec, tandis que <code>spec/</code> est le <em>dossier</em> où vous voulez que specs s'exécute. Vous pouvez également jouer seulement les specs dans un sous-dossier particulier. Par exemple, la commande suivante joue uniquement ls specs des contrôleurs&nbsp;:</p>
+<p>En jouant <code>rspec spec/</code>, <code>rspec</code> est un programme fourni par RSpec, tandis que <code>spec/</code> est le <em>dossier</em> où vous voulez que rspec s'exécute. Vous pouvez également jouer seulement les specs dans un sous-dossier particulier. Par exemple, la commande suivante joue uniquement ls specs des contrôleurs&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/controllers/
 <span class="go">....</span>
@@ -1105,7 +1109,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Si vous utilisez un Mac avec les notifications Growl activées, vous devirez pouvoir répliquer mes réglages montrés dans l'<a class="ref" href="static-pages#fig:autotest_green">illustration&nbsp;3.6</a>. Avec Autotest jouant en arrière-tâche et les notifications Growl vous disant l'état de vos tests, vous pourriez bien devenir accro du développement TDD.</p>
+<p>Si vous utilisez un Mac avec les notifications Growl activées, vous devriez pouvoir répliquer mes réglages montrés dans l'<a class="ref" href="static-pages#fig:autotest_green">illustration&nbsp;3.6</a>. Avec Autotest jouant en arrière-tâche et les notifications Growl vous disant l'état de vos tests, vous pourriez bien devenir accro du développement TDD.</p>
 
 <div class="label" id="fig:autotest_green"></div>
 
@@ -1121,7 +1125,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.2.1" href="static-pages#sec:spork" class="heading">Spork</a></h4>
 
 
-<p>Vous avez peut-être noté que les [(ressources)(overhead)] liées à la gestion d'une batterie de test peuvent être considérables. Cela s'explique du fait que chaque fois que RSpec joue les tests il doit recharger tout l'environnement Rails. Le <a href="http://github.com/timcharper/spork">serveur de test Spork</a><sup class="footnote" id="fnref:3.14"><a href="#fn:3.14">14</a></sup> a pour but de régler ce problème. Spork charge <em>une seule fois</em> l'environnement, et maintient alors un pool de processus pour jouer les prochains tests. Spork est particulièrement utile quand il est combiné à Autotest.</p>
+<p>Vous avez peut-être noté que les ressources-système liées à la gestion d'une suite de tests peuvent être considérables. Cela s'explique par le fait que chaque fois que RSpec joue les tests, il doit recharger tout l'environnement Rails. Le <a href="http://github.com/timcharper/spork">serveur de test Spork</a><sup class="footnote" id="fnref:3.14"><a href="#fn:3.14">14</a></sup> a pour but de régler ce problème. Spork charge <em>une seule fois</em> l'environnement, et maintient alors un pool de processus pour jouer les prochains tests. Combiné à Autotest, Spork est particulièrement utile.</p>
 
 <p>Configurer et faire fonctionner Spork peut être difficile, et c'est un sujet de niveau plutôt avancé. <strong>Si vous vous sentez dépassé, n'hésitez pas à passer cette section.</strong></p>
 
@@ -1131,7 +1135,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.12.</span> <span class="description">Un <code>Gemfile</code> pour l'application exemple.</span>       
+<div class="listing"><span class="header">Extrait 3.12.</span> <span class="description">Un <code>Gemfile</code> pour l'<em>Application Exemple</em>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1160,27 +1164,28 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Ensuite, amorcer la configuration Spork&nbsp;:</p>
+<p>Amorcer la configuration Spork&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> spork --bootstrap
 </pre></div>
 </div>
 
 
-<p>Maintenant nous devons éditer le fichier de configuration RSpec, <code>spec/spec_helper.rb</code>, pour que l'environnement soit chargé dans le bloc <em>prefork</em>, pour n'avoir à le charger qu'une seule fois (<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a>). <em>Note&nbsp;:</em> utilisez seulement ce code si vous utilisez Spork. Si vous essayez d'utiliser l''<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a> sans Spork, la suite de test de votre application ne fonctionnera pas.</p>
+<p>Maintenant nous devons éditer le fichier de configuration RSpec, <code>spec/spec_helper.rb</code>, pour que l'environnement soit chargé dans le bloc <em>prefork</em>, pour n'avoir à le charger qu'une seule fois (<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a>).</p>
 
 <div class="label" id="code:spork_spec_helper"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.13.</span> <span class="description">Ajout du chargement de l'environnement dans le bloc <code>Spork.prefork</code>. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.13.</span> <span class="description">Ajout du chargement de l'environnement dans le bloc <code>Spork.prefork</code>. <br /> <code>spec/spec_helper.rb</code></span>
+<div><em>Note&nbsp;: utilisez seulement ce code si vous utilisez Spork. Si vous essayez d'utiliser l''<a class="ref" href="static-pages#code:spork_spec_helper">extrait&nbsp;3.13</a> sans Spork, la suite de test de votre application ne fonctionnera pas.</em></div>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spork&#39;</span>
 
 <span class="no">Spork</span><span class="o">.</span><span class="n">prefork</span> <span class="k">do</span>
-  <span class="c1"># En charger plus dans ce bloc accélèrera les test. Cependant, </span>
-  <span class="c1"># si vous changez de configuration ou le code des librairies chargées ici, vous</span>
-  <span class="c1"># devrez redémarrer spork.</span>
+  <span class="c1"># En charger plus dans ce bloc accélèrera les tests. Cependant, </span>
+  <span class="c1"># si vous changez de configuration ou le code des</span>
+  <span class="c1"># librairies chargées ici, vous devrez redémarrer spork.</span>
   <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;RAILS_ENV&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;test&#39;</span>
   <span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s2">&quot;../../config/environment&quot;</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
   <span class="nb">require</span> <span class="s1">&#39;rspec/rails&#39;</span>
@@ -1230,7 +1235,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Ici la suite de test prend plus de sept secondes pour être exécuté même si les tests effectifs jouent en moins d'une dizaine de secondes. Pour accélérer cela, nous pouvons ouvrir une fenêtre terminal dédiée aux tests, naviguer vers le dossier Rails racine, et démarrer un serveur Spork&nbsp;:</p>
+<p>Ici la suite de tests prend plus de 7 secondes pour être exécutée même si les tests effectifs jouent en moins d'une dizaine de secondes. Pour accélérer cela, nous pouvons ouvrir une fenêtre terminal dédiée aux tests, nous rendre dans le dossier Rails racine et démarrer un serveur Spork&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> spork
 <span class="go">Using RSpec</span>
@@ -1295,14 +1300,14 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>ou</p>
+<p>… ou&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> autotest
 </pre></div>
 </div>
 
 
-<p>sans la commande <code>time</code>.</p>
+<p>… sans la commande <code>time</code>.</p>
 
 <p>Un petit conseil quand vous utilisez Spork&nbsp;: si vos tests échouent quand vous pensez qu'ils devraient réussir, le problème peut venir du chargement du <em>prefork</em> de Spork, qui peut parfois empêcher le chargement de certains fichiers utiles. Dans le doute, quittez alors le serveur Spok (avec <tt>Control-C</tt>) et relancez-le&nbsp;:</p>
 
@@ -1322,13 +1327,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.2.2" href="static-pages#sec:red" class="heading">Rouge</a></h4>
 
 
-<p>Maintenant voyons la partie Rouge de notre cycle Rouge-Vert en écrivant un test qui va échouer sur la page «&nbsp;À propos&nbsp;» (page <code>about</code)>. En suivant les modèles de l'<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>, vous pouvez probablement deviner le test adéquat (<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>).</p>
+<p>Maintenant voyons la partie Rouge de notre cycle Rouge-Vert en écrivant un test qui va échouer sur la page «&nbsp;À Propos&nbsp;» (page <code>about</code>). En suivant les modèles de l'<a class="ref" href="static-pages#code:default_pages_controller_spec">extrait&nbsp;3.11</a>, vous pouvez probablement deviner le test adéquat (<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>).</p>
 
 <div class="label" id="code:failing_about_page"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.15.</span> <span class="description">Le spec du contrôleur Pages avec un test d'échec pour la page «&nbsp;À propos&nbsp;». <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 3.15.</span> <span class="description">Le spec du contrôleur Pages avec un test d'échec pour la page «&nbsp;À Propos&nbsp;». <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1373,12 +1378,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>Cela assure que si les tests réussissent, la page est vraiment là.</p>
 
-<p>Le nouveau test tente d'atteindre (<code>get</code>) l'action <code>about</code>, et indique que la réponse en résultant doit être un succès. À dessein, cela échoue (avec un message d'erreur rouge), comme le montre l'<a class="ref" href="static-pages#fig:rspec_spec_red">illustration&nbsp;3.7</a> (<code>rspec spec/</code>) et l'<a class="ref" href="static-pages#fig:autotest_red">illustration&nbsp;3.8</a> (<code>autotest</code>) (si vous testez les vues dans les contrôleurs comme le préconise ce tutoriel, cela vaut la peine de noter que changer le fichier de la vue d'invitera pas Autotest à jouer le test de contrôleur correspondant. Il existe probablement une façon de configurer Autotest pour faire cela automatiquement, mais habituellement je bascule juste vers le contrôleur et presse la touche &ldquo;espace-retour&rdquo; pour que le fichier soit marqué comme modifié. Sauver le contrôleur conduit Autotest à jouer les tests comme prévu).</p>
+<p>Le nouveau test tente d'atteindre (<code>get</code>) l'action <code>about</code>, et indique que la réponse en résultant doit être un succès. À dessein, cela échoue (avec un message d'erreur rouge), comme le montre l'<a class="ref" href="static-pages#fig:rspec_spec_red">illustration&nbsp;3.7</a> (<code>rspec spec/</code>) et l'<a class="ref" href="static-pages#fig:autotest_red">illustration&nbsp;3.8</a> (<code>autotest</code>) (si vous testez les vues dans les contrôleurs comme le préconise ce tutoriel, cela vaut la peine de noter que changer le fichier de la vue n'invitera pas Autotest à jouer le test de contrôleur correspondant. Il existe probablement une façon de configurer Autotest pour faire cela automatiquement, mais habituellement je bascule juste vers le contrôleur et presse la touche «&nbsp;espace-retour&nbsp;» pour que le fichier soit marqué comme modifié. Sauver le contrôleur conduit Autotest à jouer les tests comme prévu).</p>
 
 <div class="label" id="fig:rspec_spec_red"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rspec_spec_red.png" alt="rspec_spec_red" /></span></div><div class="caption"><span class="header">Illustration 3.7: </span><span class="description">Specification de l'échec pour la page About («&nbsp;À propos&nbsp;») en utilisant <code>rspec spec/</code>.&nbsp;<a href="http://railstutorial.org/images/figures/rspec_spec_red-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rspec_spec_red.png" alt="rspec_spec_red" /></span></div><div class="caption"><span class="header">Illustration 3.7: </span><span class="description">Specification de l'échec pour la page About («&nbsp;À Propos&nbsp;») en utilisant <code>rspec spec/</code>.&nbsp;<a href="http://railstutorial.org/images/figures/rspec_spec_red-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1397,7 +1402,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.2.3" href="static-pages#sec:green" class="heading">Vert</a></h4>
 
 
-<p>Rappelez-vous, de la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, que nous pouvons générer une page statique avec Rails en créant une action et la vue correspondante avec le nom de la page. Dans notre cas, la page «&nbsp;À propos&nbsp;» aura d'abord besoin d'une action appelée <code>about</code> dans le contrôleur Pages. Ayant écrit un test d'échec, nous pouvons maintenant être sûr qu'en le faisant réussir, nous avons bien créé une page <code>about</code> qui fonctionne.</p>
+<p>Rappelez-vous, de la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, que nous pouvons générer une page statique avec Rails en créant une action et la vue correspondante avec le nom de la page. Dans notre cas, la page «&nbsp;À Propos&nbsp;» aura d'abord besoin d'une action appelée <code>about</code> dans le contrôleur Pages. Ayant écrit un test d'échec, nous pouvons maintenant être sûr qu'en le faisant réussir, nous avons bien créé une page <code>about</code> qui fonctionne.</p>
 
 <p>En suivant les modèles fournis par <code>home</code> et <code>contact</code> dans l'<a class="ref" href="static-pages#code:pages_controller">extrait&nbsp;3.6</a>, commençons d'abord par ajouter l'action <code>about</code> dans le contrôleur Pages (<a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>).</p>
 
@@ -1448,7 +1453,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.18.</span> <span class="description">[(A stub About page)(Un talon de la page «&nbsp;À propos&nbsp;»)]. <br /> <code>app/views/pages/about.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.18.</span> <span class="description">Une page «&nbsp;À Propos&nbsp;» souche. <br /> <code>app/views/pages/about.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#about<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/about.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -1466,7 +1471,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:autotest_back_to_green"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_back_to_green.png" alt="autotest_back_to_green" /></span></div><div class="caption"><span class="header">Illustration 3.9: </span><span class="description">Autotest de retour au Vert&nbsp;: tous les tests réussisent.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_back_to_green-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/autotest_back_to_green.png" alt="autotest_back_to_green" /></span></div><div class="caption"><span class="header">Illustration 3.9: </span><span class="description">Autotest de retour au Vert&nbsp;: tous les tests réussissent.&nbsp;<a href="http://railstutorial.org/images/figures/autotest_back_to_green-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Bien sûr, ça n'est jamais une mauvaise idée de jeter un œil à la page dans un navigtaeur pour s'assurer que les tests ne sont pas totalement absurdes (<a class="ref" href="static-pages#fig:raw_about_page">illustration&nbsp;3.10</a>).</p>
@@ -1474,7 +1479,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:raw_about_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_about_page.png" alt="raw_about_page" /></span></div><div class="caption"><span class="header">Illustration 3.10: </span><span class="description">La nouvelle (et plutôt brute de décoffrage) page «&nbsp;À Propos&nbsp;» (<a href="http://localhost:3000/pages/about"><tt>/pages/about</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/raw_about_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_about_page.png" alt="raw_about_page" /></span></div><div class="caption"><span class="header">Illustration 3.10: </span><span class="description">La nouvelle page (brute de décoffrage) «&nbsp;À Propos&nbsp;» (<a href="http://localhost:3000/pages/about"><tt>/pages/about</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/raw_about_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1487,7 +1492,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>Maintenant que nous sommes au Vert, nous sommes libre de <em>restructurer</em> notre code en changeant sa forme sans changer sa fonction. Souvent, le codage se fait <em>au feeling</em>, ce qui signifie qu'il devient rapidement laid, bouffi et plein de répétitions. L'ordinateur s'en fiche, bien sûr, mais pas les humains, donc il est important de garder le code base le plus propre possible en le restructurant fréquemment. Avoir une bonne batterie de tests (qui réussissent) est un outil inestimable à cet égard, car il réduit considérablement la probabilité d'introduire des bogues en cours de restructuration.</p>
 
-<p>Notre application exemple est un peu trop petite pour la restructurer maintenant, mais l'odeur de code sale s'infiltre par chaque fissure, donc nous n'aurons pas à attendre trop longtemps&nbsp;: nous serons contraints de restructurer dès la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a> de ce chapitre.</p>
+<p>Notre <em>Application Exemple</em> est un peu trop petite pour la restructurer maintenant, mais l'odeur de code sale s'infiltre par chaque fissure, donc nous n'aurons pas à attendre bien longtemps&nbsp;: nous serons contraints de restructurer dès la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a> de ce chapitre.</p>
 
 <div class="label" id="sec:slightly_dynamic_pages"></div>
 
@@ -1495,7 +1500,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:3.3" href="static-pages#sec:slightly_dynamic_pages" class="heading"><span class="number">3.3</span> Pages (un peu) dynamiques</a></h2>
 
 
-<p>Maintenant que nous avons créé les actions et les vues pour quelques pages statiques, nous allons les rendre <em>très légèrement</em> dynamiques en ajoutant du contenu qui change [(on a per-page basis)(sur une base commune)]&nbsp;: nous devons changer le titre de chaque page pour qu'il reflète son contenu. Que cela représente <em>vraiment</em> un contenu dynamique est discutable, mais en tout cas il présente les fondements nécessaires pour le contenu indiscutablement dynamique du <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Maintenant que nous avons créé les actions et les vues pour quelques pages statiques, nous allons les rendre <em>très légèrement</em> dynamiques en ajoutant du contenu qui change en fonction des pages&nbsp;: nous devons changer le titre de chaque page pour qu'il reflète son contenu. Que cela représente <em>vraiment</em> un contenu dynamique est discutable, mais en tout cas il présente les fondements nécessaires pour le contenu indiscutablement dynamique du <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
 <p>(Si vous avez passé ce qui concernait le TDD de la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a>, assurez-vous de créer une page «&nbsp;À Propos&nbsp;» ici en utilisant le code de l'<a class="ref" href="static-pages#code:adding_the_about_page">extrait&nbsp;3.16</a>, de l'<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a> et de l'<a class="ref" href="static-pages#code:raw_about_view">extrait&nbsp;3.18</a>.)</p>
 
@@ -1505,15 +1510,15 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.3.1" href="static-pages#sec:testing_a_title_change" class="heading"><span class="number">3.3.1</span> Tester un changement de titre</a></h3>
 
 
-<p>Notre plan est d'éditer les pages Home (<em>Accueil</em>), Contact et About (<em>À Propos</em>) pour ajouter le type de structure HTML que nous avons vu dans l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>, en incluant des titres qui changent pour chacune des pages. C'est un sujet épineux de décider lequel de ces changements tester, et en général, tester le code HTML peut se révéler hasardeux entendu que le contenu tend à changer fréquemment. Nous garderons nos tests simples en ne testant que le titre de la page.</p>
+<p>Notre plan est d'éditer les pages Home (<em>Accueil</em>), Contact et About (<em>À Propos</em>) pour ajouter le type de structure HTML que nous avons vu dans l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>, en incluant des titres qui changent pour chacune des pages. C'est un sujet épineux de décider lequel de ces changements tester, et en général, tester le code HTML peut se révéler hasardeux entendu que le contenu tend à changer fréquemment. Nous garderons nos tests le plus simple possible en ne testant que le titre de la page.</p>
 
 <div class="label" id="table:static_pages"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_center"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Titre de base</strong></th><th class="align_left"><strong>Variable title</strong></th></tr><tr class="top_bar"><td class="align_center">Accueil</td><td class="align_left"><tt>/pages/home</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Accueil"</code></td></tr><tr><td class="align_center">Contact</td><td class="align_left"><tt>/pages/contact</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Contact"</code></td></tr><tr><td class="align_center">À Propos</td><td class="align_left"><tt>/pages/about</tt></td><td class="align_left"><code>"Simple App du tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | À Propos"</code></td></tr></table></div><div class="caption"><span class="header">Table 3.1: </span><span class="description">Les pages statiques (courantes) pour l'application exemple.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_center"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Titre de base</strong></th><th class="align_left"><strong>Variable titre</strong></th></tr><tr class="top_bar"><td class="align_center">Accueil</td><td class="align_left"><tt>/pages/home</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Accueil"</code></td></tr><tr><td class="align_center">Contact</td><td class="align_left"><tt>/pages/contact</tt></td><td class="align_left"><code>"Simple App du Tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | Contact"</code></td></tr><tr><td class="align_center">À Propos</td><td class="align_left"><tt>/pages/about</tt></td><td class="align_left"><code>"Simple App du tutoriel Ruby on Rails"</code></td><td class="align_left"><code>" | À Propos"</code></td></tr></table></div><div class="caption"><span class="header">Table 3.1: </span><span class="description">Les pages statiques (courantes) pour l'<em>Application Exemple</em>.</span></div></div>
 
 
-<p>À la fin de cette section, nos trois pages statiques auront des titres de la forme &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails | Accueil&nbsp;&rdquo;, où la dernière partie de titre variera en fonction de la page (<a class="ref" href="static-pages#table:static_pages">Table&nbsp;3.1</a>). Nous construirons les tests d'après l'<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>, en ajoutant des tests sur le titre suivant le modèle de l'<a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a>.</p>
+<p>À la fin de cette section, nos trois pages statiques auront des titres de la forme «&nbsp;Simple App du Tutoriel Ruby on Rails | Accueil&nbsp;», où la dernière partie de titre variera en fonction de la page (<a class="ref" href="static-pages#table:static_pages">Table&nbsp;3.1</a>). Nous construirons les tests d'après l'<a class="ref" href="static-pages#code:failing_about_page">extrait&nbsp;3.15</a>, en ajoutant des tests sur le titre suivant le modèle de l'<a class="ref" href="static-pages#code:title_test">extrait&nbsp;3.19</a>.</p>
 
 <div class="label" id="code:title_test"></div>
 
@@ -1530,7 +1535,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Ce code utilise la méthode <code>have_selector</code> à l'intérieur de RSpec&nbsp;; la documentation sur <code>have_selector</code> est étonnament éparse, mais ce qu'elle fait est comparer le contenu d'un élément HTML (d'un &ldquo;selector&rdquo;) avec le contenu donné. En d'autres termes, le code…</p>
+<p>Ce code utilise la méthode <code>have_selector</code> à l'intérieur de RSpec&nbsp;; la documentation sur <code>have_selector</code> est étonnament éparse, mais ce qu'elle fait, c'est de comparer le contenu d'un élément HTML (d'un «&nbsp;selector&nbsp;») avec un contenu donné. En d'autres termes, le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                   <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Simple App du Tutoriel Ruby on Rails | Accueil&quot;</span><span class="p">)</span>
@@ -1538,7 +1543,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>… s'assure que le contenu entre les balises <tt class="verb">&lt;title&gt;&lt;/title&gt;</tt> est bien <code>"Simple App du Tutoriel Ruby on Rails | Accueil"</code>.<sup class="footnote" id="fnref:3.16"><a href="#fn:3.16">16</a></sup> Il est utile de mentionner que le contenu n'a pas besoin d'être exact&nbsp;; toute sous-chaine fonctionne aussi, donc le code…</p>
+<p>… s'assure que le contenu entre les balises <tt class="verb">&lt;title&gt;&lt;/title&gt;</tt> est bien <code>"Simple App du Tutoriel Ruby on Rails | Accueil"</code>.<sup class="footnote" id="fnref:3.16"><a href="#fn:3.16">16</a></sup> Il est utile de mentionner que le contenu n'a pas besoin d'être exact&nbsp;; toute sous-chaine fonctionne aussi, donc le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot; | Accueil&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1624,7 +1629,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.3.2" href="static-pages#sec:passing_title_tests" class="heading"><span class="number">3.3.2</span> Réussir les tests de titre</a></h3>
 
 
-<p>Nous allons maintenant faire en sorte que nos tests de titre réussissent, et en même temps ajouter une structure HTML valide. Commençons avec la page d'accueil (<a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a>), en utilisant le même squelette HTML basique que la page &ldquo;hello&rdquo; de l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>.</p>
+<p>Nous allons maintenant faire en sorte que nos tests de titre réussissent, et en même temps ajouter une structure HTML valide. Commençons avec la page d'accueil (<a class="ref" href="static-pages#code:home_view_full_html">extrait&nbsp;3.21</a>), en utilisant le même squelette HTML basique que la page «&nbsp;hello&nbsp;» de l'<a class="ref" href="static-pages#code:hello_world">extrait&nbsp;3.3</a>.</p>
 
 <p><em>Note&nbsp;:</em> avec Rails&nbsp;3, le générateur de contrôleur crée un fichier de <em>mise en forme</em> (<em>layout</em>), dont nous expliquerons brièvement la fonction, mais que nous devons pour le moment supprimer avant de poursuivre&nbsp;:</p>
 
@@ -1647,7 +1652,7 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Simple App<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      Ceci est la page d'accueil de l'application exemple du
+      Ceci est la page d'accueil de l'<em>Application Exemple</em> du
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -1663,7 +1668,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Comme résultat, les tests pour la page d'accueil devraient maintenant réussir. Nous obenons toujours du Rouge à cause des tests des pages Contact et «&nbsp;À Propos&nbsp;», et nous allons pouvoir obtenir du Vert avc le code de l'<a class="ref" href="static-pages#code:contact_view_full_html">extrait&nbsp;3.22</a> et de l'<a class="ref" href="static-pages#code:about_view_full_html">extrait&nbsp;3.23</a>.</p>
+<p>Les tests pour la page d'accueil devraient maintenant réussir. Nous obenons toujours du Rouge à cause des tests des pages Contact et «&nbsp;À Propos&nbsp;», et nous allons pouvoir obtenir du Vert avc le code de l'<a class="ref" href="static-pages#code:contact_view_full_html">extrait&nbsp;3.22</a> et de l'<a class="ref" href="static-pages#code:about_view_full_html">extrait&nbsp;3.23</a>.</p>
 
 <div class="label" id="code:contact_view_full_html"></div>
 
@@ -1679,7 +1684,7 @@ par [Michael Hartl](http://michaelhartl.com/).
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      Contact Ruby on Rails Tutorial à propos de l'application exemple à
+      Contact Ruby on Rails Tutorial à propos de l'<em>Application Exemple</em> à
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>feedback page<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -1702,12 +1707,12 @@ par [Michael Hartl](http://michaelhartl.com/).
     <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | À Propos<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>À propos de nous<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>À Propos de nous<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Le Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
       est un projet de livre et de screencasts pour apprendre le développement web
       avec <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. Ceci
-      est l'application exemple du tutoriel.
+      est l'<em>Application Exemple</em> du tutoriel.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1715,7 +1720,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Ces pages exemples introduisent la balise <em>ancre</em> tag&nbsp;<code>a</code>, qui crée des liens vers les URLs données (appelés &ldquo;href&rdquo; ou &ldquo;hypertext reference&rdquo; dans le contexte d'une balise ancre)&nbsp;:</p>
+<p>Ces pages exemples introduisent la balise <em>ancre</em> tag&nbsp;<code>a</code>, qui crée des liens vers les URLs données (appelés «&nbsp;href&nbsp;» ou «&nbsp;hypertext reference&nbsp;» dans le contexte d'une balise ancre)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
 </pre></div>
@@ -1727,7 +1732,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="fig:new_home_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_home_page.png" alt="new_home_page" /></span></div><div class="caption"><span class="header">Illustration 3.11: </span><span class="description">Une page accueil minimale pour l'application exemple (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/new_home_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/new_home_page.png" alt="new_home_page" /></span></div><div class="caption"><span class="header">Illustration 3.11: </span><span class="description">Une page accueil minimale pour l'<em>Application Exemple</em> (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/new_home_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1737,20 +1742,20 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h3><a id="sec:3.3.3" href="static-pages#sec:instance_variables_embedded_ruby" class="heading"><span class="number">3.3.3</span> Variables d'instance et Ruby embarqué</a></h3>
 
 
-<p>Nous avons déjà fait beaucoup de choses dans cette section, générer trois pages valides en utilisant les contrôleurs et actions Rails, mais ce sont de pure page statiques HTML et donc ne font pas la démonstration de la puissance de Rails. Plus encore, elles souffrent de terribles duplications&nbsp;:</p>
+<p>Nous avons déjà fait beaucoup de choses dans cette section, générer trois pages valides en utilisant les contrôleurs et actions Rails, mais ce sont de pures pages statiques HTML et elles ne font donc pas la démonstration de la puissance de Rails. Plus encore, elles souffrent de terribles duplications&nbsp;:</p>
 
 <ul>
 <li>Les titres de page sont presque (mais pas tout à fait) exactement semblables&nbsp;;</li>
-<li>&ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;&rdquo; est commun aux trois titres&nbsp;;</li>
+<li>«&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;» est commun aux trois titres&nbsp;;</li>
 <li>L'entière structure du code HTML est répétée dans chacune des pages.</li>
 </ul>
 
 
-<p>Ce code répété est une violation du principe &ldquo;Don&rsquo;t Repeat Yourself&rdquo; (DRY —&nbsp;«&nbsp;Ne vous répétez pas&nbsp;»)&nbsp;; dans cette section et la suivante, nous allons «&nbsp;DRYer&nbsp;» notre code en supprimant les répétitions.</p>
+<p>Ce code répété est une violation du principe «&nbsp;Don&rsquo;t Repeat Yourself&nbsp;» (DRY —&nbsp;«&nbsp;Ne vous répétez pas&nbsp;»)&nbsp;; dans cette section et la suivante, nous allons «&nbsp;DRYer&nbsp;» notre code en supprimant les répétitions.</p>
 
-<p>Paradoxalement, nous allons passer la première étape d'élimination des duplications en en ajoutant plus encore&nbsp;: nous allons faire que les titres des pages, qui sont en général les mêmes, correspondre <em>exactement</em>. Cela rendra plus simple la suppression de toutes les répétions d'un coup.</p>
+<p>Paradoxalement, nous allons passer la première étape d'élimination des duplications en en ajoutant plus encore&nbsp;: nous allons faire que les titres des pages, qui sont en général les mêmes, correspondre <em>exactement</em>. Cela rendra plus simple la suppression en un coup de toutes les répétions.</p>
 
-<p>La technique implique de créer des <em>instances de variables</em> à l'intérieur de nos actions. Puisque les titres des pages Accueil, Contact et À Propos ont un contenu variable, nous allons renseigner la variable <code>@title</code> (prononcez en anglais &ldquo;at title&rdquo;) avec le titre approprié à chaque action (<a class="ref" href="static-pages#code:pages_controller_with_title">extrait&nbsp;3.24</a>).</p>
+<p>La technique implique de créer des <em>instances de variables</em> à l'intérieur de nos actions. Puisque les titres des pages Accueil, Contact et À Propos ont un contenu variable, nous allons renseigner la variable <code>@titre</code> (prononcez «&nbsp;hate titre&nbsp;») avec le titre approprié à chaque action (<a class="ref" href="static-pages#code:pages_controller_with_title">extrait&nbsp;3.24</a>).</p>
 
 <div class="label" id="code:pages_controller_with_title"></div>
 
@@ -1761,31 +1766,31 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">home</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">contact</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Contact&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Contact&quot;</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">about</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;À Propos&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;À Propos&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>Une déclaration comme…</p>
+<p>Une déclaration comme&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Accueil&quot;</span>
 </pre></div>
 </div>
 
 
-<p>… est un <em>assignement</em>, qui crée dans ce cas une nouvelle variable <code>@title</code> de valeur <code>"Accueil"</code>. Le signe arobase, <code>@</code>, dans le nom <code>@title</code> indique que c'est une variable d'instance. Les variables d'instance ont un sens plus général en Ruby (voir la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), mais en Rails leur rôle est principalement de lier les actions et les vues&nbsp;: toute variable d'instance définie dans l'action <code>home</code> est automatiquement accessible dans la vue <code>home.html.erb</code>, et aisni de suite pour toutes les paires action/vue.<sup class="footnote" id="fnref:3.21"><a href="#fn:3.21">21</a></sup></p>
+<p>… est un <em>assignement</em>, qui crée dans ce cas une nouvelle variable <code>@titre</code> de valeur <code>"Accueil"</code>. Le signe arobase, <code>@</code>, dans le nom <code>@titre</code> indique que c'est une variable d'instance. Les variables d'instance ont un sens plus général en Ruby (voir la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), mais en Rails leur rôle est principalement de lier les actions et les vues&nbsp;: toute variable d'instance définie dans l'action <code>home</code> est automatiquement accessible dans la vue <code>home.html.erb</code>, et aisni de suite pour toutes les paires action/vue.<sup class="footnote" id="fnref:3.21"><a href="#fn:3.21">21</a></sup></p>
 
-<p>Nous pouvons voir comment cela fonctionne en remplaçant le titre littéral &ldquo;Accueil&rdquo; par le contenu de la variable <code>@title</code> dans la vue <code>home.html.erb</code> (<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>).</p>
+<p>Nous pouvons voir comment cela fonctionne en remplaçant le titre littéral «&nbsp;Accueil&nbsp;» par le contenu de la variable <code>@titre</code> dans la vue <code>home.html.erb</code> (<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a>).</p>
 
 <div class="label" id="code:home_view_erb_title"></div>
 
@@ -1796,12 +1801,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      C'est la page d'accueil de l'application exemple du
+      C'est la page d'accueil de l'<em>Application Exemple</em> du
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -1812,19 +1817,19 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>L''<a class="ref" href="static-pages#code:home_view_erb_title">extrait&nbsp;3.25</a> est notre premier exemple de <em>Ruby embarqué</em>, également appelé <em>ERb</em> (vous savez maintenant pourquoi les fichiers des vues HTML possèdent l'extension <code>.html.erb</code>). ERb est le principal mécanisme Rails pour inclure du contenu dynamique dans les pages web.<sup class="footnote" id="fnref:3.22"><a href="#fn:3.22">22</a></sup> Le code&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>… indique par l'utilisation de <tt class="verb">&lt;%= ... %&gt;</tt> que Rails devra insérer le contenu de la variable <code>@title</code>, quel qu'il puisse être. Quand nous visitons la page <tt>/pages/home</tt>, Rails exécute le corps de l'action <code>home</code>, qui procède à la déclaration  <code>@title = "Accueil"</code>, donc dans le cas présent&nbsp;:</p>
+<p>… indique par l'utilisation de <tt class="verb">&lt;%= ... %&gt;</tt> que Rails devra insérer le contenu de la variable <code>@titre</code>, quel qu'il puisse être. Quand nous visitons la page <tt>/pages/home</tt>, Rails exécute le corps de l'action <code>home</code>, qui procède à la déclaration  <code>@titre = "Accueil"</code>, donc dans le cas présent&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>… sera remplacé par &ldquo;Accueil&rdquo;. Rails rend alors la vue, en utilisant ERb pour insérer la valeur de <code>@title</code> dans le gabarit, que le serveur web envoie alors à votre navigateur comme code HTML. Le résultat est exactement le même qu'auparavant, à la différence près que la partie variable du titre est générée dynamiquement par ERb.</p>
+<p>… sera remplacé par «&nbsp;Accueil&nbsp;». Rails rend alors la vue, en utilisant ERb pour insérer la valeur de <code>@titre</code> dans le gabarit, que le serveur web envoie alors à votre navigateur comme code HTML. Le résultat est exactement le même qu'auparavant, à la différence près que la partie variable du titre est générée dynamiquement par ERb.</p>
 
 <p>Nous pouvons vérifier que tout fonctionne en jouant les tests de la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> et en constatant qu'ils réussissent toujours. Nous pouvons alors faire les remplacements correspondants dans les pages Contact et À Propos (<a class="ref" href="static-pages#code:contact_view_erb_title">extrait&nbsp;3.26</a> et <a class="ref" href="static-pages#code:about_view_erb_title">extrait&nbsp;3.27</a>).</p>
 
@@ -1837,12 +1842,12 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
-      Contact du Tutoriel Ruby on Rails à propos de l'application exemple à la
+      Contact du Tutoriel Ruby on Rails à propos de l'<em>Application Exemple</em> à la
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>page de feedback<span class="nt">&lt;/a&gt;</span>.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -1862,16 +1867,16 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>À propos de nous<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>À Propos de nous<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Le Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>
-			est un projet pour faire un livre des screnncasts pour apprendre le
-			développement web avec 
-			<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est
-      une application exemple pour le tutoriel.
+    est un projet pour faire un livre des screnncasts pour apprendre le
+    développement web avec 
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est
+      une <em>Application Exemple</em> pour le tutoriel.
     <span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
@@ -1892,7 +1897,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
       Contenu
@@ -1904,18 +1909,18 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <p>En d'autres mots, <em>toutes</em> nos pages sont identiques en structure, incluant même le titre (à cause du code Ruby embarqué), avec pour seule exception le contenu de chaque page.</p>
 
-<p>Ne serait-il pas intéressant de structurer les éléments commun dans une sorte de gabarit global (un <em>layout</em>), et que le contenu du body soit inséré sur cette page de base&nbsp;? Vraiment, ce serait bien, et Rails nous y convie gentiment en utilisant un fichier spécial appelé <code>application.html.erb</code>, qui doit résider dans le dossier <code>layouts</code>. Pour capturer le squelette de la structure, créez le fichier <code>application.html.erb</code> et remplissez le avec le contenu de l'<a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a>.</p>
+<p>Ne serait-il pas intéressant de structurer les éléments communs dans une sorte de gabarit global (un <em>layout</em>), et que le contenu du body soit inséré sur cette page de base&nbsp;? Vraiment, ce serait bien, et Rails nous y convie gentiment en utilisant un fichier spécial appelé <code>application.html.erb</code>, qui doit résider dans le dossier <code>layouts</code>. Pour capturer le squelette de la structure, créez le fichier <code>application.html.erb</code> et copiez-y le contenu de l'<a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a>.</p>
 
 <div class="label" id="code:application_layout"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 3.28.</span> <span class="description">Le <em>layout</em> du site de l'application exemple. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 3.28.</span> <span class="description">Le <em>layout</em> du site de l'<em>Application Exemple</em>. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Simple App du Tutoriel Ruby on Rails | <span class="cp">&lt;%=</span> <span class="vi">@titre</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">csrf_meta_tag</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
@@ -1933,7 +1938,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Ce code est responsable de l'insertion du contenu de chaque page dans le layout. Comme pour <tt class="verb">&lt;%= @title %&gt;</tt>, la balise <tt class="verb">&lt;% ... %&gt;</tt> indique du Ruby embarqué, et le signe égal dans <tt class="verb">&lt;%= ... %&gt;</tt> assure que les résultats de l'évaluation de l'expression soit insérés à ce point exact du template (ne vous inquiétez pas pour la signification du mot &ldquo;yield&rdquo; —&nbsp;[(rendement)]&nbsp;&mdash; dans ce contexte&nbsp;;<sup class="footnote" id="fnref:3.23"><a href="#fn:3.23">23</a></sup> ce qui importe c'est d'être certain qu'avec ce layout, la visite de la page <tt>/pages/home</tt> convertira le contenu du fichier <code>home.html.erb</code> en HTML et l'insèrera alors à la place du <tt class="verb">&lt;%= yield %&gt;</tt>.</p>
+<p>Ce code est responsable de l'insertion du contenu de chaque page dans le layout. Comme pour <tt class="verb">&lt;%= @titre %&gt;</tt>, la balise <tt class="verb">&lt;% ... %&gt;</tt> indique du Ruby embarqué, et le signe égal dans <tt class="verb">&lt;%= ... %&gt;</tt> assure que les résultats de l'évaluation de l'expression soient insérés à ce point exact du template (ne vous inquiétez pas pour la signification du mot «&nbsp;yield&nbsp;» (&nbsp;)<em>rendement</em>) dans ce contexte&nbsp;;<sup class="footnote" id="fnref:3.23"><a href="#fn:3.23">23</a></sup> ce qui importe c'est d'être certain qu'avec ce layout, la visite de la page <tt>/pages/home</tt> convertira le contenu du fichier <code>home.html.erb</code> en HTML et l'insèrera alors à la place du <tt class="verb">&lt;%= yield %&gt;</tt>.</p>
 
 <p>Maintenant que nous avons un layout pour le site, nous avons aussi saisi l'opportunité d'ajouter une fonctionnalité de sécurité pour chaque page. L'<a class="ref" href="static-pages#code:application_layout">extrait&nbsp;3.28</a> ajoute ce code&nbsp;:</p>
 
@@ -1954,7 +1959,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-  C'est la page d'accueil de l'application exemple du
+  C'est la page d'accueil de l'<em>Application Exemple</em> du
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
@@ -1971,7 +1976,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Contact<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-  Contact du Tutoriel Ruby on Rails à propos de l'application exemple à la
+  Contact du Tutoriel Ruby on Rails à propos de l'<em>Application Exemple</em> à la
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/feedback&quot;</span><span class="nt">&gt;</span>page de feedback<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
@@ -1990,13 +1995,13 @@ par [Michael Hartl](http://michaelhartl.com/).
 <span class="nt">&lt;p&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails Tutorial<span class="nt">&lt;/a&gt;</span>
   est un projet de livre et de screencasts pour apprendre le développement web
-  avec <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est l'application exemple de ce tutoriel.
+  avec <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://rubyonrails.org/&quot;</span><span class="nt">&gt;</span>Ruby on Rails<span class="nt">&lt;/a&gt;</span>. C'est l'<em>Application Exemple</em> de ce tutoriel.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>Avec ces vues redéfinies, les pages Accueil, Contact et À Propos avec exactement les mêmes que précédemment &mdash;&nbsp;c'est-à-dire que nous les avons restructurées avec succès&nbsp;&mdash; mais elles ont beaucoup moins de duplication de code. Et, comme requis, les tests réussissent toujours.</p>
+<p>Avec ces vues redéfinies, les pages Accueil, Contact et À Propos avec exactement les mêmes que précédemment &mdash;&nbsp;c'est-à-dire que nous les avons restructurées avec succès&nbsp;&mdash; mais elles contiennent beaucoup moins de duplications de code. Et, comme requis, les tests réussissent toujours.</p>
 
 <div class="label" id="sec:static_pages_conclusion"></div>
 
@@ -2004,10 +2009,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 <h2><a id="sec:3.4" href="static-pages#sec:static_pages_conclusion" class="heading"><span class="number">3.4</span> Conclusion</a></h2>
 
 
-<p>Vue de l'extérieur, ce chapitre n'a pas accompli grand chose&nbsp;: nous l'avons commencé avec des pages statiques, et nous le finissons avec&hellip; les pages <em>le plus souvent</em> statiques. Mais les apparences sont trompeuses&nbsp;: en développant en termes de <em>Contrôleurs</em> Rails, d'<em>Actions</em> Rails et de <em>Vues</em> Rails, nous sommes maintenant en mesure d'ajouter n'importe quel contenu dynamique à notre site. Voir comment cela joue exactement est la tâche que se propose la suite de ce tutoriel.</p>
+<p>Vu de l'extérieur, ce chapitre n'a pas accompli grand chose&nbsp;: nous l'avons commencé avec des pages statiques, et nous le finissons avec&hellip; les pages <em>le plus souvent</em> statiques. Mais les apparences sont trompeuses&nbsp;: en développant en termes de <em>Contrôleurs</em> Rails, d'<em>Actions</em> Rails et de <em>Vues</em> Rails, nous sommes maintenant en mesure d'ajouter n'importe quel contenu dynamique à notre site. Voir comment cela joue exactement est la tâche que se propose la suite de ce tutoriel.</p>
 
-<p>Avant de poursuivre, prenez le temps de «&nbsp;commettre&nbsp;» vos changements et les fusionner avec la branche maitresse. 
-<p>Before moving on, let&rsquo;s take a minute to commit our changes and merge them into the master branch. Dans la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a> nous avons créé une branche Git pour le développement des pages statiques. Si vous n'avez pas fait de dépôts à mesure que nous avancions, commencez par en faire un en indiquant que nous avons atteint un point d'arrêt&nbsp;:</p>
+<p>Avant de poursuivre, prenez le temps de «&nbsp;commettre&nbsp;» vos changements et les fusionner avec la branche maitresse. Dans la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, nous avons créé une branche Git pour le développement des pages statiques. Si vous n'avez pas fait de dépôts à mesure que nous avancions, commencez par en faire un en indiquant que nous avons atteint un point d'arrêt&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Fini avec les pages statiques&quot;</span>
@@ -2015,7 +2019,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>Fusionnez alors les changements dans la branche maitresse en utilisant la même technique que dans la <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>:</p>
+<p>Fusionnez alors les changements dans la branche maitresse en utilisant la même technique que dans la <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="gp">$</span> git merge static-pages
@@ -2050,9 +2054,9 @@ par [Michael Hartl](http://michaelhartl.com/).
 
 <ol>
 
-<li>Créez une page d'aide pour l'application exemple. Écrivez d'abord un test pour vérifier l'existence d'une page à l'URL <tt>/pages/help</tt>. Écrivez ensuite un second test pour le titre &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails | Aide&nbsp;&rdquo;. Faites le nécessaire pour que ces tests réussissent, et remplissez alors la page Aide avec le contenu de l'<a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
+<li>Créez une page d'aide pour l'<em>Application Exemple</em>. Écrivez d'abord un test pour vérifier l'existence d'une page à l'URL <tt>/pages/help</tt>. Écrivez ensuite un second test pour le titre «&nbsp;Simple App du Tutoriel Ruby on Rails | Aide&nbsp;». Faites le nécessaire pour que ces tests réussissent, et remplissez alors la page Aide avec le contenu de l'<a class="ref" href="static-pages#code:help_page">extrait&nbsp;3.32</a>.</li>
 
-<li>Vous avez peut-être noté quelques répétitions dans les spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). En particulier, la base du titre, &ldquo;&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;&rdquo;, est la même pour tous les tests de titre. En utilisant la facilité RSpec <code>before(:each)</code>, qui exécute un code avant chaque cas testé, remplissez l'<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> pour définir une instance de variable <code>@base_title</code> qui éliminera cette redondance (ce code utilise deux nouveaux éléments&nbsp;: un <em>symbole</em>, <code>:each</code>, et un opération de concaténation de chaine, code>+</code>. Nous en apprendrons plus sur ces deux éléments au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, et nous reverrons <code>before(:each)</code> à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>). Notez que, avec la base du titre capturée dans une variable d'instance, nous sommes maintenant en mesure d'aligner <code>:content</code> avec le premier caractère à l'intérieur de chaque parenthèse ouverte&nbsp;<code>(</code>. C'est ma convention préférée pour formater du codre découpé en plusieurs lignes.</li>
+<li>Vous avez peut-être noté quelques répétitions dans les specs du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>). En particulier, la base du titre, «&nbsp;Simple App du Tutoriel Ruby on Rails&nbsp;», est la même pour tous les tests de titre. En utilisant la facilité RSpec <code>before(:each)</code>, qui exécute un code avant chaque cas testé, remplissez l'<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a> pour définir une instance de variable <code>@base_title</code> qui éliminera cette redondance (ce code utilise deux nouveaux éléments&nbsp;: un <em>symbole</em>, <code>:each</code>, et une opération de concaténation de chaine, <code>+</code>. Nous en apprendrons plus sur ces deux éléments au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, et nous reverrons <code>before(:each)</code> à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>). Notez que, avec la base du titre capturée dans une variable d'instance, nous sommes maintenant en mesure d'aligner <code>:content</code> avec le premier caractère à l'intérieur de chaque parenthèse ouverte. C'est ma convention préférée pour formater du code découpé en plusieurs lignes.</li>
 
 </ol>
 
@@ -2069,7 +2073,7 @@ par [Michael Hartl](http://michaelhartl.com/).
 <span class="nt">&lt;p&gt;</span>
   Obtenez de l'aide sur le Tutoriel Ruby on Rails sur la
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/help&quot;</span><span class="nt">&gt;</span>page d'aide du Tutoriel Rails<span class="nt">&lt;/a&gt;</span>.
-  Pour obtenir de l'aide sur cette application exemple, voyez le 
+  Pour obtenir de l'aide sur cette <em>Application Exemple</em>, voyez le 
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/book&quot;</span><span class="nt">&gt;</span>livre du Tutoriel Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
@@ -2146,25 +2150,25 @@ par [Michael Hartl](http://michaelhartl.com/).
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:3.1">Comme précédemment, vous pouvez trouver que fichier augmenté de l'<a class="ref" href="beginning#code:gitignore">extrait&nbsp;1.5</a> plus pratique en fonction de votre système.&nbsp;<a class="arrow" href="#fnref:3.1">&uarr;</a></li>
+<li id="fn:3.1">Comme précédemment, vous pouvez trouver le fichier «&nbsp;augmenté&nbsp;» de l'<a class="ref" href="beginning#code:gitignore">extrait&nbsp;1.5</a> plus pratique en fonction de votre système.&nbsp;<a class="arrow" href="#fnref:3.1">&uarr;</a></li>
 <li id="fn:3.2">En fait, Rails s'assure que les requêtes pour de tels fichiers   [(never hit the main Rails stack)(n'atteignent jamais la pile principale de Rails)]&nbsp;; ils sont livrés directement du système de fichier (voir <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> pour de plus amples détails).&nbsp;<a class="arrow" href="#fnref:3.2">&uarr;</a></li>
 <li id="fn:3.3">Comme d'habitude, remplacez <code>mate</code> avec la commande de votre propre éditeur de texte.&nbsp;<a class="arrow" href="#fnref:3.3">&uarr;</a></li>
 <li id="fn:3.4">HTML change avec le temps&nbsp;; en faisant une déclaration de doctype explicite nous nous arrangeons pour que les navigateurs rendent toujours nos pages proprement dans le futur. Le doctype <code>&lt;!DOCTYPE html&gt;</code> extrêmement simple est caractéristique du dernier standard HTML, HTML5.&nbsp;<a class="arrow" href="#fnref:3.4">&uarr;</a></li>
-<li id="fn:3.5">Nous méthode pour créer des pages statiques est probablement la plus simple, mais ce n'est pas la seule. La méthode optimale dépend vraiment de vos besoins&nbsp;; si vous comptez sur un <em>grand</em> nombre de pages statiques, utiliser un contrôleur Pages controller peut être très lourd, mais dans notre application exemple nous n'en avons besoin que de quelques unes. Lisez ce <a href="http://blog.hasmanythrough.com/2008/4/2/simple-pages">post de blog sur des pages simple avec <tt>has_many :through</tt></a> pour une vue d'ensemble des techniques de création de pages statiques avec Rails. <em>Attention&nbsp;:</em> la discussion est plutôt de niveau avancée, donc vous avez peut-être intérêt à attendre un peu avant d'essayer de la comprendre.&nbsp;<a class="arrow" href="#fnref:3.5">&uarr;</a></li>
+<li id="fn:3.5">Notre méthode pour créer des pages statiques est probablement la plus simple, mais ce n'est pas la seule. La méthode optimale dépend vraiment de vos besoins&nbsp;; si vous comptez sur un <em>grand</em> nombre de pages statiques, utiliser un contrôleur Pages peut être très lourd, mais dans notre <em>Application Exemple</em> nous n'avons besoin que de quelques pages statiques. Lisez ce <a href="http://blog.hasmanythrough.com/2008/4/2/simple-pages">post de blog sur des pages simples avec <tt>has_many :through</tt></a> pour une vue d'ensemble des techniques de création de pages statiques avec Rails. <em>Attention&nbsp;:</em> la discussion est plutôt de niveau avancé, donc vous avez peut-être intérêt à attendre un peu avant d'essayer de la comprendre.&nbsp;<a class="arrow" href="#fnref:3.5">&uarr;</a></li>
 <li id="fn:3.6">Dans le contexte de RSpec, TDD est aussi connu sous le nom de Behavior Driven Development, or BDD (Développement Conduit par le Comportement) (franchement, je ne suis pas convaincu qu'il y ait une énorme différence).&nbsp;<a class="arrow" href="#fnref:3.6">&uarr;</a></li>
 <li id="fn:3.7">Le frameword de testing <a href="http://github.com/thoughtbot/shoulda">Shoulda</a> est une bonne alternative  (et en fait peut être utilisé avec RSpec). C'est l'autre «&nbsp;manière Rails&nbsp;», pour ainsi dire.&nbsp;<a class="arrow" href="#fnref:3.7">&uarr;</a></li>
 <li id="fn:3.8">Cela a été utilisé pour <tt>autotest-rails</tt>, mais ce gem dépend de la suite complète ZenTest, qui occasionne des problèmes sur certains systèmes. Le gem <tt>autotest-rails-pure</tt> évite cette dépendance.&nbsp;<a class="arrow" href="#fnref:3.8">&uarr;</a></li>
-<li id="fn:3.9">Le gem Autotest Growl fait que les résultats du test sont automatiquement affichés à l'écran tandis que le FSEvent fait qu'Autotest utilise les évènements de filesystem d'OS&nbsp;X pour déclencher la suite de tests, plutôt que continuellement sonder le filesystem. Notez également qu'avec ces deux gems vous pouvez avoir besoin d'utiliser une version actualisée si vous travaillez sous le système OS&nbsp;X Snow Leopard.&nbsp;<a class="arrow" href="#fnref:3.9">&uarr;</a></li>
+<li id="fn:3.9">Le gem Autotest Growl fait que les résultats du test sont automatiquement affichés à l'écran tandis que le FSEvent fait qu'Autotest utilise les évènements du <em>système de fichier</em> d'OS&nbsp;X pour déclencher la suite de tests, plutôt que continuellement sonder le système de fichier. Notez également qu'avec ces deux gems vous pouvez avoir besoin d'utiliser une version actualisée si vous travaillez sous le système OS&nbsp;X Snow Leopard.&nbsp;<a class="arrow" href="#fnref:3.9">&uarr;</a></li>
 <li id="fn:3.10">http://fredschoeneman.posterous.com/pimp-your-autotest-notification&nbsp;<a class="arrow" href="#fnref:3.10">&uarr;</a></li>
-<li id="fn:3.11">Dans le contexte de RSpec, les tests sont souvent appelés des <em>specs</em>, mais pour la simplicité je m'en tiendrai la plupart du temps au terme &ldquo;test&rdquo;&mdash; <em>sauf</em> quand je me réfèrerai à un fichier tel que <code>pages_controller_spec</code>, dans ce cas j'utiliserai &ldquo;spec du contrôleur Pages&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.11">&uarr;</a></li>
+<li id="fn:3.11">Dans le contexte de RSpec, les tests sont souvent appelés des <em>specs</em>, mais pour la simplicité je m'en tiendrai la plupart du temps au terme «&nbsp;test&nbsp;»&mdash; <em>sauf</em> quand je me réfèrerai à un fichier tel que <code>pages_controller_spec</code>, dans ce cas j'utiliserai «&nbsp;spec du contrôleur Pages&nbsp;».&nbsp;<a class="arrow" href="#fnref:3.11">&uarr;</a></li>
 <li id="fn:3.12">La plupart des IDEs ont également une interface de testing, mais comme cela a été noté à la <a class="ref" href="beginning#sec:development_tools">section&nbsp;1.2.1</a> j'ai une expérience limitée de ces outils.&nbsp;<a class="arrow" href="#fnref:3.12">&uarr;</a></li>
 <li id="fn:3.13">Vous pouvez aussi jouer <code>rake spec</code>, qui est par essence équivalent (fâcheusement, si vous voulez jouer <code>rake spec</code> ici vous devrez d'abord jouer <code>rake db:migrate</code>, quand bien même les tests de ce chapitre ne requièrent par de base de données).&nbsp;<a class="arrow" href="#fnref:3.13">&uarr;</a></li>
 <li id="fn:3.14">Un <em>spork</em> est la combinaison «&nbsp;spoon-fork&nbsp;» (<em>cuillière-fourchette</em>). Mon sentiment est que le nom du projet est un jeu de mot sur l'utilisation de Spork des <a href="http://en.wikipedia.org/wiki/Fork_(software_development)">fourchettes</a><a href="http://en.wikipedia.org/wiki/POSIX">POSIX</a>.&nbsp;<a class="arrow" href="#fnref:3.14">&uarr;</a></li>
-<li id="fn:3.15">DRb signifie &ldquo;Distributed Ruby&rdquo;.&nbsp;<a class="arrow" href="#fnref:3.15">&uarr;</a></li>
+<li id="fn:3.15">DRb signifie «&nbsp;Distributed Ruby&nbsp;».&nbsp;<a class="arrow" href="#fnref:3.15">&uarr;</a></li>
 <li id="fn:3.16">Nous apprendrons à la <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a> que la syntaxe <code>:content =&gt; "&hellip;"</code> est un <em>tableau hash</em> utilisant un <em>symbole</em> comme clé.&nbsp;<a class="arrow" href="#fnref:3.16">&uarr;</a></li>
 <li id="fn:3.17">Je considère que c'est un recul par rapport à la version RSpec&nbsp;1.3, qui utilisait <code>have_tag</code> dans ce context, qui pourrait être utilisé pour requérir une correspondance plus exacte. Malheureusement, cette écriture <code>have_tag</code> n'est plus utilisable avec RSpec&nbsp;2.&nbsp;<a class="arrow" href="#fnref:3.17">&uarr;</a></li>
 <li id="fn:3.18">Une nouvelle ligne est ce qui arrive à la fin de la ligne, commençant avec, hé bien, une nouvelle ligne. Dans le code, c'est représenté par le signe <tt class="verb">\n</tt>.&nbsp;<a class="arrow" href="#fnref:3.18">&uarr;</a></li>
-<li id="fn:3.19">En vérité, le <em>comptage</em> des colonnes peut vous rendre fou, ce qui explique que de nombreux éditeurs de texte possède une aide visuelle pour vous aider. Considérons TextMate, par exemple&nbsp;; si vous revenez à l'<a class="ref" href="beginning#fig:editor_shell">illustration&nbsp;1.1</a>, vous verrez une petit ligne verticale sur la droite pour aider à garder le code sous les 80 signes (il est en fait à 78 colonnes, ce qui vous laisse une marge d'erreur). Si vous utilisez TextMate, vous pouvez trouver cette fonctionnalité dans le menu <tt>View &gt; Wrap Column &gt; 78</tt>.&nbsp;<a class="arrow" href="#fnref:3.19">&uarr;</a></li>
+<li id="fn:3.19">En vérité, le <em>comptage</em> des colonnes peut vous rendre fou, ce qui explique que de nombreux éditeurs de texte possèdend une aide visuelle pour vous aider. Considérons TextMate, par exemple&nbsp;; si vous revenez à l'<a class="ref" href="beginning#fig:editor_shell">illustration&nbsp;1.1</a>, vous verrez une petite ligne verticale sur la droite pour aider à garder le code sous les 80 signes (il est en fait à 78 colonnes, ce qui vous laisse une marge d'erreur). Si vous utilisez TextMate, vous pouvez trouver cette fonctionnalité dans le menu <tt>View &gt; Wrap Column &gt; 78</tt>.&nbsp;<a class="arrow" href="#fnref:3.19">&uarr;</a></li>
 <li id="fn:3.20">Rails 2.3/RSpec 1.3, utilisait le code <code>have_tag</code> plus court au lieu de <code>have_selector</code>, l'argument <code>:content</code> n'était pas nécessaire non plus. Nouveau ne signifie pas toujours meilleur&hellip;&nbsp;<a class="arrow" href="#fnref:3.20">&uarr;</a></li>
 <li id="fn:3.21">En fait, la variable d'instance est vraiment lisible dans  <em>n'importe quelle</em> vue, un fait dont nous nous servirons à la <a class="ref" href="sign-up#sec:a_working_form">section&nbsp;8.2.2</a>.&nbsp;<a class="arrow" href="#fnref:3.21">&uarr;</a></li>
 <li id="fn:3.22">Il existe un second système de template populaire appelé <a href="http://haml-lang.com/">Haml</a>, que j'aime personnellement, mais il n'est pas encore <em>assez</em> standard pour l'utiliser dans l'introduction d'un tutoriel. Si cela se révèle suffisamment intéressant, je pourrais produire une série de screencasts pour le Tutoriel Rails utilisant Haml pour les vues. Cela permettrait aussi une introduction à <a href="http://sass-lang.com/">Sass</a>, le technologie sœur de Haml, si quelque chose peut être plus impressionnant que Haml.&nbsp;<a class="arrow" href="#fnref:3.22">&uarr;</a></li>

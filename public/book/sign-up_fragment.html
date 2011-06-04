@@ -21,7 +21,7 @@
 <li class="section"><a href="beginning#sec:introduction"><span class="number">1.1</span> Introduction</a></li>
 <li><ol>
 <li class="subsection"><a href="beginning#sec:comments_for_various_readers"><span class="number">1.1.1</span> Commentaires pour les lecteurs différents</a></li>
-<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> &ldquo;Dimensionner&rdquo; Rails</a></li>
+<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> «&nbsp;Dimensionner&nbsp;» Rails</a></li>
 <li class="subsection"><a href="beginning#sec:conventions"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></li></ol></li>
 <li class="section"><a href="beginning#sec:up_and_running"><span class="number">1.2</span> [(Up and running)(En route pour le démarrage)]</a></li>
 <li><ol>
@@ -434,19 +434,20 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:8" href="sign-up#top" class="heading"><span class="number">chapitre 8</span> Sign up</a></h1>
+<h1 class="chapter"><a id="sec:8" href="sign-up#top" class="heading"><span class="number">chapitre 8</span> Inscription</a></h1>
 
 
-<p>Now that we have a working User model, it&rsquo;s time to add an ability few websites can live with out: letting users sign up for the site&mdash;thus fulfilling the promise implicit in <a class="ref" href="filling-in-the-layout#sec:user_signup">section&nbsp;5.3</a>, &ldquo;User signup: A first step&rdquo;. We&rsquo;ll use an HTML <em>form</em> to submit user signup information to our application in <a class="ref" href="sign-up#sec:signup_form">section&nbsp;8.1</a>, which will then be used to create a new user and save its attributes to the database in <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>. As usual, we&rsquo;ll write tests as we develop, and in <a class="ref" href="sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a> we&rsquo;ll use RSpec&rsquo;s support for web navigation syntax to write succinct and expressive integration tests.</p>
+<p>Maintenant que nous avons un modèle User fonctionnel, il est temps d'ajouter quelques capacités dont ne peut pas se passer un site web&nbsp;: laisser ses utilisateurs s'inscrire &mdash;&nbsp;et ainsi tenir la promesse faite à la <a class="ref" href="filling-in-the-layout#sec:user_signup">section&nbsp;5.3</a>, «&nbsp;Inscription de l'utilisateur&nbsp;: une première étape&nbsp;».
+Nous allons utiliser un <em>formulaire</em> HTML pour soumettre les informations d'inscription de l'utilisateur à notre application à la <a class="ref" href="sign-up#sec:signup_form">section&nbsp;8.1</a>, qui serviront à créer un nouvel utilisateur et à savuer ses attributs dans la base de données à la <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>. Comme d'habitude, nous allons écrire des tests à mesure que nous développons, et à la <a class="ref" href="sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a> nous utiliserons le support RSpec pour la syntaxe de la navigation web pour écrire des tests d'intégration succincts et expressifs.</p>
 
-<p>Since we&rsquo;ll be creating a new user in this chapter, you might want to reset the database to clear out any users created at the console (e.g., in <a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">section&nbsp;7.3.2</a>), so that your results will match those shown in the tutorial. You can do this as follows:</p>
+<p>Puis nous allons créer un nouvel utilisateur dans ce chapitre, vous voudrez peut-être initialiser la base de données pour supprimer tous les utilisateurs créés à la console (par exemple ceux de la <a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">section&nbsp;7.3.2</a>), de telle sorte que vos résultats correspondent à ceux montrés dans ce tutoriel. Vous pouvez faire cela comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:reset
 </pre></div>
 </div>
 
 
-<p>If you&rsquo;re following along with version control, make a topic branch as usual:</p>
+<p>Si vous suivez votre développement en utilisant le contrôle de version, fait une branche sujet comme d'habitude&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="gp">$</span> git checkout -b signing-up
@@ -457,16 +458,16 @@
 <div class="label" id="sec:signup_form"></div>
 
 
-<h2><a id="sec:8.1" href="sign-up#sec:signup_form" class="heading"><span class="number">8.1</span> Signup form</a></h2>
+<h2><a id="sec:8.1" href="sign-up#sec:signup_form" class="heading"><span class="number">8.1</span> Formulaire d'inscription</a></h2>
 
 
-<p>Recall from <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a> that we already have tests for the new users (signup) page, originally seen in <a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a> and reproduced in <a class="ref" href="sign-up#code:new_users_tests">extrait&nbsp;8.1</a>.  (As promised in <a class="ref" href="modeling-and-viewing-users-two#sec:tests_with_factories">section&nbsp;7.3.1</a>, we&rsquo;ve switched from <code>get &rsquo;new&rsquo;</code> to <code>get :new</code> because that&rsquo;s what my fingers want to type.) In addition, we saw in <a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a> (shown again in <a class="ref" href="sign-up#fig:blank_signup_page_recap">illustration&nbsp;8.1</a>) that this signup page is currently blank: useless for signing up new users. The goal of this section is to start changing this sad state of affairs by producing the signup form mocked up in <a class="ref" href="sign-up#fig:signup_mockup">illustration&nbsp;8.2</a>.</p>
+<p>Souvenez-vous d'après la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a> que nous avons déjà des tests pour la page des nouveaux utilisateurs (<em>signup page</em>), vu à l'origine dans l'<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a> et reproduits dans l'<a class="ref" href="sign-up#code:new_users_tests">extrait&nbsp;8.1</a> (comme promis à la <a class="ref" href="modeling-and-viewing-users-two#sec:tests_with_factories">section&nbsp;7.3.1</a>, nous sommes passés de <code>get &rsquo;new&rsquo;</code> à <code>get :new</code> parce que c'est ce que mes doigts veulent taper). De plus, nous avons vu dans l'<a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a> (et à nouveau dans l'<a class="ref" href="sign-up#fig:blank_signup_page_recap">illustration&nbsp;8.1</a>) que cette page d'inscription est pour le moment vierge&nbsp;: donc inutile pour inscrire de nouveaux utilisateurs. Le but de cette section sera de commencer à changer ce triste état des choses en produisant la maquette de formulaire d'inscription de l'<a class="ref" href="sign-up#fig:signup_mockup">illustration&nbsp;8.2</a>.</p>
 
 <div class="label" id="code:new_users_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.1.</span> <span class="description">The tests for the new users page (first seen in <a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.1.</span> <span class="description">Les tests pour la page d'inscription des utilisateurs (vu d'abord dans l'<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -484,7 +485,7 @@
 
     <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:new</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Inscription&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -500,7 +501,7 @@
 <div class="label" id="fig:blank_signup_page_recap"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 8.1: </span><span class="description">The current state of the signup page  <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 8.1: </span><span class="description">L'état actuel de la page d'inscription <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -508,7 +509,7 @@
 <div class="label" id="fig:signup_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_mockup.png" alt="signup_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.2: </span><span class="description">A mockup of the user signup page.&nbsp;<a href="http://railstutorial.org/images/figures/signup_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_mockup.png" alt="signup_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.2: </span><span class="description">Une maquette de la page d'inscription .&nbsp;<a href="http://railstutorial.org/images/figures/signup_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -516,23 +517,23 @@
 <div class="label" id="sec:using_form_for"></div>
 
 
-<h3><a id="sec:8.1.1" href="sign-up#sec:using_form_for" class="heading"><span class="number">8.1.1</span> Using <code>form_for</code></a></h3>
+<h3><a id="sec:8.1.1" href="sign-up#sec:using_form_for" class="heading"><span class="number">8.1.1</span> Utiliser <code>form_for</code></a></h3>
 
 
-<p>The HTML element needed for submitting information to a remote website is a <em>form</em>, which suggests a good first step toward registering users is to make a form to accept their signup information. We can accomplish this in Rails with the <code>form_for</code> helper method; the result appears in <a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a>. (Readers familiar with Rails&nbsp;2.x should note that <code>form_for</code> now uses the &ldquo;percent-equals&rdquo; ERb syntax for inserting content; that is, where Rails&nbsp;2.x used <tt class="verb">&lt;% form_for ... %&gt;</tt>, Rails&nbsp;3 uses <tt class="verb">&lt;%= form_for ... %&gt;</tt> instead.)</p>
+<p>L'élément HTML nécessaire pour soumettre des information à un site à distane est un <em>formulaire</em>, ce qui suggère qu'une bonne première étape vers la registration des utilisateurs est de faire un formulaire acceptant leurs information d'inscription. Nous pouvons accomplir cela en Rails avec la méthode <em>helper</em> <code>form_for</code> (<em>formulaire_pour</em>)&nbsp;; le résultat apparait dans l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> (les lecteurs familiers de Rails&nbsp;2.x doivent noter que <code>form_for</code> utilise maintenant la syntaxe ERb «&nbsp;pourcent-égal&nbsp;» pour insérer le contenu&nbsp;; c'est-à-dire qu'où Rails&nbsp;2.x utilisait <tt class="verb">&lt;% form_for ... %&gt;</tt>, Rails&nbsp;3 utilise maintenant <tt class="verb">&lt;%= form_for ... %&gt;</tt>).</p>
 
 <div class="label" id="code:new_user_form"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.2.</span> <span class="description">A form to sign up new users. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 8.2.</span> <span class="description">Un formulaire pour l'inscription de nouveaux utilisateurs. <br /> <code>app/views/users/new.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Inscription<span class="nt">&lt;/h1&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:email</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
@@ -547,32 +548,32 @@
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">password_field</span> <span class="ss">:password_confirmation</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s2">&quot;Sign up&quot;</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s2">&quot;Inscription&quot;</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>Let&rsquo;s break this down into pieces. The presence of the <code>do</code> keyword indicates that <code>form_for</code> takes a block (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>), which has one variable, which we&rsquo;ve called <code>f</code> for &ldquo;form&rdquo;. Inside of the <code>form_for</code> helper, <code>f</code> is an object that represents a form; as is usually the case with Rails helpers, we don&rsquo;t need to know any details about the implementation, but what we <em>do</em> need to know is what the <code>f</code> object does: when called with a method corresponding to an <a href="http://www.w3schools.com/html/html_forms.asp">HTML form element</a>&mdash;such as a text field, radio button, or password field&mdash;it returns code for that element specifically designed to set an attribute of the <code>@user</code> object. In other words,</p>
+<p>Cassons cela pièce à pièce. La présence du mot-clé <code>do</code> indique que <code>form_for</code> comprend un bloc (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>), qui possède une variable, que nous avons appelée <code>f</code> pour «&nbsp;formulaire&nbsp;». À l'intérieur de l'<em>helper</em> <code>form_for</code>, <code>f</code> est un objet qui représente une formulaire&nbsp;; comme c'est souvent le cas avec les <em>helpers</em> Rails, nous n'avons pas besoin de connaitre tous les détails de l'implémentation, mais ce que nous avons <em>besoin</em> de connaitre est ce que l'objet <code>f</code> fait&nbsp;: quand appelé avec une méthode correspondant à un <a href="http://www.w3schools.com/html/html_forms.asp">élément formulaire HTML</a> &mdash;&nbsp;tel qu'un champ de texte (<code>text field</code>), un bouton radio ou un champ de mot de passe&nbsp;&mdash; il retourne le code pour cet élément spécifiquement conçu pour définir un attribut de l'objet <code>@user</code>. En d'autres termes&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>creates the HTML needed to make a labeled text field element appropriate for setting the <code>name</code> attribute of a User model.</p>
+<p>… crée le code HTML nécessaire pour faire un élément champ de texte labélisé approprié pour définir l'attribut <code>nom</code> d'un modèle User.</p>
 
-<p>To see this in action, we need to drill down and look at the actual HTML produced by this form, but here we have a problem: the page currently breaks, because we have not set the <code>@user</code> variable&mdash;like all undefined instance variables (<a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), <code>@user</code> is currently <code>nil</code>. Appropriately, if you run your test suite at this point, you&rsquo;ll see that the signup page tests fail. To get them to pass and get our form to render, we must define an <code>@user</code> variable in the controller action corresponding to <code>new.html.erb</code>, i.e., the <code>new</code> action in the Users controller. The <code>form_for</code> helper expects <code>@user</code> to be a User object, and since we&rsquo;re creating a <em>new</em> user we simply use <code>User.new</code>, as seen in <a class="ref" href="sign-up#code:new_action_with_user">extrait&nbsp;8.3</a>.</p>
+<p>Pour voir cela en action, nous avons besoin de naviguer et de regarder le code HTML produit en fait par ce formulaire, mais ici nous avons un problème&nbsp;: la page pour le moment échoue, parce que nous n'avons pas défini la variable <code>@user</code> &mdash;&nbsp;comme toute variable d'instance non définie (<a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>), <code>@user</code> est pour le moment <code>nil</code>. De façon appropriée, si vous jouez votre suite de tests maintenant, vous verrez que la page d'inscription échoue. Pour obtenir qu'elle s'affiche et rendre notre formulaire, nous devons définir une variable <code>@user</code> dans l'action du contrôleur correspondant à <code>new.html.erb</code>, c'est-à-dire l'action <code>new</code> dans le contrôleur Users. L'helper <code>form_for</code> attend que <code>@user</code> soit un objet User, et puisque nous créer un <em>nouvel</em> utilisateur nous utiliserons simplement <code>User.new</code>, comme dans l'<a class="ref" href="sign-up#code:new_action_with_user">extrait&nbsp;8.3</a>.</p>
 
 <div class="label" id="code:new_action_with_user"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.3.</span> <span class="description">Adding an <code>@user</code> variable to the <code>new</code> action. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.3.</span> <span class="description">Ajout d'une variable <code>@user</code> à l'action <code>new</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -580,20 +581,20 @@
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">new</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>With the <code>@user</code> variable so defined, the tests should be passing again,<sup class="footnote" id="fnref:8.1"><a href="#fn:8.1">1</a></sup> and now the form (with the tiny bit of styling from <a class="ref" href="sign-up#code:form_css">extrait&nbsp;8.4</a>) appears as in <a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>.</p>
+<p>Avec la variable <code>@user</code> ainsi définie, les tests devraient réussir à nouveau,<sup class="footnote" id="fnref:8.1"><a href="#fn:8.1">1</a></sup> et maintenant le formulaire (avec un peu de stylisation qui vient de l'<a class="ref" href="sign-up#code:form_css">extrait&nbsp;8.4</a>) apparait comme dans l'<a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>.</p>
 
 <div class="label" id="code:form_css"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.4.</span> <span class="description">A <a href="http://www.youtube.com/watch?v=MlfcF1I5e_g">wafer-thin</a> amount of CSS for the signup form. <br /> <code>public/stylesheets/custom.css</code></span>       
+<div class="listing"><span class="header">Extrait 8.4.</span> <span class="description">Une quantité <a href="http://www.youtube.com/watch?v=MlfcF1I5e_g">wafer-thin</a> de CSS pour le formulaire d'inscription. <br /> <code>public/stylesheets/custom.css</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -610,7 +611,7 @@
 <div class="label" id="fig:signup_form"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_form.png" alt="signup_form" /></span></div><div class="caption"><span class="header">Illustration 8.3: </span><span class="description">The signup form  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> for new users.&nbsp;<a href="http://railstutorial.org/images/figures/signup_form-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_form.png" alt="signup_form" /></span></div><div class="caption"><span class="header">Illustration 8.3: </span><span class="description">Le formulaire d'inscription  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> pour de nouveaux utilisateurs.&nbsp;<a href="http://railstutorial.org/images/figures/signup_form-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -618,71 +619,71 @@
 <div class="label" id="sec:the_form_html"></div>
 
 
-<h3><a id="sec:8.1.2" href="sign-up#sec:the_form_html" class="heading"><span class="number">8.1.2</span> The form HTML</a></h3>
+<h3><a id="sec:8.1.2" href="sign-up#sec:the_form_html" class="heading"><span class="number">8.1.2</span> Le formulaire HTML</a></h3>
 
 
-<p>As indicated by <a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>, the signup page now renders properly, indicating that the <code>form_for</code> code in <a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> is producing valid HTML. If you look at the HTML for the generated form (using either <a href="http://getfirebug.com/">Firebug</a> or the &ldquo;view page source&rdquo; feature of your browser), you should see markup as in <a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>. Although many of the details are irrelevant for our purposes, let&rsquo;s take a moment to highlight the most important parts of its structure.</p>
+<p>Comme indiqué par <a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>, la page d'inscription est maintenant rendue proprement, indiquant que le code <code>form_for</code> dans l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> produit du code HTML valide. Si vous regardez ce code HTML pour le formulaire généré (en utilisant soit <a href="http://getfirebug.com/">Firebug</a> ou le menu «&nbsp;Code source de la page&nbsp;» de votre navigateur), vous devriez voir le balisage tel que dans l'<a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>. Bien que de nombreux détails ne sont pas utiles à notre propos, prenons un moment pour mettre en évidence les parties les plus importantes de sa structure.</p>
 
 <div class="label" id="code:signup_form_html"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.5.</span> <span class="description">The HTML for the form in <a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>.</span>       
+<div class="listing"><span class="header">Extrait 8.5.</span> <span class="description">Le code HTML pour le formulaire de l'<a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/users&quot;</span> <span class="na">class=</span><span class="s">&quot;new_user&quot;</span> <span class="na">id=</span><span class="s">&quot;new_user&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;margin:0;padding:0;display:inline&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span>
+<span class="nt">&lt;input</span> <span class="na">nom=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span>
        <span class="na">value=</span><span class="s">&quot;rB82sI7Qw5J9J1UMILG/VQL411vH5putR+JwlxLScMQ=&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_name&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_name&quot;</span> <span class="na">name=</span><span class="s">&quot;user[name]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_nom&quot;</span><span class="nt">&gt;</span>Nom<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_nom&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[nom]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_email&quot;</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_email&quot;</span> <span class="na">name=</span><span class="s">&quot;user[email]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_email&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[email]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_password&quot;</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password&quot;</span> <span class="na">name=</span><span class="s">&quot;user[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_password_confirmation&quot;</span><span class="nt">&gt;</span>Confirmation<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password_confirmation&quot;</span> <span class="na">name=</span><span class="s">&quot;user[password_confirmation]&quot;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password_confirmation&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[password_confirmation]&quot;</span>
            <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_submit&quot;</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Sign up&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_submit&quot;</span> <span class="na">nom=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Inscription&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>We&rsquo;ll start with the internal structure. Comparing <a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> with <a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>, we see that the Embedded Ruby</p>
+<p>Nous allons commencer avec la structure interne. En comparant l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> avec l'<a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>, nous voyons que le Ruby embarqué&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>produces the HTML</p>
+<p>… produit le code HTML&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_name&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_name&quot;</span> <span class="na">name=</span><span class="s">&quot;user[name]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_nom&quot;</span><span class="nt">&gt;</span>Nom<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_nom&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[nom]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>and</p>
+<p>… et&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:password</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
@@ -692,27 +693,27 @@
 </div>
 
 
-<p>produces the HTML</p>
+<p>… produit le code HTML&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_password&quot;</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password&quot;</span> <span class="na">name=</span><span class="s">&quot;user[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password&quot;</span> <span class="na">nom=</span><span class="s">&quot;user[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>As seen in <a class="ref" href="sign-up#fig:filled_in_form">illustration&nbsp;8.4</a>, text fields (<code>type="text"</code>) simply display their contents, whereas password fields (<code>type="password"</code>) obscure the input for security purposes, as seen in <a class="ref" href="sign-up#fig:filled_in_form">illustration&nbsp;8.4</a>.</p>
+<p>Comme vu dans l'<a class="ref" href="sign-up#fig:filled_in_form">illustration&nbsp;8.4</a>, les champs de saisie textuels (<code>type="text"</code>) affichent simplement leur contenu, tandis que les champs mot de passe (<code>type="password"</code>) masquent leur contenu pour des questions de sécurité, comme le montre l'<a class="ref" href="sign-up#fig:filled_in_form">illustration&nbsp;8.4</a>.</p>
 
 <div class="label" id="fig:filled_in_form"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/filled_in_form.png" alt="filled_in_form" /></span></div><div class="caption"><span class="header">Illustration 8.4: </span><span class="description">A filled-in form, showing the difference between <code>text</code> and <code>password</code> fields.&nbsp;<a href="http://railstutorial.org/images/figures/filled_in_form-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/filled_in_form.png" alt="filled_in_form" /></span></div><div class="caption"><span class="header">Illustration 8.4: </span><span class="description">Un formulaire rempli, montrant la différence entre les champs <code>text</code> et les champs <code>password</code> (<em>mot de passe</em>).&nbsp;<a href="http://railstutorial.org/images/figures/filled_in_form-full.png">(taille normale)</a></span></div></div>
 
 
-<p>As we&rsquo;ll see in <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>, the key to creating a user is the special <code>name</code> attribute in each <code>input</code>:</p>
+<p>Comme nous le verrons à la <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>, la clé pour créer un utilisateur est l'attribut spécial <code>name</code> dans chaque <code>input</code>:</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_name&quot;</span> <span class="na">name=</span><span class="s">&quot;user[name]&quot;</span> <span class="na">-</span> <span class="na">-</span> <span class="na">-</span> <span class="nt">/&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_nom&quot;</span> <span class="na">name=</span><span class="s">&quot;user[nom]&quot;</span> <span class="na">-</span> <span class="na">-</span> <span class="na">-</span> <span class="nt">/&gt;</span>
 .
 .
 .
@@ -721,41 +722,42 @@
 </div>
 
 
-<p>These <code>name</code> values allow Rails to construct an initialization hash (via the <code>params</code> variable first seen in <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>) for creating users using the values entered by the user, as we&rsquo;ll see in <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
+<p>Ces valeurs <code>name</code> permettent à Rails de construire une table d'initialisation (via la variable <code>params</code> initialement vue à la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>) pour créer des utilisateurs en utilisant les valeurs entrées par l'utilisateur, comme nous le verrons à la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
 
-<p>The second important element is the <code>form</code> tag itself. Rails creates the <code>form</code> tag using the <code>@user</code> object: because every Ruby object knows its own class (<a class="ref" href="rails-flavored-ruby#sec:constructors">section&nbsp;4.4.1</a>), Rails figures out that <code>@user</code> is of class <code>User</code>; moreover, since <code>@user</code> is a <em>new</em> user, Rails knows to construct a form with the <code>post</code> method, which is the proper verb for creating a new object (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>):</p>
+<p>Le second élément important est la balise <code>form</code> elle-même. Rails crée la balise <code>form</code> en utilisant l'objet <code>@user</code>&nbsp;: parce que chaque objet Ruby connait sa propre classe (<a class="ref" href="rails-flavored-ruby#sec:constructors">section&nbsp;4.4.1</a>), Rails peut savoir que <code>@user</code> est de classe <code>User</code>&nbsp;; plus encore, puisque <code>@user</code> est un <em>nouvel</em> utilisateur, Rails sait construire un formulaire avec la méthode <code>post</code>, qui est le verbe approprié pour créer un nouvel objet (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>):</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/users&quot;</span> <span class="na">class=</span><span class="s">&quot;new_user&quot;</span> <span class="na">id=</span><span class="s">&quot;new_user&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Here the <code>class</code> and <code>id</code> attributes are largely irrelevant; what&rsquo;s important is <code>action="/users"</code> and <code>method="post"</code>. Together, these constitute instructions to issue an HTML <tt>POST</tt> request to the <tt>/users</tt> URL. We&rsquo;ll see in the next two sections what effects this has.</p>
+<p>Ici les attributs <code>class</code> et <code>id</code> ne sont pas très pertinents&nbsp;; ce qui est important c'est <code>action="/users"</code> et <code>method="post"</code>. Ensemble, ils constituent les instructions pour prendre en compte une requête HTML <tt>POST</tt> à l'URL <tt>/users</tt>. Nous allons dans le deux prochaines sections les effets que cela a.</p>
 
-<p>Finally, note the rather obscure code for the &ldquo;authenticity token&rdquo;:</p>
+<p>Enfin, notez que le code plutôt obscur pour le «&nbsp;authenticity token&nbsp;»&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;margin:0;padding:0;display:inline&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span>
+<span class="nt">&lt;input</span> <span class="na">nom=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span>
        <span class="na">value=</span><span class="s">&quot;rB82sI7Qw5J9J1UMILG/VQL411vH5putR+JwlxLScMQ=&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Here Rails uses a special unique value to thwart a particular kind of cross-site scripting attack called a <em>forgery</em>; see <a href="http://stackoverflow.com/questions/941594/understand-rails-authenticity-token">the Stack Overflow entry on the Rails authenticity token</a> if you&rsquo;re interested in the details of how this works and why it&rsquo;s important. Happily, Rails takes care of the problem for you, and the input tag is <code>hidden</code> so you don&rsquo;t really have to give it a second thought, but it shows up when you view the form source so I wanted at least to address it.</p>
+<p>Ici Rails utilise une valeur spéciale unique pour contrecarrer une attaque particulière appelée une <em>contrefaçon</em> (<em>forgery</em>)&nbsp;; consultez <a href="http://stackoverflow.com/questions/941594/understand-rails-authenticity-token">the Stack Overflow entry on the Rails authenticity token</a> si vous êtes intéressé par les détails de son fonctionnement et pourquoi c'est important. Heureusement, Rails prend soin du problème pour nous, et la balise input est <code>hidden</code> (<em>cachée</em>) donc vous n'avez pas à y jeter un coup d'œil plus attentif, mais comme elle sautait aux yeux en consultant le code source, je voulais au moins vous en parler.</p>
 
 <div class="label" id="sec:signup_failure"></div>
 
 
-<h2><a id="sec:8.2" href="sign-up#sec:signup_failure" class="heading"><span class="number">8.2</span> Signup failure</a></h2>
+<h2><a id="sec:8.2" href="sign-up#sec:signup_failure" class="heading"><span class="number">8.2</span> Échec de l'inscription</a></h2>
 
 
-<p>Though we&rsquo;ve briefly examined the HTML for the form in <a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a> (shown in <a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>), it&rsquo;s best understood in the context of <em>signup failure</em>. Just getting a signup form that accepts an invalid submission and re-renders the signup page (as mocked up in <a class="ref" href="sign-up#fig:signup_failure_mockup">illustration&nbsp;8.5</a>) is a significant accomplishment, and it&rsquo;s the goal of this section.</p>
+<p>Bien que nous ayons brièvement examiné le code HTML du formulaire de l'<a class="ref" href="sign-up#fig:signup_form">illustration&nbsp;8.3</a> (vu dans l'<a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>),
+c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. Juste en donnant un formulaire d'inscription qui accepte une soumission invalide et redonne la page d'inscription (comme maquété dans l'<a class="ref" href="sign-up#fig:signup_failure_mockup">illustration&nbsp;8.5</a>) est un accomplissement significatif, et c'est le but de cette section.</p>
 
 <div class="label" id="fig:signup_failure_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_failure_mockup.png" alt="signup_failure_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.5: </span><span class="description">A mockup of the signup failure page.&nbsp;<a href="http://railstutorial.org/images/figures/signup_failure_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_failure_mockup.png" alt="signup_failure_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.5: </span><span class="description">Une maquette pour l'échec de la page d'inscription.&nbsp;<a href="http://railstutorial.org/images/figures/signup_failure_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -763,25 +765,25 @@
 <div class="label" id="sec:testing_failure"></div>
 
 
-<h3><a id="sec:8.2.1" href="sign-up#sec:testing_failure" class="heading"><span class="number">8.2.1</span> Testing failure</a></h3>
+<h3><a id="sec:8.2.1" href="sign-up#sec:testing_failure" class="heading"><span class="number">8.2.1</span> Tester l'échec</a></h3>
 
 
-<p>Recall from <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">section&nbsp;6.3.3</a> that adding <code>resources :users</code> to the <code>routes.rb</code> file (<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>) automatically ensures that our Rails application responds to the RESTful URLs from <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>. In particular, it ensures that a <tt>POST</tt> request to <tt>/users</tt> is handled by the <code>create</code> action. Our strategy for the <code>create</code> action is to use the form submission to make a new user object using <code>User.new</code>, try (and fail) to save that user, and then render the signup page for possible resubmission. Our task is to write tests for this action, and then add <code>create</code> to the Users controller to get it to pass.</p>
+<p>Souvenez-vous de la <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">section&nbsp;6.3.3</a> qu'ajouter <code>resources :users</code> au fichier <code>routes.rb</code> (<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>) permettait de s'assurer automatiquement que notre application Rails répondait aux URLs RESTful de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>. En particulier, cela assurait qu'une requête <tt>POST</tt> pour <tt>/users</tt> était traitée par l'action <code>create</code>. Notre stratégie pour l'action <code>create</code> (<em>créer</em>) est d'utiliser la soumission du formulaire pour fabriquer une nouvel objet utilisateur en utilisant <code>User.new</code>, en essayant (et échouant) de sauver cette utilisateur, et alors de retourner la page d'inscription pour une possible re-soumission. Notre tâche est d'écrire les tests pour cette action, et d'ajouter ensuite <code>create</code> au contrôleur Users pour le faire réussir.</p>
 
-<p>Let&rsquo;s get started by reviewing the code for the signup form:</p>
+<p>Commençons par revisiter le code du formulaire d'inscription&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/users&quot;</span> <span class="na">class=</span><span class="s">&quot;new_user&quot;</span> <span class="na">id=</span><span class="s">&quot;new_user&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 
 
-<p>As noted in <a class="ref" href="sign-up#sec:the_form_html">section&nbsp;8.1.2</a>, this HTML issues a <tt>POST</tt> request to the <tt>/users</tt> URL. In analogy with the <code>get</code> method, which issues a <tt>GET</tt> request inside of tests, we use the <code>post</code> method to issue a <tt>POST</tt> request to the <code>create</code> action. As we&rsquo;ll see shortly, <code>create</code> takes in a hash corresponding to the object type being created; since this is a test for signup <em>failure</em>, we&rsquo;ll just pass an <code>@attr</code> hash with blank entries, as seen in <a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>. This is essentially equivalent to visiting the signup page and clicking on the button without filling in any of the fields.</p>
+<p>Comme indique à la <a class="ref" href="sign-up#sec:the_form_html">section&nbsp;8.1.2</a>, ce code HTML émet une requête <tt>POST</tt> pour l'URL <tt>/users</tt>. En analogie à la méthode <code>get</code>, qui émet une requête <tt>GET</tt> à l'intérieur des tests, nous utilisons la méthode <code>post</code> pour émettre un requête <tt>POST</tt> pour l'action <code>create</code>. Comme nous allons le voir brièvement, <code>create</code> reçoit une table correspond au type d'objet qui doit être créé&nbsp;; puisque c'est un test pour l'<em>échec</em> de l'inscription, nous allons juste passer la table <code>@attr</code> avec une entrée vierge, comme montré dans l'<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>. C'est essentiellement équivalent à visiter la page d'inscription et de cliquer sur le bouton de soumissions sans avoir rempli aucun des champs de saisie.</p>
 
 <div class="label" id="code:failing_create_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.6.</span> <span class="description">Tests for failed user signup. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.6.</span> <span class="description">Tests pour l'échec de l'inscription de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -796,11 +798,11 @@
     <span class="n">describe</span> <span class="s2">&quot;failure&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                   <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should not create a user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;ne devrait pas créer d'utilisateur&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="k">end</span><span class="o">.</span><span class="n">should_not</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span>
@@ -808,10 +810,10 @@
 
       <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
-        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;titre&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Inscription&quot;</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should render the &#39;new&#39; page&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait rendre la page &#39;new&#39;&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
       <span class="k">end</span>
@@ -822,11 +824,11 @@
 </div></div>
 
 
-<p>The final two tests are relatively straightforward: we make sure that the title is correct, and then we check that a failed signup attempt just re-renders the new user page (using the <code>render_template</code> RSpec method). The first test, on the other hand, is a little tricky.</p>
+<p>Les deux tests finaux sont relativement simples&nbsp;: nous nous assurons que le titre est correct, et puis nous vérifions qu'une inscription défectueuse renvoie bien à nouveau la page d'inscription d'un nouvel utilisateur (en utilisant la méthode RSpec <code>render_template</code>). Le premier test, en revanche, est un peu plus délicat.</p>
 
-<p>The purpose of the test</p>
+<p>Le but du test&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should not create a user&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;ne devrait pas créer d'utilisateur&quot;</span> <span class="k">do</span>
   <span class="nb">lambda</span> <span class="k">do</span>
     <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
   <span class="k">end</span><span class="o">.</span><span class="n">should_not</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span>
@@ -835,14 +837,14 @@
 </div>
 
 
-<p>is to verify that a failed <code>create</code> action doesn&rsquo;t create a user in the database. To do this, it introduces two new elements. First, we use the RSpec <code>change</code> method to return the change in the number of users in the database:</p>
+<p>… est censé vérifier que l'échec de l'action <code>create</code> ne crée pas d'utilisateur dans la base de données. Pour ce faire, il introduit deux éléments nouveaux. D'abord, nous utilisons la méthode RSpec <code>change</code> pour retourner le changement du nombre d'utilisateurs dans la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>This defers to the Active Record <code>count</code> method, which simply returns how many records of that type are in the database. For example, if you cleared the development database at the beginning of the chapter, this count should currently be&nbsp;<code>0</code>:</p>
+<p>Cela diffère de la méthode Active Record <code>count</code>, qui retourne simplement combien d'enregistrement du type demandé sont dans la base de données. Par exemple, si vous avez réinitialisé la base de données de développement au début de ce chapitre, ce compte devrait à présent être de&nbsp;<code>0</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">count</span>
@@ -851,7 +853,7 @@
 </div>
 
 
-<p>The second new idea is to wrap the <code>post :create</code> step in a package using a Ruby construct called a <code>lambda</code>,<sup class="footnote" id="fnref:8.2"><a href="#fn:8.2">2</a></sup> which allows us to check that it doesn&rsquo;t change the <code>User</code> count:</p>
+<p>La seconde nouvelle idée est d'enrouler l'étape <code>post :create</code> dans un «&nbsp;package&nbsp;» en utilisant la construction Ruby appelée un <code>lambda</code>,<sup class="footnote" id="fnref:8.2"><a href="#fn:8.2">2</a></sup> qui nous permet de vérifier qu'elle ne change pas le compte de <code>User</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nb">lambda</span> <span class="k">do</span>
   <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
@@ -860,21 +862,21 @@
 </div>
 
 
-<p>Although this <code>lambda</code> may seem strange at this point, there will be more examples in the tests to come, and the pattern will quickly become clear.</p>
+<p>Bien que ce <code>lambda</code> peut semble étrange pour le moment, il y en aura d'autres exemple dans les tests à venir, et le modèle deviendra rapidement clair pour vous.</p>
 
 <div class="label" id="sec:a_working_form"></div>
 
 
-<h3><a id="sec:8.2.2" href="sign-up#sec:a_working_form" class="heading"><span class="number">8.2.2</span> A working form</a></h3>
+<h3><a id="sec:8.2.2" href="sign-up#sec:a_working_form" class="heading"><span class="number">8.2.2</span> Un formulaire fonctionnel</a></h3>
 
 
-<p>We can get the tests from <a class="ref" href="sign-up#sec:testing_failure">section&nbsp;8.2.1</a> to pass with the code in <a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a>. This listing includes a second use of the <code>render</code> method, which we first saw in the context of partials (<a class="ref" href="filling-in-the-layout#sec:partials">section&nbsp;5.1.3</a>); as you can see, <code>render</code> works in controller actions as well. Note that we&rsquo;ve taken this opportunity to introduce an <code>if</code>-<code>else</code> branching structure, which allows us to handle the cases of failure and success separately based on the value of <code>@user.save</code>.</p>
+<p>Nous pouvons faire réussir les tests de la <a class="ref" href="sign-up#sec:testing_failure">section&nbsp;8.2.1</a> avec le code de l'<a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a>. Cet extrait inclut une seconde utilisation de la méthode <code>render</code>, que nous avons vue pour la première fois dans le contexte des <em>partiels</em> (<a class="ref" href="filling-in-the-layout#sec:partials">section&nbsp;5.1.3</a>)&nbsp;; comme vous pouvez le voir, <code>render</code> fonctionne aussi bien dans les actions de contrôleur . Notez que nous avons pris la liberté d'introduire une structure <code>if</code>-<code>else</code> (<em>si</em>-<em>sinon</em>) qui nous permet de traiter les cas d'échec et de succès séparément en se basant sur la valeur de <code>@user.save</code>.</p>
 
 <div class="label" id="code:first_create_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.7.</span> <span class="description">A <code>create</code> action that can handle signup failure (but not success). <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.7.</span> <span class="description">Une action <code>create</code> qui peut traiter les échec d'inscription (mais pas les succès). <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -883,9 +885,9 @@
   <span class="k">def</span> <span class="nf">create</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
-      <span class="c1"># Handle a successful save.</span>
+      <span class="c1"># Traite un succès d'enregistrement.</span>
     <span class="k">else</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -894,23 +896,23 @@
 </div></div>
 
 
-<p>The best way understand how the code in <a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> works is to <em>submit</em> the form with some invalid signup data; the results appear in <a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a>.</p>
+<p>La meilleure façon de comprendre le fonctionnement du code de l'<a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> est de <em>soumettre</em> le formulaire avec des données d'inscription invalides&nbsp;; le résultat apparait dans l'<a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a>.</p>
 
 <div class="label" id="fig:signup_failure_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_failure_rails_3.png" alt="signup_failure_rails_3" /></span></div><div class="caption"><span class="header">Illustration 8.6: </span><span class="description">Signup failure with a <code>params</code> hash.&nbsp;<a href="http://railstutorial.org/images/figures/signup_failure_rails_3-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_failure_rails_3.png" alt="signup_failure_rails_3" /></span></div><div class="caption"><span class="header">Illustration 8.6: </span><span class="description">Échec d'inscription avec une table <code>params</code>.&nbsp;<a href="http://railstutorial.org/images/figures/signup_failure_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>To get a clearer picture of how Rails handles the submission, let&rsquo;s take a closer look at the <code>params</code> hash in the debug information at the bottom of <a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a>:</p>
+<p>Pour obtenir une image plus claire de comment Rails traite la soumission, jetons un coup d'œil plus précis à la table <code>params</code> dans les informations de débuggage en bas de la page de l'<a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nn">---</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span> 
-<span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Sign up</span>
+<span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Inscription</span>
 <span class="l-Scalar-Plain">authenticity_token</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">rB82sI7Qw5J9J1UMILG/VQL411vH5puR+Jw1xL5cMQ=</span>
 <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">create</span>
 <span class="l-Scalar-Plain">controller</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">users</span>
 <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span> 
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Foo Bar</span>
+  <span class="l-Scalar-Plain">nom</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Foo Bar</span>
   <span class="l-Scalar-Plain">password_confirmation</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">dude</span>
   <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">dude</span>
   <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">foo@invalid</span>
@@ -918,38 +920,38 @@
 </div>
 
 
-<p>We saw starting in <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a> that the <code>params</code> hash contains information about each request; in the case of a URL like <tt>/users/1</tt>, the value of <code>params[:id]</code> is the <code>id</code> of the corresponding user (<code>1</code>&nbsp;in this example). In the case of posting to the signup form, <code>params</code> instead contains a hash of hashes, a construction we first saw in <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a>, which introduced the strategically named <code>params</code> variable in a console session. This debug information above shows that submitting the form results in a <code>user</code> hash with attributes corresponding to the submitted values, where the keys come from the <code>name</code> attributes of the <code>input</code> tags seen in <a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a>; for example, the value of</p>
+<p>Nous avons vu en abordant la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a> que la table <code>params</code> contenanit des informations sur chaque requête&nbsp;; dans le cas d'une URL comme <tt>/users/1</tt>, la valeur de <code>params[:id]</code> est l'<code>id</code> de l'utilisateur correspondant (<code>1</code>&nbsp;dans ce exemple). Dans le cas d'un <em>POST</em>ing du formulaire d'inscription, <code>params</code> contiennent plutôt une table de tableaux, une construction que nous avons vue pour la première fois à la <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a>, qui introduisait la variable stratégiquement appelée <code>params</code> dans la session de console. L'information de débuggage ci-dessus montre que la soumissions du formulaire résulte en une table <code>user</code> avec des attributs correspondants aux valeurs soumises, où les clés viennent des attributs <code>name</code> des balises <code>input</code> vues dans l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a>&nbsp;; par exemple, la valeur de&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_email&quot;</span> <span class="na">name=</span><span class="s">&quot;user[email]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 
 
-<p>with name <code>"user[email]"</code> is precisely the <code>email</code> attribute of the <code>user</code> hash.</p>
+<p>… avec name <code>"user[email]"</code> est précisément l'attribut <code>email</code> de la table <code>user</code>.</p>
 
-<p>Though the hash keys appear as strings in the debug output, internally Rails uses symbols, so that <code>params[:user]</code> is the hash of user attributes&mdash;in fact, exactly the attributes needed as an argument to <code>User.new</code>, as first seen in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a> and appearing in <a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a>. This means that the line</p>
+<p>Bien que les clés de la table apparaissent comme des chaines de caractère dans le message de débuggage, Rails utilise en interne des symboles, de telle sorte que <code>params[:user]</code> est la table des attributs de l'utilisateur &mdash;&nbsp;en fait, exactement, les attributs nécessaires comme argument pour <code>User.new</code>, comme nous l'avons initialement vu à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a> et revu dans l'<a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a>. Cela signifie que la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>is equivalent to</p>
+<p>… est équivalente à&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;foo@invalid&quot;</span><span class="p">,</span>
+<div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;foo@invalid&quot;</span><span class="p">,</span>
                  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>This is exactly the format needed to initialize a User model object with the given attributes.</p>
+<p>C'est exactement le format nécessaire pour initialiser le modèle objet User avec les attributs donnés.</p>
 
-<p>Of course, instantiating such a variable has implications for successful signup&mdash;as we&rsquo;ll see in <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>, once <code>@user</code> is defined properly, calling <code>@user.save</code> is all that&rsquo;s needed to complete the registration&mdash;but it has consequences even in the failed signup considered here. Note in <a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a> that the fields are <em>pre-filled</em> with the data from the failed submission. This is because <code>form_for</code> automatically fills in the fields with the attributes of the <code>@user</code> object, so that, for example, if <code>@user.name</code> is <code>"Foo"</code> then</p>
+<p>Bien entendu, instancier une telle variable a des implications dans le succès de l'inscription &mdash;&nbsp;comme nous le verrons à la <a class="ref" href="sign-up#sec:signup_success">section&nbsp;8.3</a>, une fois que <code>@user</code> est défini proprement, appeler <code>@user.save</code> est tout ce qu'il y a à faire pour achever l'enregistrement&nbsp;&mdash; mais cela a des conséquences même dans l'échec d'inscription considéré ici. Notez dans l'<a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a> que les champs sont <em>pré-remplis</em> avec les données de la soumission défectueuse. C'est parce que <code>form_for</code> remplit automatiquement dans les champs avec les attributs de l'objet <code>@user</code>, donc, par exemple, si <code>@user.nom</code> vaut <code>"Foo"</code> alors&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:nom</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   .
   .
@@ -958,13 +960,13 @@
 </div>
 
 
-<p>will produce the HTML</p>
+<p>… produira le code HTML&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/users&quot;</span> <span class="na">class=</span><span class="s">&quot;new_user&quot;</span> <span class="na">id=</span><span class="s">&quot;new_user&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_name&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_name&quot;</span> <span class="na">name=</span><span class="s">&quot;user[name]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;Foo&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_nom&quot;</span><span class="nt">&gt;</span>Nom<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_nom&quot;</span> <span class="na">name=</span><span class="s">&quot;user[nom]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;Foo&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   .
   .
@@ -973,7 +975,7 @@
 </div>
 
 
-<p>Here the <code>value</code> of the <code>input</code> tag is <code>"Foo"</code>, so that&rsquo;s what appears in the text field.</p>
+<p>Ici le <code>value</code> de la balise <code>input</code> vaut <code>"Foo"</code>, donc c'est ce qui apparait dans le champ de texte.</p>
 
 <div class="label" id="sec:signup_error_messages"></div>
 
@@ -984,7 +986,7 @@
 <p>Though not strictly necessary, it&rsquo;s helpful to output error messages on failed signup to indicate the problems that prevented successful user registration. Rails provides just such messages based on the User model validations. For example, consider trying to save a user with an invalid email address and with a short password:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
-<span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;foo@invalid&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;foo@invalid&quot;</span><span class="p">,</span>
 <span class="gp">?&gt; </span>                <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">save</span>
 <span class="go">=&gt; false</span>
@@ -1004,7 +1006,7 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Extrait 8.8.</span> <span class="description">Code to display error messages on the signup form. <br /> <code>app/views/users/new.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Inscription<span class="nt">&lt;/h1&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span> <span class="cp">%&gt;</span>
@@ -1177,10 +1179,10 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Extrait 8.11.</span> <span class="description">The pre&ndash;Rails 3 development log with visible passwords. <br /> <code>log/development.log</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
+<div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Inscription&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
 <span class="s2">&quot;authenticity_token&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;K1HchFF8uYE8ZaQKz5DVG9vF2KGoXJu4JGp/VE3NMjA=&quot;</span><span class="p">,</span>
 <span class="s2">&quot;controller&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> 
-  <span class="s2">&quot;user&quot;</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;password_confirmation&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;dude&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;password_confirmation&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;dude&quot;</span><span class="p">,</span>
            <span class="s2">&quot;password&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;dude&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;foo@invalid&quot;</span><span class="p">}}</span>
 </pre></div>
 </div></div>
@@ -1194,10 +1196,10 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Extrait 8.12.</span> <span class="description">The development log with filtered passwords. <br /> <code>log/development.log</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
+<div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Inscription&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
 <span class="s2">&quot;authenticity_token&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;K1HchFF8uYE8ZaQKz5DVG9vF2KGoXJu4JGp/VE3NMjA=&quot;</span><span class="p">,</span>
 <span class="s2">&quot;controller&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;user&quot;</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;password_confirmation&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;[FILTERED]&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;password_confirmation&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;[FILTERED]&quot;</span><span class="p">,</span>
            <span class="s2">&quot;password&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;[FILTERED]&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;foo@invalid&quot;</span><span class="p">}}</span>
 </pre></div>
 </div></div>
@@ -1295,7 +1297,7 @@
     <span class="n">describe</span> <span class="s2">&quot;success&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;New User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
+        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;New User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
                   <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
@@ -1364,7 +1366,7 @@
     <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
       <span class="n">redirect_to</span> <span class="vi">@user</span>
     <span class="k">else</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -1478,7 +1480,7 @@
 </div></div>
 
 
-<p>This introduces the &ldquo;equals-tilde&rdquo; <tt class="verb">=~</tt> operator for comparing strings to regular expressions. (We first saw regular expressions in the <code>email_regex</code> of <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>). Rather than testing for the full flash message, we just test to make sure that &ldquo;welcome to the sample app&rdquo; is present. (Note that we don&rsquo;t yet test for the appearance of the actual flash message&rsquo;s HTML; we&rsquo;ll fix this by testing for the actual <code>div</code> tag in <a class="ref" href="sign-up#sec:successful_signup">section&nbsp;8.4.3</a>.)</p>
+<p>This introduces the «&nbsp;equals-tilde&nbsp;» <tt class="verb">=~</tt> operator for comparing strings to regular expressions. (We first saw regular expressions in the <code>email_regex</code> of <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>). Rather than testing for the full flash message, we just test to make sure that «&nbsp;welcome to the sample app&nbsp;» is present. (Note that we don&rsquo;t yet test for the appearance of the actual flash message&rsquo;s HTML; we&rsquo;ll fix this by testing for the actual <code>div</code> tag in <a class="ref" href="sign-up#sec:successful_signup">section&nbsp;8.4.3</a>.)</p>
 
 <p>If you&rsquo;ve programmed much before, it&rsquo;s likely that you&rsquo;re already familiar with regular expressions, but here&rsquo;s a quick <code>console</code> session in case you need an introduction:</p>
 
@@ -1526,7 +1528,7 @@
       <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the Sample App!&quot;</span>
       <span class="n">redirect_to</span> <span class="vi">@user</span>
     <span class="k">else</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -1543,7 +1545,7 @@
 <h3><a id="sec:8.3.4" href="sign-up#sec:the_first_signup" class="heading"><span class="number">8.3.4</span> The first signup</a></h3>
 
 
-<p>We can see the result of all this work by signing up our first user (under the name &ldquo;Rails Tutorial&rdquo; and email address &ldquo;<tt>example@railstutorial.org</tt>&rdquo;), which shows a friendly message upon successful signup, as seen in <a class="ref" href="sign-up#fig:signup_flash">illustration&nbsp;8.9</a>. (The nice green styling for the <code>success</code> class comes included with the Blueprint CSS framework from <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>.) Then, upon reloading the user show page, the flash message disappears as promised (<a class="ref" href="sign-up#fig:signup_flash_reloaded">illustration&nbsp;8.10</a>).</p>
+<p>We can see the result of all this work by signing up our first user (under the name «&nbsp;Rails Tutorial&nbsp;» and email address «&nbsp;<tt>example@railstutorial.org</tt>&nbsp;»), which shows a friendly message upon successful signup, as seen in <a class="ref" href="sign-up#fig:signup_flash">illustration&nbsp;8.9</a>. (The nice green styling for the <code>success</code> class comes included with the Blueprint CSS framework from <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>.) Then, upon reloading the user show page, the flash message disappears as promised (<a class="ref" href="sign-up#fig:signup_flash_reloaded">illustration&nbsp;8.10</a>).</p>
 
 <div class="label" id="fig:signup_flash"></div>
 
@@ -1563,7 +1565,7 @@
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
-<span class="go">=&gt; #&lt;User id: 1, name: &quot;Rails Tutorial&quot;, email: &quot;example@railstutorial.org&quot;,</span>
+<span class="go">=&gt; #&lt;User id: 1, nom: &quot;Rails Tutorial&quot;, email: &quot;example@railstutorial.org&quot;,</span>
 <span class="go">created_at: &quot;2010-02-17 03:07:53&quot;, updated_at: &quot;2010-02-17 03:07:53&quot;,</span>
 <span class="go">encrypted_password: &quot;48aa8f4444b71f3f713d87d051819b0d44cd89f4a963949f201...&quot;,</span>
 <span class="go">salt: &quot;f52924ba502d4f92a634d4f9647622ccce26205176cceca2adc...&quot;&gt;</span>
@@ -1581,7 +1583,7 @@
 
 <p>In principle, we are done with user signup at this point, but you may have noticed that we haven&rsquo;t tested the structure of the signup form, nor have we tested that submissions actually work. Of course, we <em>have</em> checked these things by viewing the pages in our browser, but the whole point of automated testing is to make sure that once things work they stay that way. Making such tests is the goal of this section&mdash;and the results are pretty sweet.</p>
 
-<p>One testing method would be to check the HTML structure of the form (using <code>render_views</code> and the <code>have_selector</code> method), and indeed this is a good way to test-drive views. (<a class="ref" href="sign-up#sec:signup_exercises">section&nbsp;8.6</a> has an exercise to this effect.) But I prefer not to test the detailed HTML structure of views&mdash;I don&rsquo;t see any reason why we should have to know that Rails implements user email submission using <code>name="user[email]"</code>, and indeed any test of that structure would break if a future Rails version changed this convention. Moreover, it would be nice to have a test for the entire signup process: visiting the signup page, filling in the form values, clicking the button, and making sure (if the submission is valid) that a new user gets created in the (test) database.</p>
+<p>One testing method would be to check the HTML structure of the form (using <code>render_views</code> and the <code>have_selector</code> method), and indeed this is a good way to test-drive views. (<a class="ref" href="sign-up#sec:signup_exercises">section&nbsp;8.6</a> has an exercise to this effect.) But I prefer not to test the detailed HTML structure of views&mdash;I don&rsquo;t see any reason why we should have to know that Rails implements user email submission using <code>nom="user[email]"</code>, and indeed any test of that structure would break if a future Rails version changed this convention. Moreover, it would be nice to have a test for the entire signup process: visiting the signup page, filling in the form values, clicking the button, and making sure (if the submission is valid) that a new user gets created in the (test) database.</p>
 
 <p>Though it&rsquo;s not the only way (see <a class="ref" href="sign-up#sidebar:integration_alternatives">Box&nbsp;8.1</a>), my preferred solution to this problem is to use an RSpec integration test, which we first used in <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a> to test the custom routes (such as <tt>/about</tt> for the About page). In that section, we saw only a tiny fraction of the power of integration tests; starting in this section, we&rsquo;ll see just how amazing they can be.</p>
 
@@ -1591,7 +1593,7 @@
 <div class="sidebar"><span class="title"><span class="header">Box 8.1.</span><span class="description">Integration alternatives</span></span>
 <p>As we&rsquo;ve seen in this and previous chapters, <em>Ruby on Rails Tutorial</em> uses RSpec for all its tests, including integration tests. In my view, there is no match for the simplicity and power of RSpec integration tests. There are a couple of viable alternatives, though. One is the Rails default, integration testing with <tt>Test::Unit</tt>. This is fine if you use <tt>Test::Unit</tt> elsewhere, but we&rsquo;re using RSpec in this tutorial, and I prefer not to mix RSpec and <tt>Test::Unit</tt> in a single project.</p>
 
-<p>A second option is <a href="http://cukes.info">Cucumber</a>, which works nicely with RSpec and allows the definition of plain-text stories describing application behavior. Many Rails programmers find Cucumber especially convenient when doing client work; since they can be read even by non-technical users, Cucumber tests, or &ldquo;scenarios&rdquo;, can be shared with (and can sometimes even be written by) the client. Of course, using a testing framework that isn&rsquo;t pure Ruby has a downside, and I find that the plain-text stories can be a bit verbose and (cu)cumbersome. Since we don&rsquo;t have any client requirements in <em>Rails Tutorial</em>, and since I strongly prefer a pure-Ruby testing approach in any case, we&rsquo;ll stick to RSpec integration tests in this book. Nevertheless, I suggest taking a look at some <a href="http://wiki.github.com/aslakhellesoy/cucumber/tutorials-and-related-blog-posts">Cucumber tutorials</a> to see if it suits you.</p>
+<p>A second option is <a href="http://cukes.info">Cucumber</a>, which works nicely with RSpec and allows the definition of plain-text stories describing application behavior. Many Rails programmers find Cucumber especially convenient when doing client work; since they can be read even by non-technical users, Cucumber tests, or «&nbsp;scenarios&nbsp;», can be shared with (and can sometimes even be written by) the client. Of course, using a testing framework that isn&rsquo;t pure Ruby has a downside, and I find that the plain-text stories can be a bit verbose and (cu)cumbersome. Since we don&rsquo;t have any client requirements in <em>Rails Tutorial</em>, and since I strongly prefer a pure-Ruby testing approach in any case, we&rsquo;ll stick to RSpec integration tests in this book. Nevertheless, I suggest taking a look at some <a href="http://wiki.github.com/aslakhellesoy/cucumber/tutorials-and-related-blog-posts">Cucumber tutorials</a> to see if it suits you.</p>
 </div>
 
 
@@ -1606,7 +1608,7 @@
 <p>We saw in <a class="ref" href="filling-in-the-layout#code:layout_links_spec">extrait&nbsp;5.13</a> that RSpec integration tests support controller-test&ndash;style constructions such as</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s1">&#39;/&#39;</span>
-<span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Home&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;titre&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Home&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
@@ -1614,7 +1616,7 @@
 <p>This is not the only kind of syntax supported, though; RSpec integration tests also support a highly expressive web-navigation syntax.<sup class="footnote" id="fnref:8.9"><a href="#fn:8.9">9</a></sup> In this section, we&rsquo;ll see how to use this syntax to simulate filling out the signin form using code like</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">visit</span> <span class="n">signin_path</span>
-<span class="n">fill_in</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
+<span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
 <span class="n">click_button</span>
 </pre></div>
 </div>
@@ -1644,7 +1646,7 @@
 <div class="label" id="fig:blank_signup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup.png" alt="blank_signup" /></span></div><div class="caption"><span class="header">Illustration 8.11: </span><span class="description">The result of visiting  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> and just clicking &ldquo;Sign up&rdquo;.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup.png" alt="blank_signup" /></span></div><div class="caption"><span class="header">Illustration 8.11: </span><span class="description">The result of visiting  <a href="http://localhost:3000/signup"><tt>/signup</tt></a> and just clicking «&nbsp;Inscription&nbsp;».&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1659,7 +1661,7 @@
   <span class="nt">&lt;h2&gt;</span>5 errors prohibited this user from being saved<span class="nt">&lt;/h2&gt;</span>
   <span class="nt">&lt;p&gt;</span>There were problems with the following fields:<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
-    <span class="nt">&lt;li&gt;</span>Name can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Nom can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Email can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Email is invalid<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Password can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
@@ -1688,7 +1690,7 @@
 
       <span class="n">it</span> <span class="s2">&quot;should not make a new user&quot;</span> <span class="k">do</span>
         <span class="n">visit</span> <span class="n">signup_path</span>
-        <span class="n">fill_in</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>     <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
@@ -1729,7 +1731,7 @@
       <span class="n">it</span> <span class="s2">&quot;should not make a new user&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">visit</span> <span class="n">signup_path</span>
-          <span class="n">fill_in</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
+          <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>     <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span>
@@ -1762,7 +1764,7 @@
 <h3><a id="sec:8.4.3" href="sign-up#sec:successful_signup" class="heading"><span class="number">8.4.3</span> Users signup success should make a new user</a></h3>
 
 
-<p>We come now to the integration test for successful signup. In this case, we need to fill in the signup fields with valid user data. When we do, the result should be the user show page with a &ldquo;flash success&rdquo; <code>div</code> tag, and it should change the User count by&nbsp;1. <a class="ref" href="sign-up#code:signup_success_test">extrait&nbsp;8.22</a> shows how to do it.</p>
+<p>We come now to the integration test for successful signup. In this case, we need to fill in the signup fields with valid user data. When we do, the result should be the user show page with a «&nbsp;flash success&nbsp;» <code>div</code> tag, and it should change the User count by&nbsp;1. <a class="ref" href="sign-up#code:signup_success_test">extrait&nbsp;8.22</a> shows how to do it.</p>
 
 <div class="label" id="code:signup_success_test"></div>
 
@@ -1783,7 +1785,7 @@
       <span class="n">it</span> <span class="s2">&quot;should make a new user&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">visit</span> <span class="n">signup_path</span>
-          <span class="n">fill_in</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
+          <span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>     <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
           <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
@@ -1800,11 +1802,11 @@
 </div></div>
 
 
-<p>By the way, although it&rsquo;s not obvious from the RSpec documentation, you can use the CSS id of the text box instead of the label, so <code>fill_in :user_name</code> also works.<sup class="footnote" id="fnref:8.11"><a href="#fn:8.11">11</a></sup> (This is especially nice for forms that don&rsquo;t use labels.)</p>
+<p>By the way, although it&rsquo;s not obvious from the RSpec documentation, you can use the CSS id of the text box instead of the label, so <code>fill_in :user_nom</code> also works.<sup class="footnote" id="fnref:8.11"><a href="#fn:8.11">11</a></sup> (This is especially nice for forms that don&rsquo;t use labels.)</p>
 
 <p>I hope you agree that this web navigation syntax is incredibly natural and succinct. For example, to fill in a field with a value, we just use code like this:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">fill_in</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="n">fill_in</span> <span class="s2">&quot;Nom&quot;</span><span class="p">,</span>         <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>        <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span>     <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
 <span class="n">fill_in</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span>
@@ -1896,7 +1898,7 @@
 
     <span class="n">it</span> <span class="s2">&quot;should have a name field&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:new</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;input[name=&#39;user[name]&#39;][type=&#39;text&#39;]&quot;</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;input[nom=&#39;user[nom]&#39;][type=&#39;text&#39;]&quot;</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="n">it</span> <span class="s2">&quot;should have an email field&quot;</span>
@@ -1956,17 +1958,17 @@
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:8.1">If you get an error like <code>views/users/new.html.erb_spec.rb fails</code>, remove those accursed view specs with <code>$ rm -rf spec/views</code>.&nbsp;<a class="arrow" href="#fnref:8.1">&uarr;</a></li>
-<li id="fn:8.2">The name comes from <a href="http://en.wikipedia.org/wiki/Lambda_calculus">the lambda calculus</a>, a mathematical system for representing functions and their operations.&nbsp;<a class="arrow" href="#fnref:8.2">&uarr;</a></li>
+<li id="fn:8.1">Si vous rencontrez une erreur comme <code>views/users/new.html.erb_spec.rb fails</code>, supprimer ces maudits specs vues avec <code>$ rm -rf spec/views</code>.&nbsp;<a class="arrow" href="#fnref:8.1">&uarr;</a></li>
+<li id="fn:8.2">Le nom vient de <a href="http://en.wikipedia.org/wiki/Lambda_calculus">the lambda calculus</a>, un système mathématique pour représenter les fonctions et leurs opérations.&nbsp;<a class="arrow" href="#fnref:8.2">&uarr;</a></li>
 <li id="fn:8.3">Before Rails&nbsp;3, displaying error messages was done through a magical call to a special <code>error_messages</code> method on the form object&nbsp;<code>f</code>, as follows: <tt class="verb">&lt;%= f.error_messages %&gt;</tt>. Though often convenient, this magical method was hard to customize, so the Rails Core team decided to recommend using Embedded Ruby to display the errors by hand.&nbsp;<a class="arrow" href="#fnref:8.3">&uarr;</a></li>
 <li id="fn:8.4">I figured this out by looking up <code>pluralize</code> in the Rails API.&nbsp;<a class="arrow" href="#fnref:8.4">&uarr;</a></li>
-<li id="fn:8.5">In case you&rsquo;re curious, the response code is <tt>302</tt>, in contrast to the &ldquo;permanent&rdquo; <tt>301</tt> redirect discussed briefly in <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>.&nbsp;<a class="arrow" href="#fnref:8.5">&uarr;</a></li>
+<li id="fn:8.5">In case you&rsquo;re curious, the response code is <tt>302</tt>, in contrast to the «&nbsp;permanent&nbsp;» <tt>301</tt> redirect discussed briefly in <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>.&nbsp;<a class="arrow" href="#fnref:8.5">&uarr;</a></li>
 <li id="fn:8.6">Note that the key <code>:success</code> is a symbol, but Embedded Ruby automatically converts it to the string <code>"success"</code> before inserting it into the template.&nbsp;<a class="arrow" href="#fnref:8.6">&uarr;</a></li>
 <li id="fn:8.7">Actually, we&rsquo;ll use the closely related <code>flash.now</code>, but we&rsquo;ll defer that subtlety until we need it.&nbsp;<a class="arrow" href="#fnref:8.7">&uarr;</a></li>
 <li id="fn:8.8">The indices are zero-offset, as with arrays (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>), so a return value of <code>0</code> means the string matches the regular expression starting with the first character.&nbsp;<a class="arrow" href="#fnref:8.8">&uarr;</a></li>
 <li id="fn:8.9">As of this writing, this syntax is available thanks to <a href="http://github.com/brynary/webrat">Webrat</a>, which appears as a gem dependency for <tt>rspec-rails</tt>, but Webrat was written before the widespread adoption of <a href="http://rack.rubyforge.org/">Rack</a> and will eventually be supplanted by the  <a href="http://github.com/jnicklas/capybara">Capybara</a> project. Happily, Capybara is designed as a drop-in replacement for Webrat, so the syntax should remain the same.&nbsp;<a class="arrow" href="#fnref:8.9">&uarr;</a></li>
 <li id="fn:8.10">Note the plural; this is <em>not</em> the User spec <code>user_spec.rb</code>, which is a model test, not an integration test.&nbsp;<a class="arrow" href="#fnref:8.10">&uarr;</a></li>
-<li id="fn:8.11">You can use Firebug or your browser&rsquo;s &ldquo;view source&rdquo; if you need to figure out the id. Or you can note that Rails uses the name of the resource and the name of the attribute separated with an underscore, yielding <code>user_name</code>, <code>user_email</code>, etc.&nbsp;<a class="arrow" href="#fnref:8.11">&uarr;</a></li>
+<li id="fn:8.11">You can use Firebug or your browser&rsquo;s «&nbsp;view source&nbsp;» if you need to figure out the id. Or you can note that Rails uses the name of the resource and the name of the attribute separated with an underscore, yielding <code>user_nom</code>, <code>user_email</code>, etc.&nbsp;<a class="arrow" href="#fnref:8.11">&uarr;</a></li>
 </ol>
 </div>
 

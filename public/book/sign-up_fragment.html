@@ -980,10 +980,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:signup_error_messages"></div>
 
 
-<h3><a id="sec:8.2.3" href="sign-up#sec:signup_error_messages" class="heading"><span class="number">8.2.3</span> Signup error messages</a></h3>
+<h3><a id="sec:8.2.3" href="sign-up#sec:signup_error_messages" class="heading"><span class="number">8.2.3</span> Message d'erreur à l'inscription</a></h3>
 
 
-<p>Though not strictly necessary, it&rsquo;s helpful to output error messages on failed signup to indicate the problems that prevented successful user registration. Rails provides just such messages based on the User model validations. For example, consider trying to save a user with an invalid email address and with a short password:</p>
+<p>Bien que ce ne soit pas strictement nécessaire, il est utile de retourner à l'utilisateur des messages d'erreur en cas d'échec de l'inscription pour indiquer les problèmes qui lui permettront de réussir son enregistrement. Rails fournit de tel messsages basé sur des validations du modèle User. Par exemple, essayons de sauver un utilisateur avec une adresse mail invalide et un mot de passe trop court&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Foo Bar&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;foo@invalid&quot;</span><span class="p">,</span>
@@ -995,16 +995,15 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </pre></div>
 </div>
 
+<p>Ici, l'objet <code>errors.full_messages</code> (que nous avons vu brièvement à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>) contient un tableau de messages d'erreurs.</p>
 
-<p>Here the <code>errors.full_messages</code> object (which we saw briefly in <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>) contains an array of error messages.</p>
-
-<p>As in the console session above, the failed save in <a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> generates a list of error messages associated with the <code>@user</code> object. To display the messages in the browser, we&rsquo;ll render an error-messages partial on the user <code>new</code> page (<a class="ref" href="sign-up#code:f_error_messages">extrait&nbsp;8.8</a>).<sup class="footnote" id="fnref:8.3"><a href="#fn:8.3">3</a></sup></p>
+<p>Comme dans la console ci-dessus, l'échec de l'enregistrement de l'<a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> génère une liste de messages d'erreurs associée à l'objet <code>@user</code>. Pour afficher les messages dans le navigateur, nous allons rendre un <em>partiel</em> de messages d'erreur sur la page <code>new</code> (<a class="ref" href="sign-up#code:f_error_messages">extrait&nbsp;8.8</a>).<sup class="footnote" id="fnref:8.3"><a href="#fn:8.3">3</a></sup></p>
 
 <div class="label" id="code:f_error_messages"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.8.</span> <span class="description">Code to display error messages on the signup form. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 8.8.</span> <span class="description">Code pour afficher les messages d'erreur sur le formulaire d'inscription. <br /> <code>app/views/users/new.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Inscription<span class="nt">&lt;/h1&gt;</span>
 
@@ -1018,19 +1017,19 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>Notice here that we <code>render</code> a partial called <code>&rsquo;shared/error_messages&rsquo;</code>; this reflects a common Rails convention that puts partials we expect to be used from multiple controllers in a dedicated <code>shared/</code> directory. (We&rsquo;ll see this expectation fulfilled in <a class="ref" href="updating-showing-and-deleting-users#sec:edit_form">section&nbsp;10.1.1</a>.) This means that we have to create this new directory along with the <code>_error_messages.html.erb</code> partial file. The partial itself appears in <a class="ref" href="sign-up#code:errors_partial">extrait&nbsp;8.9</a>.</p>
+<p>Notez ici que nous <em>rendons</em> (<code>render</code>) un partiel appelé <code>&rsquo;shared/error_messages&rsquo;</code>&nbsp;; cela reflète une convention Rails courante qui définit que les partiels à utiliser par de multiples contrôleurs se trouvent dans le dossier dédié <code>shared/</code> (<em>partagé</em>) (nous verrons cette convention pleinement remplie à la <a class="ref" href="updating-showing-and-deleting-users#sec:edit_form">section&nbsp;10.1.1</a>). Cela signifie que nous devons créer ce nouveau dossier en même temps que le fichier du partiel <code>_error_messages.html.erb</code>. Le partiel lui-même est présenté dans l'<a class="ref" href="sign-up#code:errors_partial">extrait&nbsp;8.9</a>.</p>
 
 <div class="label" id="code:errors_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.9.</span> <span class="description">A partial for displaying form submission error messages. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 8.9.</span> <span class="description">Un partiel pour afficher les messages d'erreur à la soumissions du formulaire. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="vi">@user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span> 
         prohibited this user from being saved:<span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p&gt;</span>There were problems with the following fields:<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Problème avec ces champs&nbsp;:<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
     <span class="cp">&lt;%</span> <span class="vi">@user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg</span><span class="o">|</span> <span class="cp">%&gt;</span>
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">msg</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
@@ -1042,7 +1041,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>This partial introduces several new Rails and Ruby constructs, including two methods for objects of class <code>Array</code>. Let&rsquo;s open up a console session to see how they work. The first method is <code>count</code>, which simply returns the number of elements in the object:</p>
+<p>Ce partiel introduit plusieurs nouvelles construction Rails et Ruby, incluant deux méthodes pour les objets de classe <code>Array</code> (<em>Tableau</em>). Ouvrons une session de conols pour voir comment ils fonctionnent. La première méthode est <code>count</code> (<em>compter</em>), qui retourne simplement le nombre d'éléments dans l'objet&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
@@ -1053,7 +1052,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>The other new method is <code>any?</code>, one of a pair of complementary methods:</p>
+<p>L'autre nouvelle méthode est <code>any?</code>, l'une des deux méthodes complémentaires&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="o">[].</span><span class="n">empty?</span>
 <span class="go">=&gt; true</span>
@@ -1067,9 +1066,9 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>We see here that the <code>empty?</code> method, which we first saw in <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a> in the context of strings, also works on arrays, returning <code>true</code> for an empty array and <code>false</code> otherwise. The <code>any?</code> method is just the opposite of <code>empty?</code>, returning <code>true</code> if there are any elements in the array and <code>false</code> otherwise.</p>
+<p>Nous voyons ici que la méthode <code>empty?</code>, que nous avons vue initialement à la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a> dans le contexte des chaines de caractères, qui fonctionne aussi sur les tableaux, retourne <code>true</code> (<em>vrai</em>) sur un tableau vide et <code>false</code> (<em>faux</em>) dans le cas contraire. La méthode <code>any?</code> est simplement l'opposée de la méthode <code>empty?</code>, retournant <code>true</code> s'il y a au moins un élément et <code>false</code> dans le cas contraire..</p>
 
-<p>The other new idea is the <code>pluralize</code> text helper. It isn&rsquo;t available in the console, but we can include it explicitly through the <code>ActionView::Helpers::TextHelper</code> module:<sup class="footnote" id="fnref:8.4"><a href="#fn:8.4">4</a></sup></p>
+<p>L'autre nouvelle idée est l'<em>helper</em> de texte <code>pluralize</code> (<em>mettre_au_pluriel</em>). Elle n'est pas accessible par la console, mais nous pouvons l'inclure explicitement par la module <code>ActionView::Helpers::TextHelper</code>&nbsp;:<sup class="footnote" id="fnref:8.4"><a href="#fn:8.4">4</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">TextHelper</span>
 <span class="go">=&gt; Object </span>
@@ -1081,7 +1080,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>We see here that <code>pluralize</code> takes an integer argument and then returns the number with a properly pluralized version of its second argument. Underlying this method is a powerful <em>inflector</em> that knows how to pluralize a large number of words (including many with irregular plurals):</p>
+<p>Nous voyons ici que <code>pluralize</code> prend un entier comme argument et retourne alors le nombre avec une version plurielle adéquate de son second argument. Sous cette méthode se trouve un puissant <em>inflecteur</em> qui sait comment pluraliser un grand nombre de mots (qui incluent de nombreux pluriels irrégulers)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">pluralize</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;woman&quot;</span><span class="p">)</span>
 <span class="go">=&gt; &quot;2 women&quot;</span>
@@ -1091,22 +1090,22 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>As a result, the code</p>
+<p>Comme résultat, le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="vi">@user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>returns <code>"1 error"</code> or <code>"2 errors"</code> (etc.) depending on how many errors there are.</p>
+<p>… retourne <code>"1 error"</code> ou <code>"2 errors"</code> (etc.) en fonction du nombre d'erreurs.</p>
 
-<p>Note that <a class="ref" href="sign-up#code:errors_partial">extrait&nbsp;8.9</a> includes the CSS&nbsp;id <code>error_explanation</code> for use in styling the error messages. (Recall from <a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a> that CSS uses the pound sign <code>#</code> to style ids.) In addition, on error pages Rails automatically wraps the fields with errors in <code>div</code>s with the CSS class <code>field_with_errors</code>. These labels then allow us to style the error messages with the CSS shown in <a class="ref" href="sign-up#code:error_messages_css">extrait&nbsp;8.10</a>. As a result, on failed submission the error messages appear as in <a class="ref" href="sign-up#fig:signup_error_messages">illustration&nbsp;8.7</a>. Because the messages are generated by the model validations, they will automatically change if you ever change your mind about, say, the format of email addresses, or the minimum length on passwords.</p>
+<p>Notez que l''<a class="ref" href="sign-up#code:errors_partial">extrait&nbsp;8.9</a> inclue l'id CSS <code>error_explanation</code> pour styliser les messages d'erreur (souvenez-vous que nous avons vu à la <a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a> que CSS utilise le signe dièse&nbsp;<code>#</code> pour styliser les ids). De plus, sur les pages d'erreur, Rails encadre automatiquement les champs d'un <code>div</code> de classe CSS <code>field_with_errors</code>. Ces labels nous permettent alors de styliser les messages d'erreur avec le code CSS montré dans l'<a class="ref" href="sign-up#code:error_messages_css">extrait&nbsp;8.10</a>. Comme résultat, en cas d'échec de la soumission les messages d'erreur apparaissent comme dans l'<a class="ref" href="sign-up#fig:signup_error_messages">illustration&nbsp;8.7</a>. Comme les messages sont générés par les validations du modèle, ils changeront automatiquement si vous changez d'avis, disons, sur le format des adresses mail ou la longueur minimum pour les mots de passe.</p>
 
 <div class="label" id="code:error_messages_css"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.10.</span> <span class="description">CSS for styling error messages. <br /> <code>public/stylesheets/custom.css</code></span>       
+<div class="listing"><span class="header">Extrait 8.10.</span> <span class="description">CSS pour styliser les messages d'erreur. <br /> <code>public/stylesheets/custom.css</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1160,7 +1159,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="fig:signup_error_messages"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_error_messages.png" alt="signup_error_messages" /></span></div><div class="caption"><span class="header">Illustration 8.7: </span><span class="description">Failed signup with error messages.&nbsp;<a href="http://railstutorial.org/images/figures/signup_error_messages-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_error_messages.png" alt="signup_error_messages" /></span></div><div class="caption"><span class="header">Illustration 8.7: </span><span class="description">Échec d'inscription avec les messages d'erreur.&nbsp;<a href="http://railstutorial.org/images/figures/signup_error_messages-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1168,16 +1167,16 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:filtering_parameter_logging"></div>
 
 
-<h3><a id="sec:8.2.4" href="sign-up#sec:filtering_parameter_logging" class="heading"><span class="number">8.2.4</span> Filtering parameter logging</a></h3>
+<h3><a id="sec:8.2.4" href="sign-up#sec:filtering_parameter_logging" class="heading"><span class="number">8.2.4</span> Filtrer les paramètres d'identification</a></h3>
 
 
-<p>Before moving on to successful signup, there&rsquo;s one loose end to tie off. You might have noticed that, even though we went to great pains to encrypt the password in <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, both the password and its confirmation appear as <a href="http://www.computerhope.com/jargon/c/cleartex.htm">cleartext</a> in the debug information. By itself this is no problem&mdash;recall from <a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a> that this information only appears for applications running in <code>development</code> mode, so actual users would never see it&mdash;but it does hint at a potential problem: the passwords might also appear unencrypted in the <em>log file</em> that Rails uses to record information about the running application. Indeed, in previous versions of Rails, the development log file in this case would contain lines like those shown in <a class="ref" href="sign-up#code:development_log_file_with_passwords">extrait&nbsp;8.11</a>.</p>
+<p>Avant de pousuivre vers la réussite des l'inscription, il reste une chose à considérer. Vous avez peut-être noté que, même si nous nous sommes évertués à crypter le mot de passe au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, le mot de passe et sa confirmation apparaissent tous deux en «&nbsp;texte clair&nbsp;» (<a href="http://www.computerhope.com/jargon/c/cleartex.htm">cleartext</a>) dans l'information de débuggage. Ce n'est pas un problème en soi &mdash;&nbsp;dans l'<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a> nous avons vu que ces informations n'apparaissaient que pour les application en mode <code>development</code> (<em>développement</em>), donc les utilisateurs ne devraient pas les voir&nbsp;&mdash; mais ça peut conduire à un problème éventuel&nbsp;: les mots de passe peuvent aussi apparaitre de façon non cryptés dans le <em>log file</em> (le <em>fichier journal</em>) que Rails utilise pour enregistrer des informations sur l'activité de l'application. En effet, dans les versions précédente de Rails, le fichier journal de développement, dans ce cas, contiendrait des lignes comme celles montrées dans l'<a class="ref" href="sign-up#code:development_log_file_with_passwords">extrait&nbsp;8.11</a>.</p>
 
 <div class="label" id="code:development_log_file_with_passwords"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.11.</span> <span class="description">The pre&ndash;Rails 3 development log with visible passwords. <br /> <code>log/development.log</code></span>       
+<div class="listing"><span class="header">Extrait 8.11.</span> <span class="description">Le fichier journal de développement, avant Rails&nbsp;3, avec des mots de passe <em>en clair</em>. <br /> <code>log/development.log</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Inscription&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
 <span class="s2">&quot;authenticity_token&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;K1HchFF8uYE8ZaQKz5DVG9vF2KGoXJu4JGp/VE3NMjA=&quot;</span><span class="p">,</span>
@@ -1188,13 +1187,13 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>It would be a terrible security breach to store unencrypted passwords in the log files&mdash;if anyone ever got a hold of the file, they would potentially obtain the passwords for every user on the system. (Of course, here the signup fails, but the problem is exactly the same for successful submissions.) Since this problem was so common in Rails applications, Rails&nbsp;3 implements a new default: all <code>password</code> attributes are filtered automatically, as seen in <a class="ref" href="sign-up#code:development_log_file_with_filtered_passwords">extrait&nbsp;8.12</a>. We see that the string <code>"[FILTERED]"</code> appears in place of the password and password confirmation. (In production, the log file will be <code>log/production.log</code>, and the filtering will work the same way.)</p>
+<p>Ce serait un trou de sécurité dramatique d'enregistrer les mots de passe non cryptés dans les fichiers journaux &mdash;&nbsp;si quiconque avait accès à ces fichiers, il pourrait obtenir les mots de passe de tous les utilisateurs du système. (Bien entendu, ici l'inscription échoue, mais le problème est exactement le même pour une soumission réussie.) Puis ce problème était tellement courant dans les application Rails, Rails&nbsp;3 implémente un nouveau comportement par défaut&nbsp;: tous les attributs <code>password</code> (<em>mot de passe</em>) sont filtrés automatiquement, comme le montre l'<a class="ref" href="sign-up#code:development_log_file_with_filtered_passwords">extrait&nbsp;8.12</a>. Nous voyons que la chaine <code>"[FILTERED]"</code> prend la place du mot de passe et de sa confirmation (en mode production, le fichier journal sera <code>log/production.log</code>, et le filtrage fonctionne de la même manière).</p>
 
 <div class="label" id="code:development_log_file_with_filtered_passwords"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.12.</span> <span class="description">The development log with filtered passwords. <br /> <code>log/development.log</code></span>       
+<div class="listing"><span class="header">Extrait 8.12.</span> <span class="description">Le journal de développement avec les mots de passe filtrés. <br /> <code>log/development.log</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commit&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;Inscription&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;create&quot;</span><span class="p">,</span>
 <span class="s2">&quot;authenticity_token&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;K1HchFF8uYE8ZaQKz5DVG9vF2KGoXJu4JGp/VE3NMjA=&quot;</span><span class="p">,</span>
@@ -1205,13 +1204,13 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>The password filtering itself is accomplished via a setting in the  <code>application.rb</code> configuration file (<a class="ref" href="sign-up#code:password_filtering">extrait&nbsp;8.13</a>).</p>
+<p>Le filtrage du mot de passe lui-même est accompli via un réglage dans le fichier de configuration <code>application.rb</code> (<a class="ref" href="sign-up#code:password_filtering">extrait&nbsp;8.13</a>).</p>
 
 <div class="label" id="code:password_filtering"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.13.</span> <span class="description">Filtering passwords by default. <br /> <code>config/application.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.13.</span> <span class="description">Filtrage des mots de passe par défaut. <br /> <code>config/application.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s1">&#39;../boot&#39;</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
 
@@ -1234,7 +1233,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>If you ever write a Rails application with a secure parameter with a name <em>other</em> than <code>password</code>, you will need to add it to the array of filtered parameters. For example, if you included a secret code as part of the signup process, you might include a line like</p>
+<p>Si vous écrivez jamais une application Rails avec un paramètre à sécuriser qui porte une <em>autre</em> nom que <code>password</code>, vous aurez besoin de l'ajouter à la liste des paramètres filtrés. Par exemple, si vous incluez un code secret comme partie du processus d'inscription, vous devez inclure une ligne comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:secret_code</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
@@ -1244,7 +1243,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>in the signup form. You would then need to add <code>:secret_code</code> to <code>application.rb</code> as follows:</p>
+<p>… dans le formulaire d'inscription. Vous aurez aussi alors besoin d'ajouter <code>:secret_code</code> à <code>application.rb</code> comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">filter_parameters</span> <span class="o">+=</span> <span class="o">[</span><span class="ss">:password</span><span class="p">,</span> <span class="ss">:secret_code</span><span class="o">]</span>
 </pre></div>
@@ -1256,15 +1255,15 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:signup_success"></div>
 
 
-<h2><a id="sec:8.3" href="sign-up#sec:signup_success" class="heading"><span class="number">8.3</span> Signup success</a></h2>
+<h2><a id="sec:8.3" href="sign-up#sec:signup_success" class="heading"><span class="number">8.3</span> Réussite de l'inscription</a></h2>
 
 
-<p>Having handled invalid form submissions, now it&rsquo;s time to complete the signup form by actually saving a new user (if valid) to the database. First, we try to save the user; if the save succeeds, the user&rsquo;s information gets written to the database automatically, and we then <em>redirect</em> the browser to show the user&rsquo;s profile (together with a friendly greeting), as mocked up in <a class="ref" href="sign-up#fig:signup_success_mockup">illustration&nbsp;8.8</a>. If it fails, we simply fall back on the behavior developed in <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
+<p>Ayant traité les soumission de formulaire invalide, il est temps maintenant d'achever le formulaire d'inscription en enregistrant réellement un nouvel utilisateur (valide) dans la base de données. D'abord, nous essayons de sauver un utilisateur&nbsp;; si l'enregistrement fonctionne, les informations de l'utilisateur sont écrites dans la base de données automatiquement, et nous pouvons alors <em>rediriger</em> (<code>redirect</code>) le navigateur pour afficher le profil de l'utilisateur (avec un sympathique message de bienvenue), comme le montre la maquette dans l'<a class="ref" href="sign-up#fig:signup_success_mockup">illustration&nbsp;8.8</a>. Si ça rate, nous retournons simplement au comportement développé à la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a>.</p>
 
 <div class="label" id="fig:signup_success_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_success_mockup.png" alt="signup_success_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.8: </span><span class="description">A mockup of successful signup.&nbsp;<a href="http://railstutorial.org/images/figures/signup_success_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_success_mockup.png" alt="signup_success_mockup" /></span></div><div class="caption"><span class="header">Illustration 8.8: </span><span class="description">Une maquette d'une inscription réussie.&nbsp;<a href="http://railstutorial.org/images/figures/signup_success_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1272,16 +1271,16 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:testing_success"></div>
 
 
-<h3><a id="sec:8.3.1" href="sign-up#sec:testing_success" class="heading"><span class="number">8.3.1</span> Testing success</a></h3>
+<h3><a id="sec:8.3.1" href="sign-up#sec:testing_success" class="heading"><span class="number">8.3.1</span> Tester la réussite</a></h3>
 
 
-<p>The tests for a successful signup follow the lead of the failed signup tests from <a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>. Let&rsquo;s take a look at the result, shown in <a class="ref" href="sign-up#code:signup_success_tests">extrait&nbsp;8.14</a>.</p>
+<p>Les tests pour une inscription réussie suivent le même chemin que les tests de l'échec de l'inscription de l'<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>. Jetons un coup d'œil au résultat présenté dans l'<a class="ref" href="sign-up#code:signup_success_tests">extrait&nbsp;8.14</a>.</p>
 
 <div class="label" id="code:signup_success_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.14.</span> <span class="description">Tests for signup success. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.14.</span> <span class="description">Tests pour une inscription réussie. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1301,13 +1300,13 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
                   <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should create a user&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait créer un utilisateur&quot;</span> <span class="k">do</span>
         <span class="nb">lambda</span> <span class="k">do</span>
           <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="k">end</span><span class="o">.</span><span class="n">should</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should redirect to the user show page&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait rediriger vers la page d'affichage de l'utilisateur&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">user_path</span><span class="p">(</span><span class="n">assigns</span><span class="p">(</span><span class="ss">:user</span><span class="p">)))</span>
       <span class="k">end</span>    
@@ -1318,9 +1317,9 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>As with the signup failure tests (<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>), here we use <code>post :create</code> to hit the <code>create</code> action with an HTTP <tt>POST</tt> request. As in the failed creation tests from <a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>, the first test wraps the user creation in a <code>lambda</code> and uses the <code>count</code> method to verify that the database has changed appropriately:</p>
+<p>Comme avec les tests de l'échec de l'inscription (<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>), nous utilisons ici <code>post :create</code> pour atteindre l'action <code>create</code> avec la requête HTML <tt>POST</tt>. Comme dans les tests d'un échec de création de l'<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>, le premier test «&nbsp;enroule&nbsp;» la création de l'utilisateur dans un bloc <code>lambda</code> et utilise la méthode <code>count</code> pour vérifier que la base de données a changé de façon adéquate&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should create a user&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait créer un utilisateur&quot;</span> <span class="k">do</span>
   <span class="nb">lambda</span> <span class="k">do</span>
     <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
   <span class="k">end</span><span class="o">.</span><span class="n">should</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1329,11 +1328,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>Here, instead of <code>should_not change(User, :count)</code> as in the case of a failed user creation, we have <code>should change(User, :count).by(1)</code>, which asserts that the <code>lambda</code> block should change the <code>User</code> count by&nbsp;1.</p>
+<p>Ici, au lieu du <code>should_not change(User, :count)</code> utilisé dans le cas d'une création d'utilisateur défectueuse, nous avons <code>should change(User, :count).by(1)</code>, qui attend du bloc <code>lambda</code> qu'il change le compte <code>User</code> de&nbsp;1.</p>
 
-<p>The second test uses the <code>assigns</code> method first seen in <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> to verify that the <code>create</code> action redirects to the newly created user&rsquo;s <code>show</code> page:</p>
+<p>Le second test utilise la méthode <code>assigns</code> vue initialement dans l'<a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">extrait&nbsp;7.17</a> pour vérifier que l'action <code>create</code> redirige le tout nouvel utilisateur vers sa page <code>show</code>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;should redirect to the user show page&quot;</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait rediriger vers la page d'affichage de l'utilisateur&quot;</span> <span class="k">do</span>
   <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
   <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">user_path</span><span class="p">(</span><span class="n">assigns</span><span class="p">(</span><span class="ss">:user</span><span class="p">)))</span>
 <span class="k">end</span>   
@@ -1341,21 +1340,21 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>This is the kind of redirect that happens on nearly every successful form submission on the web, and with RSpec&rsquo;s helpful syntax you don&rsquo;t have to know anything about the underlying HTTP response code.<sup class="footnote" id="fnref:8.5"><a href="#fn:8.5">5</a></sup> The URL itself is generated using the named route <code>user_path</code> shown in <a class="ref" href="modeling-and-viewing-users-two#table:named_routes">Table&nbsp;7.1</a>.</p>
+<p>C'est le genre de redirection qui se produit dans presque toutes réussites de soumissions de formulaires sur le web, et avec la syntaxe assistée de RSpec vous n'avez rien besoin de savoir sur le code de réponse HTML sous-jacent.<sup class="footnote" id="fnref:8.5"><a href="#fn:8.5">5</a></sup> L'URL elle-même est générée en utilisant la route nommée  <code>user_path</code> présentée dans la <a class="ref" href="modeling-and-viewing-users-two#table:named_routes">Table&nbsp;7.1</a>.</p>
 
 <div class="label" id="sec:the_finished_signup_form"></div>
 
 
-<h3><a id="sec:8.3.2" href="sign-up#sec:the_finished_signup_form" class="heading"><span class="number">8.3.2</span> The finished signup form</a></h3>
+<h3><a id="sec:8.3.2" href="sign-up#sec:the_finished_signup_form" class="heading"><span class="number">8.3.2</span> Le formulaire d'inscription final</a></h3>
 
 
-<p>To get these tests to pass and thereby complete a working signup form, fill in the commented-out section in <a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> with a redirect, as shown in <a class="ref" href="sign-up#code:user_create_action">extrait&nbsp;8.15</a>.</p>
+<p>Pour obtenir la réussite de ces tests et ainsi achever un formulaire d'inscription fonctionnel, remplissez la section décommentée de l'<a class="ref" href="sign-up#code:first_create_action">extrait&nbsp;8.7</a> avec une redirection, comme montré dans l'<a class="ref" href="sign-up#code:user_create_action">extrait&nbsp;8.15</a>.</p>
 
 <div class="label" id="code:user_create_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.15.</span> <span class="description">The user <code>create</code> action with a save and a redirect. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.15.</span> <span class="description">L'action utilisateur <code>create</code> avec une sauvegarde et une redirection. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1375,15 +1374,15 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>Note that we can omit the <code>user_path</code> in the redirect, writing simply <code>redirect_to @user</code> to redirect to the user show page, a convention we saw before with <code>link_to</code> in <a class="ref" href="modeling-and-viewing-users-two#code:user_show_with_sidebar">extrait&nbsp;7.25</a>. This syntax is nicely succinct, but unfortunately RSpec doesn&rsquo;t understand it, so we have to use the more verbose <code>user_path(@user)</code> in that case.</p>
+<p>Notez que nous pouvons omettre le <code>user_path</code> dans la redirection, en écrivant simplement <code>redirect_to @user</code> pour rediriger l'utilisateur vers sa page d'affichage (<code>show</code> ), une convention que nous avons vu précédemment avec <code>link_to</code> dans l'<a class="ref" href="modeling-and-viewing-users-two#code:user_show_with_sidebar">extrait&nbsp;7.25</a>. Cette syntaxe est joliment succincte, mais malheureusement RSpec ne la comprend pas, donc nous devons utiliser l'expression plus bavarde <code>user_path(@user)</code> dans ce cas.</p>
 
 <div class="label" id="sec:the_flash"></div>
 
 
-<h3><a id="sec:8.3.3" href="sign-up#sec:the_flash" class="heading"><span class="number">8.3.3</span> The flash</a></h3>
+<h3><a id="sec:8.3.3" href="sign-up#sec:the_flash" class="heading"><span class="number">8.3.3</span> Le message «&nbsp;flash&nbsp;»</a></h3>
 
 
-<p>Before submitting a valid registration in a browser, we&rsquo;re going to add a bit of polish common in web applications: a message that appears temporarily and then disappears upon page reload. (If this is unclear now, be patient; a concrete example appears shortly.) The Rails way to accomplish this is to use a special variable called the <em>flash</em>, which operates like <a href="http://en.wikipedia.org/wiki/Flash_memory">flash memory</a> in that it stores its data temporarily. The <code>flash</code> variable is effectively a hash; you may even recall the console example in <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a>, where we saw how to iterate through a hash using a strategically named <code>flash</code> hash. To recap, try this console session:</p>
+<p>Avant de soumettre une registration valide dans le navigateur, nous allons ajouter quelque chose de très courant dans les applications web&nbsp;: un message qui apparait temporairement et disparait au rechargement de la page (si ce n'est pas clair, soyez patient&nbsp;: un exemple concret va être présenté rapidement). La manière de Rails d'accomplir cela consiste à utiliser une variable spéciale appelée le <em>flash</em>, qui opère comme <a href="http://fr.wikipedia.org/wiki/M%C3%A9moire_flash">mémoire flash</a> dans laquelle il consigne temporairement ses données. La variable <code>flash</code> est en fait une table de hachage&nbsp;; vous pouvez même vous souvenir de l'exemple console de la <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">section&nbsp;4.3.3</a>, où nous avions vu comment boucler sur une table en utilisant une table stratégiquement appelée <code>flash</code>. Pour résumer, essayez cette session de console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">flash</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:success</span> <span class="o">=&gt;</span> <span class="s2">&quot;It worked!&quot;</span><span class="p">,</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;It failed. :-(&quot;</span> <span class="p">}</span>
@@ -1400,13 +1399,13 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>We can arrange to display the contents of the flash site-wide by including it in our application layout, as in <a class="ref" href="sign-up#code:layout_flash">extrait&nbsp;8.16</a>.</p>
+<p>Nous pouvons nous arranger pour afficher le contenu du flash sur le site en l'incluant au <em>layout</em> de notre application, comme dans l'<a class="ref" href="sign-up#code:layout_flash">extrait&nbsp;8.16</a>.</p>
 
 <div class="label" id="code:layout_flash"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.16.</span> <span class="description">Adding the contents of the <code>flash</code> variable to the site layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 8.16.</span> <span class="description">Ajout du contenu de la variable <code>flash</code> au layout du site. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1428,7 +1427,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>This code arranges to insert a <code>div</code> tag for each element in the flash, with a CSS class indicating the type of message. For example, if <code>flash[:success] = "Welcome to the Sample App!"</code>, then the code</p>
+<p>Ce code s'arrange pour insérer une balise <code>div</code> pour chaque élément du flahs, avec une classe CSS indiquant le type du message. Par exemple, si <code>flash[:success] = "Bienvenue dans l'Application Exemple&nbsp;!"</code>, alors le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">flash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;flash </span><span class="cp">&lt;%=</span> <span class="n">key</span> <span class="cp">%&gt;</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">value</span> <span class="cp">%&gt;</span><span class="nt">&lt;/div&gt;</span>
@@ -1437,22 +1436,22 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>will produce this HTML:<sup class="footnote" id="fnref:8.6"><a href="#fn:8.6">6</a></sup></p>
+<p>… produira le code HTML&nbsp;:<sup class="footnote" id="fnref:8.6"><a href="#fn:8.6">6</a></sup></p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;flash success&quot;</span><span class="nt">&gt;</span>Welcome to the Sample App!<span class="nt">&lt;/div&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;flash success&quot;</span><span class="nt">&gt;</span>Bienvenue dans l'Application Exemple&nbsp;!<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 
 
-<p>The reason we iterate through all possible key/value pairs is so that we can include other kinds of flash messages; for example, in <a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a> we&rsquo;ll see <code>flash[:error]</code> used to indicate a failed signin attempt.<sup class="footnote" id="fnref:8.7"><a href="#fn:8.7">7</a></sup></p>
+<p>La raison pour laquelle nous bouclons sur toutes les paires clé/valeur possible permet d'inclure les autres types de messages flash&nbsp;; par exemple, dans l'<a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a> nous verrons <code>flash[:error]</code> utilisé pour indiquer un échec d'identification.<sup class="footnote" id="fnref:8.7"><a href="#fn:8.7">7</a></sup></p>
 
-<p>Let&rsquo;s test for the right flash message by making sure the right message appears under the key <code>:success</code> (<a class="ref" href="sign-up#code:signup_flash_test">extrait&nbsp;8.17</a>).</p>
+<p>Testons le bon message flash en nous assurant que le message adéquat apparait sous la clé <code>:success</code> (<a class="ref" href="sign-up#code:signup_flash_test">extrait&nbsp;8.17</a>).</p>
 
 <div class="label" id="code:signup_flash_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.17.</span> <span class="description">A test for a flash message on successful user signup. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.17.</span> <span class="description">A test du message flash en cas de succès de l'inscription de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1469,9 +1468,9 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
       <span class="o">.</span>
       <span class="o">.</span>
       <span class="o">.</span>
-      <span class="n">it</span> <span class="s2">&quot;should have a welcome message&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait avoir un message de bienvenue&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
-        <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">].</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/welcome to the sample app/i</span>
+        <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">].</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/Bienvenue dans l'Application Exemple/i</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -1480,11 +1479,11 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div></div>
 
 
-<p>This introduces the «&nbsp;equals-tilde&nbsp;» <tt class="verb">=~</tt> operator for comparing strings to regular expressions. (We first saw regular expressions in the <code>email_regex</code> of <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>). Rather than testing for the full flash message, we just test to make sure that «&nbsp;welcome to the sample app&nbsp;» is present. (Note that we don&rsquo;t yet test for the appearance of the actual flash message&rsquo;s HTML; we&rsquo;ll fix this by testing for the actual <code>div</code> tag in <a class="ref" href="sign-up#sec:successful_signup">section&nbsp;8.4.3</a>.)</p>
+<p>Cela introduit l'opération «&nbsp;égale-tilde&nbsp;» <tt class="verb">=~</tt> pour comparer les chaines de caractère par expression régulière (vous avons parlé des expressions régulières avec le <code>email_regex</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>). Plutôt que de tester tout le message flash, nous testons simplement que le «&nbsp;Bienvenue dans l'Application Exemple&nbsp;» soit présent (notez que nous ne testons pas encore l'apparence du code HTML du message flash&nbsp;; nous réglerons cela en testant la balise <code>div</code> à la <a class="ref" href="sign-up#sec:successful_signup">section&nbsp;8.4.3</a>.)</p>
 
-<p>If you&rsquo;ve programmed much before, it&rsquo;s likely that you&rsquo;re already familiar with regular expressions, but here&rsquo;s a quick <code>console</code> session in case you need an introduction:</p>
+<p>Si vous avez déjà beaucoup programmé, vous devez être familier des expressions régulières, mais voilà une rapide session de console dans le cas où vous auriez besoin d'une introduction&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;foo bar&quot;</span> <span class="o">=~</span> <span class="sr">/Foo/</span>     <span class="c1"># Regex comparison is case-sensitive by default.</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;foo bar&quot;</span> <span class="o">=~</span> <span class="sr">/Foo/</span>     <span class="c1"># Les comparaisons Regex sont sensibles à la casse, par défaut</span>
 <span class="go">=&gt; nil</span>
 <span class="gp">&gt;&gt; </span><span class="s2">&quot;foo bar&quot;</span> <span class="o">=~</span> <span class="sr">/foo/</span>
 <span class="go">=&gt; 0</span>
@@ -1492,31 +1491,31 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>Here the console&rsquo;s return values may look odd: for no match, the regex comparison returns <code>nil</code>; for a match, it returns the <em>index</em> (position) in the string where the match starts.<sup class="footnote" id="fnref:8.8"><a href="#fn:8.8">8</a></sup> Usually, though, the exact index doesn&rsquo;t matter, since the comparison is usually used in a boolean context: recall from <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a> that <code>nil</code> is <code>false</code> in a boolean context and that anything else (even&nbsp;<code>0</code>) is true. Thus, we can write code like this:</p>
+<p>Ici les valeurs de retour de la console peuvent sembler étranges&nbsp;: pour aucune correspondance, la comparaison régulière retourne <code>nil</code>&nbsp;; pour une correspondance, elle retourne l'<em>index</em> (la position) dans la chaine où la correspondance commence.<sup class="footnote" id="fnref:8.8"><a href="#fn:8.8">8</a></sup> Habituellement, cependant, l'index exact n'est pas très important, puisque la comparaison est le plus souvent utilisé dans un context booléen&nbsp;: en vous souvenant de la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>, <code>nil</code> est <code>false</code> (<em>faux</em>) dans un contexte booléen et tout autre valeur, même&nbsp;<code>0</code>, est <code>true</code> (<em>vrai</em>). Ainsi, nous pouvons écrire le code ainsi&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the Sample App!&quot;</span>
-<span class="go">=&gt; &quot;Welcome to the Sample App!&quot;</span>
-<span class="gp">&gt;&gt; </span><span class="s2">&quot;It&#39;s a match!&quot;</span> <span class="k">if</span> <span class="n">success</span> <span class="o">=~</span> <span class="sr">/welcome to the sample app/</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;Bienvenue dans l'Application Exemple&nbsp;!&quot;</span>
+<span class="go">=&gt; &quot;Bienvenue dans l'Application Exemple&nbsp;!&quot;</span>
+<span class="gp">&gt;&gt; </span><span class="s2">&quot;It&#39;s a match!&quot;</span> <span class="k">if</span> <span class="n">success</span> <span class="o">=~</span> <span class="sr">/bienvenue dans l'application exemple/</span>
 <span class="go">=&gt; nil</span>
 </pre></div>
 </div>
 
 
-<p>Here there&rsquo;s no match because regular expressions are case-sensitive by default, but we can be more permissive in the match using&nbsp;<code>/.../i</code> to force a case-insensitive match:</p>
+<p>Il n'y a aucune correspondance ici parce que les expressions régulières sont sensibles à la casse (minuscule/MAJUSCULE) par défaut, mais nous pouvons être plus permissifs dans la recherche en utilisant&nbsp;<code>/.../i</code> qui force une recherche non sensible à la casse&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;It&#39;s a match!&quot;</span> <span class="k">if</span> <span class="n">success</span> <span class="o">=~</span> <span class="sr">/welcome to the sample app/i</span>
-<span class="go">=&gt; &quot;It&#39;s a match!&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;It&#39;s a match!&quot;</span> <span class="k">if</span> <span class="n">success</span> <span class="o">=~</span> <span class="sr">/bienvenue dans l'application exemple/i</span>
+<span class="go">=&gt; &quot;Trouvé&nbsp;!&quot;</span>
 </pre></div>
 </div>
 
 
-<p>Now that we understand how the flash test&rsquo;s regular expression comparison works, we can get the test to pass by assigning to <code>flash[:success]</code> in the <code>create</code> action as in <a class="ref" href="sign-up#code:signup_flash">extrait&nbsp;8.18</a>. The message uses different capitalization from the one in the test, but the test passes anyway because of the&nbsp;<code>i</code> at the end of the regular expression. This way we won&rsquo;t break the test if we write, e.g., <code>sample app</code> in place of <code>Sample App</code>.</p>
+<p>Maintenant que nous comprenons comment fonctionne le test du message flash, nous pouvons obtenir qu'il réussisse en assignant <code>flash[:success]</code> dans l'action <code>create</code> comme dans l'<a class="ref" href="sign-up#code:signup_flash">extrait&nbsp;8.18</a>. Le message utilise une  capitalisation différente de celle du test, mais le test réussit quand même grâce au&nbsp;<code>i</code> à la fin de l'expression régulière. De cette façon nous ne cassons pas le test si nous écrivons, par exemple, <code>application exemple</code> au lieu de <code>Application Exemple</code>.</p>
 
 <div class="label" id="code:signup_flash"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 8.18.</span> <span class="description">Adding a flash message to user signup. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 8.18.</span> <span class="description">Ajout d'un message flash message lors de l'inscription de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1525,7 +1524,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
   <span class="k">def</span> <span class="nf">create</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
-      <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the Sample App!&quot;</span>
+      <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Bienvenue dans l'Application Exemple!&quot;</span>
       <span class="n">redirect_to</span> <span class="vi">@user</span>
     <span class="k">else</span>
       <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
@@ -1542,15 +1541,15 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="sec:the_first_signup"></div>
 
 
-<h3><a id="sec:8.3.4" href="sign-up#sec:the_first_signup" class="heading"><span class="number">8.3.4</span> The first signup</a></h3>
+<h3><a id="sec:8.3.4" href="sign-up#sec:the_first_signup" class="heading"><span class="number">8.3.4</span> La première inscription</a></h3>
 
 
-<p>We can see the result of all this work by signing up our first user (under the name «&nbsp;Rails Tutorial&nbsp;» and email address «&nbsp;<tt>example@railstutorial.org</tt>&nbsp;»), which shows a friendly message upon successful signup, as seen in <a class="ref" href="sign-up#fig:signup_flash">illustration&nbsp;8.9</a>. (The nice green styling for the <code>success</code> class comes included with the Blueprint CSS framework from <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>.) Then, upon reloading the user show page, the flash message disappears as promised (<a class="ref" href="sign-up#fig:signup_flash_reloaded">illustration&nbsp;8.10</a>).</p>
+<p>Nous pouvons voir le résultat de tout ce travail en inscrivant notre premier utilisateur (sous le nom «&nbsp;Rails Tutorial&nbsp;» et l'adresse mail «&nbsp;<tt>example@railstutorial.org</tt>&nbsp;»), qui affiche un message convivial au succès de l'inscription, comme montré dans l'<a class="ref" href="sign-up#fig:signup_flash">illustration&nbsp;8.9</a> (la jolie stylisation verte pour la classe <code>success</code> vient du framework CSS Blueprint de la <a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>). Ensuite, en rechargeant la page d'affichage de l'utilisateur, le message flash disparait comme promis (<a class="ref" href="sign-up#fig:signup_flash_reloaded">illustration&nbsp;8.10</a>).</p>
 
 <div class="label" id="fig:signup_flash"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_flash.png" alt="signup_flash" /></span></div><div class="caption"><span class="header">Illustration 8.9: </span><span class="description">The results of a successful user signup, with flash message.&nbsp;<a href="http://railstutorial.org/images/figures/signup_flash-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_flash.png" alt="signup_flash" /></span></div><div class="caption"><span class="header">Illustration 8.9: </span><span class="description">Le résultat d'une inscription réussie, avec le message flash.&nbsp;<a href="http://railstutorial.org/images/figures/signup_flash-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1558,10 +1557,10 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <div class="label" id="fig:signup_flash_reloaded"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_flash_reloaded.png" alt="signup_flash_reloaded" /></span></div><div class="caption"><span class="header">Illustration 8.10: </span><span class="description">The flash-less profile page after a browser reload.&nbsp;<a href="http://railstutorial.org/images/figures/signup_flash_reloaded-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_flash_reloaded.png" alt="signup_flash_reloaded" /></span></div><div class="caption"><span class="header">Illustration 8.10: </span><span class="description">La page de profil sans le message flash après le rechargement éventuel de la page.&nbsp;<a href="http://railstutorial.org/images/figures/signup_flash_reloaded-full.png">(taille normale)</a></span></div></div>
 
 
-<p>We can now check our database just to be double-sure that the new user was actually created:</p>
+<p>Nous pouvons maintenant interroger notre base de données juste pour nous assurer par deux fois que le nouvel utilisateur a bien été créé&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
@@ -1573,14 +1572,15 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 
 
-<p>Success!</p>
+<p>C'est un triomphe&nbsp;!</p>
 
 <div class="label" id="sec:rspec_integration_tests"></div>
 
 
-<h2><a id="sec:8.4" href="sign-up#sec:rspec_integration_tests" class="heading"><span class="number">8.4</span> RSpec integration tests</a></h2>
+<h2><a id="sec:8.4" href="sign-up#sec:rspec_integration_tests" class="heading"><span class="number">8.4</span> Les tests d'intégration RSpec</a></h2>
 
 
+<p>En principe, 
 <p>In principle, we are done with user signup at this point, but you may have noticed that we haven&rsquo;t tested the structure of the signup form, nor have we tested that submissions actually work. Of course, we <em>have</em> checked these things by viewing the pages in our browser, but the whole point of automated testing is to make sure that once things work they stay that way. Making such tests is the goal of this section&mdash;and the results are pretty sweet.</p>
 
 <p>One testing method would be to check the HTML structure of the form (using <code>render_views</code> and the <code>have_selector</code> method), and indeed this is a good way to test-drive views. (<a class="ref" href="sign-up#sec:signup_exercises">section&nbsp;8.6</a> has an exercise to this effect.) But I prefer not to test the detailed HTML structure of views&mdash;I don&rsquo;t see any reason why we should have to know that Rails implements user email submission using <code>nom="user[email]"</code>, and indeed any test of that structure would break if a future Rails version changed this convention. Moreover, it would be nice to have a test for the entire signup process: visiting the signup page, filling in the form values, clicking the button, and making sure (if the submission is valid) that a new user gets created in the (test) database.</p>
@@ -1659,7 +1659,7 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;error_explanation&quot;</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h2&gt;</span>5 errors prohibited this user from being saved<span class="nt">&lt;/h2&gt;</span>
-  <span class="nt">&lt;p&gt;</span>There were problems with the following fields:<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Problème avec ces champs&nbsp;:<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
     <span class="nt">&lt;li&gt;</span>Nom can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Email can&#39;t be blank<span class="nt">&lt;/li&gt;</span>
@@ -1960,13 +1960,13 @@ c'est plus compréhensible dans le contexte d'un <em>échec d'inscription</em>. 
 <ol>
 <li id="fn:8.1">Si vous rencontrez une erreur comme <code>views/users/new.html.erb_spec.rb fails</code>, supprimer ces maudits specs vues avec <code>$ rm -rf spec/views</code>.&nbsp;<a class="arrow" href="#fnref:8.1">&uarr;</a></li>
 <li id="fn:8.2">Le nom vient de <a href="http://en.wikipedia.org/wiki/Lambda_calculus">the lambda calculus</a>, un système mathématique pour représenter les fonctions et leurs opérations.&nbsp;<a class="arrow" href="#fnref:8.2">&uarr;</a></li>
-<li id="fn:8.3">Before Rails&nbsp;3, displaying error messages was done through a magical call to a special <code>error_messages</code> method on the form object&nbsp;<code>f</code>, as follows: <tt class="verb">&lt;%= f.error_messages %&gt;</tt>. Though often convenient, this magical method was hard to customize, so the Rails Core team decided to recommend using Embedded Ruby to display the errors by hand.&nbsp;<a class="arrow" href="#fnref:8.3">&uarr;</a></li>
-<li id="fn:8.4">I figured this out by looking up <code>pluralize</code> in the Rails API.&nbsp;<a class="arrow" href="#fnref:8.4">&uarr;</a></li>
-<li id="fn:8.5">In case you&rsquo;re curious, the response code is <tt>302</tt>, in contrast to the «&nbsp;permanent&nbsp;» <tt>301</tt> redirect discussed briefly in <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>.&nbsp;<a class="arrow" href="#fnref:8.5">&uarr;</a></li>
-<li id="fn:8.6">Note that the key <code>:success</code> is a symbol, but Embedded Ruby automatically converts it to the string <code>"success"</code> before inserting it into the template.&nbsp;<a class="arrow" href="#fnref:8.6">&uarr;</a></li>
+<li id="fn:8.3">Avant Rails&nbsp;3, l'affichage des messages d'erreur se faisait par un appel magique à une méthode spéciale <code>error_messages</code> sur l'objet formulaire&nbsp;<code>f</code>, comme suit&nbsp;: <tt class="verb">&lt;%= f.error_messages %&gt;</tt>. Bien que souvent efficace, cette méthode magique était difficilement personnalisable, donc l'équipe Rails a décidé de recommander d'utiliser du Ruby embarqué pour afficher les erreurs à la main.&nbsp;<a class="arrow" href="#fnref:8.3">&uarr;</a></li>
+<li id="fn:8.4">Je l'ai compris en consultant <code>pluralize</code> dans l'API Rails.&nbsp;<a class="arrow" href="#fnref:8.4">&uarr;</a></li>
+<li id="fn:8.5">Dans le cas où vous seriez curieux, le code de réponse eest le <tt>302</tt>, en contraste avec la redirection «&nbsp;permanente&nbsp;» <tt>301</tt> exposée brièvement dans le <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>.&nbsp;<a class="arrow" href="#fnref:8.5">&uarr;</a></li>
+<li id="fn:8.6">Notez que la clé <code>:success</code> est un symbole, mais le code Ruby embarqué le convertit automatiquement en une chaine <code>"success"</code> avant de l'insérer dans le.&nbsp;<a class="arrow" href="#fnref:8.6">&uarr;</a></li>
 <li id="fn:8.7">Actually, we&rsquo;ll use the closely related <code>flash.now</code>, but we&rsquo;ll defer that subtlety until we need it.&nbsp;<a class="arrow" href="#fnref:8.7">&uarr;</a></li>
 <li id="fn:8.8">The indices are zero-offset, as with arrays (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>), so a return value of <code>0</code> means the string matches the regular expression starting with the first character.&nbsp;<a class="arrow" href="#fnref:8.8">&uarr;</a></li>
-<li id="fn:8.9">As of this writing, this syntax is available thanks to <a href="http://github.com/brynary/webrat">Webrat</a>, which appears as a gem dependency for <tt>rspec-rails</tt>, but Webrat was written before the widespread adoption of <a href="http://rack.rubyforge.org/">Rack</a> and will eventually be supplanted by the  <a href="http://github.com/jnicklas/capybara">Capybara</a> project. Happily, Capybara is designed as a drop-in replacement for Webrat, so the syntax should remain the same.&nbsp;<a class="arrow" href="#fnref:8.9">&uarr;</a></li>
+<li id="fn:8.9">Au moment où j'écris ces lignes, cette syntaxe est disponible grâce à <a href="http://github.com/brynary/webrat">Webrat</a>, qui est apparue comme une dépendance gem de <tt>rspec-rails</tt>, mais que Webrat a écrit avant l'adoption généralisée de <a href="http://rack.rubyforge.org/">Rack</a> et sera peut-être supplantée par le projet  <a href="http://github.com/jnicklas/capybara">Capybara</a>. Heureusement,, Capybara est conçu comme une solution de remplacement de Webrat, donc la syntaxe devrait rester la même.&nbsp;<a class="arrow" href="#fnref:8.9">&uarr;</a></li>
 <li id="fn:8.10">Note the plural; this is <em>not</em> the User spec <code>user_spec.rb</code>, which is a model test, not an integration test.&nbsp;<a class="arrow" href="#fnref:8.10">&uarr;</a></li>
 <li id="fn:8.11">You can use Firebug or your browser&rsquo;s «&nbsp;view source&nbsp;» if you need to figure out the id. Or you can note that Rails uses the name of the resource and the name of the attribute separated with an underscore, yielding <code>user_nom</code>, <code>user_email</code>, etc.&nbsp;<a class="arrow" href="#fnref:8.11">&uarr;</a></li>
 </ol>

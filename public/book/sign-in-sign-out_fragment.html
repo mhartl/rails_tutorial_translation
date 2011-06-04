@@ -21,7 +21,7 @@
 <li class="section"><a href="beginning#sec:introduction"><span class="number">1.1</span> Introduction</a></li>
 <li><ol>
 <li class="subsection"><a href="beginning#sec:comments_for_various_readers"><span class="number">1.1.1</span> Commentaires pour les lecteurs différents</a></li>
-<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> &ldquo;Dimensionner&rdquo; Rails</a></li>
+<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> «&nbsp;Dimensionner&nbsp;» Rails</a></li>
 <li class="subsection"><a href="beginning#sec:conventions"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></li></ol></li>
 <li class="section"><a href="beginning#sec:up_and_running"><span class="number">1.2</span> [(Up and running)(En route pour le démarrage)]</a></li>
 <li><ol>
@@ -113,7 +113,7 @@
 <li><ol>
 <li class="section"><a href="rails-flavored-ruby#sec:motivation"><span class="number">4.1</span> Motivation</a></li>
 <li><ol>
-<li class="subsection"><a href="rails-flavored-ruby#sec:title_helper"><span class="number">4.1.1</span> Un « helper » (« aideur ») pour le titre (<code>title</code>)</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:title_helper"><span class="number">4.1.1</span> Un « helper » (« aideur ») pour le titre (<code>titre</code>)</a></li>
 <li class="subsection"><a href="rails-flavored-ruby#sec:cascading_style_sheets"><span class="number">4.1.2</span> Feuilles de styles (CSS — Cascading Style Sheets)</a></li></ol></li>
 <li class="section"><a href="rails-flavored-ruby#sec:strings_and_methods"><span class="number">4.2</span> Chaines de caractères et méthodes</a></li>
 <li><ol>
@@ -192,7 +192,7 @@
 <li><ol>
 <li class="subsection"><a href="modeling-and-viewing-users-two#sec:password_validations"><span class="number">7.1.1</span> Valider le mot de passe</a></li>
 <li class="subsection"><a href="modeling-and-viewing-users-two#sec:password_migration"><span class="number">7.1.2</span> Migrer un mot de passe</a></li>
-<li class="subsection"><a href="modeling-and-viewing-users-two#sec:an_active_record_callback"><span class="number">7.1.3</span> Un <em>callback</em> de l'Active Record</a></li></ol></li>
+<li class="subsection"><a href="modeling-and-viewing-users-two#sec:an_active_record_fonction de rappel"><span class="number">7.1.3</span> Un <em>fonction de rappel</em> de l'Active Record</a></li></ol></li>
 <li class="section"><a href="modeling-and-viewing-users-two#sec:secure_passwords"><span class="number">7.2</span> Sécuriser les mots de passe</a></li>
 <li><ol>
 <li class="subsection"><a href="modeling-and-viewing-users-two#sec:a_secure_password_test"><span class="number">7.2.1</span> Test de mot de passe sûr</a></li>
@@ -434,14 +434,14 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:9" href="sign-in-sign-out#top" class="heading"><span class="number">Chapter 9</span> Sign in, sign out</a></h1>
+<h1 class="chapter"><a id="sec:9" href="sign-in-sign-out#top" class="heading"><span class="number">Chapitre 9</span> Connexion, déconnection</a></h1>
 
 
-<p>Now that new users can sign up for our site (<a class="ref" href="sign-up#top">Chapter&nbsp;8</a>), it&rsquo;s time to give registered users the ability to sign in and sign out. This will allow us to add customizations based on signin status and depending on the identity of the current user. For example, in this chapter we&rsquo;ll update the site header with signin/signout links and a profile link; in <a class="ref" href="user-microposts#top">Chapter&nbsp;11</a>, we&rsquo;ll use the identity of a signed-in user to create microposts associated with that user, and in <a class="ref" href="following-users#top">Chapter&nbsp;12</a> we&rsquo;ll allow the current user to follow other users of the application (thereby receiving a feed of their microposts).</p>
+<p>Maintenant que les nouveaux utilisateurs peuvent s'inscrire sur notre site (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>), il est temps de donner aux utilisateurs enregistrés la possibilité de se connecter et se déconnection. Cela nous permettra d'ajouter des personnalisations basées sur l'état d'inscription en fonction de l'état de l'utilisateur courant. Par exemple, dans ce chapitre nous actualiserons l'entête avec les liens d'identification et de déconnexion et le lien pour rejoindre le profil&nbsp;; au <a class="ref" href="user-microposts#top">chapitre&nbsp;11</a>, nous utiliserons l'identité d'un utilisateur connecté pour créer des micro-messages associés à cet utilisateur, et au <a class="ref" href="following-users#top">chapitre&nbsp;12</a> nous permettrons à l'utilisateur de suivre d'autres utilisateurs de l'application (cela en suivant l'alimentation de leurs micro-messages).</p>
 
-<p>Having users sign in will also allow us to implement a security model, restricting access to particular pages based on the identity of the signed-in user. For instance, as we&rsquo;ll see in <a class="ref" href="updating-showing-and-deleting-users#top">Chapter&nbsp;10</a>, only signed-in users will be able to access the page used to edit user information. The signin system will also make possible special privileges for administrative users, such as the ability (also in <a class="ref" href="updating-showing-and-deleting-users#top">Chapter&nbsp;10</a>) to delete users from the database.</p>
+<p>Avoir des utilisateurs connectés nous permettra aussi d'implémenter un modèle de sécurité restreignant l'accès de pages particulières à des utilisateurs particuliers. Par exemple, comme nous le verrons au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a>, seuls les utilisateurs connectés seront en mesure d'accéder à la page utilisée pour modifier les informations de l'utilisateur. Le système d'identification (de <em>connexion</em>) rendra aussi possible certains privilèges pour les utilisateurs administrateurs, comme la possibilité (aussi au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a>) de détruire des utilisateurs de la base de données.</p>
 
-<p>As in previous chapters, we&rsquo;ll do our work on a topic branch and merge in the changes at the end:</p>
+<p>Comme dans les chapitres précédents, nous ferons notre travail sur une branche sujet et fusionnerons les changements à la fin&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -b sign-in-out
 </pre></div>
@@ -451,20 +451,20 @@
 <div class="label" id="sec:sessions"></div>
 
 
-<h2><a id="sec:9.1" href="sign-in-sign-out#sec:sessions" class="heading"><span class="number">9.1</span> Sessions</a></h2>
+<h2><a id="sec:9.1" href="sign-in-sign-out#sec:sessions" class="heading"><span class="number">9.1</span> Les sessions</a></h2>
 
 
-<p>A <a href="http://en.wikipedia.org/wiki/Session_(computer_science)"><em>session</em></a> is a semi-permanent connection between two computers, such as a client computer running a web browser and a server running Rails. There are several different models for session behavior common on the web: &ldquo;forgetting&rdquo; the session on browser close, using an optional &ldquo;remember me&rdquo; checkbox for persistent sessions, and remembering sessions until the user explicitly signs out.<sup class="footnote" id="fnref:9.1"><a href="#fn:9.1">1</a></sup> We&rsquo;ll opt for the final of these options: when users sign in, we will remember their signin status &ldquo;forever&rdquo;,<sup class="footnote" id="fnref:9.2"><a href="#fn:9.2">2</a></sup> clearing the session only when the user explicitly signs out.</p>
+<p>Une <a href="http://en.wikipedia.org/wiki/Session_(computer_science)"><em>session</em></a> est une connexion semi-permanente entre deux ordinateurs, tels qu'un ordinateur client jouant un navigateur web et un serveur jouant Rails. Il existe plusieurs modèles de comportement de session sur le web&nbsp;: «&nbsp;oublier&nbsp;» la session à la fermeture du navigateur, utiliser une option «&nbsp;se souvenir de moi&nbsp;» pour des sessions persistantes, et se souvenir des sessions jusqu'à ce que l'utilisateur se déconnecte explicitement.<sup class="footnote" id="fnref:9.1"><a href="#fn:9.1">1</a></sup> Nous opterons pour la dernière de ces options&nbsp;: quand les utilisateurs s'identifient, nous nous rappellerons de leur status «&nbsp;pour toujours&nbsp;»,<sup class="footnote" id="fnref:9.2"><a href="#fn:9.2">2</a></sup> effaçant la session seulement quand l'utilisateur se déconnecte explicitement.</p>
 
-<p>It&rsquo;s convenient to model sessions as a RESTful resource: we&rsquo;ll have a signin page for <code>new</code> sessions, signing in will <code>create</code> a session, and signing out will <code>destroy</code> it. We will therefore need a Sessions controller with <code>new</code>, <code>create</code>, and <code>destroy</code> actions. Unlike the case of the Users controller, which uses a database back-end (via the User model) to persist data, the Sessions controller will use a <a href="http://en.wikipedia.org/wiki/HTTP_cookie"><em>cookie</em></a>, which is a small piece of text placed on the user&rsquo;s browser. Much of the work involved in signin comes from building this cookie-based authentication machinery. In this section and the next, we&rsquo;ll prepare for this work by constructing a Sessions controller, a signin form, and the relevant controller actions. (Much of this work parallels user signup from <a class="ref" href="sign-up#top">Chapter&nbsp;8</a>.) We&rsquo;ll then complete user signin with the necessary cookie-manipulation code in <a class="ref" href="sign-in-sign-out#sec:signin_success">Section&nbsp;9.3</a>.</p>
+<p>Il est pratique de modeler les sessions comme une ressource REST&nbsp;: nous aurons une page d'identification for les <em>nouvelles</em> (<code>new</code>) sessions, l'identification créera (<code>create</code>) une session, et la déconnexion la <em>détruira</em> (<code>destroy</code>). Nous aurons par conséquent besoin d'un contrôleur Sessions avec les action <code>new</code> (<em>nouvelle</em>), <code>create</code> (<em>créer</em>) et <code>destroy</code> (<em>détruire</em>). Contrairement au cas du contrôleur Users, qui utilise une base de données (via le modèle User) pour les données persistantes, le contrôleur Sessions utilisera un <a href="http://en.wikipedia.org/wiki/HTTP_cookie"><em>cookie</em></a>, qui est un petit morceau de texte placé sur le navigateur de l'utilisateur. Le plus gros du travail de l'identification consiste à construire cette machinerie d'authentification basée sur les cookies. Dans cette section et la suivante, nous allons nous préparer à ce travail en construisant un contrôleur Sessions, un formulaire d'identification et les actions de contrôleur correspondantes (le plus gros ce travail est similaire à l'inscription de l'utilisateur du <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>). Nous terminerons alors l'identification de l'utilisateur avec le code nécessaire manipulant les cookies à la <a class="ref" href="sign-in-sign-out#sec:signin_success">section&nbsp;9.3</a>.</p>
 
 <div class="label" id="sec:sessions_controller"></div>
 
 
-<h3><a id="sec:9.1.1" href="sign-in-sign-out#sec:sessions_controller" class="heading"><span class="number">9.1.1</span> Sessions controller</a></h3>
+<h3><a id="sec:9.1.1" href="sign-in-sign-out#sec:sessions_controller" class="heading"><span class="number">9.1.1</span> Contrôleur Sessions</a></h3>
 
 
-<p>The elements of signing in and out correspond to particular REST actions of the Sessions controller: the signin form is handled by the <code>new</code> action (covered in  this section), actually signing in is handled by sending a <tt>POST</tt> request to the <code>create</code> action (<a class="ref" href="sign-in-sign-out#sec:signin_failure">Section&nbsp;9.2</a> and <a class="ref" href="sign-in-sign-out#sec:signin_success">Section&nbsp;9.3</a>), and signing out is handled by sending a <tt>DELETE</tt> request to the <code>destroy</code> action (<a class="ref" href="sign-in-sign-out#sec:signing_out">Section&nbsp;9.4</a>). (Recall the association of HTTP verbs with REST actions from <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>.) Since we know that we&rsquo;ll need a <code>new</code> action, we can create it when we generate the Sessions controller (just as with the Users controller in <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Listing&nbsp;5.23</a>):<sup class="footnote" id="fnref:9.3"><a href="#fn:9.3">3</a></sup></p>
+<p>Les éléments de l'inscription et de l'identification correspondent aux actions REST particulière du contrôleur Sessions&nbsp;: le formulaire d'identification est traité par l'action <code>new</code> (couverte par cette section), et plus précisément l'identification est traitée en envoyant une requête <tt>POST</tt> à l'action <code>create</code> (<a class="ref" href="sign-in-sign-out#sec:signin_failure">section&nbsp;9.2</a> et <a class="ref" href="sign-in-sign-out#sec:signin_success">section&nbsp;9.3</a>), et la déconnexion est traitée en envoyant une requête <tt>DELETE</tt> à l'action <code>destroy</code> (<a class="ref" href="sign-in-sign-out#sec:signing_out">section&nbsp;9.4</a>) (rappelez-vous de l'association des verbes HTTP avec les actions REST de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a>.) Puisque nous savons que nous avons besoin d'une action <code>new</code>, nous pouvons la créer en générant le contrôleur Session (comme pour le contrôleur Users de l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>):<sup class="footnote" id="fnref:9.3"><a href="#fn:9.3">3</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Sessions new
 <span class="gp">$</span> rm -rf spec/views
@@ -473,13 +473,13 @@
 </div>
 
 
-<p>Now, as with the signup form in <a class="ref" href="sign-up#sec:signup_form">Section&nbsp;8.1</a>, we create a new file for the Sessions controller specs and add a couple of tests for the <code>new</code> action and corresponding view (<a class="ref" href="sign-in-sign-out#code:new_session_tests">Listing&nbsp;9.1</a>). (This pattern should start to look familiar by now.)</p>
+<p>Maintenant, comme avec le formulaire d'inscription  à la <a class="ref" href="sign-up#sec:signup_form">section&nbsp;8.1</a>, nous créons un nouveau fichier pour le spec du contrôleur Sessions et ajoutons une paire de tests pour l'action <code>new</code> et la vue correspondante (<a class="ref" href="sign-in-sign-out#code:new_session_tests">extrait&nbsp;9.1</a>) (ce modèle devrait commencer à vous être familier maintenant).</p>
 
 <div class="label" id="code:new_session_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.1.</span> <span class="description">Tests for the <code>new</code> session action and view. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.1.</span> <span class="description">Tests pour l'action <code>new</code> et la vue de la session. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -488,14 +488,14 @@
 
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;new&#39;&quot;</span> <span class="k">do</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:new</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:new</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign in&quot;</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;titre&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign in&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -503,13 +503,13 @@
 </div></div>
 
 
-<p>To get these tests to pass, we first need to add a route for the <code>new</code> action; while we&rsquo;re at it, we&rsquo;ll create all the actions needed throughout the chapter as well. We generally follow the example from <a class="ref" href="modeling-and-viewing-users-one#code:users_resource">Listing&nbsp;6.26</a>, but in this case we define only the particular actions we need, i.e., <code>new</code>, <code>create</code>, and <code>destroy</code>, and also add named routes for signin and signout (<a class="ref" href="sign-in-sign-out#code:sessions_resource">Listing&nbsp;9.2</a>).</p>
+<p>Pour faire réussir ces tests, nous avons d'abord besoin d'ajouter une route pour l'action <code>new</code>, et tant que nous y serons, nous créerons toutes les actions nécessaire au long de ce chapitre. Nous suivons de façon générale l'exemple de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a>, mais dans ce cas nous définissons seulement les actions particulières dont nous avons besoin, c'est-à-dire <code>new</code>, <code>create</code> et <code>destroy</code>, et ajoutons aussi les routes nommées pour l'identification et la déconnexion (<a class="ref" href="sign-in-sign-out#code:sessions_resource">extrait&nbsp;9.2</a>).</p>
 
 <div class="label" id="code:sessions_resource"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.2.</span> <span class="description">Adding a resource to get the standard RESTful actions for sessions. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.2.</span> <span class="description">Ajout d'une ressource pour obtenir les actions RESTful pour les sessions. <br /> <code>config/routes.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:users</span>
@@ -526,26 +526,26 @@
 </div></div>
 
 
-<p>As you can see, the <code>resources</code> method can take an options hash, which in this case has key <code>:only</code> and value equal to an array of the actions the Sessions controller has to respond to. The resources defined in <a class="ref" href="sign-in-sign-out#code:sessions_resource">Listing&nbsp;9.2</a> provide URLs and actions similar to those for users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>), as shown in <a class="ref" href="sign-in-sign-out#table:RESTful_sessions">Table&nbsp;9.1</a>.</p>
+<p>Comme vous pouvez le voir, les méthodes <code>resources</code> (<em>ressources</em>) peuvent prendre une table d'options, qui dans ce cas possède une clé <code>:only</code> et une valeur égale à un tableau des actions à laquelle doit répondre le contrôleur Sessions. Les ressources définies dans l'<a class="ref" href="sign-in-sign-out#code:sessions_resource">extrait&nbsp;9.2</a> fournissent des URLs et des actions similaires à celles des utilisateurs (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>), comme montré dans la <a class="ref" href="sign-in-sign-out#table:RESTful_sessions">table&nbsp;9.1</a>.</p>
 
 <div class="label" id="table:RESTful_sessions"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Named route</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/signin</tt></td><td class="align_left"><code>signin_path</code></td><td class="align_left"><code>new</code></td><td class="align_left">page for  a new session (signin)</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/sessions</tt></td><td class="align_left"><code>sessions_path</code></td><td class="align_left"><code>create</code></td><td class="align_left">create a new session</td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/signout</tt></td><td class="align_left"><code>signout_path</code></td><td class="align_left"><code>destroy</code></td><td class="align_left">delete a session (sign out)</td></tr></table></div><div class="caption"><span class="header">Table 9.1: </span><span class="description">RESTful routes provided by the sessions rules in <a class="ref" href="sign-in-sign-out#code:sessions_resource">Listing&nbsp;9.2</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Requête HTTP</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Route nommée</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>But</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/signin</tt></td><td class="align_left"><code>signin_path</code></td><td class="align_left"><code>new</code></td><td class="align_left">page pour une nouvelle session (identification)</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/sessions</tt></td><td class="align_left"><code>sessions_path</code></td><td class="align_left"><code>create</code></td><td class="align_left">crée une nouvelle session</td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/signout</tt></td><td class="align_left"><code>signout_path</code></td><td class="align_left"><code>destroy</code></td><td class="align_left">efface la session (déconnexion)</td></tr></table></div><div class="caption"><span class="header">Table 9.1: </span><span class="description">Routes RESTful fournies par les règles de sessions de l'<a class="ref" href="sign-in-sign-out#code:sessions_resource">extrait&nbsp;9.2</a>.</span></div></div>
 
 
-<p>We can get the second test in <a class="ref" href="sign-in-sign-out#code:new_session_tests">Listing&nbsp;9.1</a> to pass by adding the proper title instance variable to the <code>new</code> action, as shown in <a class="ref" href="sign-in-sign-out#code:new_session_title">Listing&nbsp;9.3</a> (which also defines the <code>create</code> and <code>destroy</code> actions for future reference).</p>
+<p>Nous pouvons obtenir la réussite du second test de l'<a class="ref" href="sign-in-sign-out#code:new_session_tests">extrait&nbsp;9.1</a> en ajoutant la variable d'instance titre adéquate à l'action <code>new</code>, comme dans l'<a class="ref" href="sign-in-sign-out#code:new_session_title">extrait&nbsp;9.3</a> (qui définit aussi les actions <code>create</code> et <code>destroy</code> pour référence future).</p>
 
 <div class="label" id="code:new_session_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.3.</span> <span class="description">Adding the title for the signin page. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.3.</span> <span class="description">Ajout du titre pour la page d'identification. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">new</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;S'identifier&quot;</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">create</span>
@@ -558,23 +558,23 @@
 </div></div>
 
 
-<p>With that, the tests in <a class="ref" href="sign-in-sign-out#code:new_session_tests">Listing&nbsp;9.1</a> should be passing, and we&rsquo;re ready to make the actual signin form.</p>
+<p>Avec ça, les tests de l'<a class="ref" href="sign-in-sign-out#code:new_session_tests">extrait&nbsp;9.1</a> devraient réussir, et nous sommes prêts à construire le formulaire d'identification.</p>
 
 <div class="label" id="sec:signin_form"></div>
 
 
-<h3><a id="sec:9.1.2" href="sign-in-sign-out#sec:signin_form" class="heading"><span class="number">9.1.2</span> Signin form</a></h3>
+<h3><a id="sec:9.1.2" href="sign-in-sign-out#sec:signin_form" class="heading"><span class="number">9.1.2</span> Formulaire d'identification </a></h3>
 
 
-<p>The signin form (or, equivalently, the new session form) is similar in appearance to the signup form, except with two fields (email and password) in place of four. A mockup appears in <a class="ref" href="sign-in-sign-out#fig:signin_mockup">Figure&nbsp;9.1</a>.</p>
+<p>Le formulaire d'identification (ou, de façon équivalente, le formulaire de nouvelle session) est similaire en apparence au formulaire d'inscription, à l'exception prêt que nous n'avons que deux champs (email et mot de passe) au lieu de quatre. Une maquette est présentée dans l'<a class="ref" href="sign-in-sign-out#fig:signin_mockup">illustration&nbsp;9.1</a>.</p>
 
 <div class="label" id="fig:signin_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_mockup.png" alt="signin_mockup" /></span></div><div class="caption"><span class="header">Figure 9.1: </span><span class="description">A mockup of the signin form.&nbsp;<a href="http://railstutorial.org/images/figures/signin_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_mockup.png" alt="signin_mockup" /></span></div><div class="caption"><span class="header">Illustration 9.1: </span><span class="description">Une maquette du formulaire d'identification.&nbsp;<a href="http://railstutorial.org/images/figures/signin_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Recall from <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a> that the signup form uses the <code>form_for</code> helper, taking as an argument the user instance variable <code>@user</code>:</p>
+<p>Rappelez-vous, de l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a>, que le formulaire d'inscription utilise l'helper <code>form_for</code>, prenant en argument la variable d'instance utilisateur <code>@user</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   .
@@ -585,29 +585,29 @@
 </div>
 
 
-<p>The main difference between this and the new session form is that we have no Session model, and hence no analogue for the <code>@user</code> variable. This means that, in constructing the new session form, we have to give <code>form_for</code> slightly more information; in particular, whereas</p>
+<p>La différence principale avec le formulaire de nouvelle session est que nous n'avons pas de modèle Session, et ainsi pas d'analogue pour la variable <code>@user</code>. Cela signifie que, en construisant le formulaire de nouvelle session, nous devons donner à <code>form_for</code> légèrement plus d'information&nbsp;; en particulier, alors que&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>allows Rails to infer that the <code>action</code> of the form should be to <tt>POST</tt> to the URL <tt>/users</tt>, in the case of sessions we need to indicate both the <em>name</em> of the resource and the appropriate URL:</p>
+<p>… permet à Rails de déduire que <code>action</code> du formulaire devrait être le <tt>POST</tt> de l'URL <tt>/users</tt>, dans le cas des sessions nous avons besoin d'indiquer le <em>nom</em> de la ressource tout comme l'URL appropriée&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">form_for</span><span class="p">(</span><span class="ss">:session</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">sessions_path</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>Since we&rsquo;re authenticating users with email address and password, we need a field for each one inside the form; the result appears in <a class="ref" href="sign-in-sign-out#code:signin_form">Listing&nbsp;9.4</a>.</p>
+<p>Puisque nous authentifions les utilisateurs avec les adresses mail et les mots de passe, nous avons besoin d'un champ pour chacun à l'intérieur du formulaire&nbsp;; le résultat apparait dans l'<a class="ref" href="sign-in-sign-out#code:signin_form">extrait&nbsp;9.4</a>.</p>
 
 <div class="label" id="code:signin_form"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.4.</span> <span class="description">Code for the signin form. <br /> <code>app/views/sessions/new.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 9.4.</span> <span class="description">Code pour le formulaire d'identification. <br /> <code>app/views/sessions/new.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign in<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Identification<span class="nt">&lt;/h1&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="ss">:session</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">sessions_path</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
@@ -619,30 +619,30 @@
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">password_field</span> <span class="ss">:password</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s2">&quot;Sign in&quot;</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s2">&quot;Identification&quot;</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 
-<span class="nt">&lt;p&gt;</span>New user? <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up now!&quot;</span><span class="p">,</span> <span class="n">signup_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>New user? <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;S'inscrire&nbsp;!&quot;</span><span class="p">,</span> <span class="n">signup_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div></div>
 
 
-<p>With the code in <a class="ref" href="sign-in-sign-out#code:signin_form">Listing&nbsp;9.4</a>, the signin form appears as in <a class="ref" href="sign-in-sign-out#fig:signin_form">Figure&nbsp;9.2</a>.</p>
+<p>Avec le code de l'<a class="ref" href="sign-in-sign-out#code:signin_form">extrait&nbsp;9.4</a>, le formulaire d'identification apparait comme dans l'<a class="ref" href="sign-in-sign-out#fig:signin_form">illustration&nbsp;9.2</a>.</p>
 
 <div class="label" id="fig:signin_form"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_form.png" alt="signin_form" /></span></div><div class="caption"><span class="header">Figure 9.2: </span><span class="description">The signin form  (<a href="http://localhost:3000/sessions/new">/sessions/new</a>).&nbsp;<a href="http://railstutorial.org/images/figures/signin_form-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_form.png" alt="signin_form" /></span></div><div class="caption"><span class="header">Illustration 9.2: </span><span class="description">Le formulaire d'identification (<a href="http://localhost:3000/sessions/new">/sessions/new</a>).&nbsp;<a href="http://railstutorial.org/images/figures/signin_form-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Though you&rsquo;ll soon get out of the habit of looking at the HTML generated by Rails (instead trusting the helpers to do their job), for now let&rsquo;s take a look at it (<a class="ref" href="sign-in-sign-out#code:signin_form_html">Listing&nbsp;9.5</a>).</p>
+<p>Bien que nous allions perdre bientôt l'habitude de regarder dans le code HTML généré par Rails (et faire plutôt confiance aux helpers pour faire leur travail), pour le moment justons-y un coup d'œil (<a class="ref" href="sign-in-sign-out#code:signin_form_html">extrait&nbsp;9.5</a>).</p>
 
 <div class="label" id="code:signin_form_html"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.5.</span> <span class="description">HTML for the signin form produced by <a class="ref" href="sign-in-sign-out#code:signin_form">Listing&nbsp;9.4</a>.</span>       
+<div class="listing"><span class="header">Extrait 9.5.</span> <span class="description">HTML pour le formulaire d'identification produit par l'<a class="ref" href="sign-in-sign-out#code:signin_form">extrait&nbsp;9.4</a>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/sessions&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
@@ -663,20 +663,20 @@
 </div></div>
 
 
-<p>Comparing <a class="ref" href="sign-in-sign-out#code:signin_form_html">Listing&nbsp;9.5</a> with <a class="ref" href="sign-up#code:signup_form_html">Listing&nbsp;8.5</a>, you might be able to guess that submitting this form will result in a <code>params</code> hash where <code>params[:session][:email]</code> and <code>params[:session][:password]</code> correspond to the email and password fields. Handling this submission&mdash;and, in particular, authenticating users based on the submitted email and password&mdash;is the goal of the next two sections.</p>
+<p>En comparant l'<a class="ref" href="sign-in-sign-out#code:signin_form_html">extrait&nbsp;9.5</a> avec l'<a class="ref" href="sign-up#code:signup_form_html">extrait&nbsp;8.5</a>, vous devriez pouvoir deviner que soumettre ce formulaire produira une table <code>params</code> où <code>params[:session][:email]</code> et <code>params[:session][:password]</code> correspondent au champs email et mot de passe. Traiter cette soumission &mdash;&nbsp;et, en particulier, authentifier les utilisateurs en se basant sur l'email et le mot de passe soumis&nbsp;&mdash; est le projet des deux prochaines sections.</p>
 
 <div class="label" id="sec:signin_failure"></div>
 
 
-<h2><a id="sec:9.2" href="sign-in-sign-out#sec:signin_failure" class="heading"><span class="number">9.2</span> Signin failure</a></h2>
+<h2><a id="sec:9.2" href="sign-in-sign-out#sec:signin_failure" class="heading"><span class="number">9.2</span> Échec de l'identification</a></h2>
 
 
-<p>As in the case of creating users (signup), the first step in creating sessions (signin) is to handle <em>invalid</em> input. We&rsquo;ll start by reviewing what happens when a form gets submitted, and then arrange for helpful error messages to appear in the case of signin failure (as mocked up in <a class="ref" href="sign-in-sign-out#fig:signin_failure_mockup">Figure&nbsp;9.3</a>.) Finally, we&rsquo;ll lay the foundation for successful signin (<a class="ref" href="sign-in-sign-out#sec:signin_success">Section&nbsp;9.3</a>) by evaluating each signin submission based on the validity of its email/password combination.</p>
+<p>Comme dans le cas de la création d'utilisateurs (signup), la première étape dans la création de sessions (signin) est de traiter les entrées <em>invalides</em>. Nous allons commencer par revoir ce qui se passe quand un formulaire est soumis, et nous arranger alors pour afficher un message d'erreur utile dans le cas de l'échec de l'identification (comme présenté dans la maquette de l'<a class="ref" href="sign-in-sign-out#fig:signin_failure_mockup">illustration&nbsp;9.3</a>). Enfin, nous poserons les bases d'une identification réussie (<a class="ref" href="sign-in-sign-out#sec:signin_success">section&nbsp;9.3</a>) en évaluant chaque soumission de l'identification en se basant sur la validité de sa combinaisons email/mot de passe.</p>
 
 <div class="label" id="fig:signin_failure_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_failure_mockup.png" alt="signin_failure_mockup" /></span></div><div class="caption"><span class="header">Figure 9.3: </span><span class="description">A mockup of signin failure.&nbsp;<a href="http://railstutorial.org/images/figures/signin_failure_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_failure_mockup.png" alt="signin_failure_mockup" /></span></div><div class="caption"><span class="header">Illustration 9.3: </span><span class="description">Une maquette de l'échec de l'identification.&nbsp;<a href="http://railstutorial.org/images/figures/signin_failure_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -687,13 +687,13 @@
 <h3><a id="sec:9.2.1" href="sign-in-sign-out#sec:reviewing_form_submission" class="heading"><span class="number">9.2.1</span> Examen de la soumission du formulaire</a></h3>
 
 
-<p>Let&rsquo;s start by defining a minimalist <code>create</code> action for the Sessions controller (<a class="ref" href="sign-in-sign-out#code:initial_create_session">Listing&nbsp;9.6</a>), which does nothing but render the <code>new</code> view. Submitting the <a href="http://localhost:3000/sessions/new"><tt>/sessions/new</tt></a> form with blank fields then yields the result shown in <a class="ref" href="sign-in-sign-out#fig:initial_failed_signin_rails_3">Figure&nbsp;9.4</a>.</p>
+<p>Commençons par définir une action <code>create</code> minimale pour le contrôleur Sessions (<a class="ref" href="sign-in-sign-out#code:initial_create_session">extrait&nbsp;9.6</a>), qui ne fait rien d'autre que rendre la vue <code>new</code>. Soumettre le formulaire <a href="http://localhost:3000/sessions/new"><tt>/sessions/new</tt></a> avec des champs vierge puis renvoyer le résultat vu dans l'<a class="ref" href="sign-in-sign-out#fig:initial_failed_signin_rails_3">illustration&nbsp;9.4</a>.</p>
 
 <div class="label" id="code:initial_create_session"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.6.</span> <span class="description">A preliminary version of the Sessions <code>create</code> action. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.6.</span> <span class="description">Une version préliminaire de l'action <code>create</code> de Sessions. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -715,10 +715,10 @@
 <div class="label" id="fig:initial_failed_signin_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/initial_failed_signin_rails_3.png" alt="initial_failed_signin_rails_3" /></span></div><div class="caption"><span class="header">Figure 9.4: </span><span class="description">The initial failed signin, with <code>create</code> as in <a class="ref" href="sign-in-sign-out#code:initial_create_session">Listing&nbsp;9.6</a>.&nbsp;<a href="http://railstutorial.org/images/figures/initial_failed_signin_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/initial_failed_signin_rails_3.png" alt="initial_failed_signin_rails_3" /></span></div><div class="caption"><span class="header">Illustration 9.4: </span><span class="description">L'échec de l'identification initiale, avec <code>create</code> comme dans l'<a class="ref" href="sign-in-sign-out#code:initial_create_session">extrait&nbsp;9.6</a>.&nbsp;<a href="http://railstutorial.org/images/figures/initial_failed_signin_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Carefully inspecting the debug information in <a class="ref" href="sign-in-sign-out#fig:initial_failed_signin_rails_3">Figure&nbsp;9.4</a> shows that, as hinted at the end of <a class="ref" href="sign-in-sign-out#sec:signin_form">Section&nbsp;9.1.2</a>, the submission results in a <code>params</code> hash containing the email and password under the key <code>:session</code>:</p>
+<p>L'inspection attentive des informations de débuggage de l'<a class="ref" href="sign-in-sign-out#fig:initial_failed_signin_rails_3">illustration&nbsp;9.4</a> montre que, comme soulevé à la fin de la <a class="ref" href="sign-in-sign-out#sec:signin_form">section&nbsp;9.1.2</a>, de la soumission résulte une table <code>params</code> contenant l'email et le mot de passe sous la clé <code>:session</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nn">---</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span>
 <span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Sign in</span>
@@ -732,53 +732,52 @@
 </div>
 
 
-<p>As with the case of user signup (<a class="ref" href="sign-up#fig:signup_failure_rails_3">Figure&nbsp;8.6</a>) these parameters form a <em>nested</em> hash like the one we saw in <a class="ref" href="rails-flavored-ruby#code:nested_hashes">Listing&nbsp;4.5</a>. In particular, <code>params</code> contains a nested hash of the form</p>
+<p>Comme dans le cas de l'inscription de l'utilisateur (<a class="ref" href="sign-up#fig:signup_failure_rails_3">illustration&nbsp;8.6</a>) ces paramètres forment un table <em>imbriquée</em> comme celle que nous avons vu dans l'<a class="ref" href="rails-flavored-ruby#code:nested_hashes">extrait&nbsp;4.5</a>. En particulier, <code>params</code> contient une table imbriquée de la forme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="p">{</span> <span class="ss">:session</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">}</span>
 </pre></div>
 </div>
 
 
-<p>
-This means that</p>
+<p>Cela signifie que&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">]</span>
 </pre></div>
 </div>
 
 
-<p>is itself a hash:</p>
+<p>… est lui-même une table&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="p">{</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span> <span class="p">}</span>
 </pre></div>
 </div>
 
 
-<p>As a result,</p>
+<p>Comme résultat&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:email</span><span class="o">]</span>
 </pre></div>
 </div>
 
 
-<p>is the submitted email address and</p>
+<p>… est l'adresse mail soumise et&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:password</span><span class="o">]</span>
 </pre></div>
 </div>
 
 
-<p>is the submitted password.</p>
+<p>… est le mot de passe soumis.</p>
 
-<p>In other words, inside the <code>create</code> action the <code>params</code> hash has all the information needed to authenticate users by email and password. Not coincidentally, we have already developed exactly the method needed:  <code>User.authenticate</code> from <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">Section&nbsp;7.2.4</a> (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">Listing&nbsp;7.12</a>). Recalling that <code>authenticate</code> returns <code>nil</code> for an invalid authentication, our strategy for user signin can be summarized as follows:</p>
+<p>En d'autres termes, à l'intérieur de l'action <code>create</code>, la table <code>params</code> contient toutes les informations dont nous avons besoin pour authentifier les utilisateurs par l'email et le mot de passe. Ça n'est pas le fait du hasard, mais nous avons déjà développé exactement la méthode nécessaire&nbsp;: <code>User.authenticate</code> à la <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">section&nbsp;7.2.4</a> (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a>). En se souvenant que <code>authenticate</code> retourne <code>nil</code> pour une authentification invalide, notre stratégie pour l'identification des utilisateurs peut être résumée comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">create</span>
   <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span>
                            <span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
-    <span class="c1"># Create an error message and re-render the signin form.</span>
+    <span class="c1"># Crée un message d'erreur et rend le formulaire d'identification.</span>
   <span class="k">else</span>
-    <span class="c1"># Sign the user in and redirect to the user&#39;s show page.</span>
+    <span class="c1"># Authentifie l'utilisateur et redirige vers la page d'affichage.</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -790,16 +789,16 @@ This means that</p>
 <div class="label" id="sec:failed_signin"></div>
 
 
-<h3><a id="sec:9.2.2" href="sign-in-sign-out#sec:failed_signin" class="heading"><span class="number">9.2.2</span> Failed signin (test and code)</a></h3>
+<h3><a id="sec:9.2.2" href="sign-in-sign-out#sec:failed_signin" class="heading"><span class="number">9.2.2</span> Échec de l'identification (test et code)</a></h3>
 
 
-<p>In order to handle a failed signin attempt, first we need to determine that it&rsquo;s a failure. The tests follow the example from the analogous tests for user signup (<a class="ref" href="sign-up#code:failing_create_specs">Listing&nbsp;8.6</a>), as shown in <a class="ref" href="sign-in-sign-out#code:failed_signin_tests">Listing&nbsp;9.7</a>.</p>
+<p>Dans le but de traiter un échec d'identification, d'abord nous avons besoin de déterminer que c'est un échec. Les tests suivent l'exemple des tests analogues pour l'inscription de l'utilisateur (<a class="ref" href="sign-up#code:failing_create_specs">extrait&nbsp;8.6</a>), comme vu dans l'<a class="ref" href="sign-in-sign-out#code:failed_signin_tests">extrait&nbsp;9.7</a>.</p>
 
 <div class="label" id="code:failed_signin_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.7.</span> <span class="description">Tests for a failed signin attempt. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.7.</span> <span class="description">Tests pour un échec d'identification. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -816,17 +815,17 @@ This means that</p>
         <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;email@example.com&quot;</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;invalid&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should re-render the new page&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait re-rendre la page new&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:session</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:session</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
-        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign in&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;titre&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign in&quot;</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should have a flash.now message&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devait avoir un message flash.now&quot;</span> <span class="k">do</span>
         <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:session</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:error</span><span class="o">].</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/invalid/i</span>
       <span class="k">end</span>
@@ -837,13 +836,13 @@ This means that</p>
 </div></div>
 
 
-<p>The application code needed to get these tests to pass appears in <a class="ref" href="sign-in-sign-out#code:signin_failure">Listing&nbsp;9.8</a>. As promised in <a class="ref" href="sign-in-sign-out#sec:reviewing_form_submission">Section&nbsp;9.2.1</a>, we extract the submitted email address and password from the <code>params</code> hash, and then pass them to the <code>User.authenticate</code> method. If the user is not authenticated (i.e., if it&rsquo;s <code>nil</code>), we set the title and re-render the signin form.<sup class="footnote" id="fnref:9.4"><a href="#fn:9.4">4</a></sup> We&rsquo;ll handle the other branch of the if-else statement in <a class="ref" href="sign-in-sign-out#sec:signin_success">Section&nbsp;9.3</a>; for now we&rsquo;ll just leave a descriptive comment.</p>
+<p>Le code de l'application nécessaire pour faire réussir ces tests est présenté dans l'<a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a>. Comme promis à la <a class="ref" href="sign-in-sign-out#sec:reviewing_form_submission">section&nbsp;9.2.1</a>, nous extrayons l'adresse mail soumise et le mot de passe de la table <code>params</code>, et les passons ensuite à la méthode <code>User.authenticate</code>. Si l'utilisateur n'est pas authentifié (c'est-à-dire s'il est <code>nil</code>), nous définissons le titre et rendons à nouveau le formulaire d'identification.<sup class="footnote" id="fnref:9.4"><a href="#fn:9.4">4</a></sup> Nous traiterons l'autre branche de la déclaration if-else à la <a class="ref" href="sign-in-sign-out#sec:signin_success">section&nbsp;9.3</a>&nbsp;; pour le moment, nous allons juste laissé un commentaire descriptif.</p>
 
 <div class="label" id="code:signin_failure"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.8.</span> <span class="description">Code for a failed signin attempt. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.8.</span> <span class="description">Code pour une tentaive ratée d'identification. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -854,10 +853,10 @@ This means that</p>
                              <span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
       <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Invalid email/password combination.&quot;</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">else</span>
-      <span class="c1"># Sign the user in and redirect to the user&#39;s show page.</span>
+      <span class="c1"># Authentifie l'utilisateur et redirige vers sa page d'affichage.</span>
     <span class="k">end</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -868,15 +867,15 @@ This means that</p>
 </div></div>
 
 
-<p>Recall from <a class="ref" href="sign-up#sec:failed_signup">Section&nbsp;8.4.2</a> that we displayed signup errors using the User model error messages. Since the session isn&rsquo;t an Active Record model, this strategy won&rsquo;t work here, so instead we&rsquo;ve put a message in the flash (or, rather, in <code>flash.now</code>; see <a class="ref" href="sign-in-sign-out#sidebar:flash_now">Box&nbsp;9.1</a>). Thanks to the flash message display in the site layout (<a class="ref" href="sign-up#code:layout_flash">Listing&nbsp;8.16</a>), the <code>flash[:error]</code> message automatically gets displayed; thanks to the Blueprint CSS, it automatically gets nice styling (<a class="ref" href="sign-in-sign-out#fig:failed_signin">Figure&nbsp;9.5</a>).</p>
+<p>Rappelez-vous de la <a class="ref" href="sign-up#sec:failed_signup">section&nbsp;8.4.2</a>&nbsp;: nous avons affiché les erreurs de l'inscription en utilisant les messages d'erreur du modèle User. Puisque la session n'est pas un modèle Active Record, cette stratégie ne fonctionnera pas ici, donc à la place nous déposons un message dans le flash (ou, plus exactement, dans <code>flash.now</code>&nbsp;; voyez le <a class="ref" href="sign-in-sign-out#sidebar:flash_now">Box&nbsp;9.1</a>). Grâce au message flash affiché dans le layout du site (<a class="ref" href="sign-up#code:layout_flash">extrait&nbsp;8.16</a>), le message <code>flash[:error]</code> sera automatiquement affiché&nbsp;; grâce aux CSS Blueprint, il aura automatiquement une belle stylisation (<a class="ref" href="sign-in-sign-out#fig:failed_signin">illustration&nbsp;9.5</a>).</p>
 
 <div class="label" id="sidebar:flash_now"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 9.1.</span><span class="description">Flash dot now</span></span>
-<p>There&rsquo;s a subtle difference between <code>flash</code> and <code>flash.now</code>. The <code>flash</code> variable is designed to be used before a <em>redirect</em>, and it persists on the resulting page for one request&mdash;that is, it appears once, and disappears when you click on another link. Unfortunately, this means that if we <em>don&rsquo;t</em> redirect, and instead simply render a page (as in <a class="ref" href="sign-in-sign-out#code:signin_failure">Listing&nbsp;9.8</a>), the flash message persists for <em>two</em> requests: it appears on the rendered page but is still waiting for a &ldquo;redirect&rdquo; (i.e., a second request), and thus appears <em>again</em> if you click a link.</p>
+<div class="sidebar"><span class="title"><span class="header">Box 9.1.</span><span class="description">Flash point now</span></span>
+<p>Il existe une subtile différence enetre <code>flash</code> et <code>flash.now</code>. La variable <code>flash</code> est conçue pour être utilisée avant une <em>redirection</em>, et elle persiste sur la page résultante de la-dite requête &mdash;&nbsp;c'est-à-dire qu'elle apparait une fois, disparait une fois, et disparait quand vous cliquez un autre lien. Malheureusement, cela signifie que si nous ne <em>redirigeons pas</em> la page, et qu'au contraire nous ne faisons que la <em>rendre</em> (comme dans <a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a>), le message flash persiste pour les <em>deux</em> requêtes&nbsp;: il apparait sur la page rendue mais il attend toujours pour une rediction (c'est-à-dire une seconde requête), et ainsi apparait <em>une nouvelle fois</em> si vous cliquez un lien.</p>
 
-<p>To avoid this weird behavior, when <code>render</code>ing rather than <code>redirect</code>ing we use <code>flash.now</code> instead of <code>flash</code>. The <code>flash.now</code> object is specifically designed for displaying flash messages on rendered pages. If you ever find yourself wondering why a flash message is showing up where you don&rsquo;t expect it, chances are good that you need to replace <code>flash</code> with <code>flash.now</code>.</p>
+<p>Pour éviter ce comportement bizarre, en <em>rendant</em> (<code>render</code>) plutôt qu'en <em>redirigeant</em> (<code>redirect</code>) nous utilisons <code>flash.now</code> plutôt que <code>flash</code>. L'objet <code>flash.now</code> est spécialement conçu pour afficher les messages flash sur les pages rendues. si vous vous demandez jamais pour un message flash est affiché à un endroit que vous n'attendiez pas, il n'y a de fortes chances qu'il faille que vous remplaciez <code>flash</code> par <code>flash.now</code>.</p>
 </div>
 
 
@@ -885,9 +884,9 @@ This means that</p>
 <div class="label" id="fig:failed_signin"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/failed_signin.png" alt="failed_signin" /></span></div><div class="caption"><span class="header">Figure 9.5: </span><span class="description">A failed signin (with a flash message).&nbsp;<a href="http://railstutorial.org/images/figures/failed_signin-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/failed_signin.png" alt="failed_signin" /></span></div><div class="caption"><span class="header">Illustration 9.5: </span><span class="description">Une identification ratée (avec un message flash).&nbsp;<a href="http://railstutorial.org/images/figures/failed_signin-full.png">(taille normale)</a></span></div></div>
 
-
+<!--FIN FRENCH -->
 
 
 <div class="label" id="sec:signin_success"></div>
@@ -896,12 +895,12 @@ This means that</p>
 <h2><a id="sec:9.3" href="sign-in-sign-out#sec:signin_success" class="heading"><span class="number">9.3</span> Signin success</a></h2>
 
 
-<p>Having handled a failed signin, we now need to actually sign a user in. A hint of where we&rsquo;re going&mdash;the user profile page, with modified navigation links&mdash;is mocked up in <a class="ref" href="sign-in-sign-out#fig:signin_success_mockup">Figure&nbsp;9.6</a>.<sup class="footnote" id="fnref:9.5"><a href="#fn:9.5">5</a></sup> Getting there will require some of the most challenging Ruby programming so far in this tutorial, so hang in there through the end and be prepared for a little heavy lifting. Happily, the first step is easy&mdash;completing the Sessions controller <code>create</code> action is a snap. Unfortunately, it&rsquo;s also a cheat.</p>
+<p>Having handled a failed signin, we now need to actually sign a user in. A hint of where we&rsquo;re going&mdash;the user profile page, with modified navigation links&mdash;is mocked up in <a class="ref" href="sign-in-sign-out#fig:signin_success_mockup">illustration&nbsp;9.6</a>.<sup class="footnote" id="fnref:9.5"><a href="#fn:9.5">5</a></sup> Getting there will require some of the most challenging Ruby programming so far in this tutorial, so hang in there through the end and be prepared for a little heavy lifting. Happily, the first step is easy&mdash;completing the Sessions controller <code>create</code> action is a snap. Unfortunately, it&rsquo;s also a cheat.</p>
 
 <div class="label" id="fig:signin_success_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_success_mockup.png" alt="signin_success_mockup" /></span></div><div class="caption"><span class="header">Figure 9.6: </span><span class="description">A mockup of the user profile after a successful signin (with updated nav links). &nbsp;<a href="http://railstutorial.org/images/figures/signin_success_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_success_mockup.png" alt="signin_success_mockup" /></span></div><div class="caption"><span class="header">Illustration 9.6: </span><span class="description">A mockup of the user profile after a successful signin (with updated nav links). &nbsp;<a href="http://railstutorial.org/images/figures/signin_success_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -912,13 +911,13 @@ This means that</p>
 <h3><a id="sec:9.3.1" href="sign-in-sign-out#sec:the_completed_create_action" class="heading"><span class="number">9.3.1</span> The completed <code>create</code> action</a></h3>
 
 
-<p>Filling in the area now occupied by the signin comment (<a class="ref" href="sign-in-sign-out#code:signin_failure">Listing&nbsp;9.8</a>) is simple: upon successful signin, we sign the user in using the <code>sign_in</code> function, and then redirect to the profile page (<a class="ref" href="sign-in-sign-out#code:sign_in_success_not_yet_working">Listing&nbsp;9.9</a>). We see now why this is a cheat: alas, <code>sign_in</code> doesn&rsquo;t currently exist. Writing it will occupy the rest of this section.</p>
+<p>Filling in the area now occupied by the signin comment (<a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a>) is simple: upon successful signin, we sign the user in using the <code>sign_in</code> function, and then redirect to the profile page (<a class="ref" href="sign-in-sign-out#code:sign_in_success_not_yet_working">extrait&nbsp;9.9</a>). We see now why this is a cheat: alas, <code>sign_in</code> doesn&rsquo;t currently exist. Writing it will occupy the rest of this section.</p>
 
 <div class="label" id="code:sign_in_success_not_yet_working"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.9.</span> <span class="description">The completed Sessions controller <code>create</code> action (not yet working). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.9.</span> <span class="description">The completed Sessions controller <code>create</code> action (not yet working). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -929,7 +928,7 @@ This means that</p>
                              <span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
       <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Invalid email/password combination.&quot;</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">else</span>
       <span class="n">sign_in</span> <span class="n">user</span>
@@ -944,13 +943,13 @@ This means that</p>
 </div></div>
 
 
-<p>Even though we lack the <code>sign_in</code> function, we can still write the tests (<a class="ref" href="sign-in-sign-out#code:pending_signin_tests">Listing&nbsp;9.10</a>). (We&rsquo;ll fill in the body of the first test in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a>.)</p>
+<p>Even though we lack the <code>sign_in</code> function, we can still write the tests (<a class="ref" href="sign-in-sign-out#code:pending_signin_tests">extrait&nbsp;9.10</a>). (We&rsquo;ll fill in the body of the first test in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a>.)</p>
 
 <div class="label" id="code:pending_signin_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.10.</span> <span class="description">Pending tests for user signin (to be completed in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a>). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.10.</span> <span class="description">Pending tests for user signin (to be completed in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a>). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -991,13 +990,13 @@ This means that</p>
 <h3><a id="sec:9.3.2" href="sign-in-sign-out#sec:remember_me" class="heading"><span class="number">9.3.2</span> Remember me</a></h3>
 
 
-<p>We&rsquo;re now in a position to start implementing our signin model, namely, remembering user signin status &ldquo;forever&rdquo; and clearing the session only when the user explicitly signs out. The signin functions themselves will end up crossing the traditional Model-View-Controller lines; in particular, several signin functions will need to be available in both controllers and views. You may recall from <a class="ref" href="rails-flavored-ruby#sec:back_to_the_title_helper">Section&nbsp;4.2.5</a> that Ruby provides a <em>module</em> facility for packaging functions together and including them in multiple places, and that&rsquo;s the plan for the authentication functions. We could make an entirely new module for authentication, but the Sessions controller already comes equipped with a module, namely, <code>SessionsHelper</code>. Moreover, helpers are automatically included in Rails views, so all we need to do to use the Sessions helper functions in controllers is to include the module into the Application controller (<a class="ref" href="sign-in-sign-out#code:sessions_helper_include">Listing&nbsp;9.11</a>).</p>
+<p>We&rsquo;re now in a position to start implementing our signin model, namely, remembering user signin status «&nbsp;forever&nbsp;» and clearing the session only when the user explicitly signs out. The signin functions themselves will end up crossing the traditional Model-View-Controller lines; in particular, several signin functions will need to be available in both controllers and views. You may recall from <a class="ref" href="rails-flavored-ruby#sec:back_to_the_title_helper">section&nbsp;4.2.5</a> that Ruby provides a <em>module</em> facility for packaging functions together and including them in multiple places, and that&rsquo;s the plan for the authentication functions. We could make an entirely new module for authentication, but the Sessions controller already comes equipped with a module, namely, <code>SessionsHelper</code>. Moreover, helpers are automatically included in Rails views, so all we need to do to use the Sessions helper functions in controllers is to include the module into the Application controller (<a class="ref" href="sign-in-sign-out#code:sessions_helper_include">extrait&nbsp;9.11</a>).</p>
 
 <div class="label" id="code:sessions_helper_include"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.11.</span> <span class="description">Including the Sessions helper module into the Application controller. <br /> <code>app/controllers/application_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.11.</span> <span class="description">Including the Sessions helper module into the Application controller. <br /> <code>app/controllers/application_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">protect_from_forgery</span>
@@ -1029,13 +1028,13 @@ This means that</p>
 </div>
 
 
-<p>Now we&rsquo;re ready for the first signin element, the <code>sign_in</code> function itself. Our authentication method is to place a <em>remember token</em> as a cookie on the user&rsquo;s browser (<a class="ref" href="sign-in-sign-out#sidebar:session_cookie">Box&nbsp;9.2</a>), and then use the token to find the user record in the database as the user moves from page to page (implemented in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a>). The result, <a class="ref" href="sign-in-sign-out#code:sign_in_function">Listing&nbsp;9.12</a>, pushes two things onto the stack: the <code>cookies</code> hash and <code>current_user</code>.<sup class="footnote" id="fnref:9.6"><a href="#fn:9.6">6</a></sup> Let&rsquo;s start popping them off.</p>
+<p>Now we&rsquo;re ready for the first signin element, the <code>sign_in</code> function itself. Our authentication method is to place a <em>remember token</em> as a cookie on the user&rsquo;s browser (<a class="ref" href="sign-in-sign-out#sidebar:session_cookie">Box&nbsp;9.2</a>), and then use the token to find the user record in the database as the user moves from page to page (implemented in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a>). The result, <a class="ref" href="sign-in-sign-out#code:sign_in_function">extrait&nbsp;9.12</a>, pushes two things onto the stack: the <code>cookies</code> hash and <code>current_user</code>.<sup class="footnote" id="fnref:9.6"><a href="#fn:9.6">6</a></sup> Let&rsquo;s start popping them off.</p>
 
 <div class="label" id="code:sign_in_function"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.12.</span> <span class="description">The complete (but not-yet-working) <code>sign_in</code> function. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.12.</span> <span class="description">The complete (but not-yet-working) <code>sign_in</code> function. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -1048,7 +1047,7 @@ This means that</p>
 </div></div>
 
 
-<p><a class="ref" href="sign-in-sign-out#code:sign_in_function">Listing&nbsp;9.12</a> introduces the <code>cookies</code> utility supplied by Rails. We can use <code>cookies</code> as if it were a hash; each element in the cookie is itself a hash of two elements, a <code>value</code> and an optional <code>expires</code> date. For example, we could implement user signin by placing a cookie with value equal to the user&rsquo;s id that expires 20 years from now:</p>
+<p><a class="ref" href="sign-in-sign-out#code:sign_in_function">extrait&nbsp;9.12</a> introduces the <code>cookies</code> utility supplied by Rails. We can use <code>cookies</code> as if it were a hash; each element in the cookie is itself a hash of two elements, a <code>value</code> and an optional <code>expires</code> date. For example, we could implement user signin by placing a cookie with value equal to the user&rsquo;s id that expires 20 years from now:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">cookies</span><span class="o">[</span><span class="ss">:remember_token</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:value</span>   <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
                              <span class="ss">:expires</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="o">.</span><span class="n">years</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">utc</span> <span class="p">}</span>
@@ -1063,12 +1062,12 @@ This means that</p>
 </div>
 
 
-<p>Of course, <code>cookies</code> isn&rsquo;t <em>really</em> a hash, since assigning to <code>cookies</code> actually <em>saves</em> a piece of text on the browser (as seen in <a class="ref" href="sign-in-sign-out#fig:user_remember_token_cookie_rails_3">Figure&nbsp;9.7</a>), but part of the beauty of Rails is that it lets you forget about that detail and concentrate on writing the application.</p>
+<p>Of course, <code>cookies</code> isn&rsquo;t <em>really</em> a hash, since assigning to <code>cookies</code> actually <em>saves</em> a piece of text on the browser (as seen in <a class="ref" href="sign-in-sign-out#fig:user_remember_token_cookie_rails_3">illustration&nbsp;9.7</a>), but part of the beauty of Rails is that it lets you forget about that detail and concentrate on writing the application.</p>
 
 <div class="label" id="fig:user_remember_token_cookie_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_remember_token_cookie_rails_3.png" alt="user_remember_token_cookie_rails_3" /></span></div><div class="caption"><span class="header">Figure 9.7: </span><span class="description">A secure remember token.&nbsp;<a href="http://railstutorial.org/images/figures/user_remember_token_cookie_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_remember_token_cookie_rails_3.png" alt="user_remember_token_cookie_rails_3" /></span></div><div class="caption"><span class="header">Illustration 9.7: </span><span class="description">A secure remember token.&nbsp;<a href="http://railstutorial.org/images/figures/user_remember_token_cookie_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Unfortunately, using the user&nbsp;id in this manner is insecure for the same reason discussed in <a class="ref" href="sign-in-sign-out#sidebar:session_cookie">Box&nbsp;9.2</a>: a malicious user could simulate a cookie with the given&nbsp;id, thereby allowing access to any user in the system. The traditional solution before Rails&nbsp;3 was to create a secure remember token associated with the User model to be used in place of the user&nbsp;id (see, e.g., the <a href="http://railstutorial.org/chapters/sign-in-sign-out?version=2.3#top">Rails&nbsp;2.3 version of <em>Rails Tutorial</em></a>). This pattern became so common that Rails&nbsp;3 now implements it for us using <code>cookies.permanent.signed</code>:</p>
@@ -1078,15 +1077,15 @@ This means that</p>
 </div>
 
 
-<p>The assignment value on the right-hand side is an array consisting of a unique identifier (i.e., the user&rsquo;s&nbsp;id) and a secure value used to create a <a href="http://en.wikipedia.org/wiki/Digital_signature">digital signature</a> to prevent the kind of attacks described in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Section&nbsp;7.2</a>. In particular, since we went to the trouble of creating a secure salt in <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">Section&nbsp;7.2.3</a>, we can re-use that value here to sign the remember token. Under the hood, using <code>permanent</code> causes Rails to set the expiration to <code>20.years.from_now</code>, and <code>signed</code> makes the cookie secure, so that the user&rsquo;s&nbsp;id is never exposed in the browser. (We&rsquo;ll see how to retrieve the user using the remember token in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a>.)</p>
+<p>The assignment value on the right-hand side is an array consisting of a unique identifier (i.e., the user&rsquo;s&nbsp;id) and a secure value used to create a <a href="http://en.wikipedia.org/wiki/Digital_signature">digital signature</a> to prevent the kind of attacks described in <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>. In particular, since we went to the trouble of creating a secure salt in <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">section&nbsp;7.2.3</a>, we can re-use that value here to sign the remember token. Under the hood, using <code>permanent</code> causes Rails to set the expiration to <code>20.years.from_now</code>, and <code>signed</code> makes the cookie secure, so that the user&rsquo;s&nbsp;id is never exposed in the browser. (We&rsquo;ll see how to retrieve the user using the remember token in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a>.)</p>
 
-<p>The code above shows the importance of using <code>new_record?</code> in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">Listing&nbsp;7.10</a> to save the salt only upon user creation. Otherwise, the salt would change each time the user was saved, preventing the retrieval of the session&rsquo;s user in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a>.</p>
+<p>The code above shows the importance of using <code>new_record?</code> in <a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a> to save the salt only upon user creation. Otherwise, the salt would change each time the user was saved, preventing the retrieval of the session&rsquo;s user in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a>.</p>
 
 <div class="label" id="sidebar:time_helpers"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 9.3.</span><span class="description">Cookies expire <code>20.years.from_now</code></span></span>
-<p>You may recall from <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">Section&nbsp;4.4.2</a> that Ruby lets you add methods to <em>any</em> class, even built-in ones. In that section, we added a <code>palindrome?</code> method to the <code>String</code> class (and discovered as a result that <code>"deified"</code> is a palindrome), and we also saw how Rails adds a <code>blank?</code> method to class <code>Object</code> (so that <code>"".blank?</code>, <code>"&nbsp;".blank?</code>, and <code>nil.blank?</code> are all <code>true</code>). The cookie code in <a class="ref" href="sign-in-sign-out#code:sign_in_function">Listing&nbsp;9.12</a> (which internally sets a cookie that expires <code>20.years.from_now</code>) gives yet another example of this practice through one of Rails&rsquo; <em>time helpers</em>, which are methods added to <code>Fixnum</code> (the base class for numbers):</p>
+<p>You may recall from <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a> that Ruby lets you add methods to <em>any</em> class, even built-in ones. In that section, we added a <code>palindrome?</code> method to the <code>String</code> class (and discovered as a result that <code>"deified"</code> is a palindrome), and we also saw how Rails adds a <code>blank?</code> method to class <code>Object</code> (so that <code>"".blank?</code>, <code>"&nbsp;".blank?</code>, and <code>nil.blank?</code> are all <code>true</code>). The cookie code in <a class="ref" href="sign-in-sign-out#code:sign_in_function">extrait&nbsp;9.12</a> (which internally sets a cookie that expires <code>20.years.from_now</code>) gives yet another example of this practice through one of Rails&rsquo; <em>time helpers</em>, which are methods added to <code>Fixnum</code> (the base class for numbers):</p>
 
 <pre class="verbatim">  $ rails console
   &gt;&gt; 1.year.from_now
@@ -1139,7 +1138,7 @@ This means that</p>
 
 <p>The purpose of this line is to create <code>current_user</code>, accessible in both controllers and views, which will allow constructions such as</p>
 
-<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
@@ -1153,13 +1152,13 @@ This means that</p>
 
 <p>The principal goal of this section is to define <code>current_user</code>.</p>
 
-<p>To describe the behavior of the remaining signin machinery, we&rsquo;ll first fill in the test for signing a user in (<a class="ref" href="sign-in-sign-out#code:signin_test">Listing&nbsp;9.13</a>).</p>
+<p>To describe the behavior of the remaining signin machinery, we&rsquo;ll first fill in the test for signing a user in (<a class="ref" href="sign-in-sign-out#code:signin_test">extrait&nbsp;9.13</a>).</p>
 
 <div class="label" id="code:signin_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.13.</span> <span class="description">Filling in the test for signing the user in. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.13.</span> <span class="description">Filling in the test for signing the user in. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1227,13 +1226,13 @@ This means that</p>
 </div>
 
 
-<p>is an <em>assignment</em>. Ruby has a special syntax for defining such an assignment function, shown in <a class="ref" href="sign-in-sign-out#code:current_user_equals">Listing&nbsp;9.14</a>.</p>
+<p>is an <em>assignment</em>. Ruby has a special syntax for defining such an assignment function, shown in <a class="ref" href="sign-in-sign-out#code:current_user_equals">extrait&nbsp;9.14</a>.</p>
 
 <div class="label" id="code:current_user_equals"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.14.</span> <span class="description">Defining assignment to <code>current_user</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.14.</span> <span class="description">Defining assignment to <code>current_user</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -1253,13 +1252,13 @@ This means that</p>
 
 <p>This might look confusing, but it simply defines a method <code>current_user=</code> expressly designed to handle assignment to <code>current_user</code>. Its one argument is the right-hand side of the assignment, in this case the user to be signed in. The one-line method body just sets an instance variable <code>@current_user</code>, effectively storing the user for later use.</p>
 
-<p>In ordinary Ruby, we could define a second method, <code>current_user</code>, designed to return the value of <code>@current_user</code> (<a class="ref" href="sign-in-sign-out#code:current_user_wrong">Listing&nbsp;9.15</a>).</p>
+<p>In ordinary Ruby, we could define a second method, <code>current_user</code>, designed to return the value of <code>@current_user</code> (<a class="ref" href="sign-in-sign-out#code:current_user_wrong">extrait&nbsp;9.15</a>).</p>
 
 <div class="label" id="code:current_user_wrong"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.15.</span> <span class="description">A tempting but useless definition for <code>current_user</code>.</span>       
+<div class="listing"><span class="header">Extrait 9.15.</span> <span class="description">A tempting but useless definition for <code>current_user</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -1281,15 +1280,15 @@ This means that</p>
 </div></div>
 
 
-<p>If we did this, we would effectively replicate the functionality of <code>attr_accessor</code>, first seen in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Section&nbsp;4.4.5</a> and used to make the virtual <code>password</code> attribute in <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">Section&nbsp;7.1.1</a>.<sup class="footnote" id="fnref:9.8"><a href="#fn:9.8">8</a></sup> The problem is that it utterly fails to solve our problem: with the code in <a class="ref" href="sign-in-sign-out#code:current_user_wrong">Listing&nbsp;9.15</a>, the user&rsquo;s signin status would be forgotten: as soon as the user went to another page&mdash;poof!&mdash;the session would end and the user would be automatically signed out.</p>
+<p>If we did this, we would effectively replicate the functionality of <code>attr_accessor</code>, first seen in <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a> and used to make the virtual <code>password</code> attribute in <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">section&nbsp;7.1.1</a>.<sup class="footnote" id="fnref:9.8"><a href="#fn:9.8">8</a></sup> The problem is that it utterly fails to solve our problem: with the code in <a class="ref" href="sign-in-sign-out#code:current_user_wrong">extrait&nbsp;9.15</a>, the user&rsquo;s signin status would be forgotten: as soon as the user went to another page&mdash;poof!&mdash;the session would end and the user would be automatically signed out.</p>
 
-<p>To avoid this problem, we can find the session user corresponding to the cookie created by the code in <a class="ref" href="sign-in-sign-out#code:sign_in_function">Listing&nbsp;9.12</a>, as shown in <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a>.</p>
+<p>To avoid this problem, we can find the session user corresponding to the cookie created by the code in <a class="ref" href="sign-in-sign-out#code:sign_in_function">extrait&nbsp;9.12</a>, as shown in <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a>.</p>
 
 <div class="label" id="code:current_user_working"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.16.</span> <span class="description">Finding the current user by <code>remember_token</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.16.</span> <span class="description">Finding the current user by <code>remember_token</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -1315,7 +1314,7 @@ This means that</p>
 
 <p>This code uses several more advanced features of Ruby, so let&rsquo;s take a moment to examine them.</p>
 
-<p>First, <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a> uses the common but initially obscure <code>||=</code> (&ldquo;or equals&rdquo;) assignment operator (<a class="ref" href="sign-in-sign-out#sidebar:or_equals">Box&nbsp;9.4</a>). Its effect is to set the <code>@current_user</code> instance variable to the user corresponding to the remember token, but only if <code>@current_user</code> is undefined.<sup class="footnote" id="fnref:9.9"><a href="#fn:9.9">9</a></sup> In other words, the construction</p>
+<p>First, <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a> uses the common but initially obscure <code>||=</code> («&nbsp;or equals&nbsp;») assignment operator (<a class="ref" href="sign-in-sign-out#sidebar:or_equals">Box&nbsp;9.4</a>). Its effect is to set the <code>@current_user</code> instance variable to the user corresponding to the remember token, but only if <code>@current_user</code> is undefined.<sup class="footnote" id="fnref:9.9"><a href="#fn:9.9">9</a></sup> In other words, the construction</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@current_user</span> <span class="o">||=</span> <span class="n">user_from_remember_token</span>
 </pre></div>
@@ -1355,7 +1354,7 @@ This means that</p>
 
 <p>In each case, the pattern is that <code>x = x O y</code> and <code>x O= y</code> are equivalent for any operator <code>O</code>.</p>
 
-<p>Another common Ruby pattern is assigning to a variable if it&rsquo;s <code>nil</code> but otherwise leaving it alone. Recalling the <em>or</em>&nbsp;operator <code>||</code> seen in <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">Section&nbsp;4.2.3</a>, we can write this as follows:</p>
+<p>Another common Ruby pattern is assigning to a variable if it&rsquo;s <code>nil</code> but otherwise leaving it alone. Recalling the <em>or</em>&nbsp;operator <code>||</code> seen in <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>, we can write this as follows:</p>
 
 <pre class="verbatim">  &gt;&gt; @user
   =&gt; nil
@@ -1377,7 +1376,7 @@ This means that</p>
 </div>
 
 
-<p><a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a> also uses the <code>*</code>&nbsp;operator, which allows us to use a two-element array as an argument to a method expecting two variables, as we can see in this console session:</p>
+<p><a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a> also uses the <code>*</code>&nbsp;operator, which allows us to use a two-element array as an argument to a method expecting two variables, as we can see in this console session:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">)</span>
@@ -1392,7 +1391,7 @@ This means that</p>
 </div>
 
 
-<p>The reason this is needed in <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a> is that <code>cookies.signed[:remember_me]</code> returns an array of two elements&mdash;the user&nbsp;id and the salt&mdash;but (following usual Ruby conventions) we want the <code>authenticate_with_salt</code> method to take two arguments, so that it can be invoked with</p>
+<p>The reason this is needed in <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a> is that <code>cookies.signed[:remember_me]</code> returns an array of two elements&mdash;the user&nbsp;id and the salt&mdash;but (following usual Ruby conventions) we want the <code>authenticate_with_salt</code> method to take two arguments, so that it can be invoked with</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">authenticate_with_salt</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">salt</span><span class="p">)</span>
 </pre></div>
@@ -1401,7 +1400,7 @@ This means that</p>
 
 <p>(There&rsquo;s no fundamental reason that <code>authenticate_with_salt</code> couldn&rsquo;t take an array as an argument, but it wouldn&rsquo;t be idiomatically correct Ruby.)</p>
 
-<p>Finally, in the <code>remember_token</code> helper method defined by <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a>, we use the&nbsp;<code>||</code> operator to return an <em>array</em> of <code>nil</code> values if <code>cookies.signed[:remember_me]</code> itself is <code>nil</code>:</p>
+<p>Finally, in the <code>remember_token</code> helper method defined by <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a>, we use the&nbsp;<code>||</code> operator to return an <em>array</em> of <code>nil</code> values if <code>cookies.signed[:remember_me]</code> itself is <code>nil</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">cookies</span><span class="o">.</span><span class="n">signed</span><span class="o">[</span><span class="ss">:remember_token</span><span class="o">]</span> <span class="o">||</span> <span class="o">[</span><span class="kp">nil</span><span class="p">,</span> <span class="kp">nil</span><span class="o">]</span>
 </pre></div>
@@ -1410,13 +1409,13 @@ This means that</p>
 
 <p>The reason for this code is that the support for signed cookies inside Rails tests is still immature, and a <code>nil</code> value for the cookie causes spurious test breakage. Returning <code>[nil, nil]</code> instead fixes the issue.<sup class="footnote" id="fnref:9.11"><a href="#fn:9.11">11</a></sup></p>
 
-<p>The final step to getting the code in <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a> working is to define an <code>authenticate_with_salt</code> class method. This method, which is analogous to the original <code>authenticate</code> method defined in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">Listing&nbsp;7.12</a>, is shown in <a class="ref" href="sign-in-sign-out#code:authenticate_with_salt">Listing&nbsp;9.17</a>.</p>
+<p>The final step to getting the code in <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a> working is to define an <code>authenticate_with_salt</code> class method. This method, which is analogous to the original <code>authenticate</code> method defined in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">extrait&nbsp;7.12</a>, is shown in <a class="ref" href="sign-in-sign-out#code:authenticate_with_salt">extrait&nbsp;9.17</a>.</p>
 
 <div class="label" id="code:authenticate_with_salt"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.17.</span> <span class="description">Adding an <code>authenticate_with_salt</code> method to the User model. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.17.</span> <span class="description">Adding an <code>authenticate_with_salt</code> method to the User model. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1501,13 +1500,13 @@ This means that</p>
 </div>
 
 
-<p>At this point, the signin test is almost passing; the only thing remaining is to define the required <code>signed_in?</code> boolean method. Happily, it&rsquo;s easy with the use of the &ldquo;not&rdquo; operator&nbsp;<code>!</code>: a user is signed in if <code>current_user</code> is not <code>nil</code> (<a class="ref" href="sign-in-sign-out#code:signed_in_p">Listing&nbsp;9.18</a>).</p>
+<p>At this point, the signin test is almost passing; the only thing remaining is to define the required <code>signed_in?</code> boolean method. Happily, it&rsquo;s easy with the use of the «&nbsp;not&nbsp;» operator&nbsp;<code>!</code>: a user is signed in if <code>current_user</code> is not <code>nil</code> (<a class="ref" href="sign-in-sign-out#code:signed_in_p">extrait&nbsp;9.18</a>).</p>
 
 <div class="label" id="code:signed_in_p"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.18.</span> <span class="description">The <code>signed_in?</code> helper method. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.18.</span> <span class="description">The <code>signed_in?</code> helper method. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -1526,7 +1525,7 @@ This means that</p>
 </div></div>
 
 
-<p>Though it&rsquo;s already useful for the test, we&rsquo;ll put the <code>signed_in?</code> method to even better use in <a class="ref" href="sign-in-sign-out#sec:changing_the_layout_links">Section&nbsp;9.4.3</a> and again in <a class="ref" href="updating-showing-and-deleting-users#top">Chapter&nbsp;10</a>.</p>
+<p>Though it&rsquo;s already useful for the test, we&rsquo;ll put the <code>signed_in?</code> method to even better use in <a class="ref" href="sign-in-sign-out#sec:changing_the_layout_links">section&nbsp;9.4.3</a> and again in <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a>.</p>
 
 <p>With that, all the tests should pass.</p>
 
@@ -1536,7 +1535,7 @@ This means that</p>
 <h2><a id="sec:9.4" href="sign-in-sign-out#sec:signing_out" class="heading"><span class="number">9.4</span> Signing out</a></h2>
 
 
-<p>As discussed in <a class="ref" href="sign-in-sign-out#sec:sessions">Section&nbsp;9.1</a>, our authentication model is to keep users signed in until they sign out explicitly. In this section, we&rsquo;ll add this necessary signout capability. Once we&rsquo;re done, we&rsquo;ll add some integration tests to put our authentication machinery through its paces.</p>
+<p>As discussed in <a class="ref" href="sign-in-sign-out#sec:sessions">section&nbsp;9.1</a>, our authentication model is to keep users signed in until they sign out explicitly. In this section, we&rsquo;ll add this necessary signout capability. Once we&rsquo;re done, we&rsquo;ll add some integration tests to put our authentication machinery through its paces.</p>
 
 <div class="label" id="sec:destroying_sessions"></div>
 
@@ -1546,13 +1545,13 @@ This means that</p>
 
 <p>So far, the Sessions controller actions have followed the RESTful convention of using <code>new</code> for a signin page and <code>create</code> to complete the signin. We&rsquo;ll continue this theme by using a <code>destroy</code> action to delete sessions, i.e., to sign out.</p>
 
-<p>In order to test the signout action, we first need a way to sign in within a test. The easiest way to do this is to use the <code>controller</code> object we saw in <a class="ref" href="sign-in-sign-out#sec:current_user">Section&nbsp;9.3.3</a> and use the <code>sign_in</code> helper to sign in the given user. In order to use the resulting <code>test_sign_in</code> function in all our tests, we need to put it in the spec helper file, as shown in <a class="ref" href="sign-in-sign-out#code:test_sign_in">Listing&nbsp;9.19</a>.<sup class="footnote" id="fnref:9.12"><a href="#fn:9.12">12</a></sup></p>
+<p>In order to test the signout action, we first need a way to sign in within a test. The easiest way to do this is to use the <code>controller</code> object we saw in <a class="ref" href="sign-in-sign-out#sec:current_user">section&nbsp;9.3.3</a> and use the <code>sign_in</code> helper to sign in the given user. In order to use the resulting <code>test_sign_in</code> function in all our tests, we need to put it in the spec helper file, as shown in <a class="ref" href="sign-in-sign-out#code:test_sign_in">extrait&nbsp;9.19</a>.<sup class="footnote" id="fnref:9.12"><a href="#fn:9.12">12</a></sup></p>
 
 <div class="label" id="code:test_sign_in"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.19.</span> <span class="description">A <code>test_sign_in</code> function to simulate user signin inside tests. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.19.</span> <span class="description">A <code>test_sign_in</code> function to simulate user signin inside tests. <br /> <code>spec/spec_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1571,13 +1570,13 @@ This means that</p>
 
 <p>After running <code>test_sign_in</code>, the <code>current_user</code> will not be <code>nil</code>, so <code>signed_in?</code> will be <code>true</code>.</p>
 
-<p>With this spec helper in hand, the test for signout is straightforward: sign in as a (factory) user and then hit the <code>destroy</code> action and verify that the user gets signed out (<a class="ref" href="sign-in-sign-out#code:destroy_session_test">Listing&nbsp;9.20</a>).</p>
+<p>With this spec helper in hand, the test for signout is straightforward: sign in as a (factory) user and then hit the <code>destroy</code> action and verify that the user gets signed out (<a class="ref" href="sign-in-sign-out#code:destroy_session_test">extrait&nbsp;9.20</a>).</p>
 
 <div class="label" id="code:destroy_session_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.20.</span> <span class="description">A test for destroying a session (user signout). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.20.</span> <span class="description">A test for destroying a session (user signout). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1599,13 +1598,13 @@ This means that</p>
 
 <p>The only novel element here is the <code>delete</code> method, which issues an HTTP <tt>DELETE</tt> request (in analogy with the <code>get</code> and <code>post</code> methods seen in previous tests), as required by the REST conventions (<a class="ref" href="sign-in-sign-out#table:RESTful_sessions">Table&nbsp;9.1</a>).</p>
 
-<p>As with user signin, which relied on the <code>sign_in</code> function, user signout just defers the hard work to a <code>sign_out</code> function (<a class="ref" href="sign-in-sign-out#code:destroy_session">Listing&nbsp;9.21</a>).</p>
+<p>As with user signin, which relied on the <code>sign_in</code> function, user signout just defers the hard work to a <code>sign_out</code> function (<a class="ref" href="sign-in-sign-out#code:destroy_session">extrait&nbsp;9.21</a>).</p>
 
 <div class="label" id="code:destroy_session"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.21.</span> <span class="description">Destroying a session (user signout). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.21.</span> <span class="description">Destroying a session (user signout). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1620,13 +1619,13 @@ This means that</p>
 </div></div>
 
 
-<p>As with the other authentication elements, we&rsquo;ll put <code>sign_out</code> in the Sessions helper module (<a class="ref" href="sign-in-sign-out#code:sign_out_method">Listing&nbsp;9.22</a>).</p>
+<p>As with the other authentication elements, we&rsquo;ll put <code>sign_out</code> in the Sessions helper module (<a class="ref" href="sign-in-sign-out#code:sign_out_method">extrait&nbsp;9.22</a>).</p>
 
 <div class="label" id="code:sign_out_method"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.22.</span> <span class="description">The <code>sign_out</code> method in the Sessions helper module. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.22.</span> <span class="description">The <code>sign_out</code> method in the Sessions helper module. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -1661,13 +1660,13 @@ This means that</p>
 
 <p>In principle, we are now done with authentication, but as currently constructed there are no links to the signin or signout actions. Moreover, newly registered users might be confused, as they are not signed in by default.</p>
 
-<p>We&rsquo;ll fix the second problem first, starting with testing that a new user is automatically signed in (<a class="ref" href="sign-in-sign-out#code:sign_up_sign_in">Listing&nbsp;9.23</a>).</p>
+<p>We&rsquo;ll fix the second problem first, starting with testing that a new user is automatically signed in (<a class="ref" href="sign-in-sign-out#code:sign_up_sign_in">extrait&nbsp;9.23</a>).</p>
 
 <div class="label" id="code:sign_up_sign_in"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.23.</span> <span class="description">Testing that newly signed-up users are also signed in. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.23.</span> <span class="description">Testing that newly signed-up users are also signed in. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1698,13 +1697,13 @@ This means that</p>
 </div></div>
 
 
-<p>With the <code>sign_in</code> method from <a class="ref" href="sign-in-sign-out#sec:signin_success">Section&nbsp;9.3</a>, getting this test to pass by actually signing in the user is easy: just add <code>sign_in @user</code> right after saving the user to the database (<a class="ref" href="sign-in-sign-out#code:signin_upon_signup">Listing&nbsp;9.24</a>).</p>
+<p>With the <code>sign_in</code> method from <a class="ref" href="sign-in-sign-out#sec:signin_success">section&nbsp;9.3</a>, getting this test to pass by actually signing in the user is easy: just add <code>sign_in @user</code> right after saving the user to the database (<a class="ref" href="sign-in-sign-out#code:signin_upon_signup">extrait&nbsp;9.24</a>).</p>
 
 <div class="label" id="code:signin_upon_signup"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.24.</span> <span class="description">Signing in the user upon signup. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.24.</span> <span class="description">Signing in the user upon signup. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1717,7 +1716,7 @@ This means that</p>
       <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the Sample App!&quot;</span>
       <span class="n">redirect_to</span> <span class="vi">@user</span>
     <span class="k">else</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Sign up&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -1733,15 +1732,15 @@ This means that</p>
 <h3><a id="sec:9.4.3" href="sign-in-sign-out#sec:changing_the_layout_links" class="heading"><span class="number">9.4.3</span> Changement des liens de la mise en plage</a></h3>
 
 
-<p>We come finally to a practical application of all our signin/out work: we&rsquo;ll change the layout links based on signin status. In particular, as seen in the <a class="ref" href="sign-in-sign-out#fig:signin_success_mockup">Figure&nbsp;9.6</a> mockup, we&rsquo;ll arrange for the links change when users sign in or sign out, and we&rsquo;ll also add a profile link to the user show page for signed-in users.</p>
+<p>We come finally to a practical application of all our signin/out work: we&rsquo;ll change the layout links based on signin status. In particular, as seen in the <a class="ref" href="sign-in-sign-out#fig:signin_success_mockup">illustration&nbsp;9.6</a> mockup, we&rsquo;ll arrange for the links change when users sign in or sign out, and we&rsquo;ll also add a profile link to the user show page for signed-in users.</p>
 
-<p>We start with two integration tests: one to check that a <code>"Sign in"</code> link appears for non-signed-in users, and one to check that a <code>"Sign out"</code> link appears for signed-in users; both cases verify that the link goes to the proper URL. We&rsquo;ll put these tests in the layout links test we created in <a class="ref" href="filling-in-the-layout#sec:integration_tests">Section&nbsp;5.2.1</a>; the result appears in <a class="ref" href="sign-in-sign-out#code:signin_layout_test">Listing&nbsp;9.25</a>.</p>
+<p>We start with two integration tests: one to check that a <code>"Sign in"</code> link appears for non-signed-in users, and one to check that a <code>"Sign out"</code> link appears for signed-in users; both cases verify that the link goes to the proper URL. We&rsquo;ll put these tests in the layout links test we created in <a class="ref" href="filling-in-the-layout#sec:integration_tests">section&nbsp;5.2.1</a>; the result appears in <a class="ref" href="sign-in-sign-out#code:signin_layout_test">extrait&nbsp;9.25</a>.</p>
 
 <div class="label" id="code:signin_layout_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.25.</span> <span class="description">Tests for the signin/signout links on the site layout. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.25.</span> <span class="description">Tests for the signin/signout links on the site layout. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Layout links&quot;</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1778,9 +1777,9 @@ This means that</p>
 </div></div>
 
 
-<p>Here the <code>before(:each)</code> block signs in by visiting the signin page and submitting a valid email/password pair.<sup class="footnote" id="fnref:9.14"><a href="#fn:9.14">14</a></sup> We do this instead of using the <code>test_sign_in</code> function from <a class="ref" href="sign-in-sign-out#code:test_sign_in">Listing&nbsp;9.19</a> because <code>test_sign_in</code> doesn&rsquo;t work inside integration tests for some reason. (See <a class="ref" href="sign-in-sign-out#sec:sign_in_out_exercises">Section&nbsp;9.6</a> for an exercise to make an <code>integration_sign_in</code> function for use in integration tests.)</p>
+<p>Here the <code>before(:each)</code> block signs in by visiting the signin page and submitting a valid email/password pair.<sup class="footnote" id="fnref:9.14"><a href="#fn:9.14">14</a></sup> We do this instead of using the <code>test_sign_in</code> function from <a class="ref" href="sign-in-sign-out#code:test_sign_in">extrait&nbsp;9.19</a> because <code>test_sign_in</code> doesn&rsquo;t work inside integration tests for some reason. (See <a class="ref" href="sign-in-sign-out#sec:sign_in_out_exercises">section&nbsp;9.6</a> for an exercise to make an <code>integration_sign_in</code> function for use in integration tests.)</p>
 
-<p>The application code uses an if-then branching structure inside of Embedded Ruby, using the <code>signed_in?</code> method defined in <a class="ref" href="sign-in-sign-out#code:signed_in_p">Listing&nbsp;9.18</a>:</p>
+<p>The application code uses an if-then branching structure inside of Embedded Ruby, using the <code>signed_in?</code> method defined in <a class="ref" href="sign-in-sign-out#code:signed_in_p">extrait&nbsp;9.18</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">signed_in?</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign out&quot;</span><span class="p">,</span> <span class="n">signout_path</span><span class="p">,</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
@@ -1791,13 +1790,13 @@ This means that</p>
 </div>
 
 
-<p>Notice that the signout link passes a hash argument indicating that it should submit with an HTTP <tt>DELETE</tt> request.<sup class="footnote" id="fnref:9.15"><a href="#fn:9.15">15</a></sup> With this snippet added, the full header partial appears as in <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">Listing&nbsp;9.26</a>.</p>
+<p>Notice that the signout link passes a hash argument indicating that it should submit with an HTTP <tt>DELETE</tt> request.<sup class="footnote" id="fnref:9.15"><a href="#fn:9.15">15</a></sup> With this snippet added, the full header partial appears as in <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">extrait&nbsp;9.26</a>.</p>
 
 <div class="label" id="code:layout_signin_signout_links"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.26.</span> <span class="description">Changing the layout links for signed-in users. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 9.26.</span> <span class="description">Changing the layout links for signed-in users. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1817,13 +1816,13 @@ This means that</p>
 </div></div>
 
 
-<p>In <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">Listing&nbsp;9.26</a> we&rsquo;ve used the <code>logo</code> helper from the <a class="ref" href="filling-in-the-layout#top">Chapter&nbsp;5</a> exercises (<a class="ref" href="filling-in-the-layout#sec:layout_exercises">Section&nbsp;5.5</a>); in case you didn&rsquo;t work that exercise, the answer appears in <a class="ref" href="sign-in-sign-out#code:logo_helper_solution">Listing&nbsp;9.27</a>.</p>
+<p>In <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">extrait&nbsp;9.26</a> we&rsquo;ve used the <code>logo</code> helper from the <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;5</a> exercises (<a class="ref" href="filling-in-the-layout#sec:layout_exercises">section&nbsp;5.5</a>); in case you didn&rsquo;t work that exercise, the answer appears in <a class="ref" href="sign-in-sign-out#code:logo_helper_solution">extrait&nbsp;9.27</a>.</p>
 
 <div class="label" id="code:logo_helper_solution"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.27.</span> <span class="description">A helper for the site logo. <br /> <code>app/helpers/application_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.27.</span> <span class="description">A helper for the site logo. <br /> <code>app/helpers/application_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">ApplicationHelper</span>
   <span class="o">.</span>
@@ -1837,13 +1836,13 @@ This means that</p>
 </div></div>
 
 
-<p>Finally, let&rsquo;s add a profile link. The test (<a class="ref" href="sign-in-sign-out#code:profile_link_test">Listing&nbsp;9.28</a>) and application code (<a class="ref" href="sign-in-sign-out#code:profile_link">Listing&nbsp;9.29</a>) are both straightforward. Notice that the profile link&rsquo;s URL is simply <code>current_user</code>,<sup class="footnote" id="fnref:9.16"><a href="#fn:9.16">16</a></sup> which is our first use of that helpful method. (It won&rsquo;t be our last.)</p>
+<p>Finally, let&rsquo;s add a profile link. The test (<a class="ref" href="sign-in-sign-out#code:profile_link_test">extrait&nbsp;9.28</a>) and application code (<a class="ref" href="sign-in-sign-out#code:profile_link">extrait&nbsp;9.29</a>) are both straightforward. Notice that the profile link&rsquo;s URL is simply <code>current_user</code>,<sup class="footnote" id="fnref:9.16"><a href="#fn:9.16">16</a></sup> which is our first use of that helpful method. (It won&rsquo;t be our last.)</p>
 
 <div class="label" id="code:profile_link_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.28.</span> <span class="description">A test for a profile link. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.28.</span> <span class="description">A test for a profile link. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Layout links&quot;</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1870,7 +1869,7 @@ This means that</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.29.</span> <span class="description">Adding a profile link. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 9.29.</span> <span class="description">Adding a profile link. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1893,12 +1892,12 @@ This means that</p>
 </div></div>
 
 
-<p>With the code in this section, a signed-in user now sees both signout and profile links, as expected (<a class="ref" href="sign-in-sign-out#fig:profile_with_signout_link">Figure&nbsp;9.8</a>).</p>
+<p>With the code in this section, a signed-in user now sees both signout and profile links, as expected (<a class="ref" href="sign-in-sign-out#fig:profile_with_signout_link">illustration&nbsp;9.8</a>).</p>
 
 <div class="label" id="fig:profile_with_signout_link"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_with_signout_link.png" alt="profile_with_signout_link" /></span></div><div class="caption"><span class="header">Figure 9.8: </span><span class="description">A signed-in user with signout and profile links.&nbsp;<a href="http://railstutorial.org/images/figures/profile_with_signout_link-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_with_signout_link.png" alt="profile_with_signout_link" /></span></div><div class="caption"><span class="header">Illustration 9.8: </span><span class="description">A signed-in user with signout and profile links.&nbsp;<a href="http://railstutorial.org/images/figures/profile_with_signout_link-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1909,13 +1908,13 @@ This means that</p>
 <h3><a id="sec:9.4.4" href="sign-in-sign-out#sec:signin_out_integration_tests" class="heading"><span class="number">9.4.4</span> Signin/out integration tests</a></h3>
 
 
-<p>As a capstone to our hard work on authentication, we&rsquo;ll finish with integration tests for signin and signout (placed in the <code>users_spec.rb</code> file for convenience). RSpec integration testing is expressive enough that <a class="ref" href="sign-in-sign-out#code:sign_in_out_integration_tests">Listing&nbsp;9.30</a> should need little explanation; I especially like the use of <code>click_link "Sign out"</code>, which not only simulates a browser clicking the signout link, but also raises an error if no such link exists&mdash;thereby testing the URL, the named route, the link text, and the changing of the layout links, all in one line. If that&rsquo;s not an <em>integration</em> test, I don&rsquo;t know what is.</p>
+<p>As a capstone to our hard work on authentication, we&rsquo;ll finish with integration tests for signin and signout (placed in the <code>users_spec.rb</code> file for convenience). RSpec integration testing is expressive enough that <a class="ref" href="sign-in-sign-out#code:sign_in_out_integration_tests">extrait&nbsp;9.30</a> should need little explanation; I especially like the use of <code>click_link "Sign out"</code>, which not only simulates a browser clicking the signout link, but also raises an error if no such link exists&mdash;thereby testing the URL, the named route, the link text, and the changing of the layout links, all in one line. If that&rsquo;s not an <em>integration</em> test, I don&rsquo;t know what is.</p>
 
 <div class="label" id="code:sign_in_out_integration_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.30.</span> <span class="description">An integration test for signing in and out. <br /> <code>spec/requests/users_spec.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.30.</span> <span class="description">An integration test for signing in and out. <br /> <code>spec/requests/users_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1984,9 +1983,9 @@ This means that</p>
 
 <ol>
 
-<li>Several of the integration specs use the same code to sign a user in. Replace that code with the <code>integration_sign_in</code> function in <a class="ref" href="sign-in-sign-out#code:integration_sign_in">Listing&nbsp;9.31</a> and verify that the tests still pass.</li>
+<li>Several of the integration specs use the same code to sign a user in. Replace that code with the <code>integration_sign_in</code> function in <a class="ref" href="sign-in-sign-out#code:integration_sign_in">extrait&nbsp;9.31</a> and verify that the tests still pass.</li>
 
-<li>Use <code>session</code> instead of <code>cookies</code> so that users are automatically signed out when they close their browsers.<sup class="footnote" id="fnref:9.17"><a href="#fn:9.17">17</a></sup> <em>Hint:</em> Do a Google search on &ldquo;Rails session&rdquo;.</li>
+<li>Use <code>session</code> instead of <code>cookies</code> so that users are automatically signed out when they close their browsers.<sup class="footnote" id="fnref:9.17"><a href="#fn:9.17">17</a></sup> <em>Hint:</em> Do a Google search on «&nbsp;Rails session&nbsp;».</li>
 
 <li><strong>(advanced)</strong> Some sites use secure HTTP (HTTPS) for their signin pages. Search online to learn how to use HTTPS in Rails, and then secure the Sessions controller <code>new</code> and <code>create</code> actions. <em>Extra challenge:</em> Write tests for the HTTPS functionality. (<em>Note:</em> I suggest doing this exercise only in development, which does not require obtaining an SSL certificate or setting up the SSL encryption machinery. Actually deploying an SSL-enabled site is <em>much</em> more difficult.)</li>
 
@@ -1999,7 +1998,7 @@ This means that</p>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.31.</span> <span class="description">A function to sign users in inside of integration tests. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Extrait 9.31.</span> <span class="description">A function to sign users in inside of integration tests. <br /> <code>spec/spec_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -2026,17 +2025,17 @@ This means that</p>
 
 
 <div class="navigation">  <a class="prev_page" href="sign-up#top">
-    &laquo;&nbsp;<span class="number">Chapter 8</span> Sign up
+    &laquo;&nbsp;<span class="number">chapitre 8</span> Sign up
   </a>
   <a class="next_page" href="updating-showing-and-deleting-users#top">
-    <span class="number">Chapter 10</span> Updating, showing, and deleting users&nbsp;&raquo;
+    <span class="number">chapitre 10</span> Updating, showing, and deleting users&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:9.1">Another common model is to expire the session after a certain amount of time. This is especially appropriate on sites containing sensitive information, such as banking and financial trading accounts.&nbsp;<a class="arrow" href="#fnref:9.1">&uarr;</a></li>
-<li id="fn:9.2">We&rsquo;ll see in <a class="ref" href="sign-in-sign-out#sec:remember_me">Section&nbsp;9.3.2</a> just how long &ldquo;forever&rdquo; is.&nbsp;<a class="arrow" href="#fnref:9.2">&uarr;</a></li>
-<li id="fn:9.3">If given the <code>create</code> and <code>destroy</code> actions as well, the generate script would make <em>views</em> for those actions, which we don&rsquo;t need. Of course, we could delete the views, but I&rsquo;ve elected to omit them from <code>generate</code> and instead define the actions by hand.&nbsp;<a class="arrow" href="#fnref:9.3">&uarr;</a></li>
-<li id="fn:9.4">If case you&rsquo;re wondering why  we use <code>user</code> instead of <code>@user</code> in <a class="ref" href="sign-in-sign-out#code:signin_failure">Listing&nbsp;9.8</a>, it&rsquo;s because this user variable is never needed in any view, so there is no reason to use an instance variable here. (Using <code>@user</code> still works, though.)&nbsp;<a class="arrow" href="#fnref:9.4">&uarr;</a></li>
+<li id="fn:9.1">Un autre modèle courant est de faire expirer la session après un certain laps de temps. C'est spécialement approprié sur les sites qui contiennent des données sensibles, comme les banques et les comptes financiers.&nbsp;<a class="arrow" href="#fnref:9.1">&uarr;</a></li>
+<li id="fn:9.2">Nous verrons à la <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a> combien de temps signifie en réalité «&nbsp;pour toujours&nbsp;».&nbsp;<a class="arrow" href="#fnref:9.2">&uarr;</a></li>
+<li id="fn:9.3">Si on lui donne les actions <code>create</code> et <code>destroy</code>, le script <code>generate</code> construira les <em>vues</em> pour ces actions, ce dont nous n'avons pas besoin. Bien sûr, nous pourrions détruire ces vues, mais j'ai décidé de les omettre de la commande <code>generate</code> et de plutôt définir ces actions à la main.&nbsp;<a class="arrow" href="#fnref:9.3">&uarr;</a></li>
+<li id="fn:9.4">Dans le cas où vous vous demanderiez pourquoi nous utilisons <code>user</code> plutôt que <code>@user</code> dans l'<a class="ref" href="sign-in-sign-out#code:signin_failure">extrait&nbsp;9.8</a>, c'est parce que cette variable user n'est jamais demandé dans aucune vue, dont il n'y  a pas de raison de ne pas utiliser un variable d'instance ici (utiliser <code>@user</code> fonctionnerait aussi, cependant).&nbsp;<a class="arrow" href="#fnref:9.4">&uarr;</a></li>
 <li id="fn:9.5">Image from <a href="http://www.flickr.com/photos/hermanusbackpackers/3343254977/">http://www.flickr.com/photos/hermanusbackpackers/3343254977/</a>.&nbsp;<a class="arrow" href="#fnref:9.5">&uarr;</a></li>
 <li id="fn:9.6">On some systems, you might need to use <code>self.current_user = user</code> to get the upcoming tests to pass.&nbsp;<a class="arrow" href="#fnref:9.6">&uarr;</a></li>
 <li id="fn:9.7">Because the Sessions helper module is included in the Application controller, the <code>self</code> variable here is the controller itself.&nbsp;<a class="arrow" href="#fnref:9.7">&uarr;</a></li>
@@ -2046,9 +2045,9 @@ This means that</p>
 <li id="fn:9.11">This feels like the tail wagging the dog, but that&rsquo;s the price we pay for being on the cutting edge.&nbsp;<a class="arrow" href="#fnref:9.11">&uarr;</a></li>
 <li id="fn:9.12">If you are using Spork, this will be located inside the <code>Spork.prefork</code> block.&nbsp;<a class="arrow" href="#fnref:9.12">&uarr;</a></li>
 <li id="fn:9.13">You can learn about things like <code>cookies.delete</code> by reading the cookies entry in the Rails API. (Since Rails API links tend to go stale quickly, use your Google-fu to find a current version.)&nbsp;<a class="arrow" href="#fnref:9.13">&uarr;</a></li>
-<li id="fn:9.14">Note that we can use symbols in place of strings for the labels, e.g., <code>fill_in :email</code> instead of <code>fill_in "Email"</code>. We used the latter in <a class="ref" href="sign-up#code:signup_success_test">Listing&nbsp;8.22</a>, but by now it shouldn&rsquo;t surprise you that Rails allows us to use symbols instead.&nbsp;<a class="arrow" href="#fnref:9.14">&uarr;</a></li>
+<li id="fn:9.14">Note that we can use symbols in place of strings for the labels, e.g., <code>fill_in :email</code> instead of <code>fill_in "Email"</code>. We used the latter in <a class="ref" href="sign-up#code:signup_success_test">extrait&nbsp;8.22</a>, but by now it shouldn&rsquo;t surprise you that Rails allows us to use symbols instead.&nbsp;<a class="arrow" href="#fnref:9.14">&uarr;</a></li>
 <li id="fn:9.15">Web browsers can&rsquo;t actually issue <tt>DELETE</tt> requests; Rails fakes it with JavaScript.&nbsp;<a class="arrow" href="#fnref:9.15">&uarr;</a></li>
-<li id="fn:9.16">Recall from <a class="ref" href="modeling-and-viewing-users-two#sec:a_user_sidebar">Section&nbsp;7.3.3</a> that we can link directly to a user object and allow Rails to figure out the appropriate URL.&nbsp;<a class="arrow" href="#fnref:9.16">&uarr;</a></li>
+<li id="fn:9.16">Recall from <a class="ref" href="modeling-and-viewing-users-two#sec:a_user_sidebar">section&nbsp;7.3.3</a> that we can link directly to a user object and allow Rails to figure out the appropriate URL.&nbsp;<a class="arrow" href="#fnref:9.16">&uarr;</a></li>
 <li id="fn:9.17">Somewhat confusingly, we&rsquo;ve used <code>cookies</code> to implement sessions, and <code>session</code> is implemented with cookies!&nbsp;<a class="arrow" href="#fnref:9.17">&uarr;</a></li>
 </ol>
 </div>

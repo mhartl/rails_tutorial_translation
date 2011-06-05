@@ -1,5 +1,6 @@
 <!--
 	chapitre : 12 Suivi des utilisateurs
+	fichier : following-users_fragment.html
 -->
 
 <h1 class="title">Tutoriel Ruby on Rails </h1>
@@ -460,7 +461,7 @@
 <div class="label" id="fig:page_flow_user_index_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/page_flow_user_index_mockup.png" alt="page_flow_user_index_mockup" /></span></div><div class="caption"><span class="header">Figure 12.2: </span><span class="description">Maquette de la recherche d'un utilisateur à suivre.&nbsp;<a href="http://railstutorial.org/images/figures/page_flow_user_index_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/page_flow_user_index_mockup.png" alt="page_flow_user_index_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.2: </span><span class="description">Maquette de la recherche d'un utilisateur à suivre.&nbsp;<a href="http://railstutorial.org/images/figures/page_flow_user_index_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -531,7 +532,7 @@
 <div class="label" id="fig:user_has_many_following"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_has_many_following.png" alt="user_has_many_following" /></span></div><div class="caption"><span class="header">Illustration 12.7: </span><span class="description">Modèle du suivi d'utilisateur à travers un modèle de relation intermédiaire.&nbsp;<a href="http://railstutorial.org/images/figures/user_has_many_following-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_has_many_following.png" alt="user_has_many_following" /></span></div><div class="caption"><span class="header">Illustration 12.7: </span><span class="description">Modèle du suivi d'utilisateur à travers un modèle de relation intermédiaire.&nbsp;<a href="http://railstutorial.org/images/figures/user_has_many_following-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Pour commencer l'implémentation, nous générons d'abord un modèle `Relationship` (“Relations”) comme suit&nbsp;:</p>
@@ -790,7 +791,7 @@
 </div>
 
 
-<p>… parce que la table <code>microposts</code> (table des micro-messages) possède un attribut <code>user_id</code> pour identifier l'utilisateur (<a class="ref" href="user-microposts#sec:the_basic_model">Section&nbsp;11.1.1</a>). Un identifiant utilisé de cette manière pour connecter les tables de la base de données est connu sous le nom de <em>Clé étrangère</em> (<em>foreign key</em>), et puisque la clé étrangère pour le modèle `User` est <code>user_id</code>, Rails peut déduire l'association automatiquement&nbsp;: par défaut, Rails attend une clé étrangère de la forme <code>&lt;class&gt;_id</code>, où <code>&lt;class&gt;</code> est la version minuscule du nom de la classe (NdT&nbsp;: classe <code>User</code> => clé étrangère <code>user</code>).<sup class="footnote" id="fnref:12.5"><a href="#fn:12.5">5</a></sup> Dans le cas présent, bien que nous traitions encore les utilisateurs, ils sont identifiés maintenant avec la clé étrangère <code>follower_id</code> (identifiant du suiveur), donc nous devons le dire explicitement à Rails, comme le montre l'<a class="ref" href="following-users#code:user_relationships_association">extrait&nbsp;12.5</a>.<sup class="footnote" id="fnref:12.6"><a href="#fn:12.6">6</a></sup></p>
+<p>… parce que la table <code>microposts</code> (table des micro-messages) possède un attribut <code>user_id</code> pour identifier l'utilisateur (<a class="ref" href="user-microposts#sec:the_basic_model">section&nbsp;11.1.1</a>). Un identifiant utilisé de cette manière pour connecter les tables de la base de données est connu sous le nom de <em>Clé étrangère</em> (<em>foreign key</em>), et puisque la clé étrangère pour le modèle `User` est <code>user_id</code>, Rails peut déduire l'association automatiquement&nbsp;: par défaut, Rails attend une clé étrangère de la forme <code>&lt;class&gt;_id</code>, où <code>&lt;class&gt;</code> est la version minuscule du nom de la classe (NdT&nbsp;: classe <code>User</code> => clé étrangère <code>user</code>).<sup class="footnote" id="fnref:12.5"><a href="#fn:12.5">5</a></sup> Dans le cas présent, bien que nous traitions encore les utilisateurs, ils sont identifiés maintenant avec la clé étrangère <code>follower_id</code> (identifiant du suiveur), donc nous devons le dire explicitement à Rails, comme le montre l'<a class="ref" href="following-users#code:user_relationships_association">extrait&nbsp;12.5</a>.<sup class="footnote" id="fnref:12.6"><a href="#fn:12.6">6</a></sup></p>
 
 <div class="label" id="code:user_relationships_association"></div>
 
@@ -834,7 +835,7 @@
 </div></div>
 
 
-<p>(Puisque détruire un utilisateur devrait aussi détruire ses relations, nous prenons de l'avance et ajoutons <code>:dependent =&gt; :destroy</code> à l'association&nbsp;; l'écriture d'un test pour ce point en laissé à titre d'exercice (<a class="ref" href="following-users#sec:following_exercises">Section&nbsp;12.5</a>).) À ce point, les tests d'association de l'<a class="ref" href="following-users#code:relationship_create_test">extrait&nbsp;12.3</a> et l'<a class="ref" href="following-users#code:user_relationships_method_test">extrait&nbsp;12.4</a> devraient réussir.</p>
+<p>(Puisque détruire un utilisateur devrait aussi détruire ses relations, nous prenons de l'avance et ajoutons <code>:dependent =&gt; :destroy</code> à l'association&nbsp;; l'écriture d'un test pour ce point en laissé à titre d'exercice (<a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a>).) À ce point, les tests d'association de l'<a class="ref" href="following-users#code:relationship_create_test">extrait&nbsp;12.3</a> et l'<a class="ref" href="following-users#code:user_relationships_method_test">extrait&nbsp;12.4</a> devraient réussir.</p>
 
 <p>Comme pour le modèle `Micropost`, le modèle `Relationship` possède avec les utilisateurs une relation <code>belongs_to</code> (“appartient à…”)&nbsp;; dans ce cas, un objet `relationship` appartient d'une part un utilisateur lecteur (<code>follower</code>, “suiveur”) et un utilisateur auteur (<code>followed</code>, “suivi”), ce que nous testons dans l'<a class="ref" href="following-users#code:relationships_belongs_to_test">extrait&nbsp;12.6</a>.</p>
 
@@ -1096,21 +1097,21 @@
 </pre></div>
 </div></div>
 
-<!-- FIN FRENCH -->
-<p>The implementation uses <code>has_many :through</code> for the first time: a user has many following <em>through</em> relationships, as illustrated in <a class="ref" href="following-users#fig:user_has_many_following">Figure&nbsp;12.7</a>. By default, in a <code>has_many :through</code> association Rails looks for a foreign key corresponding to the singular version of the association; in other words, code like</p>
+
+<p>L'implémentation utilise <code>has_many :through</code> (<em>possède_plusieurs :à_travers</em>) pour la première fois&nbsp;: un utilisateur possède plusieurs lecteurs <em>à travers</em> la relation, comme le montre l'<a class="ref" href="following-users#fig:user_has_many_following">illustration&nbsp;12.7</a>. Par défaut, dans une association <code>has_many :through</code> Rails regarde pour une clé étrangère correspondant à la version singulier de l'association&nbsp;; en d'autres termes, un code comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:followeds</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:relationships</span>
 </pre></div>
 </div>
 
 
-<p>would assemble an array using the <code>followed_id</code> in the <code>relationships</code> table. But, as noted in <a class="ref" href="following-users#sec:a_problem_with_the_data_model">Section&nbsp;12.1.1</a>, <code>user.followeds</code> is rather awkward; far more natural is to treat &ldquo;following&rdquo; as a plural of &ldquo;followed&rdquo;, and write instead <code>user.following</code> for the array of followed users. Naturally, Rails allows us to override the default, in this case using the <code>:source</code> parameter (<a class="ref" href="following-users#code:has_many_following_through_relationships">Listing&nbsp;12.11</a>), which explicitly tells Rails that the source of the <code>following</code> array is the set of <code>followed</code>&nbsp;ids.</p>
+<p>… devrait assembler un tableau en utilisant le <code>followed_id</code> dans la table <code>relationships</code>. Mais, comme indiqué à la <a class="ref" href="following-users#sec:a_problem_with_the_data_model">section&nbsp;12.1.1</a>, <code>user.followeds</code> est plutôt maladroit&nbsp;; il est de loin plus naturel de traiter «&nbsp;following&nbsp;» comme la forme plurielle de «&nbsp;followed&nbsp;», et d'écrire plutôt <code>user.following</code> pour la table des utilisateurs suivis. Naturellement, Rails nous permet de sur-écrire la valeur par défaut, dans ce cas en utilisant le paramètre <code>:source</code> (<a class="ref" href="following-users#code:has_many_following_through_relationships">extrait&nbsp;12.11</a>), qui dit explicitement à Rails que la source de la table <code>following</code> est le set des ids de <code>followed</code>.</p>
 
 <div class="label" id="code:has_many_following_through_relationships"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.11.</span> <span class="description">Adding the User model <code>following</code> association with <code>has_many :through</code>. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.11.</span> <span class="description">Ajout de l'association <code>following</code> du modèle User avec <code>has_many :through</code>. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_43ca4671bb54e14356e02a6a798c294847f38f35">
@@ -1149,13 +1150,13 @@
 </div></div>
 
 
-<p>To create a following relationship, we&rsquo;ll introduce a <code>follow!</code> utility method so that we can write <code>user.follow!(other_user)</code>.<sup class="footnote" id="fnref:12.7"><a href="#fn:12.7">7</a></sup> We&rsquo;ll also add an associated <code>following?</code> boolean method to test if one user is following another.<sup class="footnote" id="fnref:12.8"><a href="#fn:12.8">8</a></sup> The tests in <a class="ref" href="following-users#code:utility_method_tests">Listing&nbsp;12.12</a> show how we expect these methods to be used in practice.</p>
+<p>Pour créer la relation following, nous allons introduire une méthode utilisataire <code>follow!</code> de telle sorte que nous puissions écrire  <code>user.follow!(other_user)</code>.<sup class="footnote" id="fnref:12.7"><a href="#fn:12.7">7</a></sup> Nous allons aussi ajouter une méthode booléen associée <code>following?</code> pour tester si un 	utilisateur en suit un autre.<sup class="footnote" id="fnref:12.8"><a href="#fn:12.8">8</a></sup> Les tests dans l'<a class="ref" href="following-users#code:utility_method_tests">extrait&nbsp;12.12</a> montrent comment nous pouvons nous attendre à ce que ces méthodes soient utilisées dans la pratique.</p>
 
 <div class="label" id="code:utility_method_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.12.</span> <span class="description">Tests for some &ldquo;following&rdquo; utility methods. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.12.</span> <span class="description">Tests pour quelques méthode utilitaires &ldquo;following&rdquo;. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_319c7d1fcaaab8b8c29e0b7f6e5d7738ddfcbb47">
@@ -1186,20 +1187,20 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;should have a following? method&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir une méthode following?&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:following?</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a follow! method&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir une méthode follow!&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:follow!</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should follow another user&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait suivre une autre utilisateur&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">be_following</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should include the followed user in the following array&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait inclure l'utilisateur suivi dans le tableau following&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
     <span class="k">end</span>
@@ -1209,29 +1210,29 @@
 </div></div>
 
 
-<p>Note that we have replaced the <code>include?</code> method seen in <a class="ref" href="user-microposts#code:feed_specs">Listing&nbsp;11.31</a> with <code>should include</code>, effectively transforming</p>
+<p>Notez que nous avons remplacé la méthode <code>include?</code> vu dans l'<a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a> par <code>should include</code>, en transformant effectivement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_true</span>
 </pre></div>
 </div>
 
 
-<p>into the clearer and more succinct</p>
+<p>… en le code plus clair et succinct&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>This example shows just how flexible the RSpec boolean convention is; even though <code>include</code> is already a Ruby keyword (used to include a module, as seen in, e.g., <a class="ref" href="sign-in-sign-out#code:sessions_helper_include">Listing&nbsp;9.11</a>), in this context RSpec correctly guesses that we want to test array inclusion.</p>
+<p>Cet exemple montre juste la flexibilité des conventions booléenne de RSpec&nbsp;; même si <code>include</code> est déjà un mot-clé Ruby (utilisé pour inclure un module, comme nous l'avons vu, par exemple, dans l'<a class="ref" href="sign-in-sign-out#code:sessions_helper_include">extrait&nbsp;9.11</a>), RSpec devine dans ce contexte que nous voulons tester une inclusion de tableau.</p>
 
-<p>In the application code, the <code>following?</code> method takes in a user, called <code>followed</code>, and checks to see if a follower with that id exists in the database; the <code>follow!</code> method calls <code>create!</code> through the <code>relationships</code> association to create the following relationship. The results appear in <a class="ref" href="following-users#code:following_p_follow_bang">Listing&nbsp;12.13</a>.<sup class="footnote" id="fnref:12.9"><a href="#fn:12.9">9</a></sup></p>
+<p>Dans le code de l'application, la méthode <code>following?</code> prend un utilisateur, appelle <code>followed</code> et vérifie de voir si un <em>follower</em> (un lecteur) avec cet identifiant existe dans la base de données&nbsp;; la méthode <code>follow!</code> appelle <code>create!</code> à travers l'association <code>relationships</code> pour créer la relation de suivi. Le résultat apparait dans l'<a class="ref" href="following-users#code:following_p_follow_bang">extrait&nbsp;12.13</a>.<sup class="footnote" id="fnref:12.9"><a href="#fn:12.9">9</a></sup></p>
 
 <div class="label" id="code:following_p_follow_bang"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.13.</span> <span class="description">The <code>following?</code> and <code>follow!</code> utility methods. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.13.</span> <span class="description">Les méthode utilitaires <code>following?</code> et <code>follow!</code>. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_285a23ca308a4ee08722756ed2a6cd6c22cddccc">
@@ -1279,29 +1280,29 @@
 </div></div>
 
 
-<p>Note that in <a class="ref" href="following-users#code:following_p_follow_bang">Listing&nbsp;12.13</a> we have omitted the user itself, writing just</p>
+<p>Notez que dans l'<a class="ref" href="following-users#code:following_p_follow_bang">extrait&nbsp;12.13</a> nous avons omis l'utilisateur lui-même, en écrivant juste&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">relationships</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>instead of the equivalent code</p>
+<p>… au lieu du code équivalent&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nb">self</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>Whether to include the explicit <code>self</code> is largely a matter of taste.</p>
+<p>Que ce soit pour inclure le <code>self</code> explicite est largement une question de goût.</p>
 
-<p>Of course, users should be able to unfollow other users as well as follow them, which leads to the somewhat predictable <code>unfollow!</code> method, as shown in <a class="ref" href="following-users#code:user_unfollow_test">Listing&nbsp;12.14</a>.<sup class="footnote" id="fnref:12.10"><a href="#fn:12.10">10</a></sup></p>
+<p>Bien entendu, les utilisateurs devraient être capable de ne plus suivre les autres utilisateurs autant que de les suivre, ce qui nous conduit à la quelque peu méthode prévisible <code>unfollow!</code>, présentée dans l'<a class="ref" href="following-users#code:user_unfollow_test">extrait&nbsp;12.14</a>.<sup class="footnote" id="fnref:12.10"><a href="#fn:12.10">10</a></sup></p>
 
 <div class="label" id="code:user_unfollow_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.14.</span> <span class="description">A test for unfollowing a user. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.14.</span> <span class="description">Un test pour le non-suivi d'un utilisateur. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_9cfc4c72018580be6c8ae727877334a33093b377">
@@ -1332,11 +1333,11 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;should have an unfollow! method&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir une méthode unfollow!&quot;</span> <span class="k">do</span>
       <span class="vi">@followed</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:unfollow!</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should unfollow a user&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait arrêter de suivre un utilisateur&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">unfollow!</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_following</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
@@ -1347,13 +1348,13 @@
 </div></div>
 
 
-<p>The code for <code>unfollow!</code> is straightforward: just find the relationship by followed&nbsp;id and destroy it (<a class="ref" href="following-users#code:user_unfollow">Listing&nbsp;12.15</a>).<sup class="footnote" id="fnref:12.11"><a href="#fn:12.11">11</a></sup></p>
+<p>Le code pour <code>unfollow!</code> est très simples&nbsp;: il trouve juste la relation par l'<code>id</code> followed et le détruit (<a class="ref" href="following-users#code:user_unfollow">extrait&nbsp;12.15</a>).<sup class="footnote" id="fnref:12.11"><a href="#fn:12.11">11</a></sup></p>
 
 <div class="label" id="code:user_unfollow"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.15.</span> <span class="description">Unfollowing a user by destroying a user relationship. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.15.</span> <span class="description">Arrêter le suivi d'un utilisateur en détruisant une relation utilisateur. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_50ac52f762ffcd4715394fa0b8032912056c1753">
@@ -1404,24 +1405,24 @@
 <div class="label" id="sec:followers"></div>
 
 
-<h3><a id="sec:12.1.5" href="following-users#sec:followers" class="heading"><span class="number">12.1.5</span> Followers</a></h3>
+<h3><a id="sec:12.1.5" href="following-users#sec:followers" class="heading"><span class="number">12.1.5</span> Les Lecteurs (<em>Followers</em>)</a></h3>
 
 
-<p>The final piece of the relationships puzzle is to add a <code>user.followers</code> method to go with <code>user.following</code>. You may have noticed from <a class="ref" href="following-users#fig:user_has_many_following">Figure&nbsp;12.7</a> that all the information needed to extract an array of followers is already present in the <code>relationships</code> table. Indeed, the technique is exactly the same as for user following, with the roles of <code>follower_id</code> and <code>followed_id</code> reversed. This suggests that, if we could somehow arrange for a <code>reverse_relationships</code> table with those two columns reversed (<a class="ref" href="following-users#fig:user_has_many_followers">Figure&nbsp;12.9</a>), we could implement <code>user.followers</code> with little effort.</p>
+<p>La dernière pièce du puzzle relationnel est d'ajouter une méthode <code>user.followers</code> marchant avec <code>user.following</code>. Vous avez peut-être noté, d'après l'<a class="ref" href="following-users#fig:user_has_many_following">illustration&nbsp;12.7</a> que toutes les informations nécessaires pour extraire un tableau des lecteurs (<em>followers</em>) est déjà présent dans la table <code>relationships</code>. En effet, la technique est exactement la même comme pour les utilisateur suivis, avec les rôles de <code>follower_id</code> et <code>followed_id</code> simplement inversé. Cela suggère que, si nous pouvions arranger une table <code>reverse_relationships</code> avec ces colonnes inversées (<a class="ref" href="following-users#fig:user_has_many_followers">illustration&nbsp;12.9</a>), nous pourrions implémenter <code>user.followers</code> avec peu d'effort.</p>
 
 <div class="label" id="fig:user_has_many_followers"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_has_many_followers.png" alt="user_has_many_followers" /></span></div><div class="caption"><span class="header">Figure 12.9: </span><span class="description">A model for user followers using a reverse Relationship model.&nbsp;<a href="http://railstutorial.org/images/figures/user_has_many_followers-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_has_many_followers.png" alt="user_has_many_followers" /></span></div><div class="caption"><span class="header">Illustration 12.9: </span><span class="description">Un modèle pour les utilisateurs lecteurs en utilisant un modèle Relationship inversé.&nbsp;<a href="http://railstutorial.org/images/figures/user_has_many_followers-full.png">(taille normale)</a></span></div></div>
 
 
-<p>We begin with the tests, having faith that the magic of Rails will come to the rescue (<a class="ref" href="following-users#code:reverse_relationships_test">Listing&nbsp;12.16</a>).</p>
+<p>Nous commençons avec les tests, en ayant la foi que la magie de Rails viendra à notre aide (<a class="ref" href="following-users#code:reverse_relationships_test">extrait&nbsp;12.16</a>).</p>
 
 <div class="label" id="code:reverse_relationships_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.16.</span> <span class="description">Testing for reverse relationships. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.16.</span> <span class="description">Tester pour la relation inversée. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_7c14c493a65f79e113d9d61901739c776daf5cb0">
@@ -1452,15 +1453,15 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>    
-    <span class="n">it</span> <span class="s2">&quot;should have a reverse_relationships method&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un méthode reverse_relationship&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:reverse_relationships</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a followers method&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir une méthode followers&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:followers</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should include the follower in the followers array&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait inclure le lecteur dans le tableau des lecteurs&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="vi">@followed</span><span class="p">)</span>
       <span class="vi">@followed</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
     <span class="k">end</span>
@@ -1470,27 +1471,27 @@
 </div></div>
 
 
-<p>As you probably suspect, we will not be making a whole database table just to hold reverse relationships. Instead, we will exploit the underlying symmetry between followers and following to simulate a <code>reverse_relationships</code> table by passing <code>followed_id</code> as the primary key. In other words, where the <code>relationships</code> association uses the <code>follower_id</code> foreign key,</p>
+<p>Comme vous le suspectez certainement, nous ne ferons pas une table complète de base de données juste pour conserver la relation inversée. Plutôt, nous exploiterons la symétrie sous-jaccente entre lecteurs et auteurs pour simuler une table <code>reverse_relationships</code> en passant <code>followed_id</code> (<em>auteur_id</em>) comme clé primaire. En d'autres termes, là où l'association <code>relationship</code> utilise la clé étrangère <code>follower_id</code> (<em>lecteur_id</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:relationships</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;follower_id&quot;</span>
 </pre></div>
 </div>
 
 
-<p>the <code>reverse_relationships</code> association uses <code>followed_id</code>:</p>
+<p>… l'association <code>reverse_relationships</code> utilise <code>followed_id</code> (<em>auteur_id</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:reverse_relationships</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;followed_id&quot;</span>
 </pre></div>
 </div>
 
 
-<p>The <code>followers</code> association then gets built through the reverse relationships, as shown in <a class="ref" href="following-users#code:user_reverse_relationships">Listing&nbsp;12.17</a>.</p>
+<p>L'association <code>followers</code> (<em>lecteurs</em>) se contruit alors à travers la relationship inversée, comme le montre l'<a class="ref" href="following-users#code:user_reverse_relationships">extrait&nbsp;12.17</a>.</p>
 
 <div class="label" id="code:user_reverse_relationships"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.17.</span> <span class="description">Implementing <code>user.followers</code> using reverse relationships. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.17.</span> <span class="description">Implémenter <code>user.followers</code> en utilisant la relation inversée. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_132806d32e044ce44aa1289d43b9cb3b503dcf6f">
@@ -1529,7 +1530,7 @@
 </div></div>
 
 
-<p>(As with <a class="ref" href="following-users#code:user_relationships_association">Listing&nbsp;12.5</a>, the test for <code>dependent :destroy</code> is left as an exercise (<a class="ref" href="following-users#sec:following_exercises">Section&nbsp;12.5</a>).) Note that we actually have to include the <em>class</em> name for this association, i.e.,</p>
+<p>(Comme dans l'<a class="ref" href="following-users#code:user_relationships_association">extrait&nbsp;12.5</a>, le test de <code>dependent :destroy</code> est laissé en exercice (<a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a>).) Notez que nous avons en fait à inclure le nom de <em>classe</em> pour cette association, c'est-à-dire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:reverse_relationships</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;followed_id&quot;</span><span class="p">,</span>
                                  <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Relationship&quot;</span>
@@ -1537,42 +1538,42 @@
 </div>
 
 
-<p>because otherwise Rails will look for a <code>ReverseRelationship</code> class, which doesn&rsquo;t exist.</p>
+<p>… sinon, Rails cherchera une classe <code>ReverseRelationship</code>, qui n'existe pas.</p>
 
-<p>It&rsquo;s also worth noting that we could actually omit the <code>:source</code> key in this case, using simply</p>
+<p>Il est important de noter aussi que nous pourrions en fait omettre la clé <code>:source</code> dans ce cas, en utilisant simplement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:followers</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:reverse_relationships</span>
 </pre></div>
 </div>
 
 
-<p>since Rails will automatically look for the foreign key <code>follower_id</code> in this case. I&rsquo;ve kept the <code>:source</code> key to emphasize the parallel structure with the <code>has_many :following</code> association, but you are free to leave it out.</p>
+<p>… puisque Rails cherchera automatiquement une clé étrangère  <code>follower_id</code> dans ce cas. J'ai gardé la clé <code>:source</code> pour mettre l'accent sur le parallèle de structure avec l'association <code>has_many :following</code>, mais vous êtes libre de ne pas l'utiliser.</p>
 
-<p>With the code in <a class="ref" href="following-users#code:user_reverse_relationships">Listing&nbsp;12.17</a>, the following/follower associations are complete, and all the tests should pass. This section has placed rather heavy demands on your data modeling skills, and it&rsquo;s fine if it takes a while to soak in. In fact, one of the best ways to understand the associations is to use them in the web interface, as seen in the next section.</p>
+<p>Avec le code de l'<a class="ref" href="following-users#code:user_reverse_relationships">extrait&nbsp;12.17</a>, les associations lecteurs/auteur sont achevées, et tous les tests devraient réussir. Cette section a fait appel de façon intensive à vos compétence en matière de modélisation de données, [(and it&rsquo;s fine if it takes a while to soak in)(et c'est bien si ça prend un moment pour vous y tremper)]. En fait, l'une des meilleures façon de comprendre les associations est de les utiliser dans l'interface web, comme nous le verrons dans la prochaine section.</p>
 
 <div class="label" id="sec:a_web_interface_for_following_and_followers"></div>
 
 
-<h2><a id="sec:12.2" href="following-users#sec:a_web_interface_for_following_and_followers" class="heading"><span class="number">12.2</span> A web interface for following and followers</a></h2>
+<h2><a id="sec:12.2" href="following-users#sec:a_web_interface_for_following_and_followers" class="heading"><span class="number">12.2</span> Une interface web pour les auteurs et les lecteurs</a></h2>
 
 
-<p>In the introduction to this chapter, we saw a preview of the page flow for user following. In this section, we will implement the basic interface and following/unfollowing functionality shown in those mockups. We will also make separate pages to show the user following and followers arrays. In <a class="ref" href="following-users#sec:the_status_feed">Section&nbsp;12.3</a>, we&rsquo;ll complete our sample application by adding the user&rsquo;s status feed.</p>
+<p>Dans l'introduction de ce chapitre, nous avons vu un aperçu du flux de page pour les utilisateurs-lecteurs. Dans cette section, nous implémenterons l'interface de base et les fonctionnalités de suivi/arrêt de suivi montrées dans ces maquettes. Nous ferons aussi des pages séparées pour montrer les lecteurs de l'auteur et les tableaux d'auteurs suivis. À la <a class="ref" href="following-users#sec:the_status_feed">section&nbsp;12.3</a>, nous achèverons notre <em>Application Exemple</em> en ajoutant l'état d'alimentation de l'utilisateur.</p>
 
 <div class="label" id="sec:sample_following_data"></div>
 
 
-<h3><a id="sec:12.2.1" href="following-users#sec:sample_following_data" class="heading"><span class="number">12.2.1</span> Sample following data</a></h3>
+<h3><a id="sec:12.2.1" href="following-users#sec:sample_following_data" class="heading"><span class="number">12.2.1</span> Données de simple lecteur</a></h3>
 
 
-<p>As in previous chapters, we will find it convenient to use the sample data Rake task to fill the database with sample relationships. This will allow us to design the look and feel of the web pages first, deferring the back-end functionality until later in this section.</p>
+<p>Comme dans les chapitres précédents, nous trouvons pratique d'utiliser la tâche Rake d'exemple de données pour remplir la base de données avec des échantillons de relations. Cela nous permettra de concevoir l'aspect et la convivialité des pages web d'abord, différant les fonctionnalités de back-end pour plus tard dans cette section.</p>
 
-<p>When we last left the sample data populator in <a class="ref" href="user-microposts#code:sample_microposts">Listing&nbsp;11.20</a>, it was getting rather cluttered, so we begin by defining separate methods to make users and microposts, and then add sample relationship data using a new <code>make_relationships</code> method. The results are shown in <a class="ref" href="following-users#code:sample_relationships">Listing&nbsp;12.18</a>.</p>
+<p>Quand nous avons abandonné le peupleur d'échantillons de données de l'<a class="ref" href="user-microposts#code:sample_microposts">extrait&nbsp;11.20</a>, il était devenu plutôt encombré, donc nous allons commencer par définir des méthodes séparées pour créer des utilisateurs et des micro-messages, et ajouter alors des échantillons de données relationship en utilisant une nouvelle méthode <code>make_relationships</code>. Le résultat est montré dans l'<a class="ref" href="following-users#code:sample_relationships">extrait&nbsp;12.18</a>.</p>
 
 <div class="label" id="code:sample_relationships"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.18.</span> <span class="description">Adding following/follower relationships to the sample data. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.18.</span> <span class="description">Ajout des relations auteurs/lecteur pour les échantillons de données. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_819faa856237c44090fb85afa11bfc1fc8fc0ed4">
@@ -1645,7 +1646,7 @@
 </div></div>
 
 
-<p>Here the sample relationships are created using the code</p>
+<p>Ici, les échantillons de relation sont créées en utilisant le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">make_relationships</span>
   <span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span>
@@ -1659,9 +1660,9 @@
 </div>
 
 
-<p>We somewhat arbitrarily arrange for the first user to follow the next&nbsp;50 users, and then have users with ids 4 through 41 follow that user back. The resulting relationships will be sufficient for developing the application interface.</p>
+<p>Nous nous arrangeons un peu arbitrairement pour que le premier utilisateur suive les 50 utilisateurs suivants, et puis avoir que les utilisateurs entre les <code>ids</code> 4 à 41 suivent cet utilisateur en retour. La relation en résultant sera suffisante pour développer l'interface de l'application.</p>
 
-<p>To execute the code in <a class="ref" href="following-users#code:sample_relationships">Listing&nbsp;12.18</a>, populate the database as usual:</p>
+<p>Pour exécuter le code de l'<a class="ref" href="following-users#code:sample_relationships">extrait&nbsp;12.18</a>, peuplons la base de données comme d'habitude&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:populate
 </pre></div>
@@ -1673,25 +1674,24 @@
 <div class="label" id="sec:stats_and_a_follow_form"></div>
 
 
-<h3><a id="sec:12.2.2" href="following-users#sec:stats_and_a_follow_form" class="heading"><span class="number">12.2.2</span> Stats and a follow form</a></h3>
+<h3><a id="sec:12.2.2" href="following-users#sec:stats_and_a_follow_form" class="heading"><span class="number">12.2.2</span> Statistiques et un formulaire de suivi</a></h3>
 
 
-<p>Now that our sample users have both following and followers arrays, we need to update the profile pages and home pages to reflect this. We&rsquo;ll start by making a partial to display the following and follower statistics on the profile and home pages, as mocked up in <a class="ref" href="following-users#fig:page_flow_profile_mockup">Figure&nbsp;12.1</a> and <a class="ref" href="following-users#fig:page_flow_home_page_feed_mockup">Figure&nbsp;12.5</a>. The result will be displays of the number following and the number of followers, together with links to their dedicated display pages. We&rsquo;ll next add a follow/unfollow form, and then make dedicated pages for showing user following and followers.</p>
+<p>Maintenant que nos échantillons d'utilisateurs ont des tableaux de lecteurs et suivent des auteurs, nous avons besoin d'actualiser les pages de profil et d'accueil pour le refléter. Nous allons commencer par faire un partiel pour afficher les statistiques sur les pages de profil et d'accueil, comme le montre la maquette de l'<a class="ref" href="following-users#fig:page_flow_profile_mockup">illustration&nbsp;12.1</a> et de l'<a class="ref" href="following-users#fig:page_flow_home_page_feed_mockup">illustration&nbsp;12.5</a>.Le résultat affichera le nombre d'auteurs suivis et de lecteurs, mis avec des liens vers leurs pages respectives. Nous ajouterons ensuite le formulaire suivre/arrêter de suivre, et fabriquerons ensuite les pages dédiées pour afficher les utilisateurs suivis et les utilisateurs qui suivent l'utilisateur courant.</p>
 
 <div class="label" id="fig:stats_partial_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/stats_partial_mockup.png" alt="stats_partial_mockup" /></span></div><div class="caption"><span class="header">Figure 12.10: </span><span class="description">A mockup of the stats partial.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/stats_partial_mockup.png" alt="stats_partial_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.10: </span><span class="description">Maquette du partiel pour les statistiques.</span></div></div>
 
 
-<p>A close-up of the stats area, taken from the mockup in <a class="ref" href="following-users#fig:page_flow_profile_mockup">Figure&nbsp;12.1</a>, appears in <a class="ref" href="following-users#fig:stats_partial_mockup">Figure&nbsp;12.10</a>.
-These stats consist of a count of the number of users the current user is following and that user&rsquo;s number of followers, each of which should be a link to its respective dedicated display page. In <a class="ref" href="filling-in-the-layout#top">Chapter&nbsp;5</a>, we stubbed out such links with the dummy text&nbsp;<code>&rsquo;#&rsquo;</code>, but that was before we had much experience with routes. This time, although we&rsquo;ll defer the actual pages to <a class="ref" href="following-users#sec:following_and_followers_pages">Section&nbsp;12.2.3</a>, we&rsquo;ll make the routes now, as seen in <a class="ref" href="following-users#code:following_followers_actions_routes">Listing&nbsp;12.19</a>. This code uses the <code>:member</code> method inside a <code>resources</code> <em>block</em>, which we haven&rsquo;t seen before, but see if you can guess what it does.</p>
+<p>Un gros plan de la zone des statistiques, prise de la maquette de l'<a class="ref" href="following-users#fig:page_flow_profile_mockup">illustration&nbsp;12.1</a>, est montré dans l'<a class="ref" href="following-users#fig:stats_partial_mockup">illustration&nbsp;12.10</a>. Ces statistiques consistent en un compte des utilisateurs que l'utilisateur courant suit et du nombre d'utilisateurs qui le suivent, chacun d'eux devant être un lien vers sa page d'affichage respective. Au <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;5</a>, nous avons esquissé de tels liens avec un texte fictif&nbsp;<code>&rsquo;#&rsquo;</code>, mais c'était avant que nous ayons plus d'expérience des routes. Cette fois, bien que nous différerons les pages réelles à la <a class="ref" href="following-users#sec:following_and_followers_pages">section&nbsp;12.2.3</a>, nous allons faire les routes maintenant, comme montré dans l'<a class="ref" href="following-users#code:following_followers_actions_routes">extrait&nbsp;12.19</a>. Ce code utilise la méthode <code>:member</code> à l'intérieur d'un <em>bloc</em> <code>resource</code>, que nous n'avons jamais vu avant, mais voyons si vous pouvez deviner ce qu'il fait.</p>
 
 <div class="label" id="code:following_followers_actions_routes"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.19.</span> <span class="description">Adding <code>following</code> and <code>followers</code> actions to the Users controller. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.19.</span> <span class="description">Ajout des actions <code>following</code> et <code>followers</code> au contrôleur Users. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_62203487439e8b98201bbc676fd51750b13e44c7">
@@ -1728,7 +1728,7 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>You might suspect that the URLs for user following and followers will look like <tt>/users/1/following</tt> and <tt>/users/1/followers</tt>, and that is exactly what the code in <a class="ref" href="following-users#code:following_followers_actions_routes">Listing&nbsp;12.19</a> does. Since both pages will be showing data, we use <code>get</code> to arrange for the URLs to respond to <tt>GET</tt> requests (as required by the REST convention for such pages), and the <code>member</code> method means that the routes respond to URLs containing the user id. (The other possibility, <code>collection</code>, works without the id, so that</p>
+<p>Vous pouvez imaginer que les URLs pour l'utilisateur suivant (<em>following</em>) et suiveur (<em>followers</em>) ressembleront à <tt>/users/1/following</tt> et <tt>/users/1/followers</tt> et c'est exactement ce que fait le code dans l'<a class="ref" href="following-users#code:following_followers_actions_routes">extrait&nbsp;12.19</a>. Puisque les deux pages affichera des données, nous utilisons <code>get</code> pour faire en sorte que les URLs répondent à la requête <tt>GET</tt> (comme requis par la convention REST pour de telles pages), et la méthode <code>member</code> signifie que les routes répondent aux URLs contenant l'<code>id</code> de l'utilisateur (l'autre possibilité, <code>collection</code>, fonctionne sans <code>id</code>, de telle sorte que&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
   <span class="n">collection</span> <span class="k">do</span>
@@ -1739,21 +1739,21 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>would respond to the URL <tt>/users/tigers</tt>&mdash;presumably to display all the tigers in our application. For more details on such routing options, see the <a href="http://guides.rubyonrails.org/routing.html">Rails Guides article on &ldquo;Rails Routing from the Outside In&rdquo;</a>.) A table of the routes generated by <a class="ref" href="following-users#code:following_followers_actions_routes">Listing&nbsp;12.19</a> appears in <a class="ref" href="following-users#table:following_routes">Table&nbsp;12.1</a>; note the named routes for the following and followers pages, which we&rsquo;ll put to use momentarily.</p>
+<p>… devra répondre à l'URL <tt>/users/tigers</tt> &mdash;vraisemblablement pour afficher tous les tigres dans notre application. Pour plus de détails sur de telles options de routage, voyez l'<a href="http://guides.rubyonrails.org/routing.html">article du Rails Guides à propos de &ldquo;Rails Routing from the Outside In&rdquo;</a>). Une table des routes généré par l'<a class="ref" href="following-users#code:following_followers_actions_routes">extrait&nbsp;12.19</a> est présentée dans la <a class="ref" href="following-users#table:following_routes">table&nbsp;12.1</a>&nbsp;; notez les routes nommées pour les pages lecteurs (<em>following</em>) et auteurs (<em>followers</em>) que nous serons amenés à utiliser dans un instant.</p>
 
 <div class="label" id="table:following_routes"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Named route</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/following</tt></td><td class="align_left"><code>following</code></td><td class="align_left"><code>following_user_path(1)</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/followers</tt></td><td class="align_left"><code>followers</code></td><td class="align_left"><code>followers_user_path(1)</code></td></tr></table></div><div class="caption"><span class="header">Table 12.1: </span><span class="description">RESTful routes provided by the custom rules in resource in <a class="ref" href="following-users#code:following_followers_actions_routes">Listing&nbsp;12.19</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Requête HTTP</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Route nommé</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/following</tt></td><td class="align_left"><code>following</code></td><td class="align_left"><code>following_user_path(1)</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/followers</tt></td><td class="align_left"><code>followers</code></td><td class="align_left"><code>followers_user_path(1)</code></td></tr></table></div><div class="caption"><span class="header">Table 12.1: </span><span class="description">Routes RESTful fournies par les règles personnalisées dans la ressource de l'<a class="ref" href="following-users#code:following_followers_actions_routes">extrait&nbsp;12.19</a>.</span></div></div>
 
 
-<p>With the routes defined, we are now in a position to make tests for the stats partial. (We could have written the tests first, but the named routes would have been hard to motivate without the updated routes file.) We could write tests for the user profile page, since the stats partial will appear there, but it will also appear on the Home page, and this is a nice opportunity to refactor the Home page tests to take into account users signing in. The result appears in <a class="ref" href="following-users#code:stats_view_test">Listing&nbsp;12.20</a>.</p>
+<p>Les routes une fois définies, nous sommes maintenant en mesure de construire les tests pour le partiel statistiques (nous aurions pu écrire les tests d'abord, mais les routes nommées auraient été difficiles à motiver sans le fichier routes actualisé). Nous pourrions écrire les tests pour la page de profil de l'utilisateur, puisque le partiel des statistiques apparaitra là, mais il apparaitra aussi sur la page d'accueil, et c'est une bonne opportunité pour restructurer les tests de la page d'accueil pour prendre en compte les utilisateur identifiés. Le résultat apparait dans l'<a class="ref" href="following-users#code:stats_view_test">extrait&nbsp;12.20</a>.</p>
 
 <div class="label" id="code:stats_view_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.20.</span> <span class="description">Testing the following/follower statistics on the Home page. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.20.</span> <span class="description">Testes les statistiques auteurs/lecteurs sur la page d'accueil. <br /> <code>spec/controllers/pages_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_2863142d450d001da4a6c3af840f777a2a0bd98c">
@@ -1787,23 +1787,23 @@ These stats consist of a count of the number of users the current user is follow
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;GET &#39;home&#39;&quot;</span> <span class="k">do</span>
 
-    <span class="n">describe</span> <span class="s2">&quot;when not signed in&quot;</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">&quot;quand pas identifié&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
         <span class="n">get</span> <span class="ss">:home</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should be successful&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait réussir&quot;</span> <span class="k">do</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should have the right title&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
                                       <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@base_title</span><span class="si">}</span><span class="s2"> | Home&quot;</span><span class="p">)</span>
       <span class="k">end</span>
     <span class="k">end</span>
 
-    <span class="n">describe</span> <span class="s2">&quot;when signed in&quot;</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">&quot;quand identifié&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
         <span class="vi">@user</span> <span class="o">=</span> <span class="n">test_sign_in</span><span class="p">(</span><span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">))</span>
@@ -1811,7 +1811,7 @@ These stats consist of a count of the number of users the current user is follow
         <span class="n">other_user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">&quot;should have the right follower/following counts&quot;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon compte d'auteurs et de lecteurs&quot;</span> <span class="k">do</span>
         <span class="n">get</span> <span class="ss">:home</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">following_user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span>
                                            <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;0 following&quot;</span><span class="p">)</span>
@@ -1825,7 +1825,7 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>The core of this test is the expectation that the following and follower counts appear on the page, together with the right URLs:</p>
+<p>Le cœur de ce test est l'attente que le compte de lecteurs et d'auteurs suivi apparaisse sur la page, accompagnés des bonnes URLs&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">following_user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">),</span>
                                    <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;0 following&quot;</span><span class="p">)</span>
@@ -1835,15 +1835,15 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>Here we have used the named routes shown in <a class="ref" href="following-users#table:following_routes">Table&nbsp;12.1</a> to verify that the links have the right URLs.</p>
+<p>Nous avons utilisé ici la route nommée de la <a class="ref" href="following-users#table:following_routes">table&nbsp;12.1</a> pour vérifier que les liens avaient les bons URLs.</p>
 
-<p>The application code for the stats partial is just a table inside a div, as shown in <a class="ref" href="following-users#code:stats_partial">Listing&nbsp;12.21</a>.</p>
+<p>Le code de l'application pour le partiel des statistiques est just une <code>table</code> à l'intérieur d'un <code>div</code> comme le montre l'<a class="ref" href="following-users#code:stats_partial">extrait&nbsp;12.21</a>.</p>
 
 <div class="label" id="code:stats_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.21.</span> <span class="description">A partial for displaying follower stats. <br /> <code>app/views/shared/_stats.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.21.</span> <span class="description">Un partile pour afficher les statistiques lecteur. <br /> <code>app/views/shared/_stats.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_a7dbd5097cb60ae7e786df8047bd5133445b432a">
@@ -1891,39 +1891,39 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>Here the user following and follower counts are calculated through the associations using</p>
+<p>Ici les comptes utilisateur de lecteurs et d'auteurs suivis sont calculés à travers l'association en utilisant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">count</span>
 </pre></div>
 </div>
 
 
-<p>and</p>
+<p>… et&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">count</span>
 </pre></div>
 </div>
 
 
-<p>Compare these to the microposts count from <a class="ref" href="user-microposts#code:user_show_microposts">Listing&nbsp;11.16</a>, where we wrote</p>
+<p>Comparez ceci aux comptes de micro-messages de l'<a class="ref" href="user-microposts#code:user_show_microposts">extrait&nbsp;11.16</a>, où nous avions écrit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">count</span>
 </pre></div>
 </div>
 
 
-<p>to count the microposts.</p>
+<p>… pour compter les micro-messages.</p>
 
-<p>Since we will be including the stats on both the user show pages and the home page, the first line of <a class="ref" href="following-users#code:stats_partial">Listing&nbsp;12.21</a> picks the right one using</p>
+<p>Puisque nous inclurons les statistiques sur la page d'affichage ainsi que sur la page d'accueil de l'utilisateur, la première ligne de l'<a class="ref" href="following-users#code:stats_partial">extrait&nbsp;12.21</a> choisit la bonne en utilisant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="vi">@user</span> <span class="o">||=</span> <span class="n">current_user</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>As discussed in <a class="ref" href="sign-in-sign-out#sidebar:or_equals">Box&nbsp;9.4</a>, this does nothing when <code>@user</code> is not <code>nil</code> (as on a profile page), but when it is (as on the Home page) it sets <code>@user</code> to the current user.</p>
+<p>Comme discuté dans la <a class="ref" href="sign-in-sign-out#sidebar:or_equals">Box&nbsp;9.4</a>, cela ne fait rien quand <code>@user</code> n'est pas <code>nil</code> (comme sur la page de profil), mais quand il l'est (comme sur la page d'accueil), il règle la valeur de <code>@user</code> à l'utilisateur courant.</p>
 
-<p>One final detail worth noting is the presence of CSS ids on some elements, as in</p>
+<p>Un détail final qui vaut le coup d'être noté eset la présence des ids CSS sur certains éléments, comme dans&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;following&quot;</span> <span class="na">class=</span><span class="s">&quot;stat&quot;</span><span class="nt">&gt;</span>
 ...
@@ -1932,15 +1932,15 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>This is for the benefit of the Ajax implementation in <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">Section&nbsp;12.2.5</a>, which accesses elements on the page using their unique ids.</p>
+<p>C'est pour le bénéfice de l'implémentation Ajax à la <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a>, qui accède aux élément de la page en utilisant leur identifiant unique.</p>
 
-<p>With the partial in hand, including the stats on the Home page is easy, as shown in <a class="ref" href="following-users#code:home_page_stats">Listing&nbsp;12.22</a>. (This also gets the test in <a class="ref" href="following-users#code:stats_view_test">Listing&nbsp;12.20</a> to pass.) The result appears in <a class="ref" href="following-users#fig:home_page_follow_stats">Figure&nbsp;12.11</a>.</p>
+<p>Avec le partiel en main, inclure les statistiques sur la page d'accueil est facile, comme montré dans l'<a class="ref" href="following-users#code:home_page_stats">extrait&nbsp;12.22</a> (ce fait aussi réussir le test de l'<a class="ref" href="following-users#code:stats_view_test">extrait&nbsp;12.20</a>). Le résultat est présenté dans l'<a class="ref" href="following-users#fig:home_page_follow_stats">illustration&nbsp;12.11</a>.</p>
 
 <div class="label" id="code:home_page_stats"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.22.</span> <span class="description">Adding follower stats to the Home page. <br /> <code>app/views/pages/home.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.22.</span> <span class="description">Ajouté les statistiques lecteur à la page d'accueil. <br /> <code>app/views/pages/home.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_a04967c56a233cc858e284e66c959ec0d6d189e2">
@@ -1986,16 +1986,16 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:home_page_follow_stats"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_follow_stats.png" alt="home_page_follow_stats" /></span></div><div class="caption"><span class="header">Figure 12.11: </span><span class="description">The Home page (<a href="http://localhost:3000/"><tt>/</tt></a>) with follow stats.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_follow_stats-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_follow_stats.png" alt="home_page_follow_stats" /></span></div><div class="caption"><span class="header">Illustration 12.11: </span><span class="description">La page d'accueil (<a href="http://localhost:3000/"><tt>/</tt></a>) avec les statistiques de suivi.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_follow_stats-full.png">(taille normale)</a></span></div></div>
 
 
-<p>We&rsquo;ll render the stats partial on the profile page in a moment, but first let&rsquo;s make a partial for the follow/unfollow button, as shown in <a class="ref" href="following-users#code:follow_form_partial">Listing&nbsp;12.23</a>.</p>
+<p>Nous rendrons le partiel des statistiques sur la page de profil dans un moment, mais d'abord faisant un partiel pour le bouton suivre/ne plus suivre comme montré dans l'<a class="ref" href="following-users#code:follow_form_partial">extrait&nbsp;12.23</a>.</p>
 
 <div class="label" id="code:follow_form_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.23.</span> <span class="description">A partial for a follow/unfollow form. <br /> <code>app/views/users/_follow_form.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.23.</span> <span class="description">Un partiel pour le formulaire suivre/ne plus suivre. <br /> <code>app/views/users/_follow_form.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_2337bfec11e8c2f2a07030f34310328d20202f20">
@@ -2031,13 +2031,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>This does nothing but defer the real work to <code>follow</code> and <code>unfollow</code> partials, which need a new routes file with rules for the Relationships resource, which follows the Microposts resource example (<a class="ref" href="user-microposts#code:microposts_resource">Listing&nbsp;11.21</a>), as seen in  <a class="ref" href="following-users#code:relationships_resource">Listing&nbsp;12.24</a>.</p>
+<p>Cela ne fait rien d'autre que différer le vrai travail aux partiels <code>follow</code> (<em>suivre</em>) et <code>unfollow</code> (<em>ne plus suivre</em>), qui ont besoin de nouvelles routes avec des règles pour la ressource Relationships, qui suivent l'exemple de la ressource Microposts (<a class="ref" href="user-microposts#code:microposts_resource">extrait&nbsp;11.21</a>), comme présenté dans l'<a class="ref" href="following-users#code:relationships_resource">extrait&nbsp;12.24</a>.</p>
 
 <div class="label" id="code:relationships_resource"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.24.</span> <span class="description">Adding the routes for user relationships. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.24.</span> <span class="description">Ajout des routes pour les relations de l'utilisateur. <br /> <code>config/routes.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_90ba233fff15a344697da7a6de491ab912922262">
@@ -2075,13 +2075,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>The follow/unfollow partials themselves are shown in <a class="ref" href="following-users#code:follow_form">Listing&nbsp;12.25</a> and <a class="ref" href="following-users#code:unfollow_form">Listing&nbsp;12.26</a>.</p>
+<p>Les partiels suivre/ne plus suivre eux-mêmes sont montrés dans l'<a class="ref" href="following-users#code:follow_form">extrait&nbsp;12.25</a> et l'<a class="ref" href="following-users#code:unfollow_form">extrait&nbsp;12.26</a>.</p>
 
 <div class="label" id="code:follow_form"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.25.</span> <span class="description">A form for following a user. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.25.</span> <span class="description">Un formulaire pour suivre un utilisateur. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_d16e8264b318f6d997a97ad0b07ccaefea055276">
@@ -2119,7 +2119,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.26.</span> <span class="description">A form for unfollowing a user. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.26.</span> <span class="description">Un formulaire pour ne plus suivre un utilisateur. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_2fe424f6ab189771960f228241a2f4b9b6b0f413">
@@ -2150,7 +2150,7 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>These two forms both use <code>form_for</code> to manipulate a Relationship model object; the main difference between the two is that <a class="ref" href="following-users#code:follow_form">Listing&nbsp;12.25</a> builds a <em>new</em> relationship, whereas <a class="ref" href="following-users#code:unfollow_form">Listing&nbsp;12.26</a> finds the existing relationship. Naturally, the former sends a <tt>POST</tt> request to the Relationships controller to <code>create</code> a relationship, while the latter sends a <tt>DELETE</tt> request to <code>destroy</code> a relationship. (We&rsquo;ll write these actions in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">Section&nbsp;12.2.4</a>.) Finally, you&rsquo;ll note that the follow/unfollow form doesn&rsquo;t have any content other than the button, but it still needs to send the <code>followed_id</code>, which we accomplish with <code>hidden_field</code>; this produces HTML of the form</p>
+<p>Ces formulaires utilisent tous deux <code>form_for</code> pour manipuler objet de modèle Relationship&nbsp;; la différence principale entre les deux est que l'<a class="ref" href="following-users#code:follow_form">extrait&nbsp;12.25</a> construit une  <em>nouvelle</em> relation, tandis que l'<a class="ref" href="following-users#code:unfollow_form">extrait&nbsp;12.26</a> cherche la relation existente. Naturellement, la première envoie une requête <tt>POST</tt> au contrôleur Relationships pour créer (<code>create</code>) une relation, tandis que la seconde envoie une requête <tt>DELETE</tt> pour détruire (<code>destroy</code>) une relation (nous écrirons ces actions à la <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a>) Enfin, vous noterez que le formulaire suivre/ne plus suivre n'a aucun contenu autre que le bouton, mais il a encore besoin d'envoyer le <code>followed_id</code>, ce que nous accomplirons avec <code>hidden_field</code>&nbsp;; cela produit un code HTML de la forme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;relationship_followed_id&quot;</span> <span class="na">name=</span><span class="s">&quot;relationship[followed_id]&quot;</span>
 <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span> <span class="nt">/&gt;</span>
@@ -2158,15 +2158,15 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>which puts the relevant information on the page without displaying it in the browser.</p>
+<p>… qui place l'information voulu sur la page sans l'afficher dans le navigateur.</p>
 
-<p>We can now include the follow form and the following statistics on the user profile page simply by rendering the partials, as shown in <a class="ref" href="following-users#code:user_follow_form_profile_stats">Listing&nbsp;12.27</a>. Profiles with follow and unfollow buttons, respectively, appear in <a class="ref" href="following-users#fig:profile_follow_button">Figure&nbsp;12.12</a> and <a class="ref" href="following-users#fig:profile_unfollow_button">Figure&nbsp;12.13</a>.</p>
+<p>Nous pouvons maintenant inclure le formulaire de suivi et les statistiques de suivi sur la page de profil simplement en rendant les partiels, comme montré dans l'<a class="ref" href="following-users#code:user_follow_form_profile_stats">extrait&nbsp;12.27</a>. Les profils avec les boutons «&nbsp;suivre&nbsp;» et «&nbsp;ne plus suivre&nbsp;», respectivement, apparaissent dans l'<a class="ref" href="following-users#fig:profile_follow_button">illustration&nbsp;12.12</a> et l'<a class="ref" href="following-users#fig:profile_unfollow_button">illustration&nbsp;12.13</a>.</p>
 
 <div class="label" id="code:user_follow_form_profile_stats"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.27.</span> <span class="description">Adding the follow form and follower stats to the user profile page. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.27.</span> <span class="description">Ajout du formulaire de suivi et des statistiques de suivi à la page profil de l'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e53fcc86528f05f01a71c16f583e4a20a89e82c2">
@@ -2218,7 +2218,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:profile_follow_button"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_follow_button.png" alt="profile_follow_button" /></span></div><div class="caption"><span class="header">Figure 12.12: </span><span class="description">A user profile with a follow button (<a href="http://localhost:3000/users/8"><tt>/users/8</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/profile_follow_button-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_follow_button.png" alt="profile_follow_button" /></span></div><div class="caption"><span class="header">Illustration 12.12: </span><span class="description">Un profil d'utilisateur avec un bouton «&nbsp;suivre&nbsp;» (<a href="http://localhost:3000/users/8"><tt>/users/8</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/profile_follow_button-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2226,23 +2226,23 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:profile_unfollow_button"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_unfollow_button.png" alt="profile_unfollow_button" /></span></div><div class="caption"><span class="header">Figure 12.13: </span><span class="description">A user profile with an unfollow button (<a href="http://localhost:3000/users/8"><tt>/users/6</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/profile_unfollow_button-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_unfollow_button.png" alt="profile_unfollow_button" /></span></div><div class="caption"><span class="header">Illustration 12.13: </span><span class="description">Un profil d'utilisateur avec un bouton «&nbsp;ne plus suivre&nbsp;» (<a href="http://localhost:3000/users/8"><tt>/users/6</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/profile_unfollow_button-full.png">(taille normale)</a></span></div></div>
 
 
-<p>We&rsquo;ll get these buttons working soon enough&mdash;in fact, we&rsquo;ll do it two ways, the standard way (<a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">Section&nbsp;12.2.4</a>) and using Ajax (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">Section&nbsp;12.2.5</a>)&mdash;but first we&rsquo;ll finish the HTML interface by making the following and followers pages.</p>
+<p>Nous obtiendrons le fonctionnement de ces boutons bien assez tôt &mdash;&nbsp;en fait, nous le ferons de deux manières, la façon stardard (<a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a>) et celle en utilisant Ajax (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a>)&nbsp;&mdash; mais d'abord nous allons finir le code HTML de l'interface en construisant les pages des lecteurs et des auteurs de l'utilisateur.</p>
 
 <div class="label" id="sec:following_and_followers_pages"></div>
 
-
+<!-- FIN FRENCH -->
 <h3><a id="sec:12.2.3" href="following-users#sec:following_and_followers_pages" class="heading"><span class="number">12.2.3</span> Following and followers pages</a></h3>
 
 
-<p>Pages to display user following and followers will resemble a hybrid of the user profile page and the user index page (<a class="ref" href="updating-showing-and-deleting-users#sec:user_index">Section&nbsp;10.3.1</a>), with a sidebar of user information (including the following stats) and a table of users. In addition, we&rsquo;ll include a raster of user profile image links in the sidebar. Mockups matching these requirements appear in <a class="ref" href="following-users#fig:following_mockup">Figure&nbsp;12.14</a> (following) and <a class="ref" href="following-users#fig:followers_mockup">Figure&nbsp;12.15</a> (followers).</p>
+<p>Pages to display user following and followers will resemble a hybrid of the user profile page and the user index page (<a class="ref" href="updating-showing-and-deleting-users#sec:user_index">section&nbsp;10.3.1</a>), with a sidebar of user information (including the following stats) and a table of users. In addition, we&rsquo;ll include a raster of user profile image links in the sidebar. Mockups matching these requirements appear in <a class="ref" href="following-users#fig:following_mockup">illustration&nbsp;12.14</a> (following) and <a class="ref" href="following-users#fig:followers_mockup">illustration&nbsp;12.15</a> (followers).</p>
 
 <div class="label" id="fig:following_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/following_mockup.png" alt="following_mockup" /></span></div><div class="caption"><span class="header">Figure 12.14: </span><span class="description">A mockup of the user following page.&nbsp;<a href="http://railstutorial.org/images/figures/following_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/following_mockup.png" alt="following_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.14: </span><span class="description">A mockup of the user following page.&nbsp;<a href="http://railstutorial.org/images/figures/following_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2250,16 +2250,16 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:followers_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/followers_mockup.png" alt="followers_mockup" /></span></div><div class="caption"><span class="header">Figure 12.15: </span><span class="description">A mockup of the user followers page.&nbsp;<a href="http://railstutorial.org/images/figures/followers_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/followers_mockup.png" alt="followers_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.15: </span><span class="description">A mockup of the user followers page.&nbsp;<a href="http://railstutorial.org/images/figures/followers_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Our first step is to get the following and followers links to work. We&rsquo;ll follow Twitter&rsquo;s lead and have both pages to require user signin. For signed-in users, the pages should have links for following and followers, respectively. <a class="ref" href="following-users#code:following_followers_tests">Listing&nbsp;12.28</a> expresses these expectations in code.<sup class="footnote" id="fnref:12.12"><a href="#fn:12.12">12</a></sup></p>
+<p>Our first step is to get the following and followers links to work. We&rsquo;ll follow Twitter&rsquo;s lead and have both pages to require user signin. For signed-in users, the pages should have links for following and followers, respectively. <a class="ref" href="following-users#code:following_followers_tests">extrait&nbsp;12.28</a> expresses these expectations in code.<sup class="footnote" id="fnref:12.12"><a href="#fn:12.12">12</a></sup></p>
 
 <div class="label" id="code:following_followers_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.28.</span> <span class="description">Test for the <code>following</code> and <code>followers</code> actions. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.28.</span> <span class="description">Test for the <code>following</code> and <code>followers</code> actions. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_04a4aa6b0115df17434a57768a1bca0b3212f283">
@@ -2288,7 +2288,7 @@ These stats consist of a count of the number of users the current user is follow
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;follow pages&quot;</span> <span class="k">do</span>
 
-    <span class="n">describe</span> <span class="s2">&quot;when not signed in&quot;</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">&quot;quand pas identifié&quot;</span> <span class="k">do</span>
 
       <span class="n">it</span> <span class="s2">&quot;should protect &#39;following&#39;&quot;</span> <span class="k">do</span>
         <span class="n">get</span> <span class="ss">:following</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="mi">1</span>
@@ -2301,7 +2301,7 @@ These stats consist of a count of the number of users the current user is follow
       <span class="k">end</span>
     <span class="k">end</span>
 
-    <span class="n">describe</span> <span class="s2">&quot;when signed in&quot;</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">&quot;quand identifié&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
         <span class="vi">@user</span> <span class="o">=</span> <span class="n">test_sign_in</span><span class="p">(</span><span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">))</span>
@@ -2327,13 +2327,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>The only tricky part of the implementation is realizing that we need to add two new actions to the Users controller; based on the routes defined in <a class="ref" href="following-users#code:following_followers_actions_routes">Listing&nbsp;12.19</a>, we need to call them <code>following</code> and <code>followers</code>. Each action needs to set a title, find the user, retrieve either <code>@user.following</code> or <code>@user.followers</code> (in paginated form), and then render the page. The result appears in <a class="ref" href="following-users#code:following_followers_actions">Listing&nbsp;12.29</a>.</p>
+<p>The only tricky part of the implementation is realizing that we need to add two new actions to the Users controller; based on the routes defined in <a class="ref" href="following-users#code:following_followers_actions_routes">extrait&nbsp;12.19</a>, we need to call them <code>following</code> and <code>followers</code>. Each action needs to set a title, find the user, retrieve either <code>@user.following</code> or <code>@user.followers</code> (in paginated form), and then render the page. The result appears in <a class="ref" href="following-users#code:following_followers_actions">extrait&nbsp;12.29</a>.</p>
 
 <div class="label" id="code:following_followers_actions"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.29.</span> <span class="description">The <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.29.</span> <span class="description">The <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_c634255abf6c0b429341c6e98aa424bf524dfd64">
@@ -2382,13 +2382,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>Note here that both actions make an <em>explicit</em> call to <code>render</code>, in this case rendering a view called <code>show_follow</code>, which we must create. The reason for the common view is that the ERb is nearly identical for the two cases, and <a class="ref" href="following-users#code:show_follow_view">Listing&nbsp;12.30</a> covers them both.</p>
+<p>Note here that both actions make an <em>explicit</em> call to <code>render</code>, in this case rendering a view called <code>show_follow</code>, which we must create. The reason for the common view is that the ERb is nearly identical for the two cases, and <a class="ref" href="following-users#code:show_follow_view">extrait&nbsp;12.30</a> covers them both.</p>
 
 <div class="label" id="code:show_follow_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.30.</span> <span class="description">The <code>show_follow</code> view used to render following and followers. <br /> <code>app/views/users/show_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.30.</span> <span class="description">The <code>show_follow</code> view used to render following and followers. <br /> <code>app/views/users/show_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b3e76dd08b784ede6d1f05b441b5f30ca0d8b762">
@@ -2440,19 +2440,19 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>There&rsquo;s a second detail in <a class="ref" href="following-users#code:following_followers_actions">Listing&nbsp;12.29</a> worth noting: in order to protect the pages for following and followers from unauthorized access, we have changed the authentication before filter to use <code>:except</code> instead of <code>:only</code>. So far in this tutorial, we have used <code>:only</code> to indicate which actions the filter gets applied to; with the addition of the new protected actions, the balance has shifted, and it is simpler to indicate which actions <em>shouldn&rsquo;t</em> be filtered. We do this with the <code>:except</code> option to the <code>authenticate</code> before filter:</p>
+<p>There&rsquo;s a second detail in <a class="ref" href="following-users#code:following_followers_actions">extrait&nbsp;12.29</a> worth noting: in order to protect the pages for following and followers from unauthorized access, we have changed the authentication before filter to use <code>:except</code> instead of <code>:only</code>. So far in this tutorial, we have used <code>:only</code> to indicate which actions the filter gets applied to; with the addition of the new protected actions, the balance has shifted, and it is simpler to indicate which actions <em>shouldn&rsquo;t</em> be filtered. We do this with the <code>:except</code> option to the <code>authenticate</code> before filter:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:except</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="o">]</span>
 </pre></div>
 </div>
 
 
-<p>With that, the tests should now be passing, and the pages should render as shown in <a class="ref" href="following-users#fig:user_following">Figure&nbsp;12.16</a> (following) and <a class="ref" href="following-users#fig:user_followers">Figure&nbsp;12.17</a> (followers).</p>
+<p>With that, the tests should now be passing, and the pages should render as shown in <a class="ref" href="following-users#fig:user_following">illustration&nbsp;12.16</a> (following) and <a class="ref" href="following-users#fig:user_followers">illustration&nbsp;12.17</a> (followers).</p>
 
 <div class="label" id="fig:user_following"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_following.png" alt="user_following" /></span></div><div class="caption"><span class="header">Figure 12.16: </span><span class="description">Showing the users being followed by the current user.&nbsp;<a href="http://railstutorial.org/images/figures/user_following-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_following.png" alt="user_following" /></span></div><div class="caption"><span class="header">Illustration 12.16: </span><span class="description">Showing the users being followed by the current user.&nbsp;<a href="http://railstutorial.org/images/figures/user_following-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2460,10 +2460,10 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:user_followers"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_followers.png" alt="user_followers" /></span></div><div class="caption"><span class="header">Figure 12.17: </span><span class="description">Showing the current user&rsquo;s followers.&nbsp;<a href="http://railstutorial.org/images/figures/user_followers-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_followers.png" alt="user_followers" /></span></div><div class="caption"><span class="header">Illustration 12.17: </span><span class="description">Showing the current user&rsquo;s followers.&nbsp;<a href="http://railstutorial.org/images/figures/user_followers-full.png">(taille normale)</a></span></div></div>
 
 
-<p>You might note that, even with the common <code>show_followers</code> partial, the <code>following</code> and <code>followers</code> actions still have a lot of duplication. Moreover, the <code>show_followers</code> partial itself shares common features with the user show page. <a class="ref" href="following-users#sec:following_exercises">Section&nbsp;12.5</a> includes exercises to eliminate these sources of duplication.</p>
+<p>You might note that, even with the common <code>show_followers</code> partial, the <code>following</code> and <code>followers</code> actions still have a lot of duplication. Moreover, the <code>show_followers</code> partial itself shares common features with the user show page. <a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a> includes exercises to eliminate these sources of duplication.</p>
 
 <div class="label" id="sec:a_working_follow_button_the_standard_way"></div>
 
@@ -2471,13 +2471,13 @@ These stats consist of a count of the number of users the current user is follow
 <h3><a id="sec:12.2.4" href="following-users#sec:a_working_follow_button_the_standard_way" class="heading"><span class="number">12.2.4</span> A working follow button the standard way</a></h3>
 
 
-<p>Now that our views are in order, it&rsquo;s time to get the follow/unfollow buttons working. Since following a user creates a relationship, and unfollowing a user destroys a relationship, this involves writing the <code>create</code> and <code>destroy</code> actions for the Relationships controller. Naturally, both actions should be protected; for signed-in users, we will use the <code>follow!</code> and <code>unfollow!</code> utility methods defined in <a class="ref" href="following-users#sec:following">Section&nbsp;12.1.4</a> to create and destroy the relevant relationships. These requirements lead to the tests in <a class="ref" href="following-users#code:relationships_controller_spec">Listing&nbsp;12.31</a>.</p>
+<p>Now that our views are in order, it&rsquo;s time to get the follow/unfollow buttons working. Since following a user creates a relationship, and unfollowing a user destroys a relationship, this involves writing the <code>create</code> and <code>destroy</code> actions for the Relationships controller. Naturally, both actions should be protected; for signed-in users, we will use the <code>follow!</code> and <code>unfollow!</code> utility methods defined in <a class="ref" href="following-users#sec:following">section&nbsp;12.1.4</a> to create and destroy the relevant relationships. These requirements lead to the tests in <a class="ref" href="following-users#code:relationships_controller_spec">extrait&nbsp;12.31</a>.</p>
 
 <div class="label" id="code:relationships_controller_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.31.</span> <span class="description">Tests for the Relationships controller actions. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.31.</span> <span class="description">Tests for the Relationships controller actions. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_1885f0f9e3df7eea4bd5831873c3141b9e101537">
@@ -2567,13 +2567,13 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>The controller code needed to get these tests to pass is remarkably concise: we just retrieve the user followed or to be followed, and then follow or unfollow the user using the relevant utility method. The full implementation appears in <a class="ref" href="following-users#code:relationships_controller">Listing&nbsp;12.32</a>.</p>
+<p>The controller code needed to get these tests to pass is remarkably concise: we just retrieve the user followed or to be followed, and then follow or unfollow the user using the relevant utility method. The full implementation appears in <a class="ref" href="following-users#code:relationships_controller">extrait&nbsp;12.32</a>.</p>
 
 <div class="label" id="code:relationships_controller"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.32.</span> <span class="description">The Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.32.</span> <span class="description">The Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_2dcd6c6fdcbcc9bb8e38c21d589741a4b21cb282">
@@ -2623,7 +2623,7 @@ These stats consist of a count of the number of users the current user is follow
 <h3><a id="sec:12.2.5" href="following-users#sec:a_working_follow_button_with_ajax" class="heading"><span class="number">12.2.5</span> A working follow button with Ajax</a></h3>
 
 
-<p>Although our user following implementation is complete as it stands, we have one bit of polish left to add before starting work on the status feed. You may have noticed in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">Section&nbsp;12.2.4</a> that both the <code>create</code> and <code>destroy</code> actions in the Relationships controller simply redirect <em>back</em> to the original profile. In other words, a user starts on a profile page, follows the user, and is immediately redirected back to the original page. It is reasonable to ask why the user needs to leave that page at all.</p>
+<p>Although our user following implementation is complete as it stands, we have one bit of polish left to add before starting work on the status feed. You may have noticed in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> that both the <code>create</code> and <code>destroy</code> actions in the Relationships controller simply redirect <em>back</em> to the original profile. In other words, a user starts on a profile page, follows the user, and is immediately redirected back to the original page. It is reasonable to ask why the user needs to leave that page at all.</p>
 
 <p>This is exactly the problem solved by <em>Ajax</em>, which allows web pages to send requests asynchronously to the server without leaving the page.<sup class="footnote" id="fnref:12.13"><a href="#fn:12.13">13</a></sup> Because the practice of adding Ajax to web forms is quite common, Rails makes Ajax easy to implement. Indeed, updating the follow/unfollow form partials is trivial: just change</p>
 
@@ -2639,13 +2639,13 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>and Rails <a href="http://catb.org/jargon/html/A/automagically.html">automagically</a> uses Ajax.<sup class="footnote" id="fnref:12.14"><a href="#fn:12.14">14</a></sup> The updated partials appear in <a class="ref" href="following-users#code:follow_form_ajax">Listing&nbsp;12.33</a> and <a class="ref" href="following-users#code:unfollow_form_ajax">Listing&nbsp;12.34</a>.</p>
+<p>and Rails <a href="http://catb.org/jargon/html/A/automagically.html">automagically</a> uses Ajax.<sup class="footnote" id="fnref:12.14"><a href="#fn:12.14">14</a></sup> The updated partials appear in <a class="ref" href="following-users#code:follow_form_ajax">extrait&nbsp;12.33</a> and <a class="ref" href="following-users#code:unfollow_form_ajax">extrait&nbsp;12.34</a>.</p>
 
 <div class="label" id="code:follow_form_ajax"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.33.</span> <span class="description">A form for following a user using Ajax. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.33.</span> <span class="description">A form for following a user using Ajax. <br /> <code>app/views/users/_follow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_a0ddba8dbb1d23a7a7e4a7cd894da91696883bee">
@@ -2683,7 +2683,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.34.</span> <span class="description">A form for unfollowing a user using Ajax. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.34.</span> <span class="description">A form for unfollowing a user using Ajax. <br /> <code>app/views/users/_unfollow.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_617e62898466f0263dc80f0ff70a9e1d30500f10">
@@ -2729,13 +2729,13 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>This sets the variable <code>data-remote="true"</code> inside the form tag, which tells Rails to allow the form to be handled by JavaScript. By using a simple HTML property instead of inserting the full JavaScript code (as in previous versions of Rails), Rails&nbsp;3 follows the philosophy of <a href="http://railscasts.com/episodes/205-unobtrusive-javascript"><em>unobtrusive JavaScript</em></a>.</p>
 
-<p>Having updated the form, we now need to arrange for the Relationships controller to respond to Ajax requests. We&rsquo;ll start with a couple simple tests. Testing Ajax is quite tricky, and doing it thoroughly is a large subject in its own right, but we can get started with the code in <a class="ref" href="following-users#code:relationships_controller_spec_ajax">Listing&nbsp;12.35</a>. This uses the <code>xhr</code> method (for &ldquo;XmlHttpRequest&rdquo;) to issue an Ajax request; compare to the <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code> methods used in previous tests. We then verify that the <code>create</code> and <code>destroy</code> actions do the correct things when hit with an Ajax request. (To write more thorough test suites for Ajax-heavy applications, take a look at <a href="http://seleniumhq.org/">Selenium</a> and <a href="http://watir.com/">Watir</a>.)</p>
+<p>Having updated the form, we now need to arrange for the Relationships controller to respond to Ajax requests. We&rsquo;ll start with a couple simple tests. Testing Ajax is quite tricky, and doing it thoroughly is a large subject in its own right, but we can get started with the code in <a class="ref" href="following-users#code:relationships_controller_spec_ajax">extrait&nbsp;12.35</a>. This uses the <code>xhr</code> method (for &ldquo;XmlHttpRequest&rdquo;) to issue an Ajax request; compare to the <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code> methods used in previous tests. We then verify that the <code>create</code> and <code>destroy</code> actions do the correct things when hit with an Ajax request. (To write more thorough test suites for Ajax-heavy applications, take a look at <a href="http://seleniumhq.org/">Selenium</a> and <a href="http://watir.com/">Watir</a>.)</p>
 
 <div class="label" id="code:relationships_controller_spec_ajax"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.35.</span> <span class="description">Tests for the Relationships controller responses to Ajax requests. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.35.</span> <span class="description">Tests for the Relationships controller responses to Ajax requests. <br /> <code>spec/controllers/relationships_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_96f9a59326e96fb63f8b3dba3bc4f3c3c994cc16">
@@ -2790,13 +2790,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>As implied by the tests, the application code uses the same <code>create</code> and <code>delete</code> actions to respond to the Ajax requests that it uses to respond to ordinary <tt>POST</tt> and <tt>DELETE</tt> HTTP requests. All we need to do is respond to a normal HTTP request with a redirect (as in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">Section&nbsp;12.2.4</a>) and respond to an Ajax request with JavaScript.<sup class="footnote" id="fnref:12.15"><a href="#fn:12.15">15</a></sup> The controller code appears as in <a class="ref" href="following-users#code:relationships_controller_ajax">Listing&nbsp;12.36</a>. (See <a class="ref" href="following-users#sec:following_exercises">Section&nbsp;12.5</a> for an exercise showing an even more compact way to accomplish the same thing.)</p>
+<p>As implied by the tests, the application code uses the same <code>create</code> and <code>delete</code> actions to respond to the Ajax requests that it uses to respond to ordinary <tt>POST</tt> and <tt>DELETE</tt> HTTP requests. All we need to do is respond to a normal HTTP request with a redirect (as in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a>) and respond to an Ajax request with JavaScript.<sup class="footnote" id="fnref:12.15"><a href="#fn:12.15">15</a></sup> The controller code appears as in <a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a>. (See <a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a> for an exercise showing an even more compact way to accomplish the same thing.)</p>
 
 <div class="label" id="code:relationships_controller_ajax"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.36.</span> <span class="description">Responding to Ajax requests in the Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.36.</span> <span class="description">Responding to Ajax requests in the Relationships controller. <br /> <code>app/controllers/relationships_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e3c348380b2c7b15ea0cda655bb665bbce4368d7">
@@ -2865,20 +2865,20 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>(Recall from <a class="ref" href="following-users#code:follow_form_partial">Listing&nbsp;12.23</a> that this is a <code>div</code> that wraps the form, not the form itself.) The second method we&rsquo;ll need is <code>update</code>, which updates the HTML inside the relevant element with the contents of its argument. For example, to replace the entire follow form with the string <code>"foobar"</code>, we would write</p>
+<p>(Recall from <a class="ref" href="following-users#code:follow_form_partial">extrait&nbsp;12.23</a> that this is a <code>div</code> that wraps the form, not the form itself.) The second method we&rsquo;ll need is <code>update</code>, which updates the HTML inside the relevant element with the contents of its argument. For example, to replace the entire follow form with the string <code>"foobar"</code>, we would write</p>
 
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>Unlike plain JavaScript files, JS-ERb files also allow the use of Embedded Ruby, which we apply in the <code>create.js.erb</code> file to update the follow form with the <code>unfollow</code> partial (which is what should show after a successful following) and update the follower count. The result is shown in <a class="ref" href="following-users#code:create_js_erb">Listing&nbsp;12.37</a>.</p>
+<p>Unlike plain JavaScript files, JS-ERb files also allow the use of Embedded Ruby, which we apply in the <code>create.js.erb</code> file to update the follow form with the <code>unfollow</code> partial (which is what should show after a successful following) and update the follower count. The result is shown in <a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>.</p>
 
 <div class="label" id="code:create_js_erb"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.37.</span> <span class="description">The JavaScript Embedded Ruby to create a following relationship. <br /> <code>app/views/relationships/create.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.37.</span> <span class="description">The JavaScript Embedded Ruby to create a following relationship. <br /> <code>app/views/relationships/create.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_662cd766d507f9e9031ba8afa0923b50b5668b9f">
@@ -2907,13 +2907,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>The <code>destroy.js.erb</code> file is analogous (<a class="ref" href="following-users#code:destroy_js_erb">Listing&nbsp;12.38</a>). Note that, as in <a class="ref" href="following-users#code:create_js_erb">Listing&nbsp;12.37</a>, we must use the <code>escape_javascript</code> to escape out the result when inserting HTML.</p>
+<p>The <code>destroy.js.erb</code> file is analogous (<a class="ref" href="following-users#code:destroy_js_erb">extrait&nbsp;12.38</a>). Note that, as in <a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>, we must use the <code>escape_javascript</code> to escape out the result when inserting HTML.</p>
 
 <div class="label" id="code:destroy_js_erb"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.38.</span> <span class="description">The Ruby JavaScript (RJS) to destroy a following relationship. <br /> <code>app/views/relationships/destroy.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.38.</span> <span class="description">The Ruby JavaScript (RJS) to destroy a following relationship. <br /> <code>app/views/relationships/destroy.js.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_7536cc1afeb987659f52621aa1bf6d6c7ad08e68">
@@ -2944,7 +2944,7 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>With that, you should navigate to a user profile page and verify that you can follow and unfollow without a page refresh.</p>
 
-<p>Using Ajax in Rails is a large and fast-moving subject, so we&rsquo;ve only been able to scratch the surface here, but (as with the rest of the material in this tutorial) our treatment gives you a good foundation for more advanced resources. It&rsquo;s especially worth noting that, in addition to Prototype, the JavaScript framework <a href="http://jquery.com/">jQuery</a> has gotten a lot of traction in the Rails community. Implementing the Ajax functions from this section using jQuery is left as an exercise; see <a class="ref" href="following-users#sec:following_exercises">Section&nbsp;12.5</a>.</p>
+<p>Using Ajax in Rails is a large and fast-moving subject, so we&rsquo;ve only been able to scratch the surface here, but (as with the rest of the material in this tutorial) our treatment gives you a good foundation for more advanced resources. It&rsquo;s especially worth noting that, in addition to Prototype, the JavaScript framework <a href="http://jquery.com/">jQuery</a> has gotten a lot of traction in the Rails community. Implementing the Ajax functions from this section using jQuery is left as an exercise; see <a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a>.</p>
 
 <div class="label" id="sec:the_status_feed"></div>
 
@@ -2954,12 +2954,12 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>We come now to the pinnacle of our sample application: the status feed. Appropriately, this section contains some of the most advanced material in the entire tutorial. Making the status feed involves assembling an array of the microposts from the users being followed by the current user, along with the current user&rsquo;s own microposts. To accomplish this feat, we will need some fairly advanced Rails, Ruby, and even SQL programming techniques.</p>
 
-<p>Because of the heavy lifting ahead, it&rsquo;s especially important to have a sense of where we&rsquo;re going. A mockup of the final user status feed, which builds on the proto-feed from <a class="ref" href="user-microposts#sec:a_proto_feed">Section&nbsp;11.3.3</a>, appears in <a class="ref" href="following-users#fig:home_page_feed_mockup">Figure&nbsp;12.18</a>.</p>
+<p>Because of the heavy lifting ahead, it&rsquo;s especially important to have a sense of where we&rsquo;re going. A mockup of the final user status feed, which builds on the proto-feed from <a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>, appears in <a class="ref" href="following-users#fig:home_page_feed_mockup">illustration&nbsp;12.18</a>.</p>
 
 <div class="label" id="fig:home_page_feed_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_feed_mockup.png" alt="home_page_feed_mockup" /></span></div><div class="caption"><span class="header">Figure 12.18: </span><span class="description">A mockup of a user&rsquo;s Home page with a status feed.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_feed_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_feed_mockup.png" alt="home_page_feed_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.18: </span><span class="description">A mockup of a user&rsquo;s Home page with a status feed.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_feed_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2970,12 +2970,12 @@ These stats consist of a count of the number of users the current user is follow
 <h3><a id="sec:12.3.1" href="following-users#sec:motivation_and_strategy" class="heading"><span class="number">12.3.1</span> Motivation and strategy</a></h3>
 
 
-<p>The basic idea behind the feed is simple. <a class="ref" href="following-users#fig:user_feed">Figure&nbsp;12.19</a> shows a sample <code>microposts</code> database table and the resulting feed. The purpose of a feed is to pull out the microposts whose user ids correspond to the users being followed by the current user (and the current user itself), as indicated by the arrows in the diagram.</p>
+<p>The basic idea behind the feed is simple. <a class="ref" href="following-users#fig:user_feed">illustration&nbsp;12.19</a> shows a sample <code>microposts</code> database table and the resulting feed. The purpose of a feed is to pull out the microposts whose user ids correspond to the users being followed by the current user (and the current user itself), as indicated by the arrows in the diagram.</p>
 
 <div class="label" id="fig:user_feed"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_feed.png" alt="user_feed" /></span></div><div class="caption"><span class="header">Figure 12.19: </span><span class="description">The feed for a user (id 1) following users 2, 7, 8, and 10.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_feed.png" alt="user_feed" /></span></div><div class="caption"><span class="header">Illustration 12.19: </span><span class="description">The feed for a user (id 1) following users 2, 7, 8, and 10.</span></div></div>
 
 
 <p>Since we need a way to find all the microposts from users followed by a given user, we&rsquo;ll plan on implementing a method called <code>from_users_followed_by</code>, which we will use as follows:</p>
@@ -2985,13 +2985,13 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>Although we don&rsquo;t yet know how to implement it, we can already write tests for <code>from_users_followed_by</code>, as seen in <a class="ref" href="following-users#code:from_users_followed_by_tests">Listing&nbsp;12.39</a>.</p>
+<p>Although we don&rsquo;t yet know how to implement it, we can already write tests for <code>from_users_followed_by</code>, as seen in <a class="ref" href="following-users#code:from_users_followed_by_tests">extrait&nbsp;12.39</a>.</p>
 
 <div class="label" id="code:from_users_followed_by_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.39.</span> <span class="description">Tests for <code>Micropost.from_users_followed_by</code>. <br /> <code>spec/models/micropost_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.39.</span> <span class="description">Tests for <code>Micropost.from_users_followed_by</code>. <br /> <code>spec/models/micropost_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_db9b2649f901e7e13ae0112defbe74ddcdc99abf">
@@ -3054,13 +3054,13 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>The key here is building the associations in the <code>before(:each)</code> block and then checking all three requirements: microposts for followed users and the user itself are included, but a post from an <em>unfollowed</em> user is not.</p>
 
-<p>The feed itself lives in the User model (<a class="ref" href="user-microposts#sec:a_proto_feed">Section&nbsp;11.3.3</a>), so we should add an additional test to the User model specs from <a class="ref" href="user-microposts#code:feed_specs">Listing&nbsp;11.31</a>, as shown in <a class="ref" href="following-users#code:full_feed_specs">Listing&nbsp;12.40</a>. (Note that we&rsquo;ve switched here from using <code>include?</code>, as seen in <a class="ref" href="user-microposts#code:feed_specs">Listing&nbsp;11.31</a>, to the more compact <code>include</code> convention introduced in <a class="ref" href="following-users#code:utility_method_tests">Listing&nbsp;12.12</a>.)</p>
+<p>The feed itself lives in the User model (<a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>), so we should add an additional test to the User model specs from <a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a>, as shown in <a class="ref" href="following-users#code:full_feed_specs">extrait&nbsp;12.40</a>. (Note that we&rsquo;ve switched here from using <code>include?</code>, as seen in <a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a>, to the more compact <code>include</code> convention introduced in <a class="ref" href="following-users#code:utility_method_tests">extrait&nbsp;12.12</a>.)</p>
 
 <div class="label" id="code:full_feed_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.40.</span> <span class="description">The final tests for the status feed. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.40.</span> <span class="description">The final tests for the status feed. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_4902cf250e368a25fce3fb295558e30356946842">
@@ -3124,13 +3124,13 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>Implementing the feed will be easy; we will simply defer to <code>Micropost.from_users_followed_by</code>, as shown in <a class="ref" href="following-users#code:user_feed">Listing&nbsp;12.41</a>.</p>
+<p>Implementing the feed will be easy; we will simply defer to <code>Micropost.from_users_followed_by</code>, as shown in <a class="ref" href="following-users#code:user_feed">extrait&nbsp;12.41</a>.</p>
 
 <div class="label" id="code:user_feed"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.41.</span> <span class="description">Adding the completed feed to the User model. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.41.</span> <span class="description">Adding the completed feed to the User model. <br /> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_27b878ebbe0e68452b4cae653d997ce22ef5ef46">
@@ -3188,7 +3188,7 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>In writing this code, we&rsquo;ve guessed that SQL supports an <code>IN</code> keyword that allows us to test for set inclusion. (Happily, it does.)</p>
 
-<p>Recall from the proto-feed in <a class="ref" href="user-microposts#sec:a_proto_feed">Section&nbsp;11.3.3</a> that Active Record uses the <code>where</code> method to accomplish the kind of select shown above, as illustrated in <a class="ref" href="user-microposts#code:proto_status_feed">Listing&nbsp;11.32</a>. There, our select was very simple; we just picked out all the microposts with user id corresponding to the current user:</p>
+<p>Recall from the proto-feed in <a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a> that Active Record uses the <code>where</code> method to accomplish the kind of select shown above, as illustrated in <a class="ref" href="user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a>. There, our select was very simple; we just picked out all the microposts with user id corresponding to the current user:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">Micropost</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id = ?&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 </pre></div>
@@ -3204,7 +3204,7 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>(Here we&rsquo;ve used the Rails convention of <code>user</code> instead of <code>user.id</code> in the condition; Rails automatically uses the&nbsp;<code>id</code>. We&rsquo;ve also omitted the leading <code>Micropost.</code> since we expect this method to live in the Micropost model itself.)</p>
 
-<p>We see from these conditions that we&rsquo;ll need an array of ids that a given user is following (or something equivalent). One way to do this is to use Ruby&rsquo;s <code>map</code> method, available on any &ldquo;enumerable&rdquo; object, i.e., any object (such as an Array or a Hash) that consists of a collection of elements.<sup class="footnote" id="fnref:12.17"><a href="#fn:12.17">17</a></sup> We saw an example of this method in <a class="ref" href="rails-flavored-ruby#sec:blocks">Section&nbsp;4.3.2</a>; it works like this:</p>
+<p>We see from these conditions that we&rsquo;ll need an array of ids that a given user is following (or something equivalent). One way to do this is to use Ruby&rsquo;s <code>map</code> method, available on any &ldquo;enumerable&rdquo; object, i.e., any object (such as an Array or a Hash) that consists of a collection of elements.<sup class="footnote" id="fnref:12.17"><a href="#fn:12.17">17</a></sup> We saw an example of this method in <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>; it works like this:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
@@ -3238,13 +3238,13 @@ These stats consist of a count of the number of users the current user is follow
 </div>
 
 
-<p>will involve a class method in the <code>Micropost</code> class (a construction last seen in the <code>User</code> class in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">Section&nbsp;7.12</a>). A proposed implementation along these lines appears in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Listing&nbsp;12.42</a>.</p>
+<p>will involve a class method in the <code>Micropost</code> class (a construction last seen in the <code>User</code> class in <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">section&nbsp;7.12</a>). A proposed implementation along these lines appears in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a>.</p>
 
 <div class="label" id="code:from_users_followed_by_first_cut"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.42.</span> <span class="description">A first cut at the <code>from_users_followed_by</code> method. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.42.</span> <span class="description">A first cut at the <code>from_users_followed_by</code> method. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_12ea71737a3f09edb7dd3877b22aed693d06aef8">
@@ -3280,7 +3280,7 @@ These stats consist of a count of the number of users the current user is follow
 </div></div>
 
 
-<p>Although the discussion leading up to <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Listing&nbsp;12.42</a> was couched in hypothetical terms, it actually works! In fact, it might be good enough for most practical purposes. But it&rsquo;s not the final implementation; see if you can make a guess about why not before moving on to the next section. (<em>Hint:</em> What if a user is following 5000 other users?)</p>
+<p>Although the discussion leading up to <a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> was couched in hypothetical terms, it actually works! In fact, it might be good enough for most practical purposes. But it&rsquo;s not the final implementation; see if you can make a guess about why not before moving on to the next section. (<em>Hint:</em> What if a user is following 5000 other users?)</p>
 
 <div class="label" id="sec:scopes_subselects_and_a_lambda"></div>
 
@@ -3288,16 +3288,16 @@ These stats consist of a count of the number of users the current user is follow
 <h3><a id="sec:12.3.3" href="following-users#sec:scopes_subselects_and_a_lambda" class="heading"><span class="number">12.3.3</span> Scopes, subselects, and a lambda</a></h3>
 
 
-<p>As hinted at in the last section, the feed implementation in <a class="ref" href="following-users#sec:a_first_feed_implementation">Section&nbsp;12.3.2</a> doesn&rsquo;t scale well when the number of microposts in the feed is large, as would likely happen if a user were following, say, 5000 other users. In this section, we&rsquo;ll reimplement the status feed in a way that scales better with the number of followed users.</p>
+<p>As hinted at in the last section, the feed implementation in <a class="ref" href="following-users#sec:a_first_feed_implementation">section&nbsp;12.3.2</a> doesn&rsquo;t scale well when the number of microposts in the feed is large, as would likely happen if a user were following, say, 5000 other users. In this section, we&rsquo;ll reimplement the status feed in a way that scales better with the number of followed users.</p>
 
-<p>There are a couple of problems with the code in <a class="ref" href="following-users#sec:a_first_feed_implementation">Section&nbsp;12.3.2</a>. First, the expression</p>
+<p>There are a couple of problems with the code in <a class="ref" href="following-users#sec:a_first_feed_implementation">section&nbsp;12.3.2</a>. First, the expression</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>pulls <em>all</em> the followed users into memory, and creates an array the full length of the following list. Since the condition in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Listing&nbsp;12.42</a> actually just checks inclusion in a set, there must be a more efficient way to do this, and indeed SQL is optimized for just such set operations. Second, the method in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Listing&nbsp;12.42</a> always pulls out <em>all</em> the microposts and sticks them into a Ruby array. Although these microposts are paginated in the view (<a class="ref" href="user-microposts#code:feed_instance_variable">Listing&nbsp;11.33</a>), the array is still full-sized.<sup class="footnote" id="fnref:12.19"><a href="#fn:12.19">19</a></sup> What we really want is honest pagination that only pulls out 30 elements at a time.</p>
+<p>pulls <em>all</em> the followed users into memory, and creates an array the full length of the following list. Since the condition in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> actually just checks inclusion in a set, there must be a more efficient way to do this, and indeed SQL is optimized for just such set operations. Second, the method in <a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> always pulls out <em>all</em> the microposts and sticks them into a Ruby array. Although these microposts are paginated in the view (<a class="ref" href="user-microposts#code:feed_instance_variable">extrait&nbsp;11.33</a>), the array is still full-sized.<sup class="footnote" id="fnref:12.19"><a href="#fn:12.19">19</a></sup> What we really want is honest pagination that only pulls out 30 elements at a time.</p>
 
 <p>The solution to both problems involves converting the feed from a class method to a <em>scope</em>, which is a Rails method for restricting database selects based on certain conditions. For example, to arrange for a method to select all the administrative users in our application, we could add a scope to the User model as follows:</p>
 
@@ -3332,13 +3332,13 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>actually paginates the admins in the database; if (for some odd reason) the site has 100 administrators, the code above will still only pull out the first 30.</p>
 
-<p>The scope for the feed is a bit more complex than the one illustrated above: it needs an <em>argument</em>, namely, the user whose feed we need to generate. We can do this with an <em>anonymous function</em>, or <code>lambda</code> (discussed in <a class="ref" href="sign-up#sec:failed_signup">Section&nbsp;8.4.2</a>), as shown in <a class="ref" href="following-users#code:from_users_followed_by_second_cut">Listing&nbsp;12.43</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
+<p>The scope for the feed is a bit more complex than the one illustrated above: it needs an <em>argument</em>, namely, the user whose feed we need to generate. We can do this with an <em>anonymous function</em>, or <code>lambda</code> (discussed in <a class="ref" href="sign-up#sec:failed_signup">section&nbsp;8.4.2</a>), as shown in <a class="ref" href="following-users#code:from_users_followed_by_second_cut">extrait&nbsp;12.43</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
 
 <div class="label" id="code:from_users_followed_by_second_cut"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.43.</span> <span class="description">Improving <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.43.</span> <span class="description">Improving <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_c12245c6ec61b8f306cd65d3373a9673b7c6a8f2">
@@ -3468,13 +3468,13 @@ These stats consist of a count of the number of users the current user is follow
 
 <p>This subselect arranges for all the set logic to be pushed into the database, which is more efficient.<sup class="footnote" id="fnref:12.21"><a href="#fn:12.21">21</a></sup></p>
 
-<p>With this foundation, we are ready for the final feed implementation, as seen in <a class="ref" href="following-users#code:from_users_followed_by_final">Listing&nbsp;12.44</a>.</p>
+<p>With this foundation, we are ready for the final feed implementation, as seen in <a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>.</p>
 
 <div class="label" id="code:from_users_followed_by_final"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.44.</span> <span class="description">The final implementation of <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.44.</span> <span class="description">The final implementation of <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_178c3e137b3db85ca52b460d2b4aff523321ad42">
@@ -3529,13 +3529,13 @@ These stats consist of a count of the number of users the current user is follow
 <h3><a id="sec:12.3.4" href="following-users#sec:the_new_status_feed" class="heading"><span class="number">12.3.4</span> The new status feed</a></h3>
 
 
-<p>With the code in <a class="ref" href="following-users#code:from_users_followed_by_final">Listing&nbsp;12.44</a>, our status feed is complete. As a reminder, the code for the Home page appears in <a class="ref" href="following-users#code:real_feed_instance_variable">Listing&nbsp;12.45</a>; this code creates a paginated feed of the relevant microposts for use in the view, as seen in <a class="ref" href="following-users#fig:home_page_with_feed">Figure&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Note that the <code>paginate</code> method actually reaches all the way into the Micropost model method in <a class="ref" href="following-users#code:from_users_followed_by_final">Listing&nbsp;12.44</a>, arranging to pull out only&nbsp;30 microposts at a time from the database.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
+<p>With the code in <a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, our status feed is complete. As a reminder, the code for the Home page appears in <a class="ref" href="following-users#code:real_feed_instance_variable">extrait&nbsp;12.45</a>; this code creates a paginated feed of the relevant microposts for use in the view, as seen in <a class="ref" href="following-users#fig:home_page_with_feed">illustration&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Note that the <code>paginate</code> method actually reaches all the way into the Micropost model method in <a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, arranging to pull out only&nbsp;30 microposts at a time from the database.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
 
 <div class="label" id="code:real_feed_instance_variable"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.45.</span> <span class="description">The <code>home</code> action with a paginated feed. <br /> <code>app/controllers/pages_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.45.</span> <span class="description">The <code>home</code> action with a paginated feed. <br /> <code>app/controllers/pages_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_8d1bdabf45b53697c1faa48c0397eeebabea250c">
@@ -3580,7 +3580,7 @@ These stats consist of a count of the number of users the current user is follow
 <div class="label" id="fig:home_page_with_feed"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_feed.png" alt="home_page_with_feed" /></span></div><div class="caption"><span class="header">Figure 12.20: </span><span class="description">The Home page with a working status feed.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_feed-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_feed.png" alt="home_page_with_feed" /></span></div><div class="caption"><span class="header">Illustration 12.20: </span><span class="description">The Home page with a working status feed.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_feed-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -3677,7 +3677,7 @@ These stats consist of a count of the number of users the current user is follow
 <h4><a id="sec:12.4.1.7" href="following-users#sec:rest_api" class="heading">REST API</a></h4>
 
 
-<p>Many web sites expose an Application Programmer Interface (API) so that third-party applications can get, post, put, and delete the application&rsquo;s resources. Implement such a REST API for the sample application. The solution will involve adding <code>respond_to</code> blocks (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">Section&nbsp;12.2.5</a>) to many of the application&rsquo;s controller actions; these should respond to requests for XML. Be careful about security; the API should only be accessible to authorized users.</p>
+<p>Many web sites expose an Application Programmer Interface (API) so that third-party applications can get, post, put, and delete the application&rsquo;s resources. Implement such a REST API for the sample application. The solution will involve adding <code>respond_to</code> blocks (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a>) to many of the application&rsquo;s controller actions; these should respond to requests for XML. Be careful about security; the API should only be accessible to authorized users.</p>
 
 <div class="label" id="sec:search"></div>
 
@@ -3720,13 +3720,13 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <ol>
-<li>Add tests for <code>dependent :destroy</code> in the Relationship model (<a class="ref" href="following-users#code:user_relationships_association">Listing&nbsp;12.5</a> and <a class="ref" href="following-users#code:user_reverse_relationships">Listing&nbsp;12.17</a>) by following the example in <a class="ref" href="user-microposts#code:micropost_dependency_test">Listing&nbsp;11.11</a>.</li>
-<li>The <code>respond_to</code> method seen in <a class="ref" href="following-users#code:relationships_controller_ajax">Listing&nbsp;12.36</a> can actually be hoisted out of the actions into the Relationships controller itself, and the <code>respond_to</code> blocks can be replaced with a Rails method called <code>respond_with</code>. Prove that the resulting code, shown in <a class="ref" href="following-users#code:compact_respond_to">Listing&nbsp;12.46</a>, is correct by verifying that the test suite still passes. (For details on this method, do a Google search on &ldquo;rails respond_with&rdquo;.)</li>
-<li>The <code>following</code> and <code>followers</code> actions in <a class="ref" href="following-users#code:following_followers_actions">Listing&nbsp;12.29</a> still have considerable duplication. Verify that the <code>show_follow</code> method in <a class="ref" href="following-users#code:following_followers_actions_refactored">Listing&nbsp;12.47</a> eliminates this duplication. (See if you can infer what the <code>send</code> method does, as in, e.g., <code>@user.send(:following)</code>.)</li>
-<li>Refactor <a class="ref" href="following-users#code:show_follow_view">Listing&nbsp;12.30</a> by adding partials for the code common to the following/followers pages, the Home page, and the user show page.</li>
-<li>Following the model in <a class="ref" href="following-users#code:stats_view_test">Listing&nbsp;12.20</a>, write tests for the stats on the profile page.</li>
+<li>Add tests for <code>dependent :destroy</code> in the Relationship model (<a class="ref" href="following-users#code:user_relationships_association">extrait&nbsp;12.5</a> and <a class="ref" href="following-users#code:user_reverse_relationships">extrait&nbsp;12.17</a>) by following the example in <a class="ref" href="user-microposts#code:micropost_dependency_test">extrait&nbsp;11.11</a>.</li>
+<li>The <code>respond_to</code> method seen in <a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a> can actually be hoisted out of the actions into the Relationships controller itself, and the <code>respond_to</code> blocks can be replaced with a Rails method called <code>respond_with</code>. Prove that the resulting code, shown in <a class="ref" href="following-users#code:compact_respond_to">extrait&nbsp;12.46</a>, is correct by verifying that the test suite still passes. (For details on this method, do a Google search on &ldquo;rails respond_with&rdquo;.)</li>
+<li>The <code>following</code> and <code>followers</code> actions in <a class="ref" href="following-users#code:following_followers_actions">extrait&nbsp;12.29</a> still have considerable duplication. Verify that the <code>show_follow</code> method in <a class="ref" href="following-users#code:following_followers_actions_refactored">extrait&nbsp;12.47</a> eliminates this duplication. (See if you can infer what the <code>send</code> method does, as in, e.g., <code>@user.send(:following)</code>.)</li>
+<li>Refactor <a class="ref" href="following-users#code:show_follow_view">extrait&nbsp;12.30</a> by adding partials for the code common to the following/followers pages, the Home page, and the user show page.</li>
+<li>Following the model in <a class="ref" href="following-users#code:stats_view_test">extrait&nbsp;12.20</a>, write tests for the stats on the profile page.</li>
 <li>Write an integration test for following and unfollowing a user.</li>
-<li>Rewrite the Ajax methods from <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">Section&nbsp;12.2.5</a> using <a href="http://jquery.com/">jQuery</a> in place of Prototype. <em>Hint:</em> You might want to read the jQuery section of  <a href="http://lindsaar.net/2010/5/9/Getting-Rails-3-Edge-with-jQuery-RSpec-and-Cucumber-using-RVM">Mikel Lindsaar&rsquo;s blog post about jQuery, RSpec, and Rails&nbsp;3</a>.</li>
+<li>Rewrite the Ajax methods from <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a> using <a href="http://jquery.com/">jQuery</a> in place of Prototype. <em>Hint:</em> You might want to read the jQuery section of  <a href="http://lindsaar.net/2010/5/9/Getting-Rails-3-Edge-with-jQuery-RSpec-and-Cucumber-using-RVM">Mikel Lindsaar&rsquo;s blog post about jQuery, RSpec, and Rails&nbsp;3</a>.</li>
 </ol>
 
 
@@ -3736,7 +3736,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.46.</span> <span class="description">A compact refactoring of <a class="ref" href="following-users#code:relationships_controller_ajax">Listing&nbsp;12.36</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.46.</span> <span class="description">A compact refactoring of <a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b7763f334828a2c00ccb7b7529383a9d624e8ef7">
@@ -3786,7 +3786,7 @@ These stats consist of a count of the number of users the current user is follow
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 12.47.</span> <span class="description">Refactored <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.47.</span> <span class="description">Refactored <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_5da024334c5ed7016b270f424bbceb2a8b6230ea">
@@ -3841,28 +3841,28 @@ These stats consist of a count of the number of users the current user is follow
 </div><div class="footnotes">
 <ol>
 <li id="fn:12.1">The photographs in the mockup tour are from <a href="http://www.flickr.com/photos/john_lustig/2518452221/">http://www.flickr.com/photos/john_lustig/2518452221/</a> and <a href="http://www.flickr.com/photos/30775272@N05/2884963755/">http://www.flickr.com/photos/30775272@N05/2884963755/</a>.&nbsp;<a class="arrow" href="#fnref:12.1">&uarr;</a></li>
-<li id="fn:12.2">For simplicity, <a class="ref" href="following-users#fig:naive_user_has_many_following">Figure&nbsp;12.6</a> suppresses the <code>following</code> table&rsquo;s&nbsp;<code>id</code> column.&nbsp;<a class="arrow" href="#fnref:12.2">&uarr;</a></li>
+<li id="fn:12.2">For simplicity, <a class="ref" href="following-users#fig:naive_user_has_many_following">illustration&nbsp;12.6</a> suppresses the <code>following</code> table&rsquo;s&nbsp;<code>id</code> column.&nbsp;<a class="arrow" href="#fnref:12.2">&uarr;</a></li>
 <li id="fn:12.3">Unfortunately, Rails uses <code>connection</code> for a database connection, so introducing a Connection model leads to some rather subtle bugs. (I learned this the hard way when developing <a href="http://www.insoshi.com/">Insoshi</a>.)&nbsp;<a class="arrow" href="#fnref:12.3">&uarr;</a></li>
 <li id="fn:12.4">Indeed, this construction is so characteristic of Rails that well-knows Rails programmer Josh Susser used it as the <a href="http://blog.hasmanythrough.com/">name of his geek blog</a>.&nbsp;<a class="arrow" href="#fnref:12.4">&uarr;</a></li>
 <li id="fn:12.5">Technically, Rails uses the <code>underscore</code> method to convert the class name to an id. For example, <code>"FooBar".underscore</code> is <code>foo_bar</code>, so the foreign key for a <code>FooBar</code> object would be <code>foo_bar_id</code>. (Incidentally, the inverse of <code>underscore</code> is <code>camelize</code>, which converts <code>camel_case</code> to <code>CamelCase</code>.)&nbsp;<a class="arrow" href="#fnref:12.5">&uarr;</a></li>
-<li id="fn:12.6">If you&rsquo;ve noticed that <code>followed_id</code> also identifies a user, and are concerned about the asymmetric treatment of followed and follower, you&rsquo;re ahead of the game. We&rsquo;ll deal with this issue in <a class="ref" href="following-users#sec:followers">Section&nbsp;12.1.5</a>.&nbsp;<a class="arrow" href="#fnref:12.6">&uarr;</a></li>
-<li id="fn:12.7">This <code>follow!</code> method should always work, so (following the model of <code>create!</code> and <code>save!</code>) we indicate with an exclamation point that an exception will be raised on failure.&nbsp;<a class="arrow" href="#fnref:12.7">&uarr;</a></li>
-<li id="fn:12.8">Once you have a lot of experience modeling a particular domain, you can often guess such utility methods in advance, and even when you can&rsquo;t you&rsquo;ll often find yourself writing them to make the tests cleaner. In this case, though, it&rsquo;s OK if you wouldn&rsquo;t have guessed them. Software development is usually an iterative process&mdash;you write code until it starts getting ugly, and then you refactor it&mdash;but for brevity the tutorial presentation is streamlined a bit.&nbsp;<a class="arrow" href="#fnref:12.8">&uarr;</a></li>
-<li id="fn:12.9">The <code>authenticate_with_salt</code> method is included simply to orient you within the User model file.&nbsp;<a class="arrow" href="#fnref:12.9">&uarr;</a></li>
-<li id="fn:12.10">The <code>unfollow!</code> method <em>doesn&rsquo;t</em> raise an exception on failure&mdash;in fact, I don&rsquo;t even know how Rails indicates a failed destroy&mdash;but we use an exclamation point to maintain the <code>follow!</code>/<code>unfollow!</code> symmetry.&nbsp;<a class="arrow" href="#fnref:12.10">&uarr;</a></li>
-<li id="fn:12.11">You might notice that sometimes we access&nbsp;<code>id</code> explicitly, as in <code>followed.id</code>, and sometimes we just use <code>followed</code>. I shame to admit that my usual algorithm for telling when to leave it off is to see if it works without&nbsp;<code>.id</code>, and then add&nbsp;<code>.id</code> if it breaks.&nbsp;<a class="arrow" href="#fnref:12.11">&uarr;</a></li>
-<li id="fn:12.12">Everything in <a class="ref" href="following-users#code:following_followers_tests">Listing&nbsp;12.28</a> has been covered elsewhere in this tutorial, so this is a good exercise in reading code.&nbsp;<a class="arrow" href="#fnref:12.12">&uarr;</a></li>
+<li id="fn:12.6">If you&rsquo;ve noticed that <code>followed_id</code> also identifies a user, and are concerned about the asymmetric treatment of followed and follower, you&rsquo;re ahead of the game. We&rsquo;ll deal with this issue in <a class="ref" href="following-users#sec:followers">section&nbsp;12.1.5</a>.&nbsp;<a class="arrow" href="#fnref:12.6">&uarr;</a></li>
+<li id="fn:12.7">Cette méthode <code>follow!</code> devrait toujours fonctionner, donc (en suivant le modèle de <code>create!</code> et <code>save!</code>) nous indiquons avec l'exclamation qu'une exception (une erreur) sera déclenchée en cas d'échec.&nbsp;<a class="arrow" href="#fnref:12.7">&uarr;</a></li>
+<li id="fn:12.8">Une fois que vous aurez une grande expérience de la modélisation d'un domaine particulier, vous pourrez souvent deviner de telle méthode utilitaires à l'avance, et même quand vous ne pourrez pas vous trouvez souvent de vous-même que les écrire rend les tests plus clairs. Dans le cas présent, cependant, c'est OK si vous ne les aviez pas anticipées. Le développement de logiciel est souvent un processus itératif &mdash;&nbsp;vous écrivez du code jusqu'à ce qu'il s'enlaidisse, et alors vous le restructurez&nbsp;&mdash; mais pour la brièveté la présentation du tutoriel est un peu simplifié.&nbsp;<a class="arrow" href="#fnref:12.8">&uarr;</a></li>
+<li id="fn:12.9">La méthode <code>authenticate_with_salt</code> est incluse simplement en vous orientant à l'intérieur du fichier du modèle User.&nbsp;<a class="arrow" href="#fnref:12.9">&uarr;</a></li>
+<li id="fn:12.10">La méthode <code>unfollow!</code> ne provoque pas d'erreur à l'échec &mdash;&nbsp;en fait, je ne sais même pas comment Rails indique un échec de destruction&nbsp;&mdash; mais nous utilisons un point d'exclamation pour maintenant la symétrie <code>follow!</code>/<code>unfollow!</code>.&nbsp;<a class="arrow" href="#fnref:12.10">&uarr;</a></li>
+<li id="fn:12.11">Vous pouvez avoir noté que quelquefois nous accédons à <code>id</code> explicitement, comme dans <code>followed.id</code> et d'autrefois nous utilisons juste <code>followed</code>. J'ai honte d'admettre que mon algorithme habituel pour dire quand savoir lequel utiliser consiste simplement à voir si ça marche sans <code>id</code> et alors de l'ajouter si ça ne fonctionne pas.&nbsp;<a class="arrow" href="#fnref:12.11">&uarr;</a></li>
+<li id="fn:12.12">Everything in <a class="ref" href="following-users#code:following_followers_tests">extrait&nbsp;12.28</a> has been covered elsewhere in this tutorial, so this is a good exercise in reading code.&nbsp;<a class="arrow" href="#fnref:12.12">&uarr;</a></li>
 <li id="fn:12.13">Because it is nominally an acronym for <em>asynchronous JavaScript and XML</em>, Ajax is sometimes misspelled &ldquo;AJAX&rdquo;, even though the <a href="http://www.adaptivepath.com/ideas/essays/archives/000385.php">original Ajax article</a> spells it as &ldquo;Ajax&rdquo; throughout.&nbsp;<a class="arrow" href="#fnref:12.13">&uarr;</a></li>
-<li id="fn:12.14">This only works if JavaScript is enabled in the browser, but it degrades gracefully, working exactly as in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">Section&nbsp;12.2.4</a> if JavaScript is disabled.&nbsp;<a class="arrow" href="#fnref:12.14">&uarr;</a></li>
-<li id="fn:12.15">At this point you will have to include the default <a href="http://www.prototypejs.org/">Prototype JavaScript Library</a> into your Rails application as in <a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">Listing&nbsp;10.39</a> if you have not done so already.&nbsp;<a class="arrow" href="#fnref:12.15">&uarr;</a></li>
+<li id="fn:12.14">This only works if JavaScript is enabled in the browser, but it degrades gracefully, working exactly as in <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> if JavaScript is disabled.&nbsp;<a class="arrow" href="#fnref:12.14">&uarr;</a></li>
+<li id="fn:12.15">At this point you will have to include the default <a href="http://www.prototypejs.org/">Prototype JavaScript Library</a> into your Rails application as in <a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">extrait&nbsp;10.39</a> if you have not done so already.&nbsp;<a class="arrow" href="#fnref:12.15">&uarr;</a></li>
 <li id="fn:12.16">There is no relationship between this <code>respond_to</code> and the <code>respond_to</code> used in the RSpec examples.&nbsp;<a class="arrow" href="#fnref:12.16">&uarr;</a></li>
 <li id="fn:12.17">The main requirement is that enumerable objects must implement an <code>each</code> method to iterate through the collection.&nbsp;<a class="arrow" href="#fnref:12.17">&uarr;</a></li>
 <li id="fn:12.18">This notation actually started as an extension Rails made to the core Ruby language; it was so useful that it has now been incorporated into Ruby itself. How cool is that?&nbsp;<a class="arrow" href="#fnref:12.18">&uarr;</a></li>
 <li id="fn:12.19">Calling <code>paginate</code> on an <code>Array</code> object converts it into a <code>WillPaginate::Collection</code> object, but that doesn&rsquo;t help us much since the entire array has already been created in memory.&nbsp;<a class="arrow" href="#fnref:12.19">&uarr;</a></li>
-<li id="fn:12.20">A function bundled with a piece of data (a user, in this case) is known as a <em>closure</em>, which we encountered briefly in the discussion of blocks in <a class="ref" href="rails-flavored-ruby#sec:blocks">Section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:12.20">&uarr;</a></li>
+<li id="fn:12.20">A function bundled with a piece of data (a user, in this case) is known as a <em>closure</em>, which we encountered briefly in the discussion of blocks in <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:12.20">&uarr;</a></li>
 <li id="fn:12.21">For a more advanced way to create the necessary subselect, see the blog post <a href="http://pivotallabs.com/users/jsusser/blog/articles/567-hacking-a-subselect-in-activerecord">&ldquo;Hacking a subselect in ActiveRecord&rdquo;.</a>&nbsp;<a class="arrow" href="#fnref:12.21">&uarr;</a></li>
 <li id="fn:12.22">Of course, even the subselect won&rsquo;t scale forever. For bigger sites, you would probably need to generate the feed asynchronously using a background job. Such scaling subtleties are beyond the scope of this tutorial, but the <a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a> screencasts are a good place to start.&nbsp;<a class="arrow" href="#fnref:12.22">&uarr;</a></li>
-<li id="fn:12.23">In order make a prettier feed for <a class="ref" href="following-users#fig:home_page_with_feed">Figure&nbsp;12.20</a>, I&rsquo;ve added a few extra microposts by hand using the Rails console.&nbsp;<a class="arrow" href="#fnref:12.23">&uarr;</a></li>
+<li id="fn:12.23">In order make a prettier feed for <a class="ref" href="following-users#fig:home_page_with_feed">illustration&nbsp;12.20</a>, I&rsquo;ve added a few extra microposts by hand using the Rails console.&nbsp;<a class="arrow" href="#fnref:12.23">&uarr;</a></li>
 <li id="fn:12.24">You can verify this by examining the SQL statements in the development server log file. (The <a href="http://railstutorial.org/screencasts">Rails Tutorial screencasts</a> will cover such subtleties in more depth.)&nbsp;<a class="arrow" href="#fnref:12.24">&uarr;</a></li>
 <li id="fn:12.25">My only reservation about Railscasts is that they often omit the tests. This is probably necessary to keep the episodes nice and short, but you could get the wrong idea about the importance of tests. Once you&rsquo;ve watched the relevant Railscast to get a basic idea of how to proceed, I suggest writing the new feature using test-driven development.&nbsp;<a class="arrow" href="#fnref:12.25">&uarr;</a></li>
 <li id="fn:12.26">In addition to being a clever phrase&mdash;<em>new relic</em> being a contradiction in terms&mdash;New Relic is also an anagram for the name of the company&rsquo;s founder, Lew Cirne.&nbsp;<a class="arrow" href="#fnref:12.26">&uarr;</a></li>

@@ -51,7 +51,7 @@
 
 <p>Моя компания (CD Baby) была одной из первых громко перешедших на Ruby on Rails, а затем еще громче вернувшейся обратно на PHP (Google расскажет об этой драме). Эту книгу, написанную Майклом Хартлом так высоко рекомендовали, что я должен был попробовать её, и <em>Ruby on Rails Tutorial</em> это всё, что я использовал, чтобы вернуться к Rails.</p>
 
-<p>Хотя я уже прошел через много книг по Rails, это одна из немногих, что, наконец, зацепила меня. Было много написано книг типа &laquo;Путь Rails&raquo; — после которых я чувствовал себя неестественно, но после этой книги я наконец почувствовал себя естественно. Это также единственная книга по Rails, которая соблюдает методику &laquo;разработка через тестирование&raquo; в течении всего времени, этот подход строго рекомендуется специалистами, но никогда не был так чётко продемонстрировал ранее. Наконец, Git, GitHub и Heroku присутствуют в демо-примерах, автор действительно дает вам почувствовать, что он хотел сделать реальный проект. Учебный код примеров не изолирован.</p>
+<p>Хотя я уже прошел через много книг по Rails, это одна из немногих, что, наконец, зацепила меня. Было много написано книг типа &laquo;Путь Rails&raquo; — после которых я чувствовал себя неестественно, но после этой книги я наконец почувствовал себя естественно. Это также единственная книга по Rails, которая соблюдает методику &laquo;разработка через тестирование&raquo; в течении всего времени, этот подход строго рекомендуется специалистами, но никогда не был так чётко продемонстрирован ранее. Наконец, Git, GitHub и Heroku присутствуют в демо-примерах, автор действительно дает вам почувствовать, что он хотел сделать реальный проект. Учебный код примеров не изолирован.</p>
 
 <p>Линейное повествование — отличный формат. Лично я прошел Rails Tutorial в течении трёх долгих дней, делая все примеры и задачи в конце каждой главы. Делайте всё от начала до конца, не прыгая, и вы получите максимальную выгоду.</p>
 
@@ -613,7 +613,7 @@
 
 <p>По умолчанию предфильтр применяется к <em>каждому</em> действию в контроллере, поэтому здесь мы ограничим действие фильтра только <code>:edit</code> и <code>:update</code> действиями передачей хэша опций <code>:only</code>.</p>
 
-<p>Этот код пока не будет работать, так как <code>deny_access</code> не был определен. Поскольку отказ в доступе является частью аутентификации, мы помстим его в хелпер Sessions из <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a>. Все что <code>deny_access</code> делает, это помещает сообщение <code>flash[:notice]</code>, а затем перенаправляет на страницу входа (<a class="ref" href="updating-showing-and-deleting-users#code:deny_access">Листинг&nbsp;10.12</a>).</p>
+<p>Этот код пока не будет работать, так как <code>deny_access</code> не был определен. Поскольку отказ в доступе является частью аутентификации, мы поместим его в хелпер Sessions из <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a>. Все что <code>deny_access</code> делает, это выводит сообщение <code>flash[:notice]</code>, а затем перенаправляет на страницу входа (<a class="ref" href="updating-showing-and-deleting-users#code:deny_access">Листинг&nbsp;10.12</a>).</p>
 
 <div class="label" id="code:deny_access"></div>
 
@@ -821,7 +821,7 @@
 
 <p>(Как отмечено в комментарии, интеграционный тест <em>follows</em> redirects (# переходит на страницу к которой ведет переадресация), поэтому тестирование того, что ответ <code>should redirect_to</code> (# должен перенаправлять_к) некоторому URL - не будет работать. Это зание мне дорогого стоило.)</p>
 
-<p>Теперь реализация.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Для того чтобы перенаправить пользователей к запрашиваемой ими странице, нам нужно где-то сохранить запрашиваемую страницу, а затем переадресовать к ней. Хранение будет осуществляться посредством <code>session</code> - объекта предоставляемого Rails, о котором Вы можете думать как об экземпляре переменной <code>cookies</code> из <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздела&nbsp;9.3.2</a>, которая автоматически истекает при закрытии браузера.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Мы также используем <code>request</code> объект для получения <code>request_uri</code>, т.е., URL запрашиваемой страницы. Результирующий код приложения показан в <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">Листинге&nbsp;10.17</a>.</p>
+<p>Теперь реализация.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Для того чтобы перенаправить пользователей к запрашиваемой ими странице, нам нужно где-то сохранить запрашиваемую страницу, а затем переадресовать к ней. Хранение будет осуществляться посредством <code>session</code> - объекта, предоставляемого Rails, о котором Вы можете думать как об экземпляре переменной <code>cookies</code> из <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздела&nbsp;9.3.2</a>, которая автоматически истекает при закрытии браузера.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Мы также используем <code>request</code> объект для получения <code>request_uri</code>, т.е., URL запрашиваемой страницы. Результирующий код приложения показан в <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">Листинге&nbsp;10.17</a>.</p>
 
 <div class="label" id="code:friendly_forwarding_code"></div>
 
@@ -1293,7 +1293,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_pagination_rails_3.png" alt="user_index_pagination_rails_3" /></span></div><div class="caption"><span class="header">Рисунок  10.10: </span><span class="description">Страница user index   <a href="http://localhost:3000/users"><tt>/users</tt></a> с пагинацией.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_pagination_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Если теперь кликнуть по любой&nbsp;<a href="http://localhost:3000/users?page=2">2</a> или <a href="http://localhost:3000/users?page=2">Next</a> ссылке, вы получите вторую страницус результатами поиска, как показано на <a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">Рис.&nbsp;10.11</a>.</p>
+<p>Если теперь кликнуть по любой&nbsp;<a href="http://localhost:3000/users?page=2">2</a> или <a href="http://localhost:3000/users?page=2">Next</a> ссылке, вы получите вторую страницу с результатами поиска, как показано на <a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">Рис.&nbsp;10.11</a>.</p>
 
 <div class="label" id="fig:user_index_page_two_rails_3"></div>
 

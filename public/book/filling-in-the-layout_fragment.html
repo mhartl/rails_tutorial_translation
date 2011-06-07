@@ -3,7 +3,7 @@
 	Fichier  : filling-in-the-layout_fragment.html
 -->
 
-<h1 class="title">Tutorile Ruby on Rails </h1>
+<h1 class="title">Tutoriel Ruby on Rails </h1>
 
 
 <h1 class="subtitle">  Apprendre Rails par l'exemple</h1>
@@ -439,7 +439,7 @@
 <h1 class="chapter"><a id="sec:5" href="filling-in-the-layout#top" class="heading"><span class="number">Chapitre 5</span> Poursuivre la mise en page</a></h1>
 
 
-<p>Dans le but de faire un bref tour de Ruby au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, nous avons ajouté quelques feuilles de styles en cascade à la mise en page de notre site (<a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>). Dans ce chapitre, nous allons ajouter quelques styles de notre cru, tout en ajoutant à notre charte des liens vers certaines pages (telles que la page Accueil ou la page À Propos) que nous avons créées précédemment. Chemin faisant, nous apprendrons des choses sur les <em>partiels</em> (<em>partials</em>), le routage Rails et les tests d'intégration. Nous terminerons en passant une importante étape&nbsp;: permettre à nos utilisateurs de s'inscrire sur notre site.</p>
+<p>Dans le but de faire un bref tour de Ruby au <a class="ref" href="rails-flavored-ruby#top">chapitre&nbsp;4</a>, nous avons ajouté quelques feuilles de styles en cascade (CSS) à la mise en page de notre site (<a class="ref" href="rails-flavored-ruby#sec:cascading_style_sheets">section&nbsp;4.1.2</a>). Dans ce chapitre, nous allons ajouter quelques styles de notre cru, tout en ajoutant à notre <em>layout</em> des liens vers certaines pages (telles que la page Accueil ou la page «&nbsp;À Propos&nbsp;») que nous avons créées précédemment. Chemin faisant, nous apprendrons des choses sur les <rw>partiels</rw> (<em>partials</em>), le <rw>routage</rw> Rails et les <rw>tests d'intégration</rw>. Nous terminerons en passant une étape importante&nbsp;: permettre à nos utilisateurs de s'inscrire sur notre site.</p>
 
 <div class="label" id="sec:structure"></div>
 
@@ -447,14 +447,14 @@
 <h2><a id="sec:5.1" href="filling-in-the-layout#sec:structure" class="heading"><span class="number">5.1</span> Ajout de structure</a></h2>
 
 
-<p>Ce <em>Tutoriel Rails</em> est un livre sur le développement web, pas sur le design web, mais ce serait un peu déprimant de travailler sur un site d'application serait une pouillerie, donc dans cette section nous allons structurer un peu notre mise en page et lui donner un minimum de style avec les CSS. Nous donnerons aussi du style à notre <em>code</em>, pour ainsi dire, en utilisant les <em>partiels</em> (<em>partials</em>) pour mieux organiser le layout une fois qu'il devient un peu trop encombré.</p>
+<p>Ce <em>Tutoriel Rails</em> est un livre sur le développement web, pas sur le design web, mais ce serait un peu déprimant de travailler sur un site qui ressemblerait à une <em>pouillerie</em>, donc dans cette section nous allons structurer un peu notre mise en page et lui donner un minimum de style avec les CSS. Nous donnerons aussi du style à notre <em>code</em>, pour ainsi dire, en utilisant les <em>partiels</em> (<em>partials</em>) pour mieux organiser le layout lorsqu'il deviendra trop fouilli.</p>
 
-<p>Quand on construit des applications web, il est souvent utile d'avoir le plus tôt possible un aperçu général de l'interface de l'utilisateur. Tout au long de la suite de ce libre, j'ajouterai donc des <em>maquettes</em> (appelées aussi <em>wireframes</em> dans le contexte du web), qui sont des croquis de ce à quoi pourra ressembler l'application.<sup class="footnote" id="fnref:5.1"><a href="#fn:5.1">1</a></sup> Dans ce chapitre, nous développerons principalement les pages statiques introduites à la <a class="ref" href="static-pages#sec:static_pages">section&nbsp;3.1</a>, en incluant un logo du site, une entête de navigation et un pied de page. Une maquette pour la plus importante de ces pages (Vraiment&nbsp;? NdT), la page d'accueil, est présentée dans l'<a class="ref" href="filling-in-the-layout#fig:home_page_mockup">illustration&nbsp;5.1</a> (vous pouvez voir le résultat final dans l'<a class="ref" href="filling-in-the-layout#fig:site_with_footer">illustration&nbsp;5.8</a>. Vous noterez qu'elle différe en quelques détails &mdash;&nbsp;par exemple, le pied de page contient quatre liens au lieu de trois&nbsp;&mdash; mais ça ne pose pas de problème, puisque une maquette n'a pas à être exacte).</p>
+<p>Quand on construit des applications web, il est souvent utile d'avoir le plus tôt possible un aperçu général de l'interface de l'utilisateur. Tout au long de la suite de ce libre, j'ajouterai donc des <em>maquettes</em> (appelées aussi <em>wireframes</em> dans le contexte du web), qui sont des croquis de ce à quoi pourra ressembler l'application.<sup class="footnote" id="fnref:5.1"><a href="#fn:5.1">1</a></sup> Dans ce chapitre, nous développerons principalement les pages statiques introduites à la <a class="ref" href="static-pages#sec:static_pages">section&nbsp;3.1</a>, en incluant un logo du site, une entête de navigation et un pied de page. Une maquette pour la plus importante de ces pages, la page d'accueil, est présentée dans l'<a class="ref" href="filling-in-the-layout#fig:home_page_mockup">illustration&nbsp;5.1</a> (vous pouvez voir le résultat final dans l'<a class="ref" href="filling-in-the-layout#fig:site_with_footer">illustration&nbsp;5.8</a>. Vous noterez qu'elle différe en quelques détails &mdash;&nbsp;par exemple, le pied de page contient quatre liens au lieu de trois&nbsp;&mdash; mais ça ne pose pas de problème, puisqu'une maquette n'a pas vocation à être exacte).</p>
 
 <div class="label" id="fig:home_page_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_mockup.png" alt="home_page_mockup" /></span></div><div class="caption"><span class="header">Illustration 5.1: </span><span class="description">Une maquette de la page Accueil de l'application exemple.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_mockup.png" alt="home_page_mockup" /></span></div><div class="caption"><span class="header">Illustration 5.1: </span><span class="description">Une maquette (anglaise) de la page Accueil de l'application exemple.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Comme d'habitude, si vous utilisez Git pour le contrôle de version, ce serait une bonne chose de créer une nouvelle branche&nbsp;:</p>
@@ -472,7 +472,7 @@
 <h3><a id="sec:5.1.1" href="filling-in-the-layout#sec:adding_to_the_layout" class="heading"><span class="number">5.1.1</span> Navigation</a></h3>
 
 
-<p>La dernière fois que nous avons vu le layout du site <code>application.html.erb</code> dans l'<a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">extrait&nbsp;4.3</a>, nous venions juste d'ajouter les feuilles de styles Blueprint en utilisant l'helper Rail <code>stylesheet_link_tag</code>. Il est temps d'ajouter un certains nombre de style, un tout spécialement pour le navigateur Internet Explorer et un pour notre fichier CSS personnalisé et bientôt ajouté. Nous ajouterons aussi quelques divisions (<code>div</code>), quelques identifiants <code>id</code> et quelques classes <code>class</code>, et le départ du matériel de navigation de notre site. Le fichier complet est présenté dans l'<a class="ref" href="filling-in-the-layout#code:layout_new_structure">extrait&nbsp;5.1</a>&nbsp;; les explications des différentes parties suit l'extrait. Si vous préférez ne pas remettre à plus tard votre plaisir, vous pouvez voir le résultat dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a> (<em>Note&nbsp;:</em> pour tout dire, ça n'est pas encore très gratifiant).</p>
+<p>La dernière fois que nous avons vu le layout du site <code>application.html.erb</code> dans l'<a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">extrait&nbsp;4.3</a>, nous venions juste d'ajouter les feuilles de styles Blueprint en utilisant l'<rw>helper</rw> Rail <code>stylesheet_link_tag</code>. Il est temps d'ajouter un certains nombre de styles, un tout spécialement pour le navigateur Internet Explorer et un pour notre fichier CSS personnalisé qui sera bientôt ajouté. Nous ajouterons aussi quelques divisions (<code>div</code>), quelques identifiants <code>id</code> et quelques classes <code>class</code>, et le départ du matériel de navigation de notre site. Le fichier complet est présenté dans l'<a class="ref" href="filling-in-the-layout#code:layout_new_structure">extrait&nbsp;5.1</a>&nbsp;; les explications des différentes parties suit l'extrait. Si vous préférez ne pas remettre à plus tard votre plaisir, vous pouvez voir le résultat dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a> (<em>note&nbsp;:</em> je vous l'accorde, ça n'est pas encore très gratifiant).</p>
 
 <div class="label" id="code:layout_new_structure"></div>
 
@@ -496,7 +496,7 @@
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;header&gt;</span>
-        <span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Simple application&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
+        <span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Application Exemple&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
         <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span><span class="nt">&gt;</span>
           <span class="nt">&lt;ul&gt;</span>
             <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Accueil&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
@@ -515,7 +515,7 @@
 </div></div>
 
 
-<p>Jetons un coup d'œil aux nouveaux éléments en commençant par le haut. Comme noté brièvement à la <a class="ref" href="static-pages#sec:static_pages">section&nbsp;3.1</a>, Rails&nbsp;3 utilise HTML5 par défaut (comme le doctype <code>&lt;!DOCTYPE html&gt;</code> l'indique)&nbsp;; puisque le standard HTML5 est récent, certains navigateurs (spécialement Internet Explorer) ne le supportent pas encore complètement, donc nous incluons un peu de code JavaScript (connu comme un &ldquo;<a href="http://code.google.com/p/html5shiv/">HTML5 shiv</a>&rdquo;) pour contourner ce problème&nbsp;:</p>
+<p>Jetons un coup d'œil aux nouveaux éléments en commençant par le haut. Comme noté brièvement à la <a class="ref" href="static-pages#sec:static_pages">section&nbsp;3.1</a>, Rails&nbsp;3 utilise HTML5 par défaut (comme le doctype <code>&lt;!DOCTYPE html&gt;</code> l'indique)&nbsp;; puisque le standard HTML5 est récent, certains navigateurs (spécialement Internet Explorer) ne le supportent pas encore complètement, donc nous incluons un peu de code JavaScript (connu sous le nom anglais de &ldquo;<a href="http://code.google.com/p/html5shiv/">Shiv HTML5</a>&rdquo;) pour contourner ce problème&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="c">&lt;!--[if lt IE 9]&gt;</span>
 <span class="c">&lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;</span>
@@ -531,18 +531,18 @@
 </div>
 
 
-<p>… inclut les lignes entre les balises <code>&lt;!--</code> et <code>--&gt;</code> que si la version d'Internet Explorer&nbsp;(IE) est inférieur à la version 9 (<code>if lt IE 9</code>). La syntaxe bizarre <code>[if lt IE 9]</code> <em>n'est pas</em> une partie de Rails&nbsp;; C'est en réalité un <a href="http://en.wikipedia.org/wiki/Conditional_comment">commentaire conditionnel</a> supporté par les navigateurs IE pour ce genre de situation. C'est une bonne chose, aussi, parce que cela signifie que nous pouvons inclure la feuille de style supplémentaire <em>seulement</em> pour les versions d'IE inférieures à 9, laissant les autres navigateurs tels que Firefox, Chrome ou Safari non affectés.</p>
+<p>… <strong>n'</strong>inclut les lignes entre les balises <code>&lt;!--</code> et <code>--&gt;</code> <strong>que</strong> si la version d'Internet Explorer&nbsp;(IE) est inférieure à la version 9 (<code>if lt IE 9</code>). La syntaxe bizarre <code>[if lt IE 9]</code> <em>n'est pas</em> une partie de Rails&nbsp;; C'est en réalité un <a href="http://en.wikipedia.org/wiki/Conditional_comment">commentaire conditionnel</a> supporté par les navigateurs IE pour ce genre de situation. C'est une bonne chose, aussi, parce que cela signifie que nous pouvons inclure la feuille de style supplémentaire <em>seulement</em> pour les versions d'IE inférieures à 9, laissant les autres navigateurs tels que Firefox, Chrome ou Safari non affectés.</p>
 
-<p>Après les lignes pour inclure la feuille de style Blueprint (introduite dans l'<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">extrait&nbsp;4.4</a>), il y a une autre ligne spécifique à IE &ndash;&nbsp;ligne spécifique qui cette fois inclue une feuille de style si la version de IE est inférieur à&nbsp;8 (<code>if lt IE 8</code>):</p>
+<p>Après les lignes pour inclure la feuille de style Blueprint (introduite dans l'<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">extrait&nbsp;4.4</a>), il y a une autre ligne spécifique à IE &ndash;&nbsp;ligne spécifique qui cette fois inclut une feuille de style si la version de IE est inférieur à&nbsp;8 (<code>if lt IE 8</code>):</p>
 
 <div class="code"><div class="highlight"><pre><span class="c">&lt;!--[if lt IE 8]&gt;</span><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/ie&#39;</span> <span class="cp">%&gt;</span><span class="c">&lt;![endif]--&gt;</span>
 </pre></div>
 </div>
 
 
-<p>IE possède un grand nombre de comportements prores (spécialement avant la version&nbsp;8) et Blueprint est fourni avec un fichier <code>ie.css</code> spécial qui fixe un certain nombre de ces problèmes.</p>
+<p>IE possède un grand nombre de comportements bien à lui (spécialement avant la version&nbsp;8) et Blueprint est fourni avec un fichier dédié <code>ie.css</code> qui fixe un certain nombre de ces problèmes.</p>
 
-<p>Après la feuille de style IE vient un lien pour une feuille de style qui n'existe pas encore, <code>custom.css</code>, où nous coderons nos styles personnalités&nbsp;:</p>
+<p>Après la feuille de style IE vient un lien pour une feuille de style qui n'existe pas encore, <code>custom.css</code>, où nous coderons les styles de notre cru&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -551,7 +551,7 @@
 
 <p>CSS est très conciliant, et même si le fichier n'existe pas encore notre page fonctionnera quand même bien (nous créerons le fichier <code>custom.css</code> à la <a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a>.)</p>
 
-<p>La prochaine section place un conteneur <em>div</em> autour des éléments de navigation et de contenu de notre site, ce qui consiste en une balise <code>div</code> de classe (<em>class</em>) <code>container</code>. Ce conteneur div est demandé par Blueprint (voyez le <a href="http://wiki.github.com/joshuaclayton/blueprint-css/quick-start-tutorial">tutoriel Blueprint</a> pour plus d'information). Viennent ensuite les éléments <code>header</code> et <code>section</code>&nbsp;; le <em>header</em> (<em>entête</em>) contient le logo de l'application (qui sera ajouté plus tard) et les éléments de navigation du site (<code>nav</code>). Enfin, on trouve un élément <code>section</code> contenant le contenu principal du site&nbsp;:</p>
+<p>La prochaine section place un conteneur <em>div</em> autour des éléments de navigation et de contenu de notre site, qui consiste en une balise <code>div</code> de classe (<em>class</em>) <code>container</code>. Ce conteneur div est demandé par Blueprint (voyez le <a href="http://wiki.github.com/joshuaclayton/blueprint-css/quick-start-tutorial">tutoriel Blueprint</a> pour plus d'information). Viennent ensuite les éléments <code>header</code> et <code>section</code>&nbsp;; le <em>header</em> (<em>entête</em>) contient le logo de l'application (que vous pourrez télécharger plus tard) et les éléments de navigation du site (<code>nav</code>). Enfin, on trouve un élément <code>section</code> contenant le contenu principal du site&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header&gt;</span>
@@ -572,25 +572,25 @@
 </div>
 
 
-<p>La balise <code>div</code>, en HTML, est une division générique&nbsp;; ça ne fait rien à part diviser le document en parties distinctes. Dans le vieux style HTML, les tables <code>div</code> sont utilisés pour presque toutes les divisions, mais HTML5 ajoute les éléments <code>header</code>, <code>nav</code> et <code>section</code> pour les divisions communes à beaucoup d'applications. On peut assigner des <em>classes</em> (<code>class</code>) et <em>identifiant</em> (<code>id</code>) à tous les éléments HTML, incluant les divs et les nouveaux éléments HTML5, <sup class="footnote" id="fnref:5.2"><a href="#fn:5.2">2</a></sup>&nbsp;; ce sont simplement des labels, et sont utiles pour styliser avec CSS (<a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a>). La différence principale entre les <em>class</em> et <em>id</em> réside dans le fait que les classes peuvent être utilisés plusieurs fois avec que les identifiants, par essence, sont uniques dans la page.</p>
+<p>La balise <code>div</code>, en HTML, est une division générique&nbsp;; elle sert simplement à part <em>diviser</em> le document en parties distinctes. Dans le vieux style HTML, les tables <code>div</code> sont utilisés pour presque toutes les divisions, mais HTML5 ajoute les éléments <code>header</code>, <code>nav</code> et <code>section</code> pour les divisions communes à beaucoup d'applications. On peut assigner des <em>classes</em> (<code>class</code>) et <em>identifiant</em> (<code>id</code>) à tous les éléments HTML, dont les divs et les nouveaux éléments HTML5 <sup class="footnote" id="fnref:5.2"><a href="#fn:5.2">2</a></sup>&nbsp;; ce sont simplement des labels, et sont nécessaires pour styliser en CSS (<a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a>). La différence principale entre les <em>class</em> et <em>id</em> réside dans le fait que les classes peuvent être utilisés plusieurs fois alors que les <em>identifiants</em>, par nature, sont uniques dans la page.</p>
 
 <p>Dans le <em>header</em> se trouve un <em>helper</em> Rails appelé <code>image_tag</code>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Application exemple&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Application Exemple&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
 <p>Notez que, comme avec <code>stylesheet_link_tag</code> (<a class="ref" href="rails-flavored-ruby#sec:css_revisited">section&nbsp;4.3.4</a>), nous passons une table d'options, dans ce cas définissant les attribuets <code>alt</code> et <code>class</code> de la balise image en utilisant les symboles <code>:alt</code> et <code>:class</code>. Pour rendre cela plus clair, regardons ce que cette balise produit en HTML&nbsp;:<sup class="footnote" id="fnref:5.3"><a href="#fn:5.3">3</a></sup></p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">&quot;Application exemple&quot;</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span> <span class="na">src=</span><span class="s">&quot;/images/logo.png&quot;</span> <span class="nt">/&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">&quot;Application Exemple&quot;</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span> <span class="na">src=</span><span class="s">&quot;/images/logo.png&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 
 
-<p>L'attribut <code>alt</code> est ce qui sera affiché si l'image est introuvable,<sup class="footnote" id="fnref:5.4"><a href="#fn:5.4">4</a></sup> and the class will be used for styling in <a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a>.(les <em>helpers</em> Rails prennent souvent des tables d'options comme celle-ci, nous offrant la flexibilité d'ajouter des options HTML arbitraire sans jamais quitter Rails). Vous pouvez voir le résultat dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a>&nbsp;; nous ajouterons l'image du logo à la fin de cette section.</p>
+<p>L'attribut <code>alt</code> définit ce qui sera affiché si l'image est introuvable,<sup class="footnote" id="fnref:5.4"><a href="#fn:5.4">4</a></sup> et la <rw>classe</rw> sera utilisée pour styliser le logo à la <a class="ref" href="filling-in-the-layout#sec:custom_css">section&nbsp;5.1.2</a>.(les <em>helpers</em> Rails prennent souvent des tables d'options comme celle-ci, nous offrant la flexibilité d'ajouter des options HTML arbitraire sans jamais quitter Rails). Vous pouvez voir le résultat dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a>&nbsp;; nous ajouterons l'image du logo à la fin de cette section.</p>
 
-<p>Le second élément à l'intérieur de l'header du layout est une liste de liens pour la navigatio, construits en utilisant une balise de <em>liste non ordonnée</em> <code>ul</code>, avec des balises d'<em>item</em> <code>li</code>&nbsp;:</p>
+<p>Le deuxième élément à l'intérieur de l'header du layout, la balise <tt>nav</tt>, est une liste de liens pour la navigation, construite en utilisant une balise de <em>liste non ordonnée</em> <code>ul</code> et des balises d'<em>items</em> <code>li</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
@@ -603,7 +603,7 @@
 </div>
 
 
-<p>Cette liste utilise l'<em>helper</em> Rails <code>link_to</code> pour créer des liens (que vous avons créés directement avec la balise ancre <code>a</code> à la <a class="ref" href="static-pages#sec:passing_title_tests">section&nbsp;3.3.2</a>)&nbsp;; le premier argument est le texte du lien et le second est l'URL du lien. Nous définirons les URLs avec <em>noms de route</em> à la <a class="ref" href="filling-in-the-layout#sec:named_routes">section&nbsp;5.2.3</a>, mais pour le moment nous utilisons l'URL souche <code>&rsquo;#&rsquo;</code> utilisé couramment en design web. Une fois que Rails a exécuté ce layout et évalué le code Ruby embarqué, la list ressemble à&nbsp;:</p>
+<p>Cette liste utilise l'<em>helper</em> Rails <code>link_to</code> pour créer des liens (que vous avons créés directement avec la balise ancre <code>a</code> à la <a class="ref" href="static-pages#sec:passing_title_tests">section&nbsp;3.3.2</a>)&nbsp;; le premier argument est le texte du lien et le second est l'URL du lien. Nous définirons les URLs avec des <em>noms de route</em> à la <a class="ref" href="filling-in-the-layout#sec:named_routes">section&nbsp;5.2.3</a>, mais pour le moment nous utilisons l'URL souche <code>&rsquo;#&rsquo;</code> utilisé couramment en design web. Une fois que Rails a exécuté ce layout et évalué le code Ruby embarqué, la liste ressemble à&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
@@ -616,7 +616,7 @@
 </div>
 
 
-<p>Notre layout est maintenant achevé, et nous pouvons regarder le résultat en visitant, par exemple, la page d'accueil. En anticipant l'ajout d'utilisateur à notre site au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, ajoutons un lien d'inscription à la vue <code>home.html.erb</code> (<a class="ref" href="filling-in-the-layout#code:signup_button">extrait&nbsp;5.2</a>).</p>
+<p>Notre layout est maintenant achevé, et nous pouvons regarder le résultat en visitant, par exemple, la page d'accueil. En anticipant l'ajout d'utilisateurs à notre site au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, ajoutons un lien d'inscription à la vue <code>home.html.erb</code> (<a class="ref" href="filling-in-the-layout#code:signup_button">extrait&nbsp;5.2</a>).</p>
 
 <div class="label" id="code:signup_button"></div>
 
@@ -624,14 +624,14 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Extrait 5.2.</span> <span class="description">Une page d'accueil avec un lien d'inscription. <br /> <code>app/views/pages/home.html.erb</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Application exemple<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Application Exemple<span class="nt">&lt;/h1&gt;</span>
 
 <span class="nt">&lt;p&gt;</span>
   C'est la page d'accuile pour l'application exemple du
   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Ruby on Rails<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 
-<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;S'inscrire&nbsp;!&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;signup_button round&quot;</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;S'inscrire&amp;nbsp;!&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;signup_button round&quot;</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div></div>
 
@@ -651,15 +651,15 @@
 
 <p>C'est pratique pour le cas courant d'un élément avec deux styles différents.</p>
 
-<p>Nous sommes maintenant près à voir le fruits de notre dur labeur (<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a>).<sup class="footnote" id="fnref:5.5"><a href="#fn:5.5">5</a></sup> Plutôt décevant, dites-vous&nbsp;? Peut-être. Heureusement, cependant, nous avons fait du bon travail en renant nos élément HTML sensibles aux <code>id</code> et <code>class</code>, ce qui nous met en bonne position pour mettre notre site en forme grâce aux CSS.</p>
+<p>Nous sommes maintenant prêts à tirer les fruits de notre dur labeur (<a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">illustration&nbsp;5.2</a>).<sup class="footnote" id="fnref:5.5"><a href="#fn:5.5">5</a></sup> Plutôt décevant, dites-vous&nbsp;? Peut-être. Heureusement, cependant, nous avons fait du bon travail en renant nos élément HTML sensibles aux <code>id</code> et <code>class</code>, ce qui nous met en bonne position pour mettre notre site en forme grâce aux CSS.</p>
 
 <div class="label" id="fig:layout_no_logo_or_custom_css"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/layout_no_logo_or_custom_css.png" alt="layout_no_logo_or_custom_css" /></span></div><div class="caption"><span class="header">Illustration 5.2: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) sans logo ou CSS personnalisé.&nbsp;<a href="http://railstutorial.org/images/figures/layout_no_logo_or_custom_css-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/layout_no_logo_or_custom_css.png" alt="layout_no_logo_or_custom_css" /></span></div><div class="caption"><span class="header">Illustration 5.2: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) sans logo ou CSS personnalisé (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/layout_no_logo_or_custom_css-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Avant que nous stylisions avec les CSS, remplaçons le texte alternatif du logo (balise <code>alt</code>) avec une image&nbsp;; vous pouvez télécharger le logo de l'application exemple à l'adresse <br /> <br />
+<p>Avant que nous stylisions avec les CSS, remplaçons le texte alternatif du logo (balise <code>alt</code>) avec une image&nbsp;; vous pouvez télécharger le logo de l'application exemple à l'adresse&nbsp;:<br /> <br />
 <a href="http://railstutorial.org/images/sample_app/logo.png">http://railstutorial.org/images/sample_app/logo.png</a><br /></p>
 
 <p>Déposez le logo dans le dossier <code>public/images</code> pour que Rails puisse le trouver. Le résultat apparait dans l'<a class="ref" href="filling-in-the-layout#fig:layout_logo_no_css">illustration&nbsp;5.3</a>.</p>
@@ -735,7 +735,7 @@
 </div></div>
 
 
-<p>Vous pouvez voir le résultat de ce code CSS dans l'<a class="ref" href="filling-in-the-layout#fig:layout_with_colors">illustration&nbsp;5.4</a>. Il y a beaucoup de CSS ici, mais il a une forme consistante. Chaque règle se réfère à une <em>class</em> un <em>id</em>, une balise HTML ou une combinaison de ceux-là, suivi par une liste des commandes de style. Par exemple&nbsp;:</p>
+<p>Vous pouvez voir le résultat de ce code CSS dans l'<a class="ref" href="filling-in-the-layout#fig:layout_with_colors">illustration&nbsp;5.4</a>. Il y a beaucoup de CSS ici, mais il a une forme consistante. Chaque règle se réfère à une <code>class</code>, un <code>id</code> ou une balise HTML, ou une combinaison des trois, suivi par une liste des commandes de style. Par exemple&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">body</span> <span class="p">{</span>
   <span class="k">background</span><span class="o">:</span> <span class="m">#cff</span><span class="p">;</span>
@@ -754,7 +754,9 @@
 </div>
 
 
-<p>met une couche de padding de 1 <code>em</code> (grossièrement la largeur de la lettre <tt>M</tt>) atour de l'image (<code>img</code>) à l'intérieur de la balise <code>header</code>. Cette règle définit aussi la couleur de fond <code>#fff</code>, qui correspond au code du blanc.<sup class="footnote" id="fnref:5.6"><a href="#fn:5.6">6</a></sup> Similairement&nbsp;:</p>
+<p>met une couche de padding de 1 <code>em</code> (grossièrement la largeur de la lettre <tt>M</tt>) atour de l'image (<code>img</code>) à l'intérieur de la balise <code>header</code>. Cette règle définit aussi la couleur de fond <code>#fff</code>, qui correspond au code du blanc.<sup class="footnote" id="fnref:5.6"><a href="#fn:5.6">6</a></sup></p>
+
+<p>Similairement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nc">.container</span> <span class="p">{</span>
   <span class="k">width</span><span class="o">:</span> <span class="m">710px</span><span class="p">;</span>
@@ -771,7 +773,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/layout_with_colors.png" alt="layout_with_colors" /></span></div><div class="caption"><span class="header">Illustration 5.4: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) avec des couleurs personnalisées.&nbsp;<a href="http://railstutorial.org/images/figures/layout_with_colors-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Changer les couleurs est sympa, mais les liens de navigation sont toujours «&nbsp;pendus&nbsp;» du côté gauche de la page. Bougeons-les à un meilleur endroit et donnons-leur une apparence plus belle avec les règles de navigation de l'<a class="ref" href="filling-in-the-layout#code:navigation_css">extrait&nbsp;5.4</a>. Le résultat apparait dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_rounded_corners">illustration&nbsp;5.5</a> (dans certains des exemples de code du livre, incluant l'<a class="ref" href="filling-in-the-layout#code:navigation_css">extrait&nbsp;5.4</a>, j'utilise trois points alignés verticalement pour indiquer du code omis. Quand vous reproduisez ce code, prenez soin de ne pas inclure ces points&nbsp;; alternativement, si vous copiez-collez ce code, assurez-vous de supprimer ces points à la main).</p>
+<p>Changer les couleurs est sympa, mais les liens de navigation sont toujours «&nbsp;pendus&nbsp;» au côté gauche de la page. Bougeons-les à un meilleur endroit et donnons-leur une apparence plus belle avec les règles de navigation de l'<a class="ref" href="filling-in-the-layout#code:navigation_css">extrait&nbsp;5.4</a>. Le résultat apparait dans l'<a class="ref" href="filling-in-the-layout#fig:layout_no_rounded_corners">illustration&nbsp;5.5</a> (dans certains des exemples de code du livre, incluant l'<a class="ref" href="filling-in-the-layout#code:navigation_css">extrait&nbsp;5.4</a>, j'utilise trois points alignés verticalement pour indiquer du code omis. Quand vous reproduisez ce code à la main, prenez soin de ne pas taper ces points&nbsp;; de la même manière, si vous copiez-collez ce code, assurez-vous de ne pas prendre ces points).</p>
 
 <div class="label" id="code:navigation_css"></div>
 
@@ -826,10 +828,10 @@
 <div class="label" id="fig:layout_no_rounded_corners"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/layout_no_rounded_corners.png" alt="layout_no_rounded_corners" /></span></div><div class="caption"><span class="header">Illustration 5.5: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) avec la navigation stylisée.&nbsp;<a href="http://railstutorial.org/images/figures/layout_no_rounded_corners-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/layout_no_rounded_corners.png" alt="layout_no_rounded_corners" /></span></div><div class="caption"><span class="header">Illustration 5.5: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) avec la navigation stylisée (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/layout_no_rounded_corners-full.png">(taille normale)</a></span></div></div>
 
 
-<p>En <a href="http://www.answers.com/penultimate">pénultième</a> étape, nous allons rendre le lien à notre page d'inscription un peu moins évident (bien que nous n'en ayons rien à faire pour notre application exemple, sur un site réel il est naturellement assez important —&nbsp;et pourquoi donc&nbsp;? NdT&nbsp;— de rendre le lien d'inscription <em>très</em> proéminent). L'<a class="ref" href="filling-in-the-layout#code:signup_css">extrait&nbsp;5.5</a> montre le code CSS pour rendre gros, vert et cliquable le lien d'inscription (pour qu'un clic n'importe où dans la boite puisse suivre ce lien).</p>
+<p>En <a href="http://www.answers.com/penultimate">pénultième</a> étape, nous allons rendre le lien à notre page d'inscription un peu moins évident (bien que nous n'en ayons rien à faire pour notre application exemple, sur un site réel il est naturellement assez important de rendre le lien d'inscription <em>très</em> proéminent —&nbsp;et pourquoi donc&nbsp;?… NdT). L'<a class="ref" href="filling-in-the-layout#code:signup_css">extrait&nbsp;5.5</a> montre le code CSS pour rendre gros, vert et cliquable le lien d'inscription (pour qu'un clic n'importe où dans la boite puisse suivre ce lien).</p>
 
 <div class="label" id="code:signup_css"></div>
 
@@ -859,7 +861,7 @@
 </div></div>
 
 
-<p>Il y a beaucoup de règles ici&nbsp;; comme d'habitude, «&nbsp;commentez&nbsp;» une ligne et rechargez la page si vous voulez voir à quoi chacune d'entre elles sert. Le résultat final est un lien d'inscription difficile à rater (<a class="ref" href="filling-in-the-layout#fig:signup_button">illustration&nbsp;5.6</a>).</p>
+<p>Il y a beaucoup de règles ici&nbsp;; comme d'habitude, «&nbsp;commentez&nbsp;» une ligne et rechargez la page si vous voulez voir à quoi elles sert. Le résultat final est un lien d'inscription difficile à rater (<a class="ref" href="filling-in-the-layout#fig:signup_button">illustration&nbsp;5.6</a>).</p>
 
 <div class="label" id="fig:signup_button"></div>
 
@@ -867,7 +869,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_button.png" alt="signup_button" /></span></div><div class="caption"><span class="header">Illustration 5.6: </span><span class="description">La page Accueil (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) avec un bouton d'inscription proéminent.&nbsp;<a href="http://railstutorial.org/images/figures/signup_button-full.png">(taille normale)</a></span></div></div>
 
 
-<p>En touche finale, nous allons utiliser les classes <code>round</code> que nous avons placé sur plusieurs des éléments de notre site. Bien que la dureté des coins des boites soit terribles, il y a un peu plus amical de les adoucir pour ne pas couper en tranches nos utilisateurs. Nous pouvons accomplir cela en utilisant le code CSS de l'<a class="ref" href="filling-in-the-layout#code:round_css">extrait&nbsp;5.6</a>, pour obtenir le résultat de l'<a class="ref" href="filling-in-the-layout#fig:layout_rounded_corners">illustration&nbsp;5.7</a>.</p>
+<p>En touche finale, nous allons utiliser les classes <code>round</code> que nous avons placées sur plusieurs des éléments de notre site. Bien que la dureté des coins des boites soit… terribles, il est un peu plus amical de les adoucir pour ne pas couper en tranches nos utilisateurs. Nous pouvons accomplir cela en utilisant le code CSS de l'<a class="ref" href="filling-in-the-layout#code:round_css">extrait&nbsp;5.6</a>, pour obtenir le résultat de l'<a class="ref" href="filling-in-the-layout#fig:layout_rounded_corners">illustration&nbsp;5.7</a>.</p>
 
 <div class="label" id="code:round_css"></div>
 
@@ -889,7 +891,7 @@
 </div></div>
 
 
-<p>Il vaut la peine de noter que cet astuces fonctionne sur Firefox, Safari, Opera, et de nombreux autres navigateurs, mais que ça ne fonctionne pas sur Internet Explorer (encore lui… NdT). Il <em>existe</em> une façon d'obtenir des arrondis sur tous les navigateurs, mais aucune qui ne soit aussi facile que celle-ci, donc nous prenons le risque de laisser nos utilisateurs IE avec quelques petites coupures.</p>
+<p>Il est important de noter que cet astuce des bords arrondis fonctionne sur Firefox, Safari, Opera, et de nombreux autres navigateurs, mais que ça ne fonctionne pas sur Internet Explorer (encore lui… NdT). Il <em>existe</em> une façon d'obtenir des arrondis sur tous les navigateurs, mais aucune qui ne soit aussi facile que celle-ci, donc nous prenons le risque de laisser nos utilisateurs IE avec quelques petites coupures aux doigts.</p>
 
 <div class="label" id="fig:layout_rounded_corners"></div>
 
@@ -905,7 +907,7 @@
 <h3><a id="sec:5.1.3" href="filling-in-the-layout#sec:partials" class="heading"><span class="number">5.1.3</span> Partiels</a></h3>
 
 
-<p>Bien que le layout de l'<a class="ref" href="filling-in-the-layout#code:layout_new_structure">extrait&nbsp;5.1</a> remplisse son role, il devient un peu encombré de code&nbsp;; il y a plusieurs lignes d'inclusion de fichiers CSS et même plus de lignes d'<em>header</em> pour ce qui n'est logiquement que deux idées. Nous pouvons ranger ces sections en utilisant la facilité de Rails qui s'appelle les <em>partiels</em> (<em>partials</em>). Jetons d'abord un œil à l'aspect du layout après que les partiels auront été définis (<a class="ref" href="filling-in-the-layout#code:layout_with_partials">extrait&nbsp;5.7</a>).</p>
+<p>Bien que le layout de l'<a class="ref" href="filling-in-the-layout#code:layout_new_structure">extrait&nbsp;5.1</a> remplisse son role, il devient un peu encombré de code&nbsp;; il y a plusieurs lignes d'inclusion de fichiers CSS et même plus de lignes d'<em>header</em> pour ce qui n'est logiquement que deux idées. Nous pouvons ranger ces sections en utilisant la facilité de Rails qui s'appelle les <rw>partiels</rw> (<em>partials</em>). Jetons d'abord un œil à l'aspect du layout après que les partiels auront été définis (<a class="ref" href="filling-in-the-layout#code:layout_with_partials">extrait&nbsp;5.7</a>).</p>
 
 <div class="label" id="code:layout_with_partials"></div>
 
@@ -940,7 +942,7 @@
 </div>
 
 
-<p>L'effet de cette ligne est de trouver un fichier appelé <code>app/views/layouts/_stylesheets.html.erb</code>, d'évaluer son contenu et d'en insérer le contenu dans la vue.<sup class="footnote" id="fnref:5.8"><a href="#fn:5.8">8</a></sup> (Rappelez-vous que <tt class="verb">&lt;%= ... %&gt;</tt> est la syntaxe de Ruby embarqué nécessaire pour évaluer une expression Ruby et insérer le résultat à l'intérieur du template.) Remarquez le tiret bas au début du nom du fichier <code>_stylesheets.html.erb</code>&nbsp;; ce tiret bas est la convention universelle pour nommer les partiels, et parmi d'autres choses rend possible d'identifier d'un coup d'œil tous les partiels dans un dossier.</p>
+<p>L'effet de cette ligne est de trouver un fichier appelé <code>app/views/layouts/_stylesheets.html.erb</code>, d'évaluer son contenu et d'en insérer le contenu dans la vue.<sup class="footnote" id="fnref:5.8"><a href="#fn:5.8">8</a></sup> (Rappelez-vous que <tt class="verb">&lt;%= ... %&gt;</tt> est la syntaxe du «&nbsp;Ruby embarqué&nbsp;» nécessaire pour évaluer une expression Ruby et insérer le résultat à l'intérieur du template.) Remarquez le tiret bas au début du nom du fichier <code>_stylesheets.html.erb</code>&nbsp;; ce tiret bas est la convention universelle pour nommer les partiels, et parmi d'autres choses rend possible d'identifier d'un coup d'œil tous les partiels dans un dossier.</p>
 
 <p>Bien entendu, pour obtenir que le partiel fonctionne, nous devons remplir son contenu; dans le cas du partiel des feuilles de styles, c'est juste les quatre ligne incluse de l'<a class="ref" href="filling-in-the-layout#code:layout_new_structure">extrait&nbsp;5.1</a>&nbsp;; le résultat apparait dans l'<a class="ref" href="filling-in-the-layout#code:stylesheets_partial">extrait&nbsp;5.8</a>. (Techniquement, le <em>HTML shiv</em> inclut Javascript, pas CSS. En d'autres mots, son but est de permettre à Internet Explorer de comprendre CSS avec HTML5, donc logiquement il doit rester dans le partiel des feuilles de style.)</p>
 
@@ -990,7 +992,7 @@
 </div></div>
 
 
-<p>Maintenant que nous savons faire des partiels, ajoutons au site un pied de page qui soit harmonisé avec l'entête. Dès à présent vous devez pouvoir devnier que nous l'appeler <code>_footer.html.erb</code> et le déposer dans le dossier des layouts (<a class="ref" href="filling-in-the-layout#code:footer_partial">extrait&nbsp;5.10</a>).</p>
+<p>Maintenant que nous savons faire des partiels, ajoutons au site un pied de page qui soit harmonisé avec l'entête. Dès à présent vous devez pouvoir devnier que nous l'appelerons <code>_footer.html.erb</code> et le déposer dans le dossier des layouts (<a class="ref" href="filling-in-the-layout#code:footer_partial">extrait&nbsp;5.10</a>).</p>
 
 <div class="label" id="code:footer_partial"></div>
 
@@ -1004,7 +1006,7 @@
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;À Propos&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Contact&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://news.railstutorial.org/&quot;</span><span class="nt">&gt;</span>News<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.railstutorial.org/&quot;</span><span class="nt">&gt;</span>Rails Tutorial<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.railstutorial.org/&quot;</span><span class="nt">&gt;</span>Tutoriel Rails<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/nav&gt;</span>
 <span class="nt">&lt;/footer&gt;</span>
@@ -1043,7 +1045,7 @@
 </div></div>
 
 
-<p>Bien sûr, le pied de page sera laid comme un peu de style (<a class="ref" href="filling-in-the-layout#code:footer_css">extrait&nbsp;5.12</a>). Le résultat est présenté dans l'<a class="ref" href="filling-in-the-layout#fig:site_with_footer">illustration&nbsp;5.8</a>.</p>
+<p>Bien sûr, le pied de page sera laid tant que nous ne lui aurons pas appliqué un peu de style (<a class="ref" href="filling-in-the-layout#code:footer_css">extrait&nbsp;5.12</a>). Le résultat est présenté dans l'<a class="ref" href="filling-in-the-layout#fig:site_with_footer">illustration&nbsp;5.8</a>.</p>
 
 <div class="label" id="code:footer_css"></div>
 
@@ -1087,7 +1089,7 @@
 </div>
 
 
-<p>… de telle sorte que le pied de page est centré en bas de page plutôt que d'être poussé vers la droite comme les liens de navigation dans l'entête. Cette convention d'avoir des successions de règles, avec des règles ultérieure écrasant des règles précédantes, est ce qui justifie le «&nbsp;en cascase&nbsp;» dans le «&nbsp;Cascade Style Sheets&nbsp;» (<em>Feuilles de Styles en Cascade</em>).</p>
+<p>… de telle sorte que le pied de page est centré en bas de page plutôt que d'être poussé vers la droite comme les liens de navigation dans l'entête. Cette convention d'avoir des successions de règles, avec des règles ultérieures écrasant des règles antérieures, est ce qui explique le «&nbsp;en cascase&nbsp;» dans le «&nbsp;Cascade Style Sheets&nbsp;» (<em>Feuilles de Styles en Cascade</em>).</p>
 
 <div class="label" id="fig:site_with_footer"></div>
 
@@ -1103,28 +1105,28 @@
 <h2><a id="sec:5.2" href="filling-in-the-layout#sec:layout_links" class="heading"><span class="number">5.2</span> Liens pour la mise en page</a></h2>
 
 
-<p>Maintenant que nous avons fini notre charte de site avec une stylisation décente, il est temps de commencer à remplir les liens que nous avons esquissés par <code>&rsquo;#&rsquo;</code>. Bien sûr, nous pourrions coder les liens en dur comme&nbsp;:</p>
+<p>Maintenant que nous avons fini notre layout du site avec une stylisation décente, il est temps de commencer à remplir les liens que nous avons amorcés avec <code>&rsquo;#&rsquo;</code>. Bien sûr, nous pourrions coder les liens en dur comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/pages/about&quot;</span><span class="nt">&gt;</span>À Propos<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 
 
-<p>… mais ce n'est pas la façon de faire Rails. <em>Primo</em>, ce serait bien si l'URL pour la page «&nbsp;À Propos&nbsp;» était <tt>/about</tt> plutôt que <tt>/pages/about</tt>&nbsp;; plus encore, Rails utilise conventionnellement des <em>routes nommés</em>, ce qui implique du code comme&nbsp;:</p>
+<p>… mais ce n'est pas la façon de faire Rails. <em>Primo</em>, ce serait bien si l'URL pour la page «&nbsp;À Propos&nbsp;» était <tt>/about</tt> plutôt que <tt>/pages/about</tt>&nbsp;; plus encore, Rails utilise conventionnellement des <rw>routes nommées</rw> qui permet d'utiliser du code comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;À Propos&quot;</span><span class="p">,</span> <span class="n">about_path</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>De cette manière le code a un sens plus clair, et il est également plus flexible puisque nous n'avons qu'à changer la définition de <code>about_path</code> pour que les URLs changement partout où <code>about_path</code> est utilisé.</p>
+<p>De cette manière le code a un sens plus clair, et il est également plus flexible puisque nous n'avons qu'à changer la définition de <code>about_path</code> pour que les URLs changent partout où <code>about_path</code> est utilisé.</p>
 
-<p>La liste complète de nos liens planifié («&nbsp;routés&nbsp;») est présenté dans la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a>, avec leur carte vers les URLs et les routes. Nous les implémenterons toutes sauf la dernière d'ici la fin de ce chapitre (la dernière se fera au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>.)</p>
+<p>La liste complète de nos liens planifiés («&nbsp;routés&nbsp;») est présentée dans la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a>, avec leur carte vers les URLs et les routes. Nous les implémenterons toutes sauf la dernière d'ici la fin de ce chapitre (la dernière sera implémentée au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>.)</p>
 
 <div class="label" id="table:url_mapping"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_right"><strong>Named route</strong></th></tr><tr class="top_bar"><td class="align_left">Accueil</td><td class="align_left"><tt>/</tt></td><td class="align_right"><code>root_path</code></td></tr><tr><td class="align_left">À Propos</td><td class="align_left"><tt>/about</tt></td><td class="align_right"><code>about_path</code></td></tr><tr><td class="align_left">Contact</td><td class="align_left"><tt>/contact</tt></td><td class="align_right"><code>contact_path</code></td></tr><tr><td class="align_left">Aide</td><td class="align_left"><tt>/help</tt></td><td class="align_right"><code>help_path</code></td></tr><tr><td class="align_left">Inscription</td><td class="align_left"><tt>/signup</tt></td><td class="align_right"><code>signup_path</code></td></tr><tr><td class="align_left">Connexion</td><td class="align_left"><tt>/signin</tt></td><td class="align_right"><code>signin_path</code></td></tr></table></div><div class="caption"><span class="header">Table 5.1: </span><span class="description">Carte des Route et URL des liens du site.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Page</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_right"><strong>Route nommée</strong></th></tr><tr class="top_bar"><td class="align_left">Accueil</td><td class="align_left"><tt>/</tt></td><td class="align_right"><code>root_path</code></td></tr><tr><td class="align_left">À Propos</td><td class="align_left"><tt>/about</tt></td><td class="align_right"><code>about_path</code></td></tr><tr><td class="align_left">Contact</td><td class="align_left"><tt>/contact</tt></td><td class="align_right"><code>contact_path</code></td></tr><tr><td class="align_left">Aide</td><td class="align_left"><tt>/help</tt></td><td class="align_right"><code>help_path</code></td></tr><tr><td class="align_left">Inscription</td><td class="align_left"><tt>/signup</tt></td><td class="align_right"><code>signup_path</code></td></tr><tr><td class="align_left">Connexion</td><td class="align_left"><tt>/signin</tt></td><td class="align_right"><code>signin_path</code></td></tr></table></div><div class="caption"><span class="header">Table 5.1: </span><span class="description">Carte des Routes et URLs des liens du site.</span></div></div>
 
 
 
@@ -1135,7 +1137,7 @@
 <h3><a id="sec:5.2.1" href="filling-in-the-layout#sec:integration_tests" class="heading"><span class="number">5.2.1</span> Test d'intégration</a></h3>
 
 
-<p>Avant d'écrire les routes de notre application, nous allons poursuivre avec notre «&nbsp;développement conduit par les tests&nbsp;» en écrivant des tests pour ces routes. Il existe plusieurs façons de tester le routage, et nous allons profiter de cette opportunité pour introduire les <em>test d'intégration</em>, qui nous offre une manière de simuler un navigateur qui accèderait à notre application et ce faisant le test de bout en bout. Comme nous le verrons en abordant la <a class="ref" href="sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a>, tester le routage n'est qu'un début.</p>
+<p>Avant d'écrire les routes de notre application, nous allons poursuivre en appliquant notre «&nbsp;Développement Dirigé par les Tests&nbsp;» et donc écrire des tests pour ces <rw>routes</rw>. Il existe plusieurs façons de tester le routage, et nous allons profiter de cette opportunité pour introduire la notion de <rw>test d'intégration</rw>, qui nous permet de simuler un navigateur accédant à notre application et, de cette manière, de pouvoir la tester de bout en bout. Comme nous le verrons en abordant la <a class="ref" href="sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a>, tester le routage n'est qu'un début.</p>
 
 <p>Nous commençons par générer un test d'intégration pour les liens du layout de l'application exemple&nbsp;:</p>
 
@@ -1146,7 +1148,7 @@
 </div>
 
 
-<p>Notez que le générateur ajoute automatiquement <code>_spec.rb</code> au nom de notre fichier test, [(yielding)(rendant)] <code>spec/requests/layout_links_spec.rb</code> (en RSpec, les tests d'intégration sont aussi appelés des <em>request specs</em> (des <em>requêtes spec</em> )&nbsp;; les origines de cette terminologie me sont obscures).</p>
+<p>Notez que le générateur ajoute automatiquement <code>_spec.rb</code> au nom de notre fichier test, ce qui donne donc <code>spec/requests/layout_links_spec.rb</code> (en RSpec, les tests d'intégration sont aussi appelés des <em>request specs</em> &mdash;&nbsp;des <em>requêtes spec</em>, ou tout simplement des «&nbsp;specs&nbsp;»)&nbsp;; les origines de cette terminologie me reste obscures).</p>
 
 <p>Notre test d'intégration utilisera la même fonction <code>get</code> que celle utilisée à la <a class="ref" href="static-pages#sec:first_tests">section&nbsp;3.2</a> dans le spec du contrôleur Pages, avec du code comme&nbsp;:</p>
 
@@ -1160,9 +1162,9 @@
 </div>
 
 
-<p>Dans cette section, nous voulons tester des URLs comme&nbsp;<tt>/</tt> et <tt>/about</tt>, mais nous ne pouvons pas <em>obtenir</em> (<code>get</code>) ces URLs à l'intérieur du test de contrôleur &mdash;&nbsp;les tests de contrôleur connaissent seulement les URLs définis pour ce contrôleur précis. En contraste, les test d'intégration ne sont pas limités par de telles restrictions, puisqu'ils sont désignés comme tests <em>intégrés</em> pour l'application complète et ainsi peuvent obtenir (<code>get</code>) la page qu'ils veulent.</p>
+<p>Dans cette section, nous voulons tester des URLs comme «&nbsp;<tt>/</tt>&nbsp;» et «&nbsp;<tt>/about</tt>&nbsp;», mais nous ne pouvons pas <em>obtenir</em> (<code>get</code>) ces URLs à l'intérieur du test simple de contrôleur &mdash;&nbsp;les tests de contrôleur connaissent seulement les URLs définis pour ce contrôleur précis. En contraste, les test d'intégration ne sont pas limités par de telles restrictions, puisqu'ils sont désignés comme tests <em>intégrés</em> pour l'application complète et ainsi peuvent obtenir (<code>get</code>) la page qu'ils veulent.</p>
 
-<p>En suivant le modèle du spec du contrôleur Pages, nous pouvons écrire un spec d'intégration pour chacune des pages de la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a> pages que nous avons déjà créées, c'est-à-dire les pages Accueil, À Propos, Contact et Aide. Pour être sûr que la bonne page (c'est-à-dire la <em>vue</em>) soit rendue dans chque cas, nous allons tester la validité du titre en utilisant <code>have_selector</code>. Les définitions du test apparaissent dans l'<a class="ref" href="filling-in-the-layout#code:layout_links_spec">extrait&nbsp;5.13</a>.</p>
+<p>En suivant le modèle du spec du contrôleur Pages, nous pouvons écrire un spec d'intégration pour chacune des pages de la <a class="ref" href="filling-in-the-layout#table:url_mapping">table&nbsp;5.1</a> que nous avons déjà créées, c'est-à-dire les pages «&nbsp;Accueil&nbsp;», «&nbsp;À Propos&nbsp;», «&nbsp;Contact&nbsp;» et «&nbsp;Aide&nbsp;». Pour être sûr que la bonne page (c'est-à-dire la bonne <em>vue</em>) soit rendue dans chaque cas, nous allons tester la validité du titre en utilisant <code>have_selector</code>. Les définitions du test apparaissent dans l'<a class="ref" href="filling-in-the-layout#code:layout_links_spec">extrait&nbsp;5.13</a>.</p>
 
 <div class="label" id="code:layout_links_spec"></div>
 
@@ -1198,9 +1200,9 @@
 </div></div>
 
 
-<p>Bien entendu, à ce point ils devraient échouer (Rouge)&nbsp;; nous les passerons au Vert à la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.</p>
+<p>Ces tests devraient pour le moment échouer &mdash;&nbsp;être au Rouge&nbsp;&mdash; (puisque les <rw>routes</rw> ne sont pas encore bien définies)&nbsp;; nous les passerons au Vert à la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a>.</p>
 
-<p>En passant, si vous n'avez pas de page d'aide à ce point, il serait temps d'en ajouter une (si vous avez résolu les <a class="ref" href="static-pages#top">chapitre&nbsp;3</a> exercises de la <a class="ref" href="static-pages#sec:static_pages_exercises">section&nbsp;3.5</a>, vous en avez déjà une). D'abord, ajoutez l'action <code>help</code> au contrôleur Pages (<a class="ref" href="filling-in-the-layout#code:help_action">extrait&nbsp;5.14</a>). Ensuite, créez la vue correspondante (<a class="ref" href="filling-in-the-layout#code:help_view">extrait&nbsp;5.15</a>).</p>
+<p>En passant, si vous n'avez pas de page d'aide, il serait temps d'en ajouter une (si vous avez résolu les exercices de la <a class="ref" href="static-pages#sec:static_pages_exercises">section&nbsp;3.5</a> du <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>, vous en avez déjà une). D'abord, ajoutez l'action <code>help</code> au contrôleur Pages (<a class="ref" href="filling-in-the-layout#code:help_action">extrait&nbsp;5.14</a>). Ensuite, créez la vue correspondante (<a class="ref" href="filling-in-the-layout#code:help_view">extrait&nbsp;5.15</a>).</p>
 
 <div class="label" id="code:help_action"></div>
 
@@ -1240,7 +1242,7 @@
 
 
 <p>Il y a un détail final pour gérer les changements précédents&nbsp;:
-si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégration. C'est à dessein, puisque les tests d'intégration peuvent être lents et aisnis peuvent entraver le cycle rouge-vert-restructuration, mais je trouve quand même préférable de dire à Autotest de lancer les tests du dossier  <code>spec/requests</code> directory (<a class="ref" href="filling-in-the-layout#code:autotest_integration">extrait&nbsp;5.16</a> ou <a class="ref" href="filling-in-the-layout#code:autotest_integration_linux">extrait&nbsp;5.17</a>).</p>
+si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégration. C'est à dessein, puisque les tests d'intégration peuvent être lents et donc entraver le cycle rouge-vert-restructuration, mais je trouve quand même préférable de dire à Autotest de lancer les tests du dossier  <code>spec/requests</code> (<a class="ref" href="filling-in-the-layout#code:autotest_integration">extrait&nbsp;5.16</a> ou <a class="ref" href="filling-in-the-layout#code:autotest_integration_linux">extrait&nbsp;5.17</a>).</p>
 
 <div class="label" id="code:autotest_integration"></div>
 
@@ -1274,7 +1276,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Ne vous souciez pas de où vient ce code&nbsp;; je ne connais pas non plus l'API Autotest. À un certain point J'utilise Google avec des termes de recherche tels que &ldquo;rspec autotest integration&rdquo; et j'ai trouvé ce code, et lorsque je l'ai introduit dans mon fichier <code>.autotest</code>, ça a fonctionné.</p>
+<p>Ne vous souciez pas de où vient ce code&nbsp;; je ne connais pas non plus l'API Autotest. Pour ce cas précis, j'ai lancé Google sur des termes de recherche tels que &ldquo;rspec autotest integration&rdquo; et j'ai trouvé ce code, et lorsque je l'ai introduit dans mon fichier <code>.autotest</code>, ça a fonctionné.</p>
 
 <div class="label" id="sec:rails_routes"></div>
 
@@ -1282,7 +1284,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h3><a id="sec:5.2.2" href="filling-in-the-layout#sec:rails_routes" class="heading"><span class="number">5.2.2</span> Routes Rails</a></h3>
 
 
-<p>Maintenant que nous avons des tests pour les URLs désirés, il est temps de les faire fonctionner. Comme noté à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, le fichier que Rails utilise pour le routage des URL <code>config/routes.rb</code>. Si vous jetez un coup d'œil au fichier par défaut des routes, vous verrez c'est plutôt le bazar, mais c'est un bazar utile &mdash;&nbsp;plein d'exemples de routages à décommenter. Je vous suggère de le lire jusqu'à un certain point, et je vous suggère aussi de jeter un regard à l'<a href="http://guides.rubyonrails.org/routing.html">article des Guides Rails &ldquo;Rails Routing from the outside in&rdquo;</a> pour un traitement plus en profondeur des routes. Pour le moment, cependant, nous en resterons là avec les exemples de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a>.<sup class="footnote" id="fnref:5.9"><a href="#fn:5.9">9</a></sup></p>
+<p>Maintenant que nous avons des tests pour les URLs désirés, il est temps de les faire fonctionner. Comme noté à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>, le fichier que Rails utilise pour le routage des URL est le fichier <code>config/routes.rb</code>. Si vous jetez un coup d'œil au fichier par défaut des routes, vous verrez que c'est plutôt le bazar, mais c'est un bazar utile &mdash;&nbsp;plein d'exemples de routages à décommenter. Je vous suggère de le lire, et je vous suggère aussi de jeter un œil à l'<a href="http://guides.rubyonrails.org/routing.html">article des Guides Rails &ldquo;Rails Routing from the outside in&rdquo;</a> pour un traitement plus en profondeur des routes. Pour le moment, cependant, nous en resterons là avec les exemples de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a>.<sup class="footnote" id="fnref:5.9"><a href="#fn:5.9">9</a></sup></p>
 
 <div class="label" id="code:static_page_routes"></div>
 
@@ -1302,7 +1304,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>L'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> contient des routes personnalisées pour les pages <code>contact</code>, <code>about</code> (<em>à propos</em>), et <code>help</code> (<em>aide</em>)&nbsp;; nous prendrons soin de la page d'accueil elle-même dans <a class="ref" href="filling-in-the-layout#code:root_route">extrait&nbsp;5.20</a> (puisque nous utiliserons des routes personnalisées dans l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> exclusivement à partir de maintenant nous avons saisi cette opportunité pour supprimer les routes du contrôleur Pages (<code>get "pages/home"</code>, etc.) vues la dernière fois dans l'<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a>).</p>
+<p>L'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> contient des routes personnalisées pour les pages <code>contact</code>, <code>about</code> (<em>à propos</em>), et <code>help</code> (<em>aide</em>)&nbsp;; nous prendrons soin de la page d'accueil elle-même dans <a class="ref" href="filling-in-the-layout#code:root_route">extrait&nbsp;5.20</a> (puisque nous utiliserons des routes personnalisées dans l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> exclusivement à partir de maintenant, nous avons saisi l'opportunité de supprimer les routes du contrôleur Pages (<code>get "pages/home"</code>, etc.) vues dans l'<a class="ref" href="static-pages#code:about_route">extrait&nbsp;3.17</a>).</p>
 
 <p>Si vous lisez attentivement le code de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a>, vous pouvez probablement imaginer ce qu'il fait&nbsp;; par exemple, nous pouvons voir que&nbsp;:</p>
 
@@ -1311,7 +1313,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>… trouve le <code>&rsquo;/about&rsquo;</code> et le route vers l'action <code>about</code> du contrôleur Pages. Avant, c'était plus explicite (au moins pour des anglophones. NdT)&nbsp;: nous utilisions <code>get &rsquo;pages/about&rsquo;</code> pour atteindre le même endroit, mais <code>/about</code> est plus succint. Ce qui n'est pas évident, c'est que <code>match &rsquo;/about&rsquo;</code> crée aussi automatiquement des <em>routes nommés</em> (<em>named routes</em>) à utiliser dans les contrôleurs et dans les vues&nbsp;:</p>
+<p>… trouve le <code>&rsquo;/about&rsquo;</code> et le route vers l'action <code>about</code> du contrôleur Pages. Avant, c'était plus explicite&nbsp;: nous utilisions <code>get &rsquo;pages/about&rsquo;</code> pour atteindre le même endroit, mais <code>/about</code> est plus succint. Ce qui n'est pas évident, c'est que <code>match &rsquo;/about&rsquo;</code> crée aussi automatiquement des <em>routes nommées</em> (<em>named routes</em>) à utiliser dans les contrôleurs et dans les vues&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">about_path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/about&#39;</span>
 <span class="n">about_url</span>  <span class="o">=&gt;</span> <span class="s1">&#39;http://localhost:3000/about&#39;</span>
@@ -1319,9 +1321,9 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>Notez que <code>about_url</code> correspond à l'URL <em>entière</em> <tt>http://localhost:3000/about</tt> (avec <code>localhost:3000</code> remplacé par le nom de domaine, tel que <code>example.com</code>, pour un site déployé online). Comme abordé à la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, pour obtenir juste <tt>/about</tt>, vous utilisez <code>about_path</code> (le <em>Tutoriel Rails</em> utilise la forme <code>path</code> (<em>chemint</em>) pour la consistance, mais la différence importe souvent peu en pratique).</p>
+<p>Notez que <code>about_url</code> correspond à l'URL <em>entière</em> <tt>http://localhost:3000/about</tt> (avec <code>localhost:3000</code> remplacé par le nom de domaine, tel que <code>example.com</code>, pour un site déployé online). Comme abordé à la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, pour obtenir juste <tt>/about</tt>, vous utilisez <code>about_path</code> (le <em>Tutoriel Rails</em> utilise la forme <code>path</code> (<em>chemin</em>) pour la consistance, mais la différence importe souvent peu en pratique).</p>
 
-<p>Ces routes maintenant définies, les tests pour les pages À Propos, Contact et Aide devraient maintenant réussir (comme d'habitude, utilisez Autotest ou <code>rspec spec/</code> pour vérifier). Il ne reste plus que le test pour la page d'accueil.</p>
+<p>Ces <rw>routes</rw> maintenant définies, les tests pour les pages «&nbsp;À Propos&nbsp;», «&nbsp;Contact&nbsp;» et «&nbsp;Aide&nbsp;» devraient maintenant réussir (comme d'habitude, utilisez Autotest ou <code>rspec spec/</code> pour vérifier). Il ne reste plus que le test pour la page d'accueil.</p>
 
 <p>Pour établir la route vers la page d'accueil, nous <em>pourrions</em> utiliser un code tel que&nbsp;:</p>
 
@@ -1353,7 +1355,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>EN utilisant l'<a class="ref" href="filling-in-the-layout#code:root_route_hint">extrait&nbsp;5.19</a> comme modèle, nous arrivons à l'<a class="ref" href="filling-in-the-layout#code:root_route">extrait&nbsp;5.20</a> pour router l'URL&nbsp;<tt>/</tt> vers la page d'accueil.</p>
+<p>En utilisant l'<a class="ref" href="filling-in-the-layout#code:root_route_hint">extrait&nbsp;5.19</a> comme modèle, nous arrivons à l'<a class="ref" href="filling-in-the-layout#code:root_route">extrait&nbsp;5.20</a> pour router l'URL&nbsp;«&nbsp;<tt>/</tt>&nbsp;» vers la page d'accueil.</p>
 
 <div class="label" id="code:root_route"></div>
 
@@ -1375,7 +1377,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Ce code dirige l'URL racine&nbsp;<tt>/</tt> vers <tt>/pages/home</tt>, et  [(also gives URL helpers)(fournit aussi l'URL aux helpers)] comme suit&nbsp;:</p>
+<p>Ce code dirige l'URL racine&nbsp;«&nbsp;<tt>/</tt>&nbsp;» vers <tt>/pages/home</tt>, et fournit aussi l'URL aux helpers comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">root_path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/&#39;</span>
 <span class="n">root_url</span>  <span class="o">=&gt;</span> <span class="s1">&#39;http://localhost:3000/&#39;</span>
@@ -1383,7 +1385,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>Nous devrions aussi tenir compte du commentaire de l'<a class="ref" href="filling-in-the-layout#code:root_route_hint">extrait&nbsp;5.19</a> et effacer <code>public/index.html</code> pour empêcher Rails de retourner la page par défaut (<a class="ref" href="beginning#fig:riding_rails_3">illustration&nbsp;1.3</a>) quand nous visitons&nbsp;<tt>/</tt>. Vous pouvez bien entendu simplement détruire le fichier, mais si vous utilisez Git pour le contrôle de version il existe une façon de dire à Git qu'une destruction a été faite en même temps qu'il le détruit, en utilisant <code>git rm</code>:</p>
+<p>Nous devrions aussi tenir compte du commentaire de l'<a class="ref" href="filling-in-the-layout#code:root_route_hint">extrait&nbsp;5.19</a> et effacer <code>public/index.html</code> pour empêcher Rails de retourner la page par défaut (<a class="ref" href="beginning#fig:riding_rails_3">illustration&nbsp;1.3</a>) quand nous visitons&nbsp;«&nbsp;<tt>/</tt>&nbsp;». Vous pouvez bien entendu simplement détruire le fichier, mais si vous utilisez Git pour le contrôle de version il existe une façon de dire à Git qu'une destruction a été faite en même temps qu'il le détruit, en utilisant <code>git rm</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git rm public/index.html
 <span class="gp">$</span> git commit -am <span class="s2">&quot;Removed default Rails page&quot;</span>
@@ -1393,15 +1395,15 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 <p>Vous vous souvenez peut-être, à la <a class="ref" href="beginning#sec:git_commands">section&nbsp;1.3.5</a>, que nous avons utilisé la commande Git <code>git commit -a -m "Message"</code>, avec des drapeaux pour &ldquo;tous les changements&rdquo; (<code>-a</code>) et un message (<code>-m</code>). Comme montré ci-dessus, Git nous laisse aussi enrouler ces deux drapeaux dans un seul en utilisant <code>git commit -am "<em>Message</em>"</code>.</p>
 
-<p>Avec ça, toutes les routes pour les pages statiques fonctionnent, et les tests devraient réussir. Maintenant nous avons juste à renseigner les liznq su layout.</p>
+<p>Avec ça, toutes les routes pour les pages statiques fonctionnent, et les tests devraient réussir. Maintenant nous avons juste à renseigner les liens du layout.</p>
 
 <div class="label" id="sec:named_routes"></div>
 
-
+<!-- FIN RÉVISION 1 -->
 <h3><a id="sec:5.2.3" href="filling-in-the-layout#sec:named_routes" class="heading"><span class="number">5.2.3</span> Routes nommées</a></h3>
 
 
-<p>Posons les routes nommées créées à la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a> pour qu'elles fonctionnent dans notre layout. Cela va entrainer de renseigner le second argument des fonctions <code>link_to</code> avec le propre nom de route. Par exemple, nous convertirons&nbsp;:</p>
+<p>Posons les routes nommées créées à la <a class="ref" href="filling-in-the-layout#sec:rails_routes">section&nbsp;5.2.2</a> pour qu'elles fonctionnent dans notre layout. Cela va consister à renseigner le second argument des fonctions <code>link_to</code> avec le nom propre à la route. Par exemple, nous convertirons&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;À Propos&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -1417,7 +1419,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 <p>… et ainsi de suite.</p>
 
-<p>Nous allons commencer dans le partiel de l'entête, <code>_header.html.erb</code> (<a class="ref" href="filling-in-the-layout#code:header_partial_links">extrait&nbsp;5.21</a>), qui contient de liens vers les pages d'accueil et d'aide. Pendant que nous y serons, nous suivrons une convention web courante et lierons le logo également à la page d'accueil.</p>
+<p>Nous allons commencer dans le partiel de l'entête, <code>_header.html.erb</code> (<a class="ref" href="filling-in-the-layout#code:header_partial_links">extrait&nbsp;5.21</a>), qui contient des liens vers les pages d'accueil et d'aide. Pendant que nous y serons, nous suivrons une convention web courante et lierons le logo également à la page d'accueil.</p>
 
 <div class="label" id="code:header_partial_links"></div>
 
@@ -1432,7 +1434,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
     <span class="nt">&lt;ul&gt;</span>
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Accueil&quot;</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Aide&quot;</span><span class="p">,</span> <span class="n">help_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-      <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Connexion&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;S'identifier&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/nav&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
@@ -1440,7 +1442,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Nous n'aurons pas de route nommée pour le lien &ldquo;Connexion&rdquo; jusqu'au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>, donc nous le laisserons à <code>&rsquo;#&rsquo;</code> pour le moment. Notez que ce code définit la variable locale <code>logo</code> pour la balise de l'image logo, et ensuite la lie à la ligne suivante&nbsp;:</p>
+<p>Nous n'aurons pas de route nommée pour le lien &ldquo;Inscription&rdquo; jusqu'au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>, donc nous le laisserons à <code>&rsquo;#&rsquo;</code> pour le moment. Notez que ce code définit la variable locale <code>logo</code> pour la balise de l'image logo, et ensuite la lie à la ligne suivante&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="cp">&lt;%</span> <span class="n">logo</span> <span class="o">=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Application exemple&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1448,9 +1450,9 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>C'est un peu plus propre que de tout rassembler dans une seule ligne. C'est spécialement important de noter que le ERb pour l'assignement de variable ne contient pas de signe égal (<code>=</code>)&nbsp;; il est juste <tt class="verb">&lt;% ... %&gt;</tt>, parce que nous ne voulons pas que cette ligne soit insérée dans le template (utiliser une variable locale de cette manière est une façon de faire mais ça n'est pas la seule. Une façon encore plus propre consiste à définir un <em>helper</em> <code>logo</code>&nbsp;; voyez la <a class="ref" href="filling-in-the-layout#sec:layout_exercises">section&nbsp;5.5</a>.)</p>
+<p>C'est un peu plus propre que de tout rassembler dans une seule ligne. C'est spécialement important de noter que le ERb pour l'assignement de variable ne contient pas de signe égal (<code>=</code>)&nbsp;; c'est seulement <tt class="verb">&lt;% ... %&gt;</tt>, parce que nous ne voulons pas que cette ligne soit insérée dans le template (utiliser une variable locale de cette manière est une façon de faire mais ça n'est pas la seule. Une façon encore plus propre consiste à définir un <em>helper</em> <code>logo</code>&nbsp;; voyez la <a class="ref" href="filling-in-the-layout#sec:layout_exercises">section&nbsp;5.5</a>.)</p>
 
-<p>L'autre endroit où on peut trouver des liens, c'est le partiel du pied de page, <code>_footer.html.erb</code>, qui contient des liens pour les pages À Propos et Contact (<a class="ref" href="filling-in-the-layout#code:footer_partial_links">extrait&nbsp;5.22</a>).</p>
+<p>L'autre endroit où on peut trouver des liens, c'est le partiel du pied de page, <code>_footer.html.erb</code>, qui contient des liens pour les pages «&nbsp;À Propos&nbsp;» et «&nbsp;Contact&nbsp;» (<a class="ref" href="filling-in-the-layout#code:footer_partial_links">extrait&nbsp;5.22</a>).</p>
 
 <div class="label" id="code:footer_partial_links"></div>
 
@@ -1472,9 +1474,9 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Avec ça, notre layout a des liens vers toutes les pages statiques créées dans le <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>, et donc, par exemple, <a href="http://localhost:3000/about"><tt>/about</tt></a> se rend à la page À Propos (<a class="ref" href="filling-in-the-layout#fig:about_page">illustration&nbsp;5.9</a>).</p>
+<p>Avec ça, notre layout a des liens vers toutes les pages statiques créées dans le <a class="ref" href="static-pages#top">chapitre&nbsp;3</a>, et donc, par exemple, «&nbsp;<a href="http://localhost:3000/about"><tt>/about</tt></a>&nbsp;» se rend à la page «&nbsp;À Propos&nbsp;» (<a class="ref" href="filling-in-the-layout#fig:about_page">illustration&nbsp;5.9</a>).</p>
 
-<p>En passant, il est important de noter que, bien que nous n'ayons pas testé, en fait, la présence des liens dans le layout, nos tests échoueront si les routes ne sont pas définies. Vous pouvez le vérifier en commentant les routes de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> et en jouant votre batterie de tests. Pour une méthode de testing qui s'assure en fait que le lien conduise au bon endroit, voyez la <a class="ref" href="filling-in-the-layout#sec:layout_exercises">section&nbsp;5.5</a>.</p>
+<p>En passant, il est important de noter que, bien que nous n'ayons pas testé, en fait, la présence des liens dans le layout, nos tests échoueront si les routes ne sont pas définies. Vous pouvez le vérifier en commentant les routes de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> et en jouant votre suite de tests. Pour une méthode de testing qui s'assure en fait que le lien conduise au bon endroit, voyez la <a class="ref" href="filling-in-the-layout#sec:layout_exercises">section&nbsp;5.5</a>.</p>
 
 <div class="label" id="fig:about_page"></div>
 
@@ -1489,7 +1491,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h2><a id="sec:5.3" href="filling-in-the-layout#sec:user_signup" class="heading"><span class="number">5.3</span> Inscription de l'utilisateur&nbsp;: une première étape</a></h2>
 
 
-<p>Comme une pierre angulaire de notre travail sur le layout et le routage, nous allons faire dans cette section une route pour la page d'inscription, ce qui signifiera de créer un second contrôleur. C'est un premier pas important vers la possibilité pour les utilisateurs de s'enregistrer sur notre site&nbsp;; nous passerons à l'étape suivant, la modélisation de ces utilisateurs, au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, et nous achèverons le travail au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
+<p>Pierre angulaire de notre travail sur le <rw>layout</rw> et le <rw>routage</rw>, nous allons faire dans cette section une route pour la page d'inscription, ce qui signifiera de créer un second contrôleur. C'est un premier pas important vers la possibilité pour les utilisateurs de s'enregistrer sur notre site&nbsp;; nous aborderons l'étape suivante, la <rw>modélisation</rw> des utilisateurs, au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, et nous achèverons le travail au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.</p>
 
 <div class="label" id="sec:users_controller"></div>
 
@@ -1497,7 +1499,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h3><a id="sec:5.3.1" href="filling-in-the-layout#sec:users_controller" class="heading"><span class="number">5.3.1</span> Contrôleur des utilisateurs (<em>Users</em> )</a></h3>
 
 
-<p>Cela fait un moment que nous avons créé notre premier contrôleur, le contrôleur Pages, à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>. Il est temps d'en créer une second, le contrôleur Users (<em>Utilisateurs</em> ). Comme précédemment, nous utiliserons la commande <code>generate</code> pour faire le contrôleur le plus simple qui remplissent nos besoins actuels, nomémment, un contrôleur avec une base de page d'inscription pour les nouveaux utilisateurs. En suivant les conventions de l'<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">architecture REST</a> préconisée par Rails, nous appellerons l'action <code>new</code> du contrôleur et le passerons comme argument à <code>generate controller</code> pour le créer automatiquement (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>).</p>
+<p>Cela fait un moment que nous avons créé notre premier <rw>contrôleur</rw>, le contrôleur Pages, à la <a class="ref" href="static-pages#sec:static_pages_with_rails">section&nbsp;3.1.2</a>. Il est temps d'en créer un second, le contrôleur Users (<em>Utilisateurs</em> ). Comme précédemment, nous utiliserons la commande <code>generate</code> pour faire le contrôleur le plus simple pour remplir nos besoins actuels, c'est-à-dire un contrôleur avec la souche d'une page d'inscription pour les nouveaux utilisateurs. En suivant les conventions de l'<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">architecture REST</a> préconisée par Rails, nous appellerons l'action <code>new</code> du contrôleur et la passerons comme argument à <code>generate controller</code> pour la créer automatiquement (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>).</p>
 
 <div class="label" id="code:generate_users_controller"></div>
 
@@ -1530,7 +1532,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div>
 
 
-<p>Le générateur de contrôleur construit ensemble un contrôleur Users et un test par défaut utile, qui vérifie que l'action <code>new</code> réponde bien à la requête <tt>GET</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>)&nbsp;; le code est présenté dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a>. Ce code devrait vous paraitre familier&nbsp;; il suit l'exacte même forme que le spec du contrôleur Pages vue précédemment à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
+<p>Le générateur de contrôleur construit deux choses&nbsp;: un contrôleur Users et un test par défaut, qui vérifie que l'action <code>new</code> réponde bien à la requête <tt>GET</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>)&nbsp;; le code est présenté dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a>. Il devrait vous sembler familier&nbsp;; il suit exactement la même forme que le spec du contrôleur Pages vue précédemment à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a> (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>).</p>
 
 <div class="label" id="code:get_new_user_spec"></div>
 
@@ -1553,7 +1555,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Par construction, le contrôleur Users possède déjà sa propre action <code>new</code> et le template <code>new.html.erb</code> pour faire réussir ce test (<a class="ref" href="filling-in-the-layout#code:new_user_action">extrait&nbsp;5.25</a>)  (pour voir la page l'adresse <a href="http://localhost:3000/users/new"><tt>/users/new</tt></a>, vous devez peut-être relancer le serveur).</p>
+<p>Par construction, le contrôleur Users possède déjà sa propre action <code>new</code> et le template <code>new.html.erb</code> pour faire réussir ce test (<a class="ref" href="filling-in-the-layout#code:new_user_action">extrait&nbsp;5.25</a>)  (pour voir la page, à l'adresse <a href="http://localhost:3000/users/new"><tt>/users/new</tt></a>, vous devez peut-être relancer le serveur).</p>
 
 <div class="label" id="code:new_user_action"></div>
 
@@ -1571,7 +1573,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Pour revenir à l'esprit du «&nbsp;développement conduit par le test&nbsp;», ajoutons un second test (échouant) de notre cru en testant le titre que contient la chaine <code>"Inscription"</code> (<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). Assurez-vous d'ajouter <code>render_views</code> comme nous l'avons fait dans le spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>)&nbsp;; sinon, le test échouera même après avoir ajouté le titre adéquat.</p>
+<p>Pour respecter l'esprit du «&nbsp;Développement Dirigé par les Tests&nbsp;», ajoutons un second test de notre cru qui échouera en testant le titre (<code>title</code>) qui devrait contenir la chaine <code>"Inscription"</code> (<a class="ref" href="filling-in-the-layout#code:signup_title_test">extrait&nbsp;5.26</a>). Assurez-vous d'ajouter <code>render_views</code> comme nous l'avons fait dans le spec du contrôleur Pages (<a class="ref" href="static-pages#code:pages_controller_spec_title">extrait&nbsp;3.20</a>)&nbsp;; sinon, le test échouera même après avoir ajouté le titre adéquat.</p>
 
 <div class="label" id="code:signup_title_test"></div>
 
@@ -1600,9 +1602,9 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Ce test utilise a méthode <code>have_selector</code> que nous avons vu précédemment (<a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>)&nbsp;; notez que, comme à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>, <code>have_selector</code> a besoin de la ligne <code>render_views</code> puisqu'il test la vue associée à l'action.</p>
+<p>Ce test utilise la méthode <code>have_selector</code> que nous avons vue précédemment (<a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>)&nbsp;; notez que, comme à la <a class="ref" href="static-pages#sec:testing_a_title_change">section&nbsp;3.3.1</a>, <code>have_selector</code> a besoin de la ligne <code>render_views</code> puisqu'il teste la <rw>vue</rw> associée à l'<rw>action</rw> et doit donc la <em>rendre</em> pour pouvoir la tester.</p>
 
-<p>Bien sûr, à dessein ce test, pour le moment échoue (Rouge). Pour avoir un titre personnalisé, nous avons besoin de créer une variable d'instance <code>@title</code> comme à la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a>. Nous pouvons ainsi obtenir le Vert avec le code de l'<a class="ref" href="filling-in-the-layout#code:new_user_title">extrait&nbsp;5.27</a>.</p>
+<p>Bien sûr, c'est à dessein que ce test, pour le moment, doit échouer (Rouge). Pour avoir un titre personnalisé, nous avons besoin de créer une variable d'instance <code>@titre</code> comme à la <a class="ref" href="static-pages#sec:instance_variables_embedded_ruby">section&nbsp;3.3.3</a>. Nous pouvons ainsi obtenir le Vert avec le code de l'<a class="ref" href="filling-in-the-layout#code:new_user_title">extrait&nbsp;5.27</a>.</p>
 
 <div class="label" id="code:new_user_title"></div>
 
@@ -1613,7 +1615,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="k">def</span> <span class="nf">new</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Inscription&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -1628,7 +1630,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h3><a id="sec:5.3.2" href="filling-in-the-layout#sec:signup_url" class="heading"><span class="number">5.3.2</span> URL de l'inscription</a></h3>
 
 
-<p>Avec le code de la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, nous avons déjà une page fonctionelle pour les nouveaux utilisateurs à l'adresse <tt>/users/new</tt>, mais vous vous souvenez que d'après la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a> nous voulons que l'URL soit plutôt <tt>/signup</tt>. Comme à la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, nous allons d'abord écrire un test (<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>).</p>
+<p>Avec le code de la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, nous avons déjà une page fonctionnelle pour les nouveaux utilisateurs à l'adresse <tt>/users/new</tt>, mais vous vous souvenez que d'après la <a class="ref" href="filling-in-the-layout#table:url_mapping">Table&nbsp;5.1</a> nous voulons que l'URL soit plutôt <tt>/signup</tt>. Comme à la <a class="ref" href="filling-in-the-layout#sec:layout_links">section&nbsp;5.2</a>, nous allons d'abord écrire un test (<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>).</p>
 
 <div class="label" id="code:user_signup_spec"></div>
 
@@ -1651,7 +1653,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Notez que c'est le <em>même</em> fichier que celui utilisé pour les liens des autres layout, même si la page d'inscription est dans un différent contrôleur. Être capable d'atteindre des pages dans de multiples contrôleur est l'un des avantages de l'utilisation des tests d'intégration.</p>
+<p>Notez que c'est le <em>même</em> fichier que celui utilisé pour les autres liens du layout, même si la page d'inscription est dans un contrôleur différent. Avoir la capacité d'atteindre des pages dans divers contrôleurs est l'un des nombreux avantages de l'utilisation des <rw>tests d'intégration</rw>.</p>
 
 <p>La dernière étape consiste à faire une <em>route nommée</em> pour les inscriptions. Nous suivrons les exemples de l'<a class="ref" href="filling-in-the-layout#code:static_page_routes">extrait&nbsp;5.18</a> et ajouterons une règle <code>match &rsquo;/signup&rsquo;</code> pour l'URL de l'inscription (<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>).</p>
 
@@ -1681,7 +1683,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 
 <p>Notez que nous avons gardé la règle <code>get "users/new"</code>, qui a été généré pendant la génération automatique du contrôleur à l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>. Pour le moment, cette règle est nécessaire pour router <tt>/users/new</tt> correctement, mais il ne suit pas proprement les conventions REST (<a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>), et nous l'éliminerons à la <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">section&nbsp;6.3.3</a>.</p>
 
-<p>À ce point, le test d'inscription de l'<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a> devrait réussir. Tout ce que qui nous reste à faire est d'ajouter le propre lien au bouton sur la page d'accueil. Comme avec les autres routes, <code>match &rsquo;/signup&rsquo;</code> nous donne la <em>route nommée</em> gives <code>signup_path</code>, que nous allons utiliser dans l'<a class="ref" href="filling-in-the-layout#code:home_page_signup_link">extrait&nbsp;5.30</a>.</p>
+<p>À ce stade, le test d'inscription de l'<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a> devrait réussir. Tout ce que qui nous reste à faire est d'ajouter le propre lien au bouton sur la page d'accueil. Comme avec les autres routes, <code>match &rsquo;/signup&rsquo;</code> nous donne la <em>route nommée</em> gives <code>signup_path</code>, que nous allons utiliser dans l'<a class="ref" href="filling-in-the-layout#code:home_page_signup_link">extrait&nbsp;5.30</a>.</p>
 
 <div class="label" id="code:home_page_signup_link"></div>
 
@@ -1701,12 +1703,12 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 </div></div>
 
 
-<p>Cela fait, nous en avons fini avec les liens et les routes nommées, au moins jusqu'à ce que nous ajoutions la route pour s'identifier (se connecter) (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). La page de nouvelle utilisateur en résultant (à l'URL <tt>/signup</tt>) est présentée dans l'<a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a>.</p>
+<p>Cela fait, nous en avons fini avec les liens et les routes nommées, au moins jusqu'à ce que nous ajoutions la route pour s'identifier (se connecter) (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). La page d'inscription d'un nouvel utilisateur résultant de ce travail (à l'URL <tt>/signup</tt>) est présentée dans l'<a class="ref" href="filling-in-the-layout#fig:blank_signup_page">illustration&nbsp;5.10</a>.</p>
 
 <div class="label" id="fig:blank_signup_page"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 5.10: </span><span class="description">La nouvelle page d'inscription à <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Illustration 5.10: </span><span class="description">La nouvelle page d'inscription à l'adresse <a href="http://localhost:3000/signup"><tt>/signup</tt></a> (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1717,13 +1719,13 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <h2><a id="sec:5.4" href="filling-in-the-layout#sec:layout_conclusion" class="heading"><span class="number">5.4</span> Conclusion</a></h2>
 
 
-<p>Dans ce chapitre, nous avons bricolé la mise en forme de notre application et avons peaufiné le routage. La suite du livre est dédié à donner du contenu à cette application exemple&nbsp;: d'abord, en ajoutant des utilisateurs qui peuvent s'incrire, s'identifiant et se déconnecter&nbsp;; ensuite, en ajoutant des micro-messages d'utilisateur&nbsp;; et, enfin, en ajoutant des relations entre utilisateurs.</p>
+<p>Dans ce chapitre, nous avons arrangé la mise en forme de notre application et avons peaufiné le routage. La suite du livre se consacrera à donner du contenu à cette <em>Application Exemple</em>&nbsp;: d'abord, en ajoutant des utilisateurs qui peuvent s'inscrire, s'identifier et se déconnecter&nbsp;; ensuite, en ajoutant des micro-messages d'utilisateur&nbsp;; et, enfin, en ajoutant des relations de <em>suivi</em> entre ces utilisateurs.</p>
 
-<p>Si vous êtes épaulé par Git, assurez de «&nbsp;commettre&nbsp;»  (<em>commit</em>) et de fusionner votre branche actuelle (et, juste par paranoïa, jouez vos tests avant)&nbsp;:</p>
+<p>Si vous vous servez de Git pour le contrôle de vos versions, n'oubliez pas de «&nbsp;commettre&nbsp;» votre dépôt  (<em>commit</em>) et de fusionner votre branche actuelle avec la branche maitresse (et, juste par paranoïa, jouez vos tests avant)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/
 <span class="gp">$</span> git add .
-<span class="gp">$</span> git commit -m <span class="s2">&quot;Fin du layout et des routes&quot;</span>
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Fin du layout et des routages&quot;</span>
 <span class="gp">$</span> git checkout master
 <span class="gp">$</span> git merge filling-in-layout
 </pre></div>
@@ -1751,7 +1753,7 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <ol>
 <li>Remplacez la variable locale <code>logo</code> de l'<a class="ref" href="filling-in-the-layout#code:header_partial_links">extrait&nbsp;5.21</a> par une méthode <em>helper</em> du même nom, pour que le nouveau partiel ressemble à l'<a class="ref" href="filling-in-the-layout#code:header_partial_logo">extrait&nbsp;5.31</a>. Utilisez le code de l'<a class="ref" href="filling-in-the-layout#code:logo_helper_stub">extrait&nbsp;5.32</a> pour vous aider à démarrer.</li>
 
-<li>Vous pouvez avoir noté que nos tests pour les liens du layout testent le routage mais ne vérifient pas en fait que ces routages conduisent sur les bonnes pages. Une façon d'implémenter ces tests est d'utiliser <code>visit</code> et <code>click_link</code> (<em>cliquer le lien</em>) à l'intérieur du test d'intégration RSpec. Remplissez le code de l'<a class="ref" href="filling-in-the-layout#code:layout_links_test">extrait&nbsp;5.33</a> pour vérifier que tous les liens du layout sont proprement définis.</li>
+<li>Vous pouvez avoir noté que nos tests pour les liens du layout testent le routage mais ne vérifient pas en fait que ces routages conduisent effectivement sur les bonnes pages. Une façon d'implémenter ces tests est d'utiliser <code>visit</code> et <code>click_link</code> (<em>cliquer le lien</em>) à l'intérieur du test d'intégration RSpec. Remplissez le code de l'<a class="ref" href="filling-in-the-layout#code:layout_links_test">extrait&nbsp;5.33</a> pour vérifier que tous les liens du layout sont proprement définis.</li>
 
 </ol>
 
@@ -1792,8 +1794,8 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
     <span class="c1"># Fill in.</span>
   <span class="k">end</span>
 
-  <span class="c1"># Return a title on a per-page basis.</span>
-  <span class="k">def</span> <span class="nf">title</span>
+  <span class="c1"># Retourne un titre basé sur la page.</span>
+  <span class="k">def</span> <span class="nf">titre</span>
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
@@ -1847,13 +1849,13 @@ si vous lancez Autotest, vous pourrez noter qu'il ne joue pas le test d'intégra
 <ol>
 <li id="fn:5.1">Les maquettes du <em>Tutoriel Ruby on Rails</em> sont réalisées avec une excellente application appelée <a href="http://gomockingbird.com">Mockingbird</a>.&nbsp;<a class="arrow" href="#fnref:5.1">&uarr;</a></li>
 <li id="fn:5.2">Ils sont tout à fait sans lien avec les classes Ruby.&nbsp;<a class="arrow" href="#fnref:5.2">&uarr;</a></li>
-<li id="fn:5.3">Vous pouvez noter que la balise <code>img</code> plutôt que de ressembler à <tt class="verb">&lt;img&gt;...&lt;/img&gt;</tt>, ressemble plutôt à <tt class="verb">&lt;img ... /&gt;</tt>. Les balises qui suivent cette forme sont connues comme étant des balises <em>auto-fermentantes</em> (<em>self-closing</em>).&nbsp;<a class="arrow" href="#fnref:5.3">&uarr;</a></li>
+<li id="fn:5.3">Vous pouvez noter que la balise <code>img</code> plutôt que de ressembler à <tt class="verb">&lt;img&gt;...&lt;/img&gt;</tt>, se code <tt class="verb">&lt;img&nbsp;...&nbsp;/&gt;</tt>. Les balises qui suivent cette forme sont appelées balises <em>auto-fermentantes</em> (<em>self-closing</em>).&nbsp;<a class="arrow" href="#fnref:5.3">&uarr;</a></li>
 <li id="fn:5.4">Le texte <code>alt</code> est aussi ce qui sera affiché par les lecteurs ayant une déficience visuelle. Bien que les gens soient souvent négligeants sur l'inclusion de l'attribut <code>alt</code> pour les images, c'est en fait exigé par les standards HTML. Heureusement, Rails inclut un attribut <code>alt</code> par défaut&nbsp;; si vous ne spécifiez pas la valeur de l'attribut dans l'appel pour <code>image_tag</code>, Rails utilise simplement le nom du fichier (sans l'extension). Dans ce cas, cependant, <code>Application exemple</code> est plus descriptif que <code>logo</code>, donc j'ai décidé de définir explicitement la valeur de <code>alt</code>.&nbsp;<a class="arrow" href="#fnref:5.4">&uarr;</a></li>
-<li id="fn:5.5">Notez que les utilisateurs Safari et Chrome verront un indicateur d'<em>image brisée</em> à la place du texte alternativ &ldquo;Application exemple&rdquo;.&nbsp;<a class="arrow" href="#fnref:5.5">&uarr;</a></li>
-<li id="fn:5.6">Les couleurs HTML peuvent être codées avec trois nombres en base 16 (hexadécimaux), chacun respectivement pour une des couleurs primaires rouge, vert et bleu. <code>#fff</code> mixe les trois couleurs, maxes out all three colors, rendant du pur blanc. Consultez ce <a href="http://www.w3schools.com/html/html_colors.asp">Site des couleurs HTML</a> pour plus d'information.&nbsp;<a class="arrow" href="#fnref:5.6">&uarr;</a></li>
-<li id="fn:5.7">Blueprint CSS utilise une grille de colonnes sur 40 pixeles, 30 pixels pour la colonne elle-même et 10 pixels pour le padding. La colonne la plus à droite n'a pas besoin de padding, donc 18 colonnes représentent 710 pixels&nbsp;: 18 * 40 &ndash; 10 = 710.&nbsp;<a class="arrow" href="#fnref:5.7">&uarr;</a></li>
-<li id="fn:5.8">De nombreux développeurs Rails utilise un dossier partagé (<code>shared</code>) pour des partiels partagés par différentes vues. Je préfère utiliser le dossier <code>shared</code> pour des partiels utilitaires qui sont utiles sur de multiples vues, tandis que je mets les partiels qui sont littéralement sur chaque page (comme une part du layout du site) dans le dossier <code>layouts</code> (nous créeons le dossier <code>shared</code> en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>). Ça me semble être une division logique, mais les mettre tous dans le dossier <code>shared</code> fonctionne certainement bien, également.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
-<li id="fn:5.9">Dans la ligne <code>SampleApp::Application.routes.draw do</code> vous pouvez reconnaitre que la méthode <code>draw</code> comprend un <em>bloc</em>, une construction syntaxique que nous avons vu précédenmment à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:5.9">&uarr;</a></li>
+<li id="fn:5.5">Notez que les utilisateurs Safari et Chrome verront un indicateur d'<em>image brisée</em> à la place du texte alternatif &ldquo;Application Exemple&rdquo;.&nbsp;<a class="arrow" href="#fnref:5.5">&uarr;</a></li>
+<li id="fn:5.6">Les couleurs HTML peuvent être codées avec trois nombres en base 16 (hexadécimaux), chacun respectivement pour une des couleurs primaires rouge, vert et bleu. <code>#fff</code> mixe les trois couleurs, rendant du pur blanc. Consultez ce <a href="http://www.w3schools.com/html/html_colors.asp">Site des couleurs HTML</a> pour plus d'information.&nbsp;<a class="arrow" href="#fnref:5.6">&uarr;</a></li>
+<li id="fn:5.7">Blueprint CSS utilise une grille de colonnes sur 40 pixels, 30 pixels pour la colonne elle-même et 10 pixels pour le padding. La colonne la plus à droite n'a pas besoin de padding, donc 18 colonnes représentent 710 pixels&nbsp;: 18 * 40 &ndash; 10 = 710.&nbsp;<a class="arrow" href="#fnref:5.7">&uarr;</a></li>
+<li id="fn:5.8">De nombreux développeurs Rails utilisent un dossier partagé (<code>shared</code>) pour des partiels partagés par différentes vues. Je préfère utiliser le dossier <code>shared</code> pour des partiels utilitaires qui sont utiles sur de multiples vues, tandis que je mets les partiels qui sont littéralement sur chaque page (comme une part du layout du site) dans le dossier <code>layouts</code> (nous créerons le dossier <code>shared</code> en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>). Ça me semble être une division logique, mais les mettre tous dans le dossier <code>shared</code> fonctionne certainement bien, également.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
+<li id="fn:5.9">Dans la ligne <code>SampleApp::Application.routes.draw do</code> vous pouvez reconnaitre que la méthode <code>draw</code> comprend un <em>bloc</em>, une construction syntaxique que nous avons vue précédemment à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:5.9">&uarr;</a></li>
 </ol>
 </div>
 

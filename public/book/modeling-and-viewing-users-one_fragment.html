@@ -23,7 +23,7 @@
 <li class="section"><a href="beginning#sec:introduction"><span class="number">1.1</span> Introduction</a></li>
 <li><ol>
 <li class="subsection"><a href="beginning#sec:comments_for_various_readers"><span class="number">1.1.1</span> Commentaires pour les lecteurs différents</a></li>
-<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> &ldquo;Dimensionner&rdquo; Rails</a></li>
+<li class="subsection"><a href="beginning#sec:1.1.2"><span class="number">1.1.2</span> «&nbsp;Dimensionner&nbsp;» Rails</a></li>
 <li class="subsection"><a href="beginning#sec:conventions"><span class="number">1.1.3</span> Conventions utilisées dans ce livre</a></li></ol></li>
 <li class="section"><a href="beginning#sec:up_and_running"><span class="number">1.2</span> [(Up and running)(En route pour le démarrage)]</a></li>
 <li><ol>
@@ -440,28 +440,28 @@
 <h1 class="chapter"><a id="sec:6" href="modeling-and-viewing-users-one#top" class="heading"><span class="number">Chapitre 6</span> Modéliser et afficher les utilisateurs, partie I</a></h1>
 
 
-<p>Nous avons terminé le <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;précédent</a> en créant une «&nbsp;souche&nbsp;» de page pour l'inscription des utilisateurs (<a class="ref" href="filling-in-the-layout#sec:user_signup">section&nbsp;5.3</a>)&nbsp;; tout au long des trois prochains chapitres, nous allons nous attacher à tenir la promesse implicite que contient cette page. La première étape critique est de créer un <rw>modèle de données</rw> pour les utilisateurs de notre site, ainsi qu'une façon de conserver ces données. Accomplir cette tâche est le but de ce chapitre et du suivant (<a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>), et nous allons donner aux utilisateurs la possibilité de s'inscrire au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.  Une fois que l'application exemple pourra créer de nouveaux utilisateurs, nous leur offrirons la possibilité de s'identifier (de se connecter) et de se déconnecter (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>), et au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">section&nbsp;10.2</a>) nous apprendrons à protéger nos pages contre les accès malveillants.</p>
+<p>Nous avons terminé le <a class="ref" href="filling-in-the-layout#top">chapitre&nbsp;précédent</a> en créant une «&nbsp;souche&nbsp;» de page pour l'inscription des utilisateurs (<a class="ref" href="filling-in-the-layout#sec:user_signup">section&nbsp;5.3</a>)&nbsp;; tout au long des trois prochains chapitres, nous allons nous attacher à tenir la promesse implicite que contient cette page. La première étape critique est de créer un <rw>modèle de données</rw> pour les utilisateurs de notre site, ainsi qu'une façon de conserver ces données. Accomplir cette tâche est le but de ce chapitre et du suivant (<a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>), et nous allons donner aux utilisateurs la possibilité de s'inscrire au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.  Une fois que l'<em>Application Exemple</em> pourra créer de nouveaux utilisateurs, nous leur offrirons la possibilité de s'identifier (de se connecter) et de se déconnecter (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>), et au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">section&nbsp;10.2</a>) nous apprendrons à protéger nos pages contre les accès malveillants.</p>
 
-<p>Pris ensemble, le matériel du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> au chapitre <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> développe un système Rails complet de login et d'authentification. Comme vous le savez peut-être, il existe une variété de solutions d'authentification clé-en-main dans le monde Rails&nbsp;; Le <a class="ref" href="modeling-and-viewing-users-one#sidebar:roll_your_own">Box&nbsp;6.1</a> explique pourquoi (au moins dans un premier temps) il est bon de composer la vôtre.</p>
+<p>Pris dans son ensemble, le matériel du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> développe un système Rails complet d'identification (<em>login</em>) et d'authentification. Comme vous le savez peut-être, il existe une variété de solutions d'authentifications clé-en-main dans le monde Rails&nbsp;; Le <a class="ref" href="modeling-and-viewing-users-one#sidebar:roll_your_own">Box&nbsp;6.1</a> explique pourquoi (au moins dans un premier temps) il est bon de composer la vôtre.</p>
 
 <div class="label" id="sidebar:roll_your_own"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 6.1.</span><span class="description">Composer votre propre système d'authentification</span></span>
-<p>Virtuellement, toutes les applications web, de nos jours, requièrent un système de login et d'authentification. De façon non surprenant, la plupart des framewords web contiennent une pléthore d'options pour implémenter de tels système, et Rails ne fait pas exception. Les exemples de systèmes d'authentification et d'autorisation incluent <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a> ou <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (tout comme les solutions non spécifiquement Rails construites au sommet de <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> ou <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Il est raisonnable de se demander pourquoi nous devrions réinventer la roue. Pourquoi ne pas tout simplement utiliser une solution clé-en-main plutôt qu'en composer une nous-même&nbsp;?</p>
+<p>En pratique, toutes les applications web, de nos jours, requièrent un système d'identification et d'authentification. Ça n'est donc pas étonnant que la plupart des <rw>frameworks</rw> web contiennent pléthore d'options pour implémenter de tels systèmes, Rails ne faisant pas exception à la règle. Les exemples de systèmes d'authentification et d'authentification incluent <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a> ou <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (tout comme les solutions non spécifiquement Rails construites au sommet de <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> ou <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Il est raisonnable de se demander pourquoi nous devrions réinventer la roue. Pourquoi ne pas tout simplement utiliser une solution clé-en-main plutôt qu'en composer une nous-mêmes&nbsp;?</p>
 
-<p>Il y a plusieurs raisons à ça. D'abord, il n'existe pas de réponse standard authentifications Rails&nbsp;; lier ce tutoriel à une solution spécifique laisserait grand ouvert le risque que notre choix particulier devienne dépassé et hors de mode. Plus encore, même si nous tombons juste, le code de base du projet utilisé devrait continuer à évoluer, rendant toute explication rapidement obsolète dans le tutoriel. Enfin, introduire toute la machinerie d'authentification d'un seul coup serait un désastre pédagogique &mdash;&nbsp;pour prendre un seul exemple, Clearance contient plus de 1000 ligne de code et crée un modèle de donnée compliqué dès le départ. Les systèmes d'authentification sont des challenges de programmation riches&nbsp;; composer notre propre solution signifie que nous pouvons considérer chaque petite partie à la fois, nous conduisant à une bien plus profonde compréhension aussi bien de l'authentification que de Rails.</p>
+<p>Il y a plusieurs raisons à ça. D'abord, il n'existe pas de réponse standard d'authentification purement Rails&nbsp;; lier ce tutoriel à une solution spécifique laisserait grand ouvert le risque que notre choix particulier devienne obsolète et passé de mode. Plus encore, même si nous tombons juste, le code de base du projet utilisé devrait continuer à évoluer, rendant toute explication rapidement obsolète dans le tutoriel. Enfin, introduire toute la machinerie d'authentification d'un seul coup serait un désastre pédagogique &mdash;&nbsp;pour prendre un seul exemple, Clearance contient plus de 1000 lignes de code et crée un modèle de donnée compliqué dès le départ. Les systèmes d'authentification sont par ailleurs des défis de programmation riches d'enseignement&nbsp;; composer notre propre solution signifie que nous avons l'opportunité de considérer chacun des aspects l'un après l'autre, nous conduisant à une compréhension bien plus profonde tant de l'authentification que de Rails lui-même.</p>
 
-<p>Je vous encourage à étudier du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> pour vous donner une bonne fondation pour vos projets futurs. En temps venu, si vous décidez d'utiliser un système d'authentification clé-en-main pour votre application, vous serez en mesure d'une part de le comprendre et d'autre part de l'adapter à vos besoins spécifiques.</p>
+<p>Je vous encourage donc à étudier les concepts présentés du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a> au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> pour vous donner les meilleurs bases pour vos projets futurs. En temps voulu, si vous décidez d'utiliser un système d'authentification clé-en-main pour votre application, vous serez en mesure d'une part de le comprendre et d'autre part de l'adapter à vos besoins spécifiques.</p>
 </div>
 
 
-<p>En parallèle de notre modélisation des données, nous développerons une page web pour <em>afficher</em> les utilisateurs, ce qui nous servira de première étape vers l'implémentation de l'architecture REST pour les utilisateurs (discutée brièvement à la <a class="ref" href="a-demo-app#sec:mvc_in_action">section&nbsp;2.2.2</a>). Mais nous n'irons pas profondément dans ce chapitre, notre but final pour les pages de profil d'utilisateur étant de montrer l'avatar (le <em>gravatar</em>) de l'utilisateur, ses données basiques et une liste de micro-messages, comme le montre la maquette de l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>.<sup class="footnote" id="fnref:6.1"><a href="#fn:6.1">1</a></sup> (<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a> contient notre premier exemple de texte <em>lorem ipsum</em>, texte qui connait une <a href="http://www.straightdope.com/columns/read/2290/what-does-the-filler-text-lorem-ipsum-mean">histoire fascinante</a> que vous devriez lire un jour). Dans ce chapitre, nous coucherons les fondations essentielles de notre page d'affichage de l'utilisateur, et nous la commencerons dans le détail au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>.</p>
+<p>En parallèle de notre modélisation des données, nous développerons une page web pour <em>afficher</em> les utilisateurs, ce qui nous servira de première étape vers l'implémentation de l'<rw>architecture REST</rw> pour les utilisateurs (discutée brièvement à la <a class="ref" href="a-demo-app#sec:mvc_in_action">section&nbsp;2.2.2</a>). Mais nous n'irons pas profondément dans ce chapitre, notre but final pour les pages de profil d'utilisateur étant de montrer l'avatar (le <em>gravatar</em>) de l'utilisateur, ses données basiques et une liste de micro-messages, comme le montre la maquette de l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>.<sup class="footnote" id="fnref:6.1"><a href="#fn:6.1">1</a></sup> (l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a> contient notre premier exemple de texte <em>lorem ipsum</em>, texte qui connait une <a href="http://www.straightdope.com/columns/read/2290/what-does-the-filler-text-lorem-ipsum-mean">histoire fascinante</a> que vous devriez lire un jour). Dans ce chapitre, nous coucherons les fondations essentielles de notre page d'affichage de l'utilisateur, et nous entrerons dans ses détails au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>.</p>
 
 <div class="label" id="fig:profile_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_mockup.png" alt="profile_mockup" /></span></div><div class="caption"><span class="header">Illustration 6.1: </span><span class="description">Une maquette de notre meilleure estimation de la page d'affichage de l'utilisateur.&nbsp;<a href="http://railstutorial.org/images/figures/profile_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_mockup.png" alt="profile_mockup" /></span></div><div class="caption"><span class="header">Illustration 6.1: </span><span class="description">Une maquette approximative de la page de profil de l'utilisateur.&nbsp;<a href="http://railstutorial.org/images/figures/profile_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Comme d'habitude, si vous utilisez le contrôle de version Git, il est temps de faire une nouvelle branche pour la modélisation des utilisateurs&nbsp;:</p>
@@ -472,17 +472,17 @@
 </div>
 
 
-<p>(La première ligne ici sert uniquement à s'assure que vous partiez bien de la branche maitresse, pour que le sujet <tt>modeling-users</tt> soit bien basé sur la branche <tt>master</tt>. Vous pouvez sauter cette commande si vous vous trouvez déjà sur la branche maitressse.)</p>
+<p>(La première ligne ici sert uniquement à s'assurer que vous partiez bien de la branche maitresse, pour que la <rw>branche-sujet</rw> <tt>modeling-users</tt> parte bien de cette branche <tt>master</tt>. Vous pouvez ne pas jouer cette commande si vous vous trouvez déjà sur la branche maitressse.)</p>
 
 <div class="label" id="sec:user_model"></div>
 
 
-<h2><a id="sec:6.1" href="modeling-and-viewing-users-one#sec:user_model" class="heading"><span class="number">6.1</span> Modèle User (<em>utilisateur</em>)</a></h2>
+<h2><a id="sec:6.1" href="modeling-and-viewing-users-one#sec:user_model" class="heading"><span class="number">6.1</span> Modèle Utilisateur (<em>User</em>)</a></h2>
 
 
-<p>Bien que le but ultime des trois prochains chapitres soit de créer une page d'inscription au site, il peut être bien de pouvoir accepter les informations d'inscription dès à présent, [(it would do little good to accept signup information now)(il ne serait pas très judicieux d'accepter les informations d'inscription tout de suite)], puisque nous n'avons pour le moment aucun endroit où les déposer. Ainsi, la première étape dans l'inscription des utilisateurs va être de faire une structure de données pour capturer et consigner leurs informations. En Rails, la structure de données par défaut pour un modèle de données est appelée, assez naturellement, un <em>modèle</em> (<em>model</em>) (c'est le «&nbsp;M&nbsp;» de «&nbsp;MVC&nbsp;» de la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>). La solution par défaut de Rails au problème de la persistence consiste à utiliser une <em>base de données</em> pour la consignation à long terme des données, et la librairie par défaut pour interagir avec cette base de données est appelée <em>Active Record</em>.<sup class="footnote" id="fnref:6.2"><a href="#fn:6.2">2</a></sup></p>
+<p>Bien que le but ultime des trois prochains chapitres soit de créer une page d'inscription au site, il ne serait pas très judicieux d'accepter les informations d'inscription tout de suite puisque nous n'avons pour le moment aucun endroit où les stoker. Ainsi, la première étape dans l'inscription des utilisateurs va être de faire une structure de données pour capturer et consigner leurs informations. En Rails, la structure de données par défaut pour un <rw>modèle de donnée</rw> est appelée, assez naturellement, un <em>modèle</em> (<em>model</em>) (c'est le «&nbsp;M&nbsp;» de «&nbsp;MVC&nbsp;» de la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>). La solution par défaut de Rails au problème de la persistance consiste tout simplement à utiliser une <rw>base de données</rw> qui consigne à long terme nos données, et la librairie Rails par défaut pour interagir avec cette base de données est appelée <em>Active Record</em>.<sup class="footnote" id="fnref:6.2"><a href="#fn:6.2">2</a></sup></p>
 
-<p>Active Record vient avec une foule de méthodes pour créer, sauver et chercher des objets-données, toutes sans avoir à utiliser le langage structure de requête (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> utilisé par les <a href="http://en.wikipedia.org/wiki/Relational_database">base de données relationnelles</a>. Plus encore, Rails possède une fonctionnalité appelée <em>migrations</em> pour permettre les définitions des données d'être écrites en pur Ruby, sans avoir à apprendre le langage de définition des données SQL (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> L'effet est que Rails vous épargent tout ce qui concerne les détails de la consignation des données. Dans ce livre, en utilisant SQLite pour le développement et Heroku pour le déploiement (<a class="ref" href="beginning#sec:deploying">section&nbsp;1.4</a>), nous avons poussé ce sujet encore plus loin, jusqu'au point où nous n'avons plus du tout à nous pré-occuper de comment Rails consigne les données, même pour les applications en mode production.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
+<p>La librairie <em>Active Record</em> est fournie avec une foule de méthodes pour créer, sauver et chercher des objets-données sans avoir à utiliser le langage structuré de requête (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> utilisé par les <a href="http://en.wikipedia.org/wiki/Relational_database">base de données relationnelles</a>. Plus encore, Rails possède une fonctionnalité appelée <em>migrations</em> pour permettre aux définitions des données d'être écrites en pur Ruby sans avoir à apprendre le langage de définition des données SQL (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> L'effet est que Rails vous épargnent tous les détails de la consignation des données. Dans ce livre, en utilisant SQLite pour le développement et Heroku pour le déploiement (<a class="ref" href="beginning#sec:deploying">section&nbsp;1.4</a>), nous avons poussé ce sujet encore plus loin, jusqu'au point où nous n'avons plus du tout à nous pré-occuper de comment Rails consigne les données, même pour les applications en mode production.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
 
 <div class="label" id="sec:database_migrations"></div>
 
@@ -490,9 +490,9 @@
 <h3><a id="sec:6.1.1" href="modeling-and-viewing-users-one#sec:database_migrations" class="heading"><span class="number">6.1.1</span> Migrations de la base de données</a></h3>
 
 
-<p>Vous vous souvenez peut-être, de la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, que nous avons déjà rencontré, via la construction personnalisée d'une classe <code>User</code> (<em>Utilisateur</em>), des objets utilisateur avec les attributs <code>nom</code> et <code>email</code>. Cette classe a servi d'exemple utile, mais elle manquait de la propriété critique de <em>persistence</em>&nbsp;: quand nous avions créé un objet utilisateur à la console Rails, il disparaissait aussitôt que nous quittions cette console. Notre but dans cette section sera de créer un modèle pour les utilisateurs qui ne disparaisse pas aussi facilement.</p>
+<p>Vous vous souvenez peut-être, <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, que nous avons déjà rencontré, via la construction personnalisée d'une classe <code>User</code> (<em>Utilisateur</em>), des objets utilisateur possédant les attributs <code>nom</code> et <code>email</code>. Cette classe a servi d'exemple utile, mais elle manquait de la propriété essentielle de <em>persistance</em>&nbsp;: quand nous avions créé un objet utilisateur via la console Rails, il disparaissait aussitôt que nous quittions cette console. Notre but dans cette section sera de créer un modèle pour les utilisateurs qui ne disparaisse pas aussi facilement.</p>
 
-<p>Comme avec la classe User à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, nous allons commencer par modéliser l'utilisateur avec deux attributs,  <code>nom</code> et <code>email</code>, dont le dernier sera utilisé comme <em>username</em> unique.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (nous ajouterons un attribut «&nbsp;mot de passe&nbsp;» à la <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a>). Dans l'<a class="ref" href="rails-flavored-ruby#code:example_user">extrait&nbsp;4.8</a>, nous avons réalisé cela avec la méthode Ruby <code>attr_accessor</code>&nbsp;:</p>
+<p>Comme avec la classe User à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, nous allons commencer par modéliser l'utilisateur avec deux attributs,  <code>nom</code> et <code>email</code>, dont le dernier sera utilisé comme <em>nom-utilisateur</em> (<em>username</em>) unique.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (nous ajouterons un attribut «&nbsp;mot de passe&nbsp;» à la <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">section&nbsp;7.1</a>). Dans l'<a class="ref" href="rails-flavored-ruby#code:example_user">extrait&nbsp;4.8</a>, nous avons réalisé cela avec la méthode Ruby <code>attr_accessor</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_accessor</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -504,18 +504,18 @@
 </div>
 
 
-<p>En constraste, en utilisant Rails pour modéliser les utilisateurs nous n'avons pas besoin d'identifier explicitement les attributs. Comme noté brièvement plus haut, pour consigner les données, Rails utilise la base de données relationnelle par défaut, qui consiste en des <em>tables</em> composées de <em>rangées</em> de données, où chaque <em>rangée</em> possède des <em>colonnes</em> pour chaque attribut de la donnée. Par exemple, pour consigner des utilisateurs avec des noms et des emails, nous créerons une table <code>users</code> (<em>utilisateurs</em>) avec les colonnes <code>nom</code> et <code>email</code> dont chaque <em>rangée</em> correspondra à un utilisateur particulier. En nommant les colonnes de cette façon, nous laissons Active Record deviner les attributs de l'objet utilisateur par lui-même.</p>
+<p>En utilisant Rails pour modéliser les utilisateurs nous n'avons pas besoin d'identifier explicitement les attributs. Comme noté brièvement plus haut, pour consigner les données, Rails utilise la base de données relationnelle par défaut, qui consiste en des <rw>tables</rw> composées de <rw>rangées</rw> de données, où chaque <em>rangée</em> possède des <rw>colonnes</rw> pour chaque <rw>attribut</rw> de la donnée. Par exemple, pour consigner des utilisateurs avec des noms et des emails, nous créerons une table <code>users</code> (<em>utilisateurs</em>) avec les colonnes <code>nom</code> et <code>email</code> dont chaque <em>rangée</em> correspondra à un utilisateur particulier. En nommant les colonnes de cette façon, nous laissons Active Record deviner par lui-même les attributs de l'objet utilisateur.</p>
 
 
 
-<p>Voyons comment il fonctionne (si cette discussion vous semble trop abstraite, soyez patient&nbsp;; les exemples en ligne de commande commençant à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> et les copies d'écran du navigateur de base de données de l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> et de l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">illustration&nbsp;6.8</a> devraient rendre les choses plus claires). À la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, vous vous souvenez (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>) que nous avons créé un contrôleur pour les utilisateurs (avec une action <code>new</code>) en utilisant la commande&nbsp;:</p>
+<p>Voyons comment il fonctionne (si cette discussion vous semble trop abstraite, soyez patient&nbsp;; les exemples en ligne de commande qui commencent à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> et les copies d'écran du navigateur de base de données de l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> et de l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">illustration&nbsp;6.8</a> devraient rendre les choses plus claires). À la <a class="ref" href="filling-in-the-layout#sec:users_controller">section&nbsp;5.3.1</a>, vous vous souvenez (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>) que nous avons créé un <rw>contrôleur</rw> pour les utilisateurs (avec une action <code>new</code>), en utilisant la commande&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Users new
 </pre></div>
 </div>
 
 
-<p>Il existe une commande analogue pour faire un modèle&nbsp;: <code>generate model</code>&nbsp;; l<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> montre la commande pour générer un modèle <code>User</code> (<em>Utilisateur</em>) avec deux attributs, <code>nom</code> et <code>email</code>.</p>
+<p>Il existe une commande analogue pour faire un modèle&nbsp;: <code>generate model</code>&nbsp;; l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> montre la commande pour générer un modèle <code>User</code> (<em>Utilisateur</em>) avec deux attributs, <code>nom</code> et <code>email</code>.</p>
 
 <div class="label" id="code:generate_user_model"></div>
 
@@ -532,9 +532,9 @@
 </div></div>
 
 
-<p>(Notez que, contrairement à la convention du <em>pluriel</em> pour les noms de contrôleur, les noms des modèles sont <em>singulier</em>&nbsp;: un contrôleur <em>Users</em> mais un modèle <em>User</em>.) En passant les paramètres optionnels <code>nom:string</code> et <code>email:string</code>, nous précisons à Rails les deux attributs que nous voulons, en précisant le type de ces attributs (dans ce cas, le type <em>string</em>, c'est-à-dire <em>chaine de caractère</em>). Compareez cela avec l'inclusion des noms d'acions dans l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> et l<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>.</p>
+<p>(Notez que, contrairement à la convention du <em>pluriel</em> pour les noms de contrôleur, les noms des modèles sont <em>singulier</em>&nbsp;: un contrôleur <em>Users</em> mais un modèle <em>User</em>.) En passant les paramètres optionnels <code>nom:string</code> et <code>email:string</code>, nous précisons à Rails les deux attributs que nous voulons, en précisant le <rw>type</rw> de ces attributs (dans ce cas, le type <em>string</em>, c'est-à-dire <em>chaine de caractère</em>). Comparez cela avec l'inclusion des noms d'actions dans l'<a class="ref" href="static-pages#code:generating_pages">extrait&nbsp;3.4</a> et l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>.</p>
 
-<p>L'un des résultats de la commande <code>generate</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> est un nouveau fichier appelé une <em>migration</em>.  Les <em>migrations</em> fournissent un moyen d'altérer la structure de la base de données de façon incrémentielle, de telle sorte que notre modèle de données peut adapter les changements requis. Dans le cas du modèle User, la migration est créée automatiquement par le script de génération de modèle&nbsp;; il crée une table <code>users</code> (<em>utilisateurs</em>) avec deux colonnes, <code>nom</code> et <code>email</code>, comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> (nous verrons à la <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a> comment faire une migration à partir de rien).</p>
+<p>L'un des résultats de la commande <code>generate</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> est un nouveau fichier appelé une <em>migration</em>.  Les <em>migrations</em> fournissent un moyen d'altérer la structure de la base de données de façon incrémentielle, de telle sorte que notre modèle de données peut adapter progressivement les changements requis au cours du développement. Dans le cas du modèle User, la migration est créée automatiquement par le script de génération de modèle&nbsp;; il crée une table <code>users</code> (<em>utilisateurs</em>) avec deux colonnes, <code>nom</code> et <code>email</code>, comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> (nous verrons à la <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a> comment faire une migration à partir de rien).</p>
 
 <div class="label" id="code:users_migration"></div>
 
@@ -560,9 +560,9 @@
 </div></div>
 
 
-<p>Notez que le nom de la migration est préfixé par un temps (<em>timestamp</em>) basé sur le temps de création de la migration. Dans les tout premiers jours des migrations, les noms de fichier étaient préfixés par un entier incrémenté, ce qui provoquait des conflits dans une équipe de collaborateurs quand les différents programmeur se retrouvaient avec des numéros identiques. Sauf très improbable concordance de création à la milliseconde près, utiliser les <em>timestamps</em> évite efficacement de telles collisions.</p>
+<p>Notez que le nom de la migration est préfixé par un temps (<em>timestamp</em>) basé sur le temps de création de la migration. Dans les tout premiers jours des migrations, les noms de fichier étaient préfixés par un entier incrémenté, ce qui provoquait des conflits dans une équipe de collaborateurs quand les différents programmeurs se retrouvaient avec des numéros identiques. Sauf très improbable concordance de création à la milliseconde près, utiliser les <em>timestamps</em> évite efficacement de telles collisions.</p>
 
-<p>Concentrons-nous sur la méthode <code>self.up</code>, qui utilise une méthode Rails appelée <code>create_table</code> (<em>créer_table</em>) pour créer une <em>table</em> dans la base de données pour consigner les utilisateurs (l'utilisation de <code>self</code> —&nbsp;<em>soi-même</em>&nbsp;—&nbsp;dans <code>self.up</code> l'identifie comme une <em>méthode de classe</em>. Ça n'a pas d'importance pour le présent, mais nous étudierons les méthodes de classe quand nous en inventerons à la <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">section&nbsp;7.2.4</a>). La méthode <code>create_table</code> accepte un bloc (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>) avec un variable de bloc, dans ce cas appelée <code>t</code> («&nbsp;t&nbsp;» pour «&nbsp;table&nbsp;»). À l'intérieur du bloc, la méthode <code>create_table</code> utilise l'objet&nbsp;<code>t</code> pour créer les colonnes <code>nom</code> et <code>email</code> dans la base de données, tous deux de type <code>string</code>.<sup class="footnote" id="fnref:6.7"><a href="#fn:6.7">7</a></sup> Ici le nom de la table est pluriel (<code>users</code>) même si le nom du modèle, lui, est singulier, ce qui reflète la convention linguistique suivie par Rails&nbsp;: un modèle représente un <em>simple</em> utilisateur, tandis que la table de la base de données consiste en plusieurs utilisateurs. La dernière ligne du bloc, <code>t.timestamps</code>, est une commande spéciale qui crée deux colonnes <em>magiques</em> appelées <code>created_at</code> (<em>créé_le</em> ) et <code>updated_at</code> (<em>actualisé_le</em> ), qui sont des signatures de temps qui enregistrenet automatiquement quand un utilisateur donné est créé ou modifié (nous verrons des exemples concrets de ces colonnes magiques en abordant la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>). Le modèle de données complet représenté par sa migration est affiché dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">illustration&nbsp;6.2</a>.</p>
+<p>Concentrons-nous sur la méthode <code>self.up</code>, qui utilise une méthode Rails appelée <code>create_table</code> (<em>créer_table</em>) pour créer une <em>table</em> dans la base de données pour consigner les utilisateurs (l'utilisation de <code>self</code> —&nbsp;<em>soi-même</em>&nbsp;—&nbsp;dans <code>self.up</code> l'identifie comme une <rw>méthode de classe</rw>. Ça n'a pas d'importance pour le présent, mais nous étudierons les méthodes de classe quand nous en inventerons à la <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">section&nbsp;7.2.4</a>). La méthode <code>create_table</code> accepte un <rw>bloc</rw> (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>) avec une variable de bloc, dans ce cas appelée <code>t</code> («&nbsp;t&nbsp;» pour «&nbsp;table&nbsp;»). À l'intérieur du bloc, la méthode <code>create_table</code> utilise l'objet&nbsp;<code>t</code> pour créer les colonnes <code>nom</code> et <code>email</code> dans la base de données, tous deux de type <code>string</code>.<sup class="footnote" id="fnref:6.7"><a href="#fn:6.7">7</a></sup> Ici le nom de la table est pluriel (<code>users</code>) même si le nom du modèle, lui, est singulier, ce qui reflète la convention linguistique suivie par Rails&nbsp;: un modèle représente un <em>simple</em> utilisateur, tandis que la table de la base de données consiste en plusieurs utilisateurs. La dernière ligne du bloc, <code>t.timestamps</code>, est une commande spéciale qui crée deux colonnes <em>magiques</em> de nom <code>created_at</code> (<em>créé_le…</em> ) et <code>updated_at</code> (<em>actualisé_le…</em>), qui sont des signatures de temps qui s'enregistrent automatiquement quand un utilisateur donné est créé ou modifié (nous verrons des exemples concrets de ces colonnes magiques en abordant la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>). Le modèle de données complet représenté par sa migration est affiché dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">illustration&nbsp;6.2</a>.</p>
 
 <div class="label" id="fig:user_model_initial"></div>
 
@@ -577,7 +577,7 @@
 </div>
 
 
-<p>(Vous pouvez vous souvenir que nous avons déjà eu à jouer cette commande, à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a> ou encore au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>.) La première fois que <code>db:migrate</code> est lancé, un fichier <code>db/development.sqlite3</code> est créé, qui est une base de données <a href="http://sqlite.org/">SQLite</a><sup class="footnote" id="fnref:6.9"><a href="#fn:6.9">9</a></sup>. Nous pouvons voir la structure de la base de données en utilisant l'exemple <a href="http://sqlitebrowser.sourceforge.net/">Navigateur de données SQLite</a> pour ouvrir le fichier <code>db/development.sqlite3</code> (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a>)&nbsp;; comparez-le avec le diagramme de l'<a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">illustration&nbsp;6.2</a>. Vous pouvez noter qu'il y a une colonne dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> qui n'a pas été prise en compte par la migration&nbsp;: la colonne <code>id</code> (<em>identifiant</em>). Comme indiqué brièvement à la <a class="ref" href="a-demo-app#sec:demo_users_resource">section&nbsp;2.2</a>, cette colonne est créée automatiquement, et est utilisée par Rails pour identifier de façon unique une rangée.</p>
+<p>(Vous pouvez vous souvenir que nous avons déjà eu à jouer cette commande, à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a> ou encore au <a class="ref" href="a-demo-app#top">chapitre&nbsp;2</a>.) La première fois que <code>db:migrate</code> est lancé, un fichier <code>db/development.sqlite3</code> est créé (ou actualisé s'il existe déjà. NdT), qui est une base de données <a href="http://sqlite.org/">SQLite</a><sup class="footnote" id="fnref:6.9"><a href="#fn:6.9">9</a></sup>. Nous pouvons voir la structure de la base de données en utilisant l'excellent <a href="http://sqlitebrowser.sourceforge.net/">Navigateur de données SQLite</a> pour ouvrir le fichier <code>db/development.sqlite3</code> (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a>)&nbsp;; comparez-le avec le diagramme de l'<a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">illustration&nbsp;6.2</a>. Vous pouvez noter qu'il y a une colonne dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> qui n'a pas été prise en compte par la migration&nbsp;: la colonne <code>id</code> (<em>identifiant</em>). Comme indiqué brièvement à la <a class="ref" href="a-demo-app#sec:demo_users_resource">section&nbsp;2.2</a>, cette colonne est créée automatiquement, et elle est utilisée par Rails pour identifier de façon unique une rangée.</p>
 
 <div class="label" id="fig:sqlite_database_browser"></div>
 
@@ -585,7 +585,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_database_browser.png" alt="sqlite_database_browser" /></span></div><div class="caption"><span class="header">Illustration 6.3: </span><span class="description">The  <a href="http://sqlitebrowser.sourceforge.net/">Navigateur de base de données SQLite</a> avec notre nouvelle table <code>users</code>.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_database_browser-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Vous avez probablement deviné que lancer <code>db:migrate</code> exécute la commande <code>self.up</code> dans le fichier migration. Qu'en est-il, donc, du code <code>self.down</code> (<em>soi-même.en-bas</em> )&nbsp;? Comme vous pouvez le deviner, <code>down</code> migre vers le <em>base</em>, inversant les effets de la migration. Dans notre cas, cela signifie <em>retirer</em>  la table <code>users</code> de la base de données&nbsp;:</p>
+<p>Vous avez probablement deviné que lancer <code>db:migrate</code> exécute la commande <code>self.up</code> dans le fichier migration. Qu'en est-il, donc, du code <code>self.down</code> (<em>soi-même.en-bas</em> )&nbsp;? Comme vous pouvez le deviner, <code>down</code> migre vers le <em>bas</em> (c'est-à-dire vers le <em>passé</em>), inversant les effets de la migration. Dans notre cas, cela signifie <em>détruire</em>  la table <code>users</code> de la base de données&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="o">.</span>
@@ -606,7 +606,7 @@
 </div>
 
 
-<p>C'est souvent utile quand vous réalisez qu'il y a une autre colonne que vous voulez ajouter mais que vous ne voulez pas vous embêter à faire une nouvelle migration&nbsp;: vous pouvez revenir en arrière, ajouter la colonne souhaitée, et reprocéder alors à la migration (ce n'est pas toujours pratique, et nous apprendrons comment ajouter une colonne à une table existante à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a>).</p>
+<p>C'est souvent utile quand vous réalisez qu'il y a une autre colonne que vous voulez ajouter mais que vous ne voulez pas vous embêter à faire une nouvelle migration&nbsp;: vous pouvez revenir en arrière, ajouter la colonne souhaitée, et reprocéder alors à la migration (ce n'est pas toujours pratique, et nous apprendrons comment ajouter autrement une colonne à une table existante à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a>).</p>
 
 <p>Si vous êtes revenu en arrière pour la base de données, procédez à nouveau à sa migration&nbsp;:</p>
 
@@ -623,7 +623,7 @@
 <h3><a id="sec:6.1.2" href="modeling-and-viewing-users-one#sec:the_model_file" class="heading"><span class="number">6.1.2</span> Le fichier modèle</a></h3>
 
 
-<p>Nous avons vu comment la génération du modèle User de l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> générait un fichier de migration (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>), et nous avons vu dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> les résultats de lancer la migration&nbsp;: cela actualise un fichier appelé <code>development.sqlite3</code> en créant une table <code>users</code> avec les colonnes <code>id</code>, <code>nom</code>, <code>email</code>, <code>created_at</code>, et <code>updated_at</code>. L<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> a créé aussi le modèle lui-même&nbsp;; la suite de cette section est dédié à le comprendre.</p>
+<p>Nous avons vu comment la génération du modèle User de l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> générait un fichier de migration (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>), et nous avons vu dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">illustration&nbsp;6.3</a> les résultats d'opérer la migration&nbsp;: cela actualise un fichier appelé <code>development.sqlite3</code> en créant une table <code>users</code> avec les colonnes <code>id</code>, <code>nom</code>, <code>email</code>, <code>created_at</code> et <code>updated_at</code>. L'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> a créé aussi le modèle lui-même&nbsp;; la suite de cette section est dédiée à l'explicitation de ce <rw>modèle</rw>.</p>
 
 <p>Nous commençons par regarder le code du modèle User, qui se trouve dans le fichier <code>user.rb</code> à l'intérieur du dossier <code>app/models/</code>&nbsp;; il est, pour ne pas dire, très compact (<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_model">extrait&nbsp;6.3</a>).</p>
 
@@ -639,7 +639,7 @@
 </div></div>
 
 
-<p>Si vous vous souvenez de la <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>, la syntaxe <code>class User &lt; ActiveRecord::Base</code> signifie que la classe <code>User</code> <em>hérite</em> de <code>ActiveRecord::Base</code>, de telle sorte que le modèle User possède automatiquement les fonctionnalités de la classe <code>ActiveRecord::Base</code>. Bien entendu, la connaissance de cet héritage ne fait rien de bien tant que nous ne savons pas ce que <code>ActiveRecord::Base</code> contient, et nous allons en avoir un avant-goût dans un moment. Mais avant de continuer, il y a deux tâches à accomplir.</p>
+<p>Si vous vous souvenez de la <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>, la syntaxe <code>class User &lt; ActiveRecord::Base</code> signifie que la classe <code>User</code> <em>hérite</em> de <code>ActiveRecord::Base</code>, de telle sorte que le modèle User possède automatiquement les fonctionnalités de la classe <code>ActiveRecord::Base</code>. Bien entendu, la connaissance de cet héritage ne sert à rien si nous ne savons pas ce que <code>ActiveRecord::Base</code> contient. Nous allons justement en avoir un avant-goût dans un moment. Mais avant de continuer, deux tâches sont à accomplir.</p>
 
 <div class="label" id="sec:model_annotation"></div>
 
@@ -673,14 +673,14 @@
 </div></div>
 
 
-<p>(Nous plaçons le gem <tt>annotate-models</tt> gem dans le bloc <code>group :development</code> (comme pour <code>group :test</code>) parce que les annotations ne sont pas nécessaire dans les applications en mode production.) Nous l'installons ensuite avec <code>bundle</code>&nbsp;:</p>
+<p>(Nous plaçons le gem <tt>annotate-models</tt> dans le bloc <code>group :development</code> (analogue au <code>group :test</code>) parce que les annotations ne sont pas nécessaires dans les applications en mode production.) Nous l'installons ensuite avec <code>bundle</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 </pre></div>
 </div>
 
 
-<p>Cela nous ajoute une commande appelée <code>annotate</code>, qui ajoute simplement des commentaires contenant le modèle de données dans le fichier du modèle&nbsp;:</p>
+<p>Ce gem ajoute une commande appelée <code>annotate</code>, qui introduit simplement des commentaires sur le modèle de données dans le fichier du modèle&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> annotate
 <span class="go">Annotated User</span>
@@ -714,7 +714,7 @@
 </div></div>
 
 
-<p>Je trouve qu'avoir un modèle de données visible dans les fichiers de modèle aide à se souvenir des attributs que le modèle possède, mais les extraits de code présentés ici omettrons souvent cette information, pour la brièveté.</p>
+<p>Je trouve qu'avoir un modèle de données visible dans les fichiers de modèle aide à se souvenir des attributs que le modèle possède, mais les extraits de code présentés ici omettront souvent cette information, par souci de brièveté.</p>
 
 <div class="label" id="sec:accessible_attributes"></div>
 
@@ -722,7 +722,7 @@
 <h4><a id="sec:6.1.2.2" href="modeling-and-viewing-users-one#sec:accessible_attributes" class="heading">Attributs accessibles.</a></h4>
 
 
-<p>Une autre étpae qui n'est pas strictement nécessaire, mais qui est une vraiment bonne idée, est de dire à Rails quels attributs du modèle sont accessibles, c'est-à-dire quels attributs peuvent être modifiés par des utilisateurs extérieurs (tels que les utilisateurs soumettant des requêtes à l'aide de leur navigateur internet). Nous faisons cela avec la méthode <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#code:attr_accessible">extrait&nbsp;6.6</a>). Nous verrons au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> qu'utiliser <code>attr_accessible</code> est important pour prévenir le <em>mass assignment</em> (<em>assignement en masse</em>), un trou de sécurité désepérément courant et souvent sérieux dans beaucoup d'applications Rails.</p>
+<p>Une autre étape, pas strictement nécessaire, mais qui peut être une bonne idée de prudence, est de dire à Rails quels attributs du modèle sont accessibles, c'est-à-dire quels attributs peuvent être modifiés par des utilisateurs extérieurs (tels que les utilisateurs soumettant des requêtes à l'aide de leur navigateur internet). Nous réalisons cela avec la méthode <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#code:attr_accessible">extrait&nbsp;6.6</a>). Nous verrons au <a class="ref" href="updating-showing-and-deleting-users#top">chapitre&nbsp;10</a> qu'utiliser <code>attr_accessible</code> est important pour prévenir le <em>mass assignment</em> (<em>assignement en masse</em>), un trou de sécurité désepérément courant et souvent sérieux dans beaucoup d'applications Rails.</p>
 
 <div class="label" id="code:attr_accessible"></div>
 
@@ -755,7 +755,7 @@
 </div>
 
 
-<p>Comme l'indique le message &ldquo;&nbsp;Any modifications you make will be rolled back on exit&nbsp;&rdquo; (<em>Toute modification que vous ferez sera effacée en quittant le bac à sable</em>. NdT ), en commençant dans un bac à sable, la console annulera tous les changements opérés sur la base de données à la fin de la session d'utilisation du bac à sable.</p>
+<p>Comme l'indique le message «&nbsp;Any modifications you make will be rolled back on exit&nbsp;» (<em>Toute modification que vous ferez sera oubliée en quittant le bac à sable</em>. NdT ), en commençant dans un bac à sable, la console annulera tous les changements opérés sur la base de données à la fin de cette session bac à sable.</p>
 
 <p>En travaillant à la console, il est utile de garder un œil sur le <em>journal de développement</em> (<em>development log</em>), qui enregistre les états de bas niveau de SQL renvoyés par Active Record, comme montrés à <a class="ref" href="modeling-and-viewing-users-one#fig:development_log">illustration&nbsp;6.4</a>. La façon d'obtenir cette sortie par une commande en ligne Unix est de <code>tail</code>er le journal&nbsp;:</p>
 
@@ -772,7 +772,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/development_log.png" alt="development_log" /></span></div><div class="caption"><span class="header">Illustration 6.4: </span><span class="description">Suivre le journal de développement.&nbsp;<a href="http://railstutorial.org/images/figures/development_log-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Dans la session de console de la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, nous avons créé un nouvel objet utilisateur avec <code>User.new</code>, auquel nous n'avions accès qu'après avoir appelé le fichier de l'utilisateur exemple de l'<a class="ref" href="rails-flavored-ruby#code:example_user">extrait&nbsp;4.8</a>. Avec les modèles, la situation est différentes&nbsp;; comme vous pouvez vous en souvenir de la <a class="ref" href="rails-flavored-ruby#sec:a_controller_class">section&nbsp;4.4.4</a>, la console Rails charge automatiquement l'environnement Rails, ce qui inclut les modèles. Cela signifie que nous pouvons créer un nouvel objet utilisateur sans travail supplémentaire&nbsp;:</p>
+<p>Dans la session de console de la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, nous avons créé un nouvel objet utilisateur avec <code>User.new</code>, auquel nous n'avions accès qu'après avoir appelé le fichier de l'utilisateur exemple de l'<a class="ref" href="rails-flavored-ruby#code:example_user">extrait&nbsp;4.8</a>. Avec les modèles, la situation est différente&nbsp;; comme vous pouvez vous en souvenir de la <a class="ref" href="rails-flavored-ruby#sec:a_controller_class">section&nbsp;4.4.4</a>, la console Rails charge automatiquement l'environnement Rails, ce qui inclut les modèles. Cela signifie que nous pouvons créer un nouvel objet utilisateur sans travail supplémentaire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">new</span>
 <span class="go">=&gt; #&lt;User id: nil, nom: nil, email: nil, created_at: nil, updated_at: nil&gt;</span>
@@ -793,7 +793,7 @@
 
 <p>Ici nous voyons que les attributs <code>nom</code> et <code>email</code> ont été définis comme voulu.</p>
 
-<p>Si vous suivez le journal de développement, vous avez peut-être noté qu'aucune nouvelle ligne n'a été affichée. Ceci parce qu'appeler <code>User.new</code> n'affecte pas la base de données&nbsp;; ça crée simplement un nouvelle objet Ruby en mémoire. Pour savuer l'objet utilisateur dans la base de données, nous appelons la méthode <code>save</code> de la variable d'instance <code>user</code>&nbsp;:</p>
+<p>Si vous suivez le journal de développement, vous avez peut-être noté qu'aucune nouvelle ligne n'a été affichée. Ceci parce qu'appeler <code>User.new</code> n'affecte pas la base de données&nbsp;; cela crée simplement un nouvel objet Ruby en mémoire. Pour sauver l'objet utilisateur dans la base de données, nous appelons la méthode <code>save</code> de la variable d'instance <code>user</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">save</span>
 <span class="go">=&gt; true</span>
@@ -812,9 +812,9 @@
 </div>
 
 
-<p>Nous voyons qu'à l'attribut <code>id</code> a été assigné la valeur&nbsp;<code>1</code>, et que les colonnes magiques se sont vues assignées le temps et la date courants.<sup class="footnote" id="fnref:6.10"><a href="#fn:6.10">10</a></sup> Pour le moment, les timestamps de création et de modification sont identiques&nbsp;; nous verrons qu'ils différeront à la <a class="ref" href="modeling-and-viewing-users-one#sec:updating_user_objects">section&nbsp;6.1.5</a>.</p>
+<p>Nous voyons qu'à l'attribut <code>id</code> a été assigné la valeur&nbsp;<code>1</code>, et que les colonnes magiques se sont vues assigner le temps et la date courants.<sup class="footnote" id="fnref:6.10"><a href="#fn:6.10">10</a></sup> Pour le moment, les timestamps de création et de modification sont identiques&nbsp;; nous verrons qu'ils différeront à la <a class="ref" href="modeling-and-viewing-users-one#sec:updating_user_objects">section&nbsp;6.1.5</a>.</p>
 
-<p>Comme avec la classe User de la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, les instances du modèle User permettent un accès à leurs attributs en utilisant la notation par point&nbsp;:<sup class="footnote" id="fnref:6.11"><a href="#fn:6.11">11</a></sup></p>
+<p>Comme avec la <rw>classe</rw> User de la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>, les <rw>instances</rw> du modèle User («&nbsp;user&nbsp;», ici, est une <em>instance</em> de la classe User) permettent un accès à leurs attributs en utilisant la notation par point&nbsp;:<sup class="footnote" id="fnref:6.11"><a href="#fn:6.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">nom</span>
 <span class="go">=&gt; &quot;Michael Hartl&quot;</span>
@@ -838,7 +838,7 @@
 </div>
 
 
-<p>Notez que <code>User.create</code>, plutôt que de retourner <code>true</code> ou <code>false</code>, retourne l'objet User lui-même, que nous pouvons optionnellement assigner à une variable (comme la variable <code>foo</code> dans le seconde commande ci-dessus).</p>
+<p>Notez que <code>User.create</code>, plutôt que de retourner <code>true</code> ou <code>false</code>, retourne l'objet User lui-même, que nous pouvons optionnellement assigner à une variable (comme la variable <code>foo</code> dans la seconde commande ci-dessus).</p>
 
 <p>L'inverse de la méthode <code>create</code> (<em>créer</em>) est la méthode <code>destroy</code> (<em>détruire</em>)&nbsp;:</p>
 
@@ -858,7 +858,7 @@
 </div>
 
 
-<p>Comment pouvons-nous être sûrs, alors, d'avoir détruit un objet&nbsp;? Et pour les objets sauvés et non-détruits, comment pouvons-nous récupérer les utilisateurs de la base de données&nbsp;? Il est temps d'apprendre à utiliser Active Record pour y répondre.</p>
+<p>Comment pouvons-nous être sûrs, alors, d'avoir détruit un objet&nbsp;? Et pour les objets sauvés et non détruits, comment pouvons-nous récupérer les utilisateurs de la base de données&nbsp;? Il est temps d'apprendre à utiliser Active Record pour y répondre.</p>
 
 <div class="label" id="sec:finding_user_objects"></div>
 
@@ -896,9 +896,9 @@
 </div>
 
 
-<p>Puisque nous utiliserons l'adresse email comme nom d'utilisateur (<em>usernames</em>), cette façon de recherche sera utile quand nous apprendrons à permettre aux utilisateurs de s'identifier à notre site (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>).<sup class="footnote" id="fnref:6.13"><a href="#fn:6.13">13</a></sup></p>
+<p>Puisque nous utiliserons l'adresse email comme nom d'utilisateur (<em>usernames</em>), cette façon de récupérer des objets enregistrés sera utile pour permettre aux utilisateurs de s'identifier à notre site (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>).<sup class="footnote" id="fnref:6.13"><a href="#fn:6.13">13</a></sup></p>
 
-<p>Nous allons terminer avec deux des façons générales de retrouver des utilisateurs. D'abord, il y a la méthode <code>first</code> (<em>premier</em>)&nbsp;:</p>
+<p>Nous allons terminer avec deux des manières classiques de retrouver des utilisateurs. D'abord, il y a la méthode <code>first</code> (<em>premier</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">first</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -918,7 +918,7 @@
 </div>
 
 
-<p>Il n'est pas difficile de devenir que <code>all</code> (<em>tous</em>) retourne un tableau (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>) de tous les utilisateurs consignés dans la base de données.</p>
+<p><code>all</code>, qui signifie «&nbsp; <em>tous</em>&nbsp;» en anglais, retourne comme on peut s'y attendre un tableau (<a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">section&nbsp;4.3.1</a>) de <em>tous</em> les utilisateurs enregistrés dans la base de données.</p>
 
 <div class="label" id="sec:updating_user_objects"></div>
 
@@ -926,9 +926,9 @@
 <h3><a id="sec:6.1.5" href="modeling-and-viewing-users-one#sec:updating_user_objects" class="heading"><span class="number">6.1.5</span> Actualisation des objets Utilisateurs (Users)</a></h3>
 
 
-<p>Une fois que nous avons créé des objets, nous voulons souvent les actualisr. Il existe deux façons basique de le faire. D'abord, nous pouvons assigner les attributs individuellement, comme nous l'avons fait à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>&nbsp;:</p>
+<p>Une fois des objets créés, il est fréquent de les actualiser. Il existe deux façons classiques de le faire. D'abord, nous pouvons assigner les attributs individuellement, comme nous l'avons fait à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span>           <span class="c1"># Just a reminder about our user&#39;s attributes</span>
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span>           <span class="c1"># Pour l'afficher à titre de rappel</span>
 <span class="go">=&gt; #&lt;User id: 1, nom: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
 <span class="go">created_at: &quot;2010-01-05 00:57:46&quot;, updated_at: &quot;2010-01-05 00:57:46&quot;&gt;</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;mhartl@example.net&quot;</span>
@@ -951,7 +951,7 @@
 </div>
 
 
-<p>Maintenant que nous avons actualisé l'utilisateur, les colonnes magiques diffèrent, comme promis à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>&nbsp;:</p>
+<p>Maintenant que nous avons actualisé l'utilisateur, la valeur des colonnes magiques de temps diffèrent, comme promis à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">created_at</span>
 <span class="go">=&gt; &quot;2010-01-05 00:57:46&quot;</span>
@@ -961,7 +961,7 @@
 </div>
 
 
-<p>La seconde façon d'actualiser les attribut est d'utiliser <code>update_attributes</code>:</p>
+<p>La seconde façon d'actualiser les attributs est d'utiliser la méthode <code>update_attributes</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;The Dude&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude@abides.org&quot;</span><span class="p">)</span>
 <span class="go">=&gt; true</span>
@@ -973,7 +973,7 @@
 </div>
 
 
-<p>La méthode <code>update_attributes</code> accepte une table d'attributs, et en cas de succès accomplit d'un coup l'actualisation et la sauvegarde (en retournant <code>true</code> pour indiquer que la sauvegarde a pu se faire). Il est important de noter que, une fois que vous avez défini l'accessibilité de certains attributs avec <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), <em>seuls</em> ces attributs peuvent être modifiés en utilisant la méthode <code>update_attributes</code>. Si vous trouvez que votre modèle commence mystérieusement à refuser d'actualiser certaines colonnes, assurez-vous que ces colonnes soient bien incluses dans l'appel à <code>attr_accessible</code>.</p>
+<p>La méthode <code>update_attributes</code> accepte une <rw>table</rw> d'attributs, et en cas de succès accomplit d'un coup l'actualisation et la sauvegarde (en retournant <code>true</code> pour indiquer que la sauvegarde a pu se faire). Il est important de noter que, une fois que vous avez défini l'accessibilité de certains attributs avec <code>attr_accessible</code> (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">section&nbsp;6.1.2.2</a>), <em>seuls</em> ces attributs peuvent être modifiés en utilisant la méthode <code>update_attributes</code>. Si, au cours de vos développements, vous trouvez tout à coup que votre modèle commence mystérieusement à refuser d'actualiser certaines colonnes, assurez-vous que ces colonnes soient bien incluses dans l'appel à <code>attr_accessible</code>.</p>
 
 <div class="label" id="sec:user_validations"></div>
 
@@ -981,11 +981,11 @@
 <h2><a id="sec:6.2" href="modeling-and-viewing-users-one#sec:user_validations" class="heading"><span class="number">6.2</span> Validations de l'utilisateur</a></h2>
 
 
-<p>Le modèle User que nous avons créé à la <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a> possède maintenant des attributs <code>nom</code> et <code>email</code> qui fonctionnent, mais ils sont complètement «&nbsp;génériques&nbsp;»&nbsp;: n'importe quelle chaine de caractères (incluant l'espace) est en ce moment valide dans tous les cas. Et pourtant, les noms et les adresses email sont plus spécifiques que ça. Par exemple, le <code>nom</code> ne devrait pas être vierge, et l'<code>email</code> devrait être conforme au format caractéristique des adresses email. Plus encore, puisque nous allons utiliser l'adresse comme unique nom d'utilisateur (username) quand l'utilisateur s'identifiera, nous ne devrions pas permettre d'avoir deux fois la même adresse dans la base de données.</p>
+<p>Le modèle User que nous avons créé à la <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">section&nbsp;6.1</a> possède maintenant des attributs <code>nom</code> et <code>email</code> qui fonctionnent, mais ils sont complètement «&nbsp;génériques&nbsp;»&nbsp;: n'importe quelle chaine de caractères (même l'espace) est en ce moment valide dans tous les cas. Et pourtant, les noms et les adresses email sont plus spécifiques que ça. Par exemple, le <code>nom</code> ne devrait pas être vierge, et l'<code>email</code> devrait être conforme au format caractéristique des adresses email. Plus encore, puisque nous allons utiliser l'adresse comme unique nom d'utilisateur (username) quand un nouvel utilisateur s'inscrira, nous ne devrions pas lui permettre d'entrer une adresse déjà contenue dans la base de données.</p>
 
-<p>En bref, nous ne devrions pas permettre que <code>nom</code> et <code>email</code> soit n'importe quelle chaine de caractères&nbsp;; nous devrions forcer certaines contraintes sur ces valeurs. Active Record nous permet d'imposer de telles contraintes en utilisant les <em>validations</em>. Dans cette section, nous couvrions plusieurs des cas les plus courants, en validant la  <em>présence</em> (<em>presence</em>), la <em>longueur</em> (<em>length</em>), le <em>format</em> et l'<em>unicité</em> (<em>uniqueness</em>). Nous ajouterons à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">section&nbsp;7.1.1</a> une validation finale courante, la <em>confirmation</em>. Et nous verrons à la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a> comment les validations nous nous renvoient des messages d'erreur pratiques quand l'utilisateur soumet des données qui les violent.</p>
+<p>En bref, nous ne devrions pas permettre que <code>nom</code> et <code>email</code> soit n'importe quelle chaine de caractères&nbsp;; nous devrions forcer certaines contraintes sur ces valeurs. Active Record nous permet d'imposer de telles contraintes en utilisant les <em>validations</em>. Dans cette section, nous couvrions plusieurs des cas les plus courants, en validant la  <em>présence</em> (<em>presence</em>), la <em>longueur</em> (<em>length</em>), le <em>format</em> et l'<em>unicité</em> (<em>uniqueness</em>). Nous ajouterons à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">section&nbsp;7.1.1</a> une validation finale courante, la <em>confirmation</em> de l'adresse. Et nous verrons à la <a class="ref" href="sign-up#sec:signup_failure">section&nbsp;8.2</a> comment les validations nous renvoient des messages d'erreur utiles quand l'utilisateur soumet des données qui les violent.</p>
 
-<p>Comme pour les autres fonctionnalités de notre application exemple, nous allons ajouter les validations au modèle User en utilisant le «&nbsp;développement conduit par les tests&nbsp;». Puisque nous avons changé le modèle de données, c'est une bonne idée de préparer le test de la base de données avant de poursuivre&nbsp;:</p>
+<p>Comme pour les autres fonctionnalités de notre application exemple, nous allons ajouter les validations au modèle User en suivant toujours le «&nbsp;Développement Dirigé par les Tests&nbsp;». Puisque nous avons changé le modèle de données, c'est une bonne idée de préparer le test de la base de données avant de poursuivre&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:test:prepare
 </pre></div>
@@ -1000,7 +1000,7 @@
 <h3><a id="sec:6.2.1" href="modeling-and-viewing-users-one#sec:presence_validation" class="heading"><span class="number">6.2.1</span> Valider la présence</a></h3>
 
 
-<p>Nous allons commencer par un test de la présence de l'attribut <code>nom</code> attribute. Bien que la première étape en TDD consiste à écrire un test <em>échouant</em> (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>), nous n'en savons pas encore assez dans ce cas à propos des validations pour écrire le test approprié, donc nous allons d'abord écrire la validation, en utilisant la console pour la comprendre. Ensuite nous commenterons la validation pour l'exclure, écrirons un test échouant, et vérifierons que décommenter les validations fait bien réussir le test. Cette procédure peut paraitre pédante pour un test aussi simple, mais j'ai <em>trop</em> vu<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup>  de «&nbsp;simples&nbsp;» tests échouer&nbsp;; être méticuleux à propos de la TDD est simplement la  <em>seule</em> manière d'être confiant sur le fait que nous testons la bonne chose à tester (la technique d'exclusion par commentaire est utile, aussi, quand on vient au secours d'une application dont le code est déjà écrit mais qu'elle ne possède &mdash;&nbsp;<em>quelle horreur&nbsp;!</em>&nbsp;&mdash; aucun test).</p>
+<p>Nous allons commencer par un test de la présence de l'attribut <code>nom</code> attribute. Bien que la première étape en TDD consiste à écrire un test <em>échouant</em> (<a class="ref" href="static-pages#sec:TDD">section&nbsp;3.2.2</a>), nous n'en savons pas encore assez dans ce cas à propos des validations pour écrire le test approprié, donc nous allons d'abord écrire la validation, en utilisant la console pour la comprendre. Ensuite nous commenterons la validation pour l'exclure, écrirons un test échouant, et vérifierons que décommenter les validations fait bien réussir le test. Cette procédure peut paraitre pédante pour un test aussi simple, mais j'ai <em>trop</em> vu<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup>  de «&nbsp;simples&nbsp;» tests échouer&nbsp;; être méticuleux à propos de la TDD est simplement la  <em>seule</em> manière d'être confiant sur le fait que nous testons la bonne chose à tester (la technique d'exclusion par commentaire &mdash;&nbsp;que j'appellerai «&nbsp;ex-commenter&nbsp;». NdT&nbsp;&mdash; est utile, aussi, quand on vient au secours d'une application dont le code est déjà écrit mais qu'elle ne possède &mdash;&nbsp;<em>quelle horreur&nbsp;!</em>&nbsp;&mdash; aucun test).</p>
 
 <p>La façon de valider la présence d'un attribut <code>nom</code> est d'utiliser la méthode <code>validates</code> avec l'argument <code>:presence =&gt; true</code>, comme montré dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a>. L'argument <code>:presence =&gt; true</code> est une table d'options à un élément&nbsp;; souvenez-vous, <a class="ref" href="rails-flavored-ruby#sec:css_revisited">section&nbsp;4.3.4</a>, que les accolades sont optionnelles lorsque les tableaux sont les arguments finaux d'une méthode (comme noté à la <a class="ref" href="filling-in-the-layout#sec:adding_to_the_layout">section&nbsp;5.1.1</a>, l'utilisation de tables d'options est un théme récurrent en Rails).</p>
 
@@ -1021,7 +1021,7 @@
 
 <p>Comme discuté brièvement à la <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">section&nbsp;2.3.2</a>, l'utilisation de <code>validates</code> est caractéristique de Rails&nbsp;3 (en Rails&nbsp;2.3, nous aurions dû plutôt écrire <code>validates_presence_of :nom</code>).</p>
 
-<p>L'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> peut sembler quelque peu, mais <code>validates</code> est juste une méthode, telle que l'est aussi <code>attr_accessible</code>. Une formulation équivalent de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> en utilisant les parenthèses serait&nbsp;:</p>
+<p>L'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> peut sembler quelque peu magique, mais <code>validates</code> est juste une méthode, telle que l'est aussi <code>attr_accessible</code>. Une formulation équivalent de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_nom">extrait&nbsp;6.7</a> en utilisant les parenthèses serait&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span><span class="p">(</span><span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span><span class="p">)</span>
@@ -1044,7 +1044,7 @@
 </div>
 
 
-<p>Ici, <code>user.save</code> retourne <code>false</code> (<em>faux</em>), indiquant un sauvegarde défectueuse. Dans la commande finale, nous utilisons la méthode <code>valid?</code>, qui retourne <code>false</code> (<em>false</em>) quand l'objet rate une ou plus validations, et <code>true</code> (<em>vrai</em>) quand toutes les validations réussissent (Souvenez-nous de la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>, que Ruby utilise le point d'interrogation pour signifier les méthodes <em>booléennes</em>). Dans ce cas, nous n'avons qu'une seule validation, donc nous savons laquelle échoue, mais il peut toujours être utile de vérifier en utilisant l'objet <code>errors</code> (<em>erreurs</em>) généré par l'échec&nbsp;:</p>
+<p>Ici, <code>user.save</code> retourne <code>false</code> (<em>faux</em>), indiquant un sauvegarde défectueuse. Dans la commande finale, nous utilisons la méthode <code>valid?</code>, qui retourne <code>false</code> (<em>false</em>) quand l'objet rate une validations ou plus, et <code>true</code> (<em>vrai</em>) quand toutes les validations réussissent (souvenez-nou, <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>, que Ruby utilise le point d'interrogation pour signifier les méthodes <em>booléennes</em>). Dans ce cas, nous n'avons qu'une seule validation, donc nous savons laquelle échoue, mais il peut toujours être utile de vérifier en utilisant l'objet <code>errors</code> (<em>erreurs</em>) généré par l'échec&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span>
 <span class="go">=&gt; [&quot;Name can&#39;t be blank&quot;]</span>
@@ -1052,15 +1052,15 @@
 </div>
 
 
-<p>(Le message d'erreur est une trace que Rails valide la présence d'un attribut en utilisant la méthode <code>blank?</code>, ce que nous avons vu à la fin de la <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">section&nbsp;4.4.3</a>.)</p>
+<p>(Le message d'erreur contient un indice qui révèle que Rails valide la présence d'un attribut en utilisant la méthode <code>blank?</code>, ce que nous avons vu à la fin de la <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">section&nbsp;4.4.3</a>.)</p>
 
-<p>Voilà pour les tests échouant. Pour s'assurer que notre test naissant échouera, commentons pour l'exclure la validation (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a>).</p>
+<p>Voilà pour les tests échouant. Pour s'assurer que notre test naissant échouera, «&nbsp;ex-commentons&nbsp;» la validation (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">extrait&nbsp;6.8</a>).</p>
 
 <div class="label" id="code:commented_out_validation"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.8.</span> <span class="description">Exclure en la commentant une valide pour s'assure que le test échoue. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.8.</span> <span class="description">Ex-commenter une validation pour s'assurer que le test échoue. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1071,7 +1071,7 @@
 </div></div>
 
 
-<p>Comme dans le cas de la génération de contrôleur (par exemple l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>), la commande de génération de modèle dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> prodiut une spec intiale pour tester les utilisateurs, mais dans ce cas elle est pratiquement vierge (<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a>).</p>
+<p>Comme dans le cas de la génération de contrôleur (par exemple l'<a class="ref" href="filling-in-the-layout#code:generate_users_controller">extrait&nbsp;5.23</a>), la commande de génération de modèle dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a> produit une <rw>spec</rw> initiale pour tester les utilisateurs, mais dans ce cas elle est pratiquement vierge (<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a>).</p>
 
 <div class="label" id="code:default_user_spec"></div>
 
@@ -1088,7 +1088,7 @@
 </div></div>
 
 
-<p>Cela utilise simplement la méthode <code>pending</code> (<em>en attendant</em>) pour indiquer que nous devriez remplir le spec avec quelque chose de plus utile. Nous pouvons en voir les effets en jouant le spec du modèle User&nbsp;:</p>
+<p>Cette spec utilise simplement la méthode <code>pending</code> (<em>en attendant</em>) pour indiquer que nous devrions soit remplir le spec avec quelque chose de plus utile, soit le supprimer. Nous pouvons en voir les effets en jouant ce spec du modèle User&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb 
 <span class="go">*</span>
@@ -1121,7 +1121,7 @@
     <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
   <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance  should create a new instance dotée des attributs valides&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance dotée des attributs valides&quot;</span> <span class="k">do</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
   <span class="k">end</span>
 
@@ -1133,18 +1133,18 @@
 
 <p>Nous avons vu <code>require</code> et <code>describe</code> auparavant, le plus récemment dans l'<a class="ref" href="filling-in-the-layout#code:user_signup_spec">extrait&nbsp;5.28</a>. La ligne suivante est un bloc <code>before(:each)</code>&nbsp;; ceci a été couvert brièvement par un exercice (<a class="ref" href="static-pages#code:pages_controller_spec_exercise">extrait&nbsp;3.33</a>), et tout ce qu'il fait est de jouer le code à l'intérieur du bloc avant chaque exemple &mdash;&nbsp;dant ce cas en définissant l'instance de variable <code>@attr</code> comme tableau d'initialisation.</p>
 
-<p>Le premier exemple est juste un «&nbsp;check de santé&nbsp;» vérifiant que le modèle User fonctionne. Il utilise <code>User.create!</code> (lire &ldquo;create bang&rdquo;, «&nbsp;créer bang&nbsp;» ), qui fonctionne comme la méthode <code>create</code> vue à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> à la différence près qu'elle provoque une exception (une erreur) <code>ActiveRecord::RecordInvalid</code> si la création échoue (similairement à l'exception <code>ActiveRecord::RecordNotFound</code> que nous avons pu voir à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>). Aussi longtemps que les attributs sont valides, elle ne provoque aucune erreur, et le test réussira.</p>
+<p>Le premier exemple est juste un «&nbsp;check de santé&nbsp;» vérifiant que le modèle User fonctionne. Il utilise <code>User.create!</code> (lire «&nbsp;create bang&nbsp;», «&nbsp;créer bang&nbsp;» ), qui fonctionne comme la méthode <code>create</code> vue à la <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">section&nbsp;6.1.3</a> à la différence près qu'elle provoque une exception (une erreur) <code>ActiveRecord::RecordInvalid</code> si la création échoue (similairement à l'exception <code>ActiveRecord::RecordNotFound</code> que nous avons pu voir à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>). Aussi longtemps que les attributs sont valides, elle ne provoque aucune erreur, et le test réussira.</p>
 
-<p>La ligne finale est le test pour la présence de l'attribut <code>nom</code> &mdash;&nbsp;ou plutôt, il <em>devrait</em> être le test effectif, s'il y avait quelque chose dans cette attribut. Au lieu de ça, le test est juste une esquisse, mais une esquisse utile&nbsp;: c'est une <em>spec de mise en attente</em>, qui est un moyen d'écrire une description du comportement de l'application sans se soucier encore de son implémentation. L'<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a> montre un exemple spec de mise en attente utilisant un appel explicite à la méthode <code>pending</code> (<em>mise en attente</em>)&nbsp;; dans ce cas, puisque nous avons inclus seulement la partie&nbsp;<code>it</code> de l'exemple…</p>
+<p>La ligne finale est le test pour la présence de l'attribut <code>nom</code> &mdash;&nbsp;ou plutôt, il <em>devrait</em> être le test effectif, s'il y avait quelque chose dans cet attribut. Au lieu de ça, le test est juste une esquisse, mais une esquisse utile&nbsp;: c'est une <rw>spec de mise en attente</rw>, qui est un moyen d'écrire une description du comportement de l'application sans se soucier encore de son implémentation. L'<a class="ref" href="modeling-and-viewing-users-one#code:default_user_spec">extrait&nbsp;6.9</a> montre un exemple spec de mise en attente utilisant un appel explicite à la méthode <code>pending</code> (<em>mise en attente</em>)&nbsp;; dans ce cas, puisque nous avons inclus seulement la partie&nbsp;<code>it</code> de l'exemple…</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait exigé un nom&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait exiger un nom&quot;</span>
 </pre></div>
 </div>
 
 
 <p>… RSpec déduit l'existence d'une spec de mise en attente.</p>
 
-<p>Les specs de mise en attente sont bien traités par les programmes pour jouer des specs, comme vu pour Autotest dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:autotest_pending_spec">illustration&nbsp;6.5</a>, et la sortie de <code>rspec spec/</code> est utile de la même façon. Les specs de mise en attente sont utiles en tant qu'emplacements réservés pour des tests que nous savons avoir à écrire mais que nous ne voulons pas gérer tout de suite.</p>
+<p>Les <rw>specs de mise en attente</rw> sont bien traités par les programmes pour jouer des specs, comme vu pour Autotest dans l'<a class="ref" href="modeling-and-viewing-users-one#fig:autotest_pending_spec">illustration&nbsp;6.5</a>, et la sortie de <code>rspec spec/</code> est utile de la même façon. Les specs de mise en attente sont utiles en tant qu'«&nbsp;emplacements réservés&nbsp;» pour des tests que nous savons avoir à écrire mais que nous ne voulons pas implémenter immédiatement.</p>
 
 <div class="label" id="fig:autotest_pending_spec"></div>
 
@@ -1179,31 +1179,31 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="n">it</span> <span class="s2">&quot;exige un nom&quot;</span> <span class="k">do</span>
-    <span class="n">no_nom_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
-    <span class="n">no_nom_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
+    <span class="n">bad_guy</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="n">bad_guy</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
 
-<p>Ici nous utilisons <code>merge</code> pour créer un nouvelle utilisation appelée <code>no_nom_user</code> (<em>utilisateur_sans_nom</em>) avec un nom vierge. La deuxième ligne utilise alors la méthode RSpec <code>should_not</code> (<em>ne_devrait_pas</em>) pour vérifier que l'utilisateur en résultant n'est <em>pas</em> valide. L'astuce à laquelle je faisait allusion ci-dessus fait référence à <code>be_valid</code> (<em>être_valide</em>)&nbsp;: nous avons appris plus haut dans cette section qu'un objet utilisateur (user) répondait à la méthode booléenne <code>valid?</code>. RSpec adopte une convention utile qui nous permettait de tester <em>n'importe</em> quelle méthode booléenne en supprimant le point d'interrogation et en préfixant la méthode avec <code>be_</code> (<em>être</em>). En d'autres mots…</p>
+<p>Ici nous utilisons <code>merge</code> pour créer un nouvel utilisateur appelée <code>bad_guy</code> (<em>mauvais_garcon</em>) avec un nom vierge. La deuxième ligne utilise alors la méthode RSpec <code>should_not</code> (<em>ne_devrait_pas</em>) pour vérifier que l'utilisateur en résultant n'est <em>pas</em> valide. L'astuce à laquelle je faisais allusion ci-dessus fait référence à <code>be_valid</code> (<em>être_valide</em>)&nbsp;: nous avons appris plus haut dans cette section qu'un objet utilisateur (user) répondait à la méthode booléenne <code>valid?</code>. RSpec adopte une convention utile qui nous permettait de tester <em>n'importe</em> quelle méthode booléenne en supprimant le point d'interrogation et en préfixant la méthode avec <code>be_</code> (<em>être</em>). En d'autres mots…</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">no_nom_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
+<div class="code"><div class="highlight"><pre><span class="n">bad_guy</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
 </pre></div>
 </div>
 
 
 <p>… est équivalent à&nbsp;:</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">no_nom_user</span><span class="o">.</span><span class="n">valid?</span><span class="o">.</span><span class="n">should_not</span> <span class="o">==</span> <span class="kp">true</span>
+<div class="code"><div class="highlight"><pre><span class="n">bad_guy</span><span class="o">.</span><span class="n">valid?</span><span class="o">.</span><span class="n">should_not</span> <span class="o">==</span> <span class="kp">true</span>
 </pre></div>
 </div>
 
 
-<p>Puisque ça sonne plus proche du langage naturel (au moins pour les anglophones. NdT), écrire <code>should_not be_valid</code> (<em>ne_devrait_pas_etre_valide</em>) est définitivement plus idiomatiquement correct en RSpec.</p>
+<p>Puisque ça sonne plus proche du langage naturel (au moins pour les anglophones. NdT), écrire <code>should_not be_valid</code> (<em>ne_devrait_pas etre_valide</em>) est définitivement plus idiomatiquement correct en RSpec.</p>
 
-<p>Avec ça, notre nouveau test devrait échoué, ce que nous pouvons vérifier avec Autotest ou en jouant le fichier <code>user_spec.rb</code> en utilisant le script <code>spec</code>&nbsp;:</p>
+<p>Avec ça, notre nouveau test devrait échouer, ce que nous pouvons vérifier avec Autotest ou en jouant le fichier <code>user_spec.rb</code> en utilisant le script <code>spec</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb
 <span class="go">.F</span>
@@ -1271,17 +1271,17 @@
 </div></div>
 
 
-<p>À présent, tous les tests devraient réussir, dans les validations de «&nbsp;présence&nbsp;» sont complets.</p>
+<p>À présent, tous les tests devraient réussir, donc les validations de «&nbsp;présence&nbsp;» sont complets.</p>
 
 <div class="label" id="sec:length_validation"></div>
 
 
-<h3><a id="sec:6.2.2" href="modeling-and-viewing-users-one#sec:length_validation" class="heading"><span class="number">6.2.2</span> Validation de la longueur (<em>Length</em>)</a></h3>
+<h3><a id="sec:6.2.2" href="modeling-and-viewing-users-one#sec:length_validation" class="heading"><span class="number">6.2.2</span> Validation de la longueur (<em>length</em>)</a></h3>
 
 
-<p>Nous avons contraint notre modèle utilisateur d'exiger un nom pour chaque utilisateur, mais nous devons aller plus loin&nbsp;: les noms d'utilisateur seront affiché sur le site exemple, donc nous devons introduire quelques limites de longueur. Avec tout le travail que nous avons accompli à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>, cette étape est facile.</p>
+<p>Nous avons contraint notre modèle utilisateur d'exiger un nom (et une adresse mail) pour chaque utilisateur, mais nous devons aller plus loin&nbsp;: les noms d'utilisateur seront affichés sur le site exemple, donc nous devons introduire quelques limites de longueur. Avec tout le travail que nous avons accompli à la <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">section&nbsp;6.2.1</a>, cette étape est facile.</p>
 
-<p>Nous commençons par un test. Il n'y a pas de science pour choisir une longueur maximum&nbsp;; nous allons déclarer que <code>50</code>&nbsp;caractères sont une limite maximale acceptable, ce qui signifie que les noms de 51&nbsp;caractères seront trop longs (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a>).</p>
+<p>Nous commençons par un test. Il n'y a pas de science exacte pour choisir une longueur maximum&nbsp;; nous allons déclarer que <code>50</code>&nbsp;caractères sont une limite maximale acceptable, ce qui signifie que les noms de 51&nbsp;caractères seront trop longs (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">extrait&nbsp;6.14</a>).</p>
 
 <div class="label" id="code:length_validation_test"></div>
 
@@ -1329,7 +1329,7 @@
   <span class="n">attr_accessible</span> <span class="ss">:nom</span><span class="p">,</span> <span class="ss">:email</span>
 
   <span class="n">validates</span> <span class="ss">:nom</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
-                    <span class="ss">:length</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:maximum</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">}</span>
+                   <span class="ss">:length</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:maximum</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">}</span>
   <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
 <span class="k">end</span>
 </pre></div>
@@ -1344,15 +1344,15 @@
 <h3><a id="sec:6.2.3" href="modeling-and-viewing-users-one#sec:format_validation" class="heading"><span class="number">6.2.3</span> Validation de format</a></h3>
 
 
-<p>Nos validations pour l'attribut <code>nom</code> force seulement des contraintes minimale &mdash;&nbsp;seuls les noms non-vierge et inférieurs à 51&nbsp;caractères seront acceptés&nbsp;&mdash; mais bien sûr l'attribut <code>email</code> doit satisfaire des exigences plus strictes. Jusqu'ici nous n'avons rejeté que l'adresse vierge&nbsp;; dans cette section, nous exigerons des adresses email qu'elles soient conforme au modèle familier <code>user@example.com</code>.</p>
+<p>Nos validations pour l'attribut <code>nom</code> forcent seulement des contraintes minimales &mdash;&nbsp;seuls les noms non vierges et inférieurs à 51&nbsp;caractères seront acceptés&nbsp;&mdash; mais bien sûr l'attribut <code>email</code> doit satisfaire des exigences plus strictes. Jusqu'ici nous n'avons rejeté que l'adresse vierge&nbsp;; dans cette section, nous exigerons des adresses email qu'elles soient conformes au modèle habituel <code>user@example.com</code>.</p>
 
-<p>Ni les tests ni la validation ne seront exhaustive, mais juste assez bonne pour accepter les adresses les plus valides et rejeter les plus invalides. Nous allons commencer avec une paire de tests impliquant une collection d'adresses valides et d'adresses invalides. Pour faire ces collections, ça vaut la peine de connaitre une méthode utile pour faire des listes de strings, comme on l'a vu dans la session de console&nbsp;:</p>
+<p>Ni les tests ni la validation ne seront exhaustives, mais juste assez bonne pour accepter les adresses les plus valides et rejeter les plus invalides. Nous allons commencer avec une paire de tests impliquant une collection d'adresses valides et d'adresses invalides. Pour faire ces collections, il est utile de se souvenir de la méthode pour faire des listes de strings, vue dans la session de console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="sx">%w[foo bar baz]</span>
 <span class="go">=&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="n">addresses</span> <span class="o">=</span> <span class="sx">%w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]</span>
+<span class="gp">&gt;&gt; </span><span class="n">adresses</span> <span class="o">=</span> <span class="sx">%w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]</span>
 <span class="go">=&gt; [&quot;user@foo.com&quot;, &quot;THE_USER@foo.bar.org&quot;, &quot;first.last@foo.jp&quot;]</span>
-<span class="gp">&gt;&gt; </span><span class="n">addresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
+<span class="gp">&gt;&gt; </span><span class="n">adresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
 <span class="gp">?&gt; </span>  <span class="nb">puts</span> <span class="n">address</span>
 <span class="gp">&gt;&gt; </span><span class="k">end</span>
 <span class="go">user@foo.com</span>
@@ -1362,7 +1362,7 @@
 </div>
 
 
-<p>Ici, nous «&nbsp;bouclons&nbsp;» sur les éléments du tableau <code>addresses</code> en utilisant la méthode <code>each</code> (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). Cette tehnique bien en main, nous sommes prêts à écrire quelques tests de validation de format basique d'adresses (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">extrait&nbsp;6.16</a>).</p>
+<p>Ici, nous «&nbsp;bouclons&nbsp;» sur les éléments du tableau <code>adresses</code> en utilisant la méthode <code>each</code> (<a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>). Cette tehnique bien en main, nous sommes prêts à écrire quelques tests de validation de format basique d'adresses (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">extrait&nbsp;6.16</a>).</p>
 
 <div class="label" id="code:email_format_validation_tests"></div>
 
@@ -1379,16 +1379,16 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="n">it</span> <span class="s2">&quot;devrait accepter une adresse email valide&quot;</span> <span class="k">do</span>
-    <span class="n">addresses</span> <span class="o">=</span> <span class="sx">%w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]</span>
-    <span class="n">addresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
+    <span class="n">adresses</span> <span class="o">=</span> <span class="sx">%w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]</span>
+    <span class="n">adresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
       <span class="n">valid_email_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">address</span><span class="p">))</span>
       <span class="n">valid_email_user</span><span class="o">.</span><span class="n">should</span> <span class="n">be_valid</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">it</span> <span class="s2">&quot;devrait rejeter une adresse email invalide&quot;</span> <span class="k">do</span>
-    <span class="n">addresses</span> <span class="o">=</span> <span class="sx">%w[user@foo,com user_at_foo.org example.user@foo.]</span>
-    <span class="n">addresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
+    <span class="n">adresses</span> <span class="o">=</span> <span class="sx">%w[user@foo,com user_at_foo.org example.user@foo.]</span>
+    <span class="n">adresses</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">address</span><span class="o">|</span>
       <span class="n">invalid_email_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@attr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">address</span><span class="p">))</span>
       <span class="n">invalid_email_user</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_valid</span>
     <span class="k">end</span>
@@ -1398,7 +1398,7 @@
 </div></div>
 
 
-<p>Comme noté ci-dessus, c'est loin d'être exhaustif, mais nous vérifions les formes d'adresse email valide courantes <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (capitales, tiret plat et domaines composés), et <code>first.last@foo.jp</code> (le nom d'utilisateur standard de l'entreprise <code>first.last</code>, avec un domaine de deux lettres&nbsp;<code>jp</code>), en plus de quelques adresses de forme invalide.</p>
+<p>Comme noté ci-dessus, c'est loin d'être exhaustif, mais nous vérifions les formes d'adresse email valides les plus courantes <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (capitales, tiret plat et domaines composés), et <code>first.last@foo.jp</code> (le nom d'utilisateur standard de l'entreprise <code>first.last</code>, avec un domaine de deux lettres&nbsp;<code>jp</code>), en plus de quelques adresses de forme invalide.</p>
 
 <p>Le code de l'application pour la validation du format des emails utilise une <em>expression régulière</em> (ou <em>regex</em>, pour «&nbsp;regular expression&nbsp;» en anglais) pour définir le format, aux côtés de l'argument <code>:format</code> pour la méthode <code>validates</code> (<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>).</p>
 
@@ -1434,17 +1434,17 @@
 </div>
 
 
-<p>… s'assure que seules les adresses mail que correspondent au modèle seront considérées comme valides.</p>
+<p>… s'assure que seules les adresses mail qui correspondent au <rw>pattern</rw> de l'expression régulière seront considérées comme valides.</p>
 
-<p>Mais d'où vient ce modèle&nbsp;?… Les expressions régulières consistent en un langage concis (certains diraient <a href="http://catb.org/jargon/html/L/line-noise.html">illisible</a>) pour «&nbsp;matcher&nbsp;» les modèles de texte&nbsp;; apprendre à construire une expression régulière est un art, et pour commencer, j'ai mis <code>email_regex</code> en pièces into bite-sized pieces (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> Pour apprendre vraiment les expressions régulière, cependant, je considère que le formidable éditeur d'expression régulières <a href="http://www.rubular.com/">Rubular</a> (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">illustration&nbsp;6.6</a>) est simplement essentiel.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> Le site Rubular est une magnifique interface interactif pour fabriquer des expressions régulières, tout autant qu'un site de référence rapide et pratique aux expressions. Je vous encourage à étudier la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a> avec une fenêtre de navigateur ouverte sur Rubular &mdash;&nbsp;aucune lecture conséquente sur les expressions régulières ne pourra remplacer une ou deux heures passées à jouer avec Rubular.</p>
+<p>Mais d'où vient ce <rw>pattern</rw>&nbsp;?… Les expressions régulières consistent en un langage concis (certains diront <a href="http://catb.org/jargon/html/L/line-noise.html"><em>illisible</em></a>) pour «&nbsp;matcher&nbsp;» les modèles de texte&nbsp;; apprendre à construire une expression régulière est un art, et pour commencer, j'ai mis <code>email_regex</code> en petites pièces (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> Pour apprendre vraiment les expressions régulières, cependant, je considère que le formidable éditeur d'expression régulières <a href="http://www.rubular.com/">Rubular</a> (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">illustration&nbsp;6.6</a>) est simplement essentiel.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> Le site Rubular est une magnifique interface interactive pour fabriquer des expressions régulières, tout autant qu'un site de référence rapide et pratique aux expressions. Je vous encourage à étudier la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a> avec une fenêtre de navigateur ouverte sur Rubular &mdash;&nbsp;aucune lecture conséquente sur les expressions régulières ne pourra remplacer une ou deux heures passées à jouer avec Rubular.</p>
 
 <div class="label" id="table:email_regex"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Expression</strong></th><th class="align_left"><strong>Sens</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i</tt></td><td class="align_left">full regex</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">début de l'expression</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">cherche le début de la chaine</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">au moins un caractère de mot, le signe «&nbsp;+&nbsp;», le signe «&nbsp;-&nbsp;» ou le point</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">arobase</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">au moins une lettre, un chiffre, un tiret ou un point</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">un point</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">au moins une lettre</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">cherche la fin de la chaine</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">fin de l'expression régulière</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">insensible à la casse</td></tr></table></div><div class="caption"><span class="header">Table 6.1: </span><span class="description">Détail de l'expression régulière pour les emails de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Expression</strong></th><th class="align_left"><strong>Sens</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i</tt></td><td class="align_left">Pattern complet</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">marque le début de l'expression</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">cherche le début de la chaine</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">au moins un caractère de mot, le signe «&nbsp;+&nbsp;», le signe «&nbsp;-&nbsp;» ou le point</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">arobase</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">au moins une lettre, un chiffre, un tiret ou un point</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">un point</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">au moins une lettre</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">cherche la fin de la chaine</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">marque la fin de l'expression régulière</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">insensible à la casse</td></tr></table></div><div class="caption"><span class="header">Table 6.1: </span><span class="description">Détail de l'expression régulière pour les emails de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a>.</span></div></div>
 
 
-<p>En passant, il existe enfait une expression régulière complète pour vérifier les adresses emails en concordance avec le standard officielle, mais ça ne vaut vraiment pas la peine. Celle de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> est bien, peut-être même meilleure que l'expression officielle.<sup class="footnote" id="fnref:6.18"><a href="#fn:6.18">18</a></sup></p>
+<p>En passant, il existe en fait une expression régulière complète pour vérifier les adresses emails en concordance avec le standard officiel, mais ça ne vaut vraiment pas la peine. Celle de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> est bien, peut-être même meilleure que l'expression officielle.<sup class="footnote" id="fnref:6.18"><a href="#fn:6.18">18</a></sup></p>
 
 <div class="label" id="fig:rubular"></div>
 
@@ -1452,7 +1452,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/rubular.png" alt="rubular" /></span></div><div class="caption"><span class="header">Illustration 6.6: </span><span class="description">L'impressionnant éditeur d'expressions régulières <a href="http://www.rubular.com/">Rubular</a>.&nbsp;<a href="http://railstutorial.org/images/figures/rubular-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Les tests devraient tous réussir maintenant (en fait, les tests pour les adresses mails valides auraient dû toutes réussir&nbsp;; puisque les expressions régulières sont notoirement sujettes à erreur, les tests de validation de l'email sont ici à titre de test de cohérence sur <code>email_regex</code>). Cela signifie qu'il ne reste qu'une seule contrainte de côté&nbsp;: forcer l'adresse email à être unique.</p>
+<p>Les tests devraient tous réussir maintenant (en fait, les tests pour les adresses mails valides auraient dû toutes réussir&nbsp;; puisque les expressions régulières sont notoirement sujettes à erreur, les tests de validation de l'email sont ici à titre de test de cohérence sur <code>email_regex</code>). Cela signifie qu'il ne reste qu'une seule contrainte à ajouter&nbsp;: forcer l'adresse email à être unique.</p>
 
 <div class="label" id="sec:uniqueness_validation"></div>
 
@@ -1489,7 +1489,7 @@
 </div></div>
 
 
-<p>La méthode ici est de créer un utilisateur et alors d'essayer de faire un autre utilisateur qui possèderait la même adresse email (nous utilisons la méthode «&nbsp;bruyante&nbsp;» <code>create!</code>, d'abord vue à l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>, de telle sorte qu'elle provoquera une exception, une erreur, si quelque chose ne tourne pas rond. En utilisant <code>create</code>, sans le «&nbsp;bang&nbsp;»&nbsp;<code>!</code>, les risques d'obtenir une erreur silencieuse dans nos tests, une source potentielle de bogue insaisissable). Nous pouvons obtenir que ce test réussisse avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email">extrait&nbsp;6.19</a>.<sup class="footnote" id="fnref:6.20"><a href="#fn:6.20">20</a></sup></p>
+<p>La méthode ici est de créer un utilisateur et alors d'essayer de faire un autre utilisateur qui possèderait la même adresse email (nous utilisons la méthode «&nbsp;bruyante&nbsp;» <code>create!</code>, d'abord vue à l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a>, de telle sorte qu'elle provoquera une exception, une erreur, si quelque chose ne tournait pas rond. En utilisant <code>create</code>, sans le «&nbsp;bang&nbsp;»&nbsp;<code>!</code>, nous risquerions d'obtenir une erreur silencieuse dans nos tests, une source potentielle de bogue insaisissable). Nous pouvons obtenir que ce test réussisse avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email">extrait&nbsp;6.19</a>.<sup class="footnote" id="fnref:6.20"><a href="#fn:6.20">20</a></sup></p>
 
 <div class="label" id="code:validates_uniqueness_of_email"></div>
 
@@ -1509,7 +1509,7 @@
 </div></div>
 
 
-<p>Nous n'en avons pas fini, cependant. Les adresses mails sont sensible à la casse &mdash;&nbsp;<code>foo@bar.com</code> se rend au même endroit que <code>FOO@BAR.COM</code> ou <code>FoO@BAr.coM</code>&nbsp;&mdash; donc nos validations doivent aussi couvrir ce cas. Nous testons cela avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>.</p>
+<p>Nous n'en avons pas fini, cependant. Les adresses mails sont sensibles à la casse &mdash;&nbsp;<code>foo@bar.com</code> se rend au même endroit que <code>FOO@BAR.COM</code> ou <code>FoO@BAr.coM</code>&nbsp;&mdash; donc nos validations doivent aussi couvrir ce cas. Nous testons cela avec le code de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>.</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_case_insensitive_test"></div>
 
@@ -1557,7 +1557,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 6.21.</span> <span class="description">CValider l'unicité de l'adresse mail, en ignorant la casse. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Extrait 6.21.</span> <span class="description">Valider l'unicité de l'adresse mail, en ignorant la casse. <br /> <code>app/models/user.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1571,7 +1571,7 @@
 </div></div>
 
 
-<p>Notez que nous avons simplement remplacer <code>true</code> par <code>:case_sensitive =&gt; false</code>&nbsp;; Rails en déduit que <code>:uniqueness</code> (<em>l'unicité</em> ) devrait être <code>true</code> (<em>vraie</em>). À ce point, notre application fait (quelque peu) en sorte que l'adresse mail soit unique, et notre suite de tests devrait réussir.</p>
+<p>Notez que nous avons simplement remplacé <code>true</code> par <code>:case_sensitive =&gt; false</code>&nbsp;; Rails en déduit que <code>:uniqueness</code> (<em>l'unicité</em> ) devrait être <code>true</code> (<em>vraie</em>). À ce point, notre application fait (quelque peu) en sorte que l'adresse mail soit unique, et notre suite de tests devrait réussir.</p>
 
 <div class="label" id="sec:the_caveat"></div>
 
@@ -1583,17 +1583,17 @@
 
 <p><strong>Utiliser <code>validates :uniqueness</code> ne garantit en rien l'unicité.</strong></p>
 
-<p>&rsquo;oh&nbsp;! Mais qu'est-ce qui peut bien mal tourner&nbsp;?… Cela&nbsp;:</p>
+<p>«&nbsp;Oh&nbsp;?… Mais qu'est-ce qui peut bien mal tourner&nbsp;?…&nbsp;» Cela&nbsp;:</p>
 
 <ol>
 <li>Alice s'inscrit à l'application exemple, avec l'adresse mail <code>alice@wonderland.com</code>&nbsp;;</li>
-<li>Accidentellement, Alice clique <em>deux fois</em> sur le bouton &ldquo;Soumettre&rdquo;, envoyant <em>deux</em> requêtes en succession rapide&nbsp;;</li>
+<li>Accidentellement, Alice clique <em>deux fois</em> sur le bouton «&nbsp;Soumettre&nbsp;», envoyant <em>deux</em> requêtes en succession rapide&nbsp;;</li>
 <li>La séquence suivante se produit&nbsp;: la requête 1 crée un utilisateur en mémoire qui réussit la validation, la requête 2 fait de même, l'utilisateur de la requête&nbsp;1 (Alice) est enregistré, l'utilisateur de la requête&nbsp;2 (ALice) est aussi enregistré&nbsp;;</li>
 <li>Résultat&nbsp;: deux enregistrements d'utilisateur avec la même adresse email, malgré la validation d'unicité.</li>
 </ol>
 
 
-<p>Si la séquence ci-dessus ne vous semble pas plausible, croyez-moi, elle l'est. Cela survient sur n'importe quel site Rails connaissant un trafic important.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> Heureusement, la solution est simple à implémenter&nbsp;; nous avons juste besoin de force l'unicité au niveau de la base de données elle-même. Notre méthode consiste à créer un <em>index</em> de base de données sur la colonne <code>email</code>, et ensuite d'exiger que cet index soit unique.</p>
+<p>Si la séquence ci-dessus ne vous semble pas plausible, croyez-moi, elle l'est. Cela survient sur n'importe quel site Rails connaissant un trafic important.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> Heureusement, la solution est simple à implémenter&nbsp;; nous avons juste besoin de forcer l'unicité au niveau de la base de données elle-même. Notre méthode consiste à créer un <rw>index</rw> de base de données sur la colonne <code>email</code>, et ensuite d'exiger que cet index soit unique.</p>
 
 <p>L'index email représente une actualisation à nos impératifs du modèle de données, ce qui (comme discuté à la <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a>) est traité par Rails en utilisant les migrations. Nous avons vu à la <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">section&nbsp;6.1.1</a> que générer le modèle User créait automatiquement une nouvelle migration (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>)&nbsp;; dans le cas présent, nous ajoutons de la structure à un modèle existant, donc nous avons besoin de créer une migration directement en utilisant le générateur <code>migration</code>&nbsp;:</p>
 
@@ -1632,15 +1632,15 @@
 </div>
 
 
-<p>Maintenant, le scénario d'Alice fonctionnera parfaitement&nbsp;: la base de données sauvera l'enregistrement basé sur la première requête, et rejettera la seconde pour violation de la contrainte d'unicité de l'adresse mail (une erreur apparaitra dans le journal Rails, mais elle ne provoque aucun dommage. Vous pouvez bien entendu saisir l'exception <code>ActiveRecord::StatementInvalid</code> qui est provoquée &mdash;&nbsp;voyez <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> pour un exemple&nbsp;&mdash; mais dans ce tutoriel nous ne nous occuperons pas de cette étape). L'ajout de l'index sur l'attribut email accomplit un second but, auquel j'ai fait brièvement allusion à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>&nbsp;: il fixe (au sens de «&nbsp;régler&nbsp;». NdT) aussi un problème sérieux de <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Box&nbsp;6.2</a>).</p>
+<p>Maintenant, le scénario d'Alice fonctionnera parfaitement&nbsp;: la base de données sauvera l'enregistrement basé sur la première requête, et rejettera la seconde pour violation de la contrainte d'unicité de l'adresse mail (une erreur apparaitra dans le journal Rails, mais elle ne provoque aucun dommage. Vous pouvez bien entendu saisir l'exception <code>ActiveRecord::StatementInvalid</code> qui est provoquée &mdash;&nbsp;voyez <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> pour un exemple&nbsp;&mdash; mais dans ce tutoriel nous ne nous occuperons pas de cette étape). L'ajout de l'index sur l'attribut email accomplit un second but, auquel j'ai fait brièvement allusion à la <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">section&nbsp;6.1.4</a>&nbsp;: il fixe (au sens de «&nbsp;régler&nbsp;». NdT) aussi un problème sérieux de <code>find_by_email</code>, comme l'explique le <a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Box&nbsp;6.2</a>.</p>
 
 <div class="label" id="sidebar:database_indices"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 6.2.</span><span class="description">Database indices</span></span>
-<p>En créant une colonne dans la base de données, il est important de considérer si nous aurons besoin de <em>trouver</em> les enregistremens par cette colonne. Considérez, par exemple, l'attribut <code>email</code> créé par la migration dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>. Quand nous permettrons les utilisateurs de s'identifier à l'application exemple, en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, nous aurons besoin de trouver l'enregistrement de l'utilisateur correspondant à l'adresse email soumise&nbsp;; malheureusement, basé sur le modèle de données na&iuml;f, la seule façon de trouver un user par son adresse email est de passer en revue <em>chaque</em> rangée d'utilisateur dans la base de données et de comparer son email à celui donné. C'est connu dans le business des base de données comme un <em>full-table scan</em> (<em>scanner complet de la table</em>), et pour un site réel contenant des milliers d'utilisateurs, c'est une très mauvaise chose (une <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a> en anglais).</p>
+<div class="sidebar"><span class="title"><span class="header">Box 6.2.</span><span class="description">Index de Bases de données</span></span>
+<p>En créant une colonne dans la base de données, il est important de considérer si nous aurons besoin de <em>trouver</em> les enregistremens par cette colonne. Considérez, par exemple, l'attribut <code>email</code> créé par la migration dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a>. Quand nous permettrons aux utilisateurs de s'identifier à l'application exemple, en abordant le <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>, nous aurons besoin de trouver l'enregistrement de l'utilisateur correspondant à l'adresse email soumise&nbsp;; malheureusement, s'appuyant sur un modèle de données na&iuml;f, la seule façon de retrouver un user par son adresse email est de passer en revue <em>chaque</em> rangée d'utilisateur dans la base de données et de comparer son email à celui donné. Ce processus est connu dans le business des bases de données comme un <em>full-table scan</em> (<em>scanner complet de la table</em>), et pour un site réel contenant des milliers d'utilisateurs, c'est une très vilaine chose.</p>
 
-<p>Placer un index sur la colonne de l'email fixe ce problème. Pour comprendre un index de base de données, il est utile de considérer l'analogie avec un index de livre. Dans un livre, pour trouver toutes les occurences d'un mot donné, dions &ldquo;foobar&rdquo;, vous aurez à consulter chaque page, une par une, pour trouver chaque &ldquo;foobar&rdquo;. Avec un index de livre, d'un autre côté, vous pouvez juste chercher &ldquo;foobar&rdquo; dans l'index et voir toutes les pages qui contiennent ce mot. Un index de base de données fonctionne essentiellement de la même façon.</p>
+<p>Placer un index sur la colonne de l'email fixe ce problème. Pour comprendre un index de base de données, on peut prendre l'analogie d'un index de livre. Dans un livre, pour trouver toutes les occurences d'un mot donné, disons «&nbsp;foobar&nbsp;», vous aurez à consulter chaque page, une par une, pour trouver chaque «&nbsp;foobar&nbsp;». Avec un index de livre, d'un autre côté, vous pouvez juste chercher «&nbsp;foobar&nbsp;» dans l'index et voir toutes les pages qui contiennent ce mot. Un index de base de données fonctionne essentiellement de la même façon.</p>
 </div>
 
 
@@ -1651,15 +1651,15 @@
 <h2><a id="sec:6.3" href="modeling-and-viewing-users-one#sec:viewing_users" class="heading"><span class="number">6.3</span> Affichage des utilisateurs</a></h2>
 
 
-<p>Nous n'en avons pas tout à fait fini avec le modèle utilisateur de base &mdash;&nbsp;nous avons encore besoin d'ajouter des mots de passe, tâche qui sera accomplie au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>&nbsp;&mdash; mais nous en avons fait suffisamment pour faire une page minimale pour pouvoir afficher les informations de l'utilisateur. Cela permettra une introduction en douceur dans l'organisation de type REST des actions utilisateur de notre site. Puisque c'est juste un démonstration grossière pour le moment, il n'y aura pas de tests dans cette section&nbsp;; nous les ajouterons quand nous étofferons la vue de l'utilisater à la <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.</p>
+<p>Nous n'en avons pas tout à fait fini avec le modèle utilisateur de base &mdash;&nbsp;nous avons encore besoin d'ajouter des mots de passe, tâche qui sera accomplie au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>&nbsp;&mdash; mais nous en avons fait suffisamment pour faire une page minimale pour pouvoir afficher les informations de l'utilisateur. Cela permettra une introduction en douceur à l'organisation de type REST des actions utilisateur de notre site. Puisque c'est juste une démonstration grossière pour le moment, il n'y aura pas de tests dans cette section&nbsp;; nous les ajouterons quand nous étofferons la vue de l'utilisateur à la <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>.</p>
 
 <div class="label" id="sec:rails_environments"></div>
 
 
-<h3><a id="sec:6.3.1" href="modeling-and-viewing-users-one#sec:rails_environments" class="heading"><span class="number">6.3.1</span> Débuggae et environnement Rails</a></h3>
+<h3><a id="sec:6.3.1" href="modeling-and-viewing-users-one#sec:rails_environments" class="heading"><span class="number">6.3.1</span> Débuggage et environnement Rails</a></h3>
 
 
-<p>À titre de préparation de l'ajout de pages dynamique dans notre application exemple, il est temps à présent d'ajouter des informations de débuggage au layout de notre site (<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>). Cela affiche des informations utiles sur chaque page en utilisant la méthode intégrée <code>debug</code> et la variable <code>params</code> (que nous étudierons plus en détail à la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>), comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#fig:home_page_with_debug_rails_3">illustration&nbsp;6.7</a>.</p>
+<p>À titre de préparation de l'ajout de pages dynamique dans notre <em>Application Exemple</em>, il est temps à présent d'ajouter des informations de débuggage au layout de notre site (<a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">extrait&nbsp;6.23</a>). Cela affiche des informations utiles sur chaque page en utilisant la méthode intégrée <code>debug</code> et la variable <code>params</code> (que nous étudierons plus en détail à la <a class="ref" href="modeling-and-viewing-users-one#sec:users_show">section&nbsp;6.3.2</a>), comme le montre l'<a class="ref" href="modeling-and-viewing-users-one#fig:home_page_with_debug_rails_3">illustration&nbsp;6.7</a>.</p>
 
 <div class="label" id="code:rails_debug"></div>
 
@@ -1686,7 +1686,7 @@
 </div></div>
 
 
-<p>Puise nous ne voulons pas afficher les informations de débuggage à l'utilisateurs de l'application déployée online, nous utilisons&nbsp;:</p>
+<p>Puisque nous ne voulons pas afficher les informations de débuggage à l'utilisateur de l'application déployée online, nous utilisons&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span>
 </pre></div>
@@ -1724,7 +1724,7 @@
 
 <p>… ne sera pas inséré dans les applications en mode production ou test (insérer les informations de débuggage pour les tests ne cause probablement pas de dommage, mais ça n'est probablement pas bon non plus, donc il est mieux de restreindre l'affichage des débuggage à l'environnement de développement seulement).</p>
 
-<p>Nous vous avez jamais besoin de jouer la console dans un environnement différent (pour débugguer un test par exemple), vous pouvez passer l'environnement en paramètre au script <code>console</code>&nbsp;:</p>
+<p>Quand vous avez besoin de jouer la console dans un environnement différent (pour débugguer un test par exemple), vous pouvez passer l'environnement en paramètre au script <code>console</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console test</span>
 <span class="go">Loading test environment (Rails 3.0.7)</span>
@@ -1770,7 +1770,7 @@
 <h3><a id="sec:6.3.2" href="modeling-and-viewing-users-one#sec:users_show" class="heading"><span class="number">6.3.2</span> Modèle User, Vue, Contrôleur</a></h3>
 
 
-<p>Afin de faire une page pour voir un utilisateur, nous allons utiliser le <em>modèle</em> User pour créer un utilisateur dans la base de données, créer une vue (<em>View</em>) pour afficher quelques unes de ses informations, et ajouter alors une action au contrôleur (<em>Controller</em>) pour traiter les requête de navigateur. En d'autres termes, pour la première fois dans ce tutoriel, nous allons voir en un seul endroit les trois éléments de l'architecture MVC (<em>Modèle-Vue-Contrôleur</em>) discutée pour la première fois à la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>.</p>
+<p>Afin de faire une page pour voir un utilisateur, nous allons utiliser le <rw>modèle</rw> User pour créer un utilisateur dans la base de données, créer une <rw>vue</rw> (<em>View</em>) pour afficher quelques unes de ses informations, et ajouter alors une <rw>action</rw> au <rw>contrôleur</rw> (<em>Controller</em>) pour traiter les requêtes du navigateur. En d'autres termes, pour la première fois dans ce tutoriel, nous allons voir en un seul endroit les trois éléments de l'architecture MVC (<em>Modèle-Vue-Contrôleur</em>) dont nous avons parlé pour la première fois à la <a class="ref" href="beginning#sec:mvc">section&nbsp;1.2.6</a>.</p>
 
 <p>Notre première étape consiste à créer un utilisateur en utilisant la console, que nous prendrons soin de ne <em>pas</em> démarrer en mode <em>bac à sable</em> puisque cette fois le but est de sauver l'enregistrement dans la base de données&nbsp;:</p>
 
@@ -1828,7 +1828,7 @@
 </div></div>
 
 
-<p>Ici nous avons donné [(a little ahead of ourselves)(un peu plus de nous-mêmes)] en utilisant le paramètre (<code>params</code>) objet standard de Rails pour récupérer l'identifiant (<code>id</code>) de l'utilisateur. Quand nous ferons la requête appropriée au contrôleur User, <code>params[:id]</code> sera l'id&nbsp;utilisateur&nbsp;<code>1</code>, donc l'effet est le même que la commande <code>find</code> (<em>trouver</em>)&nbsp;:</p>
+<p>Ici nous avons donné un peu plus de nous-mêmes en utilisant le paramètre (<code>params</code>), objet standard de Rails pour récupérer l'identifiant (<code>id</code>) de l'utilisateur. Quand nous ferons la requête appropriée au contrôleur User, <code>params[:id]</code> sera l'id&nbsp;utilisateur&nbsp;<code>1</code>, donc l'effet est le même que la commande <code>find</code> (<em>trouver</em>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1845,9 +1845,9 @@
 <h3><a id="sec:6.3.3" href="modeling-and-viewing-users-one#sec:a_users_resource" class="heading"><span class="number">6.3.3</span> Une ressource Users</a></h3>
 
 
-<p>Nous méthode pour afficher la page d'affichage de l'utilisateur va suivre les conventions de l'architecture RESTE préconisée pour les applications Rails. Ce style est basé sur les idées de <em>transfer d'état représentationnel</em> (<em>representational state transfer</em>) identifié et nommé par l'expert en informatique <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a> dans sa dissertation doctorale <em>Architectural Styles and the Design of Network-based Software Architectures</em> (<em>Styles architecturaux et conception des architectures de logiciels de réseau</em>).<sup class="footnote" id="fnref:6.24"><a href="#fn:6.24">24</a></sup> Le style de conception REST met l'accent sur la représentation des données en tant que <em>ressources</em> qui peuvent être créées, affichées, actualisées et détruites &mdash;&nbsp;quatre actions correspondant au quatre opérations fondamentales <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt> et <tt>DELETE</tt> définies par le <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">standard HTTP</a> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>).</p>
+<p>Nous méthode pour afficher la page d'affichage de l'utilisateur va suivre les conventions de l'architecture REST préconisée pour les applications Rails. Ce style est basé sur les idées de <em>transfer d'état représentationnel</em> (<em>representational state transfer</em>) identifié et nommé par l'expert en informatique <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a> dans sa dissertation doctorale <em>Architectural Styles and the Design of Network-based Software Architectures</em> (<em>Styles architecturaux et conception des architectures de logiciels de réseau</em>).<sup class="footnote" id="fnref:6.24"><a href="#fn:6.24">24</a></sup> Le style de conception REST met l'accent sur la représentation des données en tant que <em>ressources</em> qui peuvent être créées, affichées, actualisées et détruites &mdash;&nbsp;quatre actions correspondant au quatre opérations fondamentales <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt> et <tt>DELETE</tt> définies par le <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">standard HTTP</a> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>).</p>
 
-<p>Quand on suit les principes REST, les ressources sont typiquement référencées en utlisant des noms de ressource et un identifiant unique. Qu'est-ce que ça signifie dans le contexte des utilisateurs &mdash;&nbsp;auxquels nous penserons en tant que «&nbsp;<em>ressource</em> Users&nbsp;» (<em>ressource Utilisateurs</em>)&nbsp;&mdash; est que nous devrions voir l'utilisateur avec un identifiant de&nbsp;<code>1</code> en envoyant une requête <tt>GET</tt> à l'URL <tt>/users/1</tt>. Ici, l'action <code>show</code> est <em>implicite</em> dans le type de requête &mdash;&nbsp;quand les fonctionnalités REST de Rails sont activées, les requêtes <tt>GET</tt> sont automatiquement traitées par l'action <code>show</code> action.</p>
+<p>Quand on suit les principes REST, les ressources sont typiquement référencées en utlisant des noms de ressource et un identifiant unique. Qu'est-ce que ça signifie dans le contexte des utilisateurs &mdash;&nbsp;auxquels nous penserons en tant que «&nbsp;<em>ressource</em> Users&nbsp;»&nbsp;? Cela signifie que nous devrions voir l'utilisateur avec un identifiant de&nbsp;<code>1</code> en envoyant une requête <tt>GET</tt> à l'URL <tt>/users/1</tt>. Ici, l'action <code>show</code> est <em>implicite</em> dans le type de requête &mdash;&nbsp;quand les fonctionnalités REST de Rails sont activées, les requêtes <tt>GET</tt> sont automatiquement traitées par l'action <code>show</code> action.</p>
 
 <div class="label" id="fig:user_show_exception_caught"></div>
 
@@ -1875,7 +1875,7 @@
 </div></div>
 
 
-<p>Après avoir ajouter les routes pour la ressource Users, l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> fonctionne parfaitement (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>).</p>
+<p>Après avoir ajouté les routes pour la ressource Users, l'URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a> fonctionne parfaitement (<a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">illustration&nbsp;6.10</a>).</p>
 
 <div class="label" id="fig:user_show_rails_3"></div>
 
@@ -1890,7 +1890,7 @@
 </div>
 
 
-<p>… vue auparavant dans l'<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>. C'est parce que la ligne de ressource ajoutée dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> n'ajoute pas seulement une URL <tt>/users/1</tt> fonctionnelle&nbsp;; elle confère à notre application exemple toutes les actions nécessaire à une ressource Users <em>RESTful</em>,<sup class="footnote" id="fnref:6.25"><a href="#fn:6.25">25</a></sup> accompagnées d'une grand nombre de routes nommées (<a class="ref" href="filling-in-the-layout#sec:nomd_routes">section&nbsp;5.2.3</a>) pour générer les URLs utilisateur. La résultante de correspondances entre URLs, actions et routes nommées est montrée dans la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> (à comparer avec la <a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>). Au cours des trois prochains chapitres, nous couvrions toutes les autres entrées de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> à mesure que nous remplirons toutes les actions nécessaires pour faire de Users une ressource pleinement conforme à REST.</p>
+<p>… vue auparavant dans l'<a class="ref" href="filling-in-the-layout#code:signup_route">extrait&nbsp;5.29</a>. C'est parce que la ligne de ressource ajoutée dans l'<a class="ref" href="modeling-and-viewing-users-one#code:users_resource">extrait&nbsp;6.26</a> n'ajoute pas seulement une URL <tt>/users/1</tt> fonctionnelle&nbsp;; elle confère à notre application exemple toutes les actions nécessaires à une ressource Users <em>RESTful</em>,<sup class="footnote" id="fnref:6.25"><a href="#fn:6.25">25</a></sup> et un grand nombre de routes nommées (<a class="ref" href="filling-in-the-layout#sec:nomd_routes">section&nbsp;5.2.3</a>) pour générer les URLs utilisateur. La résultante des correspondances entre URLs, actions et routes nommées est montrée dans la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> (à comparer avec la <a class="ref" href="a-demo-app#table:demo_RESTful_users">Table&nbsp;2.2</a>). Au cours des trois prochains chapitres, nous couvrirons toutes les autres entrées de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> à mesure que nous remplirons toutes les actions nécessaires pour faire de Users une ressource pleinement conforme à REST.</p>
 
 <div class="label" id="table:RESTful_users"></div>
 
@@ -1916,7 +1916,7 @@
 </div>
 
 
-<p>C'est une représentation YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> des <code>params</code>, laquelle (comme suggéré par le nom <code>HashWithIndifferentAccess</code>) est basiquement une table de hachage. Nous voyons que son contrôleur est <code>users</code>, son action est <code>show</code>, et son attribut <code>id</code> est <code>"1"</code>. Bien que vous aurez rarement l'occasion d'utiliser <code>params[:controller]</code> ou <code>params[:action]</code>, utiliser <code>params[:id]</code> pour extraire l'identifiant de l'URL est un idiom Rails courant. En particulier, nous utilisons le code&nbsp;:</p>
+<p>C'est une représentation YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> des <code>params</code>, laquelle (comme suggéré par le «&nbsp;Hash&nbsp;» du nom <code>HashWithIndifferentAccess</code>, qui signifie «&nbsp;table de hachage&nbsp;») est basiquement une table de hachage. Nous voyons que son contrôleur est <code>users</code>, son action est <code>show</code>, et son attribut <code>id</code> est <code>"1"</code>. Bien que vous aurez rarement l'occasion d'utiliser <code>params[:controller]</code> ou <code>params[:action]</code>, utiliser <code>params[:id]</code> pour extraire l'identifiant de l'URL est un idiome Rails très courant. En particulier, nous utilisons le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
@@ -1930,7 +1930,7 @@
 <h2><a id="sec:6.4" href="modeling-and-viewing-users-one#sec:6.4" class="heading"><span class="number">6.4</span> Conclusion</a></h2>
 
 
-<p>Ce chapitre est la première moitié du processus en deux temps de la création d'un modèle utilisateur (<em>User</em>) fonctionnel. Nos utilisateurs ont maintenant des attributs <code>nom</code> et <code>email</code>, chacun armé de validations contraignant leur valeur. Nous avons aussi amorcé une page d'affichage de l'utilisateur et une ressource utilistaur basée sur l'architecture REST. Au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, nous achèverons le processus en ajouter des mots de passe et des vues de l'utilisateur plus utiles.</p>
+<p>Ce chapitre est la première moitié du processus en deux temps de la création d'un modèle utilisateur (<em>User</em>) fonctionnel. Nos utilisateurs ont maintenant des attributs <code>nom</code> et <code>email</code>, chacun paré de validations contraignant leur valeur. Nous avons aussi amorcé une page d'affichage de l'utilisateur et une ressource utilisateur basée sur l'architecture REST. Au <a class="ref" href="modeling-and-viewing-users-two#top">chapitre&nbsp;7</a>, nous achèverons le processus en ajoutant des mots de passe et des vues de l'utilisateur plus utiles.</p>
 
 <p>Si vous utilisez Git, il serait bien de <em>commettre</em> un nouveau dépôt si vous ne l'avez pas fait depuis un moment&nbsp;:</p>
 
@@ -1962,33 +1962,33 @@
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:6.1"><a href="http://gomockingbird.com/">Mockingbird</a> ne support pas les images personnalisées comme la photo de profil de l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>&nbsp;; je l'ai déposé à la main en utilisant <a href="http://www.adobe.com/products/fireworks/">Adobe Fireworks</a>. L'hippo ici vient de <a href="http://www.flickr.com/photos/43803060@N00/24308857/">http://www.flickr.com/photos/43803060@N00/24308857/</a>.&nbsp;<a class="arrow" href="#fnref:6.1">&uarr;</a></li>
-<li id="fn:6.2">Ce nom (Active Record) vient de la &ldquo;<a href="http://en.wikipedia.org/wiki/Active_record_pattern">pattern active record</a>&rdquo;, identifiée et nommée dans <em>Patterns of Enterprise Application Architecture</em> par Martin Fowler.&nbsp;<a class="arrow" href="#fnref:6.2">&uarr;</a></li>
-<li id="fn:6.3">Proconcé &ldquo;ess-quiou-elle&rdquo;, bien que la prononciation alternative &ldquo;sequel&rdquo; (en anglais) est aussi courante.&nbsp;<a class="arrow" href="#fnref:6.3">&uarr;</a></li>
-<li id="fn:6.4">Dans ses toutes premières incarnations, Rails requiérait la connaissance des DLL de SQL. Même après que Rails eut ajouté les migrations,  Even after Rails added migrations, mettre en place l'ancien base de données par défaut (MySQL) était nécessaire. Heureusement, comme noté à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a>, Rails utilise maintenant SQLite par défaut, ce qui enregistre les données sous la forme de simples fichiers &mdash;&nbsp;aucun réglage n'est nécessaire.&nbsp;<a class="arrow" href="#fnref:6.4">&uarr;</a></li>
-<li id="fn:6.5">Occasionnellement, il est nécessaire de comprendre la couche d'abstraction, mais l'un des but de ce tutoriel est de rendre tout le code indépendant de la base de données (je vous assure que c'est un but qui vaut le coup, en général). Dans le cas où vous auriez à écrire le code d'une base de données spécifique pour un déploiement sur Heroku, sachez qu'ils utilisent l'excellent base de données <a href="http://www.postgresql.org/">PostgreSQL</a> (&ldquo;post-gres-cue-ell&rdquo;). PostgreSQL est libre, open-source, et cross-plateforme&nbsp;; si vous développez des applications spécifiquement PostgreSQL, vous pouvez l'installer localement, et configurer Rails pour l'utiliser en mode de développement en éditant le fichier <code>config/database.yml</code>. Une telle configuration dépasse le cadre de ce tutoriel, mais vous trouverez de nombreuses ressources sur le web&nbsp;; utilisez un moteur de recherche pour chercher de l'information actualisée en fonction de votre plateforme.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
-<li id="fn:6.6">En utilisant une adresse email comme <em>username</em>, nous offrons la possibilité théorique de communiquer avec nos utilisateuers dans le futur.&nbsp;<a class="arrow" href="#fnref:6.6">&uarr;</a></li>
+<li id="fn:6.1"><a href="http://gomockingbird.com/">Mockingbird</a> ne gère pas les images personnalisées comme la photo du profil de l'<a class="ref" href="modeling-and-viewing-users-one#fig:profile_mockup">illustration&nbsp;6.1</a>&nbsp;; je l'ai déposée à la main en utilisant <a href="http://www.adobe.com/products/fireworks/">Adobe Fireworks</a>. L'hippo ici vient de <a href="http://www.flickr.com/photos/43803060@N00/24308857/">http://www.flickr.com/photos/43803060@N00/24308857/</a>.&nbsp;<a class="arrow" href="#fnref:6.1">&uarr;</a></li>
+<li id="fn:6.2">Ce nom (Active Record) vient de la «&nbsp;<a href="http://en.wikipedia.org/wiki/Active_record_pattern">pattern active record</a>&nbsp;», identifiée et nommée dans <em>Patterns of Enterprise Application Architecture</em> par Martin Fowler.&nbsp;<a class="arrow" href="#fnref:6.2">&uarr;</a></li>
+<li id="fn:6.3">Prononcez «&nbsp;ess-quiou-elle&nbsp;», bien que la prononciation alternative «&nbsp;sé-quel&nbsp;» (en anglais) est aussi courante.&nbsp;<a class="arrow" href="#fnref:6.3">&uarr;</a></li>
+<li id="fn:6.4">Dans ses toutes premières incarnations, Rails requiérait la connaissance des DLL de SQL. Même après que Rails eut ajouté les migrations, mettre en place l'ancienne base de données par défaut (MySQL) était nécessaire. Heureusement, comme noté à la <a class="ref" href="beginning#sec:rails_server">section&nbsp;1.2.5</a>, Rails utilise maintenant SQLite par défaut, ce qui enregistre les données sous la forme de simples fichiers &mdash;&nbsp;aucun réglage n'est plus nécessaire.&nbsp;<a class="arrow" href="#fnref:6.4">&uarr;</a></li>
+<li id="fn:6.5">Occasionnellement, il est nécessaire de comprendre la couche d'abstraction sous-jacente, mais l'une des philosophies de ce tutoriel est de rendre tout le code indépendant de la base de données (je vous assure que c'est un but qui vaut le coup, en général). Dans le cas où vous auriez à écrire le code d'une base de données spécifique pour un déploiement sur Heroku, sachez qu'Heroku utilise l'excellente base de données <a href="http://www.postgresql.org/">PostgreSQL</a> (prononcez «&nbsp;poste-grèce-kiou-elle&nbsp;»). PostgreSQL est libre, open-source, et cross-plateforme&nbsp;; si vous développez des applications spécifiquement PostgreSQL, vous pouvez l'installer localement, et configurer Rails pour l'utiliser en mode de développement en éditant le fichier <code>config/database.yml</code>. Une telle configuration dépasse le cadre de ce tutoriel, mais vous trouverez de nombreuses ressources sur le web&nbsp;; utilisez un moteur de recherche pour chercher de l'information actualisée en fonction de votre plateforme.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
+<li id="fn:6.6">En utilisant l'adresse email comme <em>username</em>, nous offrons la possibilité théorique de communiquer avec nos utilisateurs dans le futur.&nbsp;<a class="arrow" href="#fnref:6.6">&uarr;</a></li>
 <li id="fn:6.7">Ne vous souciez pas de comment l'objet <code>t</code> s'arrange exactement pour faire ça&nbsp;; la beauté des <em>couches d'abstraction</em> tient à ce que nous n'avons pas besoin de le savoir. Nous pouvons juste faire confiance à l'objet&nbsp;<code>t</code> pour faire son travail.&nbsp;<a class="arrow" href="#fnref:6.7">&uarr;</a></li>
 <li id="fn:6.8">Nous verrons comment migrer sur un serveur à distance Heroku à la <a class="ref" href="modeling-and-viewing-users-two#sec:heroku_deploy">section&nbsp;7.4.2</a>.&nbsp;<a class="arrow" href="#fnref:6.8">&uarr;</a></li>
-<li id="fn:6.9">Officiellement prononcé &ldquo;ess-cue-ell-ite&rdquo; (en anglais.NdT), bien que la (mauvaise)prononciation &ldquo;sequel-ite&rdquo; (en anglais. NdT) soit aussi courante.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
-<li id="fn:6.10">Dans le cas où vous seriez surpris par <code>"2010-01-05 00:57:46"</code>, je n'ai pas écrit ce code après minuit&nbsp;; les <em>timestamps</em> sont enregistrés en <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordonnées de Temps Unversel</a> (UTC), qui pour la plupart des propos est le même que le <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Temps de Greenwich</a>. Tiré du <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Question&nbsp;:</strong> Pourquoi UTC est utilisé comme acronyme de <em>Coordinated Universal Time</em> plutôt que CUT&nbsp;? <strong>Réponse&nbsp;:</strong> En 1970 le système <em>Coordinated Universal Time</em> a été conçu par un groupe consultatif d'experts internationaux à l'intérieur de l'Union Internationale de Communication (International Telecommunication Union, ITU). l'ITU a pensé qu'il serait mieux d'utiliser une simple abréviation pour l'usage dans tous les langages dans le but de minimiser la confusion. Puisqu'aucun accord unanime n'a pu être trouvé sur l'utilisation de soit l'ordre des mots anglais, CUT, soit l'ordre des mots français, TUC, l'acronyme UTC a utilisé en guise de compromis.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
+<li id="fn:6.9">Officiellement prononcé «&nbsp;ess-cue-ell-ite&nbsp;» (en anglais.NdT), bien que la (mauvaise)prononciation «&nbsp;sequel-ite&nbsp;» (en anglais. NdT) soit aussi courante.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
+<li id="fn:6.10">Dans le cas où vous seriez surpris par <code>"2010-01-05 00:57:46"</code>, je n'ai pas écrit ce code après minuit&nbsp;; les <em>timestamps</em> sont enregistrés en <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordonnées de Temps Unversel</a> (UTC), qui pour la plupart des propos est le même que le <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Temps de Greenwich</a>. Tiré du <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Question&nbsp;:</strong> Pourquoi UTC est utilisé comme acronyme de <em>Coordinated Universal Time</em> plutôt que CUT&nbsp;? <strong>Réponse&nbsp;:</strong> En 1970 le système <em>Coordinated Universal Time</em> a été conçu par un groupe consultatif d'experts internationaux à l'intérieur de l'Union Internationale de Communication (International Telecommunication Union, ITU). L'ITU a pensé qu'il serait mieux d'utiliser une simple abréviation pour l'usage dans tous les langages dans le but de minimiser la confusion. Puisqu'aucun accord unanime n'a pu être trouvé sur l'utilisation soit de l'ordre des mots anglais, CUT, soit de l'ordre des mots français, TUC, le compromis de l'acronyme UTC a été choisi.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
 <li id="fn:6.11">Notez la valeur de <code>user.updated_at</code>. Dites-vous bien que le timestamp était en UTC.&nbsp;<a class="arrow" href="#fnref:6.11">&uarr;</a></li>
 <li id="fn:6.12">Les exceptions et la gestion des exceptions est un des sujets avancés de Ruby, et nous n'en aurons pas vraiment besoin dans ce livre. Ils sont importants cependant, et je vous suggère de les étudier en utilisant un livre sur Ruby recommandé à la <a class="ref" href="beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>.&nbsp;<a class="arrow" href="#fnref:6.12">&uarr;</a></li>
-<li id="fn:6.13">À ceux qui s'inquièteraient que <code>find_by_email</code> serait inefficace s'il y avait une grande quantité d'utilisateurs, je dirais que vous êtes en avance sur la musique. Nous couvrirons ce problème, et sa solution, par le biais des indices de base de données, à la <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a>.&nbsp;<a class="arrow" href="#fnref:6.13">&uarr;</a></li>
-<li id="fn:6.14">(et écrits)&nbsp;<a class="arrow" href="#fnref:6.14">&uarr;</a></li>
-<li id="fn:6.15">J'omettrai la sortie des commandes de la console quand elles ne sont pas particulièrement instrutivs &mdash;&nbsp;par exemple, les résultats de <code>User.new</code>.&nbsp;<a class="arrow" href="#fnref:6.15">&uarr;</a></li>
-<li id="fn:6.16">Notez que, dans la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>, &ldquo;letter&rdquo; (<em>lettre</em>) signifie en réalité &ldquo;lettre minuscules&rdquo;, mais le <code>i</code> à la fin de l'expression régulière force à ne pas tenir compte de la casse (minuscule/majuscule).&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
+<li id="fn:6.13">À ceux qui s'inquiéteraient que <code>find_by_email</code> serait inefficace s'il y avait une grande quantité d'utilisateurs, je dirais que vous êtes en avance sur la musique. Nous couvrirons ce problème, et sa solution, par le biais des <rw>index</rw> de base de données, à la <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">section&nbsp;6.2.4</a>.&nbsp;<a class="arrow" href="#fnref:6.13">&uarr;</a></li>
+<li id="fn:6.14">(et écrit)&nbsp;<a class="arrow" href="#fnref:6.14">&uarr;</a></li>
+<li id="fn:6.15">J'omettrai la sortie des commandes de la console quand elles ne sont pas particulièrement instructives &mdash;&nbsp;par exemple, les résultats de <code>User.new</code>.&nbsp;<a class="arrow" href="#fnref:6.15">&uarr;</a></li>
+<li id="fn:6.16">Notez que, dans la <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Table&nbsp;6.1</a>, «&nbsp;letter&nbsp;» (<em>lettre</em>) signifie en réalité «&nbsp;lettre minuscule&nbsp;», mais le <code>i</code> à la fin de l'expression régulière force à ne pas tenir compte de la casse (minuscule/majuscule).&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
 <li id="fn:6.17">Si vous le trouvez aussi utile que moi, je vous encourage à <a href="http://bit.ly/donate-to-rubular">faire un don à Rubular</a> pour remercier le développeur <a href="http://lovitt.net/">Michael Lovitt</a> pour son formidable travail.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
-<li id="fn:6.18">Saviez-vous que <code>"Michael Hartl"@example.com</code>, avec des guillemets et une espace<!-- "espace" est féminine en type --> au milieu est une adresse valide, conformément au standard&nbsp;? Aussi surprenant que ça paraisse, c'est vrai &mdash;&nbsp;mais c'est absurde. Si vous n'avez pas une adresse mail ne contenant que des lettres, des nombres, des tirets plats et des points, alors fais l'acquisition d'une autre. N.B. L'expression régulière de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> permet plus de signes aussi, parce que Gmail (et possiblement d'autres services d'email) font quelque chose d'utile pour eux&nbsp;:  par exemple, pour filtrer les ordres d'Amazon, vous pouvez utiliser <tt>username+amazon@gmail.com</tt>, qui se rendra vers l'adresse Gmail <tt>username@gmail.com</tt>, vous permettant de filtrer la chaine <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
+<li id="fn:6.18">Saviez-vous que <code>"Michael Hartl"@example.com</code>, avec des guillemets et une espace<!-- "espace" est féminine en type --> au milieu est une adresse valide, conformément au standard&nbsp;? Aussi surprenant que ça paraisse, c'est vrai &mdash;&nbsp;mais c'est absurde. Si vous n'avez pas une adresse mail ne contenant que des lettres, des nombres, des tirets plats et des points, alors changez-en&nbsp;! N.B. L'expression régulière de l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">extrait&nbsp;6.17</a> permet plus de signes aussi, parce que Gmail (et possiblement d'autres services d'email) font quelque chose d'utile pour eux&nbsp;:  par exemple, pour filtrer les ordres d'Amazon, vous pouvez utiliser <tt>username+amazon@gmail.com</tt>, qui se rendra vers l'adresse Gmail <tt>username@gmail.com</tt>, vous permettant de filtrer la chaine <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
 <li id="fn:6.19">Comme indiqué brièvement dans l'introduction de cette section, il existe une base de données de test dédiée, <code>db/test.sqlite3</code>, dans ce but.&nbsp;<a class="arrow" href="#fnref:6.19">&uarr;</a></li>
 <li id="fn:6.20">Si vous vous demandez pourquoi la ligne <code>create!</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">extrait&nbsp;6.10</a> ne conduit pas à une erreur en créant une duplication d'utilisateur, c'est parce que les tests Rails sont <em>transactionnels</em>&nbsp;: chaque test est enroulé dans une <a href="http://en.wikipedia.org/wiki/Database_transaction">transaction</a>, qui repart de l'état précédent de la base de données après l'exécution des tests. De cette façon, chaque test s'applique à une base de données fraiche.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
 <li id="fn:6.21">Oui, ça m'est arrivé. Comment croyez-vous que j'ai découvert cette explication&nbsp;?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
-<li id="fn:6.22">Bien sûr, nous pourrions juste éditer le fichier de migration pour la table <code>users</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> mmais ça exigerait de revenir en arrière puis à nouveau en avant. La façon Rails est d'utiliser des migrations différentes chaque fois que nous découvrons que notre modèle de data doit changer.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
+<li id="fn:6.22">Bien sûr, nous pourrions juste éditer le fichier de migration pour la table <code>users</code> de l'<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">extrait&nbsp;6.2</a> mais ça exigerait de revenir en arrière puis à nouveau en avant. La façon Rails est d'utiliser des migrations différentes chaque fois que nous découvrons que notre modèle de data doit changer.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
 <li id="fn:6.23">Vous pouvez même définir votre propre environnement personnalisé; voyez le <a href="http://railscasts.com/episodes/72-adding-an-environment">Railscast pour ajouter un environement</a> pour les détails.&nbsp;<a class="arrow" href="#fnref:6.23">&uarr;</a></li>
 <li id="fn:6.24">Fielding, Roy Thomas. <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Doctoral dissertation, University of California, Irvine, 2000.&nbsp;<a class="arrow" href="#fnref:6.24">&uarr;</a></li>
-<li id="fn:6.25">Cela signifie que le <em>routage</em> fonctionne, mais que les pages correspondantes ne fonctionnent pas, elle, à ce point du développement. Par exemple, <tt>/users/1/edit</tt> sera proprement routé vers l'action <code>edit</code> du contrôleur Users, mais puisque l'action <code>edit</code> n'existe pas encore, en fait, invoquer l'URL retournera une erreur.&nbsp;<a class="arrow" href="#fnref:6.25">&uarr;</a></li>
-<li id="fn:6.26">Certaines des copies-écran de ce tutoriel montre des informations de débuggage avec des sorties comme <code>!map:HashWithIndifferentAccess</code> au lieu de <code>!map:ActiveSupport::HashWithIndifferentAccess</code>. C'est simplement une différence mineure entre Rails&nbsp;2.3 et Rails&nbsp;3. Puisque les page web rendues sont en grande partie identique entre les deux versions, cette note de bas de page me permet de ne pas avoir à refaire toutes ces copies-écran.&nbsp;<a class="arrow" href="#fnref:6.26">&uarr;</a></li>
-<li id="fn:6.27">L'information <code>debug</code> Rails est affichée au format <a href="http://www.yaml.org/">YAML</a> (un <a href="http://catb.org/jargon/html/R/recursive-acronym.html">acronyme récursif</a> signifiant &ldquo;YAML Ain&rsquo;t Markup Language&rdquo;), qui est un format de donnée convivial conçu pour être lu aussi facilement par les  machines <em>que</em> par les humains.&nbsp;<a class="arrow" href="#fnref:6.27">&uarr;</a></li>
+<li id="fn:6.25">Cela signifie que le <em>routage</em> fonctionne, mais que les pages correspondantes ne fonctionnent pas, elles, à ce point du développement. Par exemple, <tt>/users/1/edit</tt> sera proprement routé vers l'action <code>edit</code> du contrôleur Users, mais puisque l'action <code>edit</code> n'existe pas encore, en fait, invoquer cette URL retournera une erreur.&nbsp;<a class="arrow" href="#fnref:6.25">&uarr;</a></li>
+<li id="fn:6.26">Certaines des copies-écran de ce tutoriel montre des informations de débuggage avec des sorties comme <code>!map:HashWithIndifferentAccess</code> au lieu de <code>!map:ActiveSupport::HashWithIndifferentAccess</code>. C'est simplement une différence mineure entre Rails&nbsp;2.3 et Rails&nbsp;3. Puisque les page web rendues sont en grande partie identiques entre les deux versions, cette note de bas de page me permet de ne pas avoir à les refaire toutes.&nbsp;<a class="arrow" href="#fnref:6.26">&uarr;</a></li>
+<li id="fn:6.27">L'information <code>debug</code> Rails est affichée au format <a href="http://www.yaml.org/">YAML</a> (un <a href="http://catb.org/jargon/html/R/recursive-acronym.html">acronyme récursif</a> signifiant «&nbsp;YAML Ain&rsquo;t Markup Language&nbsp;»), qui est un format de donnée convivial conçu pour être lu aussi facilement par les  machines <em>que</em> par les humains.&nbsp;<a class="arrow" href="#fnref:6.27">&uarr;</a></li>
 </ol>
 </div>
 

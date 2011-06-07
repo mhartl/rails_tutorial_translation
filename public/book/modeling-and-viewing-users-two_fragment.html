@@ -1,5 +1,6 @@
 <!--
-	Chapitre : 7
+	Chapitre : 7 Modéliser et afficher les utilisateurs, partie II
+	Fichier  : modeling-and-viewing-users-two_fragment.html
 -->
 
 <h1 class="title">Tutoriel Ruby on Rails </h1>
@@ -439,9 +440,9 @@
 <h1 class="chapter"><a id="sec:7" href="modeling-and-viewing-users-two#top" class="heading"><span class="number">chapitre 7</span> Modéliser et afficher les utilisateurs, partie II</a></h1>
 
 
-<p>Au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, nous avons créé la première itération d'un modèle User (<em>Utilisateur</em>) pour représenter les utilisateusr de notre application, mais le job a été à moitié accompli. Virtuellement n'importe quel site avec des utilisateurs, incluant nous-mêmes, a besoin d'un système d'<em>authentification</em>, mais pour le moment n'importe quel utilisateur qui peut s'inscricre au site possède un nom et une adresse mail, et nous n'avons aucun moyen de vérifier leur identité. Dans ce chapitre, nous allons ajouter l'attribut <em>mot de passe</em> (<em>password</em>) nécessaire à une inscription initiale de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et pour une identification (une connexion) avec une combinaison email/mot de passe (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). Au cours du processus, nous ré-utiliserons plusieurs des idées du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, incluant les migrations et les validations, et aussi introduire de nouvelle idées telles que les attributs virtuels, les méthodes privées et les <em>fonctions de rappel</em> (<em>callbacks</em>) d'Active Record.</p>
+<p>Au <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, nous avons créé la première itération d'un modèle User (<em>Utilisateur</em>) pour représenter les utilisateurs de notre application, mais le job a été à moitié accompli. Virtuellement n'importe quel site avec des utilisateurs, incluant le nôtre, a besoin d'un <em>système d'authentification</em>, mais pour le moment n'importe quel utilisateur qui peut s'inscrire au site possède un nom et une adresse mail, et nous n'avons aucun moyen de vérifier leur identité. Dans ce chapitre, nous allons ajouter l'attribut <em>mot de passe</em> (<em>password</em>) nécessaire à une inscription initiale de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et à une identification (une connexion) avec une combinaison email/mot de passe (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). Au cours du processus, nous ré-utiliserons plusieurs des idées du <a class="ref" href="modeling-and-viewing-users-one#top">chapitre&nbsp;6</a>, incluant les <rw>migrations</rw> et les <rw>validations</rw>, et aussi introduire de nouvelles idées telles que les <rw>attributs virtuels</rw>, les <rw>méthodes privées</rw> et les <rw>fonctions de rappel</rw> (<em>callbacks</em>) d'Active Record.</p>
 
-<p>Une fois que nous avons un attribut <code>mot_de_passe</code> fonctionnel, nous ferons une action et une vue pour afficher les profils des utilisateurs (<a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>). Vers la fin de ce chapitre, nos profils d'utilisateur afficheront les noms et les photos du profil (comme indiqué dans la maquette de l'<a class="ref" href="modeling-and-viewing-users-two#fig:profile_mockup_profile_name">illustration&nbsp;7.1</a>), et [(they will be nicely tested with user <em>factories</em>)(ils seront bien testés avec l'utilisateur <em>factories</em>)].</p>
+<p>Dès que nous aurons un attribut <code>mot_de_passe</code> fonctionnel, nous ferons une action et une vue pour afficher les profils des utilisateurs (<a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">section&nbsp;7.3</a>). Vers la fin de ce chapitre, nos profils d'utilisateur afficheront les noms et les photos du profil (comme indiqué dans la maquette de l'<a class="ref" href="modeling-and-viewing-users-two#fig:profile_mockup_profile_name">illustration&nbsp;7.1</a>), et ils seront bien testés avec des «&nbsp;utilisateurs d'usine&nbsp;».</p>
 
 <p>Avant d'avancer, ré-initialisons la base de données avec <code>rake db:reset</code>, ce qui va retirer tous les vieux exemples d'utilisateurs des sessions précédentes&nbsp;:</p>
 
@@ -466,7 +467,7 @@
 <h2><a id="sec:7.1" href="modeling-and-viewing-users-two#sec:insecure_passwords" class="heading"><span class="number">7.1</span> Mots de passe peu sécurisés</a></h2>
 
 
-<p>Faire des mots de passe robustes requiert beaucoup de machinerie, donc nous allons diviser le processus en deux principales étapes. Dans cette section, nous allons faire un attribut <code>mot_de_passe</code> et ajouter des validations. Le modèle User (<em>Utilisateur</em>) en résultant sera complètement fonctionnel mais pas du tout sécurisé, avec des mots de passe enregistrés tels quels dans la base de données. À la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, nous règlerons ce problème en cryptant les mots de passe avant de les sauver, ainsi protégeant notre site contre les possibles attaques.</p>
+<p>Faire des mots de passe robustes requiert beaucoup de machinerie, donc nous allons diviser le processus en deux principales étapes. Dans cette section, nous allons faire un attribut <code>mot_de_passe</code> et ajouter des validations. Le modèle User (<em>Utilisateur</em>) en résultant sera complètement fonctionnel mais pas du tout sécurisé, avec des mots de passe enregistrés «&nbsp;en clair&nbsp;» dans la base de données. À la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, nous règlerons ce problème en cryptant les mots de passe avant de les sauver, protégeant ainsi notre site des attaques toujours possibles.</p>
 
 <div class="label" id="sec:password_validations"></div>
 
@@ -474,7 +475,7 @@
 <h3><a id="sec:7.1.1" href="modeling-and-viewing-users-two#sec:password_validations" class="heading"><span class="number">7.1.1</span> Validations du mot de passe</a></h3>
 
 
-<p>Quand bien même nous aurions déjà ajouté une colonne pour les mots de passe à notre base de données, nous allons déjà commencer par écrire leurs tests. Notre projet initial est d'avoir des tests pour valider la présence, la longueur et la confirmation des mots de passe.
+<p>Quand bien même nous n'avons pas encore ajouté une colonne pour les mots de passe à notre base de données, nous allons déjà commencer par écrire leurs tests. Notre projet initial est d'avoir des tests pour valider la présence, la longueur et la confirmation des mots de passe.
 	C'est notre plus gros bloc de tests jusqu'ici, voyez si vous pouvez le lire tout d'un tenant. Si vous restez coincé, ça vous aidera sans doute de revoir les validations analogues de la <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">section&nbsp;6.2</a> ou sauter directement au code de l'application de l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">extrait&nbsp;7.2</a>.</p>
 
 <p>Dans le but de minimiser les typos dans les mots de passe, quand on fera la page d'inscription de l'utilisateur au <a class="ref" href="sign-up#top">chapitre&nbsp;8</a> nous adopterons la convention courante que les utilisateurs <em>confirment</em> leur mot de passe. Pour commencer, revoyons la table d'attributs vue dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">extrait&nbsp;6.20</a>:</p>
@@ -492,7 +493,7 @@
 </div>
 
 
-<p>Pour écrire des tests pour les mots de passe, nous aurons besoin d'ajouter <em>deux</em> nouveaux attributs à la table <code>@attr</code>, <code>password</code> (<em>mot de passe</em>) et <code>password_confirmation</code> (<em>motdepasse_confirmation</em>). Comme vous pouvez certainement le deviner, l'attribut <code>password_confirmation</code> sera utilisé pour l'étape de confirmation du mot de passe.</p>
+<p>Pour écrire des tests pour les mots de passe, nous aurons besoin d'ajouter <em>deux</em> nouveaux <rw>attributs</rw> à la table <code>@attr</code>, <code>password</code> (<em>mot de passe</em>) et <code>password_confirmation</code> (<em>motdepasse_confirmation</em>). Comme vous pouvez certainement le deviner, l'attribut <code>password_confirmation</code> sera utilisé pour l'étape de confirmation du mot de passe.</p>
 
 <p>Écrivons des tests pour la présence du mot de passe et sa confirmation, avec des tests confirmant que le mot de passe a une longueur valide (réduite à quelque chose arbitrairement fixée entre 6 et 40 caractères). Le résultat apparait dans l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a>.</p>
 
@@ -550,7 +551,7 @@
 </div></div>
 
 
-<p>Notez sans l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a> comme nous collectons d'abord un set d'attributs utilisateur valides dans <code>@attr</code>. Si pour quelques raisons que ce soit ces attributs ne sont pas valides &mdash;&nbsp;comme ce devrait être le cas, par exemple, si nous n'avons pas implémenté les confirmations proprement&nbsp;&mdash; alors la première étape&nbsp;:</p>
+<p>Notez sans l'<a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">extrait&nbsp;7.1</a> comme nous collectons d'abord un set d'attributs utilisateur valides dans <code>@attr</code>. Si pour quelque raison que ce soit ces attributs ne sont pas valides &mdash;&nbsp;comme ce devrait être le cas, par exemple, si nous n'avons pas implémenté les confirmations proprement&nbsp;&mdash; alors la première étape&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">it</span> <span class="s2">&quot;devrait créer une nouvelle instance avec des attributs valides&quot;</span> <span class="k">do</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
@@ -559,9 +560,9 @@
 </div>
 
 
-<p>… rencontrera une erreur. Les tests suivants vérifiera alors chaque validation à son tour, en utilisant la même technique <code>@attr.merge</code> introduite la première fois dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>.</p>
+<p>… rencontrera une erreur. Les tests suivants vérifieront alors chaque validation à son tour, en utilisant la même technique <code>@attr.merge</code> introduite la première fois dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>.</p>
 
-<p>Maintenant voyons le code de l'application, qui contient une astuce. En fait, elle contient <em>deux</em> astuces. D'abord, vous pouvez vous attendre, à ce point, à ce qu'on joue une migration pour ajouter un attribut <code>password</code> à notre modèle User, comme nous l'avions fait pour les attributs <code>nom</code> et <code>email</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>. Mais ce n'est pas le cas&nbsp;: nous n'allons enregistrer qu'un mot de passe <em>crypté</em> dans la base de données&nbsp;; pour le mot de passe, nous allons introduire la notion d'<em>attribut virtuel</em> (c'est-à-dire un attribut qui ne correspond pas à une colonne de la base de données) en utilisant la méthode <code>attr_accessor</code>, bien plus que nous ne l'avions fait avec les attributs originel <code>nom</code> et <code>email</code> pour l'exemple d'utilisateur à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>. L'attribut <code>password</code> ne sera jamais écrit dans la base de données, mais n'existera seulement qu'en mémoire pour permettre l'étape de confirmation du mot de passe (implémentée ci-dessous) et l'étape de cryptage (implémentée à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a> et <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>).</p>
+<p>Voyons maintenant le code de l'application, qui contient une astuce. En fait, elle contient <em>deux</em> astuces. D'abord, vous pouvez vous attendre, à ce point, à ce qu'on joue une migration pour ajouter un attribut <code>password</code> à notre modèle User, comme nous l'avions fait pour les attributs <code>nom</code> et <code>email</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">extrait&nbsp;6.1</a>. Mais ce n'est pas le cas&nbsp;: nous n'allons enregistrer qu'un mot de passe <em>crypté</em> dans la base de données&nbsp;; pour le mot de passe, nous allons introduire la notion d'<em>attribut virtuel</em> (c'est-à-dire un attribut qui ne correspond pas à une colonne de la base de données) en utilisant la méthode <code>attr_accessor</code>, comme nous l'avons fait avec la méthode <code>attr_accessible</code> pour les attributs <code>nom</code> et <code>email</code> pour l'exemple d'utilisateur à la <a class="ref" href="rails-flavored-ruby#sec:a_user_class">section&nbsp;4.4.5</a>. L'attribut <code>password</code> ne sera jamais écrit dans la base de données, mais n'existera qu'en mémoire pour permettre l'étape de confirmation du mot de passe (implémentée ci-dessous) et l'étape de cryptage (implémentée à la <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">section&nbsp;7.1.2</a> et <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>).</p>
 
 <p>La seconde astuce est que nous n'allons <em>pas</em> introduire un attribut  <code>password_confirmation</code>, pas même un virtuel. À la place, nous utiliserons la validation spéciale&nbsp;:</p>
 
@@ -618,9 +619,9 @@
 <h3><a id="sec:7.1.2" href="modeling-and-viewing-users-two#sec:password_migration" class="heading"><span class="number">7.1.2</span> La migration du mot de passe</a></h3>
 
 
-<p>À ce point, nous devons considérer que nous n'enregistrons le mot de passe de l'utilisateur nulle part&nbsp;; puisque nous avons décidé d'utiliser un mot de passe virtuel, plutôt que de l'enregistrer dans la base de données, il n'existe qu'en mémoire. Comment pouvons-nous utiliser ce mot de passe pour l'identification&nbsp;? La solution consiste à créer un attribut séparé dédié à la consignation du mot de passe, et notre stratégie consistera à utiliser un mot de passe virtuel comme matériel brut pour un <em>mot de passe crytpé</em>, que nous <em>enregistrerons</em> dans la base de données à l'inscription de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et que nous récupèrerons plus tard pour l'identification de l'utilisateur (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
+<p>À ce point, nous devons considérer que nous n'enregistrons le mot de passe de l'utilisateur nulle part&nbsp;; puisque nous avons décidé d'utiliser un mot de passe virtuel, plutôt que de l'enregistrer dans la base de données, il n'existe qu'en mémoire. Comment pouvons-nous utiliser ce mot de passe pour l'identification&nbsp;? La solution consiste à créer un attribut séparé dédié à la consignation du mot de passe, et notre stratégie consistera à utiliser un mot de passe virtuel comme matériel brut pour un <em>mot de passe crypté</em>, que nous <em>enregistrerons</em> dans la base de données à l'inscription de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et que nous récupèrerons plus tard pour l'identification de l'utilisateur (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
 
-<p>Planifions l'enregistrement du mot de passe crytpé en utilisant un attribut <code>encrypted_password</code> dans notre modèle User (<em>Utilisateur</em>). Nous discuterons des détails de l'implémentation à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, mais nous pouvons commencer avec nos tests du mot de passe crytpé en notant que le mot de passe crytpé devrait au moins <em>exister</em>. Nous pouvons tester cela en utilisant la méthode Ruby <code>respond_to?</code> (<em>répond_à&nbsp;?</em> ), qui accepte un symbole et retourne <code>true</code> (<em>vrai</em>) si l'objet répond à la méthode ou l'attribut donné et <code>false</code> (<em>faux</em>) dans le cas contraire&nbsp;:</p>
+<p>Planifions l'enregistrement du mot de passe crypté en utilisant un attribut <code>encrypted_password</code> dans notre modèle User (<em>Utilisateur</em>). Nous discuterons des détails de l'implémentation à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, mais nous pouvons commencer avec nos tests du mot de passe crypté en notant que le mot de passe crypté devrait au moins <em>exister</em>. Nous pouvons tester cela en utilisant la méthode Ruby <code>respond_to?</code> (<em>répond_à&nbsp;?</em> ), qui accepte un symbole et retourne <code>true</code> (<em>vrai</em>) si l'objet répond à la méthode ou l'attribut donné et <code>false</code> (<em>faux</em>) dans le cas contraire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
@@ -650,7 +651,7 @@
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;devrait avoir un attribut  mot de passe crytpé&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait avoir un attribut  mot de passe crypté&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:encrypted_password</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -659,7 +660,7 @@
 </div></div>
 
 
-<p>Notez que dans le bloc <code>before(:each)</code> nous <em>créons</em> un utilisateur, plutôt que d'appeler juste la méthode <code>User.new</code>. Nous pourrions en fait faire réussir ce test en utilisant <code>User.new</code>, mais (comme nous le verrons dans un instant) <em>définir</em> le mot de passe crytpé exigera que l'utilisateur soit enregistré dans la base de données. En utilisant <code>create!</code> dans ce premier cas ne crée pas de dommage, et le placer dans <code>before(:each)</code> nous permettra de garder tous les tests du mot de passe crytpé dans un seul bloc <code>describe</code>.</p>
+<p>Notez que dans le bloc <code>before(:each)</code> nous <em>créons</em> un utilisateur, plutôt que d'appeler juste la méthode <code>User.new</code>. Nous pourrions en fait faire réussir ce test en utilisant <code>User.new</code>, mais (comme nous le verrons dans un instant) <em>définir</em> le mot de passe crypté exigera que l'utilisateur soit enregistré dans la base de données. En utilisant <code>create!</code> dans ce premier cas ne crée pas de dommage, et le placer dans <code>before(:each)</code> nous permettra de garder tous les tests du mot de passe crypté dans un seul bloc <code>describe</code>.</p>
 
 <p>Pour obtenir la réussite de ce test, nous aurons besoin d'une migration pour ajouter l'attribut <code>encrypted_password</code> à la table <code>users</code> (<em>utilisateurs</em>)&nbsp;:</p>
 
@@ -694,10 +695,10 @@
 <div class="label" id="fig:user_model_password"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_password.png" alt="user_model_password" /></span></div><div class="caption"><span class="header">Illustration 7.2: </span><span class="description">Le modèle User avec un attribut mot de passe (crypté) ajouté.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_password.png" alt="user_model_password" /></span></div><div class="caption"><span class="header">Illustration 7.2: </span><span class="description">Le modèle User avec un attribut mot de passe (crypté) ajouté (version anglaise).</span></div></div>
 
 
-<p>Si nous jouons maintenant la migration et préparons le test de la base de données, le test devrait réussir, puisque le modèle User model répondra à l'attribut <code>encrypted_password</code> (assuez-vous de fermer toutes les console Rails lancées dans le «&nbsp;bac à sable&nbsp;» (<em>sandbox</em>)&nbsp;; la <em>sandbox</em> verrouille la base de données et interdit les migrations).</p>
+<p>Si nous jouons maintenant la migration et préparons le test de la base de données, le test devrait réussir, puisque le modèle User model répondra à l'attribut <code>encrypted_password</code> (assurez-vous de fermer toutes les consoles Rails lancées dans le «&nbsp;bac à sable&nbsp;» (<em>sandbox</em>)&nbsp;; la <em>sandbox</em> verrouille la base de données et interdit les migrations).</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="gp">$</span> rake db:test:prepare
@@ -705,10 +706,10 @@
 </div>
 
 
-<p>Bien sûr, nous pouvons jouer toute la suite de test avec <code>rspec spec/</code>, mais il est pratique parfois de jouer juste <em>une</em> RSpec, ce que nous pouvons faire avec le drapeau <code>-e</code> (&ldquo;exemple&rdquo;)&nbsp;:</p>
+<p>Bien sûr, nous pouvons jouer toute la suite de tests avec <code>rspec spec/</code>, mais il est pratique parfois de jouer juste <em>une</em> RSpec, ce que nous pouvons faire avec le drapeau <code>-e</code> (&ldquo;exemple&rdquo;)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/models/user_spec.rb <span class="se">\</span>
-<span class="gp">&gt;</span> -e <span class="s2">&quot;devrait avoir un attribut mot de passe crytpé&quot;</span>
+<span class="gp">&gt;</span> -e <span class="s2">&quot;devrait avoir un attribut mot de passe crypté&quot;</span>
 <span class="go">.</span>
 
 <span class="go">1 example, 0 failures</span>
@@ -722,9 +723,9 @@
 <h3><a id="sec:7.1.3" href="modeling-and-viewing-users-two#sec:an_active_record_callback" class="heading"><span class="number">7.1.3</span> Un <em>callback</em> de l'Active Record</a></h3>
 
 
-<p>Maintenant que notre modèle User possède un attribut pour consigner le mot de passe, nous devons nous arranger pour générer et sauver le mot de passe crytpé quand Active Record enregistre l'utilisateur dans la base de données. Nous allons faire ça en utilisant une technique appelée un <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a> (<em>fonction de rappel</em>), qui est méthode qui est invoquée à un point particulier de la vie de l'objet Active Record. Dans le cas présent, nous utiliserons le callback <code>before_save</code> pour créer <code>encrypted_password</code> juste avant que l'utilisateur ne soit enregistré.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>
+<p>Maintenant que notre modèle User possède un attribut pour consigner le mot de passe, nous devons nous arranger pour générer et sauver le mot de passe crypté quand Active Record enregistre l'utilisateur dans la base de données. Nous allons faire ça en utilisant une technique appelée un <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a> (<em>fonction de rappel</em>), qui est méthode qui est invoquée à un point particulier de la vie de l'objet Active Record. Dans le cas présent, nous utiliserons le callback <code>before_save</code> pour créer <code>encrypted_password</code> juste avant que l'utilisateur ne soit enregistré.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>
 
-<p>Nous commençons avec un test pour l'attribut mot de passe crytpé. Puisque nous avons différé les détails de l'implémentation &mdash;&nbsp;et, en particulier, la méthode de cryptage&nbsp;&mdash; à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, dans cette section nous allons seulement nous assurer que l'attribut <code>encrypted_password</code> d'un utilisateur enregistré n'est pas vierge. Nous faisons cela en combinant la méthode <code>blank?</code> sur les chaines de caractères (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>) avec la convention RSpec pour les méthodes booléennes (vue pour la première fois dans le contexte des méthodes <code>valid?</code>/<code>be_valid</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>), rendant le test de l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">extrait&nbsp;7.5</a>.</p>
+<p>Nous commençons avec un test pour l'attribut mot de passe crypté. Puisque nous avons différé les détails de l'implémentation &mdash;&nbsp;et, en particulier, la méthode de cryptage&nbsp;&mdash; à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, dans cette section nous allons seulement nous assurer que l'attribut <code>encrypted_password</code> d'un utilisateur enregistré n'est pas vierge. Nous faisons cela en combinant la méthode <code>blank?</code> sur les chaines de caractères (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a>) avec la convention RSpec pour les méthodes booléennes (vue pour la première fois dans le contexte des méthodes <code>valid?</code>/<code>be_valid</code> dans l'<a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">extrait&nbsp;6.11</a>), rendant le test de l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">extrait&nbsp;7.5</a>.</p>
 
 <div class="label" id="code:encrypted_password_not_empty_test"></div>
 
@@ -942,7 +943,7 @@
 <h3><a id="sec:7.2.2" href="modeling-and-viewing-users-two#sec:secure_password_theory" class="heading"><span class="number">7.2.2</span> Un peu de théorie sur la sécurisation des mots de passe</a></h3>
 
 
-<p>L'idée de base d'un mot de passe crytpés est simple&nbsp;: plutôt que d'enregistre un mot de passe tel quel dans la base de données (donc en «&nbsp;texte clair&nbsp;»), nous enregistrons une chaine de caractères générée en utilisant une <em>fonction de hachage cryptographique</em> (<a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">cryptographic hash function</a>), qui est par essence irréversible, de telle sorte que même un hacker en possession de la version cryptée du mot de passe sera incapable d'en déduire l'original. Pour vérifier qu'un mot de passe soumis coïncide avec le mot de passe de l'utilisateur, nous cryptons d'abord la chaine de caractères soumise puis nous la comparons au mot de passe crypté enregistré. Rejoignons une session de console pour voir comment tout cela fonctionne&nbsp;:</p>
+<p>L'idée de base d'un mot de passe cryptés est simple&nbsp;: plutôt que d'enregistre un mot de passe tel quel dans la base de données (donc en «&nbsp;texte clair&nbsp;»), nous enregistrons une chaine de caractères générée en utilisant une <em>fonction de hachage cryptographique</em> (<a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">cryptographic hash function</a>), qui est par essence irréversible, de telle sorte que même un hacker en possession de la version cryptée du mot de passe sera incapable d'en déduire l'original. Pour vérifier qu'un mot de passe soumis coïncide avec le mot de passe de l'utilisateur, nous cryptons d'abord la chaine de caractères soumise puis nous la comparons au mot de passe crypté enregistré. Rejoignons une session de console pour voir comment tout cela fonctionne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
@@ -998,7 +999,7 @@
 </div>
 
 
-<p>Dans les dernières lignes, nous avons haché le sel avec le mot de passe, pour retourner un mot de passe crytpé qu'il est virtuellement impossible de cracker (pour la clareté, les arguments des fonctions de hachage sont souvent séparés par <tt class="verb">--</tt>).</p>
+<p>Dans les dernières lignes, nous avons haché le sel avec le mot de passe, pour retourner un mot de passe crypté qu'il est virtuellement impossible de cracker (pour la clareté, les arguments des fonctions de hachage sont souvent séparés par <tt class="verb">--</tt>).</p>
 
 <div class="label" id="sec:implementing_has_password"></div>
 
@@ -1006,7 +1007,7 @@
 <h3><a id="sec:7.2.3" href="modeling-and-viewing-users-two#sec:implementing_has_password" class="heading"><span class="number">7.2.3</span> Implémenter <code>has_password?</code></a></h3>
 
 
-<p>En ayant fini avec la théorie, nous sommes maintenant en mesure de procéder à l'implémentation. Nous allons aller de l'avant pour voir où nous allons. Chaque objet utilisateur connait son propre mot de passe crytpé, donc pour le vérifier avec le mot de passe soumis, nous pouvons définir <code>has_password?</code> comme suit&nbsp;:</p>
+<p>En ayant fini avec la théorie, nous sommes maintenant en mesure de procéder à l'implémentation. Nous allons aller de l'avant pour voir où nous allons. Chaque objet utilisateur connait son propre mot de passe crypté, donc pour le vérifier avec le mot de passe soumis, nous pouvons définir <code>has_password?</code> comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">has_password?</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>
   <span class="n">encrypted_password</span> <span class="o">==</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">submitted_password</span><span class="p">)</span>

@@ -363,16 +363,16 @@
 
 <p>Neste capítulo, vamos desenvolver uma aplicação simples para demonstrar um pouco do poder do Rails. A intenção é ter um resumo de alto nível de programação Ruby on Rails (e desenvolvimento web em geral) gerando rapidamente uma aplicação usando <em>scaffold generators</em>.<sup class="footnote" id="fnref:2.1"><a href="#fn:2.1">1</a></sup> Como discutido no <a class="ref" href="beginning#sidebar:scaffolding">Box&nbsp;1.1</a>, o resto do livro vai tomar uma abordagem oposta, desenvolvendo uma aplicação completa incrementando e explicando cada novo conceito conforme for evoluindo, mas para um breve resumo (e alguma gratificação inspontânea) não existe substituto para o scaffolding. A aplicação de demonstração gerada nos permitirá que interagimos com ela através de URLs, nos dando uma visão geral da estrutura de uma aplicação Rails, incluindo um primeiro exemplo da <em>arquitetura REST</em> favorecida pelo Rails.</p>
 
+<p>E como em toda aplicação de exemplo, nosso demo terá <em>users</em> e <em>microposts</em> associados a eles (o que fará nossa app parecer um mini Twitter). A funcionalidade será completamente sub-desenvolvida, e muitos dos passos vão parecer mágica, mas não se preocupe: para a app completa de exemplo será desenvolvida uma aplicação similar começando do zero no <a class="ref" href="static-pages#top">Capítulo 3</a>, e vou providenciar muito material para futuras referências. Enquanto isso, tenha paciência e um pouco de fé, o principal objetivo desse tutorial é te levar <em>além</em> desta abordagem superficial facilitada pelo scaffold para atingir um entendimento maior do Rails.</p>
 
-<p>As with the forthcoming sample application, the demo app will consist of <em>users</em> and their associated <em>microposts</em> (thus constituting a minimalist Twitter-style app). The functionality will be utterly under-developed, and many of the steps will seem like magic, but worry not: the full sample app will develop a similar application from the ground up starting in <a class="ref" href="static-pages#top">Chapter&nbsp;3</a>, and I will provide plentiful forward-references to later material. In the mean time, have patience and a little faith&mdash;the whole point of this tutorial is to take you <em>beyond</em> this superficial, scaffold-driven approach to achieve a deeper understanding of Rails.</p>
 
 <div class="label" id="sec:planning_the_application"></div>
 
 
-<h2><a id="sec:2.1" href="a-demo-app#sec:planning_the_application" class="heading"><span class="number">2.1</span> Planning the application</a></h2>
+<h2><a id="sec:2.1" href="a-demo-app#sec:planning_the_application" class="heading"><span class="number">2.1</span> Planejando a aplicação</a></h2>
 
 
-<p>In this section, we&rsquo;ll outline our plans for the demo application. As in <a class="ref" href="beginning#sec:the_first_application">Section&nbsp;1.2.3</a>, we&rsquo;ll start by generating the application skeleton using the <code>rails</code> command:</p>
+<p>Nesta seção, vamos esboçar nossos planos para a aplicação demo. Como na <a class="ref" href="beginning#sec:the_first_application">Seção 1.2.3</a>, iremos iniciar gerando o esqueleto da aplicação usando o comando <code>rails</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/rails_projects
 <span class="gp">$</span> rails new demo_app
@@ -381,13 +381,13 @@
 </div>
 
 
-<p>Next, we&rsquo;ll use a text editor to update the <code>Gemfile</code> needed by Bundler with the contents of <a class="ref" href="a-demo-app#code:demo_gemfile_sqlite_version_redux">Listing&nbsp;2.1</a>.</p>
+<p>Depois, vamos usar um editor de textos para atualizar o arquivo <code>Gemfile</code>, requerido pelo Bundler com o conteúdo da <a class="ref" href="a-demo-app#code:demo_gemfile_sqlite_version_redux">Listagem 2.1</a>.</p>
 
 <div class="label" id="code:demo_gemfile_sqlite_version_redux"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 2.1.</span> <span class="description">A <code>Gemfile</code> for the demo app.</span>       
+<div class="listing"><span class="header">Listagem 2.1.</span> <span class="description">Um <code>Gemfile</code> para a app demo.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -397,14 +397,15 @@
 </div></div>
 
 
-<p>(Recall from <a class="ref" href="beginning#sec:bundler">Section&nbsp;1.2.4</a> that you may need version <tt>1.2.5</tt> of the <tt>sqlite3-ruby</tt> gem if you&rsquo;re using OS&nbsp;X Leopard.) We then install and include the gems using <code>bundle</code>:</p>
+<p>(Relembre da <a class="ref" href="beginning#sec:bundler">Seção 1.2.4</a> que você talvez precise da versão <tt>1.2.5</tt> da gem <tt>sqlite3-ruby</tt> se você está usando o OSX Leopard.) Agora vamos instalar e incluir as gems usando o <code>bundle</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
 </pre></div>
 </div>
 
 
-<p>Finally, we&rsquo;ll initialize a Git repository and make the first commit:<sup class="footnote" id="fnref:2.2"><a href="#fn:2.2">2</a></sup></p>
+<p>Finalmente, vamos iniciar um repositório Git e fazer o primeiro commit:<sup class="footnote" id="fnref:2.2"><a href="#fn:2.2">2</a></sup></p>
+
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git init
 <span class="gp">$</span> git add .
@@ -416,31 +417,34 @@
 <div class="label" id="fig:create_demo_repo"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Figure 2.1: </span><span class="description">Creating a demo app repository at GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(full size)</a></span></div></div>
-
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Figura 2.1: </span><span class="description">Criando um repositório no GitHUb para a app demo.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(tamanho original)</a></span></div></div>
 
 <p>You can also optionally create a new repository (<a class="ref" href="a-demo-app#fig:create_demo_repo">Figure&nbsp;2.1</a>) and push it up to GitHub:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;username&gt;/demo_app.git
+<p>Você também pode opcionalmente criar um repositório novo (<a class="ref" href="a-demo-app#fig:create_demo_repo">Figura&nbsp;2.1</a>) e dar um push para o GitHub:</p>
+
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;nome_do_usuario&gt;/demo_app.git
 <span class="gp">$</span> git push origin master
 </pre></div>
 </div>
 
 
-<p>Now we&rsquo;re ready to start making the app itself. The typical first step when making a web application is to create a <em>data model</em>, which is a representation of the structures needed by our application. In our case, the demo app will be a stripped-down microblog, with only users and short (micro) posts. Thus, we&rsquo;ll begin with a model for <em>users</em> of the app (<a class="ref" href="a-demo-app#sec:modeling_users">Section&nbsp;2.1.1</a>), and then we&rsquo;ll add a model for  <em>microposts</em> (<a class="ref" href="a-demo-app#sec:modeling_microposts">Section&nbsp;2.1.2</a>).</p>
+<p>Agora estamos prontos para começar a fazer a app. O primeiro típico passo para se fazer uma aplicação web é criar um <em>modelo de dados</em>, que é uma representação da estrutura necessária pela sua aplicação. No nosso caso, a app demo será um simples microblog, apenas com usuários e curtos (micro) posts. Sendo assim, vamos começar com um modelo para <em>usuários</em> da app (<a class="ref" href="a-demo-app#sec:modeling_users">Seção&nbsp;2.1.1</a>), e então iremos adicionar um modelo para <em>microposts</em> (<a class="ref" href="a-demo-app#sec:modeling_microposts">Seção&nbsp;2.1.2</a>).</p>
+
 
 <div class="label" id="sec:modeling_users"></div>
 
 
-<h3><a id="sec:2.1.1" href="a-demo-app#sec:modeling_users" class="heading"><span class="number">2.1.1</span> Modeling users</a></h3>
+<h3><a id="sec:2.1.1" href="a-demo-app#sec:modeling_users" class="heading"><span class="number">2.1.1</span> Modelando usuários</a></h3>
 
 
-<p>There are as many choices for a user data model as there are different registration forms on the web; we&rsquo;ll go with a distinctly minimalist approach. Users of our demo app will have a unique <code>integer</code> identifier called <code>id</code>, a publicly viewable <code>name</code> (of type <code>string</code>), and an <code>email</code> address (also a <code>string</code>) that will double as a username. A summary of the data model for users appears in <a class="ref" href="a-demo-app#fig:demo_user_model">Figure&nbsp;2.2</a>.</p>
+<p>Existem tantas escolhas para o modelo de usuários como existem tantos forms diferentes de registro na web; e vamos optar por uma abordagem mínima e distinta. Os usuários da nossa app demo terá um identificador único <code>integer</code> chamado <code>id</code>,  um <code>nome</code> (do tipo <code>string</code>), e um endereço de <code>email</code> (também um <code>string</code>) que funcionará como um username. Um resumo do modelo de dados dos usuários é mostrado na <a class="ref" href="a-demo-app#fig:demo_user_model">Figura&nbsp;2.2</a>.</p>
 
 <div class="label" id="fig:demo_user_model"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_model.png" alt="demo_user_model" /></span></div><div class="caption"><span class="header">Figure 2.2: </span><span class="description">The data model for users.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_model.png" alt="demo_user_model" /></span></div><div class="caption"><span class="header">Figure 2.2: </span><span class="description">O modelo de dados para usuários.</span></div></div>
 
 
 <p>As we&rsquo;ll see starting in <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Section&nbsp;6.1.1</a>, the label <code>users</code> in <a class="ref" href="a-demo-app#fig:demo_user_model">Figure&nbsp;2.2</a> corresponds to a <em>table</em> in a database, and the <code>id</code>, <code>name</code>, and <code>email</code> attributes are <em>columns</em> in that table.</p>

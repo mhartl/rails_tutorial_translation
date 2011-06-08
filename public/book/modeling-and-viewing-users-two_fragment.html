@@ -467,7 +467,7 @@
 <h2><a id="sec:7.1" href="modeling-and-viewing-users-two#sec:insecure_passwords" class="heading"><span class="number">7.1</span> Mots de passe peu sécurisés</a></h2>
 
 
-<p>Faire des mots de passe robustes requiert beaucoup de machinerie, donc nous allons diviser le processus en deux principales étapes. Dans cette section, nous allons faire un attribut <code>mot_de_passe</code> et ajouter des validations. Le modèle User (<em>Utilisateur</em>) en résultant sera complètement fonctionnel mais pas du tout sécurisé, avec des mots de passe enregistrés «&nbsp;en clair&nbsp;» dans la base de données. À la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, nous règlerons ce problème en cryptant les mots de passe avant de les sauver, protégeant ainsi notre site des attaques toujours possibles.</p>
+<p>Faire des mots de passe robustes requiert beaucoup de machinerie, donc nous allons diviser le processus en deux principales étapes. Dans cette section, nous allons faire un attribut <code>mot_de_passe</code> et ajouter des validations. Le modèle User (<em>Utilisateur</em>) en résultant sera complètement fonctionnel mais pas du tout sécurisé, avec des mots de passe enregistrés «&nbsp;en clair&nbsp;» dans la base de données. À la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, nous réglerons ce problème en cryptant les mots de passe avant de les sauver, protégeant ainsi notre site des attaques toujours possibles.</p>
 
 <div class="label" id="sec:password_validations"></div>
 
@@ -603,7 +603,7 @@
 </div>
 
 
-<p>Ensuite viennent les validations du mot de passe. Elles requièrent la présence d'un <code>:password</code> (commme, par exemple dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">extrait&nbsp;6.7</a>) et incluent <code>:confirmation =&gt; true</code> qui rejette les utilisateurs dont le mot de passe et sa confirmation ne correspondent pas. Nous avons aussi une deuxième application de la validation de la longueur&nbsp;; dans l'<a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a> nous contraignons l'attribut <code>nom</code> à avoir moins de 50 caractères en utilisant l'option <code>:maximum</code>&nbsp;:</p>
+<p>Ensuite viennent les validations du mot de passe. Elles requièrent la présence d'un <code>:password</code> (comme, par exemple dans l'<a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">extrait&nbsp;6.7</a>) et incluent <code>:confirmation =&gt; true</code> qui rejette les utilisateurs dont le mot de passe et sa confirmation ne correspondent pas. Nous avons aussi une deuxième application de la validation de la longueur&nbsp;; dans l'<a class="ref" href="modeling-and-viewing-users-one#code:length_validation">extrait&nbsp;6.15</a> nous contraignons l'attribut <code>nom</code> à avoir moins de 50 caractères en utilisant l'option <code>:maximum</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">validates</span> <span class="ss">:nom</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
                   <span class="ss">:length</span>   <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:maximum</span> <span class="o">=&gt;</span> <span class="mi">50</span> <span class="p">}</span>
@@ -619,7 +619,7 @@
 <h3><a id="sec:7.1.2" href="modeling-and-viewing-users-two#sec:password_migration" class="heading"><span class="number">7.1.2</span> La migration du mot de passe</a></h3>
 
 
-<p>À ce point, nous devons considérer que nous n'enregistrons le mot de passe de l'utilisateur nulle part&nbsp;; puisque nous avons décidé d'utiliser un mot de passe virtuel, plutôt que de l'enregistrer dans la base de données, il n'existe qu'en mémoire. Comment pouvons-nous utiliser ce mot de passe pour l'identification&nbsp;? La solution consiste à créer un attribut séparé dédié à la consignation du mot de passe, et notre stratégie consistera à utiliser un mot de passe virtuel comme matériel brut pour un <em>mot de passe crypté</em>, que nous <em>enregistrerons</em> dans la base de données à l'inscription de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et que nous récupèrerons plus tard pour l'identification de l'utilisateur (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
+<p>À ce point, nous devons considérer que nous n'enregistrons le mot de passe de l'utilisateur nulle part&nbsp;; puisque nous avons décidé d'utiliser un mot de passe virtuel, plutôt que de l'enregistrer dans la base de données, il n'existe qu'en mémoire. Comment pouvons-nous utiliser ce mot de passe pour l'identification&nbsp;? La solution consiste à créer un attribut séparé dédié à la consignation du mot de passe, et notre stratégie consistera à utiliser un mot de passe virtuel comme matériel brut pour un <em>mot de passe crypté</em>, que nous <em>enregistrerons</em> dans la base de données à l'inscription de l'utilisateur (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>) et que nous récupérerons plus tard pour l'identification de l'utilisateur (<a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>).</p>
 
 <p>Planifions l'enregistrement du mot de passe crypté en utilisant un attribut <code>encrypted_password</code> dans notre modèle User (<em>Utilisateur</em>). Nous discuterons des détails de l'implémentation à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>, mais nous pouvons commencer avec nos tests du mot de passe crypté en notant que le mot de passe crypté devrait au moins <em>exister</em>. Nous pouvons tester cela en utilisant la méthode Ruby <code>respond_to?</code> (<em>répond_à&nbsp;?</em> ), qui accepte un symbole et retourne <code>true</code> (<em>vrai</em>) si l'objet répond à la méthode ou l'attribut donné et <code>false</code> (<em>faux</em>) dans le cas contraire&nbsp;:</p>
 
@@ -698,7 +698,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_model_password.png" alt="user_model_password" /></span></div><div class="caption"><span class="header">Illustration 7.2: </span><span class="description">Le modèle User avec un attribut mot de passe (crypté) ajouté (version anglaise).</span></div></div>
 
 
-<p>Si nous jouons maintenant la migration et préparons le test de la base de données, le test devrait réussir, puisque le modèle User model répondra à l'attribut <code>encrypted_password</code> (assurez-vous de fermer toutes les consoles Rails lancées dans le «&nbsp;bac à sable&nbsp;» (<em>sandbox</em>)&nbsp;; la <em>sandbox</em> verrouille la base de données et interdit les migrations).</p>
+<p>Si nous jouons maintenant la migration et préparons le test de la base de données, le test devrait réussir, puisque le modèle User répondra à l'attribut <code>encrypted_password</code> (assurez-vous de fermer toutes les consoles Rails lancées dans le «&nbsp;bac à sable&nbsp;» (<em>sandbox</em>)&nbsp;; la <em>sandbox</em> verrouille la base de données et interdit les migrations).</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
 <span class="gp">$</span> rake db:test:prepare
@@ -790,7 +790,7 @@
 
 <p>Ici la <rw>fonction de rappel</rw> <code>encrypt_password</code> délègue en fait le cryptage à une méthode <code>encrypt</code>&nbsp;; comme signalé dans le commentaire, c'est seulement une implémentation provisoire &mdash;&nbsp;construit ainsi, l'<a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">extrait&nbsp;7.6</a> met simplement le mot de passe crypté à la valeur du mot de passe non crypté, ce qui n'est pas notre but. Mais ça suffit pour faire réussir notre test, et nous ferons que la méthode <code>encrypt</code> procède réellement au cryptage à la <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">section&nbsp;7.2</a>.</p>
 
-<p>Avant d'essayer de comprendre l'implémentation, notez d'abord que les méthodes de cryptage sont placées après le mot-clé <code>private</code>&nbsp;; à l'intérieur d'une classe Ruby, toutes les méthodes définies <em>après</em> le mot-clé <code>private</code> (<em>privé</em>) sont utilisées de façon <em>interne</em> par l'objet et ne sont pas destinées à l'utilisage <em>publique</em>.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> À titre d'exemple, nous pouvons tester l'objet User dans la console&nbsp;:</p>
+<p>Avant d'essayer de comprendre l'implémentation, notez d'abord que les méthodes de cryptage sont placées après le mot-clé <code>private</code>&nbsp;; à l'intérieur d'une classe Ruby, toutes les méthodes définies <em>après</em> le mot-clé <code>private</code> (<em>privé</em>) sont utilisées de façon <em>interne</em> par l'objet et ne sont pas destinées à l'utilisation <em>publique</em>.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> À titre d'exemple, nous pouvons tester l'objet User dans la console&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">encrypt_password</span>
@@ -814,7 +814,7 @@
 </div>
 
 
-<p>C'est une méthode en une ligne (donc du meilleur genre&nbsp;!), mais elle ne contient pas seulement une mais <em>deux</em> subtilités. <em>Primo</em> , le membre gauche de la déclaration (<code>self.encrypted_password</code>) assigne explicitement l'attribut <code>encrypted_password</code> en utilisant le mot-clé <code>self</code> (<em>soi-même</em>) (de la <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a> vous vous souvenez que la classe <code>self</code> se réfère à l'objet lui-même, ce qui pour le modèle User est simplement l'utilisateur lui-même). L'utilisation de <code>self</code> est <em>obligatoire</em> dans ce contexte&nbsp;; si nous ommettons <code>self</code> et que nous écrivons&nbsp;:</p>
+<p>C'est une méthode en une ligne (donc du meilleur genre&nbsp;!), mais elle ne contient pas seulement une mais <em>deux</em> subtilités. <em>Primo</em> , le membre gauche de la déclaration (<code>self.encrypted_password</code>) assigne explicitement l'attribut <code>encrypted_password</code> en utilisant le mot-clé <code>self</code> (<em>soi-même</em>) (de la <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">section&nbsp;4.4.2</a> vous vous souvenez que la classe <code>self</code> se réfère à l'objet lui-même, ce qui pour le modèle User est simplement l'utilisateur lui-même). L'utilisation de <code>self</code> est <em>obligatoire</em> dans ce contexte&nbsp;; si nous omettons <code>self</code> et que nous écrivons&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span>
   <span class="n">encrypted_password</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
@@ -935,7 +935,7 @@
 </div></div>
 
 
-<p>À la <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">section&nbsp;7.2.3</a>, nous complèterons l'implémentation de la méthode <code>has_password?</code> (et obtiendrons que le test réussisse dans le processus). Mais d'abord nous avons besoin d'en apprendre un peu plus sur la sécurisation des mots de passe.</p>
+<p>À la <a class="ref" href="modeling-and-viewing-users-two#sec:implementing_has_password">section&nbsp;7.2.3</a>, nous compléterons l'implémentation de la méthode <code>has_password?</code> (et obtiendrons que le test réussisse dans le processus). Mais d'abord nous avons besoin d'en apprendre un peu plus sur la sécurisation des mots de passe.</p>
 
 <div class="label" id="sec:secure_password_theory"></div>
 
@@ -1161,7 +1161,7 @@
 
 <p>Avoir une méthode <code>has_password?</code> pour chaque utilisateur est une bonne chose, mais en elle-même elle n'est pas très utile. Nous terminons notre discussion sur les mots de passe en utilisant  <code>has_password?</code> pour écrire une méthode pour identifier un utilisateur par une combinaison email/mot de passe. Au <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>, nous utiliserons cette méthode <code>authenticate</code> en identifiant les utilisateurs de notre site.</p>
 
-<p>Nous pouvons avoir une idée de ce fonctionnement à l'aide de la console. D'abord, nous créons un utilisateur, et ensuite nous récupérons cet utilisateur par l'adresse email pour vérifier qu'il a un mot de passe donné&nbsp;:<sup class="footnote" id="fnref:7.11"><a href="#fn:7.11">11</a></sup></p>
+<p>Nous pouvons avoir une idée de ce fonctionnement à l'aide de la console. D'abord, nous créons un utilisateur, et ensuite nous récupérons cet utilisateur par l'adresse-mail pour vérifier qu'il a un mot de passe donné&nbsp;:<sup class="footnote" id="fnref:7.11"><a href="#fn:7.11">11</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">,</span>
@@ -1648,7 +1648,7 @@
 </div></div>
 
 
-<p>Ce code introduit un problème potentiel&nbsp;: un utilisateur peut entrer un nom avec du code malveillant &mdash;&nbsp;appelé attaque <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a>&nbsp;&mdash; qui serait injecté à l'intérieur de l'application par l'helper <code>title</code> défini dans l'<a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>. Avant Rails&nbsp;3, la solution consistait à <em>échapper</em> les codes potentiellement problématiques en utilisant la méthode&nbsp;<code>h</code> (raccourci pour <code>html_escape</code>), mais avec Rails&nbsp;3.0, tout le code Ruby embarqué est maintenant échappé par défaut.<sup class="footnote" id="fnref:7.18"><a href="#fn:7.18">18</a></sup> Par exemple, si un utilisateur essayait d'injecter un programme JavaScript malveillant en utilisant <code>&lt;script&gt;</code> dans son nom, l'échappement HTML automatique le convertirait en <code>&amp;lt;script&amp;gt;</code>, le rendant complètement inoffensif.</p>
+<p>Ce code introduit un problème potentiel&nbsp;: un utilisateur peut entrer un nom avec du code malveillant &mdash;&nbsp;appelé attaque <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a>&nbsp;&mdash; qui serait injecté à l'intérieur de l'application par l'helper <code>titre</code> défini dans l'<a class="ref" href="rails-flavored-ruby#code:title_helper">extrait&nbsp;4.2</a>. Avant Rails&nbsp;3, la solution consistait à <em>échapper</em> les codes potentiellement problématiques en utilisant la méthode&nbsp;<code>h</code> (raccourci pour <code>html_escape</code>), mais avec Rails&nbsp;3.0, tout le code Ruby embarqué est maintenant échappé par défaut.<sup class="footnote" id="fnref:7.18"><a href="#fn:7.18">18</a></sup> Par exemple, si un utilisateur essayait d'injecter un programme JavaScript malveillant en utilisant <code>&lt;script&gt;</code> dans son nom, l'échappement HTML automatique le convertirait en <code>&amp;lt;script&amp;gt;</code>, le rendant complètement inoffensif.</p>
 
 <p>Voyons maintenant les autres tests. Créer un <code>h1</code> à partir du nom de l'utilisateur (échappé) est facile (<a class="ref" href="modeling-and-viewing-users-two#code:user_show_view_with_name">extrait&nbsp;7.20</a>).</p>
 
@@ -1656,7 +1656,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 7.20.</span> <span class="description">L'utilisateur voir la vue aec un nom d'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Extrait 7.20.</span> <span class="description">La page de profil avec un nom d'utilisateur. <br /> <code>app/views/users/show.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span> <span class="cp">%&gt;</span>
@@ -2017,7 +2017,7 @@
 <div class="label" id="sec:more_modeling_users_exercises"></div>
 
 
-<h2><a id="sec:7.5" href="modeling-and-viewing-users-two#sec:more_modeling_users_exercises" class="heading"><span class="number">7.5</span> Exercises</a></h2>
+<h2><a id="sec:7.5" href="modeling-and-viewing-users-two#sec:more_modeling_users_exercises" class="heading"><span class="number">7.5</span> Exercices</a></h2>
 
 
 
@@ -2152,7 +2152,7 @@
 <li id="fn:7.15">J'ai utilisé <code>get &rsquo;new&rsquo;</code> dans l'<a class="ref" href="filling-in-the-layout#code:get_new_user_spec">extrait&nbsp;5.24</a> et les tests suivants pour l'action <code>new</code> parce qu'à ce point nous n'avions pas encore rencontré l'idée des actions du concept REST. Je le remplacerai par <code>get :new</code> dans les tests futurs.&nbsp;<a class="arrow" href="#fnref:7.15">&uarr;</a></li>
 <li id="fn:7.16">Il accomplit cela en appelant la méthode <code>to_param</code> sur la variable <code>@user</code>.&nbsp;<a class="arrow" href="#fnref:7.16">&uarr;</a></li>
 <li id="fn:7.17">Ça n'est pas toujours nécessairement une bonne idée de créer des tests HTML aussi spécifiques, puisque nous ne voulons pas toujours contraindre aussi étroitement le layout HTML. Sentez-vous libre d'expérimenter et de trouver le bon niveau de détail pour vos projets conformément à vos goûts.&nbsp;<a class="arrow" href="#fnref:7.17">&uarr;</a></li>
-<li id="fn:7.18">Ou plutôt, si vous voulez <em>déséchapper</em> le texte vous devez utiliser la méthode <code>raw</code> (<em>brut</em>), comme dans <tt class="verb">&lt;%=&nbsp;raw&nbsp;@titre&nbsp;%&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
+<li id="fn:7.18">Ou plutôt, si vous voulez <em>dés-échapper</em> le texte vous devez utiliser la méthode <code>raw</code> (<em>brut</em>), comme dans <tt class="verb">&lt;%=&nbsp;raw&nbsp;@titre&nbsp;%&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
 <li id="fn:7.19">Gravatar a été créé originellement par Tom Preston-Werner, co-fondateur de <a href="http://github.com/">GitHub</a>, et a été acquis et redimensionné par <a href="http://automattic.com/">Automattic</a> (plus connu comme les concepteurs de <a href="http://wordpress.com/">WordPress</a>).&nbsp;<a class="arrow" href="#fnref:7.19">&uarr;</a></li>
 <li id="fn:7.20">Dans l'hindouisme, un <em>avatar</em> est la manifestation d'une divinité dans une forme humaine ou animale. Par extension, le terme <em>avatar</em> est couramment utilisé pour signifier toute forme de représentation personnelle, spécialement dans un environnement virtuel. Mais vous avez dû voir le film maintenant, donc vous savez déjà ce que c'est.&nbsp;<a class="arrow" href="#fnref:7.20">&uarr;</a></li>
 <li id="fn:7.21">Si votre application a besoin de traiter les images ou tout autre téléchargement de fichier, <a href="http://github.com/thoughtbot/paperclip">Paperclip</a> est l'endroit où se rendre. Comme Factory Girl, Paperclip vous est offert par <a href="http://thoughtbot.com/">thoughtbot</a> (bien que je connaisse quelques personnes là-bas, je n'ai aucun intérêt particulier à promouvoir thoughtbot&nbsp;; ils font simplement de bons logiciels).&nbsp;<a class="arrow" href="#fnref:7.21">&uarr;</a></li>

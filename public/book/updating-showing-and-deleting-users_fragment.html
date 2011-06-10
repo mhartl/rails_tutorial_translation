@@ -1,5 +1,6 @@
 <!--
-	chapitre : 10
+	chapitre : 10 Actualiser, afficher et supprimer des utilisateurs
+	file     : updating-showing-and-deleting-users_fragment.html
 -->
 <h1 class="title">Tutoriel Ruby on Rails </h1>
 
@@ -125,9 +126,9 @@
 <li class="subsection"><a href="rails-flavored-ruby#sec:back_to_the_title_helper"><span class="number">4.2.5</span> Retour à l'« helper » de titre</a></li></ol></li>
 <li class="section"><a href="rails-flavored-ruby#sec:other_data_structures"><span class="number">4.3</span> Autres structures de données</a></li>
 <li><ol>
-<li class="subsection"><a href="rails-flavored-ruby#sec:arrays_and_ranges"><span class="number">4.3.1</span> Tableaux et rangs</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:arrays_and_ranges"><span class="number">4.3.1</span> tableaux et rangs</a></li>
 <li class="subsection"><a href="rails-flavored-ruby#sec:blocks"><span class="number">4.3.2</span> Blocs</a></li>
-<li class="subsection"><a href="rails-flavored-ruby#sec:hashes_and_symbols"><span class="number">4.3.3</span> Tables de hachage et symboles</a></li>
+<li class="subsection"><a href="rails-flavored-ruby#sec:hashes_and_symbols"><span class="number">4.3.3</span> tables de hachage et symboles</a></li>
 <li class="subsection"><a href="rails-flavored-ruby#sec:css_revisited"><span class="number">4.3.4</span> CSS revisitées</a></li></ol></li>
 <li class="section"><a href="rails-flavored-ruby#sec:ruby_classes"><span class="number">4.4</span> Classes Ruby</a></li>
 <li><ol>
@@ -436,7 +437,7 @@
 
 <h1 class="chapter"><a id="sec:10" href="updating-showing-and-deleting-users#top" class="heading"><span class="number">Chapitre 10</span>Actualiser, afficher et supprimer des utilisateurs</a></h1>
 
-<p>Dans ce chapitre, nous allons compléter les actions REST de la ressource Users (“utilisateurs”) (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>) en ajoutant les action <code>edit</code> (“éditer”), <code>update</code> (“actualiser”), <code>index</code> (“lister”), et <code>destroy</code> (“détruire”). Nous commencerons par donner la possibilité aux utilisateurs d'actualiser leur profil, ce qui donnera l'occasion de produire un modèle sécurisé (rendu possible  par le code d'authentification dans <a class="ref" href="sign-in-sign-out#top">Chapitre&nbsp;9</a>). Puis nous ferons un listing de tous les utilisateurs (nécessitant l'identification de l'utilisateur) ce qui nous amènera à introduire la notion de “données exemple” et de pagination. Enfin, nous ajouterons la possibilité de supprimer des utilisateurs en les retirant de la base de données. Puisque nous ne pouvons permettre à n'importe quel utilisateur d'avoir de tels pouvoirs, nous profiterons de l'occasion pour  créer la classe privilégiée d'utilisateur-administrateur (admins).</p>
+<p>Dans ce chapitre, nous allons compléter les actions REST de la ressource Users («&nbsp;utilisateurs&nbsp;») (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a>) en ajoutant les action <code>edit</code> («&nbsp;éditer&nbsp;»), <code>update</code> («&nbsp;actualiser&nbsp;»), <code>index</code> («&nbsp;lister&nbsp;»), et <code>destroy</code> («&nbsp;détruire&nbsp;»). Nous commencerons par donner la possibilité aux utilisateurs d'actualiser leur profil, ce qui donnera l'occasion de produire un modèle sécurisé (rendu possible  par le code d'authentification dans le <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>). Puis nous ferons un listing de tous les utilisateurs (nécessitant l'identification de l'utilisateur) ce qui nous amènera à introduire la notion de «&nbsp;données exemple&nbsp;» et de pagination. Enfin, nous ajouterons la possibilité de supprimer des utilisateurs en les retirant de la base de données. Puisque nous ne pouvons permettre à n'importe quel utilisateur d'avoir de tels pouvoirs, nous profiterons de l'occasion pour  créer la classe privilégiée d'utilisateur-administrateur (<em>admins</em>).</p>
 
 <p>Avant de nous mettre au travail, commençons par initier une nouvelle branche développement&nbsp;: <code>updating-users</code>&nbsp;:</p>
 
@@ -451,19 +452,19 @@
 <h2><a id="sec:10.1" href="updating-showing-and-deleting-users#sec:updating_users" class="heading"><span class="number">10.1</span> Actualisation</a></h2>
 
 
-<p>La façon d'éditer les informations de l'utilisateur est très proche de celle pour les créer (<a class="ref" href="sign-up#top">Chapitre&nbsp;8</a>). Au lieu d'une action <code>new</code> rendant une vue pour des nouveaux utilisateurs, nous avons une action <code>edit</code> rendant une vue pour éditer les utilisateurs&nbsp;; à la place d'une action <code>create</code> répondant à une requête <tt>POST</tt>, nous avons une action <code>update</code> répondant à une requête <tt>PUT</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). La différence notoire est que, entendu que n'importe qui peut s'inscrire, seul l'utilisateur courant doit être en mesure d'actualiser ses informations. Cela signifie que nous devons renforcer le contrôle d'accès afin que seuls l'utilisateur autorisé puisse accomplir les actions d'édition et d'actualisation&nbsp;; le mécanisme d'authentification du <a class="ref" href="sign-in-sign-out#top">Chapitre&nbsp;9</a> va nous permettre d'utiliser un <em>before filter</em> (un filtre “passe-avant”) pour remplir cette fonction.</p>
+<p>La façon d'éditer les informations de l'utilisateur est très proche de celle pour les créer (<a class="ref" href="sign-up#top">chapitre&nbsp;8</a>). Au lieu d'une action <code>new</code> rendant une vue pour des nouveaux utilisateurs, nous avons une action <code>edit</code> rendant une vue pour éditer les utilisateurs&nbsp;; à la place d'une action <code>create</code> répondant à une requête <tt>POST</tt>, nous avons une action <code>update</code> répondant à une requête <tt>PUT</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). La différence notoire est que, entendu que n'importe qui peut s'inscrire, seul l'utilisateur courant doit être en mesure d'actualiser ses informations. Cela signifie que nous devons renforcer le contrôle d'accès afin que seuls l'utilisateur autorisé puisse accomplir les actions d'édition et d'actualisation&nbsp;; le mécanisme d'authentification du <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a> va nous permettre d'utiliser un <em>before filter</em> (un filtre «&nbsp;passe-avant&nbsp;») pour remplir cette fonction.</p>
 
 <div class="label" id="sec:edit_form"></div>
 
 
 <h3><a id="sec:10.1.1" href="updating-showing-and-deleting-users#sec:edit_form" class="heading"><span class="number">10.1.1</span> Formulaire d'édition</a></h3>
 
-<p>Nous commençons avec des tests pour le formulaire d'édition, dont la maquette apparait dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">Illustration&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Les deux sont analogues aux tests que nous avons vu pour la page de nouvel utilisateur (<a class="ref" href="sign-up#code:new_users_tests">Listing&nbsp;8.1</a>), qui [vérifie la réponses appropriée et le titre][checking for the proper response and title]&nbsp;; le troisième test s'assure qu'il y ait un lien pour éditer l'image Gravatar de l'utilisateur (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Section&nbsp;7.3.2</a>). Si vous parcourrez [poke around] le site de Gravatar, vous verrez que la page pour ajouter ou modifier l'image est (ce qui peut sembler quelque peu étrange) à l'adresse <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, donc nous testons la page <code>edit</code> page pour un lien possédant cette URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> Le résultat est montré dans <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">Listing&nbsp;10.1</a>.</p>
+<p>Nous commençons avec des tests pour le formulaire d'édition, dont la maquette apparait dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">illustration&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Les deux sont analogues aux tests que nous avons vus pour la page de nouvel utilisateur (<a class="ref" href="sign-up#code:new_users_tests">extrait&nbsp;8.1</a>), qui vérifie la réponse appropriée et le titre&nbsp;; le troisième test s'assure qu'il y ait un lien pour éditer l'image Gravatar de l'utilisateur (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">section&nbsp;7.3.2</a>). Si vous fouinez dans le site de Gravatar, vous verrez que la page pour ajouter ou modifier l'image est (ce qui peut sembler quelque peu étrange) à l'adresse <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, donc nous testons la page <code>edit</code> page pour un lien possédant cette URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> Le résultat est montré dans <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">extrait&nbsp;10.1</a>.</p>
 
 <div class="label" id="fig:edit_user_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_mockup.png" alt="edit_user_mockup" /></span></div><div class="caption"><span class="header">Illustration 10.1: </span><span class="description">Mauqette de la page d'édition de l'utilisateur.&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_mockup.png" alt="edit_user_mockup" /></span></div><div class="caption"><span class="header">Illustration 10.1: </span><span class="description">Maquette de la page d'édition de l'utilisateur (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -472,7 +473,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.1.</span> <span class="description">Tests pour l'action <code>edit</code> de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.1.</span> <span class="description">Tests pour l'action <code>edit</code> de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_68939a8c4a5a8b651102e480ebb0b228f70eafae">
@@ -516,14 +517,14 @@
 
     <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Edit user&quot;</span><span class="p">)</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Édition profil&quot;</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="n">it</span> <span class="s2">&quot;devrait avoir un lien pour changer l'image Gravatar&quot;</span> <span class="k">do</span>
       <span class="n">get</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
       <span class="n">gravatar_url</span> <span class="o">=</span> <span class="s2">&quot;http://gravatar.com/emails&quot;</span>
       <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">gravatar_url</span><span class="p">,</span>
-                                         <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;change&quot;</span><span class="p">)</span>
+                                         <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;changer&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -531,15 +532,15 @@
 </div></div>
 
 
-<p>Ici, nous nous sommes assurés d'utiliser la méthode <code>test_sign_in(@user)</code> pour s'identifier en tant qu'utilisateur, anticipant par là-même l'accès protégé à la page d'édition (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">Section&nbsp;10.2</a>). Dans le cas contraire, ces tests seraient invalides dès que nous implémenterions notre code d'authentification.</p>
+<p>Ici, nous nous sommes assurés d'utiliser la méthode <code>test_sign_in(@user)</code> pour s'identifier en tant qu'utilisateur, anticipant par là-même l'accès protégé à la page d'édition (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">section&nbsp;10.2</a>). Dans le cas contraire, ces tests seraient invalides dès que nous implémenterions notre code d'authentification.</p>
 
-<p>Notez, en observant la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> que l'URL correct pour la page d'édition d'un utilisateur est <tt>/users/1/edit</tt> (qui supposer que l'identifiant —&nbsp;id&nbsp;— de l'utilisateur est&nbsp;<tt>1</tt>). Souvenez-vous que l'identifiant —&nbsp;id&nbsp;— de l'utilisateur se trouve dans la variable <code>params[:id]</code>, ce qui signifie que nous pouvons trouver l'utilisateur avec le code du  <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">Listing&nbsp;10.2</a>. Il utiliser <code>find</code> (“trouver”) pour trouver l'utilisateur concerné dans la base de données, et renseigne alors la variable titre —&nbsp;<code>@title</code>&nbsp;—.</p>
+<p>Notez, en observant la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a> que l'URL correct pour la page d'édition d'un utilisateur est <tt>/users/1/edit</tt> (qui suppose que l'identifiant —&nbsp;id&nbsp;— de l'utilisateur est&nbsp;<tt>1</tt>). Souvenez-vous que l'identifiant —&nbsp;id&nbsp;— de l'utilisateur se trouve dans la variable <code>params[:id]</code>, ce qui signifie que nous pouvons trouver l'utilisateur avec le code du  <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">extrait&nbsp;10.2</a>. Il utilise <code>find</code> (<em>trouver</em>) pour trouver l'utilisateur concerné dans la base de données, et renseigne alors la variable titre —&nbsp;<code>@titre</code>.</p>
 
 <div class="label" id="code:initial_edit_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.2.</span> <span class="description">L'action <code>edit</code> de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.2.</span> <span class="description">L'action <code>edit</code> de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_1fa0473f3e8dea2d37f9d9073a9674714734ac0b">
@@ -547,7 +548,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20end%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20end%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -557,7 +558,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20end%0Aend%0A"
+             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20end%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -568,19 +569,19 @@
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">edit</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Edit user&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Édition profil&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
 
-<p>Pour que le test soit valide, il faut créer la vue d'édition, montrée dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Listing&nbsp;10.3</a>. Remarquez comme ce code s'apparente à celui de la vue du nouvel utilisateur du <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a>&nbsp;; la grande similiture suggère de reconstruire la code à l'aide des partielles (“partial”), ce que vous pourrez faire à titre d'exercice (<a class="ref" href="updating-showing-and-deleting-users#sec:updating_deleting_exercises">Section&nbsp;10.6</a>).</p>
+<p>Pour que le test soit valide, il faut créer la vue d'édition, montrée dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">extrait&nbsp;10.3</a>. Remarquez comme ce code s'apparente à celui de la vue du nouvel utilisateur de l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a>&nbsp;; la grande similitude suggère de reconstruire la code à l'aide des <rw>partiels</rw>, ce que vous pourrez faire à titre d'exercice (<a class="ref" href="updating-showing-and-deleting-users#sec:updating_deleting_exercises">section&nbsp;10.6</a>).</p>
 
 <div class="label" id="code:user_edit_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.3.</span> <span class="description">La vue d'édition de l'utilisateur. <br /> <code>app/views/users/edit.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.3.</span> <span class="description">La vue d'édition de l'utilisateur. <br /> <code>app/views/users/edit.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_609ef158d399548cd6ab11f0ce03c88e31656ec1">
@@ -603,24 +604,24 @@
       />
       </object>
 </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Editer l'utilisateur<span class="nt">&lt;/h1&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Edition du profil<span class="nt">&lt;/h1&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">object</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name, "Nom"</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:email</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:email, "eMail"</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:email</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:password</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:password, "Mot de passe"</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">password_field</span> <span class="ss">:password</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:password_confirmation</span><span class="p">,</span> <span class="s2">&quot;Confirmation&quot;</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:password_confirmation, "Confirmation mot de passe"</span><span class="p">,</span> <span class="s2">&quot;Confirmation&quot;</span> <span class="cp">%&gt;</span><span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">password_field</span> <span class="ss">:password_confirmation</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;actions&quot;</span><span class="nt">&gt;</span>
@@ -630,26 +631,26 @@
 
 <span class="nt">&lt;div&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://gravatar.com/emails&quot;</span><span class="nt">&gt;</span>change<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://gravatar.com/emails&quot;</span><span class="nt">&gt;</span>changer<span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div></div>
 
-<p>Ici, nous avons ré-utilisé la partielle partagée <code>error_messages</code> introduite à <a class="ref" href="sign-up#sec:signup_error_messages">Section&nbsp;8.2.3</a>.</p>
+<p>Ici, nous avons ré-utilisé le <rw>partiel</rw> partagé <code>error_messages</code> introduit à la <a class="ref" href="sign-up#sec:signup_error_messages">section&nbsp;8.2.3</a>.</p>
 
-<p>Nous pouvons nous rappeler du <a class="ref" href="sign-up#code:f_error_messages">Listing&nbsp;8.8</a> que la partielle “error-messages” fait référence explicitement à la variable <code>@user</code>. Dans le cas présent, [][we <em>do</em> happen to have an <code>@user</code> variable], [mais dans le but d'obtenir vraiment une partielle partagée][but in order to make this a truly shared partial] [nous ne devons pas déprendre de ce fait][ we should not depend on this fact]. La solution consiste à passer à la partielle, en paramètre, un objet correspondant à la variable formulaire&nbsp;<code>f</code>&nbsp;:</p>
+<p>Nous pouvons nous rappeler du <a class="ref" href="sign-up#code:f_error_messages">extrait&nbsp;8.8</a> que le partiel «&nbsp;error-messages&nbsp;» fait référence explicitement à la <rw>variable d'instance</rw> <code>@user</code>. Dans le cas présent, nous sommes <em>censés</em> avoir une variable <code>@user</code>, mais dans le but d'obtenir vraiment un partiel partagé, nous ne devons pas le rendre dépendant de l'existence de cette variable. La solution consiste à passer au partiel, en paramètre, un objet correspondant à la variable formulaire&nbsp;<code>f</code>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">object</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
-<p>Cela crée une variable appelée <code>object</code> dans la partielle, qui peut être alors utilisée pour générer les messages d'erreur, comme le montre le <a class="ref" href="updating-showing-and-deleting-users#code:updated_error_messages_partial">Listing&nbsp;10.4</a>. (Notez l'élégance de la chaine de méthodes qui produit une bonne version du nom de l'objet&nbsp;; voyez l'entrée de l'API Rails pour, disons, <code>humanize</code>, [pour avoir une idée des possibilités de Rails][to get an idea of the range of Rails utilities available].)</p>
+<p>Cela crée une variable appelée <code>object</code> dans la partielle, qui peut être alors utilisée pour générer les messages d'erreur, comme le montre le <a class="ref" href="updating-showing-and-deleting-users#code:updated_error_messages_partial">extrait&nbsp;10.4</a> (notez l'élégance de la chaine de méthodes qui produit une bonne version du nom de l'objet&nbsp;; voyez l'entrée de l'API Rails pour, disons, <code>humanize</code>, pour avoir une idée des nombreuses méthodes utilitaires de Rails).</p>
 
 <div class="label" id="code:updated_error_messages_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.4.</span> <span class="description">Actualisation de la partielle des messages d'erreur du <a class="ref" href="sign-up#code:errors_partial">Listing&nbsp;8.9</a> pour qu'il fonctionne avec d'autres objets. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.4.</span> <span class="description">Actualisation du partiel des messages d'erreur de l'<a class="ref" href="sign-up#code:errors_partial">extrait&nbsp;8.9</a> pour qu'il fonctionne avec d'autres objets. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_00de7ea22b93f982b6be5666d424d963731f9b25">
@@ -688,13 +689,13 @@
 </pre></div>
 </div></div>
 
-<p>Pendant que nous y sommes, nous allons actualiser le formulaire d'inscription avec ce code (<a class="ref" href="updating-showing-and-deleting-users#code:signup_errors_updated">Listing&nbsp;10.5</a>).</p>
+<p>Pendant que nous y sommes, nous allons actualiser le formulaire d'inscription avec ce code (<a class="ref" href="updating-showing-and-deleting-users#code:signup_errors_updated">extrait&nbsp;10.5</a>).</p>
 
 <div class="label" id="code:signup_errors_updated"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.5.</span> <span class="description">Actualisation du rendu des messages d'erreur de l'inscription des utilisateurs. <br /> <code>app/views/users/new.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.5.</span> <span class="description">Actualisation du rendu des messages d'erreur de l'inscription des utilisateurs. <br /> <code>app/views/users/new.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_9a7dcac21bbc1d2fada0b8683a2740d84b3dc7c1">
@@ -728,12 +729,12 @@
 </pre></div>
 </div></div>
 
-<p>Nous allons également ajouter un lien dans la partie navigation du site pour la page d'édition de l'utilisateur (que nous appellerons &ldquo;Profil&rdquo;), sur la base de la maquette dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:profile_settings_link_mockup">Illustration&nbsp;10.2</a><sup class="footnote" id="fnref:10.3"><a href="#fn:10.3">3</a></sup> et montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:settings_link">Listing&nbsp;10.6</a>.</p>
+<p>Nous allons également ajouter un lien dans la partie navigation du site pour la page d'édition de l'utilisateur (que nous appellerons &ldquo;Profil&rdquo;), sur la base de la maquette de l'<a class="ref" href="updating-showing-and-deleting-users#fig:profile_settings_link_mockup">illustration&nbsp;10.2</a><sup class="footnote" id="fnref:10.3"><a href="#fn:10.3">3</a></sup> et montré dans l'<a class="ref" href="updating-showing-and-deleting-users#code:settings_link">extrait&nbsp;10.6</a>.</p>
 
 <div class="label" id="fig:profile_settings_link_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_settings_link_mockup.png" alt="profile_settings_link_mockup" /></span></div><div class="caption"><span class="header">Figure 10.2: </span><span class="description">Maquette de la page d'édition de l'utilisateur avec un lien &ldquo;Profil&rdquo;.&nbsp;<a href="http://railstutorial.org/images/figures/profile_settings_link_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_settings_link_mockup.png" alt="profile_settings_link_mockup" /></span></div><div class="caption"><span class="header">Figure 10.2: </span><span class="description">Maquette de la page d'édition de l'utilisateur avec un lien &ldquo;Profil&rdquo; (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/profile_settings_link_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -742,7 +743,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.6.</span> <span class="description">Ajout d'un lien Profil. <br /> <code>app/views/layouts/_header.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.6.</span> <span class="description">Ajout d'un lien Profil. <br /> <code>app/views/layouts/_header.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_a05e4500ae3b22fc395253d6efba7ed9b0fe28b2">
@@ -769,9 +770,8 @@
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
-      <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Accueil&quot;</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">signed_in?</span> <span class="cp">%&gt;</span>
-      <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Profile&quot;</span><span class="p">,</span> <span class="n">current_user</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Profil&quot;</span><span class="p">,</span> <span class="n">edit_user_path</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
       <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
       .
@@ -783,22 +783,22 @@
 </pre></div>
 </div></div>
 
-<p>Ici nous utilisons la route de nom <code>edit_user_path</code> de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>, avec la méthode pratique de l'helper <code>current_user</code> définie dans le <a class="ref" href="sign-in-sign-out#code:current_user_working">Listing&nbsp;9.16</a>.</p>
+<p>Ici nous utilisons la route de nom <code>edit_user_path</code> de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a>, avec la méthode pratique de l'helper <code>current_user</code> définie dans le <a class="ref" href="sign-in-sign-out#code:current_user_working">extrait&nbsp;9.16</a>.</p>
 
-<p>Avec la variable d'instance <code>@user</code> du <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">Listing&nbsp;10.2</a>, les tests du <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">Listing&nbsp;10.1</a> réussiront. Comme cela est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Illustration&nbsp;10.3</a>, le rendu de la page <code>edit</code>, bien qu'elle ne fonctionne pas encore.</p>
+<p>Avec la variable d'instance <code>@user</code> de l'<a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">extrait&nbsp;10.2</a>, les tests du <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">extrait&nbsp;10.1</a> réussiront. Comme cela est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">illustration&nbsp;10.3</a>, le rendu de la page <code>edit</code>, bien qu'elle ne fonctionne pas encore.</p>
 
 <div class="label" id="fig:edit_user_settings"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_settings.png" alt="edit_user_settings" /></span></div><div class="caption"><span class="header">Figure 10.3: </span><span class="description">Edition des caractéristiques de l'utilisateur [Editing user settings] (<a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_settings-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_settings.png" alt="edit_user_settings" /></span></div><div class="caption"><span class="header">Figure 10.3: </span><span class="description">Edition des caractéristiques de l'utilisateur (<a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a>).&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_settings-full.png">(taille normale)</a></span></div></div>
 
-<p>En regardant le code HTML source de l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Illustration&nbsp;10.3</a>, nous voyons la balise de formulaire attendue (<a class="ref" href="updating-showing-and-deleting-users#code:edit_form_html">Listing&nbsp;10.7</a>).</p>
+<p>En regardant le code HTML source de l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">illustration&nbsp;10.3</a>, nous voyons la balise de formulaire attendue (<a class="ref" href="updating-showing-and-deleting-users#code:edit_form_html">extrait&nbsp;10.7</a>).</p>
 
 <div class="label" id="code:edit_form_html"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.7.</span> <span class="description">Code HTML pour le formulaire d'édition défini dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Listing&nbsp;10.3</a> et affiché dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Illustration&nbsp;10.3</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.7.</span> <span class="description">Code HTML pour le formulaire d'édition défini dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">extrait&nbsp;10.3</a> et affiché dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">illustration&nbsp;10.3</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b2e92c646c288a84aadb4724ff93c38ac409535a">
@@ -836,9 +836,9 @@
 </pre></div>
 </div>
 
-<p>Puisque les navigateurs internet ne peuvent pas, de façon native, envoyer des requêtes <tt>PUT</tt> (requises par les conventions REST conventions de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>), Rails la simule avec une requête <tt>POST</tt> et un champ caché (hidden <code>input</code>).<sup class="footnote" id="fnref:10.4"><a href="#fn:10.4">4</a></sup></p>
+<p>Puisque les navigateurs internet ne peuvent pas, de façon native, envoyer des requêtes <tt>PUT</tt> (requises par les conventions REST conventions de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a>), Rails la simule avec une requête <tt>POST</tt> et un champ caché (hidden <code>input</code>).<sup class="footnote" id="fnref:10.4"><a href="#fn:10.4">4</a></sup></p>
 
-<p>Il y a une autre subilité à noter ici&nbsp;: le code <code>form_for(@user)</code> dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Listing&nbsp;10.3</a> est <em>très exactement</em> identique au code dans le <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a>&mdash;donc comment fait Rails pour utiliser la requête <tt>POST</tt> pour de nouveaux utilisateurs et la requête <tt>PUT</tt> pour éditer ces utilisateurs&nbsp;? La réponse est qu'il est possible de dire si un utilisateur est nouveau ou s'il existe déjà dans la base de données via la méthode booléenne <code>new_record?</code> (nouveL_enregistrement) (que nous avons vu brièvement dans le <a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">Listing&nbsp;7.10</a>):</p>
+<p>Il y a une autre subtilité à noter ici&nbsp;: le code <code>form_for(@user)</code> dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">extrait&nbsp;10.3</a> est <em>très exactement</em> identique au code dans l'<a class="ref" href="sign-up#code:new_user_form">extrait&nbsp;8.2</a> &mdash;&nbsp;donc comment fait Rails pour utiliser la requête <tt>POST</tt> pour de nouveaux utilisateurs et la requête <tt>PUT</tt> pour éditer ces utilisateurs&nbsp;? La réponse est qu'il est possible de dire si un utilisateur est nouveau ou s'il existe déjà dans la base de données via la méthode booléenne <code>new_record?</code> (nouvel_enregistrement) (que nous avons vu brièvement dans l'<a class="ref" href="modeling-and-viewing-users-two#code:has_password_with_encrypt">extrait&nbsp;7.10</a>)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">new_record?</span>
@@ -856,20 +856,20 @@
 
 <h3><a id="sec:10.1.2" href="updating-showing-and-deleting-users#sec:enabling_edits" class="heading"><span class="number">10.1.2</span> Permettre l'édition</a></h3>
 
-<p>Bien que le formulaire d'édition ne fonctionne pas encore, nous avons [extrait l'image de Gravatar][we&rsquo;ve outsourced image upload to Gravatar], donc il fonctionne déjà en cliquant sur le lien &ldquo;change&rdquo; link de l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Illustration&nbsp;10.3</a>, comme montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:gravatar_cropper">Illustration&nbsp;10.4</a>. Mettons en place les autres fonctionnalités de l'édition de l'utilisateur.</p>
+<p>Bien que le formulaire d'édition ne fonctionne pas encore, nous avons implémenté le téléchargement de l'image Gravatar, donc il est déjà possible en cliquant sur le lien &ldquo;changer&rdquo; de l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">illustration&nbsp;10.3</a>, comme montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:gravatar_cropper">illustration&nbsp;10.4</a>. Mettons en place les autres fonctionnalités de l'édition de l'utilisateur.</p>
 
 <div class="label" id="fig:gravatar_cropper"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/gravatar_cropper.png" alt="gravatar_cropper" /></span></div><div class="caption"><span class="header">Illustration 10.4: </span><span class="description">L'interface d'ajustement de <a href="http://gravatar.com/">Gravatar</a>, avec une image de <a href="http://michaelhartl.com/">some dude</a>.&nbsp;<a href="http://railstutorial.org/images/figures/gravatar_cropper-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/gravatar_cropper.png" alt="gravatar_cropper" /></span></div><div class="caption"><span class="header">Illustration 10.4: </span><span class="description">L'interface d'ajustement de <a href="http://gravatar.com/">Gravatar</a>, avec l'image d'<a href="http://michaelhartl.com/">un mec</a>.&nbsp;<a href="http://railstutorial.org/images/figures/gravatar_cropper-full.png">(taille normale)</a></span></div></div>
 
-<p>Les tests pour  l'action <code>update</code> (“actualisation”) sont similaires à ceux de l'action <code>create</code> (“Créer”). En particulier, nous testons l'échec de l'actualisation et son succès (<a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">Listing&nbsp;10.8</a>). (C'est beaucoup de code&nbsp;; voyons si vous pouvez l'analyser en vous référant aux tests du <a class="ref" href="sign-up#top">Chapitre&nbsp;8</a>.)</p>
+<p>Les tests pour  l'action <code>update</code> (<em>actualisation</em>) sont similaires à ceux de l'action <code>create</code> (<em>Créer</em>). En particulier, nous testons l'échec de l'actualisation et son succès (<a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">extrait&nbsp;10.8</a>) (ça fait beaucoup de code&nbsp;; voyons si vous pouvez l'analyser en vous référant aux tests du <a class="ref" href="sign-up#top">chapitre&nbsp;8</a>.)</p>
 
 <div class="label" id="code:user_update_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.8.</span> <span class="description">Tests pour l'action <code>update</code> de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.8.</span> <span class="description">Tests pour l'action <code>update</code> de l'utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b94ffec5313a99d0b3621a363ae145623fd3937c">
@@ -907,7 +907,7 @@
     <span class="n">describe</span> <span class="s2">&quot;Échec&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                   <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
@@ -918,21 +918,21 @@
 
       <span class="n">it</span> <span class="s2">&quot;devrait avoir le bon titre&quot;</span> <span class="k">do</span>
         <span class="n">put</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
-        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Edit user&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Édition profil&quot;</span><span class="p">)</span>
       <span class="k">end</span>
     <span class="k">end</span>
 
     <span class="n">describe</span> <span class="s2">&quot;succès&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;New Name&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.org&quot;</span><span class="p">,</span>
+        <span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:nom</span> <span class="o">=&gt;</span> <span class="s2">&quot;New Name&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.org&quot;</span><span class="p">,</span>
                   <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;barbaz&quot;</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;barbaz&quot;</span> <span class="p">}</span>
       <span class="k">end</span>
 
       <span class="n">it</span> <span class="s2">&quot;devrait modifier les caractéristiques de l'utilisateur&quot;</span> <span class="k">do</span>
         <span class="n">put</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">reload</span>
-        <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">should</span>  <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span>
+        <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">should</span>  <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:nom</span><span class="o">]</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
       <span class="k">end</span>
 
@@ -943,7 +943,7 @@
 
       <span class="n">it</span> <span class="s2">&quot;devrait afficher un message flash&quot;</span> <span class="k">do</span>
         <span class="n">put</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@attr</span>
-        <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">].</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/updated/</span>
+        <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">].</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/actualisé/</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -951,25 +951,25 @@
 </pre></div>
 </div></div>
 
-<p>La seule nouveauté ici est la méthode <code>reload</code> (“rechargement”), qui apparait dans le test pour le changements des caractéristiques de l'utilisateur&nbsp;:</p>
+<p>La seule nouveauté ici est la méthode <code>reload</code> (<em>rechargement</em>) qui apparait dans le test pour le changement des caractéristiques de l'utilisateur&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">it</span> <span class="s2">&quot;devrait modifier les caractéristiques de l'utilisateur&quot;</span> <span class="k">do</span>
   <span class="vi">@user</span><span class="o">.</span><span class="n">reload</span>
-  <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">should</span>  <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span>
+  <span class="vi">@user</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">should</span>  <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:nom</span><span class="o">]</span>
   <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@attr</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 
-<p>Ce code recharge la variable <code>@user</code> de la base de données (de test) en utilisant <code>@user.reload</code>, et vérifie alors que le nouveau nom de l'utilisateur et son adresse mail correspondent aux valeurs présentent dans la table <code>@attr</code>.</p>
+<p>Ce code recharge la variable <code>@user</code> de la base de données (de test) en utilisant <code>@user.reload</code>, et vérifie alors que le nouveau nom de l'utilisateur et son adresse mail correspondent aux valeurs de la table <code>@attr</code>.</p>
 
-<p>L'action <code>update</code> (“actualiser”) nécessaire pour réussir les tests du <a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">Listing&nbsp;10.8</a> est similaire au formulaire final de l'action <code>create</code> (“créer”) (<a class="ref" href="sign-in-sign-out#code:signin_upon_signup">Listing&nbsp;9.24</a>), comme nous l'avons vu dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_update_action">Listing&nbsp;10.9</a>.</p>
+<p>L'action <code>update</code> (<em>actualiser</em>) nécessaire pour réussir les tests de l'<a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">extrait&nbsp;10.8</a> est similaire au formulaire final de l'action <code>create</code> (<em>créer</em>) (<a class="ref" href="sign-in-sign-out#code:signin_upon_signup">extrait&nbsp;9.24</a>), comme nous l'avons vu dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_update_action">extrait&nbsp;10.9</a>.</p>
 
 <div class="label" id="code:user_update_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.9.</span> <span class="description">L'action utilisateur <code>update</code> (“actualiser”). <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.9.</span> <span class="description">L'action utilisateur <code>update</code> (<em>actualiser</em>). <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_f8caf5d9edf24be49139fff2b367ccdc0e4bcffd">
@@ -977,7 +977,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20update%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20if%20@user.update_attributes(params[:user])%0A%20%20%20%20%20%20flash[:success]%20=%20%22Profile%20updated.%22%0A%20%20%20%20%20%20redirect_to%20@user%0A%20%20%20%20else%0A%20%20%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20%20%20%20%20render%20'edit'%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20update%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20if%20@user.update_attributes(params[:user])%0A%20%20%20%20%20%20flash[:success]%20=%20%22Profile%20updated.%22%0A%20%20%20%20%20%20redirect_to%20@user%0A%20%20%20%20else%0A%20%20%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20%20%20%20%20render%20'edit'%0A%20%20%20%20end%0A%20%20end%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -987,7 +987,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20update%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20if%20@user.update_attributes(params[:user])%0A%20%20%20%20%20%20flash[:success]%20=%20%22Profile%20updated.%22%0A%20%20%20%20%20%20redirect_to%20@user%0A%20%20%20%20else%0A%20%20%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20%20%20%20%20render%20'edit'%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
+             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20update%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20if%20@user.update_attributes(params[:user])%0A%20%20%20%20%20%20flash[:success]%20=%20%22Profile%20updated.%22%0A%20%20%20%20%20%20redirect_to%20@user%0A%20%20%20%20else%0A%20%20%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20%20%20%20%20render%20'edit'%0A%20%20%20%20end%0A%20%20end%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -999,10 +999,10 @@
   <span class="k">def</span> <span class="nf">update</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
-      <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Profile updated.&quot;</span>
+      <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Profil actualisé.&quot;</span>
       <span class="n">redirect_to</span> <span class="vi">@user</span>
     <span class="k">else</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Edit user&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Édition profil&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;edit&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -1010,19 +1010,19 @@
 </pre></div>
 </div></div>
 
-<p>Avec cela, la page d'édition de l'utilisateur devrait fonctionner. Dans la forme actuelle, chaque édition demande à l'utilisateur de reconfirmer le mot de passe (comme requis par le champ de saisie vie dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Illustration&nbsp;10.3</a>), ce qui rend les actualisations plus sécurisées, mais reste quelque peu gênant.</p>
+<p>Avec cela, la page d'édition de l'utilisateur devrait fonctionner. Dans la forme actuelle, chaque édition demande à l'utilisateur de confirmer le mot de passe à nouveau (comme requis par le champ de saisie vue dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">illustration&nbsp;10.3</a>), ce qui rend les actualisations plus sécurisées, mais reste quelque peu contraignant.</p>
 
 <div class="label" id="sec:protecting_pages"></div>
 
 
-<h2><a id="sec:10.2" href="updating-showing-and-deleting-users#sec:protecting_pages" class="heading"><span class="number">10.2</span> Proctection des pages</a></h2>
+<h2><a id="sec:10.2" href="updating-showing-and-deleting-users#sec:protecting_pages" class="heading"><span class="number">10.2</span> Protection des pages</a></h2>
 
-<p>Bien que les actions edit (éditer) et update (actualiser) de la <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">Section&nbsp;10.1</a> soient fonctionnelles, elles souffrent d'un vice de sécurité ridicule&nbsp;: elles permettent à n'importe qui (même des utilisateurs non identifiés) d'accéder à ces actions, et n'importe quel utilisateur identifié peut modifier les informations de n'importe quel utilisateur. Dans cette section, nous allons implémenter un modèle de sécurité qui requiert des utilisateurs qu'ils soient identifiés et qui les empêchent d'actualiser d'autres informations que les leurs. Les utilisateurs qui ne sont pas identifiés ou qui tentent d'atteindre des pages protégées seront redirigés vers la page d'identification, avec un message d'aide, comme le montre la maquette de l'<a class="ref" href="updating-showing-and-deleting-users#fig:signin_page_protected_mockup">Illustration&nbsp;10.5</a>.</p>
+<p>Bien que les actions edit (<em>éditer</em>) et update (<em>actualiser</em>) de la <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">section&nbsp;10.1</a> soient fonctionnelles, elles souffrent d'un vice de sécurité ridicule&nbsp;: elles permettent à n'importe qui (même des utilisateurs non identifiés) d'accéder à ces actions, et n'importe quel utilisateur identifié peut modifier les informations de n'importe quel autre utilisateur. Dans cette section, nous allons implémenter un modèle de sécurité qui requiert des utilisateurs qu'ils soient identifiés et qui les empêchent d'actualiser d'autres informations que les leurs. Les utilisateurs qui ne sont pas identifiés ou qui tentent d'atteindre des pages protégées seront redirigés vers la page d'identification, avec un message d'aide, comme le montre la maquette de l'<a class="ref" href="updating-showing-and-deleting-users#fig:signin_page_protected_mockup">illustration&nbsp;10.5</a>.</p>
 
 <div class="label" id="fig:signin_page_protected_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_page_protected_mockup.png" alt="signin_page_protected_mockup" /></span></div><div class="caption"><span class="header">Figure 10.5: </span><span class="description">Maquette du résultat de la tentative d'accès à une page protégée&nbsp;<a href="http://railstutorial.org/images/figures/signin_page_protected_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_page_protected_mockup.png" alt="signin_page_protected_mockup" /></span></div><div class="caption"><span class="header">Figure 10.5: </span><span class="description">Maquette du résultat de la tentative d'accès à une page protégée (version anglaise)&nbsp;<a href="http://railstutorial.org/images/figures/signin_page_protected_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -1033,13 +1033,13 @@
 <h3><a id="sec:10.2.1" href="updating-showing-and-deleting-users#sec:requiring_signed_in_users" class="heading"><span class="number">10.2.1</span> L'identification requise de l'utilisateur</a></h3>
 
 
-<p>Puisque les restrictions de sécurité des actions <code>edit</code> et <code>update</code> sont identiques, nous les définirons dans un bloc RSpec<code>describe</code> unique. En commençant par vérifier que l'utilisateur est identifié, nos premiers tests vérifient qu'un utilisateur non identifié qui essaie d'utiliser de mauvaises actions soient simplement redirigé vers la page d'identification, comme nous pouvons le voir dans le <a class="ref" href="updating-showing-and-deleting-users#code:authentication_specs">Listing&nbsp;10.10</a>.</p>
+<p>Puisque les restrictions de sécurité des actions <code>edit</code> et <code>update</code> sont identiques, nous les définirons dans un bloc RSpec <code>describe</code> unique. En commençant par vérifier que l'utilisateur est identifié, nos premiers tests vérifient qu'un utilisateur non identifié qui essaie d'utiliser de mauvaises actions soit simplement redirigé vers la page d'identification, comme nous pouvons le voir dans l'<a class="ref" href="updating-showing-and-deleting-users#code:authentication_specs">extrait&nbsp;10.10</a>.</p>
 
 <div class="label" id="code:authentication_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.10.</span> <span class="description">Premiers tests d'authentification. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.10.</span> <span class="description">Premiers tests d'authentification. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_6205f23fe17de15f78c25998634bc09ff90a42c8">
@@ -1090,13 +1090,13 @@
 </pre></div>
 </div></div>
 
-<p>Le code de l'application permettra de réussir ces tests en utilisant un filtre “passe-avant” (<em>before filter</em>), qui permet d'appeler une méthode particulière avant d'appeler les actions données. Dans ce cas, nous définissons une méthode <code>authenticate</code> et nous l'invoquons en utilisant <code>before_filter :authenticate</code>, comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:authenticate_before_filter">Listing&nbsp;10.11</a>.</p>
+<p>Le code de l'application permettra de réussir ces tests en utilisant un filtre «&nbsp;passe-avant&nbsp;» (<em>before filter</em>), qui permet d'appeler une méthode particulière avant d'appeler les actions données. Dans ce cas, nous définissons une méthode <code>authenticate</code> et nous l'invoquons en utilisant <code>before_filter :authenticate</code>, comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:authenticate_before_filter">extrait&nbsp;10.11</a>.</p>
 
 <div class="label" id="code:authenticate_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.11.</span> <span class="description">Ajout d'un filtre “passe-avant” <code>authenticate</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.11.</span> <span class="description">Ajout d'un filtre «&nbsp;passe-avant&nbsp;» <code>authenticate</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_d5fd8070eeea7dae71a20423271185277d6900d4">
@@ -1133,15 +1133,15 @@
 </pre></div>
 </div></div>
 
-<p>Par défaut, les filtres “passe-avant” s'applique à <em>toute</em> action du contrôleur, donc ici nous restreignons l'effet du filtre aux actions <code>:edit</code> et <code>:update</code> en renseignant l'attribut  <code>:only</code> dans la table des options.</p>
+<p>Par défaut, les filtres «&nbsp;passe-avant&nbsp;» s'applique à <em>toute</em> action du contrôleur, donc ici nous restreignons l'effet du filtre aux actions <code>:edit</code> et <code>:update</code> en renseignant l'attribut  <code>:only</code> dans la table des options.</p>
 
-<p>Ce code ne fonctionne pas encore, parce que la méthode <code>deny_access</code> (“refuser l'accès”) n'a pas été encore définie. Puisque le refus de l'accès est une partie de l'authentification, nous alons implémenter cette méthode dans l'<em>helper</em> du fichier Sessions du <a class="ref" href="sign-in-sign-out#top">Chapitre&nbsp;9</a>. Tout ce que fait  <code>deny_access</code>, c'est placer un message dans <code>flash[:notice]</code> et rediriger vers la page d'identification (<a class="ref" href="updating-showing-and-deleting-users#code:deny_access">Listing&nbsp;10.12</a>).</p>
+<p>Ce code ne fonctionne pas encore, parce que la méthode <code>deny_access</code> («&nbsp;refuser l'accès&nbsp;») n'a pas été encore définie. Puisque le refus de l'accès est une partie de l'authentification, nous alons implémenter cette méthode dans l'<em>helper</em> du fichier Sessions du <a class="ref" href="sign-in-sign-out#top">chapitre&nbsp;9</a>. Tout ce que fait  <code>deny_access</code>, c'est placer un message dans <code>flash[:notice]</code> et rediriger vers la page d'identification (<a class="ref" href="updating-showing-and-deleting-users#code:deny_access">extrait&nbsp;10.12</a>).</p>
 
 <div class="label" id="code:deny_access"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.12.</span> <span class="description">La méthode <code>deny_access</code> pour l'authentification de l'utilisateur. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.12.</span> <span class="description">La méthode <code>deny_access</code> pour l'authentification de l'utilisateur. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_785ea11194563a0c75b45386b329795870b38159">
@@ -1179,7 +1179,7 @@
 </div></div>
 
 
-<p>Notez ici que le <a class="ref" href="updating-showing-and-deleting-users#code:deny_access">Listing&nbsp;10.12</a> utilise un raccourci d'écriture pour renseigner l'attribut <code>flash[:notice]</code> en passant une table “options” à la fonction  <em>redirect_to</em>. Le code dans le <a class="ref" href="updating-showing-and-deleting-users#code:deny_access">Listing&nbsp;10.12</a> est équivalent à celui plus verbeux&nbsp;:</p>
+<p>Notez ici que le <a class="ref" href="updating-showing-and-deleting-users#code:deny_access">extrait&nbsp;10.12</a> utilise un raccourci d'écriture pour renseigner l'attribut <code>flash[:notice]</code> en passant une table «&nbsp;options&nbsp;» à la fonction  <em>redirect_to</em>. Le code dans le <a class="ref" href="updating-showing-and-deleting-users#code:deny_access">extrait&nbsp;10.12</a> est équivalent à celui plus verbeux&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Please sign in to access this page.&quot;</span>
 <span class="n">redirect_to</span> <span class="n">signin_path</span>
@@ -1189,7 +1189,7 @@
 
 <p>(La même syntaxe fontion pour la clé <code>:error</code>, mais pas pour la clé <code>:success</code>.)</p>
 
-<p>Associée à <code>:success</code> et <code>:error</code>, la clé <code>:notice</code> complète notre triumvirate des styles <code>flash</code>, tous supportés nativement par les feuilles de styles Blueprint CSS. En se déconnectant et en essayant d'atteindre la page d'édition de l'utilisateur <a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a>, nous pouvons voir s'afficher la boite jaune du message <code>"notice"</code>, comme dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:protected_sign_in">Illustration&nbsp;10.6</a>.</p>
+<p>Associée à <code>:success</code> et <code>:error</code>, la clé <code>:notice</code> complète notre triumvirate des styles <code>flash</code>, tous supportés nativement par les feuilles de styles Blueprint CSS. En se déconnectant et en essayant d'atteindre la page d'édition de l'utilisateur <a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a>, nous pouvons voir s'afficher la boite jaune du message <code>"notice"</code>, comme dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:protected_sign_in">illustration&nbsp;10.6</a>.</p>
 
 <div class="label" id="fig:protected_sign_in"></div>
 
@@ -1204,13 +1204,13 @@
 
 <h3><a id="sec:10.2.2" href="updating-showing-and-deleting-users#sec:requiring_the_right_user" class="heading"><span class="number">10.2.2</span> Nécessité du bon utilisateur</a></h3>
 
-<p>Bien entendu, qu'un utilisateur soit identifié n'est pas suffisant&nbsp;; les utilisateurs ne doivent être autorisés qu'à modifier leur <em>propres</em> informations suelement. Nous pouvons tester cela d'abord en identifiant un utilisateur incorrect puis en invoquant les actions <code>edit</code> et <code>update</code> (<a class="ref" href="updating-showing-and-deleting-users#code:authentication_for_signed_in">Listing&nbsp;10.13</a>). Notez que, puisque les utilisateurs ne devraient même pas <em>essayer</em> d'éditer le profil d'un autre utilisateur, nous ne les redirigerons pas vers la page d'identification mais vers l'accueil du site (l'url racine, root url).</p>
+<p>Bien entendu, qu'un utilisateur soit identifié n'est pas suffisant&nbsp;; les utilisateurs ne doivent être autorisés qu'à modifier leur <em>propres</em> informations suelement. Nous pouvons tester cela d'abord en identifiant un utilisateur incorrect puis en invoquant les actions <code>edit</code> et <code>update</code> (<a class="ref" href="updating-showing-and-deleting-users#code:authentication_for_signed_in">extrait&nbsp;10.13</a>). Notez que, puisque les utilisateurs ne devraient même pas <em>essayer</em> d'éditer le profil d'un autre utilisateur, nous ne les redirigerons pas vers la page d'identification mais vers l'accueil du site (l'url racine, root url).</p>
 
 <div class="label" id="code:authentication_for_signed_in"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.13.</span> <span class="description">Test d'authentification pour les utilisateurs identifiés. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.13.</span> <span class="description">Test d'authentification pour les utilisateurs identifiés. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_2dd1135a874b7bc9b2dafd7cd48578c59fabb923">
@@ -1264,13 +1264,13 @@
 </pre></div>
 </div></div>
 
-<p>Le code de l'application est simple&nbsp;:nous ajoutons un second filtre “passe-avant” pour appeler la méthode <code>correct_user</code> (que nous devons encore écrire), comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:correct_user_before_filter">Listing&nbsp;10.14</a>.</p>
+<p>Le code de l'application est simple&nbsp;:nous ajoutons un second filtre «&nbsp;passe-avant&nbsp;» pour appeler la méthode <code>correct_user</code> (que nous devons encore écrire), comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:correct_user_before_filter">extrait&nbsp;10.14</a>.</p>
 
 <div class="label" id="code:correct_user_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.14.</span> <span class="description">Un filtre “passe-avant” <code>correct_user</code> pour protéger les pages d'édition (edit) et d'actualisation (update). <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.14.</span> <span class="description">Un filtre «&nbsp;passe-avant&nbsp;» <code>correct_user</code> pour protéger les pages d'édition (edit) et d'actualisation (update). <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e81e642669fff1bf55f87433f52f7fb29eddfacf">
@@ -1278,7 +1278,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20before_filter%20:correct_user,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20private%0A%20%20%20%20%0A%20%20%20%20def%20authenticate%0A%20%20%20%20%20%20deny_access%20unless%20signed_in?%0A%20%20%20%20end%0A%0A%20%20%20%20def%20correct_user%0A%20%20%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20%20%20redirect_to(root_path)%20unless%20current_user?(@user)%0A%20%20%20%20end%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20before_filter%20:correct_user,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20private%0A%20%20%20%20%0A%20%20%20%20def%20authenticate%0A%20%20%20%20%20%20deny_access%20unless%20signed_in?%0A%20%20%20%20end%0A%0A%20%20%20%20def%20correct_user%0A%20%20%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20%20%20redirect_to(root_path)%20unless%20current_user?(@user)%0A%20%20%20%20end%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -1288,7 +1288,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20before_filter%20:correct_user,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@title%20=%20%22Edit%20user%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20private%0A%20%20%20%20%0A%20%20%20%20def%20authenticate%0A%20%20%20%20%20%20deny_access%20unless%20signed_in?%0A%20%20%20%20end%0A%0A%20%20%20%20def%20correct_user%0A%20%20%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20%20%20redirect_to(root_path)%20unless%20current_user?(@user)%0A%20%20%20%20end%0Aend%0A"
+             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20before_filter%20:correct_user,%20:only%20=%3E%20[:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20edit%0A%20%20%20%20@titre%20=%20%22Edit%20user%22%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20private%0A%20%20%20%20%0A%20%20%20%20def%20authenticate%0A%20%20%20%20%20%20deny_access%20unless%20signed_in?%0A%20%20%20%20end%0A%0A%20%20%20%20def%20correct_user%0A%20%20%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20%20%20redirect_to(root_path)%20unless%20current_user?(@user)%0A%20%20%20%20end%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -1300,7 +1300,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">edit</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Edit user&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Édition profil&quot;</span>
   <span class="k">end</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1319,13 +1319,13 @@
 </pre></div>
 </div></div>
 
-<p>Ce code utilise la méthode <code>current_user?</code>, que nous définissons (comme la méthode <code>deny_access</code>) dans l'<em>helper</em> Sessions (<a class="ref" href="updating-showing-and-deleting-users#code:current_user_p">Listing&nbsp;10.15</a>).</p>
+<p>Ce code utilise la méthode <code>current_user?</code>, que nous définissons (comme la méthode <code>deny_access</code>) dans l'<em>helper</em> Sessions (<a class="ref" href="updating-showing-and-deleting-users#code:current_user_p">extrait&nbsp;10.15</a>).</p>
 
 <div class="label" id="code:current_user_p"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.15.</span> <span class="description">La méthode <code>current_user?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.15.</span> <span class="description">La méthode <code>current_user?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_d3ae31efd09eb4a4646761f14a84c5d4c4671541">
@@ -1369,16 +1369,16 @@
 </div></div>
 
 
-<p>Le <a class="ref" href="updating-showing-and-deleting-users#code:correct_user_before_filter">Listing&nbsp;10.14</a> montre aussi l'actualisation de l'action <code>edit</code>. Auparavant, dans le <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">Listing&nbsp;10.2</a>, nous avions&nbsp;:</p>
+<p>Le <a class="ref" href="updating-showing-and-deleting-users#code:correct_user_before_filter">extrait&nbsp;10.14</a> montre aussi l'actualisation de l'action <code>edit</code>. Auparavant, dans le <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">extrait&nbsp;10.2</a>, nous avions&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">edit</span>
   <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-  <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Edit user&quot;</span>
+  <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Édition profil&quot;</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 
-<p>Mais maintenant que le filtre “passe-avant” <code>correct_user</code> définit la variable <code>@user</code> nous pouvons l'omettre dans l'action <code>edit</code> (et, de la même manière, dans l'action <code>update</code>).</p>
+<p>Mais maintenant que le filtre «&nbsp;passe-avant&nbsp;» <code>correct_user</code> définit la variable <code>@user</code> nous pouvons l'omettre dans l'action <code>edit</code> (et, de la même manière, dans l'action <code>update</code>).</p>
 
 <div class="label" id="sec:friendly_forwarding"></div>
 
@@ -1393,13 +1393,13 @@
 </pre></div>
 </div>
 
-<p>Le code apparait alors comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_test">Listing&nbsp;10.16</a>.</p>
+<p>Le code apparait alors comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_test">extrait&nbsp;10.16</a>.</p>
 
 <div class="label" id="code:friendly_forwarding_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.16.</span> <span class="description">Test d'intégration pour la redirection conviviale. <br /> <code>spec/requests/friendly_forwardings_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.16.</span> <span class="description">Test d'intégration pour la redirection conviviale. <br /> <code>spec/requests/friendly_forwardings_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_0ad82445c7b64fc93ea9c9827ce829ecb8b088be">
@@ -1443,13 +1443,13 @@
 
 <p>(Comme indiqué dans les commentiares, le test d'intégration <em>suit</em> les redirections, donc tester que la réponse <code>devrait rediriger</code> (<code>should redirect_to</code>) vers telle ou telle URL ne fonctionnera pas. Je l'ai appris en en faisait l'expérience.)</p>
 
-<p>Voyons maintenant l'implémentation.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Dans le but de rediriger les utilisateurs vers leurs destination désirée, nous avons besoin de consigner quelque part leur destination, et de les rediriger vers cette destination ensuite. Le mécanisme de consignation est une des facilités proposées par Rails avec la <code>session</code>, qui peut être pensé un peu comme l'instance de variable  <code>cookie</code> de la <a class="ref" href="sign-in-sign-out#sec:remember_me">Section&nbsp;9.3.2</a> qui expire automatiquement quand le navigateur est refermé.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Nous utilisons aussi l'objet  requête (<code>request</code>)  pour obtenir la <code>request_uri</code>, par exemple l'URL de la page requise. Le code d'application résultant est montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">Listing&nbsp;10.17</a>.</p>
+<p>Voyons maintenant l'implémentation.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Dans le but de rediriger les utilisateurs vers leurs destination désirée, nous avons besoin de consigner quelque part leur destination, et de les rediriger vers cette destination ensuite. Le mécanisme de consignation est une des facilités proposées par Rails avec la <code>session</code>, qui peut être pensé un peu comme l'instance de variable  <code>cookie</code> de la <a class="ref" href="sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a> qui expire automatiquement quand le navigateur est refermé.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Nous utilisons aussi l'objet  requête (<code>request</code>)  pour obtenir la <code>request_uri</code>, par exemple l'URL de la page requise. Le code d'application résultant est montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">extrait&nbsp;10.17</a>.</p>
 
 <div class="label" id="code:friendly_forwarding_code"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.17.</span> <span class="description">Code pour implémenter la redirection conviviale. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.17.</span> <span class="description">Code pour implémenter la redirection conviviale. <br /> <code>app/helpers/sessions_helper.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_621444152476f18f3c78e8d92c36495609a7bd05">
@@ -1503,13 +1503,13 @@
 
 <p>Ici nous avons ajouté une ligne à la méthode <code>deny_access</code>, d'abord pour ajouter le chemin complet de la requête avec la méthode <code>store_location</code> et procédant ensuite comme avant. La méthode  <code>store_location</code> place la requête URL dans la variable <code>session</code> avec pour clé <code>:return_to</code>. (Nous avons rendu les deux méthodes <code>store_location</code> et <code>clear_return_to</code> privées puisque elles ne sont jamais nécessaire en dehors de l'<em>helper</em> Sessions.)</p>
 
-<p>Nous avons aussi défini la méthode <code>redirect_back_or</code> pour rediriger vers la requête URL si elle existe (si elle est définie), ou vers l'URL par défaut dans le cas contraire. Cette méthode est utilisé dans l'action <code>create</code> (“créer”) du contrôleur de Sessions pour procéder à la redirection en cas d'identification réussie (<a class="ref" href="updating-showing-and-deleting-users#code:friendly_session_create">Listing&nbsp;10.18</a>).</p>
+<p>Nous avons aussi défini la méthode <code>redirect_back_or</code> pour rediriger vers la requête URL si elle existe (si elle est définie), ou vers l'URL par défaut dans le cas contraire. Cette méthode est utilisé dans l'action <code>create</code> («&nbsp;créer&nbsp;») du contrôleur de Sessions pour procéder à la redirection en cas d'identification réussie (<a class="ref" href="updating-showing-and-deleting-users#code:friendly_session_create">extrait&nbsp;10.18</a>).</p>
 
 <div class="label" id="code:friendly_session_create"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.18.</span> <span class="description">L'action <code>create</code> de Sessions avec une redirection conviviale. <br /> <code>app/controllers/sessions_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.18.</span> <span class="description">L'action <code>create</code> de Sessions avec une redirection conviviale. <br /> <code>app/controllers/sessions_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e10f897dbfebfdc3bd353fbb5d54a19913041b4a">
@@ -1517,7 +1517,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20SessionsController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20create%0A%20%20%20%20user%20=%20User.authenticate(params[:session][:email],%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20params[:session][:password])%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20flash.now[:error]%20=%20%22Invalid%20email/password%20combination.%22%0A%20%20%20%20%20%20@title%20=%20%22Sign%20in%22%0A%20%20%20%20%20%20render%20'new'%0A%20%20%20%20else%0A%20%20%20%20%20%20sign_in%20user%0A%20%20%20%20%20%20redirect_back_or%20user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20SessionsController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20create%0A%20%20%20%20user%20=%20User.authenticate(params[:session][:email],%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20params[:session][:password])%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20flash.now[:error]%20=%20%22Invalid%20email/password%20combination.%22%0A%20%20%20%20%20%20@titre%20=%20%22Sign%20in%22%0A%20%20%20%20%20%20render%20'new'%0A%20%20%20%20else%0A%20%20%20%20%20%20sign_in%20user%0A%20%20%20%20%20%20redirect_back_or%20user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -1527,7 +1527,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20SessionsController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20create%0A%20%20%20%20user%20=%20User.authenticate(params[:session][:email],%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20params[:session][:password])%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20flash.now[:error]%20=%20%22Invalid%20email/password%20combination.%22%0A%20%20%20%20%20%20@title%20=%20%22Sign%20in%22%0A%20%20%20%20%20%20render%20'new'%0A%20%20%20%20else%0A%20%20%20%20%20%20sign_in%20user%0A%20%20%20%20%20%20redirect_back_or%20user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
+             FlashVars="text=class%20SessionsController%20%3C%20ApplicationController%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20create%0A%20%20%20%20user%20=%20User.authenticate(params[:session][:email],%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20params[:session][:password])%0A%20%20%20%20if%20user.nil?%0A%20%20%20%20%20%20flash.now[:error]%20=%20%22Invalid%20email/password%20combination.%22%0A%20%20%20%20%20%20@titre%20=%20%22Sign%20in%22%0A%20%20%20%20%20%20render%20'new'%0A%20%20%20%20else%0A%20%20%20%20%20%20sign_in%20user%0A%20%20%20%20%20%20redirect_back_or%20user%0A%20%20%20%20end%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -1541,7 +1541,7 @@
                              <span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">][</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
       <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Combinaison mail/mot de passe invalide.&quot;</span>
-      <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
+      <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">else</span>
       <span class="n">sign_in</span> <span class="n">user</span>
@@ -1555,7 +1555,7 @@
 </pre></div>
 </div></div>
 
-<p>Avec ça, le test d'intégration de la redirection conviviale dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_test">Listing&nbsp;10.16</a> devrait réussir, et l'implémentation de l'authentification basique de l'utilisateur et de la protection de page est achevée.</p>
+<p>Avec ça, le test d'intégration de la redirection conviviale dans le <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_test">extrait&nbsp;10.16</a> devrait réussir, et l'implémentation de l'authentification basique de l'utilisateur et de la protection de page est achevée.</p>
 
 <div class="label" id="sec:showing_users"></div>
 
@@ -1563,7 +1563,7 @@
 <h2><a id="sec:10.3" href="updating-showing-and-deleting-users#sec:showing_users" class="heading"><span class="number">10.3</span> Affichage des utilisateurs</a></h2>
 
 
-<p>Dans cette section nous allons ajouter la dernière action utilistaeur, l'action <code>index</code> destinée à afficher <em>tous</em> les utilisateurs, pas seulement un. Chemin faisant, nous apprendrons à peupler une base de données avec des exemples d'utilisateurs et à paginger (<em>paginating</em>) la sortie pour l'utilisateur, pour que la page puisse s'adapter à l'affichage éventuel d'un très grand nombre d'utilisateurs. Une maquette du résultat &mdash;utilisateurs, liens de paginations, et un lien de navigation &ldquo;Utilisateurs&rdquo; &mdash;est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_mockup">Illustration&nbsp;10.7</a>.<sup class="footnote" id="fnref:10.7"><a href="#fn:10.7">7</a></sup> Dans la <a class="ref" href="updating-showing-and-deleting-users#sec:destroying_users">Section&nbsp;10.4</a>, nous ajouterons une interface administrateur à l'index de l'utilisateur pour empêcher les utilisateurs d'être détruits (ce qui peut être problématique).</p>
+<p>Dans cette section nous allons ajouter la dernière action utilistaeur, l'action <code>index</code> destinée à afficher <em>tous</em> les utilisateurs, pas seulement un. Chemin faisant, nous apprendrons à peupler une base de données avec des exemples d'utilisateurs et à paginger (<em>paginating</em>) la sortie pour l'utilisateur, pour que la page puisse s'adapter à l'affichage éventuel d'un très grand nombre d'utilisateurs. Une maquette du résultat &mdash;utilisateurs, liens de paginations, et un lien de navigation &ldquo;Utilisateurs&rdquo; &mdash;est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_mockup">illustration&nbsp;10.7</a>.<sup class="footnote" id="fnref:10.7"><a href="#fn:10.7">7</a></sup> Dans la <a class="ref" href="updating-showing-and-deleting-users#sec:destroying_users">section&nbsp;10.4</a>, nous ajouterons une interface administrateur à l'index de l'utilisateur pour empêcher les utilisateurs d'être détruits (ce qui peut être problématique).</p>
 
 <div class="label" id="fig:user_index_mockup"></div>
 
@@ -1579,13 +1579,13 @@
 <h3><a id="sec:10.3.1" href="updating-showing-and-deleting-users#sec:user_index" class="heading"><span class="number">10.3.1</span> Index utilisateur</a></h3>
 
 
-<p>Bien que nous gardions visible la page d'affichage d'un utilisateur à tout visiteur du site, l'index visiteur (la liste de tous les utilisateurs) sera réservée au utilisateurs identifiés, [de telle sorte qu'il y a une limite sur combien d'utilisateurs non identifiés peuvent voir par défaut][so that there&rsquo;s a limit to how much unregistered users can see by default]. Nos tests d'<code>index</code> le vérifieront, et vérifieront aussi que tous les utilisateurs soient listés pour un utilisateur identifié (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">Listing&nbsp;10.19</a>).</p>
+<p>Bien que nous gardions visible la page d'affichage d'un utilisateur à tout visiteur du site, l'index visiteur (la liste de tous les utilisateurs) sera réservée au utilisateurs identifiés, [de telle sorte qu'il y a une limite sur combien d'utilisateurs non identifiés peuvent voir par défaut][so that there&rsquo;s a limit to how much unregistered users can see by default]. Nos tests d'<code>index</code> le vérifieront, et vérifieront aussi que tous les utilisateurs soient listés pour un utilisateur identifié (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">extrait&nbsp;10.19</a>).</p>
 
 <div class="label" id="code:user_index_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.19.</span> <span class="description">Test pour la page d'index utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.19.</span> <span class="description">Test pour la page d'index utilisateur. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_dca69d352153b53274e8718876ce34b984829cb3">
@@ -1660,13 +1660,13 @@
 
 <p>Comme vous pouvez le voir, la méthode pour vérifier la page d'index consiste à créer trois utilisateurs d'usine (identifié pour le premier) et vérifier alors que la page d'index a un élément de liste (balise <code>li</code>) pour le nom de chacun d'eux.</p>
 
-<p>Comme vous pouvez l'imaginer, le code de l'application utilise <code>User.all</code> pour faire une variable d'instance <code>@users</code> dans l'action <code>index</code> du contrôleur Users (<a class="ref" href="updating-showing-and-deleting-users#code:user_index">Listing&nbsp;10.20</a>).</p>
+<p>Comme vous pouvez l'imaginer, le code de l'application utilise <code>User.all</code> pour faire une variable d'instance <code>@users</code> dans l'action <code>index</code> du contrôleur Users (<a class="ref" href="updating-showing-and-deleting-users#code:user_index">extrait&nbsp;10.20</a>).</p>
 
 <div class="label" id="code:user_index"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.20.</span> <span class="description">L'action <code>index</code> de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.20.</span> <span class="description">L'action <code>index</code> de l'utilisateur. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_bd3d535c686e45c053f891ace3706775780b9549">
@@ -1674,7 +1674,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@title%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.all%0A%20%20end%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@titre%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.all%0A%20%20end%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@titre%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -1684,7 +1684,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@title%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.all%0A%20%20end%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@title%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
+             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@titre%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.all%0A%20%20end%0A%0A%20%20def%20show%0A%20%20%20%20@user%20=%20User.find(params[:id])%0A%20%20%20%20@titre%20=%20@user.name%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -1695,13 +1695,13 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">index</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;All users&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;All users&quot;</span>
     <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">show</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span>
   <span class="k">end</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1710,15 +1710,15 @@
 </pre></div>
 </div></div>
 
-<p>Notez que nous avons ajouté <code>:index</code> à la liste des contrôleurs protégés par le filtre “passe-avant” <code>authenticate</code>, ce faisant on obtient la réussite du premier test de <a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">Listing&nbsp;10.19</a>.</p>
+<p>Notez que nous avons ajouté <code>:index</code> à la liste des contrôleurs protégés par le filtre «&nbsp;passe-avant&nbsp;» <code>authenticate</code>, ce faisant on obtient la réussite du premier test de <a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">extrait&nbsp;10.19</a>.</p>
 
-<p>Pour faire la page voulue, nous avons besoin de faire une vue qui fait une itération sur les utilisateurs et entoure chacun d'eux d'une balise&nbsp;<code>li</code>. Nous faisons cela avec la méthode <code>each</code> (“chaque”), en affichant chaque nom et gravatar d'utilisateur, entourant l'ensemble dans une balise de liste non ordonnée (<code>ul</code>) (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_view">Listing&nbsp;10.21</a>).</p>
+<p>Pour faire la page voulue, nous avons besoin de faire une vue qui fait une itération sur les utilisateurs et entoure chacun d'eux d'une balise&nbsp;<code>li</code>. Nous faisons cela avec la méthode <code>each</code> («&nbsp;chaque&nbsp;»), en affichant chaque nom et gravatar d'utilisateur, entourant l'ensemble dans une balise de liste non ordonnée (<code>ul</code>) (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_view">extrait&nbsp;10.21</a>).</p>
 
 <div class="label" id="code:user_index_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.21.</span> <span class="description">La vue de l'index utilisateur. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.21.</span> <span class="description">La vue de l'index utilisateur. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_83362b5b5def90a5cd2590ae3010aa4d226b5d35">
@@ -1754,13 +1754,13 @@
 </pre></div>
 </div></div>
 
-<p>Nous ajoutons alors un peu de CSS pour le style (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_css">Listing&nbsp;10.22</a>).</p>
+<p>Nous ajoutons alors un peu de CSS pour le style (<a class="ref" href="updating-showing-and-deleting-users#code:user_index_css">extrait&nbsp;10.22</a>).</p>
 
 <div class="label" id="code:user_index_css"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.22.</span> <span class="description">CSS pour l'index utilisateur. <br /> <code>public/stylesheets/custom.css</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.22.</span> <span class="description">CSS pour l'index utilisateur. <br /> <code>public/stylesheets/custom.css</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_fef53c485ef7f31aa7aa0a34506a995b0ed5e74d">
@@ -1796,13 +1796,13 @@
 </pre></div>
 </div></div>
 
-<p>Enfin, nous ajouterons le liens &ldquo;Utilisateurs&rdquo; à l'entête de navigation du site (<a class="ref" href="updating-showing-and-deleting-users#code:users_link">Listing&nbsp;10.23</a>). Cela introduit l'utilisation du nom de route <code>users_path</code> (“chemins aux utilisateurs”) de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>.</p>
+<p>Enfin, nous ajouterons le liens &ldquo;Utilisateurs&rdquo; à l'entête de navigation du site (<a class="ref" href="updating-showing-and-deleting-users#code:users_link">extrait&nbsp;10.23</a>). Cela introduit l'utilisation du nom de route <code>users_path</code> («&nbsp;chemins aux utilisateurs&nbsp;») de la <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">table&nbsp;6.2</a>.</p>
 
 <div class="label" id="code:users_link"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.23.</span> <span class="description">Un lien à l'index utilisateur. <br /> <code>app/views/layouts/_header.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.23.</span> <span class="description">Un lien à l'index utilisateur. <br /> <code>app/views/layouts/_header.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_5c69e226e14c7cdd297bf845974592bd15540c2f">
@@ -1844,7 +1844,7 @@
 </pre></div>
 </div></div>
 
-<p>Avec ça, l'index utilisateur est totalement fonctionnel (avec la réussite de tous les tests), mais on se sent un peu solitaire… (<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_only_one">Illustration&nbsp;10.8</a>).</p>
+<p>Avec ça, l'index utilisateur est totalement fonctionnel (avec la réussite de tous les tests), mais on se sent un peu solitaire… (<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_only_one">illustration&nbsp;10.8</a>).</p>
 
 <div class="label" id="fig:user_index_only_one"></div>
 
@@ -1861,13 +1861,13 @@
 
 <p>Dans cette section, nous allons donner de la compagnie à notre exemple d'utilisateur solitaire. Bien sûr, pour créer suffisamment d'utilisateurs pour un index décent, nous <em>pourrions</em> utiliser notre navigateur pour rejoindre la page d'inscription et entrer les utilisateurs un par un. Mais une bien meilleure solution consiste à demander à Ruby (et Rake) de les entrer pour nous.</p>
 
-<p>D'abord, nous allons ajouter le gem Faker à notre <code>Gemfile</code>, ce qui nous permettra de créer des exemples d'utilisateurs avec noms et des adresses-mails semi-réalistes (<a class="ref" href="updating-showing-and-deleting-users#code:faker_gemfile">Listing&nbsp;10.24</a>).</p>
+<p>D'abord, nous allons ajouter le gem Faker à notre <code>Gemfile</code>, ce qui nous permettra de créer des exemples d'utilisateurs avec noms et des adresses-mails semi-réalistes (<a class="ref" href="updating-showing-and-deleting-users#code:faker_gemfile">extrait&nbsp;10.24</a>).</p>
 
 <div class="label" id="code:faker_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.24.</span> <span class="description">Ajout du gem Faker au <code>Gemfile</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.24.</span> <span class="description">Ajout du gem Faker au <code>Gemfile</code>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_9135d410642f6c3f9b231b1da7092706c5d1f700">
@@ -1913,13 +1913,13 @@
 </div>
 
 
-<p>Ensuite, nous allons ajouter un tâche Rake (“Rake task”) pour créer les utilisateurs fictifs. Les tâches Rake sont consignées dans le dossier <code>lib/tasks</code>, et sont définis en utilisant des <em>espace de noms</em> (<em>namespaces</em>) (dans notre cas, <code>:db</code>), comme on peut le voir dans le <a class="ref" href="updating-showing-and-deleting-users#code:db_populate">Listing&nbsp;10.25</a>.</p>
+<p>Ensuite, nous allons ajouter un tâche Rake («&nbsp;Rake task&nbsp;») pour créer les utilisateurs fictifs. Les tâches Rake sont consignées dans le dossier <code>lib/tasks</code>, et sont définis en utilisant des <em>espace de noms</em> (<em>namespaces</em>) (dans notre cas, <code>:db</code>), comme on peut le voir dans le <a class="ref" href="updating-showing-and-deleting-users#code:db_populate">extrait&nbsp;10.25</a>.</p>
 
 <div class="label" id="code:db_populate"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.25.</span> <span class="description">Une tâche Rake pour peupler la base de données avec des utilisateurs fictifs. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.25.</span> <span class="description">Une tâche Rake pour peupler la base de données avec des utilisateurs fictifs. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_9144995e5a900c92ac9f4c2918d272efed71dd55">
@@ -1976,13 +1976,13 @@
 
 <p>… assure que la tâche Rake task a accès à l'environnement Rails local, pour inclure le modèle User (et ainsi la méthode <code>User.create!</code>).</p>
 
-<p>Avec le domaine de nom <code>:db</code> comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:db_populate">Listing&nbsp;10.25</a>, on peut invoquer la tâche Rake comme suit&nbsp;:</p>
+<p>Avec le domaine de nom <code>:db</code> comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:db_populate">extrait&nbsp;10.25</a>, on peut invoquer la tâche Rake comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:populate
 </pre></div>
 </div>
 
-<p>Après avoir joué la tâche Rake, notre application possède 100 utilisateurs fictifs, comme on peut le ovir dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_all">Illustration&nbsp;10.9</a>. (J'ai pris la liberté d'associer les premières adresses à des photos pour que les utilisateurs n'aient pas tous le même gravatar par défaut.)</p>
+<p>Après avoir joué la tâche Rake, notre application possède 100 utilisateurs fictifs, comme on peut le ovir dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_all">illustration&nbsp;10.9</a>. (J'ai pris la liberté d'associer les premières adresses à des photos pour que les utilisateurs n'aient pas tous le même gravatar par défaut.)</p>
 
 <div class="label" id="fig:user_index_all"></div>
 
@@ -1999,13 +1999,13 @@
 
 <p>Ayant résolu le problème d'avoir trop peu d'utilisateurs, nous nous confrontons maintenant au problème d'en avoir trop sur la même page. Maintenant, il y en a une centaine, ce qui représente un nombre raisonnablement important, et un site réel peut en compter des milliers. La solution est de <em>paginer</em> les utilisateurs, pour que (par exemple), seulement 30 s'affichent par page à n'importe quel moment.</p>
 
-<p>Il existe plusieurs méthodes de paginaiton dans Rails&nbsp;; nous en utiliserons une des plus simples et des plus robustes, appelée <a href="http://wiki.github.com/mislav/will_paginate/"><tt>will_paginate</tt></a>. Pour l'utiliser, nous avons besoin d'actualiser le fichier <code>Gemfile</code> comme d'habitude (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_gem">Listing&nbsp;10.26</a>).</p>
+<p>Il existe plusieurs méthodes de paginaiton dans Rails&nbsp;; nous en utiliserons une des plus simples et des plus robustes, appelée <a href="http://wiki.github.com/mislav/will_paginate/"><tt>will_paginate</tt></a>. Pour l'utiliser, nous avons besoin d'actualiser le fichier <code>Gemfile</code> comme d'habitude (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_gem">extrait&nbsp;10.26</a>).</p>
 
 <div class="label" id="code:will_paginate_gem"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.26.</span> <span class="description">Inclusion de <tt>will_paginate</tt> dans le fichier Gemfile.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.26.</span> <span class="description">Inclusion de <tt>will_paginate</tt> dans le fichier Gemfile.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_1d22ab64a9a0fc0c3e2a183befa0998e0169f2c5">
@@ -2048,13 +2048,13 @@
 </div>
 
 
-<p>Avec <tt>will_paginate</tt> installé, nous sommes maintenant en mesure de paginer le résultat de nos utilisateurs trouvés. Nous allons commener par ajouter la méthode spéciale <code>will_paginate</code> dans la vue (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">Listing&nbsp;10.27</a>)&nbsp;; nous verrons dans un moment pourquoi le code apparait au-dessus et en dessous de la liste d'utilisateurs.</p>
+<p>Avec <tt>will_paginate</tt> installé, nous sommes maintenant en mesure de paginer le résultat de nos utilisateurs trouvés. Nous allons commener par ajouter la méthode spéciale <code>will_paginate</code> dans la vue (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">extrait&nbsp;10.27</a>)&nbsp;; nous verrons dans un moment pourquoi le code apparait au-dessus et en dessous de la liste d'utilisateurs.</p>
 
 <div class="label" id="code:will_paginate_index_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.27.</span> <span class="description">L'index utilisateur avec la pagination. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.27.</span> <span class="description">L'index utilisateur avec la pagination. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_82c4f816cb4d9bc486435606b323c9a4f6bef49e">
@@ -2095,7 +2095,7 @@
 </div></div>
 
 
-<p>La méthode <code>will_paginate</code> est un peu magique&nbsp;; à l'intérieur d'une vue <code>users</code> (“utilisateurs”), elle cherche automatiquement un objet <code>@users</code>, et affiche des liens de paginations pour atteindre les autres pages. La vue dans le <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">Listing&nbsp;10.27</a> ne fonctionne pas encore, évidemment, puisque actuellement la variable <code>@users</code> contient le résultat de <code>User.all</code> (<a class="ref" href="updating-showing-and-deleting-users#code:user_index">Listing&nbsp;10.20</a>), qui est de classe Array (“table non associative”), tandis que <code>will_paginate</code> attend un objet de classe <code>WillPaginate::Collection</code>. Heureusement, c'est justement le type d'objet retourné par la méthode <code>paginate</code> fournie par le gem <tt>will_paginate</tt>&nbsp;:</p>
+<p>La méthode <code>will_paginate</code> est un peu magique&nbsp;; à l'intérieur d'une vue <code>users</code> («&nbsp;utilisateurs&nbsp;»), elle cherche automatiquement un objet <code>@users</code>, et affiche des liens de paginations pour atteindre les autres pages. La vue dans le <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">extrait&nbsp;10.27</a> ne fonctionne pas encore, évidemment, puisque actuellement la variable <code>@users</code> contient le résultat de <code>User.all</code> (<a class="ref" href="updating-showing-and-deleting-users#code:user_index">extrait&nbsp;10.20</a>), qui est de classe Array («&nbsp;table non associative&nbsp;»), tandis que <code>will_paginate</code> attend un objet de classe <code>WillPaginate::Collection</code>. Heureusement, c'est justement le type d'objet retourné par la méthode <code>paginate</code> fournie par le gem <tt>will_paginate</tt>&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">class</span>
@@ -2108,13 +2108,13 @@
 <p>Notes que <code>paginage</code> prend un argument de type tableau associatif avec la clé <code>:page</code> de valeur égale à la page requise.
 <code>User.paginate</code> extrait les utilisateurs de la base de donnée en une fois (30 par défaut), en se basant sur le paramètre <code>:page</code>. Ainsi, par exemple, la page&nbsp;1 sont les utilisateurs 1&ndash;30, la page&nbsp;2 les utilisateurs 31&ndash;60, etc.</p>
 
-<p>On peut paginer les utilisateurs dans l'application exemple en utilisant  <code>paginate</code> à la place de <code>all</code> dans l'action <code>index</code> (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_action">Listing&nbsp;10.28</a>). Ici le paramètre <code>:page</code> est issu de <code>params[:page]</code>, qui est généré automatiuement par <code>will_paginate</code>.</p>
+<p>On peut paginer les utilisateurs dans l'application exemple en utilisant  <code>paginate</code> à la place de <code>all</code> dans l'action <code>index</code> (<a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_action">extrait&nbsp;10.28</a>). Ici le paramètre <code>:page</code> est issu de <code>params[:page]</code>, qui est généré automatiuement par <code>will_paginate</code>.</p>
 
 <div class="label" id="code:will_paginate_index_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.28.</span> <span class="description">Paginer les utilisateurs dans l'action <code>index</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.28.</span> <span class="description">Paginer les utilisateurs dans l'action <code>index</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_a385404c02d6d2dfc8a9e876940ec67efae30cda">
@@ -2122,7 +2122,7 @@
       <param name="allowScriptAccess" value="always" />
       <param name="quality" value="high" />
       <param name="scale" value="noscale" />
-      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@title%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.paginate(:page%20=%3E%20params[:page])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
+      <param name="FlashVars" value="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@titre%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.paginate(:page%20=%3E%20params[:page])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A" />
       <param name="bgcolor" value="#ffffff" />
       <embed src="/flash/clippy.swf"
              width="110"
@@ -2132,7 +2132,7 @@
              allowScriptAccess="always"
              type="application/x-shockwave-flash"
              pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@title%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.paginate(:page%20=%3E%20params[:page])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
+             FlashVars="text=class%20UsersController%20%3C%20ApplicationController%0A%20%20before_filter%20:authenticate,%20:only%20=%3E%20[:index,%20:edit,%20:update]%0A%20%20.%0A%20%20.%0A%20%20.%0A%20%20def%20index%0A%20%20%20%20@titre%20=%20%22All%20users%22%0A%20%20%20%20@users%20=%20User.paginate(:page%20=%3E%20params[:page])%0A%20%20end%0A%20%20.%0A%20%20.%0A%20%20.%0Aend%0A"
              bgcolor="#ffffff"
       />
       </object>
@@ -2143,7 +2143,7 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">index</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="s2">&quot;Tous les utilisateurs&quot;</span>
+    <span class="vi">@titre</span> <span class="o">=</span> <span class="s2">&quot;Tous les utilisateurs&quot;</span>
     <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">)</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -2154,15 +2154,15 @@
 </div></div>
 
 
-<p>La page d'index de l'utilisateur devrait maintenant fonctionner, apparaissant telle que dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_pagination_rails_3">Illustration&nbsp;10.10</a>; parce que nous avons inclus <code>will_paginate</code> au-dessus et en dessous de la liste des utilisateurs, les liens de pagination apparaissent à ces deux endroits.</p>
+<p>La page d'index de l'utilisateur devrait maintenant fonctionner, apparaissant telle que dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_pagination_rails_3">illustration&nbsp;10.10</a>; parce que nous avons inclus <code>will_paginate</code> au-dessus et en dessous de la liste des utilisateurs, les liens de pagination apparaissent à ces deux endroits.</p>
 
 <div class="label" id="fig:user_index_pagination_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_pagination_rails_3.png" alt="user_index_pagination_rails_3" /></span></div><div class="caption"><span class="header">Illustration 10.10: </span><span class="description">La page d'index <a href="http://localhost:3000/users"><tt>/users</tt></a> paginée.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_pagination_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_pagination_rails_3.png" alt="user_index_pagination_rails_3" /></span></div><div class="caption"><span class="header">Illustration 10.10: </span><span class="description">La page d'index <a href="http://localhost:3000/users"><tt>/users</tt></a> paginée.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_pagination_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Si vous cliquez soit le lien &nbsp;<a href="http://localhost:3000/users?page=2">2</a> soit le lien <a href="http://localhost:3000/users?page=2">Next</a>, vous obtiendrez la seconde page de résultats, comme dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">Illustration&nbsp;10.11</a>.</p>
+<p>Si vous cliquez soit le lien &nbsp;<a href="http://localhost:3000/users?page=2">2</a> soit le lien <a href="http://localhost:3000/users?page=2">Next</a>, vous obtiendrez la seconde page de résultats, comme dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">illustration&nbsp;10.11</a>.</p>
 
 <div class="label" id="fig:user_index_page_two_rails_3"></div>
 
@@ -2180,13 +2180,13 @@
 
 <p>Tester la pagination requiert quelque connaissance de comment fonctionne <tt>will_paginate</tt>, donc nous avons commencé par l'implémentation, mais ça reste une bonne idée de la tester. Pour ce faire, nous avons besoin d'invoquer la pagination dans un test, ce qui signifie de créer d'abord plus de 30 utilisateurs (d'usine).</p>
 
-<p>Comme auparavant, nous utiliserons Factory Girl pour simuler des utilisateurs, mais pour le moment, nous avons un problème&nbsp;: les adresses d'utilisateurs doivent être uniques, ce qui semblerait consister à créer plus de 30 utilisateurs “à la main”&mdash;un travail terriblement rébarbatif… Par chance, Factory Girl anticipe ce problème, et fournit des <em>sequences</em> pour le résoudre, comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:factory_sequence">Listing&nbsp;10.29</a>.</p>
+<p>Comme auparavant, nous utiliserons Factory Girl pour simuler des utilisateurs, mais pour le moment, nous avons un problème&nbsp;: les adresses d'utilisateurs doivent être uniques, ce qui semblerait consister à créer plus de 30 utilisateurs «&nbsp;à la main&nbsp;»&mdash;un travail terriblement rébarbatif… Par chance, Factory Girl anticipe ce problème, et fournit des <em>sequences</em> pour le résoudre, comme montré dans le <a class="ref" href="updating-showing-and-deleting-users#code:factory_sequence">extrait&nbsp;10.29</a>.</p>
 
 <div class="label" id="code:factory_sequence"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.29.</span> <span class="description">Définir une séquence Factory Girl. <br /> <code>spec/factories.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.29.</span> <span class="description">Définir une séquence Factory Girl. <br /> <code>spec/factories.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_fbaf6e80245d4c467c74fe278ca12246811ff21d">
@@ -2230,13 +2230,13 @@
 </div>
 
 
-<p>En appliquant l'idée de séquence d'usine, nous pouvons faire 31 utilisateurs (l'utilisateur <code>@user</code> original et 30 de plus) à l'intérieur d'un test, et vérifier alors que la réponse obtient de <tt>will_paginate</tt> le code HTML voulu (ce que nous devrions être en mesure de déterminer en utilisant Firebug ou en consultant le code source de la page). Le résultat apparait dans le <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_test">Listing&nbsp;10.30</a>.</p>
+<p>En appliquant l'idée de séquence d'usine, nous pouvons faire 31 utilisateurs (l'utilisateur <code>@user</code> original et 30 de plus) à l'intérieur d'un test, et vérifier alors que la réponse obtient de <tt>will_paginate</tt> le code HTML voulu (ce que nous devrions être en mesure de déterminer en utilisant Firebug ou en consultant le code source de la page). Le résultat apparait dans le <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_test">extrait&nbsp;10.30</a>.</p>
 
 <div class="label" id="code:will_paginate_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.30.</span> <span class="description">Un test de la pagination. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.30.</span> <span class="description">Un test de la pagination. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_cdcd4d45a89a49b541751874e967b26e40c90653">
@@ -2308,7 +2308,7 @@
 </div></div>
 
 
-<p>Ce code s'assure que les tests invoquent la pagination en ajoutant 30<sup class="footnote" id="fnref:10.8"><a href="#fn:10.8">8</a></sup> utilisateurs à la variable <code>@users</code> en utilisant la notation “push” des tableaux <code>Array</code>&nbsp;<code>&lt;&lt;</code>, qui ajoute un élément à un tableau existant&nbsp;:</p>
+<p>Ce code s'assure que les tests invoquent la pagination en ajoutant 30<sup class="footnote" id="fnref:10.8"><a href="#fn:10.8">8</a></sup> utilisateurs à la variable <code>@users</code> en utilisant la notation «&nbsp;push&nbsp;» des tableaux <code>Array</code>&nbsp;<code>&lt;&lt;</code>, qui ajoute un élément à un tableau existant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
@@ -2321,7 +2321,7 @@
 </div>
 
 
-<p>Nous voyons dans le dernier exemple que les occurrences de&nbsp;<code>&lt;&lt;</code> peuvent être “chaînées”. Dans le test lui-même, notez la notation compacte <code>have_selector("div.pagination")</code>, qui emprunte la convention des classes CSS (vues pour la première fois dans le <a class="ref" href="filling-in-the-layout#code:header_content">Listing&nbsp;5.3</a>) pour vérifier l'existence d'une balise <code>div</code> de classe <code>pagination</code>. Notez aussi que, maintenant qu'il y a 33 utilisateurs, nous avons actualisé le test de l'élément utilisateur pour n'utiliser que les trois premiers éléments (<code>[0..2]</code>) de la table  <code>@users</code>, ce qui correspond à ce que nous avions avant dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">Listing&nbsp;10.19</a>:</p>
+<p>Nous voyons dans le dernier exemple que les occurrences de&nbsp;<code>&lt;&lt;</code> peuvent être «&nbsp;chaînées&nbsp;». Dans le test lui-même, notez la notation compacte <code>have_selector("div.pagination")</code>, qui emprunte la convention des classes CSS (vues pour la première fois dans le <a class="ref" href="filling-in-the-layout#code:header_content">extrait&nbsp;5.3</a>) pour vérifier l'existence d'une balise <code>div</code> de classe <code>pagination</code>. Notez aussi que, maintenant qu'il y a 33 utilisateurs, nous avons actualisé le test de l'élément utilisateur pour n'utiliser que les trois premiers éléments (<code>[0..2]</code>) de la table  <code>@users</code>, ce qui correspond à ce que nous avions avant dans le <a class="ref" href="updating-showing-and-deleting-users#code:user_index_tests">extrait&nbsp;10.19</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@users</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">2</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
   <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -2340,13 +2340,13 @@
 
 <p>L'index paginé est maintenant complet, mais il reste une amélioration que je ne peux m'empêche d'inclure&nbsp;: Rails possède des outils incroyablement [glissant|slick] pour faire des vues compactes, et dans cette section nous restructurerons la page d'index pour les utiliser. Parce que notre code est bien testé, nous pouvons le restructurer en toute confiance, assurés que nous sommes que nous ne casseront pas les fonctionnalités du site&rsquo;s functionality.</p>
 
-<p>La première étape dans la restructuration est de remplacer le <code>li</code> de l'utilisateur (du <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">Listing&nbsp;10.27</a>) par un appel à un <code>render</code> (“rendu”) (<a class="ref" href="updating-showing-and-deleting-users#code:index_view_first_refactoring">Listing&nbsp;10.31</a>).</p>
+<p>La première étape dans la restructuration est de remplacer le <code>li</code> de l'utilisateur (du <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_index_view">extrait&nbsp;10.27</a>) par un appel à un <code>render</code> («&nbsp;rendu&nbsp;») (<a class="ref" href="updating-showing-and-deleting-users#code:index_view_first_refactoring">extrait&nbsp;10.31</a>).</p>
 
 <div class="label" id="code:index_view_first_refactoring"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.31.</span> <span class="description">Premier élément de restructuration de la vue d'index. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.31.</span> <span class="description">Premier élément de restructuration de la vue d'index. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e8384f9a385aacd1a8e2bf2565c64c68694134e4">
@@ -2383,13 +2383,13 @@
 </pre></div>
 </div></div>
 
-<p>Ici nous appelons <code>render</code> non pas sur une chaine (string) avec le nom du partiel, mais plutôt sur une variable <code>user</code> de classe <code>User</code>&nbsp;;<sup class="footnote" id="fnref:10.9"><a href="#fn:10.9">9</a></sup> dans ce contexte, Rails recherche automatiuement un partiel appelé <code>_user.html.erb</code>, que nous devons créer (<a class="ref" href="updating-showing-and-deleting-users#code:user_partial">Listing&nbsp;10.32</a>).</p>
+<p>Ici nous appelons <code>render</code> non pas sur une chaine (string) avec le nom du partiel, mais plutôt sur une variable <code>user</code> de classe <code>User</code>&nbsp;;<sup class="footnote" id="fnref:10.9"><a href="#fn:10.9">9</a></sup> dans ce contexte, Rails recherche automatiuement un partiel appelé <code>_user.html.erb</code>, que nous devons créer (<a class="ref" href="updating-showing-and-deleting-users#code:user_partial">extrait&nbsp;10.32</a>).</p>
 
 <div class="label" id="code:user_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.32.</span> <span class="description">Partiel pour rendre un seul utilisateur. <br /> <code>app/views/users/_user.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.32.</span> <span class="description">Partiel pour rendre un seul utilisateur. <br /> <code>app/views/users/_user.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_4c58e746ca1fade16dd57bf5d27ccfb0f1bc0cf0">
@@ -2420,13 +2420,13 @@
 </div></div>
 
 
-<p>C'est une amélioration définitive, mais nous pouvons encore faire mieux&nbsp;: nous pouvons appeler <code>render</code> <em>directement</em> sur la variable <code>@users</code> (<a class="ref" href="updating-showing-and-deleting-users#code:index_final_refactoring">Listing&nbsp;10.33</a>).</p>
+<p>C'est une amélioration définitive, mais nous pouvons encore faire mieux&nbsp;: nous pouvons appeler <code>render</code> <em>directement</em> sur la variable <code>@users</code> (<a class="ref" href="updating-showing-and-deleting-users#code:index_final_refactoring">extrait&nbsp;10.33</a>).</p>
 
 <div class="label" id="code:index_final_refactoring"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.33.</span> <span class="description">La restructuration complète de l'index. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.33.</span> <span class="description">La restructuration complète de l'index. <br /> <code>app/views/users/index.html.erb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_368538608d9ff4622c16302f20dbfead05836046">
@@ -2462,7 +2462,7 @@
 </div></div>
 
 
-<p>Ici Rails déduit que <code>@users</code> est une liste d'objets <code>User</code>&nbsp;; plus encore, quand appelé avec une collection d'utilisateurs, Rails itère automatiquement sur eux, rendant chaque occurrence avec le partiel <code>_user.html.erb</code>. Le résultat est le code incroyablement compact du <a class="ref" href="updating-showing-and-deleting-users#code:index_final_refactoring">Listing&nbsp;10.33</a>.</p>
+<p>Ici Rails déduit que <code>@users</code> est une liste d'objets <code>User</code>&nbsp;; plus encore, quand appelé avec une collection d'utilisateurs, Rails itère automatiquement sur eux, rendant chaque occurrence avec le partiel <code>_user.html.erb</code>. Le résultat est le code incroyablement compact du <a class="ref" href="updating-showing-and-deleting-users#code:index_final_refactoring">extrait&nbsp;10.33</a>.</p>
 
 <div class="label" id="sec:destroying_users"></div>
 
@@ -2470,12 +2470,12 @@
 <h2><a id="sec:10.4" href="updating-showing-and-deleting-users#sec:destroying_users" class="heading"><span class="number">10.4</span> Destruction des utilisateurs</a></h2>
 
 
-<p>Maintenant que l'index est achevé, il ne reste qu'un action canonique REST à produire&nbsp;: <code>destroy</code>. Dans cette section, nous ajouterons des liens pour supprimer des utilisateurs, comme dans la maquette de l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_delete_links_mockup">Illustration&nbsp;10.12</a>, et nous définirons l'action <code>destroy</code> (“détruire”) nécessaire pour accomplir cette suppression. Mais avant tout, nous devons créer la classe “administrateurs” qui seront autorisés à procéder à cette destruction.</p>
+<p>Maintenant que l'index est achevé, il ne reste qu'un action canonique REST à produire&nbsp;: <code>destroy</code>. Dans cette section, nous ajouterons des liens pour supprimer des utilisateurs, comme dans la maquette de l'<a class="ref" href="updating-showing-and-deleting-users#fig:user_index_delete_links_mockup">illustration&nbsp;10.12</a>, et nous définirons l'action <code>destroy</code> («&nbsp;détruire&nbsp;») nécessaire pour accomplir cette suppression. Mais avant tout, nous devons créer la classe «&nbsp;administrateurs&nbsp;» qui seront autorisés à procéder à cette destruction.</p>
 
 <div class="label" id="fig:user_index_delete_links_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_delete_links_mockup.png" alt="user_index_delete_links_mockup" /></span></div><div class="caption"><span class="header">Illustration 10.12: </span><span class="description">Maquette de l'index avec des liens de suppression.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_delete_links_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_delete_links_mockup.png" alt="user_index_delete_links_mockup" /></span></div><div class="caption"><span class="header">Illustration 10.12: </span><span class="description">Maquette de l'index avec des liens de suppression.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_delete_links_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2486,13 +2486,13 @@
 <h3><a id="sec:10.4.1" href="updating-showing-and-deleting-users#sec:administrative_users" class="heading"><span class="number">10.4.1</span> Utilisateurs administrateurs</a></h3>
 
 
-<p>Nous allons identifier les utilisateurs possédant des privilèges d'administrateur par le biais d'un attribut booléen <code>admin</code> dans le modèle User, ce qui nous conduira à créer une méthode <code>admin?</code> testant le statut de l'utilisateur. Nous pouvons écrire des tests pour cet attribut comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:admin_specs">Listing&nbsp;10.34</a>.</p>
+<p>Nous allons identifier les utilisateurs possédant des privilèges d'administrateur par le biais d'un attribut booléen <code>admin</code> dans le modèle User, ce qui nous conduira à créer une méthode <code>admin?</code> testant le statut de l'utilisateur. Nous pouvons écrire des tests pour cet attribut comme dans le <a class="ref" href="updating-showing-and-deleting-users#code:admin_specs">extrait&nbsp;10.34</a>.</p>
 
 <div class="label" id="code:admin_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.34.</span> <span class="description">Test pour un attribut <code>admin</code>. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.34.</span> <span class="description">Test pour un attribut <code>admin</code>. <br /> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_d8e9994f056af9dc5497f504cae510c551b898a2">
@@ -2542,7 +2542,7 @@
 </div></div>
 
 
-<p>Ici nous avons utilisé la méthode <code>toggle!</code> (“bascule”) pour basculer la valeur de l'attribut <code>admin</code> de <code>false</code> (“faux”) à <code>true</code> (“true”). Aussi, notez que la ligne&nbsp;:</p>
+<p>Ici nous avons utilisé la méthode <code>toggle!</code> («&nbsp;bascule&nbsp;») pour basculer la valeur de l'attribut <code>admin</code> de <code>false</code> («&nbsp;faux&nbsp;») à <code>true</code> («&nbsp;true&nbsp;»). Aussi, notez que la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">be_admin</span>
 </pre></div>
@@ -2558,13 +2558,13 @@
 </div>
 
 
-<p>La migration ajoute simplement la colonne <code>admin</code> à la table <code>users</code> (<a class="ref" href="updating-showing-and-deleting-users#code:admin_migration">Listing&nbsp;10.35</a>), en [adaptant le modèle de données comme dans l'][yielding the data model in ]<a class="ref" href="updating-showing-and-deleting-users#fig:user_model_admin">Illustration&nbsp;10.13</a>.</p>
+<p>La migration ajoute simplement la colonne <code>admin</code> à la table <code>users</code> (<a class="ref" href="updating-showing-and-deleting-users#code:admin_migration">extrait&nbsp;10.35</a>), en [adaptant le modèle de données comme dans l'][yielding the data model in ]<a class="ref" href="updating-showing-and-deleting-users#fig:user_model_admin">illustration&nbsp;10.13</a>.</p>
 
 <div class="label" id="code:admin_migration"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.35.</span> <span class="description">Migration pour ajouter un attribut booléen <code>admin</code> aux utilisateurs. <br /> <code>db/migrate/&lt;timestamp&gt;_add_admin_to_users.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.35.</span> <span class="description">Migration pour ajouter un attribut booléen <code>admin</code> aux utilisateurs. <br /> <code>db/migrate/&lt;timestamp&gt;_add_admin_to_users.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_5ffda71427b2b18840b24be6b9cc6c43f1fec818">
@@ -2600,7 +2600,7 @@
 </div></div>
 
 
-<p>Notez l'ajout de l'argument <code>:default =&gt; false</code> à la fonction <code>add_column</code> dans le <a class="ref" href="updating-showing-and-deleting-users#code:admin_migration">Listing&nbsp;10.35</a>, qui spécifie que les utilisateurs <em>ne seront pas</em> des administrateurs par défaut (sans cet argument <code>:default =&gt; false</code>, <code>admin</code> serait nul dar défaut (<code>nil</code>), ce qui équivaut à <code>false</code>, donc cette précision n'est pas strictement nécessaire. Mais le code est plus explicite ainsi, et transmet notre intention de façon plus claire à Rails ainsi qu'aux lecteurs du code).</p>
+<p>Notez l'ajout de l'argument <code>:default =&gt; false</code> à la fonction <code>add_column</code> dans le <a class="ref" href="updating-showing-and-deleting-users#code:admin_migration">extrait&nbsp;10.35</a>, qui spécifie que les utilisateurs <em>ne seront pas</em> des administrateurs par défaut (sans cet argument <code>:default =&gt; false</code>, <code>admin</code> serait nul dar défaut (<code>nil</code>), ce qui équivaut à <code>false</code>, donc cette précision n'est pas strictement nécessaire. Mais le code est plus explicite ainsi, et transmet notre intention de façon plus claire à Rails ainsi qu'aux lecteurs du code).</p>
 
 <div class="label" id="fig:user_model_admin"></div>
 
@@ -2631,13 +2631,13 @@
 </div>
 
 
-<p>Pour finir, actualisation notre peuplement fictif pour faire du premier utilisateur un administrateur (<a class="ref" href="updating-showing-and-deleting-users#code:populator_with_admin">Listing&nbsp;10.36</a>).</p>
+<p>Pour finir, actualisation notre peuplement fictif pour faire du premier utilisateur un administrateur (<a class="ref" href="updating-showing-and-deleting-users#code:populator_with_admin">extrait&nbsp;10.36</a>).</p>
 
 <div class="label" id="code:populator_with_admin"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.36.</span> <span class="description">Peuplement fictif avec un utilisateur administrateur. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.36.</span> <span class="description">Peuplement fictif avec un utilisateur administrateur. <br /> <code>lib/tasks/sample_data.rake</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b5920aee43b6281a108bdadabcded4f8a93f179c">
@@ -2680,7 +2680,7 @@
 </div></div>
 
 
-<p>Enfin, jouons à nouveau le “populateur” pour ré-initialiser la base de données et la reconstruire entièrement&nbsp;:</p>
+<p>Enfin, jouons à nouveau le «&nbsp;populateur&nbsp;» pour ré-initialiser la base de données et la reconstruire entièrement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:populate
 </pre></div>
@@ -2693,7 +2693,7 @@
 <h4><a id="sec:10.4.1.1" href="updating-showing-and-deleting-users#sec:revisiting_attr_accessible" class="heading">Révision de <code>attr_accessible</code></a></h4>
 
 
-<p>Vous avez peut-être noté que le <a class="ref" href="updating-showing-and-deleting-users#code:populator_with_admin">Listing&nbsp;10.36</a> transforme un utilisateur en administrateur avec la méthode <code>toggle!(:admin)</code>, mais pourquoi ne pas ajouter simplement un <code>:admin =&gt; true</code> à la table d'initialisation&nbsp;? La réponse est que cela ne fonctionnerait pas, et ce à dessein&nbsp;: seuls les attributs définis par <code>attr_accessible</code> peuvent être renseignés par le biais d'un [“assignement public”][mass assignment], et l'attribut  <code>admin</code> n'est pas dans ce cas. L'<a class="ref" href="updating-showing-and-deleting-users#code:attr_accessible_review">Extrait&nbsp;10.37</a> reproduit la liste la plus récente des attributs <code>attr_accessible</code> &mdash;notez que <code>:admin</code>  <em>n'est pas</em> dans cette liste.</p>
+<p>Vous avez peut-être noté que le <a class="ref" href="updating-showing-and-deleting-users#code:populator_with_admin">extrait&nbsp;10.36</a> transforme un utilisateur en administrateur avec la méthode <code>toggle!(:admin)</code>, mais pourquoi ne pas ajouter simplement un <code>:admin =&gt; true</code> à la table d'initialisation&nbsp;? La réponse est que cela ne fonctionnerait pas, et ce à dessein&nbsp;: seuls les attributs définis par <code>attr_accessible</code> peuvent être renseignés par le biais d'un [«&nbsp;assignement public&nbsp;»][mass assignment], et l'attribut  <code>admin</code> n'est pas dans ce cas. L'<a class="ref" href="updating-showing-and-deleting-users#code:attr_accessible_review">Extrait&nbsp;10.37</a> reproduit la liste la plus récente des attributs <code>attr_accessible</code> &mdash;notez que <code>:admin</code>  <em>n'est pas</em> dans cette liste.</p>
 
 <div class="label" id="code:attr_accessible_review"></div>
 
@@ -2745,10 +2745,10 @@
 <div class="label" id="sec:the_destroy_action"></div>
 
 
-<h3><a id="sec:10.4.2" href="updating-showing-and-deleting-users#sec:the_destroy_action" class="heading"><span class="number">10.4.2</span> L'action <code>destroy</code> (“détruire”)</a></h3>
+<h3><a id="sec:10.4.2" href="updating-showing-and-deleting-users#sec:the_destroy_action" class="heading"><span class="number">10.4.2</span> L'action <code>destroy</code> («&nbsp;détruire&nbsp;»)</a></h3>
 
 
-<p>La dernière étape nécessaire pour achever la ressource `Utilisateurs` est d'ajouter des liens pour supprimer des utilisateurs et une action <code>destroy</code>. Nous allons commencer par ajouter un lien “supprimer” pour chaque utilisateur dans la page d'index (<a class="ref" href="updating-showing-and-deleting-users#code:delete_links">Extrait&nbsp;10.38</a>).</p>
+<p>La dernière étape nécessaire pour achever la ressource `Utilisateurs` est d'ajouter des liens pour supprimer des utilisateurs et une action <code>destroy</code>. Nous allons commencer par ajouter un lien «&nbsp;supprimer&nbsp;» pour chaque utilisateur dans la page d'index (<a class="ref" href="updating-showing-and-deleting-users#code:delete_links">Extrait&nbsp;10.38</a>).</p>
 
 <div class="label" id="code:delete_links"></div>
 
@@ -2789,7 +2789,7 @@
 </div></div>
 
 
-<p>Notez l'argument <code>:method =&gt; :delete</code>, qui s'arrange pour que le lien envoie la bonne requête <tt>DELETE</tt> (“EFFACER”). Nous avons aussi entouré chaque lien à l'intérieur d'une condition&nbsp;<code>if</code> pour que seuls les administrateurs puissent les voir. Le résultat pour notre utilisateur administrateur apparait dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:index_delete_links_rails_3">Illustration&nbsp;10.14</a>.</p>
+<p>Notez l'argument <code>:method =&gt; :delete</code>, qui s'arrange pour que le lien envoie la bonne requête <tt>DELETE</tt> («&nbsp;EFFACER&nbsp;»). Nous avons aussi entouré chaque lien à l'intérieur d'une condition&nbsp;<code>if</code> pour que seuls les administrateurs puissent les voir. Le résultat pour notre utilisateur administrateur apparait dans l'<a class="ref" href="updating-showing-and-deleting-users#fig:index_delete_links_rails_3">illustration&nbsp;10.14</a>.</p>
 
 <p>Les navigateurs ne peuvent pas envoyer nativement de requête <tt>DELETE</tt>, donc Rails les simule par le biais de JavaScript.<sup class="footnote" id="fnref:10.12"><a href="#fn:10.12">12</a></sup> Pour que le lien de suppression fonctionne, nous avons donc à inclure la librairie JavaScript standard de Rails, ce que nous faisons en ajoutant la ligne…</p>
 
@@ -2798,7 +2798,7 @@
 </div>
 
 
-<p>… au gabarit du site. Le résultat est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">Illustration&nbsp;10.39</a>.</p>
+<p>… au gabarit du site. Le résultat est montré dans l'<a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">illustration&nbsp;10.39</a>.</p>
 
 <div class="label" id="code:adding_default_javascript"></div>
 
@@ -2850,7 +2850,7 @@
 <div class="label" id="fig:index_delete_links_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/index_delete_links_rails_3.png" alt="index_delete_links_rails_3" /></span></div><div class="caption"><span class="header">Illustration 10.14: </span><span class="description">L'index  <a href="http://localhost:3000/users"><tt>/users</tt></a> avec les liens de suppression.&nbsp;<a href="http://railstutorial.org/images/figures/index_delete_links_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/index_delete_links_rails_3.png" alt="index_delete_links_rails_3" /></span></div><div class="caption"><span class="header">Illustration 10.14: </span><span class="description">L'index  <a href="http://localhost:3000/users"><tt>/users</tt></a> avec les liens de suppression.&nbsp;<a href="http://railstutorial.org/images/figures/index_delete_links_rails_3-full.png">(taille normale)</a></span></div></div>
 
 
 <p>Quand bien même seuls les administrateurs seraient en mesure de voir les liens de suppression, il demeure cependant un trou de sécurité important&nbsp;: n'importe quel utilisateur mal intentionné et suffisamment [connaisseur][sophisticated] pourrait transmettre une requête <tt>DELETE</tt> en ligne de commande pour détruire n'importe quel utilisateur. Pour sécuriser proprement le site, nous avons donc aussi besoin d'un contrôle d'accès, pour que les tests ne vérifient pas seulement qu'un administrateur <em>puisse</em> supprimer des utilisateurs, mais également que les autres utilisateurs <em>ne puissent pas</em>. Le résultat apparait dans l'<a class="ref" href="updating-showing-and-deleting-users#code:destroy_tests">Extrait&nbsp;10.40</a>. Notez que, à l'instar des méthodes <code>get</code>, <code>post</code> et <code>put</code>, nous utilisons <code>delete</code> pour traiter la requête <tt>DELETE</tt> à l'intérieur des tests.</p>
@@ -2932,7 +2932,7 @@
 </div></div>
 
 
-<p>(Vous pouvez noter que nous avons défini un utilisateur-administrateur en utilisant <code>:admin =&gt; true</code>&nbsp;; [les “utilisateurs d'usine” n'est pas concerné par les règles des paramètres <code>attr_accessible</code>][user factories are not bound by the rules of <code>attr_accessible</code> parameters].) Notez ici que la méthode <code>change</code> peut prendre une valeur négative, ce qui signifie que, tout comme nous avons vérifié la création d'un utilisateur en testant un changement de +1 (<a class="ref" href="sign-up#code:signup_success_tests">Extrait&nbsp;8.14</a>), nous pouvons vérifier une suppression d'utilisateur en testant un changement de -1&nbsp;:</p>
+<p>(Vous pouvez noter que nous avons défini un utilisateur-administrateur en utilisant <code>:admin =&gt; true</code>&nbsp;; [les «&nbsp;utilisateurs d'usine&nbsp;» n'est pas concerné par les règles des paramètres <code>attr_accessible</code>][user factories are not bound by the rules of <code>attr_accessible</code> parameters].) Notez ici que la méthode <code>change</code> peut prendre une valeur négative, ce qui signifie que, tout comme nous avons vérifié la création d'un utilisateur en testant un changement de +1 (<a class="ref" href="sign-up#code:signup_success_tests">Extrait&nbsp;8.14</a>), nous pouvons vérifier une suppression d'utilisateur en testant un changement de -1&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nb">lambda</span> <span class="k">do</span>
   <span class="n">delete</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@user</span>
@@ -2941,13 +2941,13 @@
 </div>
 
 
-<p>Comme vous pouvez vous en douter, l'implémentation utilise un filtre “passe-avant” (“before filter”), cette fois pour restreindre l'accès l'action <code>destroy</code> aux seuls administrateurs. L'action <code>destroy</code> trouve elle-même l'utilisateur, le détruit, et redirige alors l'administrateur vers l'index des utilisateurs (<a class="ref" href="updating-showing-and-deleting-users#code:admin_destroy_before_filter">Extrait&nbsp;10.41</a>). [[Je mettrais un warning ici pour penser à ajouter :admin au filtre "passe-avant" :authenticate]]</p>
+<p>Comme vous pouvez vous en douter, l'implémentation utilise un filtre «&nbsp;passe-avant&nbsp;» («&nbsp;before filter&nbsp;»), cette fois pour restreindre l'accès l'action <code>destroy</code> aux seuls administrateurs. L'action <code>destroy</code> trouve elle-même l'utilisateur, le détruit, et redirige alors l'administrateur vers l'index des utilisateurs (<a class="ref" href="updating-showing-and-deleting-users#code:admin_destroy_before_filter">Extrait&nbsp;10.41</a>). [[Je mettrais un warning ici pour penser à ajouter :admin au filtre "passe-avant" :authenticate]]</p>
 
 <div class="label" id="code:admin_destroy_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 10.41.</span> <span class="description">Filtre “passe-avant’ pour restreindre l'utilisation de l'action <code>destroy</code> aux administrateurs. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 10.41.</span> <span class="description">Filtre «&nbsp;passe-avant’ pour restreindre l'utilisation de l'action <code>destroy</code> aux administrateurs. <br /> <code>app/controllers/users_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_e60a95617888eb1ba93027061e7d9c324538ee8f">
@@ -2995,7 +2995,7 @@
 </div></div>
 
 
-<p>Notez que l'action <code>destroy</code> action utilise la [<em>méthode de chaînes</em>][<em>method chaining</em>] (vue brièvement dans la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">Section&nbsp;4.2.3</a>) dans la ligne&nbsp;:</p>
+<p>Notez que l'action <code>destroy</code> action utilise la [<em>méthode de chaînes</em>][<em>method chaining</em>] (vue brièvement dans la <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">section&nbsp;4.2.3</a>) dans la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">destroy</span>
 </pre></div>
@@ -3009,11 +3009,11 @@
 <h2><a id="sec:10.5" href="updating-showing-and-deleting-users#sec:10.5" class="heading"><span class="number">10.5</span> Conclusion</a></h2>
 
 
-<p>Nous avons parcouru un long chemin [depuis l'introduction d'un contrôleur d'utilisateur dans la][since introducing the Users controller way back in] <a class="ref" href="filling-in-the-layout#sec:user_signup">Section&nbsp;5.3</a>. Ce utilisateurs ne pouvaient même pas s'inscrire, d'identifier, se déconnecter, voir leur profil, l'éditer, et voir une liste de tous les utilisateurs&mdash;et certains peuvent même en supprimer d'autres.</p>
+<p>Nous avons parcouru un long chemin [depuis l'introduction d'un contrôleur d'utilisateur dans la][since introducing the Users controller way back in] <a class="ref" href="filling-in-the-layout#sec:user_signup">section&nbsp;5.3</a>. Ce utilisateurs ne pouvaient même pas s'inscrire, d'identifier, se déconnecter, voir leur profil, l'éditer, et voir une liste de tous les utilisateurs&mdash;et certains peuvent même en supprimer d'autres.</p>
 
-<p>La suite de ce livre va se construire sur les fondations de cette ressource utilisateurs (et le système d'authentification) pour faire un site avec des micro-messages comme dans (<a class="ref" href="user-microposts#top">Chapitre&nbsp;11</a>) et la possibilité de suivre des utilisateurs (<a class="ref" href="following-users#top">Chapitre&nbsp;12</a>). Ces chapitres introduiront certains des outils les plus puissants de Rails, introduisant le modelage de données (“data modeling”) avec <code>has_many</code> (“a plusieurs…”) et <code>has_many :through</code> (“a plusieurs… à travers…”).</p>
+<p>La suite de ce livre va se construire sur les fondations de cette ressource utilisateurs (et le système d'authentification) pour faire un site avec des micro-messages comme dans (<a class="ref" href="user-microposts#top">chapitre&nbsp;11</a>) et la possibilité de suivre des utilisateurs (<a class="ref" href="following-users#top">chapitre&nbsp;12</a>). Ces chapitres introduiront certains des outils les plus puissants de Rails, introduisant le modelage de données («&nbsp;data modeling&nbsp;») avec <code>has_many</code> («&nbsp;a plusieurs…&nbsp;») et <code>has_many :through</code> («&nbsp;a plusieurs… à travers…&nbsp;»).</p>
 
-<p>Avant de pousuivre, assurez-vous de “merger” tous les changements dans la branche principale de développement&nbsp;:</p>
+<p>Avant de pousuivre, assurez-vous de «&nbsp;merger&nbsp;» tous les changements dans la branche principale de développement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Done with user edit/update, index, and destroy actions&quot;</span>
@@ -3087,11 +3087,11 @@
 
 <ol>
 
-<li>Faite en sorte que le lien &ldquo;change&rdquo; du Gravatar, dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">extrait&nbsp;10.3</a> s'ouvre dans une nouvelle fenêtre (ou un onglet). <em>Astuce&nbsp;:</em> Cherchez sur le wb&nbsp;; vous devriez trouver une méthode particulièrement robuste comportant quelque chose appelé <code>_blank</code> (“_vierge”). </li>
+<li>Faite en sorte que le lien &ldquo;change&rdquo; du Gravatar, dans l'<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">extrait&nbsp;10.3</a> s'ouvre dans une nouvelle fenêtre (ou un onglet). <em>Astuce&nbsp;:</em> Cherchez sur le wb&nbsp;; vous devriez trouver une méthode particulièrement robuste comportant quelque chose appelé <code>_blank</code> («&nbsp;_vierge&nbsp;»). </li>
 
 <li>Supprimer le code de formulaire redondant en restructurant les vues <code>new.html.erb</code> et <code>edit.html.erb</code> views pour utiliser un partiel dans l'<a class="ref" href="updating-showing-and-deleting-users#code:new_edit_partial">extrait&nbsp;10.43</a>. Notez que vous devrez passer la variable formulaire&nbsp;<code>f</code> de façon explicite comme variable locale, comme dans l'<a class="ref" href="updating-showing-and-deleting-users#code:new_user_with_partial">extrait&nbsp;10.44</a>.</li>
 
-<li>Les utilisateurs identifiés n'ont aucune raison d'accéder aux actions <code>new</code> (“nouvel utilisateur”) et <code>create</code> (“créer l'utilisateur”) dans le contrôleur `User`. Faite en sorte qu'ils soient redirigés vers l'accueil s'ils tentent d'atteindre ces pages.</li>
+<li>Les utilisateurs identifiés n'ont aucune raison d'accéder aux actions <code>new</code> («&nbsp;nouvel utilisateur&nbsp;») et <code>create</code> («&nbsp;créer l'utilisateur&nbsp;») dans le contrôleur `User`. Faite en sorte qu'ils soient redirigés vers l'accueil s'ils tentent d'atteindre ces pages.</li>
 
 <li>Ajoutez des tests pour vérifier que les liens de suppression dans l'<a class="ref" href="updating-showing-and-deleting-users#code:delete_links">extrait&nbsp;10.38</a> apparaissent pour les administrateurs et pas pour les utilisateurs normaux.</li>
 
@@ -3206,11 +3206,11 @@
 <li id="fn:10.3">Image de <a href="http://www.flickr.com/photos/sashawolff/4598355045/">http://www.flickr.com/photos/sashawolff/4598355045/</a>.&nbsp;<a class="arrow" href="#fnref:10.3">&uarr;</a></li>
 <li id="fn:10.4">Ne vous souciez de comment cela fonctionne&nbsp;; les détails concernent les développeurs du framework Rails eux-même, mais ne sont pas important, à dessein, pour les développeurs d'applications.&nbsp;<a class="arrow" href="#fnref:10.4">&uarr;</a></li>
 <li id="fn:10.5">Le code de cette section est adapté du gem <a href="http://github.com/thoughtbot/clearance">Clearance</a> par <a href="http://thoughtbot.com/">thoughtbot</a>.&nbsp;<a class="arrow" href="#fnref:10.5">&uarr;</a></li>
-<li id="fn:10.6">Vraiment, comme indiqué dans la <a class="ref" href="sign-in-sign-out#sec:sign_in_out_exercises">Section&nbsp;9.6</a>, <code>session</code> est juste implémentée de cette façon.&nbsp;<a class="arrow" href="#fnref:10.6">&uarr;</a></li>
+<li id="fn:10.6">Vraiment, comme indiqué dans la <a class="ref" href="sign-in-sign-out#sec:sign_in_out_exercises">section&nbsp;9.6</a>, <code>session</code> est juste implémentée de cette façon.&nbsp;<a class="arrow" href="#fnref:10.6">&uarr;</a></li>
 <li id="fn:10.7">Photo Baby de <a href="http://www.flickr.com/photos/glasgows/338937124/">http://www.flickr.com/photos/glasgows/338937124/</a>.&nbsp;<a class="arrow" href="#fnref:10.7">&uarr;</a></li>
 <li id="fn:10.8">Techniquement parlant, nous n'avons besoin que d'ajouter 28 utilisateurs fictifs, puisque nous en avons déjà trois, mais je trouve le sens plus clair si nous en ajoutons plutôt 30.&nbsp;<a class="arrow" href="#fnref:10.8">&uarr;</a></li>
 <li id="fn:10.9">Le nom <code>user</code> est immatériel&mdash;nous aurions pu tout aussi bien écrire <code>@users.each do |foobar|</code> et utiliser alors  <code>render foobar</code>. La clé est la <em>classe</em> de l'objet dans ce cas, <code>User</code>.&nbsp;<a class="arrow" href="#fnref:10.9">&uarr;</a></li>
-<li id="fn:10.10">La méthode <code>toggle!</code> invoque les “callbacks” de Active Record mais pas les validations, donc nous devons renseigner l'attribut  <code>password</code> (mais pas la confirmation de ce mot de passe) pour avoir un mot de passe non vide dans la fonction callback <code>encrypt_password</code>.&nbsp;<a class="arrow" href="#fnref:10.10">&uarr;</a></li>
+<li id="fn:10.10">La méthode <code>toggle!</code> invoque les «&nbsp;callbacks&nbsp;» de Active Record mais pas les validations, donc nous devons renseigner l'attribut  <code>password</code> (mais pas la confirmation de ce mot de passe) pour avoir un mot de passe non vide dans la fonction callback <code>encrypt_password</code>.&nbsp;<a class="arrow" href="#fnref:10.10">&uarr;</a></li>
 <li id="fn:10.11">Des outils en ligne de commande tels que <tt>curl</tt> (vue dans la <a class="ref" href="static-pages#sidebar:response_codes">Box&nbsp;3.2</a>) peut utiliser les requêtes <tt>PUT</tt> de cette forme.&nbsp;<a class="arrow" href="#fnref:10.11">&uarr;</a></li>
 <li id="fn:10.12">Cela signifie que le lien pour supprimer un utilisateur ne fonctionnera pas si l'utilisateur a JavaScript désactivé dans son navigateur. Si vous devez traiter le cas de navigateur sans JavaScript, vous pouvez simuler une requête <tt>DELETE</tt> en utilisant la forme d'une requête <tt>POST</tt>, laquelle fonctionne même sans JavaScript&nbsp;; consultez le  Railscast sur la &ldquo;<a href="http://railscasts.com/episodes/77-destroy-without-javascript">Destruction sans JavaScript</a>&rdquo; pour les détails.&nbsp;<a class="arrow" href="#fnref:10.12">&uarr;</a></li>
 </ol>

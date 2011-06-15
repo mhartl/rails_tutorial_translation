@@ -833,7 +833,7 @@
 
 <p>Le test de l'association <code>has_many</code> (<em>possède_plusieurs…</em>) de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:user_has_many_microposts_spec">extrait&nbsp;11.5</a> ne teste pas grand chose —&nbsp;il vérifie simplement l'<em>existence</em> de l'attribut <code>microposts</code> (<em>micro-messages</em>). Dans cette section, nous allons ajouter un <em>ordering</em> (<em>classement</em>) et une <em>dependency</em> (<em>dépendance</em>) aux micro-messages, tout en testant aussi que la valeur retournée par la méthode <code>user.microposts</code> est bien une liste (array) de micro-messages.</p>
 
-<p>Nous allons avoir besoin de construire quelques micro-messages dans le modèle de test `User`, ce qui signifie que nous devrons faire une “usine à micro-messages” (<em>micropost factory</em>). Pour ce faire, nous avons besoin d'un moyen de construire une association dans Factory Girl. Heureusement, c'est très facile —&nbsp;nous avons juste à utiliser la méthode <code>micropost.association</code> de Factory Girl, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_factory">extrait&nbsp;11.8</a>.<sup class="footnote" id="fnref:11.3"><a href="#fn:11.3">3</a></sup></p>
+<p>Nous allons avoir besoin de construire quelques micro-messages dans le modèle de test `User`, ce qui signifie que nous devrons faire une «&nbsp;usine à micro-messages&nbsp;» (<em>micropost factory</em>). Pour ce faire, nous avons besoin d'un moyen de construire une association dans Factory Girl. Heureusement, c'est très facile —&nbsp;nous avons juste à utiliser la méthode <code>micropost.association</code> de Factory Girl, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_factory">extrait&nbsp;11.8</a>.<sup class="footnote" id="fnref:11.3"><a href="#fn:11.3">3</a></sup></p>
 
 <div class="label" id="code:micropost_factory"></div>
 
@@ -886,7 +886,7 @@
 </div>
 
 
-<p>Ici nous indiquons que le second message a été créé plus récemment, une heure plus tôt (<code>1.hour.ago</code> = “il y a 1 heure”), et le premier message a été créé il y a un jour (<code>1.day.ago</code>). Notez comme l'utilisation de  Girl est pratique ici&nbsp;: non seulement nous pouvons désigner un utilisateur en utilisant une “assignation publique” (puisque les productions de Factory <em>by-passent</em> —&nbsp;contournent&nbsp;— le paramètre <code>attr_accessible</code>), mais nous pouvons aussi renseigner l'attribut <code>created_at</code> manuellement, ce que Active Record ne nous laisserait jamais faire.<sup class="footnote" id="fnref:11.4"><a href="#fn:11.4">4</a></sup></p>
+<p>Ici nous indiquons que le second message a été créé plus récemment, une heure plus tôt (<code>1.hour.ago</code> = «&nbsp;il y a 1 heure&nbsp;»), et le premier message a été créé il y a un jour (<code>1.day.ago</code>). Notez comme l'utilisation de  Girl est pratique ici&nbsp;: non seulement nous pouvons désigner un utilisateur en utilisant une «&nbsp;assignation publique&nbsp;» (puisque les productions de Factory <em>by-passent</em> —&nbsp;contournent&nbsp;— le paramètre <code>attr_accessible</code>), mais nous pouvons aussi renseigner l'attribut <code>created_at</code> manuellement, ce que Active Record ne nous laisserait jamais faire.<sup class="footnote" id="fnref:11.4"><a href="#fn:11.4">4</a></sup></p>
 
 <p>La plupart des adaptateurs de bases de données (SQLite compris) retournent les micro-messages en les classant par leur identifiant (colonne <code>id</code>), donc nous pouvons arranger un test initial qui échouera à coup sûr, en utilisant le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_ordering_test">extrait&nbsp;11.9</a>.</p>
 
@@ -940,7 +940,7 @@
 
 <p>… qui indique que les messages doivent être bien classés, les plus récents d'abord. Cette condition devrait échouer parce que par défaut les messages seront classés par leur identifiant (id), donc&nbsp;: <code>[@mp1, @mp2]</code>. Ce test vérifie aussi la validité de l'association <code>has_many</code> elle-même, en s'assurant (comme indiqué dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#table:association_methods">table&nbsp;11.1</a>) que <code>user.microposts</code> est bien une liste (array) de micro-messages.</p>
 
-<p>Pour faire réussir le test de classement, nous utilisons une facilité de Rails appelée <code>default_scope</code> (<em>portée par défaut</em>) avec un paramètre <code>:order</code> (<em>ordre</em>), comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_ordering">extrait&nbsp;11.10</a> (c'est notre premier exemple de la notion de <em>portée</em> (<em>scope</em>). Nous en apprendrons davantage à propos de la “portée” dans un contexte plus général au <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.)</p>
+<p>Pour faire réussir le test de classement, nous utilisons une facilité de Rails appelée <code>default_scope</code> (<em>portée par défaut</em>) avec un paramètre <code>:order</code> (<em>ordre</em>), comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_ordering">extrait&nbsp;11.10</a> (c'est notre premier exemple de la notion de <em>portée</em> (<em>scope</em>). Nous en apprendrons davantage à propos de la «&nbsp;portée&nbsp;» dans un contexte plus général au <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.)</p>
 
 <div class="label" id="code:micropost_ordering"></div>
 
@@ -1188,7 +1188,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_microposts_mockup.png" alt="user_microposts_mockup"></span></div><div class="caption"><span class="header">Illustration 11.4: </span><span class="description">Maquette de la page de profil avec des micro-messages (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/user_microposts_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Comme pour la discussion sur la machinerie d'identification dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>, la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a> poussera souvent plusieurs éléments à la fois dans le tampon (<a href="http://en.wikipedia.org/wiki/Stack_%28data_structure%29">stack</a>), avant de les “éclater” un par un. Si cette dernière explication vous plonge dans la confusion, soyez patient&nbsp;; il y a un paiement plutôt sympa à la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:sample_microposts">section&nbsp;11.2.2</a>.</p>
+<p>Comme pour la discussion sur la machinerie d'identification dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a>, la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a> poussera souvent plusieurs éléments à la fois dans le tampon (<a href="http://en.wikipedia.org/wiki/Stack_%28data_structure%29">stack</a>), avant de les «&nbsp;éclater&nbsp;» un par un. Si cette dernière explication vous plonge dans la confusion, soyez patient&nbsp;; il y a un paiement plutôt sympa à la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:sample_microposts">section&nbsp;11.2.2</a>.</p>
 
 <div class="label" id="sec:augmenting_the_user_show_page"></div>
 
@@ -1515,7 +1515,7 @@
 <h3><a id="sec:11.2.2" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:sample_microposts" class="heading"><span class="number">11.2.2</span> Exemples de micro-messages</a></h3>
 
 
-<p>Avec le travail des templates pour les micro-messages d'utilisateur de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a>, le dénouement est plutôt décevant. Nous pouvons remédier à cette triste situation en ajoutant des micro-messages fictifs par le biais du “populateur” de la <a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:sample_users">section&nbsp;10.3.2</a>. Ajouter des micro-messages fictifs pour <em>tous</em> les utilisateurs prendrait un certain temps, donc nous ne choisirons dans un premier temps que les six premiers utilisateurs<sup class="footnote" id="fnref:11.8"><a href="#fn:11.8">8</a></sup> en faisant appel à l'option <code>:limit</code> de la méthode <code>User.all</code>&nbsp;:<sup class="footnote" id="fnref:11.9"><a href="#fn:11.9">9</a></sup></p>
+<p>Avec le travail des templates pour les micro-messages d'utilisateur de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a>, le dénouement est plutôt décevant. Nous pouvons remédier à cette triste situation en ajoutant des micro-messages fictifs par le biais du «&nbsp;populateur&nbsp;» de la <a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:sample_users">section&nbsp;10.3.2</a>. Ajouter des micro-messages fictifs pour <em>tous</em> les utilisateurs prendrait un certain temps, donc nous ne choisirons dans un premier temps que les six premiers utilisateurs<sup class="footnote" id="fnref:11.8"><a href="#fn:11.8">8</a></sup> en faisant appel à l'option <code>:limit</code> de la méthode <code>User.all</code>&nbsp;:<sup class="footnote" id="fnref:11.9"><a href="#fn:11.9">9</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="ss">:limit</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
@@ -1564,7 +1564,7 @@
 </div>
 
 
-<p>Avec ce code, nous sommes en position de tirer les fruits des durs labeurs de notre <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a> en affichant l'information de chaque micro-message.<sup class="footnote" id="fnref:11.10"><a href="#fn:11.10">10</a></sup> L'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:user_profile_with_microposts">illustration&nbsp;11.6</a> montre la page de profil de l'utilisateur pour un premier utilisateur (identifié), tandis que l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:other_profile_with_microposts">illustration&nbsp;11.7</a> montre le profil d'un second utilisateur. Pour finir, l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:user_profile_microposts_page_2_rails_3">illustration&nbsp;11.8</a> montre la <em>seconde</em> page de micro-messages d'un <em>premier</em> utilisateur, accompagné des liens de pagination en bas de l'affichage. Dans les trois cas, observez que chaque micro-message indique le temps depuis sa création (p.e., “Posté il y a 1 minute.”)&nbsp;; c'est le travail de la méthode <code>time_ago_in_words</code> de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_partial">extrait&nbsp;11.17</a>. Si vous patientez une ou deux minutes puis rechargez les pages, vous verrez ce texte s'actualiser automatiquement en se fondant sur le nouveau temps.</p>
+<p>Avec ce code, nous sommes en position de tirer les fruits des durs labeurs de notre <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:augmenting_the_user_show_page">section&nbsp;11.2.1</a> en affichant l'information de chaque micro-message.<sup class="footnote" id="fnref:11.10"><a href="#fn:11.10">10</a></sup> L'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:user_profile_with_microposts">illustration&nbsp;11.6</a> montre la page de profil de l'utilisateur pour un premier utilisateur (identifié), tandis que l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:other_profile_with_microposts">illustration&nbsp;11.7</a> montre le profil d'un second utilisateur. Pour finir, l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:user_profile_microposts_page_2_rails_3">illustration&nbsp;11.8</a> montre la <em>seconde</em> page de micro-messages d'un <em>premier</em> utilisateur, accompagné des liens de pagination en bas de l'affichage. Dans les trois cas, observez que chaque micro-message indique le temps depuis sa création (p.e., «&nbsp;Posté il y a 1 minute.&nbsp;»)&nbsp;; c'est le travail de la méthode <code>time_ago_in_words</code> de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_partial">extrait&nbsp;11.17</a>. Si vous patientez une ou deux minutes puis rechargez les pages, vous verrez ce texte s'actualiser automatiquement en se fondant sur le nouveau temps.</p>
 
 <div class="label" id="fig:user_profile_with_microposts"></div>
 
@@ -1681,7 +1681,7 @@ ce qui requiert la création du fichier spec du contrôleur Microposts (nous tes
 </div></div>
 
 
-<p>L'écriture du code de l'application nécessaire à la réussite des test de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_access_control">extrait&nbsp;11.22</a> requiert d'abord un peu de restructuration. Rappelez-vous comment, dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:requiring_signed_in_users">section&nbsp;10.2.1</a>, nous avons forcé l'identification requise en utilisant un filtre “passe-avant” qui appelait la méthode <code>authenticate</code> (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:authenticate_before_filter">extrait&nbsp;10.11</a>). À ce moment-là, nous n'avions besoin que de la méthode <code>authenticate</code> dans le contrôleur `Users`, mais maintenant il se trouve que nous en avons besoin aussi dans le contrôleur Microposts, donc nous allons déplacer la méthode <code>authenticate</code> dans l'<em>helper</em> Sessions, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:sessions_helper_authenticate">extrait&nbsp;11.23</a>.<sup class="footnote" id="fnref:11.12"><a href="#fn:11.12">12</a></sup></p>
+<p>L'écriture du code de l'application nécessaire à la réussite des test de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_access_control">extrait&nbsp;11.22</a> requiert d'abord un peu de restructuration. Rappelez-vous comment, dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:requiring_signed_in_users">section&nbsp;10.2.1</a>, nous avons forcé l'identification requise en utilisant un filtre «&nbsp;passe-avant&nbsp;» qui appelait la méthode <code>authenticate</code> (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:authenticate_before_filter">extrait&nbsp;10.11</a>). À ce moment-là, nous n'avions besoin que de la méthode <code>authenticate</code> dans le contrôleur `Users`, mais maintenant il se trouve que nous en avons besoin aussi dans le contrôleur Microposts, donc nous allons déplacer la méthode <code>authenticate</code> dans l'<em>helper</em> Sessions, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:sessions_helper_authenticate">extrait&nbsp;11.23</a>.<sup class="footnote" id="fnref:11.12"><a href="#fn:11.12">12</a></sup></p>
 
 <div class="label" id="code:sessions_helper_authenticate"></div>
 
@@ -1719,7 +1719,7 @@ ce qui requiert la création du fichier spec du contrôleur Microposts (nous tes
 
 <p>(Pour éviter la répétition de code, nous devons également supprimer la méthode <code>authenticate</code> du contrôler `Users`.)</p>
 
-<p>Avec le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:sessions_helper_authenticate">extrait&nbsp;11.23</a>, la méthode <code>authenticate</code> est maintenant accessible depuis le contrôleur `Microposts`, ce qui signifie que nous pouvons restreindre l'accès aux actions <code>create</code> et <code>destroy</code> avec le filtre “passe-avant” de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_controller_access_control">extrait&nbsp;11.24</a> (puisque nous n'avons pas généré ce contrôleur en ligne de commande &mdash;&nbsp;<code>$ rails generate controler etc.</code>&nbsp;&mdash; vous devrez créer son fichier à la main).</p>
+<p>Avec le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:sessions_helper_authenticate">extrait&nbsp;11.23</a>, la méthode <code>authenticate</code> est maintenant accessible depuis le contrôleur `Microposts`, ce qui signifie que nous pouvons restreindre l'accès aux actions <code>create</code> et <code>destroy</code> avec le filtre «&nbsp;passe-avant&nbsp;» de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_controller_access_control">extrait&nbsp;11.24</a> (puisque nous n'avons pas généré ce contrôleur en ligne de commande &mdash;&nbsp;<code>$ rails generate controler etc.</code>&nbsp;&mdash; vous devrez créer son fichier à la main).</p>
 
 <div class="label" id="code:microposts_controller_access_control"></div>
 
@@ -1748,7 +1748,7 @@ ce qui requiert la création du fichier spec du contrôleur Microposts (nous tes
 </div></div>
 
 
-<p>Notez que n'avons pas restreint l'application du fichier “passe-avant” aux actions, puisque pour le moment il s'applique aux deux seules actions. Si nous étions amenés à ajouter, disons, une action <code>index</code> accessible même aux utilisateurs non identifiés, nous devrions spécifier les actions protégées de façon explicite&nbsp;:</p>
+<p>Notez que n'avons pas restreint l'application du fichier «&nbsp;passe-avant&nbsp;» aux actions, puisque pour le moment il s'applique aux deux seules actions. Si nous étions amenés à ajouter, disons, une action <code>index</code> accessible même aux utilisateurs non identifiés, nous devrions spécifier les actions protégées de façon explicite&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MicropostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:create</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
@@ -1779,7 +1779,7 @@ ce qui requiert la création du fichier spec du contrôleur Microposts (nous tes
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_micropost_form_mockup.png" alt="home_page_with_micropost_form_mockup"></span></div><div class="caption"><span class="header">Illustration 11.9: </span><span class="description">Maquette de la page d'accueil avec un formulaire pour créer des micro-messages (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_micropost_form_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Dans la page d'accueil telle que nous l'avons laissée, elle apparaissait comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/filling-in-the-layout#fig:layout_rounded_corners">illustration&nbsp;5.7</a> —&nbsp;c'est-à-dire qu'elle avait un gros bouton “S'inscrire&nbsp;!” en son centre. Puisque la création d'un micro-message n'a de sens que dans le contexte d'un utilisateur identifié particulier, un des buts de cete section sera de produire différentes versions de la page d'accueil en fonction du statut d'identifictaion de l'utilisateur. Nous implémenterons cela dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_home_page">extrait&nbsp;11.27</a> ci-dessous, mais pour le moment, le seul impératif est que les tests pour l'action <code>create</code> du contrôleur  `Microposts` devraient identifier un utilisateur (d'usine) avant d'essayer de pouvoir créer un message.</p>
+<p>Dans la page d'accueil telle que nous l'avons laissée, elle apparaissait comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/filling-in-the-layout#fig:layout_rounded_corners">illustration&nbsp;5.7</a> —&nbsp;c'est-à-dire qu'elle avait un gros bouton «&nbsp;S'inscrire&nbsp;!&nbsp;» en son centre. Puisque la création d'un micro-message n'a de sens que dans le contexte d'un utilisateur identifié particulier, un des buts de cete section sera de produire différentes versions de la page d'accueil en fonction du statut d'identifictaion de l'utilisateur. Nous implémenterons cela dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_home_page">extrait&nbsp;11.27</a> ci-dessous, mais pour le moment, le seul impératif est que les tests pour l'action <code>create</code> du contrôleur  `Microposts` devraient identifier un utilisateur (d'usine) avant d'essayer de pouvoir créer un message.</p>
 
 <p>En gardant cet avertissement à l'esprit, les tests de création des micro-messages ressemblent à ceux de la création de l'utilisateur de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#code:failing_create_specs">extrait&nbsp;8.6</a> et de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#code:signup_success_tests">extrait&nbsp;8.14</a>&nbsp;; le résultat apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_create_tests">extrait&nbsp;11.25</a>.</p>
 
@@ -1994,8 +1994,8 @@ ce qui requiert la création du fichier spec du contrôleur Microposts (nous tes
 </div></div>
 
 
-<p>Notez que, comme dans la barre lattérale du profil (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:user_show_microposts">extrait&nbsp;11.16</a>), l'information sur l'utilisateur dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:user_info">extrait&nbsp;11.29</a> affiche le nombre total de micro-messages de l'utilisateur. Il y a une légère différence ici dans l'affichage, cependant&nbsp;; dans la barre lattérale du profil, <code>Messages</code> est un label, et afficher <code>Messages&nbsp;: 1</code> fait parfaitement sens. Dans le cas présent, en revanche, dire “1 messages” est grammaticalement incorrect, donc nous nous arrangeons pour afficher “1 message” (et “2 
-messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <code>pluralize</code>.</p>
+<p>Notez que, comme dans la barre lattérale du profil (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:user_show_microposts">extrait&nbsp;11.16</a>), l'information sur l'utilisateur dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:user_info">extrait&nbsp;11.29</a> affiche le nombre total de micro-messages de l'utilisateur. Il y a une légère différence ici dans l'affichage, cependant&nbsp;; dans la barre lattérale du profil, <code>Messages</code> est un label, et afficher <code>Messages&nbsp;: 1</code> fait parfaitement sens. Dans le cas présent, en revanche, dire «&nbsp;1 messages&nbsp;» est grammaticalement incorrect, donc nous nous arrangeons pour afficher «&nbsp;1 message&nbsp;» (et «&nbsp;2 
+messages&nbsp;») en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <code>pluralize</code>.</p>
 
 <p>Le formulaire défini dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_form">extrait&nbsp;11.28</a> est une réplique exacte du formulaire d'inscription de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#code:new_user_form">exrait&nbsp;8.2</a>, ce qui signifie qu'il nécessite une variable d'instance  <code>@micropost</code>. C'est accompli dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_instance_variable">extrait&nbsp;11.30</a> —&nbsp;mais seulement quand l'utilisateur est identifié.</p>
 
@@ -2049,21 +2049,21 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <h3><a id="sec:11.3.3" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:a_proto_feed" class="heading"><span class="number">11.3.3</span> Une proto-alimentation</a></h3>
 
 
-<p>Le commentaire à la fin de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:creating_microposts">section&nbsp;11.3.2</a> fait allusion à un problème&nbsp;: la page d'accueil courante n'affiche aucun micro-messages. Si vous voulez, vous pouvez vérifier que ce formulaire montré dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:home_with_form">illustration&nbsp;11.10</a> fonctionne en soumettant une entrée valide et en se rendant ensuite sur la <a href="http://localhost:3000/users/1">page de profil</a> pour voir le message, mais cela est plutôt fastidieux. Il serait bien meilleur d'avoir une <em>alimentation</em> des micro-messages qui inclut les propres messages de l'utilisateur, comme le montre la mauette de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:proto_feed_mockup">illustration&nbsp;11.12</a>. (Dans le <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>, nous généraliserons cette alimentation pour inclure les micro-messages des utilisateurs qui sont <em>suivis</em> (“<em>followed</em>”) par l'utilisateur courant.)</p>
+<p>Le commentaire à la fin de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:creating_microposts">section&nbsp;11.3.2</a> fait allusion à un problème&nbsp;: la page d'accueil courante n'affiche aucun micro-message. Si vous voulez, vous pouvez vérifier que ce formulaire montré dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:home_with_form">illustration&nbsp;11.10</a> fonctionne en soumettant une entrée valide et en vous rendant ensuite sur la <a href="http://localhost:3000/users/1">page de profil</a> pour voir le message, mais cela est plutôt fastidieux. Il serait bien meilleur d'avoir une <em>alimentation</em> des micro-messages qui inclut les propres messages de l'utilisateur, comme le présente la maquette de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:proto_feed_mockup">illustration&nbsp;11.12</a> (au <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>, nous généraliserons cette alimentation pour inclure les micro-messages des utilisateurs qui sont <em>suivis</em> par l'utilisateur courant).</p>
 
 <div class="label" id="fig:proto_feed_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/proto_feed_mockup.png" alt="proto_feed_mockup"></span></div><div class="caption"><span class="header">Illustration 11.12: </span><span class="description">Maquette de la page d'accueil vers une proto-alimentation.&nbsp;<a href="http://railstutorial.org/images/figures/proto_feed_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/proto_feed_mockup.png" alt="proto_feed_mockup"></span></div><div class="caption"><span class="header">Illustration 11.12: </span><span class="description">Maquette de la page d'accueil avec une proto-alimentation (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/proto_feed_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Puisque chaque utilisateur devrait avoir une alimentation, nous sommes naturellement conduit à une méthode <code>feed</code> (“alimentation”) dans le modèle de l'utilisateur. Éventuellement, nous testerons que l'alimentation retourne bien les messages que l'utilisateur suit, mais pour le moment, nous testerons simplement que la méthode <code>feed</code> <em>inclut</em> les micro-messages de l'utilisateur courant mais <em>exclut</em> les messages d'un utilisateur différent. Nous pouvons exprimer ces exigences dans le code avec l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_specs">extrait&nbsp;11.31</a>.</p>
+<p>Puisque chaque utilisateur devrait avoir une alimentation, nous sommes naturellement conduit à une méthode <code>feed</code> (<em>alimentation</em>) dans le modèle de l'utilisateur. Éventuellement, nous testerons que l'alimentation retourne bien les messages que l'utilisateur suit, mais pour le moment, nous testerons simplement que la méthode <code>feed</code> <em>inclut</em> les micro-messages de l'utilisateur courant mais <em>exclut</em> les messages d'un utilisateur différent. Nous pouvons exprimer ces exigences avec le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_specs">extrait&nbsp;11.31</a>.</p>
 
 <div class="label" id="code:feed_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.31.</span> <span class="description">Tests pour le [](proto-)statut de l'alimentation][(proto-)status feed]. <br> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_38a7f0e89ab5108f2c400c45f92eed67c6d942d4" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.31.</span> <span class="description">Tests pour l'état de la proto-alimentation. <br> <code>spec/models/user_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_38a7f0e89ab5108f2c400c45f92eed67c6d942d4" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2079,7 +2079,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">describe</span> <span class="s2">"micropost associations"</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s2">"Association micro-messages"</span> <span class="k">do</span>
 
     <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="vi">@attr</span><span class="p">)</span>
@@ -2089,7 +2089,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">describe</span> <span class="s2">"[statut d'alimentation][status feed]"</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">"État de l'alimentation"</span> <span class="k">do</span>
 
       <span class="n">it</span> <span class="s2">"devrait avoir une methode `feed`"</span> <span class="k">do</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:feed</span><span class="p">)</span>
@@ -2112,7 +2112,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p>Ces test introduise la [méthode tableau <code>include?</code> (“inclure”)][array <code>include?</code> method], qui teste simplement si une liste (array) inclut l'élément donnée&nbsp;:<sup class="footnote" id="fnref:11.13"><a href="#fn:11.13">13</a></sup></p>
+<p>Ces test introduit la <rw>méthode tableau</rw> <code>include?</code> (<em>inclure&nbsp;?</em>) qui teste simplement si une liste (<em>array</em>) inclut un élément donné&nbsp;:<sup class="footnote" id="fnref:11.13"><a href="#fn:11.13">13</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="ss">:bar</span><span class="o">]</span>
@@ -2126,13 +2126,13 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div>
 
 
-<p>Nous pouvons arranger une alimentation (<code>feed</code>) de micro-message appropriée en sélectionnant tous les micro-messages dont l'attribut <code>user_id</code> serait égal à l'identifiant de l'utilisateur courant, ce que nous accomplissons en utilisant la méthode <code>where</code> sur le modèle <code>Micropost</code>, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a>.<sup class="footnote" id="fnref:11.14"><a href="#fn:11.14">14</a></sup></p>
+<p>Nous pouvons obtenir une alimentation appropriée (<code>feed</code>) de micro-messages en sélectionnant tous les micro-messages dont l'attribut <code>user_id</code> serait égal à l'identifiant (<code>id</code>) de l'utilisateur courant, ce que nous accomplissons en utilisant la méthode <code>where</code> sur le modèle <code>Micropost</code>, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a>.<sup class="footnote" id="fnref:11.14"><a href="#fn:11.14">14</a></sup></p>
 
 <div class="label" id="code:proto_status_feed"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.32.</span> <span class="description">Implémentation préliminaire pour le [statut d'alimentation du micro-message][micropost status feed]. <br> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_3e982d43c2418474435590f7291f81eddf74a355" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.32.</span> <span class="description">Implémentation préliminaire pour de l'état d'alimentation en micro-messages. <br> <code>app/models/user.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_3e982d43c2418474435590f7291f81eddf74a355" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2147,7 +2147,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">feed</span>
-    <span class="c1"># C'est un préliminaire. Voir le chapitre 12 pour l'implémentation complète.</span>
+    <span class="c1"># C'est un préliminaire. Cf. chapitre 12 pour l'implémentation complète.</span>
     <span class="no">Micropost</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">"user_id = ?"</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -2158,14 +2158,14 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p>Le point d'interrogation dans…</p>
+<p>Le point d'interrogation dans&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">Micropost</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">"user_id = ?"</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>… s'assure que l'identifiant (<code>id</code>) est proprement “échappé” avant d'être inclus dans la requête SQL sous-jacente, évitant par là-même un sérieux trou de sécurité appelé <a href="http://en.wikipedia.org/wiki/SQL_injection"><em>SQL injection</em></a> (“injection SQL”). (L'attribut&nbsp;<code>id</code> ici est juste un entier, donc il n'y a aucun danger dans ce cas, mais <em>toujours</em> échapper les variables injectées dans les déclarations SQL est une habitude à cultiver)</p>
+<p>… s'assure que l'identifiant (<code>id</code>) est proprement «&nbsp;échappé&nbsp;» avant d'être inclus dans la requête SQL sous-jacente, évitant par là-même un sérieux trou de sécurité appelé <a href="http://en.wikipedia.org/wiki/SQL_injection"><em>SQL injection</em></a> (<em>injection SQL</em>) (l'attribut&nbsp;<code>id</code> est ici juste un entier, donc il n'y a aucun danger dans ce cas, mais <em>toujours</em> échapper les variables injectées dans les déclarations SQL est une habitude à cultiver).</p>
 
 <p>Les lecteurs attentifs peuvent noter à ce point que le code dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a> revient à écrire&nbsp;:</p>
 
@@ -2176,15 +2176,15 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div>
 
 
-<p>Nous avons utilisé plutôt le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a> plutôt parce qu'[il généralise beaucoup plus naturellement pour le statut d'alimentation complet du][it generalizes much more naturally to the full status feed needed in] <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.</p>
+<p>Nous avons utilisé plutôt le code de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a> parce qu'il prépare de façon plus naturelle la généralisation du statut d'alimentation complet du <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.</p>
 
-<p>Pour utiliser l'alimentation dans l'application exemple, nous ajontons une variable d'instance <code>@feed_items</code> pour l'alimentation (paginée) de l'utilisateur courant, comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_instance_variable">extrait&nbsp;11.33</a>, et alors ajoutons un partiel alimentation (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_partial">extrait&nbsp;11.34</a>) à la page d'accueil (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:home_with_feed">extrait&nbsp;11.36</a>).</p>
+<p>Pour utiliser l'alimentation dans l'application exemple, nous ajontons une variable d'instance <code>@feed_items</code> pour l'alimentation (paginée) de l'utilisateur courant, comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_instance_variable">extrait&nbsp;11.33</a>, ainsi qu'un <rw>partiel</rw> alimentation (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_partial">extrait&nbsp;11.34</a>) à la page d'accueil (<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:home_with_feed">extrait&nbsp;11.36</a>).</p>
 
 <div class="label" id="code:feed_instance_variable"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.33.</span> <span class="description">Ajout d'un variable d'instance à l'action <code>home</code> (“accueil”). <br> <code>app/controllers/pages_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_8d1bdabf45b53697c1faa48c0397eeebabea250c" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.33.</span> <span class="description">Ajout d'une variable d'instance à l'action <code>home</code>. <br> <code>app/controllers/pages_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_8d1bdabf45b53697c1faa48c0397eeebabea250c" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2237,14 +2237,14 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p>[Le partiel du statut d'alimentation differt l'élément alimentation en rendant pour un partiel de l'élément d'alimention en utilisant le code][The status feed partial defers the feed item rendering to a feed item partial using the code]&nbsp;:</p>
+<p>Le partiel d'état d'alimentation ci-dessus rend chaque élément de l'alimentation à l'aide d'un partiel repéré par <code>feed_item</code> (<code>_feed_item.html.erb</code>) en utilisant le code&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s1">'shared/feed_item'</span><span class="p">,</span> <span class="ss">:collection</span> <span class="o">=&gt;</span> <span class="vi">@feed_items</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Ici nous passons un paramètre <code>:collection</code> avec les éléments d'alimentation, ce qui contraint <code>render</code> à utiliser le partiel donné (<code>’feed_item’</code> dans ce cas) pour rendre chaque élément dans la collection. (Nous avons omis le paramètre <code>:partial</code> dans les rendus précédents, en écrivant, p.e., <code>render ’shared/micropost’</code>, mais avec un paramètre <code>:collection</code> cette syntaxe ne fonctionne pas.) Le partiel de l'élément d'alimentation lui-même apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_item_partial">extrait&nbsp;11.35</a>&nbsp;; notez l'addition d'un lien de suppression au partiel de l'élément d'alimentation, suivant l'exemple de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:delete_links">extrait&nbsp;10.38</a>.</p>
+<p>Ici nous passons un paramètre <code>:collection</code> avec les éléments d'alimentation, ce qui contraint <code>render</code> à utiliser le partiel donné (<code>feed_item</code> dans ce cas) pour rendre chaque élément de la <rw>collection</rw> proposée (nous avons omis le paramètre <code>:partial</code> dans les rendus précédents, en écrivant par exemple&nbsp;: <code>render ’shared/micropost’</code>, mais avec un paramètre <code>:collection</code> cette syntaxe ne fonctionne pas). Le code du partiel de l'élément d'alimentation lui-même est présenté dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_item_partial">extrait&nbsp;11.35</a>&nbsp;; notez l'addition d'un lien de suppression au partiel de l'élément d'alimentation, suivant l'exemple de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:delete_links">extrait&nbsp;10.38</a>.</p>
 
 <div class="label" id="code:feed_item_partial"></div>
 
@@ -2262,21 +2262,21 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;tr&gt;</span>
   <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"gravatar"</span><span class="nt">&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">gravatar_for</span><span class="p">(</span><span class="n">feed_item</span><span class="o">.</span><span class="n">user</span><span class="p">),</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">gravatar_pour</span><span class="p">(</span><span class="n">feed_item</span><span class="o">.</span><span class="n">user</span><span class="p">),</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/td&gt;</span>
   <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"micropost"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"user"</span><span class="nt">&gt;</span>
-      <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span> <span class="cp">%&gt;</span>
+      <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">nom</span><span class="p">,</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">user</span> <span class="cp">%&gt;</span>
     <span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">content</span> <span class="cp">%&gt;</span><span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"timestamp"</span><span class="nt">&gt;</span>
-      Posted <span class="cp">&lt;%=</span> <span class="n">time_ago_in_words</span><span class="p">(</span><span class="n">feed_item</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span> <span class="cp">%&gt;</span> ago.
+      Posté il y a <span class="cp">&lt;%=</span> <span class="n">time_ago_in_words</span><span class="p">(</span><span class="n">feed_item</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span> <span class="cp">%&gt;</span>.
     <span class="nt">&lt;/span&gt;</span>
   <span class="nt">&lt;/td&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">current_user?</span><span class="p">(</span><span class="n">feed_item</span><span class="o">.</span><span class="n">user</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;td&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"delete"</span><span class="p">,</span> <span class="n">feed_item</span><span class="p">,</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span><span class="p">,</span>
-                                     <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"You sure?"</span><span class="p">,</span>
+    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"supprimer"</span><span class="p">,</span> <span class="n">feed_item</span><span class="p">,</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span><span class="p">,</span>
+                                     <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"Etes-vous certain&nbsp;?"</span><span class="p">,</span>
                                      <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="n">feed_item</span><span class="o">.</span><span class="n">content</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/td&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
@@ -2305,7 +2305,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
   <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"front"</span> <span class="na">summary=</span><span class="s">"For signed-in users"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;tr&gt;</span>
       <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"micropost"</span><span class="nt">&gt;</span>What's up?<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"micropost"</span><span class="nt">&gt;</span>Quoi de neuf&nbsp;?<span class="nt">&lt;/h1&gt;</span>
         <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">'shared/micropost_form'</span> <span class="cp">%&gt;</span>
         <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">'shared/feed'</span> <span class="cp">%&gt;</span>
       <span class="nt">&lt;/td&gt;</span>
@@ -2329,10 +2329,10 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <div class="label" id="fig:home_with_proto_feed"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_with_proto_feed.png" alt="home_with_proto_feed"></span></div><div class="caption"><span class="header">Illustration 11.13: </span><span class="description">Page d'accueil page (<a href="http://localhost:3000/"><tt>/</tt></a>) avec une proto-alimentation.&nbsp;<a href="http://railstutorial.org/images/figures/home_with_proto_feed-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_with_proto_feed.png" alt="home_with_proto_feed"></span></div><div class="caption"><span class="header">Illustration 11.13: </span><span class="description">Page d'accueil (<a href="http://localhost:3000/"><tt>/</tt></a>) avec une proto-alimentation.&nbsp;<a href="http://railstutorial.org/images/figures/home_with_proto_feed-full.png">(taille normale)</a></span></div></div>
 
 
-<p>À ce point, créer une nouveau micro-message fonctionne comme voulu, comme montré dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:micropost_created">illustration&nbsp;11.14</a>. (Nous écrirons un test d'intégration pour cet effet à la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:testing_the_new_home_page">section&nbsp;11.3.5</a>.) Il y a une subtilité, cependant&nbsp;: à l'<em>échec</em> de la soumission du micro-message, la page d'accueil attend une variable d'instance <code>@feed_items</code>, donc les échecs de soumission actuellement [provoquent une rupture][break] (comme vous devriez pouvoir le vérifier en jouant votre suite de tests). La solution la plus simple est de supprimer entièrement l'alimentation en lui assignant une liste (array) vide, comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_create_action_with_feed">extrait&nbsp;11.37</a>.<sup class="footnote" id="fnref:11.15"><a href="#fn:11.15">15</a></sup></p>
+<p>Au point où nous sommes arrivés, créer un nouveau micro-message fonctionne comme voulu, comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:micropost_created">illustration&nbsp;11.14</a> (nous écrirons un test d'intégration pour cet effet à la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:testing_the_new_home_page">section&nbsp;11.3.5</a>). Il y a une subtilité, cependant&nbsp;: à l'<em>échec</em> de la soumission du micro-message, la page d'accueil attend une variable d'instance <code>@feed_items</code>, donc les échecs de la soumission provoquent pour le moment une rupture (comme vous devriez pouvoir le constater en jouant votre suite de tests). La solution la plus simple est de supprimer entièrement l'alimentation en lui assignant une liste (array) vide, comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_create_action_with_feed">extrait&nbsp;11.37</a>.<sup class="footnote" id="fnref:11.15"><a href="#fn:11.15">15</a></sup></p>
 
 <div class="label" id="fig:micropost_created"></div>
 
@@ -2346,7 +2346,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.37.</span> <span class="description">Ajout d'un variable d'instance (vide) <code>@feed_items</code> à l'action <code>create</code> (“créer”). <br> <code>app/controllers/microposts_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_abca89b4e7c76f1aaecb86010d4958e6b7375165" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.37.</span> <span class="description">Ajout d'un variable d'instance (vide) <code>@feed_items</code> à l'action <code>create</code>. <br> <code>app/controllers/microposts_controller.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_abca89b4e7c76f1aaecb86010d4958e6b7375165" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2386,15 +2386,15 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <h3><a id="sec:11.3.4" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:destroying_microposts" class="heading"><span class="number">11.3.4</span> Destruction des micro-messages</a></h3>
 
 
-<p>La dernière pièce de fonctionnalité à ajouter à la ressource `Microposts` est la possibilité de détruire les messages. Comme avec la suppression des utilisateurs (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:the_destroy_action">section&nbsp;10.4.2</a>), nous accomplissons cela avec un lien “supprimer”, comme le montre la maquette de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:micropost_delete_links_mockup">illustration&nbsp;11.15</a>. Contrairement à ce cas, qui restreignait la suppression d'utilisateur aux administrateurs, le lien suppression  fonctionnera seulement pour les micro-messages créés par l'utilisateur courant.</p>
+<p>La dernière pièce fonctionnelle à ajouter à la ressource `Microposts` est la possibilité pour l'utilisateur de détruire ses messages. Comme avec la suppression des utilisateurs (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:the_destroy_action">section&nbsp;10.4.2</a>), nous accomplissons cela avec un lien «&nbsp;supprimer&nbsp;», comme le montre la maquette de l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:micropost_delete_links_mockup">illustration&nbsp;11.15</a>. Contrairement à ce cas des utilisateurs, qui restreignait la suppression aux seuls administrateurs, le lien suppression fonctionnera seulement pour les micro-messages créés par l'utilisateur courant.</p>
 
 <div class="label" id="fig:micropost_delete_links_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_delete_links_mockup.png" alt="micropost_delete_links_mockup"></span></div><div class="caption"><span class="header">Illustration 11.15: </span><span class="description">Maquette de la proto-alimentation avec le lien de suppression des micro-messages.&nbsp;<a href="http://railstutorial.org/images/figures/micropost_delete_links_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_delete_links_mockup.png" alt="micropost_delete_links_mockup"></span></div><div class="caption"><span class="header">Illustration 11.15: </span><span class="description">Maquette de la proto-alimentation avec le lien de suppression des micro-messages (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/micropost_delete_links_mockup-full.png">(taille normale)</a></span></div></div>
 
 
-<p>Notre première étape consiste à ajouter un lien de suppression au partiel de micro-message comment dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_item_partial">extrait&nbsp;11.35</a>. Le résultat apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_partial_with_delete">extrait&nbsp;11.38</a>.</p>
+<p>Notre première étape consiste à ajouter un lien de suppression au <rw>partiel</rw> de micro-message comme dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:feed_item_partial">extrait&nbsp;11.35</a>. Le résultat apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_partial_with_delete">extrait&nbsp;11.38</a>.</p>
 
 <div class="label" id="code:micropost_partial_with_delete"></div>
 
@@ -2414,13 +2414,13 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
   <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"micropost"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">micropost</span><span class="o">.</span><span class="n">content</span> <span class="cp">%&gt;</span><span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"timestamp"</span><span class="nt">&gt;</span>
-      Posted <span class="cp">&lt;%=</span> <span class="n">time_ago_in_words</span><span class="p">(</span><span class="n">micropost</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span> <span class="cp">%&gt;</span> ago.
+      Posté il y a <span class="cp">&lt;%=</span> <span class="n">time_ago_in_words</span><span class="p">(</span><span class="n">micropost</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span> <span class="cp">%&gt;</span>.
     <span class="nt">&lt;/span&gt;</span>
   <span class="nt">&lt;/td&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">current_user?</span><span class="p">(</span><span class="n">micropost</span><span class="o">.</span><span class="n">user</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;td&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"delete"</span><span class="p">,</span> <span class="n">micropost</span><span class="p">,</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span><span class="p">,</span>
-                                     <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"You sure?"</span><span class="p">,</span>
+    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"supprimer"</span><span class="p">,</span> <span class="n">micropost</span><span class="p">,</span> <span class="ss">:method</span> <span class="o">=&gt;</span> <span class="ss">:delete</span><span class="p">,</span>
+                                     <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"Etes-vous certain ?"</span><span class="p">,</span>
                                      <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="n">micropost</span><span class="o">.</span><span class="n">content</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/td&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
@@ -2429,7 +2429,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p><em>Notez&nbsp;:</em> en ce qui concerne la dernière version de Rails&nbsp;3.0, moi et quelques autres lecteurs rencontrent quelquefois un étrange bogue, où l'assocation <code>micropost.user</code> n'est pas faite proprement. Le résultat est qu'appeler <code>micropost.user</code> provoque une exception (une erreur) <code>NoMethodError</code>. Puisque ce bogue est [corrigé][fixed], pour le détourner vous pouvez remplacer la ligne…</p>
+<p><em>Notez&nbsp;:</em> en ce qui concerne la dernière version de Rails&nbsp;3.0, moi et quelques autres lecteurs rencontrent quelquefois un étrange bogue, où l'assocation <code>micropost.user</code> n'est pas faite proprement. Le résultat est qu'appeler <code>micropost.user</code> peut provoquer une exception (<em>une erreur</em>) <code>NoMethodError</code>. Pour contourner ce bogue, vous pouvez remplacer la ligne&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">current_user?</span><span class="p">(</span><span class="n">micropost</span><span class="o">.</span><span class="n">user</span><span class="p">)</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -2446,13 +2446,13 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 
 <p>Quand l'appel de <code>micropost.user</code> provoque une exception, ce code trouve l'utilisateur en se basant sur l'attribut <code>user_id</code> du micro-message.</p>
 
-<p>Les tests pour l'action <code>destroy</code> sont simplement une généralisation des test similaires de la suppression d'utilisateurs (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:destroy_tests">extrait&nbsp;10.40</a>), comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_destroy_specs">extrait&nbsp;11.39</a>.</p>
+<p>Les tests pour l'action <code>destroy</code> sont simplement une généralisation des tests similaires de la suppression d'utilisateur (<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:destroy_tests">extrait&nbsp;10.40</a>), comme le montre l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_destroy_specs">extrait&nbsp;11.39</a>.</p>
 
 <div class="label" id="code:micropost_destroy_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.39.</span> <span class="description">Tests pour l'action <code>destroy</code> (“détruire”) du contrôleur `Microposts`. <br> <code>spec/controllers/microposts_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_335b45d6804116b41fe84cd646a9eee493b26e7b" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.39.</span> <span class="description">Tests pour l'action <code>destroy</code> («&nbsp;détruire&nbsp;») du contrôleur `Microposts`. <br> <code>spec/controllers/microposts_controller_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_335b45d6804116b41fe84cd646a9eee493b26e7b" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2468,7 +2468,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">"DELETE 'destroy'"</span> <span class="k">do</span>
 
-    <span class="n">describe</span> <span class="s2">"pour un utilisateur non autorisé"</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">"pour un utilisateur non auteur du message"</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
         <span class="vi">@user</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
@@ -2477,13 +2477,13 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
         <span class="vi">@micropost</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="n">it</span> <span class="s2">"devrait refuser l'accès"</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s2">"devrait refuser la suppression du message"</span> <span class="k">do</span>
         <span class="n">delete</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@micropost</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
       <span class="k">end</span>
     <span class="k">end</span>
 
-    <span class="n">describe</span> <span class="s2">"pour un utilisateur autorisé"</span> <span class="k">do</span>
+    <span class="n">describe</span> <span class="s2">"pour l'auteur du message"</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
         <span class="vi">@user</span> <span class="o">=</span> <span class="n">test_sign_in</span><span class="p">(</span><span class="no">Factory</span><span class="p">(</span><span class="ss">:user</span><span class="p">))</span>
@@ -2502,7 +2502,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p>Le code de l'application est aussi analogue au cas de l'utilisateur dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:admin_destroy_before_filter">extrait&nbsp;10.41</a>&nbsp;; la différence principale est que, plutôt que d'utiliser un filtre “passe-avant” <code>admin_user</code>, dans le cas des micro-messages nous utilisons un filtre “passe-avant” <code>authorized_user</code> qui vérifie que l'utilisateur courant est l'auteur du micro-message. Le code apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_destroy_action">extrait&nbsp;11.40</a>, et le résultat de la suppression du deuxième plus récent message apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:home_post_delete">illustration&nbsp;11.16</a>.</p>
+<p>Le code de l'application est aussi analogue au cas de l'utilisateur dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#code:admin_destroy_before_filter">extrait&nbsp;10.41</a>&nbsp;; la différence principale est que, plutôt que d'utiliser un filtre «&nbsp;passe-avant&nbsp;» <code>admin_user</code>, dans le cas des micro-messages nous utilisons un filtre «&nbsp;passe-avant&nbsp;» <code>authorized_user</code> qui vérifie que l'utilisateur courant est l'auteur du micro-message. Le code apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_destroy_action">extrait&nbsp;11.40</a>, et le résultat de la suppression du deuxième plus récent message apparait dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:home_post_delete">illustration&nbsp;11.16</a>.</p>
 
 <div class="label" id="code:microposts_destroy_action"></div>
 
@@ -2545,7 +2545,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <div class="label" id="fig:home_post_delete"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_post_delete.png" alt="home_post_delete"></span></div><div class="caption"><span class="header">Illustration 11.16: </span><span class="description">Page d'accueil de l'utilisateur après la suppression du second plus récent micro-message.&nbsp;<a href="http://railstutorial.org/images/figures/home_post_delete-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_post_delete.png" alt="home_post_delete"></span></div><div class="caption"><span class="header">Illustration 11.16: </span><span class="description">Page d'accueil de l'utilisateur après la suppression du second plus récent micro-message (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/home_post_delete-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2556,20 +2556,20 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <h3><a id="sec:11.3.5" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:testing_the_new_home_page" class="heading"><span class="number">11.3.5</span> Test de la nouvelle page d'accueil</a></h3>
 
 
-<p>Avant de quitter la création et la suppresion des micro-messages, nous allons écrire un spec d'intégration RSpec pour tester que nos formulaire fonctionnent proprement. Comme dans le cas des utilisateurs (<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a>), nous commençons par générer un spec d'intégration `microposts` (“micro-messags”)&nbsp;:</p>
+<p>Avant de quitter la création et la suppresion des micro-messages, nous allons écrire un spec d'intégration RSpec pour tester que nos formulaires fonctionnent proprement. Comme dans le cas des utilisateurs (<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#sec:rspec_integration_tests">section&nbsp;8.4</a>), nous commençons par générer un spec d'intégration `microposts` («&nbsp;micro-messags&nbsp;»)&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate integration_test microposts
 </pre></div>
 </div>
 
 
-<p>Des tests pour échec et la réussite de la création du micro-message apparaissent dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_integration_spec">extrait&nbsp;11.41</a>.</p>
+<p>Des tests pour l'échec et la réussite de la création d'un micro-message sont présentés dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:microposts_integration_spec">extrait&nbsp;11.41</a>.</p>
 
 <div class="label" id="code:microposts_integration_spec"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 11.41.</span> <span class="description">Un test d'intégration pour les micro-messages sur la page d'accueil (<code>home</code> page). <br> <code>spec/requests/microposts_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_46f82d00f99f5727539e5eea240e447f4bab867f" height="14" width="110">
+<div class="listing"><span class="header">Extrait 11.41.</span> <span class="description">Un test d'intégration pour les micro-messages sur la page d'accueil. <br> <code>spec/requests/microposts_spec.rb</code></span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="clippy_46f82d00f99f5727539e5eea240e447f4bab867f" height="14" width="110">
       <param name="movie" value="/flash/clippy.swf">
       <param name="allowScriptAccess" value="always">
       <param name="quality" value="high">
@@ -2624,14 +2624,14 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div></div>
 
 
-<p>Ayabt fini de tester les fonctionnalités attachées aux micro-messages, nous sommes maintenant en mesure d'élaborer la fonctionnalité final de notre exemple d'application&nbsp;: le suivi d'utilisateur.</p>
+<p>Ayant fini de tester les fonctionnalités attachées aux micro-messages, nous sommes en mesure à présent d'élaborer la fonctionnalité finale de notre <em>Application Exemple</em>&nbsp;: le suivi d'utilisateur.</p>
 
 <h2><a id="sec:11.4" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:11.4" class="heading"><span class="number">11.4</span> Conclusion</a></h2>
 
 
-<p>Avec l'addition de la ressource `Microposts`, nous en avons presque fini avec notre exemple d'application. Tout ce qu'il reste à faire est d'ajouter une “couche sociale” en permettant à des utilisateurs de se suivre l'un l'autre. Nous allons apprendre comment modeler une telle relation entre utilisateurs, et voir les implications pour les statuts d'alimentation, au <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.</p>
+<p>Avec l'addition de la ressource `Microposts`, nous en avons presque fini avec notre exemple d'application. Tout ce qui reste à faire est d'ajouter une «&nbsp;couche sociale&nbsp;» en permettant aux utilisateurs de se suivre les uns les autres. Nous allons apprendre comment modeler une telle relation entre utilisateurs, et voir les implications pour les statuts d'alimentation, au <a class="ref" href="http://ruby.railstutorial.org/chapters/following-users#top">chapitre&nbsp;12</a>.</p>
 
-<p>Avant d'y venir, assurez-vous d'enregistrer (<code>commit</code> et <code>merge</code>) vos changements si vous utilisez le contrôle de versions Git&nbsp;:</p>
+<p>Avant cela, assurez-vous d'enregistrer (<code>commit</code> et <code>merge</code>) vos changements si vous utilisez le contrôle de versions Git&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">"Added user microposts"</span>
@@ -2641,7 +2641,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 </div>
 
 
-<p>Vous pouvez aussi “pousser” l'application sur Heroku à ce point. Parce que le modèle de données a changé avec l'addition de la table <code>microposts</code>, vous aurez aussi besoin de migrer la base de données de production&nbsp;:</p>
+<p>Vous pouvez aussi «&nbsp;pousser&nbsp;» l'application vers Heroku. Le modèle de données ayant changé avec l'addition de la table <code>microposts</code>, vous aurez aussi besoin de migrer la base de données de production&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push heroku
 <span class="gp">$</span> heroku rake db:migrate
@@ -2655,17 +2655,17 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <h2><a id="sec:11.5" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:micropost_exercises" class="heading"><span class="number">11.5</span> Exercices</a></h2>
 
 
-<p>Nous avons abordé suffisamment de sujets maintenant pour entrevoir une combinaison d'extensions possible à notre application. En voilà quelques unes parmi les nombreuses possibilités&nbsp;:</p>
+<p>Nous avons abordé suffisamment de sujets maintenant pour entrevoir une combinaison d'extensions possible à notre application. En voilà quelques-unes parmi les très nombreuses possibilités&nbsp;:</p>
 
 <ol>
 <li><strong>(challenge)</strong> Ajoutez un affichage, à l'aide de JavaScript, pour afficher le décompte de 140 signes sur la page d'accueil, à mesure que l'utilisateur entre du texte.</li>
-<li>Ajoutez des tests pour le compte des micro-messages dans la sidebar (sans oublier le traitement du pluriel).</li>
-<li><strong>(principalement pour les designers)</strong> Modifiez le listing des micro-messages en utilisant une liste numérotée plutôt qu'une table. (<em>Note&nbsp;:</em> c'est la façon pour Twitter d'afficher [ses statuts d'actualisation][its status updates].) Ajouter ensuite les styles CSS appropriés pour que l'alimentation en résultant n'ait pas l'air trop moche.</li>
+<li>Ajoutez des tests pour le compte des micro-messages dans la barre lattérale (sans oublier le traitement du pluriel).</li>
+<li><strong>(principalement pour les designers)</strong> Modifiez le listing des micro-messages en utilisant une liste numérotée plutôt qu'une table (<em>note&nbsp;:</em> c'est la façon pour Twitter d'afficher ses statuts d'actualisation). Ajouter ensuite les styles CSS appropriés pour que l'alimentation en résultant n'ait pas l'air trop affreuse.</li>
 <li>Ajoutez des tests pour la pagination des micro-messages.</li>
 <li>Restructurez la page d'accueil pour utiliser des partiels différents pour les deux branches des conditions <code>if</code> et <code>else</code>.</li>
 <li>Écrivez un test pour vous assurer que le lien de suppression des messages n'apparaissent pas sur le messages dont l'utilisateur courant n'est pas l'auteur.</li>
-<li>Ajoutez  une route “imbriquée” (<a href="http://guides.rubyonrails.org/routing.html#nested-routes">nested route</a>) pour que <tt>/users/1/microposts</tt> affiche tous les micro-messages de l'utilisateur&nbsp;1. (Vous aurez aussi à ajouter une action <code>index</code> au contrôleur `Microposts` et à créer la vue correspondante.)</li>
-<li>Les très longs mots, généralement, perturbent l'affichage, comme on peut le voir dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:long_word_micropost">illustration&nbsp;11.17</a>. Réglez ce problème en utilisant l'<em>helper</em> <code>wrap</code> défini dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:wrap">extrait&nbsp;11.42</a>. (Notez l'utilisation de la méthode <code>raw</code> (“brut”) pour empêcher Rails d'échapper le code HTML, liée à la méthode <code>sanitize</code> nécessaire pour prévenir le [scripting à travers le site][cross-site scripting].)</li>
+<li>Ajoutez  une route «&nbsp;imbriquée&nbsp;» (<a href="http://guides.rubyonrails.org/routing.html#nested-routes">nested route</a>) pour que <tt>/users/1/microposts</tt> affiche tous les micro-messages de l'utilisateur&nbsp;1 (vous aurez aussi à ajouter une action <code>index</code> au contrôleur `Microposts` et à créer la vue correspondante).</li>
+<li>Les très longs mots, généralement, perturbent l'affichage, comme on peut le voir dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#fig:long_word_micropost">illustration&nbsp;11.17</a>. Réglez ce problème en utilisant l'<em>helper</em> <code>wrap</code> défini dans l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:wrap">extrait&nbsp;11.42</a> (notez l'utilisation de la méthode <code>raw</code> &mdash;&nbsp;<em>brut</em>&nbsp;&mdash; pour empêcher Rails d'échapper le code HTML, liée à la méthode <code>sanitize</code> nécessaire pour prévenir les attaques de <em>cross-site scripting</em>).</li>
 </ol>
 
 
@@ -2674,7 +2674,7 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
 <div class="label" id="fig:long_word_micropost"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/long_word_micropost.png" alt="long_word_micropost"></span></div><div class="caption"><span class="header">Illustration 11.17: </span><span class="description">Déficience de l'affichage à cause d'un mot trop long.&nbsp;<a href="http://railstutorial.org/images/figures/long_word_micropost-full.png">(traille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/long_word_micropost.png" alt="long_word_micropost"></span></div><div class="caption"><span class="header">Illustration 11.17: </span><span class="description">Déficience de l'affichage à cause d'un mot trop long.&nbsp;<a href="http://railstutorial.org/images/figures/long_word_micropost-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2718,27 +2718,24 @@ messages”) en utilisant la <rw>méthode helper</rw> très pratique&nbsp;: <cod
     «&nbsp;<span class="number">chapitre 10</span> Actualiser, afficher et supprimer des utilisateurs
   </a>
   <a class="next_page" href="http://ruby.railstutorial.org/chapters/following-users#top">
-    <span class="number">chapitre 12</span> Following users&nbsp;»
+    <span class="number">chapitre 12</span> Suivi des utilisateurs&nbsp;»
   </a>
 </div><div class="footnotes">
 <ol>
 <li id="fn:11.1">Techniquement, nous traitons les sessions comme une ressource dans le <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#top">chapitre&nbsp;9</a>, mais elles ne sont pas sauvées dans la base de données de la même façon que les utilisateurs et les micro-messages.&nbsp;<a class="arrow" href="#fnref:11.1">&uarr;</a></li>
-<li id="fn:11.2">L'attribut <code>content</code> (“contenu”) sera une chaine de caractères (<code>string</code>), mais, comme cela est noté brièvement dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/a-demo-app#sec:modeling_microposts">section&nbsp;2.1.2</a>, pour des champs de saisie de textes plus longs, vous devriez utiliser le type de donnée <code>text</code>.&nbsp;<a class="arrow" href="#fnref:11.2">&uarr;</a></li>
+<li id="fn:11.2">L'attribut <code>content</code> (<em>contenu</em>) sera une chaine de caractères (<code>string</code>), mais, comme cela est noté brièvement dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/a-demo-app#sec:modeling_microposts">section&nbsp;2.1.2</a>, pour des champs de saisie de textes plus longs, vous devez utiliser le type de donnée <code>text</code>.&nbsp;<a class="arrow" href="#fnref:11.2">&uarr;</a></li>
 <li id="fn:11.3">Pour en savoir plus sur les associations dans Factory Girl, y compris toutes les options possibles, voyez la <a href="http://rdoc.info/projects/thoughtbot/factory_girl">Documentation Factory Girl</a>.&nbsp;<a class="arrow" href="#fnref:11.3">&uarr;</a></li>
-<li id="fn:11.4">Souvenez-vous que <code>created_at</code> (“créé à…”) et <code>updated_at</code> ("actualisé le…") sont des colonnes “magiques”, donc toute assignation explicte sera remplacée par ces valeurs magiques.&nbsp;<a class="arrow" href="#fnref:11.4">&uarr;</a></li>
-<li id="fn:11.5">Conformément au “marquage sémantique” (<a href="http://en.wikipedia.org/wiki/HTML#Semantic_HTML">semantic markup</a>), il serait probablement meilleur d'utiliser une liste numérotée (<a href="http://www.w3.org/MarkUp/html3/seqlists.html"><em>ordered list</em></a>), mais dans ce cas l'alignement du texte et des images est beaucoup plus difficile qu'avec les tables. Voyez l'exercice de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:micropost_exercises">section&nbsp;11.5</a> si vous mettez un point d'honneur à utiliser la version sémantique.&nbsp;<a class="arrow" href="#fnref:11.5">&uarr;</a></li>
-<li id="fn:11.6">Dans le cas où vous vous poseriez la question, la méthode associative <code>count</code> (“compter”) est intelligente, et exécute le décompte directement dans la base de données. En particulier, elle <em>ne</em> tire <em>pas</em> tous les micro-messages de la base pour compter ensuite le nombre d'éléments dans la liste obtenue, ce qui serait terriblement consommateur à mesure que le nombre de micro-messages grossirait. Au lieu de ça, elle demande à la base de données de compter les micro-messages possédant un identifiant d'utilisateur donné (<code>user_id</code>). En passant, [dans l'éventualité peu probable que dénombrer les messages soit toujours un goulot de bouteille —&nbsp;un entonnoir&nbsp;— dans votre application][in the 
-unlikely event that finding the count is still a bottleneck in your 
-application], vous pouvez même le rendre encore plus rapide avec un <a href="http://railscasts.com/episodes/23-counter-cache-column"><em>counter cache</em></a>.&nbsp;<a class="arrow" href="#fnref:11.6">&uarr;</a></li>
+<li id="fn:11.4">Souvenez-vous que <code>created_at</code> (<em>créé le…</em>) et <code>updated_at</code> (<em>actualisé_le…</em>) sont des colonnes «&nbsp;magiques&nbsp;», donc toute assignation explicite sera remplacée par ces valeurs magiques.&nbsp;<a class="arrow" href="#fnref:11.4">&uarr;</a></li>
+<li id="fn:11.5">Conformément au <em>marquage sémantique</em> (<a href="http://en.wikipedia.org/wiki/HTML#Semantic_HTML">semantic markup</a>), il serait probablement meilleur d'utiliser une liste numérotée (<a href="http://www.w3.org/MarkUp/html3/seqlists.html"><em>ordered list</em></a>), mais dans ce cas l'alignement du texte et des images est beaucoup plus difficile qu'avec les tables. Voyez l'exercice de la <a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#sec:micropost_exercises">section&nbsp;11.5</a> si vous mettez un point d'honneur à utiliser la version sémantique.&nbsp;<a class="arrow" href="#fnref:11.5">&uarr;</a></li>
+<li id="fn:11.6">Dans le cas où vous vous poseriez la question, la méthode associative <code>count</code> (<em>compter</em>) est intelligente, et exécute le décompte directement dans la base de données. En particulier, elle <em>ne</em> tire <em>pas</em> tous les micro-messages de la base pour compter ensuite le nombre d'éléments dans la liste obtenue, ce qui serait terriblement consommateur à mesure que le nombre de micro-messages grossirait. Au lieu de ça, elle demande à la base de données de compter les micro-messages possédant un identifiant d'utilisateur donné (<code>user_id</code>). En passant, dans l'éventualité très peu probable où dénombrer les messages serait quand même un goulot d'étranglement, vous pouvez le rendre encore plus rapide avec un <a href="http://railscasts.com/episodes/23-counter-cache-column"><em>counter cache</em></a>.&nbsp;<a class="arrow" href="#fnref:11.6">&uarr;</a></li>
 <li id="fn:11.7">De façon pratique, l'<a class="ref" href="http://ruby.railstutorial.org/chapters/user-microposts#code:micropost_css">extrait&nbsp;11.19</a> contient en fait <em>tous</em> les styles CSS nécessaires à ce chapitre.&nbsp;<a class="arrow" href="#fnref:11.7">&uarr;</a></li>
 <li id="fn:11.8">(c'est-à-dire cinq utilisateurs avec un gravatar personnalisé, et un avec le gravatar par défaut)&nbsp;<a class="arrow" href="#fnref:11.8">&uarr;</a></li>
 <li id="fn:11.9">Consultez votre journal de développement (<code>log/development.log</code>) si vous êtes curieux de connaitre la commande SQL que cette méthode génère.&nbsp;<a class="arrow" href="#fnref:11.9">&uarr;</a></li>
 <li id="fn:11.10">À dessein, le texte <em>lorem ipsum</em> du gem Faker est aléatoire, donc les contenus des micro-messages en exemple seront différents.&nbsp;<a class="arrow" href="#fnref:11.10">&uarr;</a></li>
 <li id="fn:11.11">Les deux autres ressources sont la ressource `Users` de la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-up#sec:signup_form">section&nbsp;8.1</a> et la ressource `Sessions` de la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#sec:sessions">section&nbsp;9.1</a>.&nbsp;<a class="arrow" href="#fnref:11.11">&uarr;</a></li>
-<li id="fn:11.12">Nous avons noté dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a> que les méthodes <em>helper</em> sont disponibes seulement dans les <em>vues</em> (<em>views</em>) par défaut, mais nous avons fait en sorte que les méthodes helper de la ressource `Sessions` soit également accessible par les contrôleurs en ajoutant le code <code>include SessionsHelper</code> au contrôleur de l'application (<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#code:sessions_helper_include">extrait&nbsp;9.11</a>).&nbsp;<a class="arrow" href="#fnref:11.12">&uarr;</a></li>
-<li id="fn:11.13">L'apprentissage des méthodes telles que <code>include?</code> est une des raisons pour laquelle, comme cela est noté dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, je recommande lire un livre de pur Ruby après avoir achevé celui-ci.&nbsp;<a class="arrow" href="#fnref:11.13">&uarr;</a></li>
-<li id="fn:11.14">Voyez le guide Rails après du <a href="http://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a> pour en savoir plus sur la clause <code>where</code> et similaire.&nbsp;<a class="arrow" href="#fnref:11.14">&uarr;</a></li>
-<li id="fn:11.15">Malheureusement, retourner une alimentation paginée ne fonctionne pas dans ce cas. Implémentez-la et cliquez sur un lien de pagination pour comprendre pourquoi. 
-(Les <a href="http://railstutorial.org/screencasts">screencasts du tutoriel Rails</a> couvre ce problème plus ne profondeur.)&nbsp;<a class="arrow" href="#fnref:11.15">&uarr;</a></li>
+<li id="fn:11.12">Nous avons noté dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#sec:remember_me">section&nbsp;9.3.2</a> que les méthodes <em>helper</em> sont disponibles seulement dans les <em>vues</em> (<em>views</em>) par défaut, mais nous avons fait en sorte que les méthodes helper de la ressource `Sessions` soient également accessibles par les contrôleurs en ajoutant le code <code>include SessionsHelper</code> au contrôleur de l'application (<a class="ref" href="http://ruby.railstutorial.org/chapters/sign-in-sign-out#code:sessions_helper_include">extrait&nbsp;9.11</a>).&nbsp;<a class="arrow" href="#fnref:11.12">&uarr;</a></li>
+<li id="fn:11.13">L'apprentissage des méthodes telles que <code>include?</code> est une des raisons pour laquelle, comme cela est noté dans la <a class="ref" href="http://ruby.railstutorial.org/chapters/beginning#sec:comments_for_various_readers">section&nbsp;1.1.1</a>, je recommande la lecture d'un livre de pur Ruby après avoir achevé celui-ci.&nbsp;<a class="arrow" href="#fnref:11.13">&uarr;</a></li>
+<li id="fn:11.14">Voyez le guide Rails à la section <a href="http://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a> pour en savoir plus sur la clause <code>where</code> et similaire.&nbsp;<a class="arrow" href="#fnref:11.14">&uarr;</a></li>
+<li id="fn:11.15">Malheureusement, retourner une alimentation paginée ne fonctionne pas dans ce cas. Implémentez-la et cliquez sur un lien de pagination pour comprendre pourquoi (les <a href="http://railstutorial.org/screencasts">screencasts du tutoriel Rails</a> couvre ce problème de façon plus approfondie.)&nbsp;<a class="arrow" href="#fnref:11.15">&uarr;</a></li>
 </ol>
 </div>

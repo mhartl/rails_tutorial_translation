@@ -2624,9 +2624,9 @@
 <h3><a id="sec:12.2.5" href="following-users#sec:a_working_follow_button_with_ajax" class="heading"><span class="number">12.2.5</span> Un bouton de suivi fonctionnel avec Ajax</a></h3>
 
 
-<p>Bien que l'implémentation du suivi de notre utilisateur soit achevée tel qu'il est, nous avons une dernière petite chose à ajouter avant de travailler sur l'état de l'alimention. Vous avez peut-être noté à la <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> que les deux actions <code>create</code> et <code>destroy</code> dans le contrôleur Relationships redirigeait simplement (<em>back</em>) vers le profil original. En d'autres termes, un utilisateur commence sur sa page de profil, suit l'utilisateur et est immédiatement redirigé en arrière vers la page originale. Il est raisonnable de se demander pourquoi l'utilisateur a donc besoin de quitter cette page originale.</p>
+<p>Bien que l'implémentation du suivi de notre utilisateur soit opérationnelle telle qu'elle est, une dernière petite chose peut être ajoutée avant de travailler sur le «&nbsp;status feed&nbsp;» (<em>l'état de l'alimentation</em>). Vous avez peut-être noté à la <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> que les deux actions <code>create</code> et <code>destroy</code> dans le contrôleur Relationships redirigeait simplement (<em>back</em>) vers le profil original. En d'autres termes, un utilisateur commence sur sa page de profil, suit l'utilisateur et est immédiatement redirigé en arrière vers la page initiale. Il est raisonnable de se demander pourquoi l'utilisateur a besoin de quitter cette page de profil.</p>
 
-<p>C'est exactement le genre de problème que peut résoudre <rw>Ajax</rw>, qui permet aux pages web d'envoyer des requêtes de façon asynchrone à un serveur sans quitter la page.<sup class="footnote" id="fnref:12.13"><a href="#fn:12.13">13</a></sup> Parce que la pratique d'ajouter de l'Ajax à des formulaires web est plutôt courant maintenant, Rails rend Ajax facile à implémenter. En effet, actualiser les formulaires suivre/ne-plus-suivre des partiels est évident&nbsp;: changez seulement&nbsp;:</p>
+<p>C'est exactement le genre de problème que peut résoudre <rw>Ajax</rw>, qui permet aux pages web d'envoyer des requêtes de façon asynchrone à un serveur sans quitter la page.<sup class="footnote" id="fnref:12.13"><a href="#fn:12.13">13</a></sup> Ajouter de l'Ajax à des formulaires web étant plutôt courant aujourd'hui, Rails le rend facile à implémenter. Actualiser les formulaires suivre/ne-plus-suivre des partiels est même particulière aisé&nbsp;; changez seulement&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">form_for</span>
 </pre></div>
@@ -2640,7 +2640,7 @@
 </div>
 
 
-<p>… et Rails <a href="http://catb.org/jargon/html/A/automagically.html">automagiquement</a> utilise Ajax.<sup class="footnote" id="fnref:12.14"><a href="#fn:12.14">14</a></sup> Les partiels actualisés apparaissent dans l'<a class="ref" href="following-users#code:follow_form_ajax">extrait&nbsp;12.33</a> et l'<a class="ref" href="following-users#code:unfollow_form_ajax">extrait&nbsp;12.34</a>.</p>
+<p>… et Rails <a href="http://catb.org/jargon/html/A/automagically.html">automagiquement</a> utilise Ajax.<sup class="footnote" id="fnref:12.14"><a href="#fn:12.14">14</a></sup> Les <rw>partiels</rw> actualisés sont présentés dans l'<a class="ref" href="following-users#code:follow_form_ajax">extrait&nbsp;12.33</a> et l'<a class="ref" href="following-users#code:unfollow_form_ajax">extrait&nbsp;12.34</a>.</p>
 
 <div class="label" id="code:follow_form_ajax"></div>
 
@@ -2716,7 +2716,7 @@
 </div></div>
 
 
-<p>Le code HTML réel généré par ce ERb n'est pas très pertinent, mais vous pouvez être curieux, donc jetons-y un coup d'œil&nbsp;:</p>
+<p>Le code HTML généré par ce ERb n'est pas très expressif, mais par curiosité, jetons-y un coup d'œil&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/relationships/117&quot;</span> <span class="na">class=</span><span class="s">&quot;edit_relationship&quot;</span> <span class="na">data-remote=</span><span class="s">&quot;true&quot;</span>
       <span class="na">id=</span><span class="s">&quot;edit_relationship_117&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
@@ -2730,7 +2730,7 @@
 
 <p>Cela définit la variable <code>data-remote="true"</code> à l'intérieur de la balise du formulaire (<code>form</code>), qui demande à Rails de permettre au formulaire d'être traité par JavaScript. En utilisant une simple propriété HTML au lieu d'insérer du code Javascript (comme dans les précédentes versions de Rails), Rails&nbsp;3 suit la philosophie du <a href="http://railscasts.com/episodes/205-unobtrusive-javascript"><em>JavaScript non intrusif</em></a>.</p>
 
-<p>Ayant actualisé le formulaire, nous avons besoin maintenant de faire que le contrôleur <code>Relationship</code> réponde aux requêtes Ajax. Nous allons commencer avec une simple paire de tests. Tester Ajax est quelque peu délicat, et le faire à fond est un vaste sujet à part entière, mais nous pouvons commencer avec le code de l'<a class="ref" href="following-users#code:relationships_controller_spec_ajax">extrait&nbsp;12.35</a>. Il utilise la méthode <code>xhr</code> (pour «&nbsp;XmlHttpRequest&nbsp;») pour lancer une requête Ajax&nbsp;; comparez-là aux méthodes <code>get</code>, <code>post</code>, <code>put</code> et <code>delete</code> utilisées dans les précédents tests. Nous vérifions alors que les actions <code>create</code> et <code>destroy</code> fassent les choses correctes quand on lance les requêtes Ajax (pour écrire une suite de tests plus prfonde pour les applications utilisant intensivement Ajax, jetez un œil à <a href="http://seleniumhq.org/">Selenium</a> et <a href="http://watir.com/">Watir</a>).</p>
+<p>Ayant actualisé le formulaire, nous avons besoin maintenant de faire que le contrôleur <code>Relationship</code> réponde aux requêtes Ajax. Nous allons commencer avec une simple paire de tests. Tester Ajax est quelque peu délicat, et le faire à fond est un sujet à part entière, très vaste, mais nous pouvons commencer avec le code de l'<a class="ref" href="following-users#code:relationships_controller_spec_ajax">extrait&nbsp;12.35</a>. Il utilise la méthode <code>xhr</code> (pour «&nbsp;XmlHttpRequest&nbsp;») pour lancer une requête Ajax&nbsp;; comparez-la aux méthodes <code>get</code>, <code>post</code>, <code>put</code> et <code>delete</code> utilisées dans les précédents tests. Nous vérifions alors que les actions <code>create</code> et <code>destroy</code> fassent les choses attendues quand on lance les requêtes Ajax (pour écrire une suite de tests plus profonde pour les applications utilisant intensivement Ajax, jetez un œil à <a href="http://seleniumhq.org/">Selenium</a> et <a href="http://watir.com/">Watir</a>).</p>
 
 <div class="label" id="code:relationships_controller_spec_ajax"></div>
 
@@ -2767,7 +2767,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;devrait créer une relation using Ajax&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait créer une relation en utilisant Ajax&quot;</span> <span class="k">do</span>
       <span class="nb">lambda</span> <span class="k">do</span>
         <span class="n">xhr</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:relationship</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:followed_id</span> <span class="o">=&gt;</span> <span class="vi">@followed</span> <span class="p">}</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
@@ -2779,7 +2779,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">it</span> <span class="s2">&quot;devrait détruire une relation using Ajax&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;devrait détruire une relation en utilisant Ajax&quot;</span> <span class="k">do</span>
       <span class="nb">lambda</span> <span class="k">do</span>
         <span class="n">xhr</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="vi">@relationship</span>
         <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
@@ -2845,7 +2845,7 @@
 </div></div>
 
 
-<p>Ce code utilise <code>respond_to</code> pour prendre l'action appropriée suivant le type de requête.<sup class="footnote" id="fnref:12.16"><a href="#fn:12.16">16</a></sup> La syntaxe est potentiellement déroutante, et il est important de comprendre que dans&nbsp;:</p>
+<p>Ce code utilise <code>respond_to</code> pour prendre l'action adaptée au type de requête.<sup class="footnote" id="fnref:12.16"><a href="#fn:12.16">16</a></sup> La syntaxe est potentiellement déroutante, et il est important de comprendre que dans&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
   <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@user</span> <span class="p">}</span>
@@ -2855,25 +2855,25 @@
 </div>
 
 
-<p>Seulement <em>une</em> des lignes sera exécutée (suivant la nature de la requête).</p>
+<p>… seulement <em>une</em> des lignes sera exécutée (suivant la nature de la requête).</p>
 
 <p>Dans le cas d'une requête Ajax, Rails appelle automatiquement un fichier de <em>code Ruby embarqué JavaScript</em> (<code>.js.erb</code>) portant le même nom que l'action, c'est-à-dire <code>create.js.erb</code> ou <code>destroy.js.erb</code>. Comme vous pouvez vous en douter, les fichiers nous permettent de mixer du JavaScript et du Ruby embarqué pour exécuter des actions sur la page courante. Ce sont ces fichiers que nous devons créer et modifier dans le but d'actualiser la page de profil de l'utilisateur après la demande de suivi (ou de non-suivi).</p>
 
-<p>À l'intérieur d'un fichier JS-ERb, Rails fournit automatiquement les <rw>helpers</rw> Prototype JavaScript pour manipuler la page en utilisant le <a href="http://www.w3.org/DOM/">Document Object Model (DOM)</a>. Le framework Prototype fournit un grand nombre de méthodes pour manipuler le DOM, mais ici nous n'en aurons besoin que de deux. D'abord, nous avons besoin de connaitre la syntaxe Prototype dollar («&nbsp;$&nbsp;») pour accéder à un élément DOM qui se base sur l'<code>id</code> CSS unique. Par exemple, pour manipuler l'élément <code>follow_form</code>, nous devrons utiliser la syntaxe&nbsp;:</p>
+<p>À l'intérieur d'un fichier JS-ERb, Rails fournit automatiquement les <rw>helpers</rw> Prototype JavaScript pour manipuler la page en utilisant le <a href="http://www.w3.org/DOM/">Document Object Model (DOM)</a>. Le framework Prototype fournit un grand nombre de méthodes pour manipuler le DOM, mais ici nous n'aurons besoin que de deux de ces méthodes. D'abord, nous avons besoin de connaitre la syntaxe Prototype dollar («&nbsp;$&nbsp;») pour accéder à un élément DOM qui se base sur l'<code>id</code> CSS unique. Par exemple, pour manipuler l'élément d'identifiant <code>follow_form</code>, nous devrons utiliser la syntaxe&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>(Souvenez-vous, venant de l'<a class="ref" href="following-users#code:follow_form_partial">extrait&nbsp;12.23</a>, que c'est un <code>div</code> qui entoure le formulaire, pas la balise <code>form</code> elle-même.) La seconde méthode dont nous avons besoin est <code>update</code>, qui actualise le code HTML à l'intérieur de l'élément concernéavec le contenu de son argument. Par exemple, pour remplacer le formulaire de suivi entièrement par la chaine de caractère <code>"foober"</code>, nous devons écrire&nbsp;:</p>
+<p>(Souvenez-vous &mdash;&nbsp;<a class="ref" href="following-users#code:follow_form_partial">extrait&nbsp;12.23</a>&nbsp;&mdash; que c'est un <code>div</code> qui entoure le formulaire, pas la balise <code>form</code> elle-même.) La seconde méthode dont nous avons besoin est <code>update</code>, qui actualise le code HTML à l'intérieur de l'élément concerné avec le contenu de son argument. Par exemple, pour remplacer entièrement le formulaire de suivi par la chaine de caractère <code>"foober"</code>, nous devons écrire&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>Contrairement au fichier en plain JavaScript, les fichiers JS-ERb permettent aussi d'utiliser du Ruby embarqué, ce que nous appliquons dans le fichier <code>create.js.erb</code> pour actualiser le formulaire de suivi avec le partiel <code>unfollow</code> (ce qui est ce qui devrait être affiché après la réussite d'une définition de suivi) et actualiser le compte de lecteurs. Le résultat est montré dans l'<a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>.</p>
+<p>Contrairement aux fichiers en «&nbsp;plain JavaScript&nbsp;», les fichiers JS-ERb permettent aussi d'utiliser du Ruby embarqué, ce que nous appliquons dans le fichier <code>create.js.erb</code> pour actualiser le formulaire de suivi avec le partiel <code>unfollow</code> (qui devrait s'afficher après la réussite d'une définition de suivi) et actualiser le compte de lecteurs. Le résultat est montré dans l'<a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>.</p>
 
 <div class="label" id="code:create_js_erb"></div>
 
@@ -2903,12 +2903,12 @@
       </object>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;</span><span class="p">)</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;followers&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;lecteurs&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
 </pre></div>
 </div></div>
 
 
-<p>Le fichier <code>destroy.js.erb</code> est analogue (<a class="ref" href="following-users#code:destroy_js_erb">extrait&nbsp;12.38</a>). Notez que, comme dans l'<a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>, nous devons utiliser <code>escape_javascript</code> pour échapper le résultat en insérant le code HTML.</p>
+<p>Le fichier <code>destroy.js.erb</code> est analogue (<a class="ref" href="following-users#code:destroy_js_erb">extrait&nbsp;12.38</a>). Notez que, comme dans l'<a class="ref" href="following-users#code:create_js_erb">extrait&nbsp;12.37</a>, nous devons utiliser <code>escape_javascript</code> pour «&nbsp;échapper&nbsp;» le résultat en insérant le code HTML.</p>
 
 <div class="label" id="code:destroy_js_erb"></div>
 
@@ -2938,14 +2938,14 @@
       </object>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;</span><span class="p">)</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;followers&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;lecteurs&quot;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
 </pre></div>
 </div></div>
 
 
-<p>Avec cela, nous devrions naviguer vers la page de profil de l'utilisateur et vérifier que vous pouvez suivre ou arrête de suivre sans rafraichissement de la page.</p>
+<p>Avec cela, nous devrions naviguer vers la page de profil de l'utilisateur et vérifier que vous pouvez suivre ou arrêter de suivre sans que la page n'ait besoin d'être rafraichie.</p>
 
-<p>L'utilisation d'Ajax en Rails est un vaste sujet qui évolue sans cesse, donc nous ne pourrons qu'en effleurer la surface ici, mais (comme pour le reste du matériel abordé dans ce tutoriel) notre traitement vous fournit de bonnes bases pour étudier ensuite des ressources plus avancées. Il est spécialement important de noter que, en addition du framework Prototype, le framework JavaScript <a href="http://jquery.com/">jQuery</a> connait beaucoup d'attraction dans la communauté Ruby. L'implémentation des fonctions Ajax de cette section en utilisant jQuery est laissé comme exercice&nbsp;; voyoez la <a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a>.</p>
+<p>L'utilisation d'Ajax en Rails est un vaste sujet qui évolue sans cesse, donc nous ne pourrons qu'en effleurer la surface ici, mais (comme pour le reste du matériel abordé dans ce tutoriel) notre traitement vous fournit de bonnes bases pour étudier ensuite des ressources plus avancées. Il est spécialement important de noter que, en addition du framework Prototype, le framework JavaScript <a href="http://jquery.com/">jQuery</a> connait beaucoup d'attraction dans la communauté Ruby. L'implémentation des fonctions Ajax de cette section en utilisant jQuery est laissé comme exercice&nbsp;; voyez la <a class="ref" href="following-users#sec:following_exercises">section&nbsp;12.5</a>.</p>
 
 <div class="label" id="sec:the_status_feed"></div>
 
@@ -2953,14 +2953,14 @@
 <h2><a id="sec:12.3" href="following-users#sec:the_status_feed" class="heading"><span class="number">12.3</span> L'état de l'alimentation</a></h2>
 
 
-<p>Nous en arrivons maintenant à l'apogée de notre <em>Application Exemple</em>&nbsp;: l'<em>état de l'alimentation</em> (<em>status feed</em>). S'occuper de l'<em>état de l'alimentation</em> signifie assembler un tableau des micro-messages des utilisateurs suivis par l'utilisateur courant, accompagné des propres micro-messages de cet utilisateur courant. De façon appropriée, cette section contient certaines des notions les plus avancées de tout le tutoriel. Pour accomplir cet exploit, nous aurons en effet besoin de techniques de programmation assez poussées, en Rails, en Ruby et même en SQL.</p>
+<p>Nous en arrivons maintenant à l'apogée de notre <em>Application Exemple</em>&nbsp;: l'<em>état de l'alimentation</em> (<em>status feed</em>). S'occuper de l'<em>état de l'alimentation</em> signifie assembler une liste temporelle des micro-messages des utilisateurs suivis par l'utilisateur courant accompagné des propres micro-messages de cet utilisateur. De façon assez logique, cette section contient certaines des notions les plus avancées de tout le tutoriel. Pour accomplir cet exploit, nous aurons en effet besoin de techniques de programmation assez poussées, en Rails, en Ruby et même en SQL.</p>
 
 <p>En prévision des lourdes charges que nous allons avoir à porter, il est spécialement important d'avoir une vision claire de là où nous allons. Une maquette finale de l'état de l'alimentation de l'utilisateur, contruite d'après le proto-feed de la <a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>, est présentée dans l'<a class="ref" href="following-users#fig:home_page_feed_mockup">illustration&nbsp;12.18</a>.</p>
 
 <div class="label" id="fig:home_page_feed_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_feed_mockup.png" alt="home_page_feed_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.18: </span><span class="description">Une maquette de la page d'accueil de l'utilisateur avec un état de l'alimentation.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_feed_mockup-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_feed_mockup.png" alt="home_page_feed_mockup" /></span></div><div class="caption"><span class="header">Illustration 12.18: </span><span class="description">Une maquette de la page d'accueil de l'utilisateur avec un état de l'alimentation (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/home_page_feed_mockup-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -2971,7 +2971,7 @@
 <h3><a id="sec:12.3.1" href="following-users#sec:motivation_and_strategy" class="heading"><span class="number">12.3.1</span> Motivation et stratégie</a></h3>
 
 
-<p>L'idée de base derrière l'alimentation est simple. L'<a class="ref" href="following-users#fig:user_feed">illustration&nbsp;12.19</a> montre un échantillon de la table <code>microposts</code> de la base de données et l'alimentation en résultant. Le but de l'alimentation est de récupérer les micro-messages dont l'identifiant d'utilisateur (<code>user_id</code>) correspond aux utilisateurs qui sont suivis par l'utilisateur courant (et l'utilisateur courant lui-même), comme indiqué par les flèches dans le diagramme.</p>
+<p>L'idée générale derrière l'alimentation est simple. L'<a class="ref" href="following-users#fig:user_feed">illustration&nbsp;12.19</a> montre un échantillon de la table <code>microposts</code> de la base de données et l'alimentation en résultant. Le but de l'alimentation est de récupérer les micro-messages dont l'identifiant d'utilisateur (<code>user_id</code>) correspond aux utilisateurs qui sont suivis par l'utilisateur courant (et l'utilisateur courant lui-même), comme indiqué par les flèches dans le diagramme.</p>
 
 <div class="label" id="fig:user_feed"></div>
 
@@ -2979,7 +2979,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_feed.png" alt="user_feed" /></span></div><div class="caption"><span class="header">Illustration 12.19: </span><span class="description">L'alimentation pour un utilisateur (<code>id</code>&nbsp;1) suivant les utilisateurs d'<code>id</code>&nbsp;2, 7, 8 et 10.</span></div></div>
 
 
-<p>Puis nous avons besoin d'une manière de trouver tous les micro-messages des utilisateurs suivis par un utilisateur donné, nous allons projeter d'implémenter une méthode appelée <code>from_users_followed_by</code>, que nous utiliserons comme suit&nbsp;:</p>
+<p>Puisque nous avons besoin d'une manière de trouver tous les micro-messages des utilisateurs suivis par un utilisateur donné, nous allons projeter d'implémenter une méthode appelée <code>from_users_followed_by</code>, que nous utiliserons comme suit&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">Micropost</span><span class="o">.</span><span class="n">from_users_followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 </pre></div>
@@ -3055,7 +3055,7 @@
 
 <p>La clé ici est de construire des associations dans le bloc <code>before(:each)</code> et ensuite de tester les trois exigences&nbsp;: inclusion des micro-messages des utilisateurs suivis, des micro-messages de l'utilisateur courant et exclusion des micro-messages des utilisateurs non suivis.</p>
 
-<p>L'alimentation elle-même se trouve dans le modèle User (<a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>), donc nous devrons ajouter un test additionnel aux specs du modèle User de l'<a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a>, comme montré dans l'<a class="ref" href="following-users#code:full_feed_specs">extrait&nbsp;12.40</a> (notez que nous avons remplacé ici l'utilisateur de <code>include?</code> vue dans l'<a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a> par le code plus compact <code>include</code>, convention introduite dans l'<a class="ref" href="following-users#code:utility_method_tests">extrait&nbsp;12.12</a>).</p>
+<p>L'alimentation elle-même se trouve dans le <rw>modèle</rw> User (<a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>), donc nous devrons ajouter un test additionnel aux specs du modèle User de l'<a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a>, comme montré dans l'<a class="ref" href="following-users#code:full_feed_specs">extrait&nbsp;12.40</a> (notez que nous avons remplacé ici l'utilisation de <code>include?</code> de l'<a class="ref" href="user-microposts#code:feed_specs">extrait&nbsp;11.31</a> par le code plus compact <code>include</code>, convention introduite dans l'<a class="ref" href="following-users#code:utility_method_tests">extrait&nbsp;12.12</a>).</p>
 
 <div class="label" id="code:full_feed_specs"></div>
 
@@ -3125,7 +3125,7 @@
 </div></div>
 
 
-<p>Implémenter l'alimentation sera facile&nbsp;; nous différerons simplement vers <code>Micropost.from_users_followed_by</code>, comme le montre l'<a class="ref" href="following-users#code:user_feed">extrait&nbsp;12.41</a>.</p>
+<p>Implémenter l'alimentation sera facile&nbsp;; nous la confierons simplement à <code>Micropost.from_users_followed_by</code>, comme le montre l'<a class="ref" href="following-users#code:user_feed">extrait&nbsp;12.41</a>.</p>
 
 <div class="label" id="code:user_feed"></div>
 
@@ -3177,7 +3177,7 @@
 <h3><a id="sec:12.3.2" href="following-users#sec:a_first_feed_implementation" class="heading"><span class="number">12.3.2</span> Une première implémentation de l'alimentation</a></h3>
 
 
-<p>Il est temps maintenant d'implémenter <code>Micropost.from_users_followed_by</code>, à laquelle, pour la simplicité, je ferai référence simplement par «&nbsp;l'alimentation&nbsp;». Puisque le résultat final est plutôt complexe, nous allons construire l'implémentation de l'alimentation finale en introduisant les pièces les unes après les autres.</p>
+<p>Il est temps maintenant d'implémenter <code>Micropost.from_users_followed_by</code>, à laquelle, pour la simplicité, je ferai référence simplement par «&nbsp;l'alimentation&nbsp;». Puisque le résultat final est plutôt complexe, nous allons construire l'implémentation de l'alimentation finale en introduisant les pièces de code les unes après les autres.</p>
 
 <p>La première étape consiste à réfléchir au type de requête dont nous avons besoin. Ce que nous voulons faire, c'est sélectionner de la table <code>microposts</code> tous les micro-messages avec des identifiants de suivi correspondant à l'utilisateur donné (ou l'utilisateur lui-même). Nous pouvons écrire cela, schématiquement, comme suit&nbsp;:</p>
 
@@ -3187,9 +3187,9 @@
 </div>
 
 
-<p>En écrivant ce code, nous devinons que SQL supporte un mot-clé <code>IN</code> qui nous permet de tester la définition de l'inclusion (heureusement, ça le fait).</p>
+<p>En écrivant ce code, nous devinons que SQL supporte un mot-clé <code>IN</code> qui nous permet de tester la définition de l'inclusion (et il le fait&nbsp;!).</p>
 
-<p>Souvenez-vous que d'après la proto-alimentation de la <a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a> que Active Record utilise la méthode <code>where</code> pour accomplir ce type de sélection vue ci-dessus, comme illustré dans l'<a class="ref" href="user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a>. Là, notre sélection est très simple&nbsp;; nous récupérons juste les micro-messages ave un <code>user_id</code> (<em>identifiant_d_utilisateur</em>) correspondant à l'utilisateur courant&nbsp;:</p>
+<p>Souvenez-vous, d'après la proto-alimentation de la <a class="ref" href="user-microposts#sec:a_proto_feed">section&nbsp;11.3.3</a>, que Active Record utilise la méthode <code>where</code> pour accomplir ce type de sélection vue ci-dessus, comme illustré dans l'<a class="ref" href="user-microposts#code:proto_status_feed">extrait&nbsp;11.32</a>. Là, notre sélection est très simple&nbsp;; nous récupérons juste les micro-messages ayant un <code>user_id</code> (<em>identifiant_dutilisateur</em>) correspondant à l'utilisateur courant&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">Micropost</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id = ?&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 </pre></div>
@@ -3205,7 +3205,7 @@
 
 <p>(Ici nous avons utilisé la convention Rails <code>user</code> plutôt que <code>user.id</code> dans la condition&nbsp;; Rails utilise automatiquement l'attribut&nbsp;<code>id</code>. Nous avons également omis le début <code>Micropost.</code> puisque nous comptons placer cette méthode dans le modèle Micropost lui-même.)</p>
 
-<p>Nous voyons de ce conditions que nous aurons besoin d'un tableau (<rw>array</rw>) d'ids que l'utilisateur donné suit (ou quelque chose d'équivalent). Une façon de le faire consiste à utiliser la méthode Ruby&nbsp;<code>map</code>, utilisable sur un <rw>objet</rw> de type «&nbsp;enumerable&nbsp;», c'est-à-dire n'importe quel objet (tel qu'un <rw>Array</rw> &mdash;&nbsp;Tableau&nbsp;&mdash; ou un <rw>Hash</rw> &mdash;&nbsp;Table de hachage&nbsp;&mdash;) constitué d'une collection d'éléments.<sup class="footnote" id="fnref:12.17"><a href="#fn:12.17">17</a></sup> Nous avons vu un exemple de cette méthode à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>&nbsp;; elle fonctionne comme cela&nbsp;:</p>
+<p>Nous tirons de ces conditions que nous aurons besoin d'un tableau (<rw>array</rw>) d'ids que l'utilisateur donné suit (ou quelque chose d'équivalent). Une façon de le faire consiste à utiliser la méthode Ruby&nbsp;<code>map</code>, utilisable sur un <rw>objet</rw> de type «&nbsp;enumerable&nbsp;», c'est-à-dire n'importe quel objet (tel qu'un <rw>Array</rw> &mdash;&nbsp;Tableau&nbsp;&mdash; ou un <rw>Hash</rw> &mdash;&nbsp;Table de hachage&nbsp;&mdash;) constitué d'une <rw>collection</rw> d'éléments.<sup class="footnote" id="fnref:12.17"><a href="#fn:12.17">17</a></sup> Nous avons vu un exemple de cette méthode à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>&nbsp;; elle fonctionne comme cela&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
@@ -3214,7 +3214,7 @@
 </div>
 
 
-<p>Des situations comme celle illustrées ci-dessus, où la même méthode (par exemple <code>to_s</code>) sera invoquée sur chaque élément, est assez courante pour avoir une notation raccourcie utilisant une <em>esperluette</em>&nbsp;«&nbsp;<code>&amp;</code>&nbsp;» et un symbole correspondant à la méthode&nbsp;:<sup class="footnote" id="fnref:12.18"><a href="#fn:12.18">18</a></sup></p>
+<p>Des situations comme celle illustrée ci-dessus, où la même méthode (par exemple <code>to_s</code>) sera invoquée sur chaque élément, est assez courante pour avoir une notation raccourcie utilisant une <em>esperluette</em>&nbsp;«&nbsp;<code>&amp;</code>&nbsp;» et un symbole correspondant à la méthode&nbsp;:<sup class="footnote" id="fnref:12.18"><a href="#fn:12.18">18</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:to_s</span><span class="p">)</span>
 <span class="go">=&gt; [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;]</span>
@@ -3239,7 +3239,7 @@
 </div>
 
 
-<p>… impliquer une méthode de classe dans la classe <code>Micropost</code> (une construction vue la dernière fois dans la classe <code>User</code> à la <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">section&nbsp;7.12</a>). Une mise en œuvre pour aller dans ce sens est présentée dans l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a>.</p>
+<p>… implique une méthode de classe dans la classe <code>Micropost</code> (une construction vue la dernière fois dans la classe <code>User</code> à la <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">section&nbsp;7.12</a>). Une mise en œuvre pour aller dans ce sens est présentée dans l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a>.</p>
 
 <div class="label" id="code:from_users_followed_by_first_cut"></div>
 
@@ -3282,7 +3282,7 @@
 
 
 
-<p>Bien que les discussions conduisant à l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> ait été formulées en termes hypothétiques, cela fonctionne, en vérité&nbsp;! En fait, c'est assez bon pour la plupart des cas pratiques. Mais ce n'est pas l'implémentation finale&nbsp;; voyons si vous pouvez deviner pourquoi avant de passer à la section suivante (<em>Indice&nbsp;:</em> qu'en est-il si un utilisateur suit 5000 autres utilisateurs&nbsp;?)</p>
+<p>Bien que les discussions conduisant à l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> ait été formulées en termes hypothétiques, cela fonctionne, en vérité&nbsp;! En fait, c'est assez efficace pour la plupart des cas pratiques. Mais ce n'est pas l'implémentation finale&nbsp;; voyons si vous pouvez deviner pourquoi avant de passer à la section suivante (<em>indice&nbsp;:</em> qu'en est-il si un utilisateur suit 5000 autres utilisateurs&nbsp;?)</p>
 
 <div class="label" id="sec:scopes_subselects_and_a_lambda"></div>
 
@@ -3290,7 +3290,7 @@
 <h3><a id="sec:12.3.3" href="following-users#sec:scopes_subselects_and_a_lambda" class="heading"><span class="number">12.3.3</span> Champs d'application, sous-sélections et lambda</a></h3>
 
 
-<p>Comme suggéré dans la dernière section, l'implémentation de l'alimentation de la <a class="ref" href="following-users#sec:a_first_feed_implementation">section&nbsp;12.3.2</a> de s'adapte pas bien quand le nombre de micro-messages de l'alimentation est grand, comme cela arriver quand un utilisateur suivrait, disons, 5000 autres utilisateurs. Dans cette section, nous allons ré-implémenter l'état de l'alimentation d'une façon à mieux l'adapter au nombre d'utilisateurs suivis.</p>
+<p>Comme suggéré dans la dernière section, l'implémentation de l'alimentation de la <a class="ref" href="following-users#sec:a_first_feed_implementation">section&nbsp;12.3.2</a> ne s'adaptera pas bien à un grand nombre de micro-messages, comme cela se produit lorsqu'un utilisateur suit disons 5000 autres utilisateurs. Dans cette section, nous allons ré-implémenter l'alimentation d'une façon à mieux l'adapter au nombre d'utilisateurs suivis.</p>
 
 <p>Il y a quelques problèmes avec le code de la <a class="ref" href="following-users#sec:a_first_feed_implementation">section&nbsp;12.3.2</a>. Pour commencer, l'expression&nbsp;:</p>
 
@@ -3299,7 +3299,7 @@
 </div>
 
 
-<p>… place <em>tous</em> les utilisateurs suivis en mémoire, et crée un tableau de la longueur totale de la liste de suivis. Puisque la condition dans l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> vérifie en fait seuelement l'inclusion dans une définition, il doit exister une façon plus efficace de le faire, et en efet SQL est justement optimisée pour de telles opérations. Ensuite, la méthode de l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> récupère toujours <em>tous</em> les micro-messages et les fourre dans un tableau Ruby. Bien que ces micro-messages soient paginés dans la vue (<a class="ref" href="user-microposts#code:feed_instance_variable">extrait&nbsp;11.33</a>), le tableau est toujours plein.<sup class="footnote" id="fnref:12.19"><a href="#fn:12.19">19</a></sup> Ce que nous voulons réellement, c'est une pagination qui ne récupère que 30 items à la fois.</p>
+<p>… place <em>tous</em> les utilisateurs suivis en mémoire, et crée un tableau de la longueur totale de la liste de suivis. Puisque la condition dans l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> vérifie en fait seulement l'inclusion dans une définition, il doit exister une façon plus efficace de le faire, et en effet SQL est justement optimisée pour de telles opérations. Ensuite, la méthode de l'<a class="ref" href="following-users#code:from_users_followed_by_first_cut">extrait&nbsp;12.42</a> récupère toujours <em>tous</em> les micro-messages et les fourre dans un tableau Ruby. Bien que ces micro-messages soient paginés dans la vue (<a class="ref" href="user-microposts#code:feed_instance_variable">extrait&nbsp;11.33</a>), le tableau est toujours plein.<sup class="footnote" id="fnref:12.19"><a href="#fn:12.19">19</a></sup> Ce que nous voulons réellement, c'est une pagination qui ne récupère que 30 items à la fois.</p>
 
 <p>La solution pour ces deux problèmes implique de convertir l'alimentation de la méthode de classe vers un <em>champ d'application</em> (un <em>scope</em>), qui est une méthode Rails pour restreindre les sélections dans la base de données à certaines conditions. Par exemple, pour qu'une méthode sélectionne tous les utilisateurs administrateurs de notre application, nous pourrions ajouter un champ d'application au modèle User comme suit&nbsp;:</p>
 
@@ -3332,9 +3332,9 @@
 </div>
 
 
-<p>… pagine en fait les administrateurs dans la base de données&nbsp;; si (pour quelque raison bizarre) le site possède 100 administrateurs, le code ci-dessus ne récupèrera que les 30 premiers.</p>
+<p>… pagine en fait les administrateurs dans la base de données&nbsp;; si (pour quelque raison bizarre) le site possède 100 administrateurs, le code ci-dessus ne récupérera que les 30 premiers.</p>
 
-<p>Le <em>champ d'application</em> pour l'alimentation est un tout petit peu plus complexe que celui illustré ci-dessus&nbsp;: il a besoin d'un <em>argument</em>, nomémment, l'utilisateur dont nous devons générer l'alimentation. Nous pouvons faire cela avec une <em>fonction anonyme</em>, ou fonction <em>lambda</em> (dont nous avons parlé à la <a class="ref" href="sign-up#sec:failed_signup">section&nbsp;8.4.2</a>), comme le montre l'<a class="ref" href="following-users#code:from_users_followed_by_second_cut">extrait&nbsp;12.43</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
+<p>Le <em>champ d'application</em> pour l'alimentation est un tout petit peu plus complexe que celui illustré ci-dessus&nbsp;: il a besoin d'un <em>argument</em>, nommément, l'utilisateur dont nous devons générer l'alimentation. Nous pouvons faire cela avec une <em>fonction anonyme</em>, ou fonction <em>lambda</em> (dont nous avons parlé à la <a class="ref" href="sign-up#sec:failed_signup">section&nbsp;8.4.2</a>), comme le montre l'<a class="ref" href="following-users#code:from_users_followed_by_second_cut">extrait&nbsp;12.43</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
 
 <div class="label" id="code:from_users_followed_by_second_cut"></div>
 
@@ -3458,7 +3458,7 @@
 </div>
 
 
-<p>(Lisez le <a class="ref" href="following-users#sidebar:percent_paren">Box&nbsp;12.1</a> pour une explication de la syntaxe <code>%()</code>). Ce code contient une <em>sous-selection</em> SQL et, internalement, l'entière selection pour l'utilisateur&nbsp;1 ressemblerait à quelque chose comme&nbsp;:</p>
+<p>(Lisez le <a class="ref" href="following-users#sidebar:percent_paren">Box&nbsp;12.1</a> pour une explication de la syntaxe <code>%()</code>). Ce code contient une <em>sous-selection</em> SQL et, «&nbsp;internalement&nbsp;», l'entière sélection pour l'utilisateur&nbsp;1 ressemblerait à quelque chose comme&nbsp;:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">microposts</span>
 <span class="k">WHERE</span> <span class="n">user_id</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">followed_id</span> <span class="k">FROM</span> <span class="n">relationships</span>
@@ -3531,7 +3531,7 @@
 <h3><a id="sec:12.3.4" href="following-users#sec:the_new_status_feed" class="heading"><span class="number">12.3.4</span> Le nouvel état de l'alimentation</a></h3>
 
 
-<p>Avec le code de l'<a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, notre état d'alimentation est achevé. Pour mémoire, le code pour la page d'accueil est présenté dans <a class="ref" href="following-users#code:real_feed_instance_variable">extrait&nbsp;12.45</a>&nbsp;; ce code crée une alimentation paginée des micro-messages concernés à utiliser dans la vue, comme le montre l'<a class="ref" href="following-users#fig:home_page_with_feed">illustration&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Notez que la méthode <code>paginate</code> [(actually reaches all the way)(parvient en fait à tout faire)] à l'intérieur de la méthode du modèle Micropost de l'<a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, s'arranger pour ne récupérer que 30&nbsp;micro-messages à la fois dans la base de données.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
+<p>Avec le code de l'<a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, notre état d'alimentation est achevé. Pour mémoire, le code pour la page d'accueil est présenté dans <a class="ref" href="following-users#code:real_feed_instance_variable">extrait&nbsp;12.45</a>&nbsp;; ce code crée une alimentation paginée des micro-messages à afficher dans la vue, comme le montre l'<a class="ref" href="following-users#fig:home_page_with_feed">illustration&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Notez que la méthode <code>paginate</code> parvient à tout faire à l'intérieur de la méthode du modèle Micropost de l'<a class="ref" href="following-users#code:from_users_followed_by_final">extrait&nbsp;12.44</a>, et s'arrange pour ne récupérer que 30&nbsp;micro-messages à la fois dans la base de données.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
 
 <div class="label" id="code:real_feed_instance_variable"></div>
 
@@ -3582,7 +3582,7 @@
 <div class="label" id="fig:home_page_with_feed"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_feed.png" alt="home_page_with_feed" /></span></div><div class="caption"><span class="header">Illustration 12.20: </span><span class="description">La page d'accueil avec un état d'alimentation fonctionnel.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_feed-full.png">(taille normale)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_with_feed.png" alt="home_page_with_feed" /></span></div><div class="caption"><span class="header">Illustration 12.20: </span><span class="description">La page d'accueil avec un état d'alimentation fonctionnel (version anglaise).&nbsp;<a href="http://railstutorial.org/images/figures/home_page_with_feed-full.png">(taille normale)</a></span></div></div>
 
 
 
@@ -3593,7 +3593,7 @@
 <h2><a id="sec:12.4" href="following-users#sec:following_conclusion" class="heading"><span class="number">12.4</span> Conclusion</a></h2>
 
 
-<p>Avec l'addition d'un état d'alimentation, nous en avons terminé avec le cœur de l'<em>Application Exemple</em> de ce <em>Tutoriel Ruby on Rails</em>. L'application inclut des exemples de toutes les fonctionnalités principales de Rails, comme les <rw>modèles</rw>, les <rw>vues</rw>, les <rw>contrôleurs</rw>, les <rw>templates</rw>, les <rw>partiels</rw>, les filtres, les validations, les <rw>fonctions de rappel</rw>, les associations <code>has_many</code>/<code>belongs_to</code> et <code>has_many :through</code>, la sécurité, le testing et le déploiement. Malgré cette liste impressionnante, il y a beaucoup plus à apprendre sur Rails. Comme première étape dans la poursuite de cet apprentissage, cette section propose quelques extensions au cœur de l'application, tout comme des suggestions d'apprentissages ultérieurs.</p>
+<p>Avec l'addition d'un état d'alimentation, nous en avons terminé avec le cœur de l'<em>Application Exemple</em> de ce <em>Tutoriel Ruby on Rails</em>. L'application inclut des exemples de toutes les fonctionnalités principales de Rails, comme les <rw>modèles</rw>, les <rw>vues</rw>, les <rw>contrôleurs</rw>, les <rw>templates</rw>, les <rw>partiels</rw>, les <rw>filtres</rw>, les <rw>validations</rw>, les <rw>fonctions de rappel</rw>, les <rw>associations</rw> <code>has_many</code>/<code>belongs_to</code> et <code>has_many :through</code>, la sécurité, le testing et le déploiement. Malgré cette liste impressionnante, il y a beaucoup plus à apprendre sur Rails. Comme première étape dans la poursuite de cet apprentissage, cette section propose quelques extensions à faire au cœur de votre application, ainsi que des suggestions d'apprentissages ultérieurs.</p>
 
 <p>Avant de commencer à aborder ces extensions de l'application, c'est une bonne idée de fusionner vos changements et de déployer l'application online&nbsp;:</p>
 
@@ -3615,11 +3615,11 @@
 <h3><a id="sec:12.4.1" href="following-users#sec:extensions_to_the_sample_application" class="heading"><span class="number">12.4.1</span> Extensions de l'Application Exemple</a></h3>
 
 
-<p>Les extensions proposées dans cette section sont principalement inspirées soit par les fonctionnalités courantes des applications web, telles que les rappels de mot de passe et les confirmations d'email, ou des fonctionnalités spécifiques de à certains exemples d'application, comme la recherche, les réponses et la messagerie. Implémenter l'une ou l'autre de ces extensions vous aidera à faire la transition entre le suivi d'un tutoriel et l'écriture des applications de votre propre cru.</p>
+<p>Les extensions proposées dans cette section sont principalement inspirées soit par les fonctionnalités courantes des applications web, telles que les rappels de mot de passe et les confirmations d'email, ou des fonctionnalités plus spécifiques à certaines applications, comme la recherche, les réponses et la messagerie. Implémenter l'une ou l'autre de ces extensions vous aidera à faire la transition entre le suivi d'un tutoriel et l'écriture des applications de votre propre cru.</p>
 
-<p>Ne vous étonnez pas si tout semble compliqué au premier abord&nbsp;; la non connaissance d'une nouvelle fonctionnalité peut être très intimidant. Pour vous aider à commencer, laissez-moi vous donner quelques précieux conseils. <em>Primo</em>, avant d'ajouter une fonctionnalité à une application Rails, jetez une coup d'œil aux <a href="http://railscasts.com/episodes/archive">archives Railscasts</a> pour voir si Ryan Bates n'aurait pas déjà couvert le sujet.<sup class="footnote" id="fnref:12.25"><a href="#fn:12.25">25</a></sup> Si ce railscast existe, commencer par le regarder peut vous faire économiser un temps considérable. <em>Secondo</em>, faites toujours des recherches Google sur la fonctionnalité que vous vous proposez d'installer pour trouver tous les posts de blog et les tutoriels concernés. Le développement d'application web est difficile, et cela peut aider d'apprendre à partir de l'expérience (et des erreurs) des autres.</p>
+<p>Ne vous étonnez pas si tout semble compliqué au premier abord&nbsp;; la non connaissance d'une nouvelle fonctionnalité peut être très intimidant. Pour vous aider à commencer, laissez-moi vous donner quelques précieux conseils. <em>Primo</em>, avant d'ajouter une fonctionnalité à une application Rails, jetez une coup d'œil aux <a href="http://railscasts.com/episodes/archive">archives Railscasts</a> pour voir si Ryan Bates n'aurait pas déjà couvert le sujet.<sup class="footnote" id="fnref:12.25"><a href="#fn:12.25">25</a></sup> Si ce railscast existe, commencer par le regarder peut vous faire économiser un temps considérable. <em>Secondo</em>, faites toujours des recherches Google sur la fonctionnalité que vous vous proposez d'installer pour trouver tous les posts de blog et les tutoriels concernés. Le développement d'application web est difficile, et cela peut aider d'apprendre à partir de l'expérience (et des erreurs) d'autrui.</p>
 
-<p>Beaucoup des fonctionnalités suivante constituent un défi, et j'ai donné quelques indices sur les outils dont vous pourriez avoir besoin pour les implémenter. Même avec ces indices, elles sont <em>beaucoup</em> plus compliquées que les exercices concluant les chapitres de ce livre, donc ne vous découragez surtout pas si vous ne parvenez pas à les implémentées sans un effort considérable. À cause de la contrainte de temps, je n'ai pas la possibilité de faire de l'assistance personnalisée, mais cela peut avoir un intérêt significatif, je pourrais peut-être réaliser dans le futur des articles ou des screencasts autonomes sur certaines de ces extensions&nbsp;; rendez-vous sur le site web du tutoriel Rails, à l'adresse <a href="http://railstutorial.org/">http://www.railstutorial.org/</a> et souscrivez à la lettre d'information pour être informé des prochaines actualisations.</p>
+<p>Beaucoup des fonctionnalités suivantes constituent un véritable challenge, et j'ai donné quelques indices sur les outils dont vous pourriez avoir besoin pour les implémenter. Même avec ces indices, elles sont <em>beaucoup</em> plus compliquées que les exercices concluant les chapitres de ce livre, donc ne vous découragez surtout pas si vous ne parvenez pas à les implémenter qu'au prix d'un effort considérable. Les contraintes du temps ne m'offrent pas la possibilité de faire de l'assistance personnalisée, mais si votre demande peut avoir un intérêt significatif, je pourrais peut-être réaliser dans le futur des articles ou des screencasts autonomes sur certaines de ces extensions&nbsp;; rendez-vous sur le site web du tutoriel Rails, à l'adresse <a href="http://railstutorial.org/">http://www.railstutorial.org/</a> et souscrivez à la lettre d'information pour être informé des prochaines actualisations.</p>
 
 <div class="label" id="sec:replies"></div>
 
@@ -3627,9 +3627,9 @@
 <h4><a id="sec:12.4.1.1" href="following-users#sec:replies" class="heading">Réponses</a></h4>
 
 
-<p>Twitter permet à ses utilisateurs de faire des «&nbsp;@réponses&nbsp;» (<em>replies</em>), qui sont des micro-messages dont les premiers caractère sont le login de l'utilisateur précédé du signe arobase&nbsp;«&nbsp;<tt>@</tt>&nbsp;». Ces post n'apparaissent que sur l'alimentation de l'utilisateur en question ou les utilisateurs qui suivent cet utilisateur. Implimentez une version simplifiée, en restreignant l'affiche des @replies à la seule alimentation du receveur (l'utilisateur qui reçoit le message) et de l'émeteur (l'utilisateur qui a écrit la réponse). Cela peut impliquer d'ajouter une colonne <code>in_reply_to</code> dans la table <code>microposts</code> et un champ d'application <code>including_replies</code> supplémentaire au modèle Micropost.</p>
+<p>Twitter permet à ses utilisateurs de faire des «&nbsp;@réponses&nbsp;» (<em>replies</em>), qui sont des micro-messages dont les premiers caractères sont le login de l'utilisateur précédé du signe arobase&nbsp;«&nbsp;<tt>@</tt>&nbsp;». Ces posts n'apparaissent que sur l'alimentation de l'utilisateur en question ou les utilisateurs qui suivent cet utilisateur. Implémentez une version simplifiée, en restreignant l'affichage des @replies à la seule alimentation du receveur (l'utilisateur qui reçoit le message) et de l'émetteur (l'utilisateur qui a écrit la réponse). Cela peut impliquer d'ajouter une colonne <code>in_reply_to</code> dans la table <code>microposts</code> et un <rw>champ d'application</rw> (<em>scope</em>) <code>including_replies</code> supplémentaire au modèle Micropost.</p>
 
-<p>Puisque votre application manque de logins unique d'utilisateur, vous devrez aussi décider d'une façon de représenter les utilisateurs. Une option consiste à utiliser une combinaison de l'<code>id</code> et du <code>nom</code>, tel que <code>@1-michael-hartl</code>. Une autre consiste à <em>ajouter</em> un <code>username</code> unique au processus d'inscription et de l'utiliser ensuite en @replies.</p>
+<p>Puisque le utilisateur de votre application n'ont pas de logins uniques, vous devrez aussi décider d'une façon de les représenter. Une option consiste à utiliser une combinaison de l'<code>id</code> et du <code>nom</code>, tel que <code>@1-michael-hartl</code>. Une autre consiste à <em>ajouter</em> un <code>username</code> unique au processus d'inscription et de l'utiliser ensuite en @replies.</p>
 
 <div class="label" id="sec:messaging"></div>
 
@@ -3637,7 +3637,7 @@
 <h4><a id="sec:12.4.1.2" href="following-users#sec:messaging" class="heading">Messagerie</a></h4>
 
 
-<p>Twitter supporte la messagerie direct (et privée) en préfixant un micro-message avec la lettre&nbsp;«&nbsp;d&nbsp;». Implémentez cette fonctionnalité à l'Application Exemple. La solution impliquera certainement un modèle <code>Message</code> et une recherche régulière sur les nouveaux micro-messages.</p>
+<p>Twitter supporte la messagerie directe (et privée) en préfixant un micro-message avec la lettre&nbsp;«&nbsp;d&nbsp;». Implémentez cette fonctionnalité à l'Application Exemple. La solution impliquera certainement un modèle <code>Message</code> et une recherche régulière sur les nouveaux micro-messages.</p>
 
 <div class="label" id="sec:follower_notifications"></div>
 
@@ -3663,7 +3663,7 @@
 <h4><a id="sec:12.4.1.5" href="following-users#sec:signup_confirmation" class="heading">Confirmation de l'inscription</a></h4>
 
 
-<p>Mise à part la vérification par expression régulière de l'adresse email, l'Application Exemple n'a pour le moment aucun moyen de vérifier la validité d'une adresse mail d'utilisateur. Ajoutez une vérification de cette adresse pour confirmer l'inscription. Cette nouvelle fonctionnalité devrait créer des utilisateurs dans un état «&nbsp;inactif&nbsp;», envoyer une URL d'activation et changer alors leur état vers «&nbsp;actif&nbsp;» à la visite de l'URL. Vous pourriez faire une recherche sur les termes <a href="http://www.google.com/search?q=state+machines+in+rails">state machines in Rails</a> pour vous aider avec la transition inactif/actif.</p>
+<p>Mise à part la vérification par expression régulière de l'adresse email, l'<em>Application Exemple</em> n'a pour le moment aucun moyen de vérifier la validité d'une adresse mail d'utilisateur. Ajoutez une vérification de cette adresse pour confirmer l'inscription. Cette nouvelle fonctionnalité devrait créer des utilisateurs dans un état «&nbsp;inactif&nbsp;», envoyer une URL d'activation et changer alors leur état vers «&nbsp;actif&nbsp;» à la visite de l'URL. Vous pourriez faire une recherche sur les termes <a href="http://www.google.com/search?q=state+machines+in+rails">state machines in Rails</a> pour vous aider à exécuter la transition inactif/actif.</p>
 
 <div class="label" id="sec:rss_feed"></div>
 
@@ -3671,7 +3671,7 @@
 <h4><a id="sec:12.4.1.6" href="following-users#sec:rss_feed" class="heading">Alimentation RSS</a></h4>
 
 
-<p>Pour chaque utilisateur, implémentez une alimentation RSS pour leur micro-messages. Implémentez ensuite une alimentation RSS pour leur état d'alimentation, en restreignant optionnellement l'accès à cette alimentation en utilisant un système d'authentification. Le <a href="http://railscasts.com/episodes/87-generating-rss-feeds">Railscast on generating RSS feeds</a> vous aidera à commencer.</p>
+<p>Pour chaque utilisateur, implémentez une alimentation RSS pour leurs micro-messages. Implémentez ensuite une alimentation RSS pour leur état d'alimentation, en restreignant optionnellement l'accès à cette alimentation en utilisant un système d'authentification. Le <a href="http://railscasts.com/episodes/87-generating-rss-feeds">Railscast on generating RSS feeds</a> vous aidera à commencer.</p>
 
 <div class="label" id="sec:rest_api"></div>
 
@@ -3679,8 +3679,7 @@
 <h4><a id="sec:12.4.1.7" href="following-users#sec:rest_api" class="heading">API REST</a></h4>
 
 
-<p>De nombreux sites 
-<p>Many web sites propose une API (<em>Application Programmer Interface</em>, pour «&nbsp;Interface de programmation&nbsp;») pour qu'une partie tierce puisse obtenir (get), poster (post), placer (put) et effacer (delete) les ressources de l'application. Implémentez une telle API REST pour votre Application Exemple. La solution impliquera d'ajouter des blocs <code>respond_to</code> (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a>) à de nombreuses actions de contrôleur de l'application&nbsp;; celles-ci devraient répondre aux requêtes en XML. Attention au problème de sécurité&nbsp;; l'API devrait être uniquement accessible aux seuls utilisateurs autorisés.</p>
+<p>De nombreux sites proposent une API (<em>Application Programmer Interface</em>, pour «&nbsp;Interface de programmation&nbsp;») pour qu'une partie tierce puisse obtenir (<code>get</code>), poster (<code>post</code>), placer (<code>put</code>) et effacer (<code>delete</code>) les ressources de l'application. Implémentez une telle API REST pour votre Application Exemple. La solution impliquera d'ajouter des blocs <code>respond_to</code> (<a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a>) à de nombreuses actions de contrôleur de l'application&nbsp;; celles-ci devraient répondre aux requêtes en XML. Attention au problème de sécurité&nbsp;; l'API devrait être uniquement accessible aux seuls utilisateurs autorisés.</p>
 
 <div class="label" id="sec:search"></div>
 
@@ -3696,16 +3695,16 @@
 <h3><a id="sec:12.4.2" href="following-users#sec:guide_to_further_resources" class="heading"><span class="number">12.4.2</span> Guide vers d'autres ressources</a></h3>
 
 
-<p>Il existe une multitude de ressources Rails dans les magasins et sur le web &mdash;&nbsp;l'offre est même tellement considérable que ça peut en être écrasant, et il peut être difficile de savoir où commencer. Maintenant vous <em>savez</em> où commencer &mdash;&nbsp;avec ce livre, bien sûr&nbsp;!. Et si vous en êtes arrivé jusqu'ici, vous êtes prêt à tout. Voilà quelques suggestions&nbsp;:</p>
+<p>Il existe une multitude de ressources Rails dans les magasins et sur le web &mdash;&nbsp;l'offre est même tellement considérable que ça peut en être écrasant, et il peut être difficile de savoir par où commencer. Maintenant vous <em>savez</em> où commencer &mdash;&nbsp;avec ce livre, bien sûr&nbsp;! Et si vous en êtes arrivé jusqu'ici, vous êtes prêt à tout. Voilà quelques suggestions&nbsp;:</p>
 
 <ul>
-<li><a href="http://railstutorial.org/screencasts"><em>Ruby on Rails Tutorial</em> screencasts</a>&nbsp;: j'ai préparé un cours complet par screencast s'appuyant sur ce livre. En addition pour couvrir tout le matériel de ce livre, les screencasts sont plein d'astuces, de trucs, et de démos «&nbsp;voyez-comment-ça-fonctionne&nbsp;» qui sont difficiles de rendre par l'écrit. Ils sont accessibles sur le  <a href="http://railstutorial.org/">Ruby on Rails Tutorial website</a>, par <a href="http://my.safaribooksonline.com/">Safari Books Online</a>, et par <a href="http://www.informit.com/index.aspx">InformIT</a>.</li>
+<li><a href="http://railstutorial.org/screencasts"><em>Ruby on Rails Tutorial</em> screencasts</a>&nbsp;: j'ai préparé un cours complet par screencast s'appuyant sur ce livre. En addition pour couvrir tout le matériel de ce livre, les screencasts sont plein d'astuces, de trucs, et de démos «&nbsp;voyez-comment-ça-fonctionne&nbsp;» qui sont difficiles de rendre par l'écrit. Ils sont accessibles sur le  <a href="http://railstutorial.org/">Ruby on Rails Tutorial website</a>, par <a href="http://my.safaribooksonline.com/">Safari Books Online</a> et par <a href="http://www.informit.com/index.aspx">InformIT</a>.</li>
 
 <li><a href="http://railscasts.com/">Railscasts</a>&nbsp;: je ne saurais trop insister sur la grande qualité des Railscasts. Je suggère de commencer en visitant le site <a href="http://railscasts.com/episodes/archive">Railscasts episode archive</a> et de cliquer sur le premier sujet qui retiendra votre attention.</li>
 
-<li><a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a>&nbsp;: l'un des sujets que nous avons presque pas couvert dans ce <em>Tutoriel Ruby on Rails</em> concerne la performance, l'optimisation et la mise à l'échelle (<rw>scaling</rw>). Heureusement, la plupart des sites ne rencontrent pas des problèmes de scaling, et utiliser quoi que ce soit au-delà de Rails serait probablement de l'optimisation prématurée. Si vous rencontrez des problèmes de performance, la série <a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a> par Gregg Pollack de <a href="http://envylabs.com/">Envy Labs</a> est un bon endroit où commencer.Je recommande aussi de visiter les application de surveillance de site <a href="http://scoutapp.com/">Scout</a> et <a href="http://www.newrelic.com/">New Relic</a>.<sup class="footnote" id="fnref:12.26"><a href="#fn:12.26">26</a></sup> Et, comme vous pouvez vous en douter maintenant, il existe des Railscasts sur ces sujets, parmi lesquels le profilage, la mise en cache, et les tâches de fond.</li>
+<li><a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a>&nbsp;: l'un des sujets que nous n'avons presque pas abordé dans ce <em>Tutoriel Ruby on Rails</em> concerne la performance, l'optimisation et la mise à l'échelle (<rw>scaling</rw>). Heureusement, la plupart des sites ne rencontrent pas des problèmes de scaling, et utiliser quoi que ce soit au-delà de Rails serait probablement de l'optimisation prématurée. Si vous rencontrez des problèmes de performance, la série <a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a> par Gregg Pollack du <a href="http://envylabs.com/">Envy Labs</a> est un bon endroit par où commencer. Je recommande aussi de visiter les applications de surveillance de site <a href="http://scoutapp.com/">Scout</a> et <a href="http://www.newrelic.com/">New Relic</a>.<sup class="footnote" id="fnref:12.26"><a href="#fn:12.26">26</a></sup> Et, comme vous pouvez vous en douter maintenant, il existe des Railscasts sur ces sujets, parmi lesquels le profilage, la mise en cache, et les tâches de fond.</li>
 
-<li>Livres Ruby and Rails&nbsp;: comme mentionné au <a class="ref" href="beginning#top">chapitre&nbsp;1</a>, je recommande <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a> par Peter Cooper, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> par David&nbsp;A. Black, et <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> par Hal Fulton, et <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> par Obie Fernandez pour en savoir plus sur Rails.</li>
+<li>Livres Ruby and Rails&nbsp;: comme mentionné au <a class="ref" href="beginning#top">chapitre&nbsp;1</a>, je recommande <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a> par Peter Cooper, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> par David&nbsp;A. Black et <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a> par Hal Fulton, ainsi que <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> par Obie Fernandez pour en savoir plus sur Rails.</li>
 
 <li><a href="http://peepcode.com/">PeepCode</a>&nbsp;: j'ai mentionné plusieurs screencasters commerciaux au <a class="ref" href="beginning#top">chapitre&nbsp;1</a>, mais le seul dont j'ai une solide expérience est PeepCode. Les screencasts à PeepCode sont de très haute qualité, et je les recommande chaudement.</li>
 
@@ -3717,19 +3716,19 @@
 <div class="label" id="sec:following_exercises"></div>
 
 
-<h2><a id="sec:12.5" href="following-users#sec:following_exercises" class="heading"><span class="number">12.5</span> Exercises</a></h2>
+<h2><a id="sec:12.5" href="following-users#sec:following_exercises" class="heading"><span class="number">12.5</span> Exercices</a></h2>
 
 
 
 
 <ol>
 <li>Ajoutez des tests pour <code>dependent :destroy</code> dans le modèle Relationship (<a class="ref" href="following-users#code:user_relationships_association">extrait&nbsp;12.5</a> et <a class="ref" href="following-users#code:user_reverse_relationships">extrait&nbsp;12.17</a>) en suivant l'exemple de l'<a class="ref" href="user-microposts#code:micropost_dependency_test">extrait&nbsp;11.11</a>.</li>
-<li>La méthode <code>respond_to</code> vu dans l'<a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a> peut en fait être hissé des actions à l'intérieur du contrôleur Relationships lui-même, et les blocs <code>respond_to</code> peuvent être remplacé par une méthode Rails appelée <code>respond_with</code>. Démontrez que le code résultant, montré dans l'<a class="ref" href="following-users#code:compact_respond_to">extrait&nbsp;12.46</a>, est correct en vérifiant que la suite de tests continue de réussir (pour les détails sur cette méthode, faites une recherche Google sur les termes «&nbsp;rails respond_with&nbsp;»).</li>
-<li>Les actions <code>following</code> et <code>followers</code> de l'<a class="ref" href="following-users#code:following_followers_actions">extrait&nbsp;12.29</a> ont encore de considérables duplication. Vérifiez que la méthode <code>show_follow</code> de l'<a class="ref" href="following-users#code:following_followers_actions_refactored">extrait&nbsp;12.47</a> élimine bien cette duplication (voyez si vous pouvez deviner ce que la méthode <code>send</code> fait, comme dans, par exeemple <code>@user.send(:following)</code>).</li>
-<li>Restructurez l'<a class="ref" href="following-users#code:show_follow_view">extrait&nbsp;12.30</a> en ajoutant des partiels pour le code courant aux pages des lecteurs et des auteurs suivis, la page d'accueil et la page d'affichage de l'utilisateur.</li>
+<li>La méthode <code>respond_to</code> vu dans l'<a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a> peut en fait hisser des actions à l'intérieur du contrôleur Relationships lui-même, et les blocs <code>respond_to</code> peuvent être remplacés par une méthode Rails appelée <code>respond_with</code>. Démontrez que le code résultant, montré dans l'<a class="ref" href="following-users#code:compact_respond_to">extrait&nbsp;12.46</a>, est correct en vérifiant que la suite de tests continue de réussir (pour les détails sur cette méthode, faites une recherche Google sur les termes «&nbsp;rails respond_with&nbsp;»).</li>
+<li>Les actions <code>following</code> et <code>followers</code> de l'<a class="ref" href="following-users#code:following_followers_actions">extrait&nbsp;12.29</a> contiennent encore de considérables redondances de code. Vérifiez que la méthode <code>show_follow</code> de l'<a class="ref" href="following-users#code:following_followers_actions_refactored">extrait&nbsp;12.47</a> élimine bien cette duplication (voyez si vous pouvez deviner ce que la méthode <code>send</code> fait, comme dans, par exeemple <code>@user.send(:following)</code>).</li>
+<li>Restructurez l'<a class="ref" href="following-users#code:show_follow_view">extrait&nbsp;12.30</a> en ajoutant des partiels au code actuel des pages des lecteurs et des auteurs suivis, de la page d'accueil et de la page d'affichage de l'utilisateur.</li>
 <li>En suivant le modèle de l'<a class="ref" href="following-users#code:stats_view_test">extrait&nbsp;12.20</a>, écrivez des tests pour les statistiques dans la page de profil.</li>
 <li>Écrivez un test d'intégration pour le suivi et l'arrêt de suivi de l'utilisateur.</li>
-<li>Ré-écrivez les méthode Ajax de la <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a> en utilisant <a href="http://jquery.com/">jQuery</a> à la place de Prototype. <em>Astuce&nbsp;:</em> vous voudrez peut-être lire la section jQuery de  <a href="http://lindsaar.net/2010/5/9/Getting-Rails-3-Edge-with-jQuery-RSpec-and-Cucumber-using-RVM">Mikel Lindsaar&rsquo;s blog post about jQuery, RSpec, and Rails&nbsp;3</a>.</li>
+<li>Ré-écrivez les méthodes Ajax de la <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">section&nbsp;12.2.5</a> en utilisant <a href="http://jquery.com/">jQuery</a> à la place de Prototype. <em>Astuce&nbsp;:</em> vous voudrez peut-être lire la section jQuery de  <a href="http://lindsaar.net/2010/5/9/Getting-Rails-3-Edge-with-jQuery-RSpec-and-Cucumber-using-RVM">Mikel Lindsaar&rsquo;s blog post about jQuery, RSpec, and Rails&nbsp;3</a>.</li>
 </ol>
 
 
@@ -3739,7 +3738,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Extrait 12.46.</span> <span class="description">Une restructuration compace de l'<a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+<div class="listing"><span class="header">Extrait 12.46.</span> <span class="description">Une restructuration compacte de l'<a class="ref" href="following-users#code:relationships_controller_ajax">extrait&nbsp;12.36</a>.</span>       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
               width="110"
               height="14"
               id="clippy_b7763f334828a2c00ccb7b7529383a9d624e8ef7">
@@ -3848,18 +3847,18 @@
 <li id="fn:12.3">Malheureusement, Rails utilise <rw>connection</rw> pour une connexion la base de données, donc introduire un modèle de nom «&nbsp;Connection&nbsp;» conduit à des bogues plutôt subtils (j'ai appris cela à mes dépends en développant <a href="http://www.insoshi.com/">Insoshi</a>). (NdT. Encore une fois, ce problème ne se poserait pas en français, où «&nbsp;connexion&nbsp;» s'écrit avec un «&nbsp;x&nbsp;», pas avec «&nbsp;_ct_ion&nbsp;»)&nbsp;<a class="arrow" href="#fnref:12.3">&uarr;</a></li>
 <li id="fn:12.4">En effet, cette construction est tellement caractéristique de Rails que le fameux programmeur Rails Josh Susser l'utilise comme <a href="http://blog.hasmanythrough.com/">nom de son blog</a>.&nbsp;<a class="arrow" href="#fnref:12.4">&uarr;</a></li>
 <li id="fn:12.5">Techniquement, Rails utilise la méthode <code>underscore</code> pour convertir la classe nom vers un id. Par exemple, <code>"FooBar".underscore</code> est <code>foo_bar</code>, donc la clé étrangère d'un objet <code>FooBar</code> devrait être <code>foo_bar_id</code> (incidemment, l'inverse de <code>underscore</code> est <code>camelize</code>, qui convertit <code>camel_case</code> vers <code>CamelCase</code>).&nbsp;<a class="arrow" href="#fnref:12.5">&uarr;</a></li>
-<li id="fn:12.6">Si vous n'avez pas noté que <code>followed_id</code> identifie aussi un utilisateur, et sont concernés par le traitement asymétrique des suivis et des suiveurs, vous êtes hors-jeu. Nous traiterons ce problème à la <a class="ref" href="following-users#sec:followers">section&nbsp;12.1.5</a>.&nbsp;<a class="arrow" href="#fnref:12.6">&uarr;</a></li>
+<li id="fn:12.6">Si vous n'avez pas noté que <code>followed_id</code> identifie aussi un utilisateur, et concerne le traitement asymétrique des suivis et des suiveurs, vous êtes hors-jeu. Nous traiterons ce problème à la <a class="ref" href="following-users#sec:followers">section&nbsp;12.1.5</a>.&nbsp;<a class="arrow" href="#fnref:12.6">&uarr;</a></li>
 <li id="fn:12.7">Cette méthode <code>follow!</code> devrait toujours fonctionner, donc (en suivant le modèle de <code>create!</code> et <code>save!</code>) nous indiquons avec l'exclamation qu'une exception (une erreur) sera déclenchée en cas d'échec.&nbsp;<a class="arrow" href="#fnref:12.7">&uarr;</a></li>
-<li id="fn:12.8">Une fois que vous aurez une grande expérience de la modélisation d'un domaine particulier, vous pourrez souvent deviner de telle méthode utilitaires à l'avance, et même quand vous ne pourrez pas vous trouvez souvent de vous-même que les écrire rend les tests plus clairs. Dans le cas présent, cependant, c'est OK si vous ne les aviez pas anticipées. Le développement de logiciel est souvent un processus itératif &mdash;&nbsp;vous écrivez du code jusqu'à ce qu'il s'enlaidisse, et alors vous le restructurez&nbsp;&mdash; mais pour la brièveté la présentation du tutoriel est un peu simplifié.&nbsp;<a class="arrow" href="#fnref:12.8">&uarr;</a></li>
+<li id="fn:12.8">Une fois que vous aurez une grande expérience de la modélisation d'un domaine particulier, vous pourrez souvent deviner à l'avance de telles méthodes utilitaires, et même quand vous ne pourrez pas, vous trouverez souvent de vous-même que les écrire rend les tests plus clairs. Dans le cas présent, cependant, ça n'est pas si grave si vous ne les aviez pas anticipées. Le développement de logiciel est souvent un processus itératif &mdash;&nbsp;vous écrivez du code jusqu'à ce qu'il s'enlaidisse, et alors vous le restructurez&nbsp;&mdash; mais la brièveté de la présentation d'un tutoriel doit quelque peu simplifier ce processus.&nbsp;<a class="arrow" href="#fnref:12.8">&uarr;</a></li>
 <li id="fn:12.9">La méthode <code>authenticate_with_salt</code> est incluse simplement en vous orientant à l'intérieur du fichier du modèle User.&nbsp;<a class="arrow" href="#fnref:12.9">&uarr;</a></li>
 <li id="fn:12.10">La méthode <code>unfollow!</code> ne provoque pas d'erreur à l'échec &mdash;&nbsp;en fait, je ne sais même pas comment Rails indique un échec de destruction&nbsp;&mdash; mais nous utilisons un point d'exclamation pour maintenant la symétrie <code>follow!</code>/<code>unfollow!</code>.&nbsp;<a class="arrow" href="#fnref:12.10">&uarr;</a></li>
 <li id="fn:12.11">Vous pouvez avoir noté que quelquefois nous accédons à <code>id</code> explicitement, comme dans <code>followed.id</code> et d'autrefois nous utilisons juste <code>followed</code>. J'ai honte d'admettre que mon algorithme habituel pour dire quand savoir lequel utiliser consiste simplement à voir si ça marche sans <code>id</code> et alors de l'ajouter si ça ne fonctionne pas.&nbsp;<a class="arrow" href="#fnref:12.11">&uarr;</a></li>
 <li id="fn:12.12">Tout dans l'<a class="ref" href="following-users#code:following_followers_tests">extrait&nbsp;12.28</a> a été couvert quelque part dans ce tutoriel, donc c'est un bon exercice de lire ce code.&nbsp;<a class="arrow" href="#fnref:12.12">&uarr;</a></li>
 <li id="fn:12.13">Parce que c'est nominalement un acronyme de <em>asynchronous JavaScript and XML</em>, Ajax est quelquefois écrit «&nbsp;AJAX&nbsp;», même si l'<a href="http://www.adaptivepath.com/ideas/essays/archives/000385.php">article sur l'Ajax original</a> l'épelle «&nbsp;Ajax&nbsp;» tout au long du texte.&nbsp;<a class="arrow" href="#fnref:12.13">&uarr;</a></li>
-<li id="fn:12.14">Cela ne fonctionne bien sûr que si JavaScript est autorisé dans le navigateur, mais [(it degrades gracefully)(il se dégrade gracieusement)], fonctionnant exactement dans dans la <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> si JavaScript n'est pas autorisé.&nbsp;<a class="arrow" href="#fnref:12.14">&uarr;</a></li>
-<li id="fn:12.15">À ce stade vous aurez à inclure la <a href="http://www.prototypejs.org/">Librairie JavaScript Prototype</a> par défaut dans votre application Rails comme dans l'<a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">extrait&nbsp;10.39</a> Si vous ne l'avez pas déjà fait.&nbsp;<a class="arrow" href="#fnref:12.15">&uarr;</a></li>
+<li id="fn:12.14">Cela ne fonctionne bien sûr que si JavaScript est autorisé dans le navigateur, mais Rails s'adapte gracieusement dans le cas contraire, rendant le fonctionnement identique à celui de la <a class="ref" href="following-users#sec:a_working_follow_button_the_standard_way">section&nbsp;12.2.4</a> dans le cas où JavaScript se serait pas autorisé.&nbsp;<a class="arrow" href="#fnref:12.14">&uarr;</a></li>
+<li id="fn:12.15">À ce stade, si vous ne l'avez déjà fait, vous aurez à inclure la <a href="http://www.prototypejs.org/">Librairie JavaScript Prototype</a> par défaut dans votre application Rails comme dans l'<a class="ref" href="updating-showing-and-deleting-users#code:adding_default_javascript">extrait&nbsp;10.39</a>.&nbsp;<a class="arrow" href="#fnref:12.15">&uarr;</a></li>
 <li id="fn:12.16">Il n'y a pas de relation entre ce <code>respond_to</code> et le <code>respond_to</code> utilisé dans les exemples RSpec.&nbsp;<a class="arrow" href="#fnref:12.16">&uarr;</a></li>
-<li id="fn:12.17">La principale exigence des ces objets <code>enumerable</code> est qu'ils doivent implémenter méthode <code>each</code> pour boucler (<em>itérer</em>) sur leur collection d'éléments.&nbsp;<a class="arrow" href="#fnref:12.17">&uarr;</a></li>
+<li id="fn:12.17">La principale exigence des ces objets <code>enumerable</code> est qu'ils doivent implémenter la méthode <code>each</code> pour boucler (<em>itérer</em>) sur leur collection d'éléments.&nbsp;<a class="arrow" href="#fnref:12.17">&uarr;</a></li>
 <li id="fn:12.18">La notation était en fait une extension Rails faite au cœur du langage Ruby&nbsp;; elle a été jugée si utile qu'elle a été maintenant incorporée à Ruby lui-même. Elle est pas belle la vie&nbsp;?&nbsp;<a class="arrow" href="#fnref:12.18">&uarr;</a></li>
 <li id="fn:12.19">L'appel de <code>paginate</code> sur un objet <code>Array</code> le convertit en objet <code>WillPaginate::Collection</code>, mais ça ne nous aide pas plus puisque le tableau entier a déjà été créé en mémoire.&nbsp;<a class="arrow" href="#fnref:12.19">&uarr;</a></li>
 <li id="fn:12.20">Une fonction «&nbsp;empaquetée&nbsp;» avec une partie de données (un utilisateur dans ce cas) porte le nom de <em>closure</em>, comme nous l'avons vu brièvement au cours d'une discussion sur les blocs à la <a class="ref" href="rails-flavored-ruby#sec:blocks">section&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:12.20">&uarr;</a></li>
@@ -3868,7 +3867,7 @@
 <li id="fn:12.23">Dans le but de faire une alimentation d'aspect plus sympa pour l'<a class="ref" href="following-users#fig:home_page_with_feed">illustration&nbsp;12.20</a>, j'ai ajouté quelque micro-messages supplémentaires à la main en utilisant la console Rails.&nbsp;<a class="arrow" href="#fnref:12.23">&uarr;</a></li>
 <li id="fn:12.24">Vous pouvez le vérifier en examinant les retours SQL dans le fichier journal du serveur de développement (le <a href="http://railstutorial.org/screencasts">screencast du Tutoriel Rails</a> couvrira de façon plus approfondie de telles subtilités).&nbsp;<a class="arrow" href="#fnref:12.24">&uarr;</a></li>
 <li id="fn:12.25">Ma seule réserve concernant Railscasts est qu'ils omettent souvent les tests. C'est probablement nécessaire pour garder l'épisode sympa et court, mais cela pourrait vous donner une mauvaise idée de l'importance de ces tests. Une fois que vous avez regardé le Railscast concerné pour vous faire une idée de base de comment procéder, je vous suggère d'écrire la nouvelle fonctionnalité en utilisant le «&nbsp;Développement Dirigé par les Tests&nbsp;».&nbsp;<a class="arrow" href="#fnref:12.25">&uarr;</a></li>
-<li id="fn:12.26">En plus d'être une phrase intelligente (même un oxymore. NdT) &mdash;&nbsp;<em>nouvelle relique</em> est une contradiction dans les termes&nbsp;&mdash; New Relic est aussi l'anagramme du nom du créateur de la compagnie, Lew Cirne.&nbsp;<a class="arrow" href="#fnref:12.26">&uarr;</a></li>
+<li id="fn:12.26">En plus d'être une phrase intelligente &mdash;&nbsp;<em>nouvelle relique</em> est une contradiction dans les termes (un oxymore. NdT)&nbsp;&mdash; New Relic est aussi l'anagramme du nom du créateur de la compagnie, Lew Cirne.&nbsp;<a class="arrow" href="#fnref:12.26">&uarr;</a></li>
 </ol>
 </div>
 

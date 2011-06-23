@@ -67,7 +67,7 @@
 
 <p><em>Ruby On Rails Учебник</em> во многом обязан моей предыдущей книге по Rails, <em>RailsSpace</em> и, следовательно, моему соавтору <a  href="http://aure.com/">Aurelius Prochazka</a>. Я хотел бы поблагодарить Aure как и за работу, которую он проделал над прошлой книгой, так и за поддержку этой. Я также хотел бы поблагодарить Debra Williams Cauley, моего редактора обеих книг <em>RailsSpace</em> и <em>Rails Tutorial</em>; до тех пор, пока она держит меня в бейсболе, я буду продолжать писать книги для нее.</p>
 
-<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
+<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Wolfram Arnold, Alex Chaffee, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
 
 <p> <span class="preamble">
  <span id="author">
@@ -130,7 +130,7 @@
 
 <h1 class="chapter"><a id="sec:1" href="beginning#top" class="heading"><span class="number">Глава 1</span> От нуля к развертыванию</a></h1>
 
-<p>Добро пожаловать в <a   href="http://railstutorial.org/book"><em>Ruby on Rails Tutorial: Изучаем Rails на примерах</em></a> Цель этой книги состоит в том, чтобы стать лучшим ответом на вопрос: &laquo;Если я хочу изучить веб-разработку на <a  href="http://rubyonrails.ru/">Ruby on Rails</a>, с чего я должен начать&raquo; К тому времени, когда Вы завершите Ruby on Rails Tutorial, вы будете иметь все знания необходимые для разработки и разворачивания собственных веб-приложений. Вы также будете готовы извлечь выгоду из многих более продвинутых книг, блогов и видеороликов, которые являются частью процветающей образовательной экосистемы Rails. Наконец, так как <em>Учебное руководство Ruby on Rails</em> использует Rails 3.0, информация, которую Вы получаете здесь, будет полностью актуализирована с самой последней и самой великой версией Rails.<sup class="footnote" id="fnref:1.1"><a href="#fn:1.1">1</a></sup></p>
+<p>Добро пожаловать в <a   href="http://railstutorial.org/book"><em>Ruby on Rails Tutorial: Изучаем Rails на примерах</em></a> Цель этой книги состоит в том, чтобы стать лучшим ответом на вопрос: &laquo;Если я хочу изучить веб-разработку на <a  href="http://rubyonrails.ru/">Ruby on Rails</a>, с чего я должен начать&raquo; К тому времени, когда Вы завершите Ruby on Rails Tutorial, вы будете иметь все знания необходимые для разработки и разворачивания собственных веб-приложений. Вы также будете готовы извлечь выгоду из многих более продвинутых книг, блогов и видеороликов, которые являются частью процветающей образовательной экосистемы Rails. Наконец, так как <em>Учебное руководство Ruby on Rails</em> использует Rails 3, информация, которую Вы получаете здесь, будет полностью актуализирована с самой последней и самой великой версией Rails.<sup class="footnote" id="fnref:1.1"><a href="#fn:1.1">1</a></sup></p>
 
 <p><em>Ruby on Rails Tutorial</em> следует, по существу, тому же подходу, что и моя предыдущая книга о Rails,<sup class="footnote" id="fnref:1.2"><a href="#fn:1.2">2</a></sup> обучение веб-разработке на Rails путём создания реального приложения с нуля. Как отмечает <a href="http://sivers.org">Дерек Сиверс</a> в предисловии, эта книга структурирована линейно, поэтому ее следует читать от начала до конца. Если вы привыкли прыгать в технических книгах, применение этого линейного подхода может потребовать от Вас некоторой корректировки, но я предлагаю попробовать. Вы можете думать о <em>Ruby on Rails Tutorial</em> как о видео-игре, где Вы &#8211; главный герой, получающий новый уровень, как Rails разработчик, в каждой главе. (упражнения &#8211; это <a  href="http://ru.wikipedia.org/wiki/Босс_%28компьютерные_игры%29">минибоссы</a>)</p>
 
@@ -361,7 +361,7 @@
 <h4><a id="sec:1.2.1.3" href="beginning#sec:1.2.1.3" class="heading">Браузеры</a></h4>
 
 
-<p>Хотя среди веб-браузеров есть из чего выбрать, подавляющее большинство программистов Rails используют Firefox, Safari, или Chrome, при разработке. Скриншоты в Учебнике Rails обычно сделаны в браузере Firefox. Если Вы используете Firefox, я советую использовать <a href="http://getfirebug.com/">Firebug</a> надстройку, которая позволяет выполнять все виды магии, такие как динамическая проверка (и даже редактирование) структуры HTML и CSS правил на любой странице. Для тех, кто не использует Firefox, <a href="http://getfirebug.com/firebuglite">Firebug Lite</a> работает  с большинством других браузеров, а у Safari и Chrome есть встроенная, &laquo;Просмотр кода элемента&raquo; функция, доступная по щелчку правой кнопкой мыши на любой части страницы. Независимо от того, какой браузер Вы используете, практика показывает, что время затраченное на изучение таких инструментов, как веб-инспектор, будет щедро вознаграждено.</p>
+<p>Хотя среди веб-браузеров есть из чего выбрать, подавляющее большинство программистов Rails используют Firefox, Safari, или Chrome, при разработке. Скриншоты в Учебнике Rails обычно сделаны в браузере Firefox. Если Вы используете Firefox, я советую использовать <a href="http://getfirebug.com/">Firebug</a> надстройку, которая позволяет выполнять все виды магии, такие как динамическая проверка (и даже редактирование) структуры HTML и CSS правил на любой странице. Для тех, кто не использует Firefox, <a href="http://getfirebug.com/firebuglite">Firebug Lite</a> работает  с большинством других браузеров, а у Safari и Chrome есть встроенная, &laquo;Просмотр кода элемента&raquo; функция, доступная по щелчку правой кнопкой мыши на любой части страницы.</p>
 
 <h4><a id="sec:1.2.1.4" href="beginning#sec:1.2.1.4" class="heading">Примечание о инструментах</a></h4>
 
@@ -410,7 +410,7 @@
 
 <p>Ветка Ruby&nbsp;1.9 находится в интенсивной разработке, поэтому, к сожалению, установка последней версии может оказаться непростой задачей. Вам придётся полагаться на интернет чтобы найти самые современные инструкции. Ниже приводится ряд шагов, после которых я привёл всё в рабочее состояние на моей системе (Macintosh OS&nbsp;X), но вам, возможно, придётся повозиться.</p>
 
-<p>Как часть установки Ruby, если Вы используете OS X или Linux, я строго рекомендую устанавливать Ruby с использованием  <a href="http://rvm.beginrescueend.com/">Ruby Version Manager (RVM)</a>, который позволит Вам устанавливать и управлять различными версиями Ruby на одной машине. (Проект <a href="http://github.com/vertiginous/pik">Pik</a> совершает подобный подвиг для Windows.) Это особенно важно, если Вы хотите запускать Rails&nbsp;3 и Rails&nbsp;2.3 на одной машине. Если Вы хотите пойти этим маршрутом, я предлагаю использовать RVM, для установки двух Ruby/Rails комбинаций: Ruby&nbsp;1.8.7/Rails&nbsp;2.3.10 и Ruby&nbsp;1.9.2/Rails&nbsp;3.0.7. Если Вы столкнетесь с какими-либо проблемами с RVM, вы часто можете найти его творца, Wayne E. Seguin, на канале IRC RVM  (<a href="http://webchat.freenode.net/?channels=rvm">#rvm на freenode.net</a>).<sup class="footnote" id="fnref:1.8"><a href="#fn:1.8">8</a></sup></p>
+<p>Как часть установки Ruby, если Вы используете OS X или Linux, я строго рекомендую устанавливать Ruby с использованием  <a href="http://rvm.beginrescueend.com/">Ruby Version Manager (RVM)</a>, который позволит Вам устанавливать и управлять различными версиями Ruby на одной машине. (Проект <a href="http://github.com/vertiginous/pik">Pik</a> совершает подобный подвиг для Windows.) Это особенно важно, если Вы хотите запускать Rails&nbsp;3 и Rails&nbsp;2.3 на одной машине. Если Вы хотите пойти этим маршрутом, я предлагаю использовать RVM, для установки двух Ruby/Rails комбинаций: Ruby&nbsp;1.8.7/Rails&nbsp;2.3.10 и Ruby&nbsp;1.9.2/Rails&nbsp;3.0.9. Если Вы столкнетесь с какими-либо проблемами с RVM, вы часто можете найти его творца, Wayne E. Seguin, на канале IRC RVM  (<a href="http://webchat.freenode.net/?channels=rvm">#rvm на freenode.net</a>).<sup class="footnote" id="fnref:1.8"><a href="#fn:1.8">8</a></sup></p>
 
 <p>После <a href="http://rvm.beginrescueend.com/rvm/install/">установки RVM</a>, Вы можете установить Руби следующим образом:<sup class="footnote" id="fnref:1.9"><a href="#fn:1.9">9</a></sup></p>
 
@@ -442,7 +442,7 @@
 
 <p>Здесь первая команда создает gemset <code>rails2tutorial</code> связанный с Ruby&nbsp;1.8.7-p302 , в то время как вторая команда создает gemset <code>rails3tutorial</code> связанный с Ruby&nbsp;1.9.2 и одновременно запускает его (посредством команды use). RVM поддерживает много различных команд для того, чтобы манипулировать gemsets; см. документацию в <a href="http://rvm.beginrescueend.com/gemsets/">http://rvm.beginrescueend.com/gemsets/</a>.</p>
 
-<p>В этом учебном руководстве мы хотим, чтобы наша система использовала Ruby&nbsp;1.9.2 и Rails&nbsp;3.0 по умолчанию, чего мы можем добиться следующим образом:</p>
+<p>В этом учебном руководстве мы хотим, чтобы наша система использовала Ruby&nbsp;1.9.2 и Rails&nbsp;3 по умолчанию, чего мы можем добиться следующим образом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --default use 1.9.2@rails3tutorial
 </pre></div>
@@ -482,12 +482,26 @@
 
 <p>Если Вы уже устанавливали RubyGems, Вы можете захотеть обновить свою систему до версии, используемой в этом учебнике:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem update --system 1.6.2
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem update --system 1.8.5
 </pre></div>
 </div>
 
 
-<p>Наконец, если Вы используете Linux Ubuntu, Вы можете захотеть посмотреть <a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu"> Ubuntu/Rails&nbsp;3.0 сообщение в блоге Toran Billups</a> для изучения полных инструкций по установке.</p>
+<p>Если Вы используете Linux Ubuntu, Вы можете захотеть посмотреть <a href="http://toranbillups.com/blog/archive/2010/09/01/How-to-install-Rails-3.0-and-Ruby-1.9.2-on-Ubuntu"> Ubuntu/Rails&nbsp;3.0 сообщение в блоге Toran Billups</a> для изучения полных инструкций по установке.</p>
+
+
+<p>При установке гемов, RubyGems по умолчанию генерирует два различных вида документации (так называемые ri и rdoc), но многие Ruby и Rails разработчики считают, что время, затрачиваимое на их установку не стоит выгоды. (Многие программисты полагаются на онлайн-документацию, а не на нативные ri и rdoc документы.) Для предотвращения автоматической генерации документации, я рекомендую создать файл конфигурации, называемый <code>.gemrc</code> (находится (located) в вашем домашнем каталоге) со строкой из <a class="ref" href="/ruby-on-rails-tutorial-book#code:gemrc">Листинга&nbsp;1.1</a>.</p>
+
+<div class="label" id="code:gemrc"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 1.1.</span> <span class="description">Подавление ri и rdoc документации с помощью <code>.gemrc</code>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="n">gem</span><span class="p">:</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">ri</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">rdoc</span>
+</pre></div>
+</div></div>
+
 
 <div class="label" id="sec:install_rails"></div>
 
@@ -495,9 +509,9 @@
 <h4><a id="sec:1.2.2.5" href="beginning#sec:install_rails" class="heading">Установка Rails</a></h4>
 
 
-<p>Поскольку Вы уже установили RubyGems, установка Rails&nbsp;3.0 должна быть легкой:</p>
+<p>Поскольку Вы уже установили RubyGems, установка Rails&nbsp;3 должна быть легкой:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.0.7
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.0.9
 </pre></div>
 </div>
 
@@ -505,7 +519,7 @@
 <p>Чтобы проверить, что это работает, выполните следующую команду:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails -v
-<span class="go">Rails 3.0.7</span>
+<span class="go">Rails 3.0.9</span>
 </pre></div>
 </div>
 
@@ -522,7 +536,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.1.</span> <span class="description">Запуск <code>rails</code> скрипта , для генерации нового приложения.</span> </div>
+<div class="listing"><span class="header">Листинг 1.2.</span> <span class="description">Запуск <code>rails</code> скрипта , для генерации нового приложения.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mkdir rails_projects
 <span class="gp">$</span> <span class="nb">cd </span>rails_projects
 <span class="gp">$</span> rails new first_app
@@ -580,22 +594,22 @@
 </div>
 
 
-<p>Результат должен выглядеть примерно как <a class="ref" href="beginning#code:default_gemfile">Листинг&nbsp;1.2</a>.</p>
+<p>Результат должен выглядеть примерно как <a class="ref" href="beginning#code:default_gemfile">Листинг&nbsp;1.3</a>.</p>
 
 <div class="label" id="code:default_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.2.</span> <span class="description">Дефолтный <code>Gemfile</code> в <code>first_app</code> каталоге.</span>       
+<div class="listing"><span class="header">Листинг 1.3.</span> <span class="description">Дефолтный <code>Gemfile</code> в <code>first_app</code> каталоге.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.9&#39;</span>
 
 <span class="c1"># Bundle edge Rails instead:</span>
 <span class="c1"># gem &#39;rails&#39;, :git =&gt; &#39;git://github.com/rails/rails.git&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span>
 
 <span class="c1"># Use unicorn as the web server</span>
 <span class="c1"># gem &#39;unicorn&#39;</span>
@@ -609,7 +623,7 @@
 <span class="c1"># Bundle the extra gems:</span>
 <span class="c1"># gem &#39;bj&#39;</span>
 <span class="c1"># gem &#39;nokogiri&#39;, &#39;1.4.1&#39;</span>
-<span class="c1"># gem &#39;sqlite3-ruby&#39;, :require =&gt; &#39;sqlite3&#39;</span>
+<span class="c1"># gem &#39;sqlite3&#39;</span>
 <span class="c1"># gem &#39;aws-s3&#39;, :require =&gt; &#39;aws/s3&#39;</span>
 
 <span class="c1"># Bundle gems for certain environments:</span>
@@ -623,37 +637,44 @@
 
 <p>Большинство этих строк закомментированы символом хеш&nbsp;<code>#</code>; они здесь для того, чтобы показать Вам некоторые обычно необходимые гемы и дать примеры синтаксиса Bundler. Сейчас нам не понадобятся никакие гемы кроме дефолтных: Rails как таковой, и гем для взаимодействия Ruby с базой данных <a href="http://www.sqlite.org/">SQLite</a>.</p>
 
-<p>Если Вы не укажете номер версии <code>gem</code>-команде, Bundler автоматически установит самую последнюю версию. К сожалению, обновления гемов часто вызывают незначительные, но потенциально сбивающие с толку поломки, так что, в этом учебном руководстве мы обычно будем явно включать номер версии известной как работавшей, как видно в <a class="ref" href="beginning#code:gemfile_sqlite_version">Листинге&nbsp;1.3</a>.<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup></p>
+<p>Если Вы не укажете номер версии <code>gem</code>-команде, Bundler автоматически установит самую последнюю версию. К сожалению, обновления гемов часто вызывают незначительные, но потенциально сбивающие с толку поломки, так что, в этом учебном руководстве мы обычно будем явно включать номер версии известной как работавшей, как видно в <a class="ref" href="beginning#code:gemfile_sqlite_version">Листинге&nbsp;1.4</a>.<sup class="footnote" id="fnref:1.10"><a href="#fn:1.10">10</a></sup></p>
 
 <div class="label" id="code:gemfile_sqlite_version"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.3.</span> <span class="description"><code>Gemfile</code> с явной версией <tt>sqlite3-ruby</tt> гема.</span>       
+<div class="listing"><span class="header">Листинг 1.4.</span> <span class="description"><code>Gemfile</code> с явной версией <tt>sqlite3</tt> гема.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.9&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.3&#39;</span>
 </pre></div>
 </div></div>
 
 
 <p>Это преобразует строку</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
+<div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>из <a class="ref" href="beginning#code:default_gemfile">Листинга&nbsp;1.2</a> to</p>
+<p>из <a class="ref" href="beginning#code:default_gemfile">Листинга&nbsp;1.3</a> в</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite3&#39;</span>
+<div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.3&#39;</span>
 </pre></div>
 </div>
 
 
-<p>которая принуждает Bundler, к установке версии <tt>1.3.2</tt> гема <tt>sqlite3-ruby</tt>. (Отметьте, что Вам нужна версия <tt>1.2.5</tt> гема <tt>sqlite3-ruby</tt> если Вы используете OS&nbsp;X Leopard, и версия <code>1.3.2</code> для Snow Leopard, чтобы скомпилировать должным образом.)</p>
+<p>что принуждает Bundler, к установке версии <tt>1.3.3</tt> гема <tt>sqlite3</tt>. (Отметьте, что Вам нужна версия <tt>1.2.5</tt> гема <tt>sqlite3-ruby</tt> если Вы используете OS&nbsp;X Leopard:</p>
+
+<div class="code"><div class="highlight"><pre><span class="n">gem</span> <span class="s1">'sqlite3-ruby'</span><span class="p">,</span> <span class="s1">'1.2.5'</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">'sqlite3'</span>
+</pre></div>
+</div>
+
+<p>Это связано с тем, что последняя версия гема, теперь называемая просто <tt>sqlite3</tt>, требуется для компиляции Snow Leopard или более поздним версиям.)</p>
+
 
 <p>Если Вы используете Linux Ubuntu, Вам, возможно, придется установить несколько других пакетов в этом пункте:<sup class="footnote" id="fnref:1.11"><a href="#fn:1.11">11</a></sup></p>
 
@@ -685,7 +706,7 @@
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails server
 <span class="go">=&gt; Booting WEBrick</span>
-<span class="go">=&gt; Rails 3.0.7 application starting on http://0.0.0.0:3000</span>
+<span class="go">=&gt; Rails 3.0.9 application starting on http://0.0.0.0:3000</span>
 <span class="go">=&gt; Call with -d to detach</span>
 <span class="go">=&gt; Ctrl-C to shutdown server</span>
 </pre></div>
@@ -788,13 +809,13 @@
 
 <p>Следующий шаг добавит файлы проекта в репозитарий. Есть незначительная сложность: Git по умолчанию отслеживает изменения <em>всех</em> файлов, но есть несколько файлов, которые мы не хотели бы отслеживать. Например, Rails создает log файлы, для записи поведения приложения; эти файлы часто изменяются, и мы не хотим, чтобы наша система управления версиями постоянно обновляла их. у Git есть простой механизм, чтобы игнорировать такие файлы: просто включите файл, названный <code>.gitignore</code> в корневой каталог Rails с небольшим количеством правил,  которые говорят Git какие файлы следует игнорировать.</p>
 
-<p>Посмотрев снова в <a class="ref" href="beginning#table:rails_directory_structure">Таблицу&nbsp;1.1</a>, мы увидим, что команда <code>rails</code> создает дефолтный <code>.gitignore</code> файл в корневом каталоге Rails, похожий на показанный в <a class="ref" href="beginning#code:default_gitignore">Листинге&nbsp;1.4</a>.</p>
+<p>Посмотрев снова в <a class="ref" href="beginning#table:rails_directory_structure">Таблицу&nbsp;1.1</a>, мы увидим, что команда <code>rails</code> создает дефолтный <code>.gitignore</code> файл в корневом каталоге Rails, как показано в <a class="ref" href="beginning#code:default_gitignore">Листинге&nbsp;1.5</a>.</p>
 
 <div class="label" id="code:default_gitignore"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.4.</span> <span class="description">Дефолтный <code>.gitignore</code> создаваемый командой <code>rails</code>.</span>       
+<div class="listing"><span class="header">Листинг 1.5.</span> <span class="description">Дефолтный <code>.gitignore</code> создаваемый командой <code>rails</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3
@@ -804,15 +825,15 @@ tmp/**/*
 </div></div>
 
 
-<p><a class="ref" href="beginning#code:default_gitignore">Листинг&nbsp;1.4</a> заставляет Git игнорировать такие файлы как log файлы, Rails временные (<code>tmp</code>) файлы, и базы данных SQLite. (Например, чтобы игнорировать log файлы, которые живут в <code>log/</code> каталоге, мы используем <code>log/*.log</code>, чтобы игнорировать все файлы, заканчивающиеся на <code>.log</code>.) Большинство этих игнорируемых файлов изменяются часто и автоматически, так что включать их в управление версиями неудобно; кроме того, сотрудничая с другими файлами они могут вызвать конфликты.</p>
+<p><a class="ref" href="beginning#code:default_gitignore">Листинг&nbsp;1.5</a> заставляет Git игнорировать такие файлы как log файлы, Rails временные (<code>tmp</code>) файлы, и базы данных SQLite. (Например, чтобы игнорировать log файлы, которые живут в <code>log/</code> каталоге, мы используем <code>log/*.log</code>, чтобы игнорировать все файлы, заканчивающиеся на <code>.log</code>.) Большинство этих игнорируемых файлов изменяются часто и автоматически, так что включать их в управление версиями неудобно; кроме того, сотрудничая с другими файлами они могут вызвать конфликты.</p>
 
-<p>The <code>.gitignore</code> файл в <a class="ref" href="beginning#code:default_gitignore">Листинге&nbsp;1.4</a> пожалуй, достаточен для этого учебного руководства, но, в зависимости от Вашей системы, можно обнаружить <a class="ref" href="beginning#code:gitignore">Листинг&nbsp;1.5</a> более удобным.<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup> Этот увеличенный <code>.gitignore</code> обеспечивает игнорирование файлов документации Rails, файлов подкачки Vim и Emacs, и (для пользователей OS X) странные <code>.DS_Store</code> каталоги, создаваемые приложением Mac Finder. Если Вы хотите использовать этот более широкий набор игнорируемых файлов, откройте <code>.gitignore</code> в Вашем любимом текстовом редакторе и наполните его содержимым <a class="ref" href="beginning#code:gitignore">Листинг&nbsp;1.5</a>.</p>
+<p> <code>.gitignore</code> файл в <a class="ref" href="beginning#code:default_gitignore">Листинге&nbsp;1.5</a> пожалуй, достаточен для этого учебного руководства, но, в зависимости от Вашей системы, можно обнаружить <a class="ref" href="beginning#code:gitignore">Листинг&nbsp;1.6</a> более удобным.<sup class="footnote" id="fnref:1.19"><a href="#fn:1.19">19</a></sup> Этот увеличенный <code>.gitignore</code> обеспечивает игнорирование файлов документации Rails, файлов подкачки Vim и Emacs, и (для пользователей OS X) странные <code>.DS_Store</code> каталоги, создаваемые приложением Mac Finder. Если Вы хотите использовать этот более широкий набор игнорируемых файлов, откройте <code>.gitignore</code> в Вашем любимом текстовом редакторе и наполните его содержимым <a class="ref" href="beginning#code:gitignore">Листинга&nbsp;1.6</a>.</p>
 
 <div class="label" id="code:gitignore"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.5.</span> <span class="description">Увеличенный <code>.gitignore</code> файл.</span>       
+<div class="listing"><span class="header">Листинг 1.6.</span> <span class="description">Увеличенный <code>.gitignore</code> файл.</span>       
 </div>
 <div class="code"><div class="highlight"><pre>.bundle
 db/*.sqlite3*
@@ -1033,7 +1054,7 @@ doc/
 <h4><a id="sec:1.3.5.2" href="beginning#sec:git_edit" class="heading">Редактирование</a></h4>
 
 
-<p>После создания темы ветки мы отредактируем его (файл readme), чтобы сделать немного более наглядным. Мне нравится использовать <a href="http://daringfireball.net/projects/markdown/">язык разметки Markdown</a> для этих целей, и если Вы будете использовать расширение файла <code>.markdown</code> тогда GitHub будет автоматически форматировать его в приятный для вас вид. Итак, сначала мы будем использовать Git версию Unix команды <code>mv</code> (“move”) , чтобы изменить название, а затем заполним его содержанием <a class="ref" href="beginning#code:new_readme">Листинга&nbsp;1.6</a>:</p>
+<p>После создания темы ветки мы отредактируем его (файл readme), чтобы сделать немного более наглядным. Мне нравится использовать <a href="http://daringfireball.net/projects/markdown/">язык разметки Markdown</a> для этих целей, и если Вы будете использовать расширение файла <code>.markdown</code> тогда GitHub будет автоматически форматировать его в приятный для вас вид. Итак, сначала мы будем использовать Git версию Unix команды <code>mv</code> (“move”) , чтобы изменить название, а затем заполним его содержанием <a class="ref" href="beginning#code:new_readme">Листинга&nbsp;1.7</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git mv README README.markdown
 <span class="gp">$</span> mate README.markdown
@@ -1045,7 +1066,7 @@ doc/
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.6.</span> <span class="description">Новый файл <code>README</code>, <code>README.markdown</code>.</span>       
+<div class="listing"><span class="header">Листинг 1.7.</span> <span class="description">Новый файл <code>README</code>, <code>README.markdown</code>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre># Ruby on Rails Tutorial: первое приложение
 
@@ -1207,13 +1228,13 @@ doc/
 </div>
 
 
-<p>Наконец, используйте <code>heroku</code> команду, чтобы создать место на серверах Heroku для примера приложения, (<a class="ref" href="beginning#code:heroku_create">Листинг&nbsp;1.7</a>).</p>
+<p>Наконец, используйте <code>heroku</code> команду, чтобы создать место на серверах Heroku для примера приложения, (<a class="ref" href="beginning#code:heroku_create">Листинг&nbsp;1.8</a>).</p>
 
 <div class="label" id="code:heroku_create"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.7.</span> <span class="description">Создание нового приложения в Heroku.</span> </div>
+<div class="listing"><span class="header">Листинг 1.8.</span> <span class="description">Создание нового приложения в Heroku.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create
 <span class="go">Created http://severe-fire-61.heroku.com/ | git@heroku.com:severe-fire-61.git</span>
 <span class="go">Git remote heroku added</span>
@@ -1243,19 +1264,19 @@ doc/
 </div>
 
 
-<p>Установка, описанная в этой главе, хорошо работает на большинстве систем, включая мою, но если Вы столкнулись с этой проблемой, следует попытаться обновить свой  <code>Gemfile</code> с кодом в <a class="ref" href="beginning#code:gemfile_sqlite_heroku">Листинге&nbsp;1.8</a>,  который препятствует попыткам Heroku загрузить <tt>sqlite3-ruby</tt> гем.)</p>
+<p>Установка, описанная в этой главе, хорошо работает на большинстве систем, включая мою, но если Вы столкнулись с этой проблемой, следует попытаться обновить свой  <code>Gemfile</code> с кодом в <a class="ref" href="beginning#code:gemfile_sqlite_heroku">Листинге&nbsp;1.9</a>,  который препятствует попыткам Heroku загрузить <tt>sqlite3</tt> гем.)</p>
 
 <div class="label" id="code:gemfile_sqlite_heroku"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 1.8.</span> <span class="description"> Исправленный для Heroku <code>Gemfile</code>, необходимый на некоторых системах.</span>       
+<div class="listing"><span class="header">Листинг 1.9.</span> <span class="description"> Исправленный для Heroku <code>Gemfile</code>, необходимый на некоторых системах.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.7&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.9&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.2&#39;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:development</span>
+<span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.3&#39;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:development</span>
 </pre></div>
 </div></div>
 
@@ -1265,7 +1286,7 @@ doc/
 <h3><a id="sec:1.4.3" href="beginning#sec:1.4.3" class="heading"><span class="number">1.4.3</span> Развертывание Heroku, шаг второй</a></h3>
 
 
-<p>Нет никакого шага два! Все готово (<a class="ref" href="beginning#fig:heroku_app">Рис.&nbsp;1.11</a>). Чтобы увидеть Ваше свежеразвернутое приложение, нужно посетить адрес, который Вы видели, когда выполнили, <code>heroku create</code> (то есть, <a class="ref" href="beginning#code:heroku_create">Листинг&nbsp;1.7</a>, но с адресом для Вашего приложения).<sup class="footnote" id="fnref:1.28"><a href="#fn:1.28">28</a></sup> Вы также можете использовать аргумент <code>heroku</code> команды который автоматически откроет Ваш браузер с правильным адресом:</p>
+<p>Нет никакого шага два! Все готово (<a class="ref" href="beginning#fig:heroku_app">Рис.&nbsp;1.11</a>). Чтобы увидеть Ваше свежеразвернутое приложение, нужно посетить адрес, который Вы видели, когда выполнили, <code>heroku create</code> (то есть, <a class="ref" href="beginning#code:heroku_create">Листинг&nbsp;1.8</a>, но с адресом для Вашего приложения).<sup class="footnote" id="fnref:1.28"><a href="#fn:1.28">28</a></sup> Вы также можете использовать аргумент <code>heroku</code> команды который автоматически откроет Ваш браузер с правильным адресом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku open
 </pre></div>
@@ -1340,7 +1361,7 @@ jhyicevg.heroku.com</pre>
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:1.1">Самая актуальная версия <em>Учебника Ruby on Rails</em> может быть найдена на веб-сайте книги  <a href="http://railstutorial.org/">http://railstutorial.org/</a>. Если Вы читаете эту книгу оффлайн, убедитесь, что проверили <a href="http://railstutorial.org/book">онлайн версию Учебика Rails в http://railstutorial.org/book</a> для самых последних обновлений. Кроме того, книги PDF, приобретенные через railstutorial.org, будут продолжать обновляться пока Rails 3.0, и RSpec 2.0 все еще являются объектом активной разработки.&nbsp;<a class="arrow" href="#fnref:1.1">&uarr;</a></li>
+<li id="fn:1.1">Самая актуальная версия <em>Учебника Ruby on Rails</em> может быть найдена на веб-сайте книги  <a href="http://railstutorial.org/">http://railstutorial.org/</a>. Если Вы читаете эту книгу оффлайн, убедитесь, что проверили <a href="http://russian.railstutorial.org/">онлайн версию Учебика Rails в http://russian.railstutorial.org/</a> для самых последних обновлений. &nbsp;<a class="arrow" href="#fnref:1.1">&uarr;</a></li>
 <li id="fn:1.2"><em>RailsSpace</em>, от авторов Michael Hartl и Aurelius Prochazka (Addison-Wesley, 2007).&nbsp;<a class="arrow" href="#fnref:1.2">&uarr;</a></li>
 <li id="fn:1.3"><em>URL</em> &#8211; сокращение от Uniform Resource Locator (Единый Указатель Ресурсов). Практически, это обычно эквивалентно “вещи, которую Вы видите в строке поиска Вашего браузера”. Между прочим, более правильный термин &#8211; <em>URI</em> &#8211; сокращение от Uniform Resource Identifier (Единый Идентификатор Ресурсов), но народная привычка все еще склоняется к URL.&nbsp;<a class="arrow" href="#fnref:1.3">&uarr;</a></li>
 <li id="fn:1.4">Twitter перешел на Java-based front-end (??) в апреле 2011, но только после успешного использования Rails для масштабирования до более чем 200 миллионов пользователей.&nbsp;<a class="arrow" href="#fnref:1.4">&uarr;</a></li>
@@ -1360,7 +1381,7 @@ jhyicevg.heroku.com</pre>
 <li id="fn:1.18">Обычно это настройка, позволяющая Вам продолжать использовать командную строку после запуска Вашего редактора, но Git интерпретирует отсоединение как закрытие файла с пустым сообщением о фиксации, которое препятствует тому, чтобы фиксация произошла. Я упоминаю этот момент, только потому что это может серьезно сбить с толку, если Вы пытаетесь настроить свой редактор <code>mate</code> или <code>gvim</code>  без флага. Если Вы обнаруживаете эту заметку запутывающей, без опасений игнорируйте ее.&nbsp;<a class="arrow" href="#fnref:1.18">&uarr;</a></li>
 <li id="fn:1.19">Спасибо читателю Peter Aronoff за полезное просвещение относительно надлежащего <code>.gitignore</code> синтаксиса.&nbsp;<a class="arrow" href="#fnref:1.19">&uarr;</a></li>
 <li id="fn:1.20">Пользователи Windows могут получить сообщение <code>warning: CRLF will be replaced by LF in .gitignore</code>. Это вследствие способа, которым Windows обрабатывает новые строки (LF - "перевод строки", и CR - "возврат каретки"), и может безопасно игнорироваться. Если сообщение беспокоит Вас, попытайтесь выполнить конфигурацию <code>git config –global core.autocrlf false</code> в командной строке, чтобы выключить его.&nbsp;<a class="arrow" href="#fnref:1.20">&uarr;</a></li>
-<li id="fn:1.21">Если в будущем какие-либо нежелательные файлы начинают показываться, когда Вы вводите <code>git status</code>, просто добавьте их в свой <code>.gitignore</code> файл из <a class="ref" href="beginning#code:gitignore">Листинга&nbsp;1.5</a>.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
+<li id="fn:1.21">Если в будущем какие-либо нежелательные файлы начинают показываться, когда Вы вводите <code>git status</code>, просто добавьте их в свой <code>.gitignore</code> файл из <a class="ref" href="beginning#code:gitignore">Листинга&nbsp;1.6</a>.&nbsp;<a class="arrow" href="#fnref:1.21">&uarr;</a></li>
 <li id="fn:1.22">См. главу <a href="http://progit.org/book/ch3-0.html">Git Branching в <em>Pro Git</em></a> для получения более подробной информации.&nbsp;<a class="arrow" href="#fnref:1.22">&uarr;</a></li>
 <li id="fn:1.23">Опытные пользователи Git признают мудрость выполнения <code>git rebase master</code> перед переключением на master ветку, но этот шаг не будет необходим в этой книге.&nbsp;<a class="arrow" href="#fnref:1.23">&uarr;</a></li>
 <li id="fn:1.24">Сотрудничая на проекте с другими разработчиками, следует выполнить  <tt class="verb">git pull --rebase</tt> перед этим шагом, чтобы принять любые удаленные изменения.&nbsp;<a class="arrow" href="#fnref:1.24">&uarr;</a></li>

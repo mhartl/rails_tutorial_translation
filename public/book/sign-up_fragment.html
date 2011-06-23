@@ -68,7 +68,7 @@
 
 <p><em>Ruby On Rails Учебник</em> во многом обязан моей предыдущей книге по Rails, <em>RailsSpace</em> и, следовательно, моему соавтору <a  href="http://aure.com/">Aurelius Prochazka</a>. Я хотел бы поблагодарить Aure как и за работу, которую он проделал над прошлой книгой, так и за поддержку этой. Я также хотел бы поблагодарить Debra Williams Cauley, моего редактора обеих книг <em>RailsSpace</em> и <em>Rails Tutorial</em>; до тех пор, пока она держит меня в бейсболе, я буду продолжать писать книги для нее.</p>
 
-<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
+<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Wolfram Arnold, Alex Chaffee, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
 
 <p> <span class="preamble">
  <span id="author">
@@ -133,7 +133,7 @@
 
 <p>Так как мы будем создавать новых пользователей в этой главе, Вы можете сбросить базу данных, чтобы удалить всех пользователей, созданных в консоли (например, в <a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Разделе&nbsp;7.3.2</a>), чтобы ваши результаты соответствовали тому, что показано в учебнике. Вы можете сделать это следующим образом:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:reset
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:reset
 </pre></div>
 </div>
 
@@ -422,7 +422,7 @@
 </div>
 
 
-<p>Здесь атрибуты <code>class</code> и <code>id</code> не играют большой роли; куда более выжны <code>action="/users"</code> и <code>method="post"</code>. Вместе они составляют инструкцию выдавать HTML запрос <tt>POST</tt> к <tt>/users</tt> URL. Мы увидим в ближайших двух разделах какие это имеет последствия.</p>
+<p>Здесь атрибуты <code>class</code> и <code>id</code> не играют большой роли; куда более выжны <code>action="/users"</code> и <code>method="post"</code>. Вместе они составляют инструкцию выдавать HTTP запрос <tt>POST</tt> к <tt>/users</tt> URL. Мы увидим в ближайших двух разделах какие это имеет последствия.</p>
 
 <p>Наконец, отметим, весьма туманный код для &ldquo;authenticity token&rdquo;:</p>
 
@@ -1513,7 +1513,7 @@
 
 <p>Как и в <a class="ref" href="sign-up#code:signup_failure_test_lambda">Листинге&nbsp;8.21</a>, мы завернули код для успешной регистрации в <code>lambda</code> блок. В этом случае, вместо того, чтобы убедиться, что количество пользователей <em>не</em> меняется, мы убедимся, что оно увеличивается на&nbsp;1 за счет записи пользователя, создаваемой в тестовой базе данных. Результат выглядит следующим образом:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rspec spec/requests/users_spec.rb 
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/requests/users_spec.rb 
 <span class="go">..</span>
 
 

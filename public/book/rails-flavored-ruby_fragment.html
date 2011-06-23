@@ -67,7 +67,7 @@
 
 <p><em>Ruby On Rails Учебник</em> во многом обязан моей предыдущей книге по Rails, <em>RailsSpace</em> и, следовательно, моему соавтору <a  href="http://aure.com/">Aurelius Prochazka</a>. Я хотел бы поблагодарить Aure как и за работу, которую он проделал над прошлой книгой, так и за поддержку этой. Я также хотел бы поблагодарить Debra Williams Cauley, моего редактора обеих книг <em>RailsSpace</em> и <em>Rails Tutorial</em>; до тех пор, пока она держит меня в бейсболе, я буду продолжать писать книги для нее.</p>
 
-<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
+<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Wolfram Arnold, Alex Chaffee, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
 
 <p> <span class="preamble">
  <span id="author">
@@ -343,7 +343,7 @@
 <p>Нашим основным инструментом для изучения Ruby будет <em>Rails консоль</em>, которая является утилитой командной строки для работы с Rails приложениями.  Сама консоль построена на интерактивном Ruby (<code>irb</code>), и таким образом, имеет доступ к полной мощности Ruby. (Как мы увидим в <a class="ref" href="rails-flavored-ruby#sec:a_controller_class">Разделе&nbsp;4.4.4</a>, консоль также имеет доступ к среде Rails.) Запуск консоли в командной строке происходит следующим образом:<sup class="footnote" id="fnref:4.4"><a href="#fn:4.4">4</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
-<span class="go">Loading development environment (Rails 3.0.7)</span>
+<span class="go">Loading development environment (Rails 3.0.9)</span>
 <span class="gp">&gt;&gt; </span>
 </pre></div>
 </div>
@@ -828,12 +828,16 @@
 </div>
 
 
-<p>Вы также можете добавить данные в массивы с помощью оператора, &ldquo;push&rdquo; (отправить, толкнуть) <code>&lt;&lt;</code>:</p>
+<p>Вы также можете добавлять данные в массивы с помощью оператора, &ldquo;push&rdquo; (отправить, толкнуть) <code>&lt;&lt;</code>:</p>
+<p>Вы также можете добавлять данные в массивы с помощью <code>push</code> (# отправить, толкнуть) метода или эквивалентного ему оператора <code>&lt;&lt;</code>:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span>                     <span class="c1"># Pushing 7 onto an array</span>
-<span class="go">[42, 8, 17, 7]</span>
-<span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;foo&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;bar&quot;</span>        <span class="c1"># Chaining array pushes</span>
-<span class="go">[42, 8, 17, 7, &quot;foo&quot;, &quot;bar&quot;]</span>
+
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>                  <span class="c1"># Отправить 6 в массив</span>
+<span class="go">=&gt; [42, 8, 17, 6]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span>                     <span class="c1"># Отправить 7 в массив</span>
+<span class="go">=&gt; [42, 8, 17, 6, 7]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">"foo"</span> <span class="o">&lt;&lt;</span> <span class="s2">"bar"</span>        <span class="c1"># Сцепление отправляемых в массив данных</span>
+<span class="go">=&gt; [42, 8, 17, 6, 7, "foo", "bar"]</span>
 </pre></div>
 </div>
 

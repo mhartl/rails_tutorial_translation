@@ -67,7 +67,7 @@
 
 <p><em>Ruby On Rails Учебник</em> во многом обязан моей предыдущей книге по Rails, <em>RailsSpace</em> и, следовательно, моему соавтору <a  href="http://aure.com/">Aurelius Prochazka</a>. Я хотел бы поблагодарить Aure как и за работу, которую он проделал над прошлой книгой, так и за поддержку этой. Я также хотел бы поблагодарить Debra Williams Cauley, моего редактора обеих книг <em>RailsSpace</em> и <em>Rails Tutorial</em>; до тех пор, пока она держит меня в бейсболе, я буду продолжать писать книги для нее.</p>
 
-<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
+<p>Я хотел бы поблагодарить большой список тех, кто учили и вдохновили меня на протяжении многих лет: David Heinemeier Hansson, Yehuda Katz, Carl Lerche, Jeremy Kemper, Xavier Noria, Ryan Bates, Geoffrey Grosenbach, Peter Cooper, Matt Aimonetti, Gregg Pollack, Amy Hoy, Dave Chelimsky, Pat Maddox, Tom Preston-Werner, Chris Wanstrath, Chad Fowler, Josh Susser, Obie Fernandez, Ian McFarland, Steven Bristol, Wolfram Arnold, Alex Chaffee, Giles Bowkett, Evan Dorn, Long Nguyen, James Lindenbaum, Adam Wiggins, Tikhon Bernstam, Ron Evans, Wyatt Greene, Miles Forrest, хороших людей из Pivotal Labs, команду Heroku, thoughtbot ребят, и команду GitHub. Наконец, многих, многих читателей, которых слишком много для составления списка внёсших большое количество сообщений об ошибках и предложений во время написания этой книги, и я с благодарностью признаю их помощь в написании ее настолько хорошей насколько возможно.<br /></p>
 
 <p> <span class="preamble">
  <span id="author">
@@ -275,8 +275,8 @@
 
 <p>Для создания таблицы <code>relationships</code>, мы мигрируем базу данных и подготавливаем тестовую бд, как обычно:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:migrate
-<span class="gp">$</span> rake db:test:prepare
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:migrate
+<span class="gp">$</span> bundle <span class="nb">exec </span>rake db:test:prepare
 </pre></div>
 </div>
 
@@ -905,12 +905,11 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Листинг 12.18.</span> <span class="description">Добавление читатели/читающие взаимоотношений в образцы данных. <br /> <code>lib/tasks/sample_data.rake</code></span>       
 </div>
-<div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;faker&#39;</span>
 
-<span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
-  <span class="n">desc</span> <span class="s2">&quot;Fill database with sample data&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"Fill database with sample data"</span>
   <span class="n">task</span> <span class="ss">:populate</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
-    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="o">[</span><span class="s1">&#39;db:reset&#39;</span><span class="o">].</span><span class="n">invoke</span>
+    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="o">[</span><span class="s1">'db:reset'</span><span class="o">].</span><span class="n">invoke</span>
     <span class="n">make_users</span>
     <span class="n">make_microposts</span>
     <span class="n">make_relationships</span>
@@ -918,15 +917,15 @@
 <span class="k">end</span>
 
 <span class="k">def</span> <span class="nf">make_users</span>
-  <span class="n">admin</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span>
-                       <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;example@railstutorial.org&quot;</span><span class="p">,</span>
-                       <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span>
-                       <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
+  <span class="n">admin</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Example User"</span><span class="p">,</span>
+                       <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"example@railstutorial.org"</span><span class="p">,</span>
+                       <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">"foobar"</span><span class="p">,</span>
+                       <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="s2">"foobar"</span><span class="p">)</span>
   <span class="n">admin</span><span class="o">.</span><span class="n">toggle!</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
   <span class="mi">99</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
     <span class="nb">name</span>  <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="o">.</span><span class="n">name</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;example-</span><span class="si">#{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">@railstutorial.org&quot;</span>
-    <span class="n">password</span>  <span class="o">=</span> <span class="s2">&quot;password&quot;</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="s2">"example-</span><span class="si">#{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">@railstutorial.org"</span>
+    <span class="n">password</span>  <span class="o">=</span> <span class="s2">"password"</span>
     <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="nb">name</span><span class="p">,</span>
                  <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">email</span><span class="p">,</span>
                  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">password</span><span class="p">,</span>
@@ -973,7 +972,7 @@
 
 <p>Чтобы выполнить код <a class="ref" href="following-users#code:sample_relationships">Листинга&nbsp;12.18</a>, заполним базу данных как обычно:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> rake db:populate
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:populate
 </pre></div>
 </div>
 
@@ -2018,7 +2017,7 @@
 <p>Здесь мы ожидаем, что он будет более сложным, чем то вроде</p>
 
 
-<div class="code"><div class="highlight"><pre><span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id in (</span><span class="si">#{</span><span class="n">followed_ids</span><span class="si">}</span><span class="s2">) OR user_id = ?&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+<div class="code"><div class="highlight"><pre><span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id in (</span><span class="si">#{</span><span class="n">following_ids</span><span class="si">}</span><span class="s2">) OR user_id = ?&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
 </pre></div>
 </div>
 
@@ -2051,6 +2050,14 @@
 </pre></div>
 </div>
 
+<p>Фактически, так как конструкции такого вида очень полезны, Active Record обеспечивает ее по умолчанию:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">following_ids</span>
+<span class="go">=&gt; [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,</span>
+<span class="go">24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,</span>
+<span class="go">43, 44, 45, 46, 47, 48, 49, 50, 51]</span>
+</pre></div>
+</div>
 
 <p>В этой точке Вы можете догадаться, что код вида</p>
 
@@ -2072,8 +2079,8 @@
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">from_users_followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-    <span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-    <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_ids</span><span class="si">}</span><span class="s2">) OR user_id = ?&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+    <span class="n">following_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following_ids</span>
+    <span class="n">where</span><span class="p">(</span><span class="s2">"user_id IN (</span><span class="si">#{</span><span class="n">following_ids</span><span class="si">}</span><span class="s2">) OR user_id = ?"</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -2081,6 +2088,26 @@
 
 
 <p>Хотя обсуждение ведущее к <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Листингу&nbsp;12.42</a> было выдержано в гипотетических тонах, он действительно работает! Фактически, этого было бы достаточно для большинства практических целей. Но это не финальная реализация; посмотрим, сможете ли Вы догадаться почему, прежде чем перейти к следующему разделу. (<em>Намек:</em> А что если пользователь следит за сообщениями 5000 других пользователей?)</p>
+
+<p>Кстати, если бы мы использовали метод из <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Листинга&nbsp;12.42</a> для финальной реализации, мы могли бы сделать отличный рефакторинг. Метод <code>where</code> может принимать хэш аргументов с ключом <code>:user_id</code> и значением эквивалентным массиву пользователей. В данном случае нам необходим массив включающий в себя всех читаемых пользователей, а также самого пользователя; мы можем организовать это используя <code>push</code> метод (упоминался в <a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">Разделе&nbsp;4.3.1</a>) на <code>following</code> ассоциации, как видно в <a class="ref" href="following-users#code:from_users_followed_by_first_cut">Листинге&nbsp;12.42</a>.</p>
+
+<div class="label" id="code:from_users_followed_by_refactored"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 12.43.</span> <span class="description">Реорганизованный метод <code>from_users_followed_by</code>. <br> <code>app/models/micropost.rb</code></span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="o">.</span>
+  <span class="o">.</span>
+  <span class="o">.</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">from_users_followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div></div>
+
 
 <div class="label" id="sec:scopes_subselects_and_a_lambda"></div>
 
@@ -2091,7 +2118,7 @@
 
 <p>Есть несколько проблем с кодом в <a class="ref" href="following-users#sec:a_first_feed_implementation">Разделе&nbsp;12.3.2</a>. Во-первых, выражение</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<div class="code"><div class="highlight"><pre><span class="n">following_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following_ids</span>
 </pre></div>
 </div>
 
@@ -2131,13 +2158,13 @@
 
 <p>фактически пагинирует администраторов в базе данных; если (по какой-то странной причине) сайт имеет 100 администраторов, код выше по-прежнему выведет первые  30.</p>
 
-<p>пространство для потока сообщений немногим более сложно чем проиллюстрированное выше: ему нужен <em>аргумент</em>, а именно, пользователь, чей поток нам необходимо генерировать. Мы можем сделать это с <em>анонимной функцией</em>, или <code>lambda</code> (обсуждалось в <a class="ref" href="sign-up#sec:failed_signup">Разделе&nbsp;8.4.2</a>), как показано в <a class="ref" href="following-users#code:from_users_followed_by_second_cut">Листинге&nbsp;12.43</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
+<p>пространство для потока сообщений немногим более сложно чем проиллюстрированное выше: ему нужен <em>аргумент</em>, а именно, пользователь, чей поток нам необходимо генерировать. Мы можем сделать это с <em>анонимной функцией</em>, или <code>lambda</code> (обсуждалось в <a class="ref" href="sign-up#sec:failed_signup">Разделе&nbsp;8.4.2</a>), как показано в <a class="ref" href="following-users#code:from_users_followed_by_second_cut">Листинге&nbsp;12.44</a>.<sup class="footnote" id="fnref:12.20"><a href="#fn:12.20">20</a></sup></p>
 
 <div class="label" id="code:from_users_followed_by_second_cut"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 12.43.</span> <span class="description">Улучшение <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
+<div class="listing"><span class="header">Листинг 12.44.</span> <span class="description">Улучшение <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -2151,10 +2178,10 @@
   <span class="kp">private</span>
 
     <span class="c1"># Return an SQL condition for users followed by the given user.</span>
-    <span class="c1"># We include the user&#39;s own id as well.</span>
+    <span class="c1"># We include the user's own id as well.</span>
     <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-      <span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-      <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id&quot;</span><span class="p">,</span>
+      <span class="n">following_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following_ids</span>
+      <span class="n">where</span><span class="p">(</span><span class="s2">"user_id IN (</span><span class="si">#{</span><span class="n">following_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id"</span><span class="p">,</span>
             <span class="p">{</span> <span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span> <span class="p">})</span>
     <span class="k">end</span>
 <span class="k">end</span>
@@ -2165,8 +2192,8 @@
 <p>Поскольку условия на  <code>from_users_followed_by</code> scope довольно длинные, мы определили вспомогательную функцию для его обработки:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-  <span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-  <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id&quot;</span><span class="p">,</span>
+  <span class="n">following_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following_ids</span>
+  <span class="n">where</span><span class="p">(</span><span class="s2">"user_id IN (</span><span class="si">#{</span><span class="n">following_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id"</span><span class="p">,</span>
         <span class="p">{</span> <span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span> <span class="p">})</span>
 <span class="k">end</span>
 </pre></div>
@@ -2220,14 +2247,13 @@
 
 <p>Из вышеизложенного следует, что мы будем добавлять  <em>второе</em> вхождение <code>user_id</code> в SQL запросе, и это действительно так. Мы можем заменить Ruby код</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">followed_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<div class="code"><div class="highlight"><pre><span class="n">following_ids</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">following_ids</span>
 </pre></div>
 </div>
 
-
 <p>на фрагмент SQL</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">followed_ids</span> <span class="o">=</span> <span class="sx">%(SELECT followed_id FROM relationships</span>
+<div class="code"><div class="highlight"><pre><span class="n">following_ids</span> <span class="o">=</span> <span class="sx">%(SELECT followed_id FROM relationships</span>
 <span class="sx">                 WHERE follower_id = :user_id)</span>
 </pre></div>
 </div>
@@ -2245,13 +2271,13 @@
 
 <p>Этот подзапрос организует набор логических выражений для отправки в базу данных, что является более эффективным.<sup class="footnote" id="fnref:12.21"><a href="#fn:12.21">21</a></sup></p>
 
-<p>С этим фундаментом мы готовы к финальной релизации потока сообщений, как видно в <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.44</a>.</p>
+<p>С этим фундаментом мы готовы к эффективной релизации потока сообщений, как видно в <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.45</a>.</p>
 
 <div class="label" id="code:from_users_followed_by_final"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 12.44.</span> <span class="description">Финальная реализация <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
+<div class="listing"><span class="header">Листинг 12.45.</span> <span class="description">Финальная реализация <code>from_users_followed_by</code>. <br /> <code>app/models/micropost.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -2265,11 +2291,11 @@
   <span class="kp">private</span>
 
     <span class="c1"># Return an SQL condition for users followed by the given user.</span>
-    <span class="c1"># We include the user&#39;s own id as well.</span>
+    <span class="c1"># We include the user's own id as well.</span>
     <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-      <span class="n">followed_ids</span> <span class="o">=</span> <span class="sx">%(SELECT followed_id FROM relationships</span>
-<span class="sx">                       WHERE follower_id = :user_id)</span>
-      <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id&quot;</span><span class="p">,</span>
+      <span class="n">following_ids</span> <span class="o">=</span> <span class="sx">%(SELECT followed_id FROM relationships</span>
+<span class="sx">                        WHERE follower_id = :user_id)</span>
+      <span class="n">where</span><span class="p">(</span><span class="s2">"user_id IN (</span><span class="si">#{</span><span class="n">following_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id"</span><span class="p">,</span>
             <span class="p">{</span> <span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span> <span class="p">})</span>
     <span class="k">end</span>
 <span class="k">end</span>
@@ -2284,13 +2310,13 @@
 
 <h3><a id="sec:12.3.4" href="following-users#sec:the_new_status_feed" class="heading"><span class="number">12.3.4</span> Новая лента сообщений</a></h3>
 
-<p>С кодом в <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.44</a>, наш status feed завершен. Напомним, что код для Home страницы, появляется в <a class="ref" href="following-users#code:real_feed_instance_variable">Листинге&nbsp;12.45</a>; этот код создает пагинированный поток соответствущих микросообщений для использования в представлении, как видно в <a class="ref" href="following-users#fig:home_page_with_feed">Рис.&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Отметим что <code>paginate</code> метод фактически достигает цели в методе модели  Micropost в  <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.44</a>, организуя вытягивание только&nbsp;30 микросообщений за раз из базы данных.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
+<p>С кодом в <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.45</a>, наш status feed завершен. Напомним, что код для Home страницы, появляется в <a class="ref" href="following-users#code:real_feed_instance_variable">Листинге&nbsp;12.46</a>; этот код создает пагинированный поток соответствущих микросообщений для использования в представлении, как видно в <a class="ref" href="following-users#fig:home_page_with_feed">Рис.&nbsp;12.20</a>.<sup class="footnote" id="fnref:12.23"><a href="#fn:12.23">23</a></sup> Отметим что <code>paginate</code> метод фактически достигает цели в методе модели  Micropost в  <a class="ref" href="following-users#code:from_users_followed_by_final">Листинге&nbsp;12.45</a>, организуя вытягивание только&nbsp;30 микросообщений за раз из базы данных.<sup class="footnote" id="fnref:12.24"><a href="#fn:12.24">24</a></sup></p>
 
 <div class="label" id="code:real_feed_instance_variable"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 12.45.</span> <span class="description"><code>Home</code> действие с пагинированным потоком. <br /> <code>app/controllers/pages_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 12.46.</span> <span class="description"><code>Home</code> действие с пагинированным потоком. <br /> <code>app/controllers/pages_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -2453,8 +2479,8 @@
 
 <ol>
 <li>Добавьте тесты для <code>dependent :destroy</code> в модели Relationship (<a class="ref" href="following-users#code:user_relationships_association">Листинг&nbsp;12.5</a> и <a class="ref" href="following-users#code:user_reverse_relationships">Листинг&nbsp;12.17</a>) следуя примеру в <a class="ref" href="user-microposts#code:micropost_dependency_test">Листинге&nbsp;11.11</a>.</li>
-<li>Метод <code>respond_to</code> виденый в <a class="ref" href="following-users#code:relationships_controller_ajax">Листинге&nbsp;12.36</a> на самом деле может быть поднят из действий в сам контроллер Relationships, и <code>respond_to</code> блоки могут быть заменены на  Rails метод <code>respond_with</code>. Подтвердите, что результирующий код, показаный в <a class="ref" href="following-users#code:compact_respond_to">Листинге&nbsp;12.46</a>, является корректным проверив что набор тестов все еще проходит. (Подробнее об этом методе см в Google поиске &ldquo;rails respond_with&rdquo;.)</li>
-<li>Действия <code>following</code> и <code>followers</code> в  <a class="ref" href="following-users#code:following_followers_actions">Листинг&nbsp;12.29</a> Листинге&nbsp;12.29</a> до сих пор имеют значительное дублирование. Проверьте что <code>show_follow</code> метод в <a class="ref" href="following-users#code:following_followers_actions_refactored">Листинге&nbsp;12.47</a> устраняет это дублирование. (Посмотрим, сможете ли Вы вывести чем занимается метод <code>send</code>, как в, например, <code>@user.send(:following)</code>.)</li>
+<li>Метод <code>respond_to</code> виденый в <a class="ref" href="following-users#code:relationships_controller_ajax">Листинге&nbsp;12.36</a> на самом деле может быть поднят из действий в сам контроллер Relationships, и <code>respond_to</code> блоки могут быть заменены на  Rails метод <code>respond_with</code>. Подтвердите, что результирующий код, показаный в <a class="ref" href="following-users#code:compact_respond_to">Листинге&nbsp;12.47</a>, является корректным проверив что набор тестов все еще проходит. (Подробнее об этом методе см в Google поиске &ldquo;rails respond_with&rdquo;.)</li>
+<li>Действия <code>following</code> и <code>followers</code> в  <a class="ref" href="following-users#code:following_followers_actions">Листинг&nbsp;12.29</a> Листинге&nbsp;12.29</a> до сих пор имеют значительное дублирование. Проверьте что <code>show_follow</code> метод в <a class="ref" href="following-users#code:following_followers_actions_refactored">Листинге&nbsp;12.48</a> устраняет это дублирование. (Посмотрим, сможете ли Вы вывести чем занимается метод <code>send</code>, как в, например, <code>@user.send(:following)</code>.)</li>
 <li>Реорганизуйте <a class="ref" href="following-users#code:show_follow_view">Листинг&nbsp;12.30</a> добавив партиалы для кода общего для читаемые/читатели страниц, Home страницы, и страницы показывающей пользователя.</li>
 <li>Следуя модели в <a class="ref" href="following-users#code:stats_view_test">Листинге&nbsp;12.20</a>, напишите тесты для статистики на странице профиля.</li>
 <li>Напишите интеграционный тест для чтения и не чтения сообщений пользователя.</li>
@@ -2468,7 +2494,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 12.46.</span> <span class="description">Компактный рефакторинг  <a class="ref" href="following-users#code:relationships_controller_ajax">Листинга&nbsp;12.36</a>.</span>       
+<div class="listing"><span class="header">Листинг 12.47.</span> <span class="description">Компактный рефакторинг  <a class="ref" href="following-users#code:relationships_controller_ajax">Листинга&nbsp;12.36</a>.</span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RelationshipsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span>
@@ -2497,7 +2523,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 12.47.</span> <span class="description">Реорганизованные <code>following</code> и <code>followers</code> действия. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 12.48.</span> <span class="description">Реорганизованные <code>following</code> и <code>followers</code> действия. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>

@@ -1,0 +1,524 @@
+
+
+
+
+<div id="top"></div>
+
+
+<h1 class="chapter"><a id="sec:13" href="rails-3-1#top" class="heading"><span class="number">Глава 13</span> Rails 3.1</a></h1>
+
+
+<p>Даже спустя семь лет после своего первого релиза, Ruby on Rails продолжает находиться на переднем краю разработки веб приложений и каждая новая версия Rails включает в себя функции, которые делают Rails приложения более мощными, а разработчиков Rails приложений более продуктивными. Rails&nbsp;3.1&mdash;доступный в качестве релиз-кандидата на момент написания не является исключением. В этой главе содержится описание того, как обновить пример приложения Rails Tutorial с Rails&nbsp;3.0 до Rails&nbsp;3.1 (<a class="ref" href="rails-3-1#sec:upgrading_the_sample_app">Раздел&nbsp;13.1</a>), а также краткий обзор некоторых из наиболее интересных новых функций Rails&nbsp;3.1 (<a class="ref" href="rails-3-1#sec:new_features">Раздел&nbsp;13.2</a>).</p>
+
+<p>Как отмечалось в <a class="ref" href="beginning#sec:install_rails">Разделе&nbsp;1.2.2.5</a>, есть несколько обратно-несовместимых изменений в Rails&nbsp;3.1, некоторые из которых влияют на пример приложения. В основном это новая конвенция для размещения изображений, таблиц стилей и JavaScript файлов&mdash;совместно известные как <em>assets (# ресурсы, активы)</em>&mdash;а также изменение дефолтной JavaScript библиотеки с <a href="http://www.prototypejs.org/">Prototype</a> на <a href="http://jquery.com/">jQuery</a>. В <a class="ref" href="rails-3-1#sec:major_differences">Разделе&nbsp;13.1.4</a> эти изменения обсуждаются более подробно.</p>
+
+<p>Rails&nbsp;3.1 также включает в себя несколько изменений которые, несмотря на то, что они совместимы с Rails&nbsp;3.0 приложениями, тем не менее влияют на разработку приложений в будущем. Эти новые функции включают в себя  <em>самообратимые миграции</em> и включение <a href="http://sass-lang.com/">Sass</a> и <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> по умолчанию. Краткий обзор этих изменений и ссылки на более подробные ресурсы представлены в <a class="ref" href="rails-3-1#sec:new_features">Разделе&nbsp;13.2</a>.</p>
+
+<p>Наконец, будущее издание этой книги (и новая версия сопутствующих <a href="http://railstutorial.org/screencasts">скринкастов</a>) будут использовать Rails&nbsp;3.1 (или более новую версию, если она будет доступна на тот момент) с самого начала. Я планирую рассказать как о Sass и CoffeeScript, так и о некоторых изменениях в других частях Ruby и Rails экосистемах (таких как улучшенный синтаксис RSpec), которые будут полезны для начинающих Rails разработчиков. Подпишитесь на <a href="http://news.railstutorial.org/">новости Rails Tutorial</a>, чтобы получить уведомление о выходе нового издания.</p>
+
+<p>С каждым новым релизом Rails, птребуется некоторое время there is a time delay while the rest of the ecosystem catches up. Например, на момент написания, не поддерживается развертывание Rails&nbsp;3.1 приложений на  Heroku и (как обсуждается в <a class="ref" href="rails-3-1#sec:minor_issues">Разделе&nbsp;13.1.3</a>) гем <tt>will_paginate</tt> не работает. Это цена, которую мы платим за использование передовых технологий&mdash;sometimes we get cut (??).</p>
+
+<div class="label" id="sec:upgrading_the_sample_app"></div>
+
+
+<h2><a id="sec:13.1" href="rails-3-1#sec:upgrading_the_sample_app" class="heading"><span class="number">13.1</span> Обновление примера приложения</a></h2>
+
+
+<p>Нашим первым шагом в приручении Rails&nbsp;3.1 является обновление примера приложения разрабатываемого с <a class="ref" href="static-pages#top">&nbsp;3</a> по <a class="ref" href="following-users#top">&nbsp;12</a> главы. Существуют две возможные стратегии для достижения этого. Во-первых, редактировать пример приложения непосредственно, меняя, <code>Gemfile</code> и конфигурационные файлы и обрабатывая возникающие поломки. Такие онлайн ресурсы, как <a href="http://jasonrudolph.com/blog/2011/06/06/helpful-resources-for-upgrading-to-rails-3-1/">Helpful resources for upgrading to Rails&nbsp;3.1</a> и особенно <a href="http://jasonrudolph.com/blog/2011/06/06/helpful-resources-for-upgrading-to-rails-3-1/">How to upgrade a Rails application to version 3.1.0</a> могут помочь при применении этого подхода. В этой главе мы будем придерживаться второго подхода, который состоит в создании нового  Rails&nbsp;3.1 приложения с нуля и последующем копировании одного за другим файлов существующего примера приложения пока не получим новое работающее приложение.</p>
+
+<p>У второго подхода есть несколько преимуществ. Во-первых, так как мы будем генерировать начальное приложение, используя <code>rails new</code>, <code>Gemfile</code> и конфигурационные файлы будут автоматически настроены правильно для Rails&nbsp;3.1. Кроме того, за счет добавления одного файла в единицу времени (или, в крайнем случае, нескольких) мы можем более легко изолировать источник любой поломки. Недостатком является то, что мы можем забыть файл или два, что приведет к поломке приложения, хотя это маловероятно из-за нашего объемного набора тестов. В конечном счете, правильная стратегия, вероятно, зависит от характера конкретного приложения; по моему мнению, лучшим способом обновления примера приложения является использование второй стратегии, но вы также можете попробовать первую.</p>
+
+<p>Для более детального изучения темы данного раздела, см. <a href="http://ruby.railstutorial.org/screencasts">Ruby on Rails Tutorial скринкасты</a>, которые теперь включают дополнительный Урок&nbsp;13 о Rails&nbsp;3.1. Кроме всего прочего, после завершения полного Rails&nbsp;3.1 апгрейда, скринкаст показывает как создать отдельную <tt>rails-3-1</tt> ветку в основном Git репозитарии примера приложения. В результате, если Вы хотите сравнить свои результаты с кодом примера приложения из книги, вы можете найти его в <a href="https://github.com/railstutorial/sample_app/tree/rails-3-1"><tt>rails-3-1</tt> ветке на GitHub</a>.</p>
+
+<div class="label" id="sec:installing_and_configuring_rails_3_1"></div>
+
+
+<h3><a id="sec:13.1.1" href="rails-3-1#sec:installing_and_configuring_rails_3_1" class="heading"><span class="number">13.1.1</span> Установка и настройка Rails&nbsp;3.1</a></h3>
+
+
+<p>Для того чтобы начать обновление до Rails&nbsp;3.1, хорошо бы создать отдельный <a href="http://rvm.beginrescueend.com/gemsets/">gemset</a> еслиВы используете <a href="https://rvm.beginrescueend.com/">Менеджер Версий Ruby (RVM)</a>:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --create use 1.9.2@rails3_1tutorial
+</pre></div>
+</div>
+
+
+<p>Независимо от того, используете Вы RVM или нет, Вам необходимо установить Rails&nbsp;3.1:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --pre
+</pre></div>
+</div>
+
+
+<p>(См. <a class="ref" href="beginning#sec:conventions">Раздел&nbsp;1.1.3</a> чтобы вспомнить о значении <code>[sudo]</code> в этом контексте.) Флаг <tt class="verb">--pre</tt> здесь говорит RubyGems установить последнюю, пред-релизную (или релиз-кандидат) версию Rails. Вполне возможно, что на момент прочтения Вами этого материала выйдет официальный релиз, в этом случае вместо предыдущей Вам следует выполнить следующую команду:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.1.0
+</pre></div>
+</div>
+
+
+<p>После установки Rails, Вы можете проверить что у Вас установлена правильная версия следующим образом:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rails -v
+<span class="go">Rails 3.1.0.rc4</span>
+</pre></div>
+</div>
+
+
+<p>(Если финальная версия вышла, этот вывод, конечно же, будет чем-то вроде <code>Rails 3.1.0</code>.) Затем создаем непосредственно скелет Rails&nbsp;3.1 примера приложения:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/rails_projects
+<span class="gp">$</span> rails new sample_app_3_1
+</pre></div>
+</div>
+
+
+<p>Наконец, добавляем специфичные для приложения гемы из <a class="ref" href="updating-showing-and-deleting-users#code:final_gemfile">Листинга&nbsp;10.42</a> в дефолтный Rails&nbsp;3.1 <code>Gemfile</code>, что приводит к <a class="ref" href="rails-3-1#code:gemfile_rails_3_1">Листингу&nbsp;13.1</a>.</p>
+
+<div class="label" id="code:gemfile_rails_3_1"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.1.</span> <span class="description"> <code>Gemfile</code> примера приложения необходимый для  Rails&nbsp;3.1.</span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
+
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.1.0.rc4&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;gravatar_image_tag&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.0.pre2&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;will_paginate&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.pre2&#39;</span>
+
+<span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.3&#39;</span>
+
+<span class="c1"># Asset template engines</span>
+<span class="n">gem</span> <span class="s1">&#39;sass-rails&#39;</span><span class="p">,</span> <span class="s2">&quot;~&gt; 3.1.0.rc&quot;</span>
+<span class="n">gem</span> <span class="s1">&#39;coffee-script&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;uglifier&#39;</span>
+
+<span class="n">gem</span> <span class="s1">&#39;jquery-rails&#39;</span>
+
+<span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;2.6.1&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;annotate-models&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.4&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;faker&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3.1&#39;</span>
+<span class="k">end</span>
+
+<span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;2.6.1&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;webrat&#39;</span><span class="p">,</span> <span class="s1">&#39;0.7.1&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;spork&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9.0.rc5&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;factory_girl_rails&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span>
+<span class="k">end</span>
+</pre></div>
+</div></div>
+
+
+<p>Конечно, прежде чем двигаться дальше следует также установить гемы:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install
+</pre></div>
+</div>
+
+
+
+<div class="label" id="sec:getting_to_red"></div>
+
+
+<h3><a id="sec:13.1.2" href="rails-3-1#sec:getting_to_red" class="heading"><span class="number">13.1.2</span> Получить Красный</a></h3>
+
+
+<p>Создав минимальный скелет Rails&nbsp;3.1 приложения в <a class="ref" href="rails-3-1#sec:installing_and_configuring_rails_3_1">Разделе&nbsp;13.1.1</a>, мы готовы получить работающий пример приложения. Как отмечалось во введении к этому разделу, наша основная стратегия заключается в копировании файлов по одному; одним из способов является использование приложения OS&nbsp;X Finder app  (или эквивалентного для Вашей системы приложения), как показано в <a class="ref" href="rails-3-1#fig:upgrade_with_finder">Рис.&nbsp;13.1</a>.</p>
+
+<div class="label" id="fig:upgrade_with_finder"></div>
+
+
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/upgrade_with_finder.png" alt="upgrade_with_finder" /></span></div><div class="caption"><span class="header">Рисунок 13.1: </span><span class="description">Обновление примера приложение копированием файлов по одному.&nbsp;<a href="http://railstutorial.org/images/figures/upgrade_with_finder-full.png">(полный размер)</a></span></div></div>
+
+
+<p>Стратегия обновления в сопутствующем скринкасте к этому разделу заключается в копировании отдельно взятого spec файла, <code>spec/controllers/pages_controller_spec.rb</code>, и попытке получить прохождение его тестов. После копирования файла мы инициализируем RSpec как в <a class="ref" href="static-pages#top">Главе&nbsp;3</a>:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate rspec:install
+</pre></div>
+</div>
+
+
+<p>Если Вы используете RSpec&nbsp;2.5, этот шаг провалится, так как Rails&nbsp;3.1 запрашивает версию <code>2.6.1</code> гема <tt>rspec-rails</tt>. Если вы используете <code>Gemfile</code> из <a class="ref" href="rails-3-1#code:gemfile_rails_3_1">Листинга&nbsp;13.1</a>, это не будет проблемой, но предыдущие версии этой книги использовали более раннюю (и несовместимую) версию гема.</p>
+
+<p>Затем пробуем запустить набор тестов:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
+</pre></div>
+</div>
+
+
+<p>Изначально все будет в Красном, и наша стратегия обновления заключается в анализе сообщения об ощибке и копировании файлов до получения прохождения всех тестов. После того как часть тестов перейдет в Зеленый, копируем другие тесты небольшими группами, смотрим как они проваливаются, а затем получаем их прохождение. Нанести, смыть, повтороить.</p>
+
+<p>Хотя остальная часть этого раздела содержит описание некоторых изменений, которые вы обязательно должны сделать, чтобы получить рабочее приложение, эта глава не охватывает всех деталей процесса обновления, которые в любом случае будут зависеть от Вашей системы. По характеру этой темы, легче показать шаги обновления в <a href="http://railstutorial.org/screencasts">скринкасте</a>, но если Вы настолько далеко продвинулись в <em>Ruby on Rails Tutorial</em>, то вы, вероятно, в состоянии ответить на брошенный вызов и сделать обновление самостоятельно (<a class="ref" href="rails-3-1#sec:rails_3_1_exercises">Раздел&nbsp;13.3</a>).</p>
+
+<div class="label" id="sec:minor_issues"></div>
+
+
+<h3><a id="sec:13.1.3" href="rails-3-1#sec:minor_issues" class="heading"><span class="number">13.1.3</span> Незначительные проблемы</a></h3>
+
+
+<p>При обновлении примера приложения Вы столкнетесь с некоторыми незначительными (но раздражающими) проблемами. Этот раздел отмечает некоторые из тех, с которыми пришлось столкнуться мне (вместе с решением), но конечно же <a href="http://www.morepc.ru/dict/term9368.php">YMMV</a>.</p>
+
+<div class="label" id="sec:will_paginate"></div>
+
+<h4><a id="sec:13.1.3.1" href="rails-3-1#sec:will_paginate" class="heading">will_paginate</a></h4>
+
+
+<p>Пытаясь перейти от Красного к Зеленому, Вы обнаружите, что <tt>will_paginate</tt> гем несовместим с Rails&nbsp;3.1, что приводит к ошибке вроде этой:</p>
+
+<div class="code"><div class="highlight"><pre><span class="n">uninitialized</span> <span class="n">constant</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Associations</span><span class="o">::</span><span class="no">AssociationCollection</span> <span class="p">(</span><span class="no">NameError</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p>Решение (полученное Гуглингом сообщения об ошибке), к сожалению, заключается в непосредственном редактировании исходного кода  гема <tt>will_paginate</tt>. Для чего требуется вначале обнаружить исходный код в Вашей системе, что может оказаться непростой затеей; на моей системе это выглядело следующим образом:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/.rvm/gems/ruby-1.9.2-p180@rails3_1tutorial/gems/
+<span class="gp">$</span> mate will_paginate-3.0.pre2/lib/will_paginate/finders/active_record.rb
+</pre></div>
+</div>
+
+
+<p>Исправить ошибку просто: нам необходимо заменить <code>AssociationCollection</code> на <code>CollectionAssociation</code>, как показано в <a href="http://ru.wikipedia.org/wiki/Diff">diff</a>  <a class="ref" href="rails-3-1#code:will_paginate_fix">Листинга&nbsp;13.2</a>. (Я опустил ссылку на  <code>::ActiveRecord::Relation</code> чтобы сэкономить место, но Вы должны ее сохранить.)
+Это изменение - ужасный <a href="http://www.catb.org/jargon/html/K/kludge.html">ляп</a>&mdash;помимо всего прочего, оно перестанет работать если мы когда-нибудь переустановим гем <tt>will_paginate</tt> и оно не работает в  production&mdash;но оно работает сейчас и, предположительно, эта проблема будет исправлена в будущих релизах  <tt>will_paginate</tt>.<sup class="footnote" id="fnref:13.1"><a href="#fn:13.1">1</a></sup></p>
+
+<div class="label" id="code:will_paginate_fix"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.2.</span> <span class="description">Необходимые изменения в геме <tt>will_paginate</tt>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre>  # support pagination on associations and scopes
+<span class="gd">- [::ActiveRecord::Associations::AssociationCollection].each do |klass|</span>
+<span class="gi">+ [::ActiveRecord::Associations::CollectionAssociation].each do |klass|</span>
+    klass.send(:include, ActiveRecord)
+  end
+end
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="sec:pagination_spec"></div>
+
+
+<h4><a id="sec:13.1.3.2" href="rails-3-1#sec:pagination_spec" class="heading">Тест пагинации</a></h4>
+
+
+<p>Другой небольшой проблемой с которой Вы можете столкнуться является провальный пагинационный тест. Это, вероятно, связано Это, очевидно, связано с изменением способа, которым Rails&nbsp;3.1 строит URL, по сравнению с Rails&nbsp;3.0, и одним из хак-решений будет просто удалить URL спецификацию из теста как показано в <a class="ref" href="rails-3-1#code:pagination_spec_diff">Листинге&nbsp;13.3</a>.</p>
+
+<div class="label" id="code:pagination_spec_diff"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.3.</span> <span class="description">Diff для пагинационного теста. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+</div>
+
+<div class="code"><div class="highlight"><pre>         get :index
+         response.should have_selector(&#39;div.pagination&#39;)
+         response.should have_selector(&#39;span.disabled&#39;, :content =&gt; &quot;Previous&quot;)
+<span class="gd">-        response.should have_selector(&#39;a&#39;, :href =&gt; &quot;/users?page=2&quot;,</span>
+<span class="gd">-                                           :content =&gt; &quot;2&quot;)</span>
+<span class="gd">-        response.should have_selector(&#39;a&#39;, :href =&gt; &quot;/users?page=2&quot;,</span>
+<span class="gd">-                                           :content =&gt; &quot;Next&quot;)</span>
+<span class="gi">+        response.should have_selector(&#39;a&#39;, :content =&gt; &quot;2&quot;)</span>
+<span class="gi">+        response.should have_selector(&#39;a&#39;, :content =&gt; &quot;Next&quot;)</span>
+       end
+
+       it &quot;should have delete links for admins&quot; do  
+</pre></div>
+</div></div>
+
+
+<p>После того как эти изменения произвдены и скопированы все файлы из Вашего основного примера приложения, Ваш набор тестов может даже перейти от Красного к Зеленому. Если этого все же не случилось, прорабатывайте и Гуглите сообщения об ошибках пока не добьетесь нужного результата. (Вы также можете ознакомится с ресурсами на <a href="http://ruby.railstutorial.org/help">странице Rails Tutorial Help</a>.)</p>
+
+<div class="label" id="sec:major_differences"></div>
+
+
+<h3><a id="sec:13.1.4" href="rails-3-1#sec:major_differences" class="heading"><span class="number">13.1.4</span> Значительные отличия</a></h3>
+
+
+<p><em>Значительные</em> отличия между Rails&nbsp;3.0 и Rails&nbsp;3.1 примерами приложений не так уж и велики, просто они касаются практически всех Rails приложений. В этом разделе мы увидим, как инкорпорировать эти различия для завершения нашего нового Rails&nbsp;3.1 примера приложения.</p>
+
+<div class="label" id="sec:asset_directories"></div>
+
+
+<h4><a id="sec:13.1.4.1" href="rails-3-1#sec:asset_directories" class="heading">Каталоги активов (ресурсов) </a></h4>
+
+
+<p>Самым большим практическим отличием между Rails&nbsp;3.0 и Rails&nbsp;3.1 приложениями является изменение расположения ресурсных (активных) файлов, таких как изображения, таблицы стилей и JavaScript файлы. В предыдущих версиях Rails все эти файлы  жили в <code>public/</code> каталоге:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">public/images/</span>
+<span class="go">public/stylesheets/</span>
+<span class="go">public/javascripts/</span>
+</pre></div>
+</div>
+
+
+<p>В Rails&nbsp;3.1, расположение этих файлов отличается в зависимости от того были ли они созданы нами или же пришли от сторонних поставщиков. В случае с нашими изображениями или написанным нами кодом, файлы живут в <code>app/assets</code> каталоге:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">app/assets/images/</span>
+<span class="go">app/assets/stylesheets/</span>
+<span class="go">app/assets/javascripts/</span>
+</pre></div>
+</div>
+
+
+<p>В случае кодом или изображениями пришедшими от сторонних поставщиков, мы используем <code>vendor/assets</code> каталог:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">vendor/assets/images/</span>
+<span class="go">vendor/assets/stylesheets/</span>
+<span class="go">vendor/assets/javascripts/</span>
+</pre></div>
+</div>
+
+
+<p>Для примера приложения, вышесказанное означает размещение <code>public/stylesheets/custom.css</code> файла в  <code>app/assets/stylesheets/</code> и логотипа <code>public/images/logo.png</code> в <code>app/assets/images/</code>, в товремя как <code>public/stylesheets/blueprint/</code> CSS каталог помещается в  <code>vendor/assets/stylesheets</code>. Что потребует незначительных изменений в файле шаблона и партиале stylesheets , как показано в <a class="ref" href="rails-3-1#code:layout_rails_3_1_diff">Листинге&nbsp;13.4</a> и <a class="ref" href="rails-3-1#code:stylesheets_partial_rails_3_1">Листинге&nbsp;13.5</a>.</p>
+
+<div class="label" id="code:layout_rails_3_1_diff"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.4.</span> <span class="description">Diff для файла шаблона <code>app/views/layouts/application.html.erb</code>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre>     &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;
+     &lt;%= csrf_meta_tag %&gt;
+     &lt;%= render &#39;layouts/stylesheets&#39; %&gt;
+<span class="gd">-    &lt;%= javascript_include_tag :defaults %&gt;</span>
+<span class="gi">+    &lt;%= stylesheet_link_tag &quot;application&quot; %&gt;</span>
+<span class="gi">+    &lt;%= javascript_include_tag &quot;application&quot; %&gt;</span>
+   &lt;/head&gt;
+   &lt;body&gt;
+     &lt;div class=&quot;container&quot;&gt;
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="code:stylesheets_partial_rails_3_1"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.5.</span> <span class="description">Diff для партиала stylesheets  <code>app/views/layouts/_stylesheets.html.erb</code>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre> &lt;![endif]--&gt;
+ &lt;%= stylesheet_link_tag &#39;blueprint/screen&#39;, :media =&gt; &#39;screen&#39; %&gt;
+ &lt;%= stylesheet_link_tag &#39;blueprint/print&#39;,  :media =&gt; &#39;print&#39; %&gt;
+ &lt;!--[if lt IE 8]&gt;&lt;%= stylesheet_link_tag &#39;blueprint/ie&#39; %&gt;&lt;![endif]--&gt;
+<span class="gd">-&lt;%= stylesheet_link_tag &#39;custom&#39;, :media =&gt; &#39;screen&#39; %&gt;</span>
+</pre></div>
+</div></div>
+
+
+<p>Заметим, что и таблицы стилей и JavaScript включаются используя форму</p>
+
+<div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;</span><span class="n">_tag</span> <span class="s2">&quot;application&quot;</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+
+
+<p>где аргументом является строка <code>"application"</code>. В случае с CSS, файлом приложения будет <code>application.css</code>; а в случае JavaScript, это будет <code>application.js</code>. В обоих случаях, файлы приложений создаются для нас Rails, так что (например) содержимое <code>custom.css</code> будет включено автоматически, как часть <code>application.css</code>. Эти функции являются частью <em>asset pipeline (# препроцессор ресурсов (активов),  конвейер ресурсов (активов)</em>, который является нововведением в Rails&nbsp;3.1 и обсуждаются более детально в <a class="ref" href="rails-3-1#sec:asset_pipeline">Разделе&nbsp;13.2.1</a>.</p>
+
+<div class="label" id="sec:prototype_to_jquery"></div>
+
+
+<h4><a id="sec:13.1.4.2" href="rails-3-1#sec:prototype_to_jquery" class="heading">Замена Prototype на jQuery</a></h4>
+
+
+<p>Второе большое изменение в Rails&nbsp;3.1, влияющее на большое количество приложений это замена дефолтной JavaScript библиотеки (фреймворка) Prototype на jQuery. Конечно, легко переключиться обратно, просто замените <code>jquery-rails</code> на <code>prototype-rails</code> в <code>Gemfile</code> (<a class="ref" href="rails-3-1#code:gemfile_rails_3_1">Листинг&nbsp;13.1</a>)&mdash;но jQuery имеет высокий рейтинг среди Rails разработчиков, и принятие его в качестве дефолтного было долгожданным.</p>
+
+<p>В случае примера приложения, единственной функциональностью, пострадавшей от перехода на JQuery является Ajax в follow/unfollow кнопках описываемый в <a class="ref" href="following-users#sec:a_working_follow_button_with_ajax">Разделе&nbsp;12.2.5</a>. Основное синтаксическое отличие состоит в том, что там где Prototype пишет</p>
+
+<div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;follow_form&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p>для манипулирования <code>follow_form</code> CSS id, jQuery пишет</p>
+
+<div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#follow_form&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p>вместо этого. Этот jQuery синтаксис, вдохновленный CSS, использует символ&nbsp;<code>#</code> для указания на идентификатор CSS&nbsp;id. (Как вы можете догадаться, jQuery, как и CSS, используют точку&nbsp;<code>.</code> для манипуляций с CSS классами.) Результирующие изменения в Ajax <code>create</code> и <code>destroy</code> файлах показаны в  <a class="ref" href="rails-3-1#code:create_js_diff">Листинге&nbsp;13.6</a> и <a class="ref" href="rails-3-1#code:destroy_js_diff">Листинге&nbsp;13.7</a>, в то время как сам обновленный код представлен в <a class="ref" href="rails-3-1#code:create_js_jquery">Листинге&nbsp;13.8</a> и <a class="ref" href="rails-3-1#code:destroy_js_jquery">Листинге&nbsp;13.9</a>. Отметим, что в дополнение к отличиям в синтаксисе для манипуляций с <a href="http://www.w3.org/DOM/">DOM</a>, jQuery использует метод <code>html</code> для модифицирования содержимого HTML элемента, там где Prototype использует <code>update</code>.</p>
+
+<div class="label" id="code:create_js_diff"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.6.</span> <span class="description"> Prototype-на-jQuery diff для <code>create.js.erb</code>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="gd">- $(&quot;follow_form&quot;).update(&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;)</span>
+<span class="gd">- $(&quot;followers&quot;).update(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
+<span class="gi">+ $(&quot;#follow_form&quot;).html(&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;)</span>
+<span class="gi">+ $(&quot;#followers&quot;).html(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="code:destroy_js_diff"></div>
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.7.</span> <span class="description"> Prototype-на-jQuery diff для <code>destroy.js.erb</code>.</span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="gd">- $(&quot;follow_form&quot;).update(&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;)</span>
+<span class="gd">- $(&quot;followers&quot;).update(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
+<span class="gi">+ $(&quot;#follow_form&quot;).html(&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;)</span>
+<span class="gi">+ $(&quot;#followers&quot;).html(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="code:create_js_jquery"></div>
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.8.</span> <span class="description"> jQuery-код, необходимый для создания following relationship. <br />  <code>app/views/create.js.erb</code></span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#follow_form&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#followers&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div></div>
+
+
+
+<div class="label" id="code:destroy_js_jquery"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.9.</span> <span class="description"> jQuery-код, необходимый для  уничтожения following relationship. <br />  <code>app/views/destroy.js.erb</code></span>       
+</div>
+<div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#follow_form&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#followers&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div></div>
+
+
+<p>С этими изменениями, а также с изменениями расположения активов (ресурсов) из <a class="ref" href="rails-3-1#sec:asset_directories">Раздела&nbsp;13.1.4.1</a>, новы пример приложения должен быть завершен и полностью совместим с Rails&nbsp;3.1. (Не забудьте, как я сделал в обновленном Rails&nbsp;3.1 скринкасте, переименовать <code>README</code> и заменить его на <code>README.markdown</code> из <a class="ref" href="static-pages#code:sample_app_readme">Листинга&nbsp;3.2</a>.)</p>
+
+<div class="label" id="sec:new_features"></div>
+
+
+<h2><a id="sec:13.2" href="rails-3-1#sec:new_features" class="heading"><span class="number">13.2</span> Новые функции в  Rails 3.1</a></h2>
+
+
+<p>Rails&nbsp;3.1 содержит несколько новых потрясающих возможностей, но важно подчеркнуть, что большинство из них либо <em>автоматичны</em> (свободно включаются Рельсами) или <em>необязательны</em>. Обзор изменений в Rails&nbsp;3.1 хорошо начинать с <a href="http://weblog.rubyonrails.org/2011/5/22/rails-3-1-release-candidate">Rails&nbsp;3.1: Release candidate</a>. В этом разделе некоторые из них рассматриваются более подробно.</p>
+
+<div class="label" id="sec:asset_pipeline"></div>
+
+
+<h3><a id="sec:13.2.1" href="rails-3-1#sec:asset_pipeline" class="heading"><span class="number">13.2.1</span> Asset pipeline</a></h3>
+
+
+<p>Ключевой фичей в Rails&nbsp;3.1 является <em>asset pipeline</em>, который создатель Rails  -  David Heinemeier Hansson описывал в <a href="http://www.youtube.com/watch?v=cGdCI2HhfAU">своем выступлении на RailsConf 2011</a>. Аsset pipeline это набор технологий предназначенных для более органичной и удобной организации assets (# активов, ресурсов)&mdash;т.e., изображений, таблиц стилей и JavaScript. Например, все таблицы стилей и JavaScript файлы соединяются автоматически и служат в качестве отдельных файлов в production. (Изменения, описанные в <a class="ref" href="rails-3-1#sec:asset_directories">Разделе&nbsp;13.1.4.1</a> являются необходимыми предпосылками для использования asset pipeline.) Чтобы узнать подробности см. <a href="http://railscasts.com/episodes/265-rails-3-1-overview">Railscast Rails&nbsp;3.1 Overview</a> и Ville Lautanala&rsquo;s пост на <a href="http://blog.nodeta.com/2011/06/14/rails-3-1-asset-pipeline-in-the-real-world/">Rails 3.1 Asset Pipeline in the Real World</a>. Будущее издание этой книги будет включать asset pipeline с самого начала.</p>
+
+<div class="label" id="sec:reversible_migrations"></div>
+
+
+<h3><a id="sec:13.2.2" href="rails-3-1#sec:reversible_migrations" class="heading"><span class="number">13.2.2</span> Самообратимые миграции</a></h3>
+
+
+<p>Rails&nbsp;3.1 также представляет <em>самообратимые миграции</em>, которые позволяют Rails сделать вывод о  <code>up</code> и <code>down</code> методах используемых для миграции базы данных up и down. Например, миграция в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>, воспроизведенная ниже как <a class="ref" href="rails-3-1#code:users_migration_redux">Листинг&nbsp;13.10</a>, может быть представлена в Rails&nbsp;3.1 как в <a class="ref" href="rails-3-1#code:users_migration_reversible">Листинге&nbsp;13.11</a>.</p>
+
+<div class="label" id="code:users_migration_redux"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.10.</span> <span class="description">Миграция для модели User  (для создания <code>users</code> таблицы). <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>       
+</div>
+
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:email</span>
+
+      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
+    <span class="n">drop_table</span> <span class="ss">:users</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="code:users_migration_reversible"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Листинг 13.11.</span> <span class="description">Самообратимая (в стиле Rails&nbsp;3.1) миграция для модели User.</span>       
+</div>
+
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:email</span>
+
+      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre></div>
+</div></div>
+
+
+<p>В случае <a class="ref" href="rails-3-1#code:users_migration_reversible">Листинга&nbsp;13.11</a>, Rails использует  метод <code>change</code> для построения соответствующих  up и down миграций на лету.</p>
+
+<p>Конечно, не все миграции могут быть выведены подобным образом и Rails&nbsp;3.1 по-прежнему позволяет разработчикам определять свои собственные <code>up</code> и <code>down</code> методы. Действительно, миграции обратно совместимы, поэтому миграционный код из предыдущих глав по-прежнему будет работать. Конечно, будущее издание этой книги будет генерировать миграции используя Rails&nbsp;3.1 (или его преемника), и, следовательно, будет включать в себя обратимые миграции, как нечто само собой разумеющееся.</p>
+
+<div class="label" id="sec:sass_and_coffeescript"></div>
+
+
+<h3><a id="sec:13.2.3" href="rails-3-1#sec:sass_and_coffeescript" class="heading"><span class="number">13.2.3</span> Sass и CoffeeScript</a></h3>
+
+
+<p>Наконец, Rails&nbsp;3.1 по умолчанию включает <a href="http://sass-lang.com/">Sass</a>, который является языком для создания &ldquo;Syntactically awesome stylesheets&rdquo; (# синтаксически офигительных таблиц стилей), и
+<a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a>, который является синтаксически элегантным языком компилируемым в JavaScript. Хорошим введением в каждый из них будут <a href="http://railscasts.com/episodes/267-coffeescript-basics">Railscast on CoffeeScript Basics</a> и <a href="http://railscasts.com/episodes/268-sass-basics">Railscast on Sass Basics</a>.</p>
+
+<p>На первый взгляд, эти новые умолчания выглядят как большие изменения способа разработки Rails приложений, и некоторые комментаторы выражали озабоченность тем, что добавление Sass и CoffeeScript сделает Rails более трудным для изучения. В этом контексте крайне важно понять, что <strong>использование Sass или CoffeeScript в Rails&nbsp;3.1 приложениях не является обязательным</strong>. Каждый валидный файл CSS это так же валидный файл Sass, так что если вы не хотите использовать Sass, то вы не обязаны делать это. Аналогичным образом, хотя вы <em>можете</em> писать  CoffeeScript если хотите, JavaScript все еще полностью поддерживается: <code>.js</code> файлы в  <code>app/assets/javascripts</code> или в <code>vendor/assets/javascripts</code> будут включены в объединенный файл <code>application.js</code> который является частью Rails&nbsp;3.1 asset pipeline.</p>
+
+<p>Другими словами, ваниль CSS и JavaScript всегда будет работать, так что нет причин для беспокойства. С другой стороны, Sass и CoffeeScript удивительны (и именно по этой причине они теперь являются частью дефолтной установки), и в будущем издании этой книги я планирую раскрыть их более подробно.</p>
+
+<div class="label" id="sec:rails_3_1_exercises"></div>
+
+
+<h2><a id="sec:13.3" href="rails-3-1#sec:rails_3_1_exercises" class="heading"><span class="number">13.3</span> Упражнения</a></h2>
+
+
+
+
+<ol>
+<li>Завершите апгрейд начатый в <a class="ref" href="rails-3-1#sec:upgrading_the_sample_app">Разделе&nbsp;13.1</a> если Вы этого еще не сделали. Не сдавайтесь до тех пор, пока Ваш набор тестов не позеленеет и приложение (запущенное локально) не станет выглядеть и вести себя правильно.</li>
+
+<li><strong>(жесть)</strong> Rails&nbsp;3.1 поддерживает развертывание своегй собственной аутентификации с новымметодом  <code>has_secure_password</code>. Начав с  <a href="http://railscasts.com/episodes/270-authentication-in-rails-3-1">Railscast on Authentication in Rails&nbsp;3.1</a>, реорганизуйте платформу аутентификации из  <a class="ref" href="modeling-and-viewing-users-two#top">Главы&nbsp;7</a> для использования новых фич Rails&nbsp;3.1. (Естественно, будущее издание этой книги будет включать в себя эти новые фичи с самого начала.)</li>
+
+</ol>
+
+
+<div class="navigation">  <a class="prev_page" href="following-users#top">
+    &laquo;&nbsp;<span class="number">Глава 12</span> Слежение за сообщениями пользователей
+  </a>
+</div><div class="footnotes">
+<ol>
+<li id="fn:13.1">Чтобы использовать измененный гем в production на Heroku, мы должны были бы построить наш собственный гем опираясь на форк <tt>will_paginate</tt>. Так как исправление настолько легко, я предполагаю, что это проблема будет решена к тому времени, когда Heroku станет полностью поддерживать Rails&nbsp;3.1.&nbsp;<a class="arrow" href="#fnref:13.1">&uarr;</a></li>
+</ol>
+</div>
+
+
+
+
+   

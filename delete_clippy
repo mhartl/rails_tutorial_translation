@@ -7,7 +7,7 @@
 embed = /(<embed .*? \/>)/m
 object = /(<object .*? <\/object>)/m
 
-Dir.glob("public/3.0/*").each do |filename|
+Dir.glob("public/book/*.html").each do |filename|
   content = File.open(filename).read
   content.gsub!(embed, '')
   content.gsub!(object, '')

@@ -102,19 +102,19 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:8" href="sign-up#top" class="heading"><span class="number">Chapter 8</span> Sign up</a></h1>
+<h1 class="chapter"><a id="sec:8" href="sign-up#top" class="heading"><span class="number">Capítulo 8</span>Registrar</a></h1>
 
 
-<p>Now that we have a working User model, it&rsquo;s time to add an ability few websites can live with out: letting users sign up for the site&mdash;thus fulfilling the promise implicit in <a class="ref" href="filling-in-the-layout#sec:user_signup">Section&nbsp;5.3</a>, &ldquo;User signup: A first step&rdquo;. We&rsquo;ll use an HTML <em>form</em> to submit user signup information to our application in <a class="ref" href="sign-up#sec:signup_form">Section&nbsp;8.1</a>, which will then be used to create a new user and save its attributes to the database in <a class="ref" href="sign-up#sec:signup_success">Section&nbsp;8.3</a>. As usual, we&rsquo;ll write tests as we develop, and in <a class="ref" href="sign-up#sec:rspec_integration_tests">Section&nbsp;8.4</a> we&rsquo;ll use RSpec&rsquo;s support for web navigation syntax to write succinct and expressive integration tests.</p>
+<p>Agora que nós temos um modelo de Usuário, é hora de adicionarmos uma funcionalidade que poucos sites conseguem viver sem: permitir que os usuários se registrem; cumprindo a promessa implícita da <a class="ref" href="filling-in-the-layout#sec:user_signup">Seção 5.3</a>, &ldquo;User signup: A first step&rdquo;. Nós usaremos um <em>form</em> para enviar os dados de registro para a nossa aplicação na <a class="ref" href="sign-up#sec:signup_form">Seção 8.1</a>, que será, então, usada para criar um novo usuário e salvar seus atributos no banco de dados na <a class="ref" href="sign-up#sec:signup_success">Seção 8.3</a>. Como sempre, nós vamos escrever testes enquanto desenvolvemos, e na <a class="ref" href="sign-up#sec:rspec_integration_tests">Seção 8.4</a> iremos usar o suporte do RSpec para sintaxe de navegação web para escrever testes de integração sucintos e expressivos.</p>
 
-<p>Since we&rsquo;ll be creating a new user in this chapter, you might want to reset the database to clear out any users created at the console (e.g., in <a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Section&nbsp;7.3.2</a>), so that your results will match those shown in the tutorial. You can do this as follows:</p>
+<p>Já que iremos criar um novo usuário neste capítulo, você pode querer limpar o banco de dados para apagar usuários criados no console (por exemplo, na <a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Seção 7.3.2</a>), para que seus resultados se igualem aos mostrados neste tutorial. Você pode fazer o seguinte:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:reset
 </pre></div>
 </div>
 
 
-<p>If you&rsquo;re following along with version control, make a topic branch as usual:</p>
+<p>Se você estiver acompanhando o controle de versionamento, faça uma nova <em>branch</em>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="gp">$</span> git checkout -b signing-up
@@ -125,16 +125,16 @@
 <div class="label" id="sec:signup_form"></div>
 
 
-<h2><a id="sec:8.1" href="sign-up#sec:signup_form" class="heading"><span class="number">8.1</span> Signup form</a></h2>
+<h2><a id="sec:8.1" href="sign-up#sec:signup_form" class="heading"><span class="number">8.1</span> Formulário de registro</a></h2>
 
 
-<p>Recall from <a class="ref" href="filling-in-the-layout#sec:users_controller">Section&nbsp;5.3.1</a> that we already have tests for the new users (signup) page, originally seen in <a class="ref" href="filling-in-the-layout#code:signup_title_test">Listing&nbsp;5.26</a> and reproduced in <a class="ref" href="sign-up#code:new_users_tests">Listing&nbsp;8.1</a>.  (As promised in <a class="ref" href="modeling-and-viewing-users-two#sec:tests_with_factories">Section&nbsp;7.3.1</a>, we&rsquo;ve switched from <code>get &rsquo;new&rsquo;</code> to <code>get :new</code> because that&rsquo;s what my fingers want to type.) In addition, we saw in <a class="ref" href="filling-in-the-layout#fig:blank_signup_page">Figure&nbsp;5.10</a> (shown again in <a class="ref" href="sign-up#fig:blank_signup_page_recap">Figure&nbsp;8.1</a>) that this signup page is currently blank: useless for signing up new users. The goal of this section is to start changing this sad state of affairs by producing the signup form mocked up in <a class="ref" href="sign-up#fig:signup_mockup">Figure&nbsp;8.2</a>.</p>
+<p>Lembre-se que na <a class="ref" href="filling-in-the-layout#sec:users_controller">Seção 5.3.1</a> nós já criamos testes para a página de registro de novos usuários, como visto na <a class="ref" href="filling-in-the-layout#code:signup_title_test">Listing&nbsp;5.26</a> e reproduzido na <a class="ref" href="sign-up#code:new_users_tests">Listing&nbsp;8.1</a>.  (Como prometido na <a class="ref" href="modeling-and-viewing-users-two#sec:tests_with_factories">Seção 7.3.1</a>, nós mudamos de <code>get &rsquo;new&rsquo;</code> para <code>get :new</code> porque isto é o que meus dedos querem digitar.) Além disso, nós vimos na <a class="ref" href="filling-in-the-layout#fig:blank_signup_page">Figura&nbsp;5.10</a> (mostrado novamente na <a class="ref" href="sign-up#fig:blank_signup_page_recap">Figura&nbsp;8.1</a>), a página de registro está atualmente em branco: sem utilidade para o registro de novos usuários. O objetivo desta seção é começar a mudar este triste caso, criando o formulário de registro esboçado na <a class="ref" href="sign-up#fig:signup_mockup">Figura&nbsp;8.2</a>.</p>
 
 <div class="label" id="code:new_users_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 8.1.</span> <span class="description">The tests for the new users page (first seen in <a class="ref" href="filling-in-the-layout#code:signup_title_test">Listing&nbsp;5.26</a>). <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Listing 8.1.</span> <span class="description">Testes para a nova página de usuários (vistos anteriormente na <a class="ref" href="filling-in-the-layout#code:signup_title_test">Listing&nbsp;5.26</a>). <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -168,7 +168,7 @@
 <div class="label" id="fig:blank_signup_page_recap"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Figure 8.1: </span><span class="description">The current state of the signup page  <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/blank_signup_page.png" alt="blank_signup_page" /></span></div><div class="caption"><span class="header">Figure 8.1: </span><span class="description">O estado atual da página de registro  <a href="http://localhost:3000/signup"><tt>/signup</tt></a>.&nbsp;<a href="http://railstutorial.org/images/figures/blank_signup_page-full.png">(tela cheia)</a></span></div></div>
 
 
 
@@ -176,7 +176,7 @@
 <div class="label" id="fig:signup_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_mockup.png" alt="signup_mockup" /></span></div><div class="caption"><span class="header">Figure 8.2: </span><span class="description">A mockup of the user signup page.&nbsp;<a href="http://railstutorial.org/images/figures/signup_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signup_mockup.png" alt="signup_mockup" /></span></div><div class="caption"><span class="header">Figure 8.2: </span><span class="description">Um esboço da página de registro.&nbsp;<a href="http://railstutorial.org/images/figures/signup_mockup-full.png">(tela cheia)</a></span></div></div>
 
 
 
@@ -184,16 +184,16 @@
 <div class="label" id="sec:using_form_for"></div>
 
 
-<h3><a id="sec:8.1.1" href="sign-up#sec:using_form_for" class="heading"><span class="number">8.1.1</span> Using <code>form_for</code></a></h3>
+<h3><a id="sec:8.1.1" href="sign-up#sec:using_form_for" class="heading"><span class="number">8.1.1</span> Usando <code>form_for</code></a></h3>
 
 
-<p>The HTML element needed for submitting information to a remote website is a <em>form</em>, which suggests a good first step toward registering users is to make a form to accept their signup information. We can accomplish this in Rails with the <code>form_for</code> helper method; the result appears in <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a>. (Readers familiar with Rails&nbsp;2.x should note that <code>form_for</code> now uses the &ldquo;percent-equals&rdquo; ERb syntax for inserting content; that is, where Rails&nbsp;2.x used <tt class="verb">&lt;% form_for ... %&gt;</tt>, Rails&nbsp;3 uses <tt class="verb">&lt;%= form_for ... %&gt;</tt> instead.)</p>
+<p>O elemento HTML necessário para enviar informações a um site remoto é o <em>form</em>, o que sugere que um bom primeiro passo do registro de usuários é fazer um formulário para receber as informações. Nós podemos alcançar isso em Rails com o método <code>form_for</code>; o resultado aparece na <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a>. (Os leitores familiarizados com Rails&nbsp;2.x devem notar que <code>form_for</code> agora usa a sintaxe ERb &ldquo;percentagem-igual&rdquo; para inserir conteúdo; ou seja, onde Rails&nbsp;2.x usava <tt class="verb">&lt;% form_for ... %&gt;</tt>, Rails&nbsp;3 usa <tt class="verb">&lt;%= form_for ... %&gt;</tt>.)</p>
 
 <div class="label" id="code:new_user_form"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 8.2.</span> <span class="description">A form to sign up new users. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Listing 8.2.</span> <span class="description">Formulário para registro de novos usuários. <br /> <code>app/views/users/new.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
 

@@ -1,9 +1,9 @@
 
 
-<h1 class="title">Ruby on Rails Tutorial </h1>
+<h1 class="title">Tutorial Ruby on Rails</h1>
 
 
-<h1 class="subtitle">  Learn Rails by Example</h1>
+<h1 class="subtitle">Aprenda Rails por Exemplos</h1>
 
 
 <h2 class="author">Michael Hartl</h2>
@@ -102,12 +102,12 @@
 <div id="top"></div>
 
 
-<h1 class="chapter"><a id="sec:10" href="updating-showing-and-deleting-users#top" class="heading"><span class="number">Chapter 10</span> Updating, showing, and deleting users</a></h1>
+<h1 class="chapter"><a id="sec:10" href="updating-showing-and-deleting-users#top" class="heading"><span class="number">Capítulo 10</span> Atualizando, exibindo e deletando usuários</a></h1>
+
+<p>Neste capítulo, nós iremos completar as ações REST para o recurso Users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Tabela&nbsp;6.2</a>) adicionando as ações <code>edit</code>, <code>update</code>, <code>index</code>, e <code>destroy</code>. Nós iniciaremos dando aos usuários a capacidade de atualizar seus perfis, que também nos dará a oportunidade natural de aplicarmos o modelo de segurança (possibilitado pelo código de autenticação do <a class="ref" href="sign-in-sign-out#top">Capítulo 9</a>). Então, nós listaremos todos os usuários (também requirindo autenticação), o que nos motivará na introdução de sample data e paginação. Finalmente, nós adicionaremos a capacidade de destroy usuários, limpando-os do banco de dados. Desde que não podemos simplesmente permitir que qualquer usuário tenha esses poderes perigosos, nós tomaremos o cuidado de criar uma classe de usuários com privilégios administrativos (admins) ao longo do capítulo.</p>
 
 
-<p>In this chapter, we will complete the REST actions for the Users resource (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a>) by adding <code>edit</code>, <code>update</code>, <code>index</code>, and <code>destroy</code> actions. We&rsquo;ll start by giving users the ability to update their profiles, which will also provide a natural opportunity to enforce a security model (made possible by the authentication code in <a class="ref" href="sign-in-sign-out#top">Chapter&nbsp;9</a>). Then we&rsquo;ll make a listing of all users (also requiring authentication), which will motivate the introduction of sample data and pagination. Finally, we&rsquo;ll add the ability to destroy users, wiping them clear from the database. Since we can&rsquo;t allow just any user to have such dangerous powers, we&rsquo;ll take care to create a privileged class of administrative users (admins) along the way.</p>
-
-<p>To get started, let&rsquo;s start work on an <code>updating-users</code> topic branch:</p>
+<p>Para começar, vamos iniciar criando um branch <code>updating-users</code> onde faremos nosso trabalho:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -b updating-users
 </pre></div>
@@ -117,23 +117,23 @@
 <div class="label" id="sec:updating_users"></div>
 
 
-<h2><a id="sec:10.1" href="updating-showing-and-deleting-users#sec:updating_users" class="heading"><span class="number">10.1</span> Updating users</a></h2>
+<h2><a id="sec:10.1" href="updating-showing-and-deleting-users#sec:updating_users" class="heading"><span class="number">10.1</span> Atualizando os usuários</a></h2>
 
+<p>O padrão para a edição das informações do usuário é muito parecido com o da criação de novos usuários (<a class="ref" href="sign-up#top">Capítulo 8</a>). Ao invés da ação <code>new</code> para renderizar uma view para novos usuários, nós teremos uma ação <code>edit</code> renderizando a view de edição de usuários; ao invés de <code>create</code> respondendo à requisição <tt>POST</tt>, nós teremos uma ação <code>update</code> respondendo uma requisição <tt>PUT</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Quadro&nbsp;3.1</a>). A grande diferença é que, enquanto qualquer um pode se inscrever, apenas o usuário atual deve ser capaz de atualizar suas próprias informações. Isso significa que nós devemos reforçar o controle de acesso para que somente os usuários autorizados possam editar e atualizar seus dados; o mecanismo de autenticação do <a class="ref" href="sign-in-sign-out#top">Capítulo&nbsp;9</a> permitirá que usemos <em>before filter</em> para garantir que este é o caso.</p>
 
-<p>The pattern for editing user information closely parallels that for creating new users (<a class="ref" href="sign-up#top">Chapter&nbsp;8</a>). Instead of a <code>new</code> action rendering a view for new users, we have an <code>edit</code> action rendering a view to edit users; instead of <code>create</code> responding to a <tt>POST</tt> request, we have an <code>update</code> action responding to a <tt>PUT</tt> request (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). The biggest difference is that, while anyone can sign up, only the current user should be able to update their information. This means that we need to enforce access control so that only authorized users can edit and update; the authentication machinery from <a class="ref" href="sign-in-sign-out#top">Chapter&nbsp;9</a> will allow us to use a <em>before filter</em> to ensure that this is the case.</p>
 
 <div class="label" id="sec:edit_form"></div>
 
 
-<h3><a id="sec:10.1.1" href="updating-showing-and-deleting-users#sec:edit_form" class="heading"><span class="number">10.1.1</span> Edit form</a></h3>
+<h3><a id="sec:10.1.1" href="updating-showing-and-deleting-users#sec:edit_form" class="heading"><span class="number">10.1.1</span> Formulário de edição</a></h3>
 
 
-<p>We start with tests for the edit form, whose mockup appears in <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">Figure&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Two are analogous to tests we saw for the <code>new</code> user page (<a class="ref" href="sign-up#code:new_users_tests">Listing&nbsp;8.1</a>), checking for the proper response and title; the third test makes sure that there is a link to edit the user&rsquo;s Gravatar image (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Section&nbsp;7.3.2</a>). If you poke around the Gravatar site, you&rsquo;ll see that the page to add or edit images is (somewhat oddly) located at <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, so we test the <code>edit</code> page for a link with that URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> The result is shown in <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">Listing&nbsp;10.1</a>.</p>
+<p>Nós começaremos pelos testes para o formulário de edição, cujo protótipo aparece na <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">Figura&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Dois deles são parecidos com os testes que vimos para a página <code>new</code> do usuário (<a class="ref" href="sign-up#code:new_users_tests">Trecho&nbsp;8.1</a>), checando a resposta adequada à requisição e o título; o terceiro teste garante que há um link para a edição da imagem do Gravatar do usuário (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Seção&nbsp;7.3.2</a>). Se você fuçar o site do Gravatar, irá ver que a página para adicionar ou editar imagens é (estranhamente) localizada no endereço <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, então nós testamos o link <code>edit</code> para a página com essa URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> O resultado está no<a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs"> Trecho&nbsp;10.1</a>.</p>
 
 <div class="label" id="fig:edit_user_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_mockup.png" alt="edit_user_mockup" /></span></div><div class="caption"><span class="header">Figure 10.1: </span><span class="description">A mockup of the user edit page.&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_mockup-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/edit_user_mockup.png" alt="edit_user_mockup" /></span></div><div class="caption"><span class="header">Figura 10.1: </span><span class="description">Um protótipo da página de edição do usuário.&nbsp;<a href="http://railstutorial.org/images/figures/edit_user_mockup-full.png">(tamanho original)</a></span></div></div>
 
 
 

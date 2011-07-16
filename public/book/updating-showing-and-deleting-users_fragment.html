@@ -104,7 +104,7 @@
 
 <h1 class="chapter"><a id="sec:10" href="updating-showing-and-deleting-users#top" class="heading"><span class="number">Capítulo 10</span> Atualizando, exibindo e deletando usuários</a></h1>
 
-<p>Neste capítulo, nós iremos completar as ações REST para o recurso Users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Tabela&nbsp;6.2</a>) adicionando as ações <code>edit</code>, <code>update</code>, <code>index</code>, e <code>destroy</code>. Nós iniciaremos dando aos usuários a capacidade de atualizar seus perfis, que também nos dará a oportunidade natural de aplicarmos o modelo de segurança (possibilitado pelo código de autenticação do <a class="ref" href="sign-in-sign-out#top">Capítulo 9</a>). Então, nós listaremos todos os usuários (também requirindo autenticação), o que nos motivará na introdução de sample data e paginação. Finalmente, nós adicionaremos a capacidade de destroy usuários, limpando-os do banco de dados. Desde que não podemos simplesmente permitir que qualquer usuário tenha esses poderes perigosos, nós tomaremos o cuidado de criar uma classe de usuários com privilégios administrativos (admins) ao longo do capítulo.</p>
+<p>Neste capítulo, nós iremos completar as ações REST para o recurso Users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Tabela&nbsp;6.2</a>) adicionando as ações <code>edit</code>, <code>update</code>, <code>index</code>, e <code>destroy</code>. Nós iniciaremos dando aos usuários a capacidade de atualizar seus perfis, que também nos dará a oportunidade natural de aplicarmos o modelo de segurança (possibilitado pelo código de autenticação do <a class="ref" href="sign-in-sign-out#top">Capítulo 9</a>). Então, nós listaremos todos os usuários (também requerendo autenticação), o que nos motivará na introdução de sample data e paginação. Finalmente, nós adicionaremos a capacidade de destroy usuários, limpando-os do banco de dados. Desde que não podemos simplesmente permitir que qualquer usuário tenha esses poderes perigosos, nós tomaremos o cuidado de criar uma classe de usuários com privilégios administrativos (admins) ao longo do capítulo.</p>
 
 
 <p>Para começar, vamos iniciar criando um branch <code>updating-users</code> onde faremos nosso trabalho:</p>
@@ -142,7 +142,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.1.</span> <span class="description">Tests for the user <code>edit</code> action. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Listing 10.1.</span> <span class="description">Testes para a ação <code>edit</code> do usuário. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -179,16 +179,16 @@
 </pre></div>
 </div></div>
 
+<p>Nesse teste utilizamos <code>test_sign_in(@user)</code> para garantir que o usuário está autenticado e a página de edição protegida de acessos não autorizados (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">Seção&nbsp;10.2</a>). Se não fizéssemos isso, os testes quebrariam assim que implementássemos o nosso código de autenticação.</p>
 
-<p>Here we&rsquo;ve made sure to use <code>test_sign_in(@user)</code> to sign in as the user in anticipation of protecting the edit page from unauthorized access (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">Section&nbsp;10.2</a>). Otherwise, these tests would break as soon as we implemented our authentication code.</p>
-
-<p>Note from <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Table&nbsp;6.2</a> that the proper URL for a user&rsquo;s edit page is <tt>/users/1/edit</tt> (assuming the user&rsquo;s id is&nbsp;<tt>1</tt>). Recall that the id of the user is available in the <code>params[:id]</code> variable, which means that we can find the user with the code in  <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">Listing&nbsp;10.2</a>. This uses <code>find</code> to find the relevant user in the database, and then sets the <code>@title</code> variable to the proper value.</p>
+<p>Observe na <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Tabela&nbsp;6.2</a> que a URL da página de edição de um usuário é <tt>/users/1/edit</tt> (supondo que sua id seja <tt>1</tt>). Lembre-se que a id do usuário está disponível na variável <code>params[:id]</code>,
+o que significa que podemos encontrá-lo com o código do  <a class="ref" href="updating-showing-and-deleting-users#code:initial_edit_action">Trecho&nbsp;10.2</a>. Esse código utiliza <code>find</code> para encontrar no banco de dados o usuário que corresponde à id fornecida, e então atribui o valor adequado para a variável <code>@title</code>.</p>
 
 <div class="label" id="code:initial_edit_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.2.</span> <span class="description">The user <code>edit</code> action. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Trecho 10.2.</span> <span class="description">A ação <code>edit</code> do usuário. <br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -203,13 +203,15 @@
 </div></div>
 
 
-<p>Getting the tests to pass requires making the actual edit view, shown in <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Listing&nbsp;10.3</a>. Note how closely this resembles the new user view from <a class="ref" href="sign-up#code:new_user_form">Listing&nbsp;8.2</a>; the large overlap suggests factoring the repeated code into a partial, which is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users#sec:updating_deleting_exercises">Section&nbsp;10.6</a>).</p>
+<p>Para os testes passarem é preciso fazer a view de edição, que tem o código disponível no <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Trecho&nbsp;10.3</a>. Observe o quanto ela é semelhante à view de novo usuário do <a class="ref" href="sign-up#code:new_user_form">Trecho&nbsp;8.2</a>; Fica como exercício (<a class="ref" href="updating-showing-and-deleting-users#sec:updating_deleting_exercises">Seção&nbsp;10.6</a>) a criação de uma partial para evitar que as duas views tenham código repetido.</p>
+
+
 
 <div class="label" id="code:user_edit_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.3.</span> <span class="description">The user edit view. <br /> <code>app/views/users/edit.html.erb</code></span>       
+<div class="listing"><span class="header">Trecho 10.3.</span> <span class="description">A view de edição do usuário. <br /> <code>app/views/users/edit.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Edit user<span class="nt">&lt;/h1&gt;</span>
 
@@ -244,22 +246,25 @@
 </div></div>
 
 
-<p>Here we have reused the shared <code>error_messages</code> partial introduced in <a class="ref" href="sign-up#sec:signup_error_messages">Section&nbsp;8.2.3</a>.</p>
+<p>Aqui nós reutilizamos a partial compartilhada de mensagens de erros (<code>error_messages</code>) criada na <a class="ref" href="sign-up#sec:signup_error_messages">Seção&nbsp;8.2.3</a>.</p>
 
-<p>You may recall from <a class="ref" href="sign-up#code:f_error_messages">Listing&nbsp;8.8</a> that the error-messages partial references the <code>@user</code> variable explicitly. In the present case, we <em>do</em> happen to have an <code>@user</code> variable, but in order to make this a truly shared partial we should not depend on this fact. The solution is to pass the object corresponding to the form variable&nbsp;<code>f</code> as a parameter to the partial:</p>
+
+<p>Lembre-se do <a class="ref" href="sign-up#code:f_error_messages">Trecho&nbsp;8.8</a> onde a partial de mensagens de erros referencia explicitamente a variável <code>@user</code>. Na view de edição, nós <em>temos</em> uma variável <code>@user</code>, mas para fazermos que essa partial possa realmente ser compartilhada entre todas as views não podemos depender disso. A solução disso é a passagem do objeto que corresponde à variável do formulário &nbsp;<code>f</code> como parâmetro para a partial :</p>
+
+
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">object</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
+<p>Assim criamos uma variável chamada <code>object</code> na partial, que usaremos para gerar as mensagens de erros, como mostrado no <a class="ref" href="updating-showing-and-deleting-users#code:updated_error_messages_partial">Trecho&nbsp;10.4</a>. (Observe o encadeamento de métodos utilizados para obter uma versão amigável do nome do objeto; veja na API do Rails a entrada para, digamos, o método <code>humanize</code>, para ter uma idéia da variedade de métodos utilitários disponíveis.)</p>
 
-<p>This creates a variable called <code>object</code> in the partial, which we can then use to generate the error messages, as shown in <a class="ref" href="updating-showing-and-deleting-users#code:updated_error_messages_partial">Listing&nbsp;10.4</a>. (Note the fancy chain of methods to get a nice version of the object name; see the Rails API entry on, say, <code>humanize</code>, to get an idea of the range of Rails utilities available.)</p>
 
 <div class="label" id="code:updated_error_messages_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.4.</span> <span class="description">Updating the error-messages partial from <a class="ref" href="sign-up#code:errors_partial">Listing&nbsp;8.9</a> to work with other objects. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       
+<div class="listing"><span class="header">Trecho 10.4.</span> <span class="description">Atualizando a partial de mensagens de erros do <a class="ref" href="sign-up#code:errors_partial">Trecho&nbsp;8.9</a> para funcionar com outros objetos. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>
@@ -278,13 +283,14 @@
 </div></div>
 
 
-<p>While we&rsquo;re at it, we&rsquo;ll update the signup form with the more general code (<a class="ref" href="updating-showing-and-deleting-users#code:signup_errors_updated">Listing&nbsp;10.5</a>).</p>
+<p>Aproveitando a oportunidade, vamos atualizar o formulário de inscrição para funcionar com o código mais genérico que fizemos agora (<a class="ref" href="updating-showing-and-deleting-users#code:signup_errors_updated">Trecho&nbsp;10.5</a>).</p>
+
 
 <div class="label" id="code:signup_errors_updated"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 10.5.</span> <span class="description">Updating the rendering of user signup errors. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Trecho 10.5.</span> <span class="description">Atualizando a renderização de erros da página de inscrição de usuários. <br /> <code>app/views/users/new.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
 

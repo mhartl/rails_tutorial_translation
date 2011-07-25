@@ -44,13 +44,13 @@
 </div>
 
 
-<p>Теперь, как и с регистрационной формой в <a class="ref" href="sign-up#sec:signup_form">Разделе&nbsp;8.1</a>, мы добавим пару тестов для <code>new</code> действия и соответствующего представления в новый файл Sessions контроллер specs (<a class="ref" href="sign-in-sign-out#code:new_session_tests">Листинг&nbsp;9.1</a>). (Эта схема должна показаться Вам знакомой.)</p>
+<p>Теперь, как и с регистрационной формой в <a class="ref" href="sign-up#sec:signup_form">Разделе&nbsp;8.1</a>, мы добавим пару тестов для <code>new</code> действия и соответствующего представления в новый файл Sessions контроллер specs (<a class="ref" href="sign-in-sign-out#code:new_session_tests">Листинг&nbsp;9.1</a>). (Эта схема должна показаться вам знакомой.)</p>
 
 <div class="label" id="code:new_session_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.1.</span> <span class="description">Тесты для <code>new</code> сессия действия и представления. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.1.</span> <span class="description">Тесты для <code>new</code> сессия действия и представления. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -80,7 +80,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.2.</span> <span class="description">Добавление ресурса для получения стандартных RESTful действий для сессий. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.2.</span> <span class="description">Добавление ресурса для получения стандартных RESTful действий для сессий. <br /> <code>config/routes.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:users</span>
@@ -97,7 +97,7 @@
 </div></div>
 
 
-<p>Как Вы можете видеть, метод <code>resources</code> может принимать хэш опций, который в данном случае имеет ключ <code>:only</code> и значение, эквивалентное массиву действий, на которые реагирует контроллер Sessions. Ресурсы, определенные в <a class="ref" href="sign-in-sign-out#code:sessions_resource">Листинге&nbsp;9.2</a> обеспечивают URL-адреса и действия, аналогичные ресурсу Users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Таблица&nbsp;6.2</a>), как видно в <a class="ref" href="sign-in-sign-out#table:RESTful_sessions">Таблице&nbsp;9.1</a>.</p>
+<p>Как вы можете видеть, метод <code>resources</code> может принимать хэш опций, который в данном случае имеет ключ <code>:only</code> и значение, эквивалентное массиву действий, на которые реагирует контроллер Sessions. Ресурсы, определенные в <a class="ref" href="sign-in-sign-out#code:sessions_resource">Листинге&nbsp;9.2</a> обеспечивают URL-адреса и действия, аналогичные ресурсу Users (<a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Таблица&nbsp;6.2</a>), как видно в <a class="ref" href="sign-in-sign-out#table:RESTful_sessions">Таблице&nbsp;9.1</a>.</p>
 
 <div class="label" id="table:RESTful_sessions"></div>
 
@@ -111,7 +111,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.3.</span> <span class="description">Добавление заголовка для страницы входа. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.3.</span> <span class="description">Добавление заголовка для страницы входа. <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -176,7 +176,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.4.</span> <span class="description">Код для формы входа. <br /> <code>app/views/sessions/new.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 9.4.</span> <span class="description">Код для формы входа. <br /> <code>app/views/sessions/new.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign in<span class="nt">&lt;/h1&gt;</span>
 
@@ -207,13 +207,13 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/signin_form.png" alt="signin_form" /></span></div><div class="caption"><span class="header">Рисунок  9.2: </span><span class="description">Форма входа  (<a href="http://localhost:3000/sessions/new">/sessions/new</a>).&nbsp;<a href="http://railstutorial.org/images/figures/signin_form-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Несмотря на то, что Вы вскоре избавитесь от привычки смотреть на HTML генерируемый Rails (вместо этого доверив хелперам, делать свою работу), давайте все же взглянем на него  (<a class="ref" href="sign-in-sign-out#code:signin_form_html">Листинг&nbsp;9.5</a>).</p>
+<p>Несмотря на то, что вы вскоре избавитесь от привычки смотреть на HTML генерируемый Rails (вместо этого доверив хелперам, делать свою работу), давайте все же взглянем на него  (<a class="ref" href="sign-in-sign-out#code:signin_form_html">Листинг&nbsp;9.5</a>).</p>
 
 <div class="label" id="code:signin_form_html"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.5.</span> <span class="description">HTML формы входа, произведенный <a class="ref" href="sign-in-sign-out#code:signin_form">Листингом&nbsp;9.4</a>.</span>       
+<div class="listing"><span class="header">Листинг 9.5.</span> <span class="description">HTML формы входа, произведенный <a class="ref" href="sign-in-sign-out#code:signin_form">Листингом&nbsp;9.4</a>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/sessions&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
@@ -234,7 +234,7 @@
 </div></div>
 
 
-<p>Сравнивая <a class="ref" href="sign-in-sign-out#code:signin_form_html">Листинг&nbsp;9.5</a> с <a class="ref" href="sign-up#code:signup_form_html">Листингом&nbsp;8.5</a>, Вы, возможно, догадались, что отправка этой формы приведет к хэшу <code>params</code> где <code>params[:session][:email]</code> и <code>params[:session][:password]</code> соответствуют email и password полям. Обработка этой отправки&nbsp;&mdash;&nbsp;и, в частности, аутентификация пользователей, основанная на отправленных email и password&nbsp;&mdash;&nbsp;является целью следующих двух разделов.</p>
+<p>Сравнивая <a class="ref" href="sign-in-sign-out#code:signin_form_html">Листинг&nbsp;9.5</a> с <a class="ref" href="sign-up#code:signup_form_html">Листингом&nbsp;8.5</a>, вы, возможно, догадались, что отправка этой формы приведет к хэшу <code>params</code> где <code>params[:session][:email]</code> и <code>params[:session][:password]</code> соответствуют email и password полям. Обработка этой отправки&nbsp;&mdash;&nbsp;и, в частности, аутентификация пользователей, основанная на отправленных email и password&nbsp;&mdash;&nbsp;является целью следующих двух разделов.</p>
 
 <div class="label" id="sec:signin_failure"></div>
 
@@ -264,7 +264,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.6.</span> <span class="description">Предварительная версия Sessions <code>create</code> действия. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.6.</span> <span class="description">Предварительная версия Sessions <code>create</code> действия. <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -293,7 +293,7 @@
 
 <div class="code"><div class="highlight"><pre><span class="nn">---</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span>
 <span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Sign in</span>
-<span class="l-Scalar-Plain">session</span><span class="p-Indicator">:</span> <span class="kt">!ActiveSupport</span><span class="l-Scalar-Plain">::HashWithIndifferentAccess</span> 
+<span class="l-Scalar-Plain">session</span><span class="p-Indicator">:</span> <span class="kt">!ActiveSupport</span><span class="l-Scalar-Plain">::HashWithIndifferentAccess</span>
   <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
   <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="l-Scalar-Plain">authenticity_token</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">BlO65PA1oS5vqrv591dt9B22HGSWW0HbBtoHKbBKYDQ=</span>
@@ -369,7 +369,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.7.</span> <span class="description">Тесты для неудачной попытки входа. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.7.</span> <span class="description">Тесты для неудачной попытки входа. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -413,7 +413,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.8.</span> <span class="description">Код для неудачной попытки входа на сайт. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.8.</span> <span class="description">Код для неудачной попытки входа на сайт. <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -444,9 +444,9 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 9.1.</span><span class="description">Flash точка now</span></span>
-<p>Есть тонкое различие между <code>flash</code> и <code>flash.now</code>. <code>Flash</code> переменная предназначена для использования до <em>переадресации</em>, и она сохраняется на открывшейся странице на один запрос, то есть, она появляется один раз, и исчезает, когда Вы нажимаете на другую ссылку. К сожалению, это означает, что если мы <em>не делаем</em> переадресации, а вместо этого просто отображаем страницу (как в <a class="ref" href="sign-in-sign-out#code:signin_failure">Листинге&nbsp;9.8</a>), флеш сообщение сохраняется в течение <em>двух</em> запросов: оно появляется на отображаемой странице, но все еще ожидает &ldquo;переадресацию&rdquo; (т.е., второй запрос), и таким образом <em>опять</em> появляется при нажатии на ссылку.</p>
+<p>Есть тонкое различие между <code>flash</code> и <code>flash.now</code>. <code>Flash</code> переменная предназначена для использования до <em>переадресации</em>, и она сохраняется на открывшейся странице на один запрос, то есть, она появляется один раз, и исчезает, когда вы нажимаете на другую ссылку. К сожалению, это означает, что если мы <em>не делаем</em> переадресации, а вместо этого просто отображаем страницу (как в <a class="ref" href="sign-in-sign-out#code:signin_failure">Листинге&nbsp;9.8</a>), флеш сообщение сохраняется в течение <em>двух</em> запросов: оно появляется на отображаемой странице, но все еще ожидает &ldquo;переадресацию&rdquo; (т.е., второй запрос), и таким образом <em>опять</em> появляется при нажатии на ссылку.</p>
 
-<p>Чтобы избежать этого странного поведения при <code>render</code>инге, отличающегося от поведения при <code>redirect</code>тинге, мы используем <code>flash.now</code> вместо <code>flash</code>. Объект <code>flash.now</code> специально предназначенн для вывода флэш сообщений при отображении страниц. Если Вы когда-нибудь обнаружите себя озадаченным неожиданным появлением флэш сообщения, велик шанс исправить ситуацию заменив <code>flash</code> на <code>flash.now</code>.</p>
+<p>Чтобы избежать этого странного поведения при <code>render</code>инге, отличающегося от поведения при <code>redirect</code>тинге, мы используем <code>flash.now</code> вместо <code>flash</code>. Объект <code>flash.now</code> специально предназначенн для вывода флэш сообщений при отображении страниц. Если вы когда-нибудь обнаружите себя озадаченным неожиданным появлением флэш сообщения, велик шанс исправить ситуацию заменив <code>flash</code> на <code>flash.now</code>.</p>
 </div>
 
 
@@ -488,7 +488,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.9.</span> <span class="description">Завершенное действие <code>create</code> контроллера Sessions (пока не рабочее). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.9.</span> <span class="description">Завершенное действие <code>create</code> контроллера Sessions (пока не рабочее). <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -520,7 +520,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.10.</span> <span class="description">Ожидающие тесты для входа пользователя (будут завершены в <a class="ref" href="sign-in-sign-out#sec:current_user">Разделе&nbsp;9.3.3</a>). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.10.</span> <span class="description">Ожидающие тесты для входа пользователя (будут завершены в <a class="ref" href="sign-in-sign-out#sec:current_user">Разделе&nbsp;9.3.3</a>). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -566,7 +566,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.11.</span> <span class="description">Включение модуля Sessions хелпер в Application controller. <br /> <code>app/controllers/application_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.11.</span> <span class="description">Включение модуля Sessions хелпер в Application controller. <br /> <code>app/controllers/application_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">protect_from_forgery</span>
@@ -603,7 +603,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.12.</span> <span class="description">Завершенная (но пока еще не работающая) <code>sign_in</code> функция. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.12.</span> <span class="description">Завершенная (но пока еще не работающая) <code>sign_in</code> функция. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -727,7 +727,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.13.</span> <span class="description">Заполнение теста для входа пользователя. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.13.</span> <span class="description">Заполнение теста для входа пользователя. <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -772,7 +772,7 @@
 </div>
 
 
-<p>Вторая строка может немного сбивать с толку в этой точке, но Вы можете догадаться, опираясь на конвенцию RSpec для булевых методов, что</p>
+<p>Вторая строка может немного сбивать с толку в этой точке, но вы можете догадаться, опираясь на конвенцию RSpec для булевых методов, что</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">controller</span><span class="o">.</span><span class="n">should</span> <span class="n">be_signed_in</span>
 </pre></div>
@@ -801,7 +801,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.14.</span> <span class="description">Определение присвоения <code>current_user</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.14.</span> <span class="description">Определение присвоения <code>current_user</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -827,7 +827,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.15.</span> <span class="description">Заманчивое, но бесполезное определение <code>current_user</code>.</span>       
+<div class="listing"><span class="header">Листинг 9.15.</span> <span class="description">Заманчивое, но бесполезное определение <code>current_user</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -857,7 +857,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.16.</span> <span class="description">Поиск текущего пользователя по <code>remember_token</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.16.</span> <span class="description">Поиск текущего пользователя по <code>remember_token</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -896,7 +896,7 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 9.4.</span><span class="description">What the *$@! is <code>||=</code> ? (# мне показалось, или автор все же выругался?)(??)</span></span>
-<p>Конструкция <code>||=</code> очень Рубишная&nbsp;&mdash;&nbsp;то есть, она очень характерна для языка Ruby&nbsp;&mdash;&nbsp;и, следовательно, важно ее знать, если Вы планируете много программировать на Ruby. Хотя на первый взгляд она может показаться таинственной, <em>или равно</em> легко понять по аналогии.</p>
+<p>Конструкция <code>||=</code> очень Рубишная&nbsp;&mdash;&nbsp;то есть, она очень характерна для языка Ruby&nbsp;&mdash;&nbsp;и, следовательно, важно ее знать, если вы планируете много программировать на Ruby. Хотя на первый взгляд она может показаться таинственной, <em>или равно</em> легко понять по аналогии.</p>
 
 <p>Начнем с общепринятой идиомы для изменения определенной в настоящее время переменной. Многие компьютерные программы включают приращение переменной, как в</p>
 
@@ -976,7 +976,7 @@
 </div>
 
 
-<p>Причиной использования этого кода является то, что поддержка cookies входа в Rails тестах еще незрелая, и <code>nil</code> значение для cookie могжет вызвать ложные поломки в тестах. Возвращая <code>[nil, nil]</code> вместо этого, мы решаем проблему.<sup class="footnote" id="fnref:9.11"><a href="#fn:9.11">11</a></sup></p>
+<p>Причиной использования этого кода является то, что поддержка cookies входа в Rails тестах еще незрелая, и <code>nil</code> значение для cookie может вызвать ложные поломки в тестах. Возвращая <code>[nil, nil]</code> вместо этого, мы решаем проблему.<sup class="footnote" id="fnref:9.11"><a href="#fn:9.11">11</a></sup></p>
 
 <p>Последним шагом для получения рабочего кода в <a class="ref" href="sign-in-sign-out#code:current_user_working">Листинге&nbsp;9.16</a> является определение <code>authenticate_with_salt</code> метода класса. Этот метод, аналогичный оригинальному <code>authenticate</code> методу, определенному в <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_method">Листинге&nbsp;7.12</a>, показан в <a class="ref" href="sign-in-sign-out#code:authenticate_with_salt">Листинге&nbsp;9.17</a>.</p>
 
@@ -984,7 +984,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.17.</span> <span class="description">Добавление <code>authenticate_with_salt</code> метода к модели User. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.17.</span> <span class="description">Добавление <code>authenticate_with_salt</code> метода к модели User. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1037,14 +1037,14 @@
 <div class="sidebar"><span class="title"><span class="header">Блок 9.5.</span><span class="description">10 типов людей</span></span>
 <p>There are 10 kinds of people in the world: Those who like the ternary operator, those who don&rsquo;t, and those who don&rsquo;t know about it. (If you happen to be in the third category, soon you won&rsquo;t be any longer.)</p>
 
-<p>В мире существует 10 типов людей: Те, кому нравится тройной оператор, те, кому он не нравится, и те, кто не знает о нем. (Если Вам случилось быть в третьей категории, скоро Вы ее покинете.) (??)</p>
+<p>В мире существует 10 типов людей: Те, кому нравится тройной оператор, те, кому он не нравится, и те, кто не знает о нем. (Если вам случилось быть в третьей категории, скоро вы ее покинете.) </p>
 
-<p>Когда Вы много программируете, Вы быстро узнаете, что одним из наиболее распространенных битов управления потоком, является что то вроде этого:</p>
+<p>Когда вы много программируете, вы быстро узнаете, что одним из наиболее распространенных битов управления потоком, является что то вроде этого:</p>
 
-<pre class="verbatim">  if boolean? 
-    do_one_thing 
-  else 
-    do_something_else 
+<pre class="verbatim">  if boolean?
+    do_one_thing
+  else
+    do_something_else
   end </pre>
 
 
@@ -1057,7 +1057,7 @@
 
 <pre class="verbatim">  if boolean?
     var = foo
-  else 
+  else
     var = bar
   end </pre>
 
@@ -1077,7 +1077,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.18.</span> <span class="description">Вспомогательный метод <code>signed_in?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.18.</span> <span class="description">Вспомогательный метод <code>signed_in?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -1122,7 +1122,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.19.</span> <span class="description">Функция <code>test_sign_in</code> для симуляции входа пользователя внутри тестов. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.19.</span> <span class="description">Функция <code>test_sign_in</code> для симуляции входа пользователя внутри тестов. <br /> <code>spec/spec_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1147,7 +1147,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.20.</span> <span class="description">Тест для уничтожения сессии (выхода пользователя). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.20.</span> <span class="description">Тест для уничтожения сессии (выхода пользователя). <br /> <code>spec/controllers/sessions_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">SessionsController</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1175,7 +1175,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.21.</span> <span class="description">Уничтожение сессии (выход пользователя). <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.21.</span> <span class="description">Уничтожение сессии (выход пользователя). <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1196,7 +1196,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.22.</span> <span class="description">Метод <code>sign_out</code> в модуле Sessions хелпера. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.22.</span> <span class="description">Метод <code>sign_out</code> в модуле Sessions хелпера. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
 
@@ -1221,7 +1221,7 @@
 </div></div>
 
 
-<p>Как Вы можете видеть, <code>sign_out</code> эффективно уничтожает метод <code>sign_in</code>, удаляя remember token и устанавливая текущего пользователя равным <code>nil</code>.<sup class="footnote" id="fnref:9.13"><a href="#fn:9.13">13</a></sup></p>
+<p>Как вы можете видеть, <code>sign_out</code> эффективно уничтожает метод <code>sign_in</code>, удаляя remember token и устанавливая текущего пользователя равным <code>nil</code>.<sup class="footnote" id="fnref:9.13"><a href="#fn:9.13">13</a></sup></p>
 
 <div class="label" id="sec:signin_upon_signup"></div>
 
@@ -1237,7 +1237,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.23.</span> <span class="description">Тестирование того, что вновь зарегистрированные пользователи также являются вошедшими. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.23.</span> <span class="description">Тестирование того, что вновь зарегистрированные пользователи также являются вошедшими. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1274,7 +1274,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.24.</span> <span class="description">Вход пользователя сразу после регистрации. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.24.</span> <span class="description">Вход пользователя сразу после регистрации. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -1311,7 +1311,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.25.</span> <span class="description">Тесты для ссылок Войти/Выйти шаблона сайта. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.25.</span> <span class="description">Тесты для ссылок Войти/Выйти шаблона сайта. <br /> <code>spec/requests/layout_links_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Layout links&quot;</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1341,7 +1341,7 @@
                                          <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sign out&quot;</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">it</span> <span class="s2">&quot;should have a profile link&quot;</span> 
+    <span class="n">it</span> <span class="s2">&quot;should have a profile link&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -1367,7 +1367,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.26.</span> <span class="description">Изменение ссылок макета для вошедших пользователей. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 9.26.</span> <span class="description">Изменение ссылок макета для вошедших пользователей. <br /> <code>app/views/layouts/_header.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1387,13 +1387,13 @@
 </div></div>
 
 
-<p>В <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">Листинге&nbsp;9.26</a> мы использовали <code>logo</code> хелпер из упражнения <a class="ref" href="filling-in-the-layout#top">Главы&nbsp;5</a> (<a class="ref" href="filling-in-the-layout#sec:layout_exercises">Раздел&nbsp;5.5</a>);  в случае, если Вы не проработали это упражнение, ответ представлен в <a class="ref" href="sign-in-sign-out#code:logo_helper_solution">Листинге&nbsp;9.27</a>.</p>
+<p>В <a class="ref" href="sign-in-sign-out#code:layout_signin_signout_links">Листинге&nbsp;9.26</a> мы использовали <code>logo</code> хелпер из упражнения <a class="ref" href="filling-in-the-layout#top">Главы&nbsp;5</a> (<a class="ref" href="filling-in-the-layout#sec:layout_exercises">Раздел&nbsp;5.5</a>);  в случае, если вы не проработали это упражнение, ответ представлен в <a class="ref" href="sign-in-sign-out#code:logo_helper_solution">Листинге&nbsp;9.27</a>.</p>
 
 <div class="label" id="code:logo_helper_solution"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.27.</span> <span class="description">Хелпер для логотипа сайта. <br /> <code>app/helpers/application_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.27.</span> <span class="description">Хелпер для логотипа сайта. <br /> <code>app/helpers/application_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">ApplicationHelper</span>
   <span class="o">.</span>
@@ -1413,7 +1413,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.28.</span> <span class="description">Тест для ссылки на профиль пользователя. <br /> <code>spec/requests/layout_links_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.28.</span> <span class="description">Тест для ссылки на профиль пользователя. <br /> <code>spec/requests/layout_links_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Layout links&quot;</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -1440,7 +1440,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.29.</span> <span class="description">Добавление ссылки на профиль пользователя. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 9.29.</span> <span class="description">Добавление ссылки на профиль пользователя. <br /> <code>app/views/layouts/_header.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1484,7 +1484,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.30.</span> <span class="description">Интеграционный тест для входа и выхода. <br /> <code>spec/requests/users_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.30.</span> <span class="description">Интеграционный тест для входа и выхода. <br /> <code>spec/requests/users_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1568,7 +1568,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 9.31.</span> <span class="description">Функция для входа пользователей внутри интеграционных тестов. <br /> <code>spec/spec_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 9.31.</span> <span class="description">Функция для входа пользователей внутри интеграционных тестов. <br /> <code>spec/spec_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1605,23 +1605,20 @@
 <li id="fn:9.1">Другой распространенной моделью является завершение сессии после истечения определенного количества времени. Это особенно уместно на сайтах, содержащих конфиденциальную информацию, такую как банковские и финансово-торговые операции.&nbsp;<a class="arrow" href="#fnref:9.1">&uarr;</a></li>
 <li id="fn:9.2">В <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздел&nbsp;9.3.2</a> Разделе&nbsp;9.3.2</a> мы увидим, насколько продолжительно это самое &ldquo;навсегда&rdquo;.&nbsp;<a class="arrow" href="#fnref:9.2">&uarr;</a></li>
 <li id="fn:9.3">Если бы мы также добавили <code>create</code> и <code>destroy</code> действия, generate скрипт создал бы <em>представления</em> для этих действий, которые нам не нужны. Конечно, мы могли бы удалить представления, но я предпочел не допустить их создания скриптом <code>generate</code>, а вместо этого определить действия вручную.&nbsp;<a class="arrow" href="#fnref:9.3">&uarr;</a></li>
-<li id="fn:9.4">В случае, если Вы задаетесь вопросом, почему мы используем <code>user</code> вместо <code>@user</code> в  <a class="ref" href="sign-in-sign-out#code:signin_failure">Листинге&nbsp;9.8</a>, это связано с тем, что эта user переменная никогда более не понадобится в других представлениях, следовательно, нет оснований использовать здесь переменную экземпляра. (Хотя использование <code>@user</code> по прежнему возможно.)&nbsp;<a class="arrow" href="#fnref:9.4">&uarr;</a></li>
+<li id="fn:9.4">В случае, если вы задаетесь вопросом, почему мы используем <code>user</code> вместо <code>@user</code> в  <a class="ref" href="sign-in-sign-out#code:signin_failure">Листинге&nbsp;9.8</a>, это связано с тем, что эта user переменная никогда более не понадобится в других представлениях, следовательно, нет оснований использовать здесь переменную экземпляра. (Хотя использование <code>@user</code> по прежнему возможно.)&nbsp;<a class="arrow" href="#fnref:9.4">&uarr;</a></li>
 <li id="fn:9.5">Изображение из <a href="http://www.flickr.com/photos/hermanusbackpackers/3343254977/">http://www.flickr.com/photos/hermanusbackpackers/3343254977/</a>.&nbsp;<a class="arrow" href="#fnref:9.5">&uarr;</a></li>
-<li id="fn:9.6">На некоторых системах, Вам, возможно, придется использовать <code>self.current_user = user</code> для прохождения предстоящих тестов.&nbsp;<a class="arrow" href="#fnref:9.6">&uarr;</a></li>
+<li id="fn:9.6">На некоторых системах, вам, возможно, придется использовать <code>self.current_user = user</code> для прохождения предстоящих тестов.&nbsp;<a class="arrow" href="#fnref:9.6">&uarr;</a></li>
 <li id="fn:9.7">Из-за включения модуля Sessions хелпера в  Application controller, <code>self</code> переменная здесь является самим контроллером.&nbsp;<a class="arrow" href="#fnref:9.7">&uarr;</a></li>
 <li id="fn:9.8">Фактически, эти двое полностью эквивалентны; <code>attr_accessor</code> это просто удобный способ создать именно такие getter/setter методы автоматически.&nbsp;<a class="arrow" href="#fnref:9.8">&uarr;</a></li>
 <li id="fn:9.9">Как правило, это означает присвоение переменных, которые изначально <code>nil</code>, но не ложные (<code>false</code>) значения также будут переписаны оператором <code>||=</code>.&nbsp;<a class="arrow" href="#fnref:9.9">&uarr;</a></li>
 <li id="fn:9.10">Этот метод оптимизации, позволяющий избежать повторных вызовов функции известен как <a href="http://ru.wikipedia.org/wiki/Мемоизация"><em>мемоизация</em></a>.&nbsp;<a class="arrow" href="#fnref:9.10">&uarr;</a></li>
 <li id="fn:9.11">Это вызывает чувство, как будто хвост виляет собакой, но это цена, которую мы платим за использование передовых технологий.&nbsp;<a class="arrow" href="#fnref:9.11">&uarr;</a></li>
-<li id="fn:9.12">Если Вы используете Spork, она будет расположена внутри блока <code>Spork.prefork</code>.&nbsp;<a class="arrow" href="#fnref:9.12">&uarr;</a></li>
-<li id="fn:9.13">Вы можете узнать о вещах, подобных  <code>cookies.delete</code>, почитав введение в cookies в Rails API. (Так как ссылки на Rails API имеют тенденцию быстро устаревать, используйте Ваш Google-fu (??) для поиска актуальной версии.)&nbsp;<a class="arrow" href="#fnref:9.13">&uarr;</a></li>
-<li id="fn:9.14">Обратите внимание, что мы можем использовать символы вместо строк для этикеток, например, <code>fill_in :email</code> вместо <code>fill_in "Email"</code>. Мы использовали последнюю в <a class="ref" href="sign-up#code:signup_success_test">Листинге&nbsp;8.22</a>, но теперь Вас не должно удивлять, что Rails позволяет использовать в этом месте символы.&nbsp;<a class="arrow" href="#fnref:9.14">&uarr;</a></li>
+<li id="fn:9.12">Если вы используете Spork, она будет расположена внутри блока <code>Spork.prefork</code>.&nbsp;<a class="arrow" href="#fnref:9.12">&uarr;</a></li>
+<li id="fn:9.13">Вы можете узнать о вещах, подобных  <code>cookies.delete</code>, почитав введение в cookies в Rails API. (Так как ссылки на Rails API имеют тенденцию быстро устаревать, используйте ваш Google для поиска актуальной версии.)&nbsp;<a class="arrow" href="#fnref:9.13">&uarr;</a></li>
+<li id="fn:9.14">Обратите внимание, что мы можем использовать символы вместо строк для этикеток, например, <code>fill_in :email</code> вместо <code>fill_in "Email"</code>. Мы использовали последнюю в <a class="ref" href="sign-up#code:signup_success_test">Листинге&nbsp;8.22</a>, но теперь вас не должно удивлять, что Rails позволяет использовать в этом месте символы.&nbsp;<a class="arrow" href="#fnref:9.14">&uarr;</a></li>
 <li id="fn:9.15">Веб браузеры на самом деле не могут выдавать запрос <tt>DELETE</tt>; Rails подделывает его с помошью JavaScript.&nbsp;<a class="arrow" href="#fnref:9.15">&uarr;</a></li>
 <li id="fn:9.16">Вспомните из <a class="ref" href="modeling-and-viewing-users-two#sec:a_user_sidebar">Раздела&nbsp;7.3.3</a> что мы можем сделать ссылку непосредственно на объект user и позволить Rails вывести соответствующий URL.&nbsp;<a class="arrow" href="#fnref:9.16">&uarr;</a></li>
 <li id="fn:9.17">Несколько странно: мы использовали <code>cookies</code> для реализации сессий, и <code>session</code> реализуются с cookies!&nbsp;<a class="arrow" href="#fnref:9.17">&uarr;</a></li>
 </ol>
 </div>
-
-
-
 

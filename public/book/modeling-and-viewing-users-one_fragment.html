@@ -8,17 +8,17 @@
 
 <p><a class="ref" href="filling-in-the-layout#top">Главу&nbsp;5</a>, мы закончили заглушкой страницы для создания новых пользователей (<a class="ref" href="filling-in-the-layout#sec:user_signup">Раздел&nbsp;5.3</a>); в течение следующих трех глав мы выполним обещание, неявное в этой начинающейся странице регистрации. Первый важный шаг это создание <em>модели данных</em> для пользователей нашего сайта, вместе со способом хранить эти данные. Завершение этой задачи является целью для ближайших двух глав, и мы дадим пользователям возможность зарегистрироваться в системе в  <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.  Как только пример приложения сможет создавать новых пользователей, мы позволим им входить и выходить (<a class="ref" href="sign-in-sign-out#top">Глава&nbsp;9</a>), и в <a class="ref" href="updating-showing-and-deleting-users#top">Главе&nbsp;10</a> (<a class="ref" href="updating-showing-and-deleting-users#sec:protecting_pages">Раздел&nbsp;10.2</a>) мы узнаем, как защитить страницы от несанкцонированного доступа.</p>
 
-<p>Взятые вместе, материалы с <a class="ref" href="modeling-and-viewing-users-one#top">Главы&nbsp;6</a> по <a class="ref" href="updating-showing-and-deleting-users#top">Главу&nbsp;10</a> разрабатывают полную Rails систему входа и аутентификации. Как Вы знаете, там, в стране Rails, есть различные готовые решения для аутентификации; <a class="ref" href="modeling-and-viewing-users-one#sidebar:roll_your_own">Блок&nbsp;6.1</a> объясняет, почему (по крайней мере, сначала) это - хорошая идея - прикрутить свою собственную.</p>
+<p>Взятые вместе, материалы с <a class="ref" href="modeling-and-viewing-users-one#top">Главы&nbsp;6</a> по <a class="ref" href="updating-showing-and-deleting-users#top">Главу&nbsp;10</a> разрабатывают полную Rails систему входа и аутентификации. Как вы знаете, там, в стране Rails, есть различные готовые решения для аутентификации; <a class="ref" href="modeling-and-viewing-users-one#sidebar:roll_your_own">Блок&nbsp;6.1</a> объясняет, почему (по крайней мере, сначала) это - хорошая идея - прикрутить свою собственную.</p>
 
 <div class="label" id="sidebar:roll_your_own"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 6.1.</span><span class="description">Прикручивание собственной  системы аутентификации.</span></span>
-<p>Фактически все веб-приложения в настоящее время требуют какую либо систему входа и аутентификации. Неудивительно, что у большинства веб-платформ есть множество возможностей для реализации таких систем, и Rails не исключение. Примеры систем аутентификации и авторизации включают в себя <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a>, и <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (так же как не-Rails-специфичные решения, построенные на <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> или <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Разумно спросить, почему мы должны повторно изобретать колесо. Почему бы просто не использовать стандартное решение вместо того, чтобы прикручивать собственное?</p>
+<p>Фактически всем веб-приложениям в настоящее время требуется какая либо система входа и аутентификации. Неудивительно, что у большинства веб-платформ есть множество возможностей для реализации таких систем, и Rails не исключение. Примеры систем аутентификации и авторизации включают в себя <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a>, и <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (так же как не-Rails-специфичные решения, построенные на <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> или <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Разумно спросить, почему мы должны повторно изобретать колесо. Почему бы просто не использовать стандартное решение вместо того, чтобы прикручивать собственное?</p>
 
 <p>Есть несколько причин, почему создание нашей собственной системы аутентификации является хорошей идеей. Во-первых, стандартного решения для аутентификации в Rails не существует; а привязав учебник к какому либо конкретному проекту мы рискуем тем, что, что выбранный проект может выйти из моды или устареть. Кроме того, даже если бы мы угадали, то кодовая база проекта продолжала бы развиваться, тем самым превращая учебник в устаревший хлам. Наконец, представление всей машинерии аутентификации сразу было бы педагогическим бедствием - к примеру, Clearance содержит более чем 1 000 строк кода и создает сложную модель данных с самого начала. Системы аутентификации - захватывающее и богатое программированием упражнение; прикручивание нашего собственного означает, что мы можем рассмотривать одну маленькую часть за один раз, что приведет к намного более глубокому пониманию - и аутентификации и Rails.</p>
 
-<p>Я призываю Вас изучить&nbsp;<a class="ref" href="modeling-and-viewing-users-one#top">6</a>&nbsp;-&nbsp;<a class="ref" href="updating-showing-and-deleting-users#top">10</a> главы чтобы дать себе хорошую основу для будущих проектов. Если Вам однажды случится  использовать стандартную систему аутентификации для своих собственных приложений, то Вы будете в хорошей позиции чтобы понять и адаптировать его под Ваши потребности.</p>
+<p>Я призываю вас изучить&nbsp;<a class="ref" href="modeling-and-viewing-users-one#top">6</a>&nbsp;-&nbsp;<a class="ref" href="updating-showing-and-deleting-users#top">10</a> главы чтобы дать себе хорошую основу для будущих проектов. Если вам однажды случится  использовать стандартную систему аутентификации для своих собственных приложений, то вы будете в хорошей позиции чтобы понять и адаптировать его под ваши потребности.</p>
 </div>
 
 
@@ -30,7 +30,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/profile_mockup.png" alt="profile_mockup" /></span></div><div class="caption"><span class="header">Рисунок  6.1: </span><span class="description">Макет страницы просмотра пользователя.&nbsp;<a href="http://railstutorial.org/images/figures/profile_mockup-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Как обычно, если Вы продолжаете использовать Git для управления версиями, сейчас было бы хорошее время, чтобы сделать отдельную тему ветки для моделировния пользователей:</p>
+<p>Как обычно, если вы продолжаете использовать Git для управления версиями, сейчас было бы хорошее время, чтобы сделать отдельную тему ветки для моделировния пользователей:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout master
 <span class="gp">$</span> git checkout -b modeling-users
@@ -38,7 +38,7 @@
 </div>
 
 
-<p>(Первая строка здесь только для того чтобы удостовериться, что Вы находитесь на master ветке, чтобы тема ветки <tt>modeling-users</tt> была основана на <tt>master</tt> ветке. Можно пропустить эту команду, если Вы уже находитесь на master ветке.)</p>
+<p>(Первая строка здесь только для того чтобы удостовериться, что вы находитесь на master ветке, чтобы тема ветки <tt>modeling-users</tt> была основана на <tt>master</tt> ветке. Можно пропустить эту команду, если вы уже находитесь на master ветке.)</p>
 
 <div class="label" id="sec:user_model"></div>
 
@@ -48,7 +48,7 @@
 
 <p>Хотя конечная цель следующих трех глав это создание страницы регистрации для нашего сайта, в принятии регистрационной информации сейчас хорошего мало, так как у нас в настоящий момент нет  места, чтобы хранить ее. Таким образом, первый шаг в регистрации пользователей должен сделать структуру данных, для получения и хранения их информации. В Rails дефолтную структуру данных для модели данных называют, что достаточно естественно, <em>модель</em> (М. в MVC из <a class="ref" href="beginning#sec:mvc">Раздела&nbsp;1.2.6</a>). Дефолтное решение Rails для проблемы персистентности состоит в том, чтобы использовать <em>базу данных</em> для долгосрочного хранения данных, и дефолтную библиотеку <em>Active Record</em> для того, чтобы взаимодействовать с базой данных.<sup class="footnote" id="fnref:6.2"><a href="#fn:6.2">2</a></sup></p>
 
-<p>Active Record идет с массой методов для создания, хранения и поиска объектов данных, и  все без необходимости использовать язык структурированных запросов (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> используемый <a  href="http://ru.wikipedia.org/wiki/Реляционная_база_данных">реляционными базами данных</a>. Кроме того, у Rails есть функции, называемые <em>миграциями</em> чтобы позволить определениям данных быть записанными в чистом Ruby, без необходимости изучать язык определения данных (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> Как результат,  Rails почти полностью изолирует Вас от деталей хранения данных. В этой книге, при использовании SQLite для разработки и Heroku для развертывания (<a class="ref" href="beginning#sec:deploying">Раздел&nbsp;1.4</a>), мы разработали эту тему еще дальше, до точки, где мы едва когда-либо должны думать о том, как Rails хранит данные, даже для production приложений.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
+<p>Active Record идет с массой методов для создания, хранения и поиска объектов данных, и  все без необходимости использовать язык структурированных запросов (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> используемый <a  href="http://ru.wikipedia.org/wiki/Реляционная_база_данных">реляционными базами данных</a>. Кроме того, у Rails есть функции, называемые <em>миграциями</em> чтобы позволить определениям данных быть записанными в чистом Ruby, без необходимости изучать язык определения данных (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> Как результат,  Rails почти полностью изолирует вас от деталей хранения данных. В этой книге, при использовании SQLite для разработки и Heroku для развертывания (<a class="ref" href="beginning#sec:deploying">Раздел&nbsp;1.4</a>), мы разработали эту тему еще дальше, до точки, где мы едва когда-либо должны думать о том, как Rails хранит данные, даже для production приложений.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
 
 <div class="label" id="sec:database_migrations"></div>
 
@@ -58,7 +58,7 @@
 
 <p>Можно вспомнить из <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Раздела&nbsp;4.4.5</a> что мы уже встречали, в сделанном нами классе <code>User</code> объекты user с атрибутами <code>name</code> и <code>email</code> Тот класс служил полезным примером, но он испытывал недостаток в критическом свойстве <em>персистентности</em>: когда мы создали объект User в консоли Rails, он исчез, как только мы вышли. Наша цель в этом Разделе состоит в том, чтобы создать модель для пользователей, которые не будут исчезать так легко.</p>
 
-<p>Как и с классом User в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы начнем с моделирования пользователя с двумя атрибутами, a <code>name</code> и <code>email</code> адрес, последний мы будем использовать в качестве уникального имени пользователя.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (Мы добавим атрибут пароля в <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">Разделе&nbsp;7.1</a>.) В <a class="ref" href="rails-flavored-ruby#code:example_user">Листинге&nbsp;4.8</a>, мы сделали это с <code>attr_accessor</code> методом Ruby:</p>
+<p>Как и с классом User в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы начнем с моделирования пользователя с двумя атрибутами: <code>name</code> и <code>email</code>, последний мы будем использовать в качестве уникального имени пользователя.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (Мы добавим атрибут пароля в <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">Разделе&nbsp;7.1</a>.) В <a class="ref" href="rails-flavored-ruby#code:example_user">Листинге&nbsp;4.8</a>, мы сделали это с <code>attr_accessor</code> методом Ruby:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -72,7 +72,7 @@
 
 <p>Напротив, при использовании Rails, чтобы смоделировать пользователей мы не должны идентифицировать атрибуты явно. Как отмечено кратко выше, чтобы хранить данные, Rails  по умолчанию использует реляционную базу данных, которая состоит из <em>таблиц</em> составленных из <em>строк</em>, данных, где у каждой строки есть <em>столбцы</em> атрибутов данных. Например, чтобы сохранить пользователей с именами и адресами электронной почты, мы составим таблицу <code>users</code> со столбцами <code>name</code> и <code>email</code> (с каждой строкой, соответствующей одному пользователю). Называя столбцы таким образом, мы позволим Active Record выводить атрибуты объектов User для нас.</p>
 
-<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на Ваш вкус, будте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить. Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>) что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
+<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на ваш вкус, будте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить. Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>) что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Users new
 </pre></div>
@@ -104,7 +104,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.2.</span> <span class="description">Миграция для модели User (чтобы составить таблицу <code>users</code>) <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.2.</span> <span class="description">Миграция для модели User (чтобы составить таблицу <code>users</code>) <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -148,7 +148,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_database_browser.png" alt="sqlite_database_browser" /></span></div><div class="caption"><span class="header">Рисунок  6.3: </span><span class="description">The  <a href="http://sqlitebrowser.sourceforge.net/">SQLite Database Browser</a> с нашей новой <code>users</code> таблицей.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_database_browser-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Вы, вероятно, заметили, что запуск <code>db:migrate</code> выполняет <code>self.up</code> команду в файле миграции. Что, тогда делает <code>self.down</code>? Как Вы могли бы предположить, <code>down</code> миграции <em>down</em>, ликвидируя последствия migrating up. В нашем случае это означает <em>сброс</em>  <code>users</code> таблицы в базе данных:</p>
+<p>Вы, вероятно, заметили, что запуск <code>db:migrate</code> выполняет <code>self.up</code> команду в файле миграции. Что, тогда делает <code>self.down</code>? Как вы могли бы предположить, <code>down</code> миграции <em>down</em>, ликвидируя последствия migrating up. В нашем случае это означает <em>сброс</em>  <code>users</code> таблицы в базе данных:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="o">.</span>
@@ -169,9 +169,9 @@
 </div>
 
 
-<p>Это часто бывает полезным, если Вы понимаете, что есть другой столбец, который Вы хотите добавить, но при этом не желаете связываться с новой миграцией: можно откатить миграцию, добавить требуемый столбец, и затем мигрировать back up. (Это не всегда удобно, и мы узнаем, как добавить столбцы к существующей таблице в <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">Разделе&nbsp;7.1.2</a>.)</p>
+<p>Это часто бывает полезным, если вы понимаете, что есть другой столбец, который вы хотите добавить, но при этом не желаете связываться с новой миграцией: можно откатить миграцию, добавить требуемый столбец, и затем мигрировать back up. (Это не всегда удобно, и мы узнаем, как добавить столбцы к существующей таблице в <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">Разделе&nbsp;7.1.2</a>.)</p>
 
-<p>Если Вы откатывали базу данных, migrate up снова перед продолжением:</p>
+<p>Если вы откатывали базу данных, migrate up снова перед продолжением:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:migrate
 </pre></div>
@@ -194,7 +194,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.3.</span> <span class="description">Совершенно новая модель User. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.3.</span> <span class="description">Совершенно новая модель User. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
 <span class="k">end</span>
@@ -210,13 +210,13 @@
 <h4><a id="sec:6.1.2.1" href="modeling-and-viewing-users-one#sec:model_annotation" class="heading">Аннотация модели</a></h4>
 
 
-<p>Хотя это и не является строго необходимым, Вы могли бы счесть удобным <em>аннотировать</em> Ваши Rails модели, используя <tt>annotate</tt> гем  (<a class="ref" href="modeling-and-viewing-users-one#code:gemfile_annotate">Листинг&nbsp;6.4</a>).</p>
+<p>Хотя это и не является строго необходимым, вы могли бы счесть удобным <em>аннотировать</em> ваши Rails модели, используя <tt>annotate</tt> гем  (<a class="ref" href="modeling-and-viewing-users-one#code:gemfile_annotate">Листинг&nbsp;6.4</a>).</p>
 
 <div class="label" id="code:gemfile_annotate"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.4.</span> <span class="description">Добавление <tt>annotate</tt> гема в <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Листинг 6.4.</span> <span class="description">Добавление <tt>annotate</tt> гема в <code>Gemfile</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 <span class="o">.</span>
@@ -257,7 +257,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.5.</span> <span class="description">Аннотированная модель User. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.5.</span> <span class="description">Аннотированная модель User. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="c1"># == Schema Information</span>
 <span class="c1">#</span>
@@ -292,7 +292,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.6.</span> <span class="description">Листинг 6.6.</span> <span class="description">Открытие доступа к <code>name</code> и <code>email</code> атрибутам. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.6.</span> <span class="description">Листинг 6.6.</span> <span class="description">Открытие доступа к <code>name</code> и <code>email</code> атрибутам. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -319,7 +319,7 @@
 </div>
 
 
-<p>Как обозначено полезным сообщением “Любые модификации которые Вы сделаете откатятся при выходе”, при работе в песочнице, консоль будет "откатывать" (то есть, отменять) любые изменения базы данных, созданные во время сеанса.</p>
+<p>Как обозначено полезным сообщением “Любые модификации которые вы сделаете откатятся при выходе”, при работе в песочнице, консоль будет "откатывать" (то есть, отменять) любые изменения базы данных, созданные во время сеанса.</p>
 
 <p>Работая в консоли, полезно следить за <em>development log</em>, который записывает актуальные низкоуровневые операторы SQL, выдаваемые Active Record, как показано в <a class="ref" href="modeling-and-viewing-users-one#fig:development_log">Рис.&nbsp;6.4</a>. Для того, чтобы получить этот вывод в командной строке Unix выполните команду:</p>
 
@@ -357,7 +357,7 @@
 
 <p>Здесь мы видим, что, как и ожидалось, атрибуты имени и адреса электронной почты были установлены.</p>
 
-<p>Если Вы следили за development log, Вы, возможно, заметили, что новые строки еще не обнаружились. Это связано с тем, что вызов <code>User.new</code> не касается базы данных; он просто создает новый Ruby объект в памяти. Чтобы сохранить объект user в базы данных, мы вызовем метод <code>save</code> на переменной <code>user</code>:</p>
+<p>Если вы следили за development log, вы, возможно, заметили, что новые строки еще не обнаружились. Это связано с тем, что вызов <code>User.new</code> не касается базы данных; он просто создает новый Ruby объект в памяти. Чтобы сохранить объект user в базы данных, мы вызовем метод <code>save</code> на переменной <code>user</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">save</span>
 <span class="go">=&gt; true</span>
@@ -365,7 +365,7 @@
 </div>
 
 
-<p>Метод <code>save</code>возвращает <code>true</code> если сохранение успешно выполнилось и <code>false</code> если сохранение не выполнено. (Сейчас все сохранения, должны успешно выполняться; но в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a> мы увидим случаи, когда некоторые из них не сработают.), После сохранения  в development log должна появиться строка с командой SQL <code>INSERT INTO "users"</code>. Из-за множества методов, предоставляемых Active Record, в этой книге нам не потребуется необработанный SQL, и я опущу обсуждение команд SQL с этого времени. Но Вы можете многому научиться, наблюдая за development log.</p>
+<p>Метод <code>save</code>возвращает <code>true</code> если сохранение успешно выполнилось и <code>false</code> если сохранение не выполнено. (Сейчас все сохранения, должны успешно выполняться; но в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a> мы увидим случаи, когда некоторые из них не сработают.), После сохранения  в development log должна появиться строка с командой SQL <code>INSERT INTO "users"</code>. Из-за множества методов, предоставляемых Active Record, в этой книге нам не потребуется необработанный SQL, и я опущу обсуждение команд SQL с этого времени. Но вы можете многому научиться, наблюдая за development log.</p>
 
 <p>Вы, возможно, заметили, что у нового объекта  user  были <code>nil</code> значения для атрибутов <code>id</code> и волшебных столбцов <code>created_at</code> и <code>updated_at</code>. Давайте посмотрим, изменило ли наше <code>save</code> что-нибудь:</p>
 
@@ -390,7 +390,7 @@
 </div>
 
 
-<p>Как мы увидим в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, часто бывает удобно создать и сохранить модель в два приема, как мы имеем выше, но Active Record также позволяет Вам объединить эти действия в один шаг с <code>User.create</code>: </p>
+<p>Как мы увидим в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, часто бывает удобно создать и сохранить модель в два приема, как мы это сделали выше, но Active Record также позволяет вам объединить эти действия в один шаг с <code>User.create</code>: </p>
 
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;A Nother&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;another@example.org&quot;</span><span class="p">)</span>
@@ -538,7 +538,7 @@
 </div>
 
 
-<p><code>Update_attributes</code> метод принимает хеш атрибутов, и в случае успеха выполняет и обновление и сохранение за один шаг (возвращающая <code>true</code> чтобы указать, что сохранение прошло). Стоит отметить, что, после того как Вы определили некоторые атрибуты как доступные, используя <code>attr_accessible</code>  (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">Раздел&nbsp;6.1.2.2</a>), могут быть изменены <em>только</em> атрибуты включенные в вызов <code>update_attributes</code>. Если Вы когда-либо обнаружите, что Ваши модели загадочным образом начинают отказываться обновлять определенные столбцы, удостоверьтесь, что эти столбцы включаются в вызов <code>attr_accessible</code>.</p>
+<p><code>Update_attributes</code> метод принимает хеш атрибутов, и в случае успеха выполняет и обновление и сохранение за один шаг (возвращающая <code>true</code> чтобы указать, что сохранение прошло). Стоит отметить, что, после того как вы определили некоторые атрибуты как доступные, используя <code>attr_accessible</code>  (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">Раздел&nbsp;6.1.2.2</a>), могут быть изменены <em>только</em> атрибуты включенные в вызов <code>update_attributes</code>. Если вы когда-либо обнаружите, что ваши модели загадочным образом начинают отказываться обновлять определенные столбцы, удостоверьтесь, что эти столбцы включаются в вызов <code>attr_accessible</code>.</p>
 
 <div class="label" id="sec:user_validations"></div>
 
@@ -574,9 +574,9 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.7.</span> <span class="description">Валидация наличия <code>name</code> атрибута. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.7.</span> <span class="description">Валидация наличия <code>name</code> атрибута. <br /> <code>app/models/user.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
 
   <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
@@ -589,7 +589,7 @@
 
 <p><a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">Листинг&nbsp;6.7</a> может быть похожим на волшебство, но <code>validates</code> только метод, как и  <code>attr_accessible</code>. Эквивалентная <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">Листингу&nbsp;6.7</a> формулировка  с использованием круглых скобок:</p>
 
-<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">)</span>
 
   <span class="n">validates</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
@@ -626,9 +626,9 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.8.</span> <span class="description">Комментирование валидации, для обеспечения провальности теста. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.8.</span> <span class="description">Комментирование валидации, для обеспечения провальности теста. <br /> <code>app/models/user.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
 
   <span class="c1"># validates :name, :presence =&gt; true</span>
@@ -643,7 +643,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.9.</span> <span class="description">Практически пустой дефолтный User spec. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.9.</span> <span class="description">Практически пустой дефолтный User spec. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -656,7 +656,7 @@
 
 <p>Это просто использует метод <code>pending</code> ("ожидающий решения") чтобы указать, что мы должны заполнить spec чем-то полезным. Мы можем увидеть его эффект запустив User model spec:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/models/user_spec.rb 
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/models/user_spec.rb
 <span class="go">*</span>
 
 
@@ -677,7 +677,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.10.</span> <span class="description">Начальный user spec. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.10.</span> <span class="description">Начальный user spec. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -734,7 +734,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.11.</span> <span class="description">Провальный тест валидации <code>name</code> атрибута. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.11.</span> <span class="description">Провальный тест валидации <code>name</code> атрибута. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -800,7 +800,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.12.</span> <span class="description">Тест для наличия атрибута <code>email</code>.<br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.12.</span> <span class="description">Тест для наличия атрибута <code>email</code>.<br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -825,9 +825,9 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.13.</span> <span class="description">Валидация наличия атрибутов <code>name</code> и <code>email</code>.<br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.13.</span> <span class="description">Валидация наличия атрибутов <code>name</code> и <code>email</code>.<br /> <code>app/models/user.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
 
   <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
@@ -853,7 +853,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.14.</span> <span class="description">Тест для валидации длинны <code>name</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.14.</span> <span class="description">Тест для валидации длинны <code>name</code>. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -889,9 +889,9 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.15.</span> <span class="description">Добавление валидации длины для <code>name</code> атрибута.<br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.15.</span> <span class="description">Добавление валидации длины для <code>name</code> атрибута.<br /> <code>app/models/user.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> 
+<div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
 
   <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span>  <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
@@ -934,7 +934,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.16.</span> <span class="description">Тесты для валидации формата электронной почты. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.16.</span> <span class="description">Тесты для валидации формата электронной почты. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -972,7 +972,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.17.</span> <span class="description">Валидация формата электронной почты с регулярным выражением. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.17.</span> <span class="description">Валидация формата электронной почты с регулярным выражением. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1033,7 +1033,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.18.</span> <span class="description">Тест для отклонения повторяющихся адресов электронной почты.<br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.18.</span> <span class="description">Тест для отклонения повторяющихся адресов электронной почты.<br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1060,7 +1060,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.19.</span> <span class="description">Валидация уникальности адресов электронной почты. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.19.</span> <span class="description">Валидация уникальности адресов электронной почты. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1080,7 +1080,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.20.</span> <span class="description">Тест для отклонения двойных адресов электронной почты, нечувствительный к регистру. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.20.</span> <span class="description">Тест для отклонения двойных адресов электронной почты, нечувствительный к регистру. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1122,7 +1122,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.21.</span> <span class="description">Валидация уникальности адресов электронной почты, игнорирующая регистр. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.21.</span> <span class="description">Валидация уникальности адресов электронной почты, игнорирующая регистр. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -1160,7 +1160,7 @@
 
 
 
-<p>Если вышеописанная последовательность  кажется Вам неправдоподобной, поверьте мне, это не так: это происходит на любом Rails сайте со значительным трафиком.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> К счастью, решение просто в реализации, нам просто необходимо обеспечить уникальность также на уровне базы данных. Наш метод заключается в создании в базе данных <em>индекса</em> столбца электронной почты и последующем требовании уникальности <em>индекса</em>.</p>
+<p>Если вышеописанная последовательность  кажется вам неправдоподобной, поверьте мне, это не так: это происходит на любом Rails сайте со значительным трафиком.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> К счастью, решение просто в реализации, нам просто необходимо обеспечить уникальность также на уровне базы данных. Наш метод заключается в создании в базе данных <em>индекса</em> столбца электронной почты и последующем требовании уникальности <em>индекса</em>.</p>
 
 <p>Индекс электронной почты представляет собой обновление требований к нашей модели данных, что (как обсуждалось в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>) делается в Rails посредством миграций. Мы видели в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a> что генерация модели User автоматически создает новую миграцию (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинг&nbsp;6.2</a>); в данном случае мы добавляем структуру к существующей модели, таким образом, мы должны создать миграцию непосредственно, используя <code>migration</code> генератор:</p>
 
@@ -1176,7 +1176,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.22.</span> <span class="description">Миграция для реализации уникальности электронной почты. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.22.</span> <span class="description">Миграция для реализации уникальности электронной почты. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddEmailUniquenessIndex</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -1208,7 +1208,7 @@
 <div class="sidebar"><span class="title"><span class="header">Блок 6.2.</span><span class="description">Индексы базы данных</span></span>
 <p>При создании столбца в базе данных, важно учитывать, что нам нужно будет <em>найти</em> записи по этому столбцу. Рассмотрим, например, <code>email</code> атрибут созданый миграцией в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>. Когда мы позволим пользователям регистрироваться на сайте, начиная с <a class="ref" href="sign-up#top">Главы&nbsp;8</a>, нам нужно будет найти записи пользователя соответствующие предоставленному адресу электронной почты; в базе данных, основанной, к сожалению, на наивной модели данных, единственный путь, чтобы найти пользователя по его адресу электронной почты, это просмотреть строку <em>каждого</em> пользователя в базе данных и сравнить его электронной почту с атрибутом данной электронной почты. Это известно в бизнесе баз данных, как <em>full-table scan</em> (полное сканирование таблицы), а для реального сайта с тысячами пользователей это <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a>.</p>
 
-<p>Добавление индекса к столбцу электронной почты решает проблему. Чтобы понять индекс базы данных, полезно рассмотреть аналогию с индексом книги. В книге, чтобы найти все вхождения заданной строки, например &ldquo;foobar&rdquo;, Вам придется сканировать каждую страницу в поиске &ldquo;foobar&rdquo;. С индексом книги, с другой стороны, Вы можете просто посмотреть &ldquo;foobar&rdquo; в индексе, чтобы увидеть все страницы, содержащие &ldquo;foobar&rdquo;. Индекс базы данных работает по сути таким же образом.</p>
+<p>Добавление индекса к столбцу электронной почты решает проблему. Чтобы понять индекс базы данных, полезно рассмотреть аналогию с индексом книги. В книге, чтобы найти все вхождения заданной строки, например &ldquo;foobar&rdquo;, вам придется сканировать каждую страницу в поиске &ldquo;foobar&rdquo;. С индексом книги, с другой стороны, вы можете просто посмотреть &ldquo;foobar&rdquo; в индексе, чтобы увидеть все страницы, содержащие &ldquo;foobar&rdquo;. Индекс базы данных работает по сути таким же образом.</p>
 </div>
 
 
@@ -1233,7 +1233,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.23.</span> <span class="description">Добавление отладочной информации к макету сайта. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 6.23.</span> <span class="description">Добавление отладочной информации к макету сайта. <br /> <code>app/views/layouts/application.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1283,7 +1283,7 @@
 </div>
 
 
-<p>Как Вы можете видеть, Rails предоставляет <code>Rails</code> объект с <code>env</code> атрибутом и связанными с окружением булевыми методами. В частности, <code>Rails.env.development?</code> является <code>true</code> только в окружении разработки, так Embedded Ruby</p>
+<p>Как вы можете видеть, Rails предоставляет <code>Rails</code> объект с <code>env</code> атрибутом и связанными с окружением булевыми методами. В частности, <code>Rails.env.development?</code> является <code>true</code> только в окружении разработки, так Embedded Ruby</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">debug</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -1292,7 +1292,7 @@
 
 <p>не будет вставлен в production приложения или tests. (Включение отладочной информации в tests, вероятно, не причинит никакого вреда, но и, вероятно, не принесет никакой пользы,  поэтому лучше ограничить и показывать отладки только для  development.)</p>
 
-<p>Если Вам когда-нибудь понадобится запустить консоль в другой среде (для отладки теста, например), Вы можете включить окружение  в качестве параметра для <code>console</code> скрипта:</p>
+<p>Если вам когда-нибудь понадобится запустить консоль в другой среде (для отладки теста, например), вы можете включить окружение  в качестве параметра для <code>console</code> скрипта:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console test</span>
 <span class="go">Loading test environment (Rails 3.0.9)</span>
@@ -1302,14 +1302,14 @@
 </div>
 
 
-<p>Как и в случае с консолью, <code>development</code> является дефолтным окружением для локального сервера Rails, но Вы также можете запустить его в другой среде:</p>
+<p>Как и в случае с консолью, <code>development</code> является дефолтным окружением для локального сервера Rails, но вы также можете запустить его в другой среде:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails server --environment production
 </pre></div>
 </div>
 
 
-<p>Если Вы просмотрите ваше приложение в production, оно не будет работать без production  базы данных, которую мы можем создать, запустив <code>rake db:migrate</code> в production:</p>
+<p>Если вы просмотрите ваше приложение в production, оно не будет работать без production  базы данных, которую мы можем создать, запустив <code>rake db:migrate</code> в production:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:migrate <span class="nv">RAILS_ENV</span><span class="o">=</span>production
 </pre></div>
@@ -1318,7 +1318,7 @@
 
 <p>(Я нахожу запутывающим, когда console, server, и migrate команды определяют нестандартное окружение тремя взаимно несовместимыми способами, и именно поэтому я потрудился показать все три.)</p>
 
-<p>Кстати, если Вы развернули ваш пример приложения в Heroku, Вы можете увидеть его  окружение, используя команду <code>heroku</code> которая предоставляет свою собственную (удаленную) консоль:</p>
+<p>Кстати, если вы развернули ваш пример приложения в Heroku, вы можете увидеть его  окружение, используя команду <code>heroku</code> которая предоставляет свою собственную (удаленную) консоль:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ heroku console</span>
 <span class="go">Ruby console for yourapp.heroku.com</span>
@@ -1358,13 +1358,13 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_user_row.png" alt="sqlite_user_row" /></span></div><div class="caption"><span class="header">Рисунок  6.8: </span><span class="description">Строка user в базе данных SQLite <code>db/development.sqlite3</code>..&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_user_row-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Далее идет представление, которое отличается минимализмом, чтобы подчеркнуть, что это просто демонстрация (<a class="ref" href="modeling-and-viewing-users-one#code:stub_user_view">Листинг&nbsp;6.24</a>). Мы используем стандартное расположение Rails для представления show, <code>app/views/users/show.html.erb</code>; в отличие от представления <code>new.html.erb</code> которое мы создали генератором в <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>, <code>show.html.erb</code> файл в настоящее время не существует, так что Вам придется создать его вручную.</p>
+<p>Далее идет представление, которое отличается минимализмом, чтобы подчеркнуть, что это просто демонстрация (<a class="ref" href="modeling-and-viewing-users-one#code:stub_user_view">Листинг&nbsp;6.24</a>). Мы используем стандартное расположение Rails для представления show, <code>app/views/users/show.html.erb</code>; в отличие от представления <code>new.html.erb</code> которое мы создали генератором в <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>, <code>show.html.erb</code> файл в настоящее время не существует, так что вам придется создать его вручную.</p>
 
 <div class="label" id="code:stub_user_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.24.</span> <span class="description">Представление–заглушка  для отображения информации о пользователе. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 6.24.</span> <span class="description">Представление–заглушка  для отображения информации о пользователе. <br /> <code>app/views/users/show.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>, <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -1379,7 +1379,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.25.</span> <span class="description">Users контроллер с <code>show</code> действием. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.25.</span> <span class="description">Users контроллер с <code>show</code> действием. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1427,7 +1427,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.26.</span> <span class="description">Добавление ресурса Users в файл маршрутов. <br /> <code>config/routes.rb</code></span>       
+<div class="listing"><span class="header">Листинг 6.26.</span> <span class="description">Добавление ресурса Users в файл маршрутов. <br /> <code>config/routes.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:users</span>
@@ -1472,7 +1472,7 @@
 <h4><a id="sec:6.3.3.1" href="modeling-and-viewing-users-one#sec:params_in_debug" class="heading"><code>params</code> в <code>debug</code></a></h4>
 
 
-<p>Прежде, чем оставить страницу, показывающую пользователя, мы займем одну минуту, чтобы исследовать отладочную информацию, произведенную <a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">Листинге&nbsp;6.23</a>. Если Вы присмотритесь к <a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">Рис.&nbsp;6.10</a>, то Вы увидите, что он включает полезную информацию об отображаемой странице:<sup class="footnote" id="fnref:6.26"><a href="#fn:6.26">26</a></sup></p>
+<p>Прежде, чем оставить страницу, показывающую пользователя, мы займем одну минуту, чтобы исследовать отладочную информацию, произведенную <a class="ref" href="modeling-and-viewing-users-one#code:rails_debug">Листинге&nbsp;6.23</a>. Если вы присмотритесь к <a class="ref" href="modeling-and-viewing-users-one#fig:user_show_rails_3">Рис.&nbsp;6.10</a>, то вы увидите, что он включает полезную информацию об отображаемой странице:<sup class="footnote" id="fnref:6.26"><a href="#fn:6.26">26</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="nn">---</span> <span class="kt">!map</span><span class="l-Scalar-Plain">:ActiveSupport::HashWithIndifferentAccess</span>
 <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">show</span>
@@ -1482,7 +1482,7 @@
 </div>
 
 
-<p>Это YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> представление <code>params</code>, которое (как намекает название <code>HashWithIndifferentAccess</code>) в основном хэш.  Мы видим, что его контроллер это <code>users</code>, его действие это <code>show</code>, и его <code>id</code> атрибут это <code>"1"</code>. Хотя Вы будете редко иметь возможность использовать <code>params[:controller]</code> или <code>params[:action]</code>, использование <code>params[:id]</code> для вытаскивания&nbsp;id из URL является общепринятой идиомой Rails. В частности, мы использовали код</p>
+<p>Это YAML<sup class="footnote" id="fnref:6.27"><a href="#fn:6.27">27</a></sup> представление <code>params</code>, которое (как намекает название <code>HashWithIndifferentAccess</code>) в основном хэш.  Мы видим, что его контроллер это <code>users</code>, его действие это <code>show</code>, и его <code>id</code> атрибут это <code>"1"</code>. Хотя вы будете редко иметь возможность использовать <code>params[:controller]</code> или <code>params[:action]</code>, использование <code>params[:id]</code> для вытаскивания&nbsp;id из URL является общепринятой идиомой Rails. В частности, мы использовали код</p>
 
 <div class="code"><div class="highlight"><pre><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
@@ -1491,14 +1491,14 @@
 
 <p>в <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Листинге&nbsp;6.25</a> чтобы найти пользователя с id&nbsp;<code>1</code>. (<code>find</code> метод знает, как преобразовать строку&nbsp;<code>"1"</code> в целое число&nbsp;<code>1</code>.)</p>
 
-<p><code>Debug</code> информация часто обеспечивает полезную обратную связь, при разработке приложений Rails, и я предлагаю привыкнуть проверять ее всякий раз, когда Ваше приложение ведет себя не так как ожидалось.</p>
+<p><code>Debug</code> информация часто обеспечивает полезную обратную связь, при разработке приложений Rails, и я предлагаю привыкнуть проверять ее всякий раз, когда ваше приложение ведет себя не так как ожидалось.</p>
 
 <h2><a id="sec:6.4" href="modeling-and-viewing-users-one#sec:6.4" class="heading"><span class="number">6.4</span> Заключение</a></h2>
 
 
 <p>Эта глава - первая половина двухступенчатого процесса создания рабочей модели User. У наших пользователей теперь есть атрибуты <code>name</code> и <code>email</code> вместе с валидациями, обеспечивающими несколько важных ограничений для их значений. Мы также предприняли первый маленький шаг к рабочей  странице показывающей пользователя и ресурсу Users, основанному на принципах REST. В <a class="ref" href="modeling-and-viewing-users-two#top">Главе&nbsp;7</a>, мы завершим процесс, добавив пароли пользователя и более полезное  представлениение пользователя.</p>
 
-<p>Если бы Вы используете Git, теперь было бы хорошее время, чтобы фиксировать, если Вы не сделали этого ранее:</p>
+<p>Если бы вы используете Git, теперь было бы хорошее время, чтобы фиксировать, если вы не сделали этого ранее:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Finished first cut of the User model&quot;</span>
@@ -1532,23 +1532,23 @@
 <li id="fn:6.2">Название происходит от &ldquo;<a href="http://en.wikipedia.org/wiki/Active_record_pattern">active record pattern</a>&rdquo;, идентифицированное и названное в <em>Patterns of Enterprise Application Architecture</em>  Martin Fowler.&nbsp;<a class="arrow" href="#fnref:6.2">&uarr;</a></li>
 <li id="fn:6.3">Произносится &ldquo;ess-cue-ell&rdquo;, хотя альтернативное произношение &ldquo;sequel&rdquo; также принято.&nbsp;<a class="arrow" href="#fnref:6.3">&uarr;</a></li>
 <li id="fn:6.4">В своих самых ранних воплощениях Rails действительно требовал знания SQL&nbsp;DDL.  Даже после того, как Rails добавил миграции, все равно требовалась установка старой дефолтной базы данных (MySQL). К счастью, как отмечено в <a class="ref" href="beginning#sec:rails_server">Разделе&nbsp;1.2.5</a>, Rails теперь использует по умолчанию SQLite, которая хранит его данные как простой файл&mdash;не требуя установки.&nbsp;<a class="arrow" href="#fnref:6.4">&uarr;</a></li>
-<li id="fn:6.5">Иногда, необходимо проникнуть в этот уровень абстракции, но одна из целей  этого учебного руководства состоит в том, чтобы сделать весь код независимым от базы данных. (Действительно, это достойная цель вообще.) В случае, если Вам когда либо придется писать специфичный для базы данных код, для развертывания на Heroku, следует знать, что они используют превосходную  <a href="http://www.postgresql.org/">PostgreSQL</a> (&ldquo;post-gres-cue-ell&rdquo;) базу данных. PostgreSQL бесплатна, open-source, и кросплатформенна; если Вы разрабатываете PostgreSQL-специфичные приложения, можно установить ее локально, и сконфигурировать Rails, для использования ее в разработке, отредактировав <code>config/database.yml</code> файл. Такая конфигурация выходит за рамки этого учебного руководства, но есть много ресурсов в сети; используйте поисковую систему, чтобы найти самую актуальную информацию для Вашей платформы.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
+<li id="fn:6.5">Иногда, необходимо проникнуть в этот уровень абстракции, но одна из целей  этого учебного руководства состоит в том, чтобы сделать весь код независимым от базы данных. (Действительно, это достойная цель вообще.) В случае, если вам когда либо придется писать специфичный для базы данных код, для развертывания на Heroku, следует знать, что они используют превосходную  <a href="http://www.postgresql.org/">PostgreSQL</a> (&ldquo;post-gres-cue-ell&rdquo;) базу данных. PostgreSQL бесплатна, open-source, и кросплатформенна; если вы разрабатываете PostgreSQL-специфичные приложения, можно установить ее локально, и сконфигурировать Rails, для использования ее в разработке, отредактировав <code>config/database.yml</code> файл. Такая конфигурация выходит за рамки этого учебного руководства, но есть много ресурсов в сети; используйте поисковую систему, чтобы найти самую актуальную информацию для вашей платформы.&nbsp;<a class="arrow" href="#fnref:6.5">&uarr;</a></li>
 <li id="fn:6.6">Используя адреса электронной почты в качестве имени пользователя мы открываем теоретическую возможность связи с нашими пользователями в будущем.&nbsp;<a class="arrow" href="#fnref:6.6">&uarr;</a></li>
 <li id="fn:6.7">Не волнуйтесь о том, как объект <code>t</code>&nbsp;делает это; красота <em>уровней абстракции</em> (the beauty of abstraction layers) состоит в том, что мы не должны этого знать. Мы можем только доверить объекту <code>t</code>&nbsp;выполнить его работу.&nbsp;<a class="arrow" href="#fnref:6.7">&uarr;</a></li>
 <li id="fn:6.8">Мы увидим, как migrate up на удаленном сервере Heroku в <a class="ref" href="modeling-and-viewing-users-two#sec:heroku_deploy">Разделе&nbsp;7.4.2</a>.&nbsp;<a class="arrow" href="#fnref:6.8">&uarr;</a></li>
 <li id="fn:6.9">Официально произносится как &ldquo;ess-cue-ell-ite&rdquo;, тем не менее, вариант произношения  &ldquo;sequel-ite&rdquo; также возможен.&nbsp;<a class="arrow" href="#fnref:6.9">&uarr;</a></li>
-<li id="fn:6.10">На случай, если <code>"2010-01-05 00:57:46"</code>, вызвало Ваше любопытство - я не пишу это после полуночи; метки времени записаны в <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time</a> (UTC), которое для многих гражданских целей является аналогом  <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Greenwich Mean Time</a>. Из <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Q:</strong> Почему UTC используется в качестве акронима к Coordinated Universal Time вместо CUT? <strong>A:</strong> В 1970 система Coordinated Universal Time была разработана международной консультативной группой технических экспертов в рамках International Telecommunication Union (ITU). ITU чувствовал, что было лучше определить единственное сокращение для использования на всех языках, чтобы минимизировать беспорядок. Так как единогласное соглашение не могло быть достигнуто при использовании английского порядка слов, CUT, или французского порядка слов, TUC, акроним, UTC был выбран в качестве компромисса.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
-<li id="fn:6.11">Отметьте что значение <code>user.updated_at</code>. Говорит Вам что метка времени была в UTC.&nbsp;<a class="arrow" href="#fnref:6.11">&uarr;</a></li>
+<li id="fn:6.10">На случай, если <code>"2010-01-05 00:57:46"</code>, вызвало ваше любопытство - я не пишу это после полуночи; метки времени записаны в <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time</a> (UTC), которое для многих гражданских целей является аналогом  <a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">Greenwich Mean Time</a>. Из <a href="http://tf.nist.gov/general/misc.htm">NIST Time and Frequency FAQ</a>:   <strong>Q:</strong> Почему UTC используется в качестве акронима к Coordinated Universal Time вместо CUT? <strong>A:</strong> В 1970 система Coordinated Universal Time была разработана международной консультативной группой технических экспертов в рамках International Telecommunication Union (ITU). ITU чувствовал, что было лучше определить единственное сокращение для использования на всех языках, чтобы минимизировать беспорядок. Так как единогласное соглашение не могло быть достигнуто при использовании английского порядка слов, CUT, или французского порядка слов, TUC, акроним, UTC был выбран в качестве компромисса.&nbsp;<a class="arrow" href="#fnref:6.10">&uarr;</a></li>
+<li id="fn:6.11">Отметьте что значение <code>user.updated_at</code>. Говорит вам что метка времени была в UTC.&nbsp;<a class="arrow" href="#fnref:6.11">&uarr;</a></li>
 <li id="fn:6.12">Исключения и обработка исключений - несколько более продвинутые предметы Ruby, и мы не сильно будем нуждаться в них в этой книге. Они важны, тем не менее, и я предлагаю узнать о них используя одну из книг, рекомендованных в <a class="ref" href="beginning#sec:comments_for_various_readers">Разделе&nbsp;1.1.1</a>.&nbsp;<a class="arrow" href="#fnref:6.12">&uarr;</a></li>
 <li id="fn:6.13">Для тех кто взволнован, что <code>find_by_email</code> будет неэффективен, если будет большое количество пользователей, you&rsquo;re ahead of the game (??). Мы обсудим эту проблему и ее решение через индексы базы данных в <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">Разделе&nbsp;6.2.4</a>.&nbsp;<a class="arrow" href="#fnref:6.13">&uarr;</a></li>
 <li id="fn:6.14">(и писал)&nbsp;<a class="arrow" href="#fnref:6.14">&uarr;</a></li>
 <li id="fn:6.15">Я опускаю выводы консольных команд, когда они не особенно поучительны например, результат <code>User.new</code>.&nbsp;<a class="arrow" href="#fnref:6.15">&uarr;</a></li>
 <li id="fn:6.16">Отметьте, что в <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Таблице&nbsp;6.1</a>, &ldquo;буква&rdquo; на самом деле означает &ldquo;строчную букву&rdquo;, но <code>i</code> в конце regex осуществляет нечувствительное к регистру соответствие.&nbsp;<a class="arrow" href="#fnref:6.16">&uarr;</a></li>
-<li id="fn:6.17">Если Вы считаете это столь же полезным, как я, я призываю Вас <a href="http://bit.ly/donate-to-rubular">donate (дарить, жертвовать) to Rubular</a> чтобы вознаградить разработчика <a href="http://lovitt.net/">Michael Lovitt</a> за его замечательную работу.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
-<li id="fn:6.18">Знаете ли вы, что <code>"Michael Hartl"@example.com</code>, с кавычками и пробелом в середине, является допустимым адресом электронной почты согласно стандарту? Невероятно,- но абсурдно. Если у Вас нет адреса электронной почты, который содержит только буквы, номера, подчеркивания, и точки, то получите. N.B. regex в <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинге&nbsp;6.17</a> позволяет знаки "плюс", также, потому что Gmail (и возможно другие сервисы электронной почты) делает что-то полезное с ними: например, чтобы фильтровать заказы от Amazon, можно использовать <tt>username+amazon@gmail.com</tt>, который пойдет в адрес <tt>username@gmail.com</tt>, разрешая Вам фильтровать по строке <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
+<li id="fn:6.17">Если вы считаете это столь же полезным, как я, я призываю вас <a href="http://bit.ly/donate-to-rubular">donate (дарить, жертвовать) to Rubular</a> чтобы вознаградить разработчика <a href="http://lovitt.net/">Michael Lovitt</a> за его замечательную работу.&nbsp;<a class="arrow" href="#fnref:6.17">&uarr;</a></li>
+<li id="fn:6.18">Знаете ли вы, что <code>"Michael Hartl"@example.com</code>, с кавычками и пробелом в середине, является допустимым адресом электронной почты согласно стандарту? Невероятно,- но абсурдно. Если у вас нет адреса электронной почты, который содержит только буквы, номера, подчеркивания, и точки, то получите. N.B. regex в <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинге&nbsp;6.17</a> позволяет знаки "плюс", также, потому что Gmail (и возможно другие сервисы электронной почты) делает что-то полезное с ними: например, чтобы фильтровать заказы от Amazon, можно использовать <tt>username+amazon@gmail.com</tt>, который пойдет в адрес <tt>username@gmail.com</tt>, разрешая вам фильтровать по строке <tt>amazon</tt>.&nbsp;<a class="arrow" href="#fnref:6.18">&uarr;</a></li>
 <li id="fn:6.19">Как отмечено кратко во введении в этот раздел, есть выделенная тестовая база данных, <code>db/test.sqlite3</code>, для этой цели.&nbsp;<a class="arrow" href="#fnref:6.19">&uarr;</a></li>
-<li id="fn:6.20">Если Вы задаетесь вопросом почему <code>create!</code> строка в <a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">Листинге&nbsp;6.10</a> не заставляет это перестать работать, создавая двойного пользователя, это потому что тесты Rails являются <em>transactional</em>: каждый тест обертывается в <a href="http://ru.wikipedia.org/wiki/Транзакция">транзакцию</a>, которая <em>откатывает</em> базу данных после того, как тест выполняется. Таким образом, каждый прогон тестов происходит в свежей базе данных.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
-<li id="fn:6.21">Да, это произошло со мной. А как Вы думали я узнал об этом?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
+<li id="fn:6.20">Если вы задаетесь вопросом почему <code>create!</code> строка в <a class="ref" href="modeling-and-viewing-users-one#code:raw_user_spec">Листинге&nbsp;6.10</a> не заставляет это перестать работать, создавая двойного пользователя, это потому что тесты Rails являются <em>transactional</em>: каждый тест обертывается в <a href="http://ru.wikipedia.org/wiki/Транзакция">транзакцию</a>, которая <em>откатывает</em> базу данных после того, как тест выполняется. Таким образом, каждый прогон тестов происходит в свежей базе данных.&nbsp;<a class="arrow" href="#fnref:6.20">&uarr;</a></li>
+<li id="fn:6.21">Да, это произошло со мной. А как вы думали я узнал об этом?&nbsp;<a class="arrow" href="#fnref:6.21">&uarr;</a></li>
 <li id="fn:6.22">Конечно, мы могли только отредактировать файл миграции для таблицы <code>users</code> в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a> but that would require rolling back and then migrating back up.(??) Rails Путь состоит в том, чтобы использовать миграции каждый раз, когда  мы обнаруживаем, что наша модель данных должна измениться.&nbsp;<a class="arrow" href="#fnref:6.22">&uarr;</a></li>
 <li id="fn:6.23">Можно также определить свои собственные окружения; подробности см. в <a href="http://railscasts.com/episodes/72-adding-an-environment">Railscast on adding an environment</a> for details.&nbsp;<a class="arrow" href="#fnref:6.23">&uarr;</a></li>
 <li id="fn:6.24">Fielding, Roy Thomas. <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Doctoral dissertation, University of California, Irvine, 2000.&nbsp;<a class="arrow" href="#fnref:6.24">&uarr;</a></li>
@@ -1557,7 +1557,4 @@
 <li id="fn:6.27">Rails <code>debug</code> информация показана как <a  href="http://www.yaml.org/">YAML</a> ( <a   href="http://catb.org/jargon/html/R/recursive-acronym.html">recursive acronym</a> (или <a href="http://ru.wikipedia.org/wiki/Рекурсивный_акроним">рекурсивный акроним)</a>)  обозначающий &ldquo;<a href="http://ru.wikipedia.org/wiki/YAML">YAML</a> Ain&rsquo;t Markup Language&rdquo;), который является дружественным форматом данных, разработанным, чтобы быть удобочитаемым и для машин и для людей.&nbsp;<a class="arrow" href="#fnref:6.27">&uarr;</a></li>
 </ol>
 </div>
-
-
-
 

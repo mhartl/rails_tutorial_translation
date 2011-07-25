@@ -39,7 +39,7 @@
 <h3><a id="sec:7.1.1" href="modeling-and-viewing-users-two#sec:password_validations" class="heading"><span class="number">7.1.1</span> Валидации пароля</a></h3>
 
 <p>Хотя мы еще даже не добавили колонку для паролей к нашей базе, мы начнем писать тесты для них. Наш первоначальный план - иметь тесты для валидации наличия, длины и подтверждения пароля.
-Это наш самый большой единый блок испытаний до сих пор, так что увидим, сможете ли Вы прочитать все за один раз. Если Вы застрянете, Вам может помочь пересмотр аналогичных проверок из <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Раздела&nbsp;6.2</a> либо пропустите тесты и переходите сразу к коду приложения в <a class="ref" href="modeling-and-viewing-users-two#code:password_validations">Листинге&nbsp;7.2</a>.</p>
+Это наш самый большой единый блок испытаний до сих пор, так что увидим, сможете ли вы прочитать все за один раз. Если вы застрянете, вам может помочь пересмотр аналогичных проверок из <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Раздела&nbsp;6.2</a> либо пропустите тесты и переходите сразу к коду приложения в <a class="ref" href="modeling-and-viewing-users-two#code:password_validations">Листинге&nbsp;7.2</a>.</p>
 
 <p>В целях сведения к минимуму опечаток в паролях, при создании sign up страницы в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, мы реализуем общепринятую конвенцию запроса <em>подтверждения</em> пользователями их паролей. Для начала, давайте рассмотрим хэш пользовательских атрибутов из <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">Листинга&nbsp;6.20</a>:</p>
 
@@ -56,7 +56,7 @@
 </div>
 
 
-<p>Чтобы написать тесты для паролей, нам необходимо добавить <em>два</em> новых атрибута к хэшу <code>@attr</code>: <code>password</code> (пароль) и <code>password_confirmation</code> (подтверждение пароля).  Как Вы наверное догадались, атрибут <code>password_confirmation</code> будет использоваться для шага подтверждения пароля.</p>
+<p>Чтобы написать тесты для паролей, нам необходимо добавить <em>два</em> новых атрибута к хэшу <code>@attr</code>: <code>password</code> (пароль) и <code>password_confirmation</code> (подтверждение пароля).  Как вы наверное догадались, атрибут <code>password_confirmation</code> будет использоваться для шага подтверждения пароля.</p>
 
 <p>Давайте напишем тесты на наличие пароля и его подтверждение, а также тесты подтверждения валидности длины  (ограничение несколько произвольно и составляет от 6 до 40 символов). Результат представлен в <a class="ref" href="modeling-and-viewing-users-two#code:password_validation_tests">Листинге&nbsp;7.1</a>.</p>
 
@@ -64,7 +64,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.1.</span> <span class="description">Тесты для валидации пароля. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.1.</span> <span class="description">Тесты для валидации пароля. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -125,7 +125,7 @@
 
 <p>вызовет ошибку. Последующие тесты затем проверят каждую валидацию, в свою очередь, используя ту же <code>@attr.merge</code> технику что и в <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">Листинге&nbsp;6.11</a>.</p>
 
-<p>Теперь код приложения, в котором содержится трюк. На самом деле, он состоит из <em>двух</em> трюков. Во-первых, Вы могли бы ожидать в этот момент, что мы запустим миграции для добавления <code>password</code> атрибута к модели User, как мы это делали с атрибутами <code>name</code> и <code>email</code> в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a>. Но это не так: мы будем хранить в базе данных только <em>зашифрованные</em> пароли; для пароля мы введем <em>виртуальный атрибут</em> (то есть, атрибут не соответствующий колонке в базе данных) используя метод <code>attr_accessor</code> так же как мы это делали с оригинальными <code>name</code> и <code>email</code> атрибутами образца пользователя в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>. <code>Password</code> атрибут никогда не будет записан в базу данных, но будет существовать только в памяти для использования при выполнении шага подтверждения пароля (реализовано ниже) и шага шифрования (реализовано в <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">Разделе&nbsp;7.1.2</a> и <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Разделе&nbsp;7.2</a>).</p>
+<p>Теперь код приложения, в котором содержится трюк. На самом деле, он состоит из <em>двух</em> трюков. Во-первых, вы могли бы ожидать в этот момент, что мы запустим миграции для добавления <code>password</code> атрибута к модели User, как мы это делали с атрибутами <code>name</code> и <code>email</code> в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a>. Но это не так: мы будем хранить в базе данных только <em>зашифрованные</em> пароли; для пароля мы введем <em>виртуальный атрибут</em> (то есть, атрибут не соответствующий колонке в базе данных) используя метод <code>attr_accessor</code> так же как мы это делали с оригинальными <code>name</code> и <code>email</code> атрибутами образца пользователя в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>. <code>Password</code> атрибут никогда не будет записан в базу данных, но будет существовать только в памяти для использования при выполнении шага подтверждения пароля (реализовано ниже) и шага шифрования (реализовано в <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">Разделе&nbsp;7.1.2</a> и <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Разделе&nbsp;7.2</a>).</p>
 
 <p>Второй фокус заключается в том, что мы <em>не</em> будем вводить атрибут <code>password_confirmation</code> , даже виртуальный. Вместо него мыбудем использовать специальную валидацию</p>
 
@@ -136,13 +136,13 @@
 
 <p>которая <em>автоматически</em> создает виртуальный атрибут <code>password_confirmation</code>, одновременно подтверждая, что он совпадает с <code>password</code> атрибутом.</p>
 
-<p>Таким образом, Вы подготовлены к пониманию реализации, давайте посмотрим на сам код (<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">Листинг&nbsp;7.2</a>).</p>
+<p>Таким образом, вы подготовлены к пониманию реализации, давайте посмотрим на сам код (<a class="ref" href="modeling-and-viewing-users-two#code:password_validations">Листинг&nbsp;7.2</a>).</p>
 
 <div class="label" id="code:password_validations"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.2.</span> <span class="description">Валидации для атрибута <code>password</code>. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.2.</span> <span class="description">Валидации для атрибута <code>password</code>. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">attr_accessor</span> <span class="ss">:password</span>
@@ -182,7 +182,7 @@
 <h3><a id="sec:7.1.2" href="modeling-and-viewing-users-two#sec:password_migration" class="heading"><span class="number">7.1.2</span> Миграция пароля</a></h3>
 
 
-<p>В этой точке Вы можете быть обеспокоены тем, что мы нигде не храним пароли пользователей; так как мы решили использовать виртуальный пароль, а не хранить его в базе данных, он существует только в памяти. Как мы можем использовать этот пароль для аутентификации? Решение состоит в создании отдельного атрибута, предназначенного для хранения паролей, и нашей стратегией будет использование виртуального пароля в качестве сырья для <em>зашифрованного</em> пароля, который мы <em>будем</em> хранить в базе данных после регистрации пользователя (<a class="ref" href="sign-up#top">Глава&nbsp;8</a>) и впоследствии будем использовать при аутентификации пользователей (<a class="ref" href="sign-in-sign-out#top">Глава&nbsp;9</a>).</p>
+<p>В этой точке вы можете быть обеспокоены тем, что мы нигде не храним пароли пользователей; так как мы решили использовать виртуальный пароль, а не хранить его в базе данных, он существует только в памяти. Как мы можем использовать этот пароль для аутентификации? Решение состоит в создании отдельного атрибута, предназначенного для хранения паролей, и нашей стратегией будет использование виртуального пароля в качестве сырья для <em>зашифрованного</em> пароля, который мы <em>будем</em> хранить в базе данных после регистрации пользователя (<a class="ref" href="sign-up#top">Глава&nbsp;8</a>) и впоследствии будем использовать при аутентификации пользователей (<a class="ref" href="sign-in-sign-out#top">Глава&nbsp;9</a>).</p>
 
 <p>Давайте запланируем хранить зашифрованные пароли, используя атрибут <code>encrypted_password</code>, в нашей модели User. Мы обсудим детали реализации в <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Разделе&nbsp;7.2</a>, но мы можем начать работу с тестами для нашего зашифрованного пароля, отметив, что зашифрованный пароль должен, по крайней мере, <em>существовать</em>. Мы можем проверить это с помощью Ruby метода <code>respond_to?</code>, который принимает символ и возвращает <code>true</code> если объект отвечает данному методу или атрибуту и возвращает <code>false</code> в противном случае:</p>
 
@@ -202,7 +202,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.3.</span> <span class="description">Тестирование на существование атрибута <code>encrypted_password</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.3.</span> <span class="description">Тестирование на существование атрибута <code>encrypted_password</code>. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -238,7 +238,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.4.</span> <span class="description">Миграция для добавления столбца <code>encrypted_password</code> к <code>users</code> таблице. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.4.</span> <span class="description">Миграция для добавления столбца <code>encrypted_password</code> к <code>users</code> таблице. <br /> <code>db/migrate/&lt;timestamp&gt;_add_password_to_users.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddPasswordToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -288,13 +288,13 @@
 
 <p>Теперь, когда наша модель User имеет атрибут для хранения паролей, мы должны организовать генерацию и сохранение зашифрованного пароля, при сохранении Active Record пользователя в базе данных. Мы будем делать это техникой, называемой <a   href="http://ru.wikipedia.org/wiki/Callback_(программирование)"><em>обратный вызов</em></a> (колбэк), которая представляет собой метод, который вызывается  в определенный момент  жизни  объекта Active Record. В данном случае, мы будем использовать обратный вызов <code>before_save</code> для создания <code>encrypted_password</code> непосредственно перед сохранением пользователя.<sup class="footnote" id="fnref:7.2"><a href="#fn:7.2">2</a></sup></p>
 
-<p>Начнем с теста для атрибута зашифрованного пароля. Так как мы отложили детали реализации и, в частности, метод шифрования, до <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Раздел&nbsp;7.2</a>, в этом разделе мы просто убедимся, что у сохраненного пользователя атрибут <code>encrypted_password</code> не является пустым. Мы сделаем это путем комбинации <code>blank?</code> метода на строке (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">Раздел&nbsp;4.4.2</a>) с RSpec конвенцией для булевых методов (впервые показано в контексте <code>valid?</code>/<code>be_valid</code> в <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">Листинге&nbsp;6.11</a>), yielding the test in (??) <a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">Листинг&nbsp;7.5</a>.</p>
+<p>Начнем с теста для атрибута зашифрованного пароля. Так как мы отложили детали реализации и, в частности, метод шифрования, до <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Раздел&nbsp;7.2</a>, в этом разделе мы просто убедимся, что у сохраненного пользователя атрибут <code>encrypted_password</code> не является пустым. Мы сделаем это путем комбинации <code>blank?</code> метода на строке (<a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">Раздел&nbsp;4.4.2</a>) с RSpec конвенцией для булевых методов (впервые показано в контексте <code>valid?</code>/<code>be_valid</code> в <a class="ref" href="modeling-and-viewing-users-one#code:failing_validates_name_spec">Листинге&nbsp;6.11</a>), что приведет нас к тесту в <a class="ref" href="modeling-and-viewing-users-two#code:encrypted_password_not_empty_test">Листинге&nbsp;7.5</a>.</p>
 
 <div class="label" id="code:encrypted_password_not_empty_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.5.</span> <span class="description">Тестирование "непустоты" атрибута <code>encrypted_password</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.5.</span> <span class="description">Тестирование "непустоты" атрибута <code>encrypted_password</code>. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -325,7 +325,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.6.</span> <span class="description">Обратный вызов <code>before_save</code> для создания атрибута <code>encrypted_password</code>. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.6.</span> <span class="description">Обратный вызов <code>before_save</code> для создания атрибута <code>encrypted_password</code>. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -437,7 +437,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.7.</span> <span class="description">Метод  <code>has_password?</code> для пользователей.<br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.7.</span> <span class="description">Метод  <code>has_password?</code> для пользователей.<br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -466,7 +466,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.8.</span> <span class="description">Тесты для <code>has_password?</code> метода. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.8.</span> <span class="description">Тесты для <code>has_password?</code> метода. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -484,11 +484,11 @@
 
       <span class="n">it</span> <span class="s2">&quot;should be true if the passwords match&quot;</span> <span class="k">do</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">has_password?</span><span class="p">(</span><span class="vi">@attr</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_true</span>
-      <span class="k">end</span>    
+      <span class="k">end</span>
 
       <span class="n">it</span> <span class="s2">&quot;should be false if the passwords don&#39;t match&quot;</span> <span class="k">do</span>
         <span class="vi">@user</span><span class="o">.</span><span class="n">has_password?</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_false</span>
-      <span class="k">end</span> 
+      <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -592,7 +592,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.9.</span> <span class="description">Миграция для добавления <code>salt</code> столбца к <code>users</code> таблице. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.9.</span> <span class="description">Миграция для добавления <code>salt</code> столбца к <code>users</code> таблице. <br /> <code>db/migrate/&lt;timestamp&gt;_add_salt_to_users.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddSaltToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -629,7 +629,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.10.</span> <span class="description">Метод <code>has_password?</code> с безопасноым шифрованием. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.10.</span> <span class="description">Метод <code>has_password?</code> с безопасноым шифрованием. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
@@ -748,7 +748,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.11.</span> <span class="description">Тесты для метода <code>User.authenticate</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.11.</span> <span class="description">Тесты для метода <code>User.authenticate</code>. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -839,7 +839,7 @@
   end</pre>
 
 
-<p>Странное <code>class &lt;&lt; self</code> начинает блок в котором все новые методы автоматически являются методами класса. Я считаю этот синтаксис довольно запутанным, но вполне возможно, Вы встретите его в чужом коде, так что стоит знать, что он делает. (Я рекомендую <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> David&nbsp;A. Black если Вы хотите погрузиться в подробности Ruby.)</p>
+<p>Странное <code>class &lt;&lt; self</code> начинает блок в котором все новые методы автоматически являются методами класса. Я считаю этот синтаксис довольно запутанным, но вполне возможно, Вы встретите его в чужом коде, так что стоит знать, что он делает. (Я рекомендую <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a> David&nbsp;A. Black если вы хотите погрузиться в подробности Ruby.)</p>
 </div>
 
 
@@ -849,7 +849,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.12.</span> <span class="description">Метод <code>User.authenticate</code>. <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.12.</span> <span class="description">Метод <code>User.authenticate</code>. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="o">.</span>
@@ -890,7 +890,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.13.</span> <span class="description">Текущий Users контроллер spec. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.13.</span> <span class="description">Текущий Users контроллер spec. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -928,7 +928,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.14.</span> <span class="description">User <code>show</code> действие из <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Листинга&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.14.</span> <span class="description">User <code>show</code> действие из <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Листинга&nbsp;6.25</a>. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -949,7 +949,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.15.</span> <span class="description">Добавление Factory Girl в <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Листинг 7.15.</span> <span class="description">Добавление Factory Girl в <code>Gemfile</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 <span class="o">.</span>
@@ -978,9 +978,9 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.16.</span> <span class="description">Фабрика для симуляции объектов модели User. <br /> <code>spec/factories.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.16.</span> <span class="description">Фабрика для симуляции объектов модели User. <br /> <code>spec/factories.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="c1"># By using the symbol &#39;:user&#39;, we get Factory Girl to simulate the User model.</span>
+<div class="code"><div class="highlight"><pre><span class="c1"># Исполльзуя символ &#39;:user&#39;, мы указываем Factory Girl на необходимость симулировать модель User.</span>
 <span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
   <span class="n">user</span><span class="o">.</span><span class="n">name</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">email</span>                 <span class="s2">&quot;mhartl@example.com&quot;</span>
@@ -1000,13 +1000,13 @@
 
 <p>Как отмечалось в коментарии, в первой строке  <a class="ref" href="modeling-and-viewing-users-two#code:user_factory">Листинга&nbsp;7.16</a>, используя символ <code>:user</code> мы даем Factory Girl возможность угадать, что мы хотим использовать модель User, так что в данном случае <code>@user</code> будет симулировать экземпляр <code>User</code>.</p>
 
-<p>Для нашей новой фабрики User в Users контроллере spec, мы создадим переменную <code>@user</code> в блоке <code>before(:each)</code> а затем <code>get</code> show страницу и проверим успешность (как мы делали с <code>new</code> страницей в <a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">Листинге&nbsp;7.13</a>), а также проверим, что действие <code>show</code> вытягивает нужного пользователя из базы данных. Результат представлен в <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">Листинге&nbsp;7.17</a>. (Если Вы используете Spork, Вам может потребоваться его рестарт, для прохождения этого теста.)</p>
+<p>Для нашей новой фабрики User в Users контроллере spec, мы создадим переменную <code>@user</code> в блоке <code>before(:each)</code> а затем <code>get</code> show страницу и проверим успешность (как мы делали с <code>new</code> страницей в <a class="ref" href="modeling-and-viewing-users-two#code:get_new_user_spec_review">Листинге&nbsp;7.13</a>), а также проверим, что действие <code>show</code> вытягивает нужного пользователя из базы данных. Результат представлен в <a class="ref" href="modeling-and-viewing-users-two#code:get_show_test">Листинге&nbsp;7.17</a>. (Если вы используете Spork, вам может потребоваться его рестарт, для прохождения этого теста.)</p>
 
 <div class="label" id="code:get_show_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.17.</span> <span class="description">Тест для получения <code>show</code> страницы, с фабрикой пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.17.</span> <span class="description">Тест для получения <code>show</code> страницы, с фабрикой пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1076,7 +1076,7 @@
 
 <p>Многие программисты Rails, особенно пользователи RSpec, предпочитают этот подход потому что он отделяет тесты контроллера от слоя модели. Действительно, <a href="http://railstutorial.org/book?version=2.3">Rails 2.3 версия этой книги</a> использует заглушки, вместе с тесно связанной техникой <em>ожидания сообщения</em>. После приобретения большого опыта с заглушками и ожиданиями, и особенно после ответов на большое количество вопросов читателей <em>Rails 2.3 Tutorial</em>, запутавшихся в этих вопросах, я пришел к выводу что заглушки и связанные с ними методы не стоят этих проблем.</p>
 
-<p>Выяснение того, когда именно заглушать вещи это трудно и сообщения ожидания полны тонкостей и ошибок (см. например, <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Блок&nbsp;8.1 в <em>Rails 2.3 Tutorial</em> book</a>). Для обычных возражений вроде; “Но теперь тесты контроллера обращаются к тестовой базе данных!”, я теперь нашел свой собственный ответ: “Ну и что?” По моему опыту это никогда не имело значения. Я не вижу никаких веских причин, чтобы не обратиться к слою модели в тестах контроллера, особенно если это приводит к упрощению тестов. Если Вам интересно изучение техник заглушек и ожидающих сообщений, я рекомендую читать <a href="http://railstutorial.org/book?version=2.3"><em>Ruby on Rails 2.3 Tutorial</em> book</a>. В противном случае, я предлагаю, не беспокоиться об обеспечении полного разделения слоев модели и контроллера в Rails тестах. Хотя тесты контроллера в остальной части этой книги будут обращаться к тестовой базе данных, на <em>концептуальном</em>  уровне всегда будет ясно, какая часть MVC проходит испытания.</p>
+<p>Выяснение того, когда именно заглушать вещи это трудно и сообщения ожидания полны тонкостей и ошибок (см. например, <a href="http://railstutorial.org/chapters/sign-up?version=2.3#sidebar:expectation_subtlety">Блок&nbsp;8.1 в <em>Rails 2.3 Tutorial</em> book</a>). Для обычных возражений вроде; “Но теперь тесты контроллера обращаются к тестовой базе данных!”, я теперь нашел свой собственный ответ: “Ну и что?” По моему опыту это никогда не имело значения. Я не вижу никаких веских причин, чтобы не обратиться к слою модели в тестах контроллера, особенно если это приводит к упрощению тестов. Если вам интересно изучение техник заглушек и ожидающих сообщений, я рекомендую читать <a href="http://railstutorial.org/book?version=2.3"><em>Ruby on Rails 2.3 Tutorial</em> book</a>. В противном случае, я предлагаю, не беспокоиться об обеспечении полного разделения слоев модели и контроллера в Rails тестах. Хотя тесты контроллера в остальной части этой книги будут обращаться к тестовой базе данных, на <em>концептуальном</em>  уровне всегда будет ясно, какая часть MVC проходит испытания.</p>
 
 <p>Кстати, в принципе, тесты должны работать быстрее, когда контроллеры не обращаются к базе данных и для законченного примера приложения, рассматриваемого в <em>Rails Tutorial</em> набор тестов который он выполняет — быстрее примерно на две десятых секунды.</p>
 </div>
@@ -1120,7 +1120,7 @@
 
 <p>является очень распространенной Rails идиомой.</p>
 
-<p>Из-за кода, который мы добавили в <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Листинге&nbsp;6.25</a>, тест в этом разделе, уже проходит. Если Вы чувствуете себя параноиком, Вы можете закомментировать строку</p>
+<p>Из-за кода, который мы добавили в <a class="ref" href="modeling-and-viewing-users-one#code:user_show_action">Листинге&nbsp;6.25</a>, тест в этом разделе, уже проходит. Если вы чувствуете себя параноиком, вы можете закомментировать строку</p>
 
 <div class="code"><div class="highlight"><pre><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 </pre></div>
@@ -1135,7 +1135,7 @@
 <h3><a id="sec:7.3.2" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar" class="heading"><span class="number">7.3.2</span> Имя и Gravatar</a></h3>
 
 
-<p>В этом разделе мы улучшим внешний вид страницы показывающей пользователя, добавив заголовок с именем пользователя и аватар. Это одна из тех ситуаций, когда я могу пойти в любую сторону Это одна из тех ситуаций, где я могу выбрать любой путь разработки через тестирование и когда я делаю представления я часто экспериментирую с HTML, прежде чем возиться с тестами. Давайте все же придерживаться темы TDD, и протестируем верхнюю часть заголовка (тег <code>h1</code>) содержащую имя пользователя и тег <code>img</code> класса <code>gravatar</code>. (Мы поговорим через мгновение о том, что эта вторая часть значит.)</p>
+<p>В этом разделе мы улучшим внешний вид страницы показывающей пользователя, добавив заголовок с именем пользователя и аватар. Это одна из тех ситуаций, где я могу выбрать любой путь разработки через тестирование и когда я делаю представления я часто экспериментирую с HTML, прежде чем возиться с тестами. Давайте все же придерживаться темы TDD, и протестируем верхнюю часть заголовка (тег <code>h1</code>) содержащую имя пользователя и тег <code>img</code> класса <code>gravatar</code>. (Мы поговорим через мгновение о том, что эта вторая часть значит.)</p>
 
 <p>Для просмотра рабочей страницы показывающей пользователя в браузере, мы должны создать образец пользователя в development базе данных. Для этого запустите консоль (не в песочнице на этот раз) и создайте пользователя:</p>
 
@@ -1153,7 +1153,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.18.</span> <span class="description">Тест для страницы показывающей пользователя.<br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.18.</span> <span class="description">Тест для страницы показывающей пользователя.<br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1195,7 +1195,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.19.</span> <span class="description">Заголовок для страницы показывающей пользователя. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.19.</span> <span class="description">Заголовок для страницы показывающей пользователя. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -1219,7 +1219,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.20.</span> <span class="description">Представление user show с пользовательским именем. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 7.20.</span> <span class="description">Представление user show с пользовательским именем. <br /> <code>app/views/users/show.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
@@ -1234,7 +1234,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.21.</span> <span class="description">Добавление гема Gravatar в <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Листинг 7.21.</span> <span class="description">Добавление гема Gravatar в <code>Gemfile</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1271,7 +1271,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.22.</span> <span class="description">Представление user show с именем и Gravatar. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 7.22.</span> <span class="description">Представление user show с именем и Gravatar. <br /> <code>app/views/users/show.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_image_tag</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span>
@@ -1301,7 +1301,7 @@
 </div>
 
 
-<p>Обратите внимание, что мы можем извлечь первого (и в данный момент единственного) пользователя из базы данных удобным методом <code>User.first</code>. В шаге <code>update_attributes</code> переназначаем пользовательский email адрес, превращая его в <code>example@railstutorial.org</code>. Как Вы можете видеть на <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">Рис.&nbsp;7.5</a>, это изменение приводит к отображению нового Gravatar: логотипу Rails Tutorial. Происходит следующее: Gravatar работает, связывая изображения с адресом электронной почты; так как <code>user@example.com</code> это неправильный адрес электронной почты (<a href="http://example.com/">example.com</a> домен зарезервирован и не доступен для регистрации) Gravatar для этого email адреса отсутствует. Но в моем акуанте Gravatar я связал  адрес <code>example@railstutorial.org</code> с логотипом Rails Tutorial, поэтому при обновлении образца пользователя с этим email адресом Gravatar меняется автоматически.</p>
+<p>Обратите внимание, что мы можем извлечь первого (и в данный момент единственного) пользователя из базы данных удобным методом <code>User.first</code>. В шаге <code>update_attributes</code> переназначаем пользовательский email адрес, превращая его в <code>example@railstutorial.org</code>. Как вы можете видеть на <a class="ref" href="modeling-and-viewing-users-two#fig:user_show_railstutorial_gravatar_rails_3">Рис.&nbsp;7.5</a>, это изменение приводит к отображению нового Gravatar: логотипу Rails Tutorial. Происходит следующее: Gravatar работает, связывая изображения с адресом электронной почты; так как <code>user@example.com</code> это неправильный адрес электронной почты (<a href="http://example.com/">example.com</a> домен зарезервирован и не доступен для регистрации) Gravatar для этого email адреса отсутствует. Но в моем акуанте Gravatar я связал  адрес <code>example@railstutorial.org</code> с логотипом Rails Tutorial, поэтому при обновлении образца пользователя с этим email адресом Gravatar меняется автоматически.</p>
 
 <div class="label" id="fig:user_show_railstutorial_gravatar_rails_3"></div>
 
@@ -1326,7 +1326,7 @@
 
 <p>С другой стороны, так как мы ожидаем, что Gravatar будет использоваться в нескольких местах нашего приложения, вставлять класс повсеместно вручную было бы повторением. Лучше сделать вспомогательный метод для ликвидации этого дублирования в зародыше.</p>
 
-<p>Это может напомнить Вам  ситуацию с повторением в базовом заголовке сайта (“Ruby on Rails Tutorial Sample App”), которую мы решили с <code>title</code> помощником в Application helper (<a class="ref" href="rails-flavored-ruby#code:title_helper">Листинг&nbsp;4.2</a>). Решение здесь аналогично; так как Gravatars естественным образом связаны с пользователями, мы определим <code>gravatar_for</code> метод в Users helper. (Users helpers выбран вместо Application helper только для концептуального удобства; Rails делает все помощники доступными во всех представлениях.)  результатом будет сокращение кода представления</p>
+<p>Это может напомнить вам  ситуацию с повторением в базовом заголовке сайта (“Ruby on Rails Tutorial Sample App”), которую мы решили с <code>title</code> помощником в Application helper (<a class="ref" href="rails-flavored-ruby#code:title_helper">Листинг&nbsp;4.2</a>). Решение здесь аналогично; так как Gravatars естественным образом связаны с пользователями, мы определим <code>gravatar_for</code> метод в Users helper. (Users helpers выбран вместо Application helper только для концептуального удобства; Rails делает все помощники доступными во всех представлениях.)  результатом будет сокращение кода представления</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -1339,7 +1339,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.23.</span> <span class="description">Определение метода <code>gravatar_for</code> хелпер. <br /> <code>app/helpers/users_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 7.23.</span> <span class="description">Определение метода <code>gravatar_for</code> хелпер. <br /> <code>app/helpers/users_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">UsersHelper</span>
 
@@ -1373,7 +1373,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.24.</span> <span class="description">Обновление user show шаблона для использования <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 7.24.</span> <span class="description">Обновление user show шаблона для использования <code>gravatar_for</code>. <br /> <code>app/views/users/show.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="vi">@user</span> <span class="cp">%&gt;</span>
@@ -1405,7 +1405,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.25.</span> <span class="description">Добавление сайдбара к user <code>show</code> представлению. <br /> <code>app/views/users/show.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 7.25.</span> <span class="description">Добавление сайдбара к user <code>show</code> представлению. <br /> <code>app/views/users/show.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;profile&quot;</span> <span class="na">summary=</span><span class="s">&quot;Profile information&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
@@ -1474,7 +1474,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.26.</span> <span class="description">CSS для стиля страницы показывающей пользователя, включающий сайдбар. <br /> <code>public/stylesheets/custom.css</code></span>       
+<div class="listing"><span class="header">Листинг 7.26.</span> <span class="description">CSS для стиля страницы показывающей пользователя, включающий сайдбар. <br /> <code>public/stylesheets/custom.css</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1549,7 +1549,7 @@
 <h3><a id="sec:7.4.2" href="modeling-and-viewing-users-two#sec:heroku_deploy" class="heading"><span class="number">7.4.2</span> Развертывание Heroku</a></h3>
 
 
-<p>Если Вы разворачивали Ваш пример приложения на Heroku, Вы можете отправить его в этой точке:</p>
+<p>Если вы разворачивали ваш пример приложения на Heroku, вы можете отправить его в этой точке:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push heroku
 </pre></div>
@@ -1563,7 +1563,7 @@
 </div>
 
 
-<p>Теперь, если Вы хотите создать образец пользователя на Heroku, Вы можете использовать Heroku консоль:</p>
+<p>Теперь, если вы хотите создать образец пользователя на Heroku, вы можете использовать Heroku консоль:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ heroku console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
@@ -1583,11 +1583,11 @@
 
 
 <ol>
-<li>Скопируйте каждый из вариантов метода <code>authenticate</code> из <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_1">Листинга&nbsp;7.27</a> по <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">Листинг&nbsp;7.31</a> в Вашу модель User, и проверьте, что они корректны, запустив Ваш набор тестов. </li>
+<li>Скопируйте каждый из вариантов метода <code>authenticate</code> из <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_1">Листинга&nbsp;7.27</a> по <a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">Листинг&nbsp;7.31</a> в вашу модель User, и проверьте, что они корректны, запустив ваш набор тестов. </li>
 
-<li>Последний пример <code>authenticate</code> (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">Листинг&nbsp;7.31</a>) это практически вызов. Поэкспериментируйте в консоли, чтобы увидеть, сможете ли Вы понять, как это работает.</li>
+<li>Последний пример <code>authenticate</code> (<a class="ref" href="modeling-and-viewing-users-two#code:authenticate_variant_5">Листинг&nbsp;7.31</a>) это практически вызов. Поэкспериментируйте в консоли, чтобы увидеть, сможете ли вы понять, как это работает.</li>
 
-<li>Как бы Вы заставили работать Gravatar хелпер <code>gravatar_for</code> если бы наша модель User использовала <code>email_address</code> вместо <code>email</code> для отображения  email адреса?</li>
+<li>Как бы вы заставили работать Gravatar хелпер <code>gravatar_for</code> если бы наша модель User использовала <code>email_address</code> вместо <code>email</code> для отображения  email адреса?</li>
 
 </ol>
 
@@ -1598,7 +1598,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.27.</span> <span class="description">Метод <code>authenticate</code> с <code>User</code> вместо <code>self</code>.</span>       
+<div class="listing"><span class="header">Листинг 7.27.</span> <span class="description">Метод <code>authenticate</code> с <code>User</code> вместо <code>self</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">User</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -1615,7 +1615,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.28.</span> <span class="description">Метод <code>authenticate</code> с явным третьим <code>return</code>.</span>       
+<div class="listing"><span class="header">Листинг 7.28.</span> <span class="description">Метод <code>authenticate</code> с явным третьим <code>return</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -1633,7 +1633,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.29.</span> <span class="description">Метод <code>authenticate</code> использующий <code>if</code> выражение.</span>       
+<div class="listing"><span class="header">Листинг 7.29.</span> <span class="description">Метод <code>authenticate</code> использующий <code>if</code> выражение.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -1655,7 +1655,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.30.</span> <span class="description">Метод <code>authenticate</code> использующий <code>if</code> выражение и неявное возвращение.</span>       
+<div class="listing"><span class="header">Листинг 7.30.</span> <span class="description">Метод <code>authenticate</code> использующий <code>if</code> выражение и неявное возвращение.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -1675,7 +1675,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.31.</span> <span class="description">Метод <code>authenticate</code> использующий тернарный оператор.</span>       
+<div class="listing"><span class="header">Листинг 7.31.</span> <span class="description">Метод <code>authenticate</code> использующий тернарный оператор.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">submitted_password</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
@@ -1698,7 +1698,7 @@
 <li id="fn:7.1">Мы видели диапазоны ранее в <a class="ref" href="rails-flavored-ruby#sec:arrays_and_ranges">Разделе&nbsp;4.3.1</a>.&nbsp;<a class="arrow" href="#fnref:7.1">&uarr;</a></li>
 <li id="fn:7.2">За более подробной информацией о видах обратных вызовов поддерживаемых Active Record, обращайтесь к к статье <a  rel="nofollow" href="http://www.rusrails.ru/active-record-validations-and-callbacks">Валидации и колбэки Active Record</a> на сайте <a  rel="nofollow" href="http://www.rusrails.ru">http://www.rusrails.ru</a>&nbsp;<a class="arrow" href="#fnref:7.2">&uarr;</a></li>
 <li id="fn:7.3">Дополнительный отступ это типографское напоминание о том, что мы находимся в приватном разделе; в противном случае можно легко пропустить <code>private</code> ключевое слово и запутаться при попытке доступа к приватному методу, думая что он публичный. Я думал, что дополнительные отступы это просто глупая конвенция, пока я не убил час на эту проблему пару лет назад. Теперь я добавляю дополнительные отступы&hellip;&nbsp;<a class="arrow" href="#fnref:7.3">&uarr;</a></li>
-<li id="fn:7.4">В Ruby есть тесно связаное ключевое слово <code>protected</code> чем-то отличающееся от <code>private</code>. Насколько я могу судить, единственный повод узнать разницу между ними это то, что у вас будет козырь на собеседовании, когда Вас спросят “В Ruby, в чем разница между  <code>private</code> и <code>protected</code>?” Но Вы действительно хотите работать в компании, которая задает такие хромые вопросы на собеседовании? В своем выступлении на RubyConf в 2008, Dave Thomas (автор <em>Programming Ruby</em>) предлагал ликвидировать <code>protected</code> в будущих версиях Ruby, и я полностью с ним согласен. Просто используйте <code>private</code> и все будет хорошо.&nbsp;<a class="arrow" href="#fnref:7.4">&uarr;</a></li>
+<li id="fn:7.4">В Ruby есть тесно связаное ключевое слово <code>protected</code> чем-то отличающееся от <code>private</code>. Насколько я могу судить, единственный повод узнать разницу между ними это то, что у вас будет козырь на собеседовании, когда вас спросят “В Ruby, в чем разница между  <code>private</code> и <code>protected</code>?” Но вы действительно хотите работать в компании, которая задает такие хромые вопросы на собеседовании? В своем выступлении на RubyConf в 2008, Dave Thomas (автор <em>Programming Ruby</em>) предлагал ликвидировать <code>protected</code> в будущих версиях Ruby, и я полностью с ним согласен. Просто используйте <code>private</code> и все будет хорошо.&nbsp;<a class="arrow" href="#fnref:7.4">&uarr;</a></li>
 <li id="fn:7.5">Мне стыдно признаться, что именно так мы реализовывали пароли в <em>RailsSpace</em>. Считайте этот раздел моим покаянием.&nbsp;<a class="arrow" href="#fnref:7.5">&uarr;</a></li>
 <li id="fn:7.6">The alert reader may notice that none of what we do in this section <em>requires</em> encryption, but, once we develop some of the theory of secure passwords and write a basic implementation (<a class="ref" href="modeling-and-viewing-users-two#sec:secure_password_theory">Раздел&nbsp;7.2.2</a>), the only way for the <code>has_password?</code> method to work properly is for all the encryption machinery to work properly as well. (??)&nbsp;<a class="arrow" href="#fnref:7.6">&uarr;</a></li>
 <li id="fn:7.7">В моей установке, строка <code>require ’digest’</code> не является необходимой, но несколько читателей сообщили о получении <code>NameError</code> исключения, если они не включали его явно. Это не вредит в любом случае, поэтому я включил явное <code>require</code> на всякий случай.&nbsp;<a class="arrow" href="#fnref:7.7">&uarr;</a></li>
@@ -1712,19 +1712,16 @@
 <li id="fn:7.15">Я использовал <code>get &rsquo;new&rsquo;</code> в <a class="ref" href="filling-in-the-layout#code:get_new_user_spec">Листинге&nbsp;5.24</a> и последующих тестах для <code>new</code> действия  поскольку на тот момент мы еще не сталкивались с идеей стандартных REST действий. Я переключусь на <code>get :new</code> в будущих тестах.&nbsp;<a class="arrow" href="#fnref:7.15">&uarr;</a></li>
 <li id="fn:7.16">Он делает это путем вызова <code>to_param</code> метода на переменной <code>@user</code>.<a class="arrow" href="#fnref:7.16">&uarr;</a></li>
 <li id="fn:7.17">Это не всегда хорошая идея  делать HTML тесты настолько специфичными, поскольку мы не всегда хотим ограничивать макет HTML настолько сильно. Не стесняйтесь экспериментировать и найдите нужный уровень детализации для ваших проектов.&nbsp;<a class="arrow" href="#fnref:7.17">&uarr;</a></li>
-<li id="fn:7.18">Вместо этого, если Вам нужен <em>немаскированный</em> текст, Вы должны использовать  метод <code>raw</code>, например <tt class="verb">&lt;%= raw @title %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
+<li id="fn:7.18">Вместо этого, если вам нужен <em>немаскированный</em> текст, вы должны использовать  метод <code>raw</code>, например <tt class="verb">&lt;%= raw @title %&gt;</tt>.&nbsp;<a class="arrow" href="#fnref:7.18">&uarr;</a></li>
 <li id="fn:7.19">Gravatar был создан Tom Preston-Werner, одним из основателей <a href="http://github.com/">GitHub</a>, и был приобретен и масштабирован <a href="http://automattic.com/">Automattic</a> (более известные как создатели  <a href="http://wordpress.com/">WordPress</a>).&nbsp;<a class="arrow" href="#fnref:7.19">&uarr;</a></li>
-<li id="fn:7.20">В индуизме, аватар это форма проявление божества в человеке или животном. В более широком смысле термин <em>avatar</em> обычно используется для обозначения  персонализации пользователя, особенно в виртуальной среде. Но Вы видели фильм, так что Вы уже знаете об этом.&nbsp;<a class="arrow" href="#fnref:7.20">&uarr;</a></li>
+<li id="fn:7.20">В индуизме, аватар это форма проявление божества в человеке или животном. В более широком смысле термин <em>avatar</em> обычно используется для обозначения  персонализации пользователя, особенно в виртуальной среде. Но вы видели фильм, так что вы уже знаете об этом.&nbsp;<a class="arrow" href="#fnref:7.20">&uarr;</a></li>
 <li id="fn:7.21">Если вашему приложению требуется обработка изображений или загрузка других файлов, обратите внимание на <a href="http://github.com/thoughtbot/paperclip">Paperclip</a> Как и Factory Girl, Paperclip предоставляется <a href="http://thoughtbot.com/">thoughtbot</a>. (Хотя я знаю несколько человек оттуда, у меня нет личной заинтересованности в продвижении thoughtbot; Они просто делают хорошее программное обеспечение.)&nbsp;<a class="arrow" href="#fnref:7.21">&uarr;</a></li>
 <li id="fn:7.22">Благодарю анонимного читателя, который отметил, что плагин Gravatar чувствителен к регистру в этом контексте.&nbsp;<a class="arrow" href="#fnref:7.22">&uarr;</a></li>
 <li id="fn:7.23">На самом деле есть возможность сбросить дефолтный размер в файле конфигурации, но я считаю  этот способ более чистым.&nbsp;<a class="arrow" href="#fnref:7.23">&uarr;</a></li>
 <li id="fn:7.24">Gravatars квадратные, поэтому единственный параметр определяет их размер однозначно.&nbsp;<a class="arrow" href="#fnref:7.24">&uarr;</a></li>
-<li id="fn:7.25">Если кто либо обругает Вас за использование, о ужас, <em>таблицы для разметки</em>, have them point(??) его Firebug inspector на боковой панели Твиттер профиля и сказать Вам что он видит. В самом деле, Вы обнаружите что, в то время как “семантичная разметка” использующая <code>div</code>ы и <code>span</code>ы получает все большее распространение, практически все сайты прибегают к таблицам для разметки при случае. В данном случае, получение вертикального  выравнивания только справа <em>намного</em> легче с таблицей.&nbsp;<a class="arrow" href="#fnref:7.25">&uarr;</a></li>
+<li id="fn:7.25">Если кто либо обругает вас за использование, о ужас, <em>таблицы для разметки</em>, have them point(??) его Firebug inspector на боковой панели Твиттер профиля и сказать вам что он видит. В самом деле, вы обнаружите что, в то время как “семантичная разметка” использующая <code>div</code>ы и <code>span</code>ы получает все большее распространение, практически все сайты прибегают к таблицам для разметки при случае. В данном случае, получение вертикального  выравнивания только справа <em>намного</em> легче с таблицей.&nbsp;<a class="arrow" href="#fnref:7.25">&uarr;</a></li>
 <li id="fn:7.26">Обычно, я рекомендую делать более частые, меньшие фиксации, но частые Git фиксации на протяжении всего учебника будет трудно поддерживать и это будет разбивать поток обсуждения.&nbsp;<a class="arrow" href="#fnref:7.26">&uarr;</a></li>
-<li id="fn:7.27">Если Вы <em>не</em> на нужной ветке, запустите <code>git checkout modeling-users</code> перед продолжением.&nbsp;<a class="arrow" href="#fnref:7.27">&uarr;</a></li>
+<li id="fn:7.27">Если вы <em>не</em> на нужной ветке, запустите <code>git checkout modeling-users</code> перед продолжением.&nbsp;<a class="arrow" href="#fnref:7.27">&uarr;</a></li>
 </ol>
 </div>
-
-
-
 

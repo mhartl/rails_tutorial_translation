@@ -16,7 +16,7 @@
 
 <p>Наконец, будущее издание этой книги (и новая версия сопутствующих <a href="http://railstutorial.org/screencasts">скринкастов</a>) будут использовать Rails&nbsp;3.1 (или более новую версию, если она будет доступна на тот момент) с самого начала. Я планирую рассказать как о Sass и CoffeeScript, так и о некоторых изменениях в других частях Ruby и Rails экосистемах (таких как улучшенный синтаксис RSpec), которые будут полезны для начинающих Rails разработчиков. Подпишитесь на <a href="http://news.railstutorial.org/">новости Rails Tutorial</a>, чтобы получить уведомление о выходе нового издания.</p>
 
-<p>С каждым новым релизом Rails, птребуется некоторое время there is a time delay while the rest of the ecosystem catches up. Например, на момент написания, не поддерживается развертывание Rails&nbsp;3.1 приложений на  Heroku и (как обсуждается в <a class="ref" href="rails-3-1#sec:minor_issues">Разделе&nbsp;13.1.3</a>) гем <tt>will_paginate</tt> не работает. Это цена, которую мы платим за использование передовых технологий&mdash;sometimes we get cut (??).</p>
+<p>После каждого нового релиза Rails экосистеме требуется некоторое время на адаптацию к изменениям. Например, на момент написания не поддерживается развертывание Rails&nbsp;3.1 приложений на  Heroku и (как обсуждается в <a class="ref" href="rails-3-1#sec:minor_issues">Разделе&nbsp;13.1.3</a>) не работает гем <tt>will_paginate</tt>. Это цена, которую мы платим за использование передовых технологий.</p>
 
 <div class="label" id="sec:upgrading_the_sample_app"></div>
 
@@ -28,7 +28,7 @@
 
 <p>У второго подхода есть несколько преимуществ. Во-первых, так как мы будем генерировать начальное приложение, используя <code>rails new</code>, <code>Gemfile</code> и конфигурационные файлы будут автоматически настроены правильно для Rails&nbsp;3.1. Кроме того, за счет добавления одного файла в единицу времени (или, в крайнем случае, нескольких) мы можем более легко изолировать источник любой поломки. Недостатком является то, что мы можем забыть файл или два, что приведет к поломке приложения, хотя это маловероятно из-за нашего объемного набора тестов. В конечном счете, правильная стратегия, вероятно, зависит от характера конкретного приложения; по моему мнению, лучшим способом обновления примера приложения является использование второй стратегии, но вы также можете попробовать первую.</p>
 
-<p>Для более детального изучения темы данного раздела, см. <a href="http://ruby.railstutorial.org/screencasts">Ruby on Rails Tutorial скринкасты</a>, которые теперь включают дополнительный Урок&nbsp;13 о Rails&nbsp;3.1. Кроме всего прочего, после завершения полного Rails&nbsp;3.1 апгрейда, скринкаст показывает как создать отдельную <tt>rails-3-1</tt> ветку в основном Git репозитарии примера приложения. В результате, если Вы хотите сравнить свои результаты с кодом примера приложения из книги, вы можете найти его в <a href="https://github.com/railstutorial/sample_app/tree/rails-3-1"><tt>rails-3-1</tt> ветке на GitHub</a>.</p>
+<p>Для более детального изучения темы данного раздела, см. <a href="http://ruby.railstutorial.org/screencasts">Ruby on Rails Tutorial скринкасты</a>, которые теперь включают дополнительный Урок&nbsp;13 о Rails&nbsp;3.1. Кроме всего прочего, после завершения полного Rails&nbsp;3.1 апгрейда, скринкаст показывает как создать отдельную <tt>rails-3-1</tt> ветку в основном Git репозитарии примера приложения. В результате, если вы хотите сравнить свои результаты с кодом примера приложения из книги, вы можете найти его в <a href="https://github.com/railstutorial/sample_app/tree/rails-3-1"><tt>rails-3-1</tt> ветке на GitHub</a>.</p>
 
 <div class="label" id="sec:installing_and_configuring_rails_3_1"></div>
 
@@ -36,28 +36,28 @@
 <h3><a id="sec:13.1.1" href="rails-3-1#sec:installing_and_configuring_rails_3_1" class="heading"><span class="number">13.1.1</span> Установка и настройка Rails&nbsp;3.1</a></h3>
 
 
-<p>Для того чтобы начать обновление до Rails&nbsp;3.1, хорошо бы создать отдельный <a href="http://rvm.beginrescueend.com/gemsets/">gemset</a> еслиВы используете <a href="https://rvm.beginrescueend.com/">Менеджер Версий Ruby (RVM)</a>:</p>
+<p>Для того чтобы начать обновление до Rails&nbsp;3.1, хорошо бы создать отдельный <a href="http://rvm.beginrescueend.com/gemsets/">gemset</a> если вы используете <a href="https://rvm.beginrescueend.com/">Менеджер Версий Ruby (RVM)</a>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rvm --create use 1.9.2@rails3_1tutorial
 </pre></div>
 </div>
 
 
-<p>Независимо от того, используете Вы RVM или нет, Вам необходимо установить Rails&nbsp;3.1:</p>
+<p>Независимо от того, используете вы RVM или нет, вам необходимо установить Rails&nbsp;3.1:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --pre
 </pre></div>
 </div>
 
 
-<p>(См. <a class="ref" href="beginning#sec:conventions">Раздел&nbsp;1.1.3</a> чтобы вспомнить о значении <code>[sudo]</code> в этом контексте.) Флаг <tt class="verb">--pre</tt> здесь говорит RubyGems установить последнюю, пред-релизную (или релиз-кандидат) версию Rails. Вполне возможно, что на момент прочтения Вами этого материала выйдет официальный релиз, в этом случае вместо предыдущей Вам следует выполнить следующую команду:</p>
+<p>(См. <a class="ref" href="beginning#sec:conventions">Раздел&nbsp;1.1.3</a> чтобы вспомнить о значении <code>[sudo]</code> в этом контексте.) Флаг <tt class="verb">--pre</tt> здесь говорит RubyGems установить последнюю, пред-релизную (или релиз-кандидат) версию Rails. Вполне возможно, что на момент прочтения вами этого материала выйдет официальный релиз, в этом случае вместо предыдущей вам следует выполнить следующую команду:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install rails --version 3.1.0
 </pre></div>
 </div>
 
 
-<p>После установки Rails, Вы можете проверить что у Вас установлена правильная версия следующим образом:</p>
+<p>После установки Rails, вы можете проверить что у вас установлена правильная версия следующим образом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails -v
 <span class="go">Rails 3.1.0.rc4</span>
@@ -79,7 +79,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.1.</span> <span class="description"> <code>Gemfile</code> примера приложения необходимый для  Rails&nbsp;3.1.</span>       
+<div class="listing"><span class="header">Листинг 13.1.</span> <span class="description"> <code>Gemfile</code> примера приложения необходимый для  Rails&nbsp;3.1.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -126,7 +126,7 @@
 <h3><a id="sec:13.1.2" href="rails-3-1#sec:getting_to_red" class="heading"><span class="number">13.1.2</span> Получить Красный</a></h3>
 
 
-<p>Создав минимальный скелет Rails&nbsp;3.1 приложения в <a class="ref" href="rails-3-1#sec:installing_and_configuring_rails_3_1">Разделе&nbsp;13.1.1</a>, мы готовы получить работающий пример приложения. Как отмечалось во введении к этому разделу, наша основная стратегия заключается в копировании файлов по одному; одним из способов является использование приложения OS&nbsp;X Finder app  (или эквивалентного для Вашей системы приложения), как показано в <a class="ref" href="rails-3-1#fig:upgrade_with_finder">Рис.&nbsp;13.1</a>.</p>
+<p>Создав минимальный скелет Rails&nbsp;3.1 приложения в <a class="ref" href="rails-3-1#sec:installing_and_configuring_rails_3_1">Разделе&nbsp;13.1.1</a>, мы готовы получить работающий пример приложения. Как отмечалось во введении к этому разделу, наша основная стратегия заключается в копировании файлов по одному; одним из способов является использование приложения OS&nbsp;X Finder app  (или эквивалентного для вашей системы приложения), как показано в <a class="ref" href="rails-3-1#fig:upgrade_with_finder">Рис.&nbsp;13.1</a>.</p>
 
 <div class="label" id="fig:upgrade_with_finder"></div>
 
@@ -141,7 +141,7 @@
 </div>
 
 
-<p>Если Вы используете RSpec&nbsp;2.5, этот шаг провалится, так как Rails&nbsp;3.1 запрашивает версию <code>2.6.1</code> гема <tt>rspec-rails</tt>. Если вы используете <code>Gemfile</code> из <a class="ref" href="rails-3-1#code:gemfile_rails_3_1">Листинга&nbsp;13.1</a>, это не будет проблемой, но предыдущие версии этой книги использовали более раннюю (и несовместимую) версию гема.</p>
+<p>Если вы используете RSpec&nbsp;2.5, этот шаг провалится, так как Rails&nbsp;3.1 запрашивает версию <code>2.6.1</code> гема <tt>rspec-rails</tt>. Если вы используете <code>Gemfile</code> из <a class="ref" href="rails-3-1#code:gemfile_rails_3_1">Листинга&nbsp;13.1</a>, это не будет проблемой, но предыдущие версии этой книги использовали более раннюю (и несовместимую) версию гема.</p>
 
 <p>Затем пробуем запустить набор тестов:</p>
 
@@ -152,7 +152,7 @@
 
 <p>Изначально все будет в Красном, и наша стратегия обновления заключается в анализе сообщения об ощибке и копировании файлов до получения прохождения всех тестов. После того как часть тестов перейдет в Зеленый, копируем другие тесты небольшими группами, смотрим как они проваливаются, а затем получаем их прохождение. Нанести, смыть, повтороить.</p>
 
-<p>Хотя остальная часть этого раздела содержит описание некоторых изменений, которые вы обязательно должны сделать, чтобы получить рабочее приложение, эта глава не охватывает всех деталей процесса обновления, которые в любом случае будут зависеть от Вашей системы. По характеру этой темы, легче показать шаги обновления в <a href="http://railstutorial.org/screencasts">скринкасте</a>, но если Вы настолько далеко продвинулись в <em>Ruby on Rails Tutorial</em>, то вы, вероятно, в состоянии ответить на брошенный вызов и сделать обновление самостоятельно (<a class="ref" href="rails-3-1#sec:rails_3_1_exercises">Раздел&nbsp;13.3</a>).</p>
+<p>Хотя остальная часть этого раздела содержит описание некоторых изменений, которые вы обязательно должны сделать, чтобы получить рабочее приложение, эта глава не охватывает всех деталей процесса обновления, которые в любом случае будут зависеть от вашей системы. По характеру этой темы, легче показать шаги обновления в <a href="http://railstutorial.org/screencasts">скринкасте</a>, но если вы настолько далеко продвинулись в <em>Ruby on Rails Tutorial</em>, то вы, вероятно, в состоянии ответить на брошенный вызов и сделать обновление самостоятельно (<a class="ref" href="rails-3-1#sec:rails_3_1_exercises">Раздел&nbsp;13.3</a>).</p>
 
 <div class="label" id="sec:minor_issues"></div>
 
@@ -160,21 +160,21 @@
 <h3><a id="sec:13.1.3" href="rails-3-1#sec:minor_issues" class="heading"><span class="number">13.1.3</span> Незначительные проблемы</a></h3>
 
 
-<p>При обновлении примера приложения Вы столкнетесь с некоторыми незначительными (но раздражающими) проблемами. Этот раздел отмечает некоторые из тех, с которыми пришлось столкнуться мне (вместе с решением), но конечно же <a href="http://www.morepc.ru/dict/term9368.php">YMMV</a>.</p>
+<p>При обновлении примера приложения вы столкнетесь с некоторыми незначительными (но раздражающими) проблемами. Этот раздел отмечает некоторые из тех, с которыми пришлось столкнуться мне (вместе с решением), но конечно же <a href="http://www.morepc.ru/dict/term9368.php">YMMV</a>.</p>
 
 <div class="label" id="sec:will_paginate"></div>
 
 <h4><a id="sec:13.1.3.1" href="rails-3-1#sec:will_paginate" class="heading">will_paginate</a></h4>
 
 
-<p>Пытаясь перейти от Красного к Зеленому, Вы обнаружите, что <tt>will_paginate</tt> гем несовместим с Rails&nbsp;3.1, что приводит к ошибке вроде этой:</p>
+<p>Пытаясь перейти от Красного к Зеленому, вы обнаружите, что <tt>will_paginate</tt> гем несовместим с Rails&nbsp;3.1, что приводит к ошибке вроде этой:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">uninitialized</span> <span class="n">constant</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Associations</span><span class="o">::</span><span class="no">AssociationCollection</span> <span class="p">(</span><span class="no">NameError</span><span class="p">)</span>
 </pre></div>
 </div>
 
 
-<p>Решение (полученное Гуглингом сообщения об ошибке), к сожалению, заключается в непосредственном редактировании исходного кода  гема <tt>will_paginate</tt>. Для чего требуется вначале обнаружить исходный код в Вашей системе, что может оказаться непростой затеей; на моей системе это выглядело следующим образом:</p>
+<p>Решение (полученное Гуглингом сообщения об ошибке), к сожалению, заключается в непосредственном редактировании исходного кода  гема <tt>will_paginate</tt>. Для чего требуется вначале обнаружить исходный код в вашей системе, что может оказаться непростой затеей; на моей системе это выглядело следующим образом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/.rvm/gems/ruby-1.9.2-p180@rails3_1tutorial/gems/
 <span class="gp">$</span> mate will_paginate-3.0.pre2/lib/will_paginate/finders/active_record.rb
@@ -182,14 +182,14 @@
 </div>
 
 
-<p>Исправить ошибку просто: нам необходимо заменить <code>AssociationCollection</code> на <code>CollectionAssociation</code>, как показано в <a href="http://ru.wikipedia.org/wiki/Diff">diff</a>  <a class="ref" href="rails-3-1#code:will_paginate_fix">Листинга&nbsp;13.2</a>. (Я опустил ссылку на  <code>::ActiveRecord::Relation</code> чтобы сэкономить место, но Вы должны ее сохранить.)
+<p>Исправить ошибку просто: нам необходимо заменить <code>AssociationCollection</code> на <code>CollectionAssociation</code>, как показано в <a href="http://ru.wikipedia.org/wiki/Diff">diff</a>  <a class="ref" href="rails-3-1#code:will_paginate_fix">Листинга&nbsp;13.2</a>. (Я опустил ссылку на  <code>::ActiveRecord::Relation</code> чтобы сэкономить место, но вы должны ее сохранить.)
 Это изменение - ужасный <a href="http://www.catb.org/jargon/html/K/kludge.html">ляп</a>&mdash;помимо всего прочего, оно перестанет работать если мы когда-нибудь переустановим гем <tt>will_paginate</tt> и оно не работает в  production&mdash;но оно работает сейчас и, предположительно, эта проблема будет исправлена в будущих релизах  <tt>will_paginate</tt>.<sup class="footnote" id="fnref:13.1"><a href="#fn:13.1">1</a></sup></p>
 
 <div class="label" id="code:will_paginate_fix"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.2.</span> <span class="description">Необходимые изменения в геме <tt>will_paginate</tt>.</span>       
+<div class="listing"><span class="header">Листинг 13.2.</span> <span class="description">Необходимые изменения в геме <tt>will_paginate</tt>.</span>
 </div>
 <div class="code"><div class="highlight"><pre>  # support pagination on associations and scopes
 <span class="gd">- [::ActiveRecord::Associations::AssociationCollection].each do |klass|</span>
@@ -209,13 +209,13 @@ end
 <h4><a id="sec:13.1.3.2" href="rails-3-1#sec:pagination_spec" class="heading">Тест пагинации</a></h4>
 
 
-<p>Другой небольшой проблемой с которой Вы можете столкнуться является провальный пагинационный тест. Это, вероятно, связано Это, очевидно, связано с изменением способа, которым Rails&nbsp;3.1 строит URL, по сравнению с Rails&nbsp;3.0, и одним из хак-решений будет просто удалить URL спецификацию из теста как показано в <a class="ref" href="rails-3-1#code:pagination_spec_diff">Листинге&nbsp;13.3</a>.</p>
+<p>Другой небольшой проблемой с которой вы можете столкнуться является провальный пагинационный тест. Это, вероятно, связано Это, очевидно, связано с изменением способа, которым Rails&nbsp;3.1 строит URL, по сравнению с Rails&nbsp;3.0, и одним из хак-решений будет просто удалить URL спецификацию из теста как показано в <a class="ref" href="rails-3-1#code:pagination_spec_diff">Листинге&nbsp;13.3</a>.</p>
 
 <div class="label" id="code:pagination_spec_diff"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.3.</span> <span class="description">Diff для пагинационного теста. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 13.3.</span> <span class="description">Diff для пагинационного теста. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>         get :index
@@ -229,12 +229,12 @@ end
 <span class="gi">+        response.should have_selector(&#39;a&#39;, :content =&gt; &quot;Next&quot;)</span>
        end
 
-       it &quot;should have delete links for admins&quot; do  
+       it &quot;should have delete links for admins&quot; do
 </pre></div>
 </div></div>
 
 
-<p>После того как эти изменения произвдены и скопированы все файлы из Вашего основного примера приложения, Ваш набор тестов может даже перейти от Красного к Зеленому. Если этого все же не случилось, прорабатывайте и Гуглите сообщения об ошибках пока не добьетесь нужного результата. (Вы также можете ознакомится с ресурсами на <a href="http://ruby.railstutorial.org/help">странице Rails Tutorial Help</a>.)</p>
+<p>После того как эти изменения произвдены и скопированы все файлы из вашего основного примера приложения, ваш набор тестов может даже перейти от Красного к Зеленому. Если этого все же не случилось, прорабатывайте и Гуглите сообщения об ошибках пока не добьетесь нужного результата. (Вы также можете ознакомится с ресурсами на <a href="http://ruby.railstutorial.org/help">странице Rails Tutorial Help</a>.)</p>
 
 <div class="label" id="sec:major_differences"></div>
 
@@ -283,7 +283,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.4.</span> <span class="description">Diff для файла шаблона <code>app/views/layouts/application.html.erb</code>.</span>       
+<div class="listing"><span class="header">Листинг 13.4.</span> <span class="description">Diff для файла шаблона <code>app/views/layouts/application.html.erb</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre>     &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;
      &lt;%= csrf_meta_tag %&gt;
@@ -304,7 +304,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.5.</span> <span class="description">Diff для партиала stylesheets  <code>app/views/layouts/_stylesheets.html.erb</code>.</span>       
+<div class="listing"><span class="header">Листинг 13.5.</span> <span class="description">Diff для партиала stylesheets  <code>app/views/layouts/_stylesheets.html.erb</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre> &lt;![endif]--&gt;
  &lt;%= stylesheet_link_tag &#39;blueprint/screen&#39;, :media =&gt; &#39;screen&#39; %&gt;
@@ -352,7 +352,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.6.</span> <span class="description"> Prototype-на-jQuery diff для <code>create.js.erb</code>.</span>       
+<div class="listing"><span class="header">Листинг 13.6.</span> <span class="description"> Prototype-на-jQuery diff для <code>create.js.erb</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="gd">- $(&quot;follow_form&quot;).update(&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;)</span>
 <span class="gd">- $(&quot;followers&quot;).update(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
@@ -367,7 +367,7 @@ end
 <div class="label" id="code:destroy_js_diff"></div>
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.7.</span> <span class="description"> Prototype-на-jQuery diff для <code>destroy.js.erb</code>.</span>       
+<div class="listing"><span class="header">Листинг 13.7.</span> <span class="description"> Prototype-на-jQuery diff для <code>destroy.js.erb</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="gd">- $(&quot;follow_form&quot;).update(&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;)</span>
 <span class="gd">- $(&quot;followers&quot;).update(&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;)</span>
@@ -382,7 +382,7 @@ end
 <div class="label" id="code:create_js_jquery"></div>
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.8.</span> <span class="description"> jQuery-код, необходимый для создания following relationship. <br />  <code>app/views/create.js.erb</code></span>       
+<div class="listing"><span class="header">Листинг 13.8.</span> <span class="description"> jQuery-код, необходимый для создания following relationship. <br />  <code>app/views/create.js.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#follow_form&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/unfollow&#39;)) %&gt;&quot;</span><span class="p">)</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#followers&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
@@ -395,7 +395,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.9.</span> <span class="description"> jQuery-код, необходимый для  уничтожения following relationship. <br />  <code>app/views/destroy.js.erb</code></span>       
+<div class="listing"><span class="header">Листинг 13.9.</span> <span class="description"> jQuery-код, необходимый для  уничтожения following relationship. <br />  <code>app/views/destroy.js.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#follow_form&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;%= escape_javascript(render(&#39;users/follow&#39;)) %&gt;&quot;</span><span class="p">)</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#followers&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;%= &quot;#{@user.followers.count} followers&quot; %&gt;&#39;</span><span class="p">)</span>
@@ -433,7 +433,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.10.</span> <span class="description">Миграция для модели User  (для создания <code>users</code> таблицы). <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>       
+<div class="listing"><span class="header">Листинг 13.10.</span> <span class="description">Миграция для модели User  (для создания <code>users</code> таблицы). <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>
 </div>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
@@ -460,7 +460,7 @@ end
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 13.11.</span> <span class="description">Самообратимая (в стиле Rails&nbsp;3.1) миграция для модели User.</span>       
+<div class="listing"><span class="header">Листинг 13.11.</span> <span class="description">Самообратимая (в стиле Rails&nbsp;3.1) миграция для модели User.</span>
 </div>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
@@ -502,9 +502,9 @@ end
 
 
 <ol>
-<li>Завершите апгрейд начатый в <a class="ref" href="rails-3-1#sec:upgrading_the_sample_app">Разделе&nbsp;13.1</a> если Вы этого еще не сделали. Не сдавайтесь до тех пор, пока Ваш набор тестов не позеленеет и приложение (запущенное локально) не станет выглядеть и вести себя правильно.</li>
+<li>Завершите апгрейд начатый в <a class="ref" href="rails-3-1#sec:upgrading_the_sample_app">Разделе&nbsp;13.1</a> если вы этого еще не сделали. Не сдавайтесь до тех пор, пока ваш набор тестов не позеленеет и приложение (запущенное локально) не станет выглядеть и вести себя правильно.</li>
 
-<li><strong>(жесть)</strong> Rails&nbsp;3.1 поддерживает развертывание своегй собственной аутентификации с новымметодом  <code>has_secure_password</code>. Начав с  <a href="http://railscasts.com/episodes/270-authentication-in-rails-3-1">Railscast on Authentication in Rails&nbsp;3.1</a>, реорганизуйте платформу аутентификации из  <a class="ref" href="modeling-and-viewing-users-two#top">Главы&nbsp;7</a> для использования новых фич Rails&nbsp;3.1. (Естественно, будущее издание этой книги будет включать в себя эти новые фичи с самого начала.)</li>
+<li><strong>(жесть)</strong> Rails&nbsp;3.1 поддерживает развертывание своей собственной аутентификации с новым методом  <code>has_secure_password</code>. Начав с  <a href="http://railscasts.com/episodes/270-authentication-in-rails-3-1">Railscast on Authentication in Rails&nbsp;3.1</a>, реорганизуйте платформу аутентификации из  <a class="ref" href="modeling-and-viewing-users-two#top">Главы&nbsp;7</a> для использования новых фич Rails&nbsp;3.1. (Естественно, будущее издание этой книги будет включать в себя эти новые фичи с самого начала.)</li>
 
 </ol>
 
@@ -518,7 +518,3 @@ end
 </ol>
 </div>
 
-
-
-
-   

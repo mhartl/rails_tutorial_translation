@@ -29,7 +29,7 @@
 <h3><a id="sec:10.1.1" href="updating-showing-and-deleting-users#sec:edit_form" class="heading"><span class="number">10.1.1</span> Форма для редактирования</a></h3>
 
 
-<p>Начнем с тестов для  формы редактирования, макет которой показан на <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">Рис.&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Два аналогичных теста для <code>new</code> user страницы, проверяющие на правильный ответ и заголовок, мы видели в (<a class="ref" href="sign-up#code:new_users_tests">Листинге&nbsp;8.1</a>; третий тест проверяет существование ссылки для редактирования изображения Gravatarа пользователя (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Раздел&nbsp;7.3.2</a>). Если Вы покопаетесь в сайте Gravatar, Вы увидите, что страница для добавления или изменения изображений (что несколько странно), расположена на <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, поэтому мы тестируем <code>edit</code> страницу на наличие ссылки на этот URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> Результат показан в <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">Листинге&nbsp;10.1</a>.</p>
+<p>Начнем с тестов для  формы редактирования, макет которой показан на <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_mockup">Рис.&nbsp;10.1</a>.<sup class="footnote" id="fnref:10.1"><a href="#fn:10.1">1</a></sup> Два аналогичных теста для <code>new</code> user страницы, проверяющие на правильный ответ и заголовок, мы видели в (<a class="ref" href="sign-up#code:new_users_tests">Листинге&nbsp;8.1</a>; третий тест проверяет существование ссылки для редактирования изображения Gravatarа пользователя (<a class="ref" href="modeling-and-viewing-users-two#sec:a_name_and_a_gravatar">Раздел&nbsp;7.3.2</a>). Если вы покопаетесь в сайте Gravatar, вы увидите, что страница для добавления или изменения изображений (что несколько странно), расположена на <a href="http://gravatar.com/emails"><tt>http://gravatar.com/emails</tt></a>, поэтому мы тестируем <code>edit</code> страницу на наличие ссылки на этот URL.<sup class="footnote" id="fnref:10.2"><a href="#fn:10.2">2</a></sup> Результат показан в <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_specs">Листинге&nbsp;10.1</a>.</p>
 
 <div class="label" id="fig:edit_user_mockup"></div>
 
@@ -43,7 +43,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.1.</span> <span class="description">Тест для user <code>edit</code> действия. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.1.</span> <span class="description">Тест для user <code>edit</code> действия. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -89,7 +89,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.2.</span> <span class="description">User <code>edit</code> действие. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.2.</span> <span class="description">User <code>edit</code> действие. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -110,7 +110,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.3.</span> <span class="description">Представление user edit. <br /> <code>app/views/users/edit.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.3.</span> <span class="description">Представление user edit. <br /> <code>app/views/users/edit.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Edit user<span class="nt">&lt;/h1&gt;</span>
 
@@ -160,12 +160,12 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.4.</span> <span class="description">Обновление error-messages партиала из <a class="ref" href="sign-up#code:errors_partial">Листинга&nbsp;8.9</a>, позволяющее ему работать с другими объектами. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.4.</span> <span class="description">Обновление error-messages партиала из <a class="ref" href="sign-up#code:errors_partial">Листинга&nbsp;8.9</a>, позволяющее ему работать с другими объектами. <br /> <code>app/views/shared/_error_messages.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;error_explanation&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span> 
-        prohibited this <span class="cp">&lt;%=</span> <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">humanize</span><span class="o">.</span><span class="n">downcase</span> <span class="cp">%&gt;</span> 
+    <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
+        prohibited this <span class="cp">&lt;%=</span> <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">humanize</span><span class="o">.</span><span class="n">downcase</span> <span class="cp">%&gt;</span>
         from being saved:<span class="nt">&lt;/h2&gt;</span>
     <span class="nt">&lt;p&gt;</span>There were problems with the following fields:<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
@@ -185,7 +185,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.5.</span> <span class="description">Обновление рендеринга ошибок регистрации пользователей. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.5.</span> <span class="description">Обновление рендеринга ошибок регистрации пользователей. <br /> <code>app/views/users/new.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
 
@@ -213,7 +213,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.6.</span> <span class="description">Добавление ссылки Settings. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.6.</span> <span class="description">Добавление ссылки Settings. <br /> <code>app/views/layouts/_header.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -250,7 +250,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.7.</span> <span class="description">HTML формы редактирования, определенной в  <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Листинге&nbsp;10.3</a> и показанной на <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Рис.&nbsp;10.3</a>.</span>       
+<div class="listing"><span class="header">Листинг 10.7.</span> <span class="description">HTML формы редактирования, определенной в  <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Листинге&nbsp;10.3</a> и показанной на <a class="ref" href="updating-showing-and-deleting-users#fig:edit_user_settings">Рис.&nbsp;10.3</a>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/users/1&quot;</span> <span class="na">class=</span><span class="s">&quot;edit_user&quot;</span> <span class="na">id=</span><span class="s">&quot;edit_user_1&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;_method&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;put&quot;</span> <span class="nt">/&gt;</span>
@@ -297,13 +297,13 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/gravatar_cropper.png" alt="gravatar_cropper" /></span></div><div class="caption"><span class="header">Рисунок  10.4: </span><span class="description">Интерфейс обрезки изображений  <a href="http://gravatar.com/">Gravatar</a> с изображением <a href="http://michaelhartl.com/">какого-то чувака</a>.&nbsp;<a href="http://railstutorial.org/images/figures/gravatar_cropper-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Тесты для <code>update</code> действия похожи на аналогичные для <code>create</code> действия. В частности, мы тестируем и успех и провал обновления (<a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">Листинг&nbsp;10.8</a>). (Это большой кусок кода; посмотрим, сможете ли Вы проработать его, возвращаясь к тестам в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.)</p>
+<p>Тесты для <code>update</code> действия похожи на аналогичные для <code>create</code> действия. В частности, мы тестируем и успех и провал обновления (<a class="ref" href="updating-showing-and-deleting-users#code:user_update_specs">Листинг&nbsp;10.8</a>). (Это большой кусок кода; посмотрим, сможете ли вы проработать его, возвращаясь к тестам в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.)</p>
 
 <div class="label" id="code:user_update_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.8.</span> <span class="description">Тесты для <code>update</code> действия. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.8.</span> <span class="description">Тесты для <code>update</code> действия. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -384,7 +384,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.9.</span> <span class="description">Действие <code>update</code> пользователя. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.9.</span> <span class="description">Действие <code>update</code> пользователя. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -435,7 +435,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.10.</span> <span class="description">Первые тесты для аутентификации. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.10.</span> <span class="description">Первые тесты для аутентификации. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -472,7 +472,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.11.</span> <span class="description">Добавление предфильтра <code>authenticate</code>. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.11.</span> <span class="description">Добавление предфильтра <code>authenticate</code>. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -497,7 +497,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.12.</span> <span class="description">Метод <code>deny_access</code> для аутентификации пользователей.<br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.12.</span> <span class="description">Метод <code>deny_access</code> для аутентификации пользователей.<br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -545,7 +545,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.13.</span> <span class="description">Аутентификационный тест для вошедших пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.13.</span> <span class="description">Аутентификационный тест для вошедших пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -585,7 +585,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.14.</span> <span class="description">Предфильтр <code>correct_user</code> для защиты edit/update страниц. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.14.</span> <span class="description">Предфильтр <code>correct_user</code> для защиты edit/update страниц. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -620,7 +620,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.15.</span> <span class="description">Метод <code>current_user?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.15.</span> <span class="description">Метод <code>current_user?</code>. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -660,7 +660,7 @@
 
 <h3><a id="sec:10.2.3" href="updating-showing-and-deleting-users#sec:friendly_forwarding" class="heading"><span class="number">10.2.3</span> Дружелюбная переадресация</a></h3>
 
-<p>Защита наших страниц закончена, как и было написано, но есть один небольшой недостаток: когда пользователи пытаются получить доступ к защищенной странице, они перенаправляются к странице профиля, независимо от того, куда они пытались попасть. Другими словами, если не залогинившийся пользователь пытается посетить страницу редактирования, после входа пользователь будет перенаправлен на <tt>/users/1</tt> вместо <tt>/users/1/edit</tt>. Было бы намного более доброжелательно, по отношению к пользователям, все же перенаправлять 
+<p>Защита наших страниц закончена, как и было написано, но есть один небольшой недостаток: когда пользователи пытаются получить доступ к защищенной странице, они перенаправляются к странице профиля, независимо от того, куда они пытались попасть. Другими словами, если не залогинившийся пользователь пытается посетить страницу редактирования, после входа пользователь будет перенаправлен на <tt>/users/1</tt> вместо <tt>/users/1/edit</tt>. Было бы намного более доброжелательно, по отношению к пользователям, все же перенаправлять
 их на запрашиваемую страницу вместо этого .</p>
 
 <p>Очередность посещения страниц, вход, и переадресация на требуемую страницу, это идеальная работа для интеграционного теста, так что давайте сделаем его для дружественной переадресации:</p>
@@ -676,7 +676,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.16.</span> <span class="description">Интеграционный тест для дружеской переадресации. <br /> <code>spec/requests/friendly_forwardings_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.16.</span> <span class="description">Интеграционный тест для дружеской переадресации. <br /> <code>spec/requests/friendly_forwardings_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -697,15 +697,15 @@
 </div></div>
 
 
-<p>(Как отмечено в комментарии, интеграционный тест <em>follows</em> redirects (# переходит на страницу к которой ведет переадресация), поэтому тестирование того, что ответ <code>should redirect_to</code> (# должен перенаправлять_к) некоторому URL - не будет работать. Это зание мне дорогого стоило.)</p>
+<p>(Как отмечено в комментарии, интеграционный тест <em>follows</em> redirects (# переходит на страницу к которой ведет переадресация), поэтому тестирование того, что ответ <code>should redirect_to</code> (# должен перенаправлять_к) некоторому URL - не будет работать. Это знание мне дорогого стоило.)</p>
 
-<p>Теперь реализация.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Для того чтобы перенаправить пользователей к запрашиваемой ими странице, нам нужно где-то сохранить запрашиваемую страницу, а затем переадресовать к ней. Хранение будет осуществляться посредством <code>session</code> - объекта, предоставляемого Rails, о котором Вы можете думать как об экземпляре переменной <code>cookies</code> из <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздела&nbsp;9.3.2</a>, которая автоматически истекает при закрытии браузера.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Мы также используем <code>request</code> объект для получения <code>request_uri</code>, т.е., URL запрашиваемой страницы. Результирующий код приложения показан в <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">Листинге&nbsp;10.17</a>.</p>
+<p>Теперь реализация.<sup class="footnote" id="fnref:10.5"><a href="#fn:10.5">5</a></sup> Для того чтобы перенаправить пользователей к запрашиваемой ими странице, нам нужно где-то сохранить запрашиваемую страницу, а затем переадресовать к ней. Хранение будет осуществляться посредством <code>session</code> - объекта, предоставляемого Rails, о котором вы можете думать как об экземпляре переменной <code>cookies</code> из <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздела&nbsp;9.3.2</a>, которая автоматически истекает при закрытии браузера.<sup class="footnote" id="fnref:10.6"><a href="#fn:10.6">6</a></sup> Мы также используем <code>request</code> объект для получения <code>request_uri</code>, т.е., URL запрашиваемой страницы. Результирующий код приложения показан в <a class="ref" href="updating-showing-and-deleting-users#code:friendly_forwarding_code">Листинге&nbsp;10.17</a>.</p>
 
 <div class="label" id="code:friendly_forwarding_code"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.17.</span> <span class="description">Код реализующий дружественную переадресацию. <br /> <code>app/helpers/sessions_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.17.</span> <span class="description">Код реализующий дружественную переадресацию. <br /> <code>app/helpers/sessions_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
@@ -745,7 +745,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.18.</span> <span class="description">Действие  <code>create</code> контроллера  Sessions с доброжелательной переадресацией. <br /> <code>app/controllers/sessions_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.18.</span> <span class="description">Действие  <code>create</code> контроллера  Sessions с доброжелательной переадресацией. <br /> <code>app/controllers/sessions_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
@@ -799,7 +799,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.19.</span> <span class="description">Тесты для страницы user index.<br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.19.</span> <span class="description">Тесты для страницы user index.<br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -852,7 +852,7 @@
 </div></div>
 
 
-<p>Как Вы можете видеть, метод проверки index страницы делает три "фабричных" пользователя (вошедших, как и первый из них), а затем проверяет что страница  index содержит тег элемента списка (<code>li</code>) для имени каждого из них. Обратите внимание, что мы позаботились о том, чтобы дать пользователям различные имена, чтобы каждый элемент в списке пользователей имел уникальную запись.</p>
+<p>Как вы можете видеть, метод проверки index страницы делает три "фабричных" пользователя (вошедших, как и первый из них), а затем проверяет что страница  index содержит тег элемента списка (<code>li</code>) для имени каждого из них. Обратите внимание, что мы позаботились о том, чтобы дать пользователям различные имена, чтобы каждый элемент в списке пользователей имел уникальную запись.</p>
 
 <p>Как и ожидалось, код приложения использует <code>User.all</code> для создания переменной экземпляра <code>@users</code> в  <code>index</code> действии контроллера Users (<a class="ref" href="updating-showing-and-deleting-users#code:user_index">Листинг&nbsp;10.20</a>).</p>
 
@@ -860,7 +860,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.20.</span> <span class="description">Действие <code>index</code> контроллера Users. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.20.</span> <span class="description">Действие <code>index</code> контроллера Users. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -892,7 +892,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.21.</span> <span class="description">Представление для страницы user index. <br /> <code>app/views/users/index.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.21.</span> <span class="description">Представление для страницы user index. <br /> <code>app/views/users/index.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -914,7 +914,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.22.</span> <span class="description">CSS для страницы user index. <br /> <code>public/stylesheets/custom.css</code></span>       
+<div class="listing"><span class="header">Листинг 10.22.</span> <span class="description">CSS для страницы user index. <br /> <code>public/stylesheets/custom.css</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -936,7 +936,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.23.</span> <span class="description">Ссылка в шаблоне для страницы user index. <br /> <code>app/views/layouts/_header.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.23.</span> <span class="description">Ссылка в шаблоне для страницы user index. <br /> <code>app/views/layouts/_header.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -981,7 +981,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.24.</span> <span class="description">Добавление Faker гема в <code>Gemfile</code>.</span>       
+<div class="listing"><span class="header">Листинг 10.24.</span> <span class="description">Добавление Faker гема в <code>Gemfile</code>.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 <span class="o">.</span>
@@ -1012,7 +1012,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.25.</span> <span class="description">Rake задача для заполнения базы данных образцами пользователей. <br /> <code>lib/tasks/sample_data.rake</code></span>       
+<div class="listing"><span class="header">Листинг 10.25.</span> <span class="description">Rake задача для заполнения базы данных образцами пользователей. <br /> <code>lib/tasks/sample_data.rake</code></span>
 </div>
 
 <div class="code"><div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
@@ -1075,7 +1075,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.26.</span> <span class="description">Включение <tt>will_paginate</tt> в Gemfile.</span>       
+<div class="listing"><span class="header">Листинг 10.26.</span> <span class="description">Включение <tt>will_paginate</tt> в Gemfile.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
 
@@ -1103,7 +1103,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.27.</span> <span class="description">Список пользователей с пагинацией. <br /> <code>app/views/users/index.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.27.</span> <span class="description">Список пользователей с пагинацией. <br /> <code>app/views/users/index.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1142,7 +1142,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.28.</span> <span class="description">Пагинация пользователей в <code>index</code> действии. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.28.</span> <span class="description">Пагинация пользователей в <code>index</code> действии. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -1169,7 +1169,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_index_pagination_rails_3.png" alt="user_index_pagination_rails_3" /></span></div><div class="caption"><span class="header">Рисунок  10.10: </span><span class="description">Страница user index   <a href="http://localhost:3000/users"><tt>/users</tt></a> с пагинацией.&nbsp;<a href="http://railstutorial.org/images/figures/user_index_pagination_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Если теперь кликнуть по любой&nbsp;<a href="http://localhost:3000/users?page=2">2</a> или <a href="http://localhost:3000/users?page=2">Next</a> ссылке, Вы получите вторую страницу с результатами поиска, как показано на <a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">Рис.&nbsp;10.11</a>.</p>
+<p>Если теперь кликнуть по любой&nbsp;<a href="http://localhost:3000/users?page=2">2</a> или <a href="http://localhost:3000/users?page=2">Next</a> ссылке, вы получите вторую страницу с результатами поиска, как показано на <a class="ref" href="updating-showing-and-deleting-users#fig:user_index_page_two_rails_3">Рис.&nbsp;10.11</a>.</p>
 
 <div class="label" id="fig:user_index_page_two_rails_3"></div>
 
@@ -1193,7 +1193,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.29.</span> <span class="description">Определение последовательности (цикла) Factory Girl. <br /> <code>spec/factories.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.29.</span> <span class="description">Определение последовательности (цикла) Factory Girl. <br /> <code>spec/factories.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
   <span class="n">user</span><span class="o">.</span><span class="n">name</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
@@ -1216,13 +1216,13 @@
 </div>
 
 
-<p>Применяя идею фабричных последовательностей (циклов), мы можем сделать 31 пользователя (исходный <code>@user</code> плюс еще 30) внутри теста, а затем проверить, что ответ имеет HTML, ожидаемый от  <tt>will_paginate</tt> (который Вы должны суметь определить с помощью Firebug или просмотра исходного кода страницы). Результат показан в <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_test">Листинге&nbsp;10.30</a>.</p>
+<p>Применяя идею фабричных последовательностей (циклов), мы можем сделать 31 пользователя (исходный <code>@user</code> плюс еще 30) внутри теста, а затем проверить, что ответ имеет HTML, ожидаемый от  <tt>will_paginate</tt> (который вы должны суметь определить с помощью Firebug или просмотра исходного кода страницы). Результат показан в <a class="ref" href="updating-showing-and-deleting-users#code:will_paginate_test">Листинге&nbsp;10.30</a>.</p>
 
 <div class="label" id="code:will_paginate_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.30.</span> <span class="description">Тест для пагинации. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.30.</span> <span class="description">Тест для пагинации. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
@@ -1310,7 +1310,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.31.</span> <span class="description">Первая попытка рефакторинга в index представлении.<br /> <code>app/views/users/index.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.31.</span> <span class="description">Первая попытка рефакторинга в index представлении.<br /> <code>app/views/users/index.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1333,7 +1333,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.32.</span> <span class="description">Партиал для отображения отдельно взятого пользователя. <br /> <code>app/views/users/_user.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.32.</span> <span class="description">Партиал для отображения отдельно взятого пользователя. <br /> <code>app/views/users/_user.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">30</span> <span class="cp">%&gt;</span>
@@ -1349,7 +1349,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.33.</span> <span class="description">Полностью реорганизованный список пользователей. <br /> <code>app/views/users/index.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.33.</span> <span class="description">Полностью реорганизованный список пользователей. <br /> <code>app/views/users/index.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1394,7 +1394,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.34.</span> <span class="description">Тесты для атрибута <code>admin</code>. <br /> <code>spec/models/user_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.34.</span> <span class="description">Тесты для атрибута <code>admin</code>. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="o">.</span>
 <span class="o">.</span>
@@ -1445,7 +1445,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.35.</span> <span class="description">Миграция для добавления булевого атрибута <code>admin</code> к пользователям. <br /> <code>db/migrate/&lt;timestamp&gt;_add_admin_to_users.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.35.</span> <span class="description">Миграция для добавления булевого атрибута <code>admin</code> к пользователям. <br /> <code>db/migrate/&lt;timestamp&gt;_add_admin_to_users.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddAdminToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -1497,7 +1497,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.36.</span> <span class="description">Код заполнителя образцов данных для создания административного пользователя. <br /> <code>lib/tasks/sample_data.rake</code></span>       
+<div class="listing"><span class="header">Листинг 10.36.</span> <span class="description">Код заполнителя образцов данных для создания административного пользователя. <br /> <code>lib/tasks/sample_data.rake</code></span>
 </div>
 
 <div class="code"><div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
@@ -1538,7 +1538,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.37.</span> <span class="description"><code>Attr_accessible</code>  атрибуты модели User <em>без</em> атрибута <code>:admin</code>.  <br /> <code>app/models/user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.37.</span> <span class="description"><code>Attr_accessible</code>  атрибуты модели User <em>без</em> атрибута <code>:admin</code>.  <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">attr_accessor</span> <span class="ss">:password</span>
@@ -1571,7 +1571,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.38.</span> <span class="description">Ссылки для удаления пользователей  (видимые только администраторам). <br /> <code>app/views/users/_user.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.38.</span> <span class="description">Ссылки для удаления пользователей  (видимые только администраторам). <br /> <code>app/views/users/_user.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">30</span> <span class="cp">%&gt;</span>
@@ -1600,7 +1600,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.39.</span> <span class="description">Добавление дефолтных библиотек JavaScript в пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.39.</span> <span class="description">Добавление дефолтных библиотек JavaScript в пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -1634,7 +1634,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.40.</span> <span class="description">Тесты для удаления пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.40.</span> <span class="description">Тесты для удаления пользователей. <br /> <code>spec/controllers/users_controller_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
   <span class="n">render_views</span>
@@ -1695,13 +1695,13 @@
 </div>
 
 
-<p>Как Вы можете догадаться, реализация использует предфильтр, в этот раз для ограничения доступа к <code>destroy</code> действию. <code>Destroy</code> действие самостоятельно находит пользователя, уничтожает его, а затем переадресует к списку пользователей (<a class="ref" href="updating-showing-and-deleting-users#code:admin_destroy_before_filter">Листинг&nbsp;10.41</a>).</p>
+<p>Как вы можете догадаться, реализация использует предфильтр, в этот раз для ограничения доступа к <code>destroy</code> действию. <code>Destroy</code> действие самостоятельно находит пользователя, уничтожает его, а затем переадресует к списку пользователей (<a class="ref" href="updating-showing-and-deleting-users#code:admin_destroy_before_filter">Листинг&nbsp;10.41</a>).</p>
 
 <div class="label" id="code:admin_destroy_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.41.</span> <span class="description">Предфильтр, позволяющий иметь доступ к <code>destroy</code> действию только администраторам. <br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">Листинг 10.41.</span> <span class="description">Предфильтр, позволяющий иметь доступ к <code>destroy</code> действию только администраторам. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
@@ -1762,7 +1762,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.42.</span> <span class="description">Окончательный вариант <code>Gemfile</code> для примера приложения.</span>       
+<div class="listing"><span class="header">Листинг 10.42.</span> <span class="description">Окончательный вариант <code>Gemfile</code> для примера приложения.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">'http://rubygems.org'</span>
 
@@ -1799,9 +1799,9 @@
 
 <ol>
 
-<li>Организуйте открытие  Gravatar ссылки  &ldquo;change&rdquo; из <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Листинга&nbsp;10.3</a> в новом окне (или вкладке). <em>Подсказка:</em> Ищите в сети; Вы должны найти один простой и надежный метод  с участием так называмого <code>_blank</code>. </li>
+<li>Организуйте открытие  Gravatar ссылки  &ldquo;change&rdquo; из <a class="ref" href="updating-showing-and-deleting-users#code:user_edit_view">Листинга&nbsp;10.3</a> в новом окне (или вкладке). <em>Подсказка:</em> Ищите в сети; вы должны найти один простой и надежный метод  с участием так называмого <code>_blank</code>. </li>
 
-<li>Удалите дублирующийся код формы рефакторингом <code>new.html.erb</code> и <code>edit.html.erb</code> представлений, используя партиал из <a class="ref" href="updating-showing-and-deleting-users#code:new_edit_partial">Листинга&nbsp;10.43</a>. Обратите внимание, что Вам придется передать пременную формы&nbsp;<code>f</code> в виде явной локальной переменной, как показано в <a class="ref" href="updating-showing-and-deleting-users#code:new_user_with_partial">Листинге&nbsp;10.44</a>.</li>
+<li>Удалите дублирующийся код формы рефакторингом <code>new.html.erb</code> и <code>edit.html.erb</code> представлений, используя партиал из <a class="ref" href="updating-showing-and-deleting-users#code:new_edit_partial">Листинга&nbsp;10.43</a>. Обратите внимание, что вам придется передать пременную формы&nbsp;<code>f</code> в виде явной локальной переменной, как показано в <a class="ref" href="updating-showing-and-deleting-users#code:new_user_with_partial">Листинге&nbsp;10.44</a>.</li>
 
 <li>Зарегистрированным пользователям совершенно незачем иметь доступ к <code>new</code> и <code>create</code> действиям контроллера Users. Организуйте  для таких пользователей переадресацию  в корневой URL, при попытке обратиться к этим страницам.</li>
 
@@ -1818,7 +1818,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.43.</span> <span class="description">Партиал для new и edit полей формы. <br /> <code>app/views/users/_fields.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.43.</span> <span class="description">Партиал для new и edit полей формы. <br /> <code>app/views/users/_fields.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">object</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field&quot;</span><span class="nt">&gt;</span>
@@ -1847,7 +1847,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 10.44.</span> <span class="description">Представление new user с партиалом. <br /> <code>app/views/users/new.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 10.44.</span> <span class="description">Представление new user с партиалом. <br /> <code>app/views/users/new.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
 
@@ -1882,10 +1882,7 @@
 <li id="fn:10.9">Имя <code>user</code> непринципиально&nbsp;&mdash;&nbsp;мы могли бы написать <code>@users.each do |foobar|</code> и затем использовать <code>render foobar</code>. Ключом является <em>класс</em> объекта&nbsp;&mdash;&nbsp;в данном случае, <code>User</code>.&nbsp;<a class="arrow" href="#fnref:10.9">&uarr;</a></li>
 <li id="fn:10.10">Метод <code>toggle!</code> вызывает колбэки Active Record но не валидации, так что мы должны установить атрибут <code>password</code> (но не подтверждение) с тем чтобы иметь не чистый пароль в обратном вызове <code>encrypt_password</code>.&nbsp;<a class="arrow" href="#fnref:10.10">&uarr;</a></li>
 <li id="fn:10.11">Инструменты командной строки, такие как <tt>curl</tt> (см. <a class="ref" href="static-pages#sidebar:response_codes">Блок&nbsp;3.2</a>) могут выдавать <tt>PUT</tt> запросы этой формы.&nbsp;<a class="arrow" href="#fnref:10.11">&uarr;</a></li>
-<li id="fn:10.12">Это означает, что ссылки на удаление не будут работать если у пользователя нет (или отключен) JavaScript. Если Вы обязаны поддерживать браузеры без включенного JavaScript, Вы можете подделать запрос <tt>DELETE</tt> используя форму и запрос <tt>POST</tt>, что будет работать даже в отсутствие JavaScript; см. об этом более подробно Railscast на &ldquo;<a href="http://railscasts.com/episodes/77-destroy-without-javascript">Destroy Without JavaScript</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:10.12">&uarr;</a></li>
+<li id="fn:10.12">Это означает, что ссылки на удаление не будут работать если у пользователя нет (или отключен) JavaScript. Если вы обязаны поддерживать браузеры без включенного JavaScript, вы можете подделать запрос <tt>DELETE</tt> используя форму и запрос <tt>POST</tt>, что будет работать даже в отсутствие JavaScript; см. об этом более подробно Railscast на &ldquo;<a href="http://railscasts.com/episodes/77-destroy-without-javascript">Destroy Without JavaScript</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:10.12">&uarr;</a></li>
 </ol>
 </div>
-
-
-
 

@@ -6,7 +6,7 @@
 <h1 class="chapter"><a id="sec:4" href="rails-flavored-ruby#top" class="heading"><span class="number">Глава 4</span> Rails&nbsp;&mdash;&nbsp;приправленный Ruby</a></h1>
 
 
-<p>Основанная на примерах из <a class="ref" href="static-pages#top">Главы&nbsp;3</a>, эта глава рассматривает некоторые элементы Ruby важные для Rails. Ruby многогранен, но, к счастью, нам нужна относительно малая его часть, чтобы быть продуктивным Rails-разработчиком. Более того, эта малая часть <em>отличается</em> от той, которая Вам понадобится в Ruby для обычных задач, поэтому, если вашей целью является создание динамических веб-приложений, я рекомендую изучать Rails первым, собирая биты Ruby на этом пути. Чтобы стать <em>экспертом</em> Rails, Вы должны понимать Ruby более глубоко, и эта книга дает Вам хорошую основу для развития.  Как отмечалось в <a class="ref" href="beginning#sec:comments_for_various_readers">Разделе&nbsp;1.1.1</a>, после окончания <em>Rails Tutorial</em> я советую почитать книги о чисто Ruby, такие как <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a>, или <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a>.</p>
+<p>Основанная на примерах из <a class="ref" href="static-pages#top">Главы&nbsp;3</a>, эта глава рассматривает некоторые элементы Ruby важные для Rails. Ruby многогранен, но, к счастью, нам нужна относительно малая его часть, чтобы быть продуктивным Rails-разработчиком. Более того, эта малая часть <em>отличается</em> от той, которая вам понадобится в Ruby для обычных задач, поэтому, если вашей целью является создание динамических веб-приложений, я рекомендую изучать Rails первым, собирая биты Ruby на этом пути. Чтобы стать <em>экспертом</em> Rails, вы должны понимать Ruby более глубоко, и эта книга дает вам хорошую основу для развития.  Как отмечалось в <a class="ref" href="beginning#sec:comments_for_various_readers">Разделе&nbsp;1.1.1</a>, после окончания <em>Rails Tutorial</em> я советую почитать книги о чисто Ruby, такие как <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a>, или <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a>.</p>
 
 <p>В этой главе рассматриваются много материала, и это нормально&nbsp;&mdash;&nbsp;не понять его весь с первого раза. Я буду часто возвращаться к нему в последующих главах.</p>
 
@@ -30,7 +30,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.1.</span> <span class="description">Шаблон сайта Пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 4.1.</span> <span class="description">Шаблон сайта Пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -67,9 +67,9 @@
 </div>
 
 
-<p>Но что, если мы не определим <code>@title</code> переменную? Это хорошее соглашение - иметь <em>базовый заголовок</em>, который мы используем на каждой странице, с дополнительным переменным заголовком (тайтлом), если мы хотим быть более конкретными. Мы уже <em>почти</em> достигли этого с нашей текущей схемой, с одним маленьким недостатком: как Вы можете видеть, если Вы удалите назначение <code>@title</code> в одном из действий, в отсутствие <code>@title</code> переменной название будет выглядеть следующим образом:</p>
+<p>Но что, если мы не определим <code>@title</code> переменную? Это хорошее соглашение - иметь <em>базовый заголовок</em>, который мы используем на каждой странице, с дополнительным переменным заголовком (тайтлом), если мы хотим быть более конкретными. Мы уже <em>почти</em> достигли этого с нашей текущей схемой, с одним маленьким недостатком: как вы можете видеть, если вы удалите назначение <code>@title</code> в одном из действий, в отсутствие <code>@title</code> переменной название будет выглядеть следующим образом:</p>
 
-<div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App | 
+<div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App |
 </pre></div>
 </div>
 
@@ -82,7 +82,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.2.</span> <span class="description">Определение <code>title</code> помощника (хелпера).<br /> <code>app/helpers/application_helper.rb</code></span>       
+<div class="listing"><span class="header">Листинг 4.2.</span> <span class="description">Определение <code>title</code> помощника (хелпера).<br /> <code>app/helpers/application_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">ApplicationHelper</span>
 
@@ -117,13 +117,13 @@
 
 
 <p>как видно в <a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">Листинге&nbsp;4.3</a>.
-Обратите внимание, в частности, на переход от переменной экземпляра <code>@title</code> к  методу помощника <code>title</code> (без <code>@</code>&nbsp;знака). Используя Autotest или <code>rspec spec/</code>, Вы можете убедиться, что тесты из  <a class="ref" href="static-pages#top">Главы&nbsp;3</a> все еще проходят.</p>
+Обратите внимание, в частности, на переход от переменной экземпляра <code>@title</code> к  методу помощника <code>title</code> (без <code>@</code>&nbsp;знака). Используя Autotest или <code>rspec spec/</code>, вы можете убедиться, что тесты из  <a class="ref" href="static-pages#top">Главы&nbsp;3</a> все еще проходят.</p>
 
 <div class="label" id="code:application_layout_full_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.3.</span> <span class="description">Макет сайта Пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 4.3.</span> <span class="description">Макет сайта Пример приложения. <br /> <code>app/views/layouts/application.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -149,7 +149,7 @@
 
 <p>Это второе дополнение к нашему сайту, оно покажется простым, но добавит несколько новых концепций Ruby: в том числе таблицы стилей в шаблон нашего сайта. Хотя это книга о веб-разработке, а не о веб-дизайне, мы будем использовать каскадные таблицы стилей (CSS), чтобы придать примеру приложения некоторый минимальный стиль, и мы будем использовать фрэймворк <a href="http://www.blueprintcss.org/">Blueprint CSS</a> в качестве основы для этого стиля.</p>
 
-<p>Для начала,  <a href="http://github.com/joshuaclayton/blueprint-css/zipball/master">скачайте последнюю версию Blueprint CSS</a>. (Для простоты я буду считать, что Вы скачали Blueprint в папку <code>Downloads</code>, но Вы можете использовать любую другую.) Используя командную строку либо графический инструмент, скопируйте папку Blueprint CSS <code>blueprint</code> в <code>public/stylesheets</code> - это специальный каталог, в котором Rails держит таблицы стилей. На моем Mac, команды выглядели так, но ваши команды могут отличаться:</p>
+<p>Для начала,  <a href="http://github.com/joshuaclayton/blueprint-css/zipball/master">скачайте последнюю версию Blueprint CSS</a>. (Для простоты я буду считать, что вы скачали Blueprint в папку <code>Downloads</code>, но вы можете использовать любую другую.) Используя командную строку либо графический инструмент, скопируйте папку Blueprint CSS <code>blueprint</code> в <code>public/stylesheets</code> - это специальный каталог, в котором Rails держит таблицы стилей. На моем Mac, команды выглядели так, но ваши команды могут отличаться:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nv">$ </span>cp -r ~/Downloads/joshuaclayton-blueprint-css-&lt;version number&gt;/blueprint <span class="se">\</span>
 &gt; public/stylesheets/
@@ -157,7 +157,7 @@
 </div>
 
 
-<p>Здесь <code>cp</code> является командой копирования Unix, и <code>-r</code>&nbsp;&mdash;&nbsp;флаг  рекурсивного копирования (необходимый для копирования директорий). (Как уже упоминалось вкратце в <a class="ref" href="static-pages#sec:autotest">Разделе&nbsp;3.2.1.1</a>, тильда <tt class="verb">~</tt> означает &ldquo;home directory&rdquo; в Unix.) <em>Примечание:</em> Вы <em>не</em> должны вставлять символ&nbsp;<tt class="verb">&gt;</tt> в терминал. Если Вы вставите первую строку с обратным слэшем (&ldquo; \&rdquo;) и нажмете Enter, Вы увидите&nbsp;<tt class="verb">&gt;</tt>, указывающий на продолжение строки. Вам следует вставить вторую строку и снова нажать Enter, чтобы выполнить команду.  Отметим также, что Вы должны будете заполнить номер версии вручную, т. к. он меняется при обновлении Blueprint. (<span class="c1"># я просто скопировал название папки, включающее и номер версии тоже, и  заменил им  «joshuaclayton-blueprint-css-&lt;номер версии&gt;»</span>) Наконец, убедитесь, что Вы <em>не вводите</em></p>
+<p>Здесь <code>cp</code> является командой копирования Unix, и <code>-r</code>&nbsp;&mdash;&nbsp;флаг  рекурсивного копирования (необходимый для копирования директорий). (Как уже упоминалось вкратце в <a class="ref" href="static-pages#sec:autotest">Разделе&nbsp;3.2.1.1</a>, тильда <tt class="verb">~</tt> означает &ldquo;home directory&rdquo; в Unix.) <em>Примечание:</em> вы <em>не</em> должны вставлять символ&nbsp;<tt class="verb">&gt;</tt> в терминал. Если вы вставите первую строку с обратным слэшем (&ldquo; \&rdquo;) и нажмете Enter, вы увидите&nbsp;<tt class="verb">&gt;</tt>, указывающий на продолжение строки. Вам следует вставить вторую строку и снова нажать Enter, чтобы выполнить команду.  Отметим также, что вы должны будете заполнить номер версии вручную, т. к. он меняется при обновлении Blueprint. (<span class="c1"># я просто скопировал название папки, включающее и номер версии тоже, и  заменил им  «joshuaclayton-blueprint-css-&lt;номер версии&gt;»</span>) Наконец, убедитесь, что вы <em>не вводите</em></p>
 
 <div class="code"><div class="highlight"><pre><span class="nv">$ </span>cp -r ~/Downloads/joshuaclayton-blueprint-css-&lt;version number&gt;/blueprint/ <span class="se">\</span>
 &gt; public/stylesheets/
@@ -167,13 +167,13 @@
 
 <p>имеющее косую черту в <code>&hellip;/blueprint/</code>. Это вставит <em>содержимое</em> папки Blueprint в каталог <code>public/stylesheets</code> вместо перемещения всей папки.</p>
 
-<p>После того как Вы заполучили таблицы стилей в соответствующий каталог, Rails предоставляет помощника для включения их на наших страницах с помощью Embedded (встроенного) Ruby (<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">Листинг&nbsp;4.4</a>).</p>
+<p>После того как вы заполучили таблицы стилей в соответствующий каталог, Rails предоставляет помощника для включения их на наших страницах с помощью Embedded (встроенного) Ruby (<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">Листинг&nbsp;4.4</a>).</p>
 
 <div class="label" id="code:layout_with_stylesheets"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.4.</span> <span class="description">Добавление таблиц стилей в макет примера приложения.<br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Листинг 4.4.</span> <span class="description">Добавление таблиц стилей в макет примера приложения.<br /> <code>app/views/layouts/application.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -199,7 +199,7 @@
 </div>
 
 
-<p>Они используют встроенный в Rails помощник <code>stylesheet_link_tag</code>, о котором Вы можете прочитать больше на Rails API.<sup class="footnote" id="fnref:4.2"><a href="#fn:4.2">2</a></sup> Первая <code>stylesheet_link_tag</code> строка включает таблицу стилей <code>blueprint/screen.css</code> для экранов (например, компьютерных мониторов), а вторая включает в себя <code>blueprint/print.css</code> для печати.   (Помощник автоматически добавляет <code>.css</code> расширение к именам файлов, если оно отсутствует, поэтому я опустил его для краткости). Как и с <code>title</code> помощником (хелпером), для опытного разработчика Rails эти строки выглядят просто, но в них есть по крайней мере четыре новых Ruby идеи: встроенные в Rails методы, вызов метода с отсутствующими скобками, символы и хэши.  В этой главе мы рассмотрим эти новые идеи. (Мы увидим, HTML произведенный включением этих таблиц стилей в <a class="ref" href="rails-flavored-ruby#code:css_source">Листинге&nbsp;4.6</a>  <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Раздела&nbsp;4.3.4</a>.)</p>
+<p>Они используют встроенный в Rails помощник <code>stylesheet_link_tag</code>, о котором вы можете прочитать больше на Rails API.<sup class="footnote" id="fnref:4.2"><a href="#fn:4.2">2</a></sup> Первая <code>stylesheet_link_tag</code> строка включает таблицу стилей <code>blueprint/screen.css</code> для экранов (например, компьютерных мониторов), а вторая включает в себя <code>blueprint/print.css</code> для печати.   (Помощник автоматически добавляет <code>.css</code> расширение к именам файлов, если оно отсутствует, поэтому я опустил его для краткости). Как и с <code>title</code> помощником (хелпером), для опытного разработчика Rails эти строки выглядят просто, но в них есть по крайней мере четыре новых Ruby идеи: встроенные в Rails методы, вызов метода с отсутствующими скобками, символы и хэши.  В этой главе мы рассмотрим эти новые идеи. (Мы увидим, HTML произведенный включением этих таблиц стилей в <a class="ref" href="rails-flavored-ruby#code:css_source">Листинге&nbsp;4.6</a>  <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Раздела&nbsp;4.3.4</a>.)</p>
 
 <p>Кстати, с новыми таблицами стилей сайт не сильно изменился, но это только начало (<a class="ref" href="rails-flavored-ruby#fig:home_with_stylesheet">Рис.&nbsp;4.1</a>). Мы будем строить на этой основе, начиная с <a class="ref" href="filling-in-the-layout#top">Главы&nbsp;5</a>.<sup class="footnote" id="fnref:4.3"><a href="#fn:4.3">3</a></sup></p>
 
@@ -228,9 +228,9 @@
 
 <p>По умолчанию, консоль запускается в <em>окружении разработки (development environment)</em>, которое является одним из трех отдельных окружений определенных в Rails (другие&nbsp;&mdash;&nbsp;<em>тестирование</em> и <em>производство</em> (<em>test</em> и <em>production</em>)). Это различие не будет иметь важного значения в этой главе, мы узнаем больше об окружениях в <a class="ref" href="modeling-and-viewing-users-one#sec:rails_environments">Разделе&nbsp;6.3.1</a>.</p>
 
-<p>Консоль это замечательный инструмент обучения, и Вы  можете чувствовать себя свободно при ее использовании&nbsp;&mdash;&nbsp;не волнуйтесь, Вы (вероятно) ничего не сломаете. При использовании консоли, нажмите Ctrl-C, если Вы застряли, или Ctrl-D для выхода из консоли в целом.</p>
+<p>Консоль это замечательный инструмент обучения, и вы  можете чувствовать себя свободно при ее использовании&nbsp;&mdash;&nbsp;не волнуйтесь, вы (вероятно) ничего не сломаете. При использовании консоли, нажмите Ctrl-C, если вы застряли, или Ctrl-D для выхода из консоли в целом.</p>
 
-<p>На протяжении оставшейся части этой главы, вы, возможно, найдете полезным консультироваться в Ruby API.<sup class="footnote" id="fnref:4.5"><a href="#fn:4.5">5</a></sup> Она упакована (возможно, даже <em>слишком</em> упакована) информацией, например, чтобы узнать больше о строках Ruby Вы можете посмотреть на Ruby API вступление для <code>String</code> класса.</p>
+<p>На протяжении оставшейся части этой главы, вы, возможно, найдете полезным консультироваться в Ruby API.<sup class="footnote" id="fnref:4.5"><a href="#fn:4.5">5</a></sup> Она упакована (возможно, даже <em>слишком</em> упакована) информацией, например, чтобы узнать больше о строках Ruby вы можете посмотреть на Ruby API вступление для <code>String</code> класса.</p>
 
 <div class="label" id="sec:comments"></div>
 
@@ -251,7 +251,7 @@
 
 <p>первая строка является комментарием с указанием цели последующего определения функции.</p>
 
-<p>Обычно, Вам не нужно включать комментарии в сессии консоли, но в учебных целях, в дальнейшем, я буду включать некоторые коментарии, например:</p>
+<p>Обычно, вам не нужно включать комментарии в сессии консоли, но в учебных целях, в дальнейшем, я буду включать некоторые коментарии, например:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="mi">17</span> <span class="o">+</span> <span class="mi">42</span>   <span class="c1"># Integer addition</span>
@@ -260,7 +260,7 @@
 </div>
 
 
-<p>Если вы,  двигаясь по этому разделу, будете набирать или копипастить команды в вашу консоль, Вы можете, конечно, опустить комментарии, если хотите; консоль будет игнорировать их в любом случае.</p>
+<p>Если вы,  двигаясь по этому разделу, будете набирать или копипастить команды в вашу консоль, вы можете, конечно, опустить комментарии, если хотите; консоль будет игнорировать их в любом случае.</p>
 
 <div class="label" id="sec:strings"></div>
 
@@ -373,7 +373,7 @@
 
 <p>Обратите внимание, как консоль возвращает значения с использованием строк в двойных кавычках, которые  требуют обратной косой черты, чтобы <em>маскировать</em> специальные символы, такие как&nbsp;<code>#</code>.</p>
 
-<p>Если строки в двойных кавычках могут делать все то же, что и одиночно закавыченные, и могут интерполировать, какой смысл в  одиночных кавычках? Они часто бывают полезны, потому что они действительно буквальные, и хранят в точности такие символы, как Вы вводите. Например, &ldquo;обратный слэш&rdquo; (бэкслэш)&nbsp;&mdash;&nbsp;символ специальный в большинстве систем, например,  буквальной новой строке&nbsp;<tt class="verb">\n</tt>. Если Вы хотите чтобы  переменная содержала буквально обратный слэш, в одиночных кавычках это сделать проще:</p>
+<p>Если строки в двойных кавычках могут делать все то же, что и одиночно закавыченные, и могут интерполировать, какой смысл в  одиночных кавычках? Они часто бывают полезны, потому что они действительно буквальные, и хранят в точности такие символы, как вы вводите. Например, &ldquo;обратный слэш&rdquo; (бэкслэш)&nbsp;&mdash;&nbsp;символ специальный в большинстве систем, например,  буквальной новой строке&nbsp;<tt class="verb">\n</tt>. Если вы хотите чтобы  переменная содержала буквально обратный слэш, в одиночных кавычках это сделать проще:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s1">&#39;\n&#39;</span>       <span class="c1"># A literal &#39;backslash n&#39; combination</span>
 <span class="go">=&gt; &quot;\\n&quot;</span>
@@ -397,7 +397,7 @@
 <h3><a id="sec:4.2.3" href="rails-flavored-ruby#sec:objects_and_message_passing" class="heading"><span class="number">4.2.3</span> Объекты и передача сообщений</a></h3>
 
 
-<p>Все в Ruby, включая строки и даже <code>nil</code>, является <em>объектом</em>. Мы увидим технический смысл этого выражения в <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">Разделе&nbsp;4.4.2</a>, но я не думаю, что кто-нибудь когда-нибудь понял объекты, прочитав определение в книге, Вы должны создать свое интуитивное понимание объектов, видя множество примеров.</p>
+<p>Все в Ruby, включая строки и даже <code>nil</code>, является <em>объектом</em>. Мы увидим технический смысл этого выражения в <a class="ref" href="rails-flavored-ruby#sec:a_class_of_our_own">Разделе&nbsp;4.4.2</a>, но я не думаю, что кто-нибудь когда-нибудь понял объекты, прочитав определение в книге, вы должны создать свое интуитивное понимание объектов, видя множество примеров.</p>
 
 <p>Проще описать, что объекты <em>делают</em>, на какие сообщения реагируют.  Объект, типа строки, например, может реагировать на сообщение <code>length</code>, которое возвращает количество символов в строке:</p>
 
@@ -470,7 +470,7 @@
 
 <p>Здесь мы видим, что <code>nil</code> объект сам по себе не реагирует на <code>empty?</code> метод, но <code>nil.to_s</code> реагирует.</p>
 
-<p>Вот специальный метод для проверки на <code>nil</code>-ность, о котором Вы могли догадаться:</p>
+<p>Вот специальный метод для проверки на <code>nil</code>-ность, о котором вы могли догадаться:</p>
 
 
 
@@ -484,7 +484,7 @@
 </div>
 
 
-<p>Если Вы посмотрите на <a class="ref" href="rails-flavored-ruby#code:title_helper">Листинг&nbsp;4.2</a>, Вы увидите, что <code>title</code> помощник тестирует, является ли <code>@title</code>&nbsp;&mdash;&nbsp;<code>nil</code>, используя <code>nil?</code> метод. Это намек на то, что есть что-то особенное в переменных экземпляра (переменных с&nbsp;<code>@</code> знаком), что может быть лучше понятым, противопоставлением их обычным переменным.  Например, предположим, что мы вводим <code>title</code> и <code>@title</code> переменные в консоли не определив их вначале:</p>
+<p>Если вы посмотрите на <a class="ref" href="rails-flavored-ruby#code:title_helper">Листинг&nbsp;4.2</a>, вы увидите, что <code>title</code> помощник тестирует, является ли <code>@title</code>&nbsp;&mdash;&nbsp;<code>nil</code>, используя <code>nil?</code> метод. Это намек на то, что есть что-то особенное в переменных экземпляра (переменных с&nbsp;<code>@</code> знаком), что может быть лучше понятым, противопоставлением их обычным переменным.  Например, предположим, что мы вводим <code>title</code> и <code>@title</code> переменные в консоли не определив их вначале:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">title</span>        <span class="c1"># Oops! We haven&#39;t defined a title variable.</span>
 <span class="go">NameError: undefined local variable or method `title&#39; </span>
@@ -508,7 +508,7 @@
 
 <p>становится</p>
 
-<div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App | 
+<div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App |
 </pre></div>
 </div>
 
@@ -555,7 +555,7 @@
 <h3><a id="sec:4.2.4" href="rails-flavored-ruby#sec:method_definitions" class="heading"><span class="number">4.2.4</span> Определение метода</a></h3>
 
 
-<p>Консоль позволяет определять методы точно так же, как мы это делали с <code>home</code> действием из <a class="ref" href="static-pages#code:pages_controller">Листинга&nbsp;3.6</a> или <code>title</code> помощником из <a class="ref" href="rails-flavored-ruby#code:title_helper">Листинга&nbsp;4.2</a>. (Определение методов в консоли - немного громоздкое мероприятие, и обычно Вы будете использовать файл, но это удобно для демонстрационных целей.) Например, давайте определим функцию <code>string_message</code> которая принимает один <em>аргумент</em> и возвращает сообщение в зависимости от того, пустой аргумент или нет:</p>
+<p>Консоль позволяет определять методы точно так же, как мы это делали с <code>home</code> действием из <a class="ref" href="static-pages#code:pages_controller">Листинга&nbsp;3.6</a> или <code>title</code> помощником из <a class="ref" href="rails-flavored-ruby#code:title_helper">Листинга&nbsp;4.2</a>. (Определение методов в консоли - немного громоздкое мероприятие, и обычно вы будете использовать файл, но это удобно для демонстрационных целей.) Например, давайте определим функцию <code>string_message</code> которая принимает один <em>аргумент</em> и возвращает сообщение в зависимости от того, пустой аргумент или нет:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="k">def</span> <span class="nf">string_message</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 <span class="gp">&gt;&gt; </span>  <span class="k">if</span> <span class="n">string</span><span class="o">.</span><span class="n">empty?</span>
@@ -610,7 +610,7 @@
 </div>
 
 
-<p>Все эти элементы&nbsp;&mdash;&nbsp;определение функции, присваивание переменной, логические тесты, управление потоком, и интерполяция строки&nbsp;&mdash;&nbsp;собраны вместе, чтобы сделать компактный вспомогательный метод для использования в макете нашего сайта. Последним элементом является <code>module ApplicationHelper</code>: код в модулях Ruby может быть <em>смешан</em> в Ruby классы. При написании обычных Ruby, Вы часто пишете модули и сами их явно включаете, но в данном случае Rails делает включение за нас, автоматически. Результатом является то, что <code>title</code> метод <a href="http://catb.org/jargon/html/A/automagically.html">автомагически</a> доступен во всех наших представлениях.</p>
+<p>Все эти элементы&nbsp;&mdash;&nbsp;определение функции, присваивание переменной, логические тесты, управление потоком, и интерполяция строки&nbsp;&mdash;&nbsp;собраны вместе, чтобы сделать компактный вспомогательный метод для использования в макете нашего сайта. Последним элементом является <code>module ApplicationHelper</code>: код в модулях Ruby может быть <em>смешан</em> в Ruby классы. При написании обычных Ruby, вы часто пишете модули и сами их явно включаете, но в данном случае Rails делает включение за нас, автоматически. Результатом является то, что <code>title</code> метод <a href="http://catb.org/jargon/html/A/automagically.html">автомагически</a> доступен во всех наших представлениях.</p>
 
 <div class="label" id="sec:other_data_structures"></div>
 
@@ -635,7 +635,7 @@
 </div>
 
 
-<p>Результатом этой операции является массив из трех строк. По умолчанию, <code>split</code> делит строку на массив путем разделения по пробелу, но Вы можете разделить практически по чему угодно:</p>
+<p>Результатом этой операции является массив из трех строк. По умолчанию, <code>split</code> делит строку на массив путем разделения по пробелу, но вы можете разделить практически по чему угодно:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;fooxbarxbazx&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="go">=&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
@@ -705,7 +705,7 @@
 </div>
 
 
-<p>Вы также можете добавлять данные в массивы с помощью оператора, &ldquo;push&rdquo; (отправить, толкнуть) <code>&lt;&lt;</code>:</p>
+
 <p>Вы также можете добавлять данные в массивы с помощью <code>push</code> (# отправить, толкнуть) метода или эквивалентного ему оператора <code>&lt;&lt;</code>:</p>
 
 
@@ -719,7 +719,7 @@
 </div>
 
 
-<p>Последний пример показывает, что Вы можете сцеплять добавления вместе, а также, что, в отличие от массивов во многих других языках, Ruby массивы могут содержать смесь различных типов (в данном случае, целые числа и строки).</p>
+<p>Последний пример показывает, что вы можете сцеплять добавления вместе, а также, что, в отличие от массивов во многих других языках, Ruby массивы могут содержать смесь различных типов (в данном случае, целые числа и строки).</p>
 
 <p>Прежде, мы видели что <code>split</code> преобразовывает строку в массив. Мы также можем пойти другим путем с <code>join</code> методом:</p>
 
@@ -784,7 +784,7 @@
 </div>
 
 
-<p>Этот код вызывает <code>each</code> метод диапазона <code>(1..5)</code> и передает ему блок <code>{ |i| puts 2 * i }</code>. Вертикальные полосы вокруг имени переменной в&nbsp;<code>|i|</code> являются Ruby синтаксисом для блоковых переменных, и это позволяет методу узнть, что делать с блоком; в данном случае диапазонный <code>each</code> метод может обрабатывать блок с одной локальной переменной, которую мы называли&nbsp;<code>i</code>, и он просто выполняет блок для каждого значения в диапазоне.</p>
+<p>Этот код вызывает <code>each</code> метод диапазона <code>(1..5)</code> и передает ему блок <code>{ |i| puts 2 * i }</code>. Вертикальные полосы вокруг имени переменной в&nbsp;<code>|i|</code> являются Ruby синтаксисом для блоковых переменных, и это позволяет методу узнать, что делать с блоком; в данном случае диапазонный <code>each</code> метод может обрабатывать блок с одной локальной переменной, которую мы называли&nbsp;<code>i</code>, и он просто выполняет блок для каждого значения в диапазоне.</p>
 
 <p>Фигурные скобки это один из способов указать блок, но есть также второй способ:</p>
 
@@ -824,7 +824,7 @@
 
 <p>Здесь я использовал <code>number</code> вместо&nbsp;<code>i</code> просто чтобы подчеркнуть, что имя переменной может быть любым.</p>
 
-<p>Если Вы существенно не владеете основами программирования, нет короткой дороги к пониманию блоков; просто их нужно много увидеть, и, в конечном итоге, Вы привыкнете к ним.<sup class="footnote" id="fnref:4.11"><a href="#fn:4.11">11</a></sup> К счастью, люди довольно хороши на обобщения на основе конкретных примеров; Вот еще несколько примеров, в том числе пара с  использованием <code>map</code> метода:</p>
+<p>Если вы существенно не владеете основами программирования, нет короткой дороги к пониманию блоков; просто их нужно много увидеть, и, в конечном итоге, вы привыкнете к ним.<sup class="footnote" id="fnref:4.11"><a href="#fn:4.11">11</a></sup> К счастью, люди довольно хороши на обобщения на основе конкретных примеров; вот еще несколько примеров, в том числе пара с  использованием <code>map</code> метода:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="mi">3</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Betelgeuse!&quot;</span> <span class="p">}</span>   <span class="c1"># 3.times takes a block with no variables.</span>
 <span class="go">&quot;Betelgeuse!&quot;</span>
@@ -841,7 +841,7 @@
 </div>
 
 
-<p>Как Вы можете видеть, <code>map</code> метод возвращает результат применения данного блока для каждого элемента в массиве или диапазоне.</p>
+<p>Как вы можете видеть, <code>map</code> метод возвращает результат применения данного блока для каждого элемента в массиве или диапазоне.</p>
 
 <p>Кстати, теперь мы в состоянии понять строку Ruby, которую  я бросил в <a class="ref" href="beginning#sec:heroku_commands">Разделе&nbsp;1.4.4</a> для генерации случайных субдоменов:</p>
 
@@ -874,7 +874,7 @@
 <h3><a id="sec:4.3.3" href="rails-flavored-ruby#sec:hashes_and_symbols" class="heading"><span class="number">4.3.3</span> Хэши и символы </a></h3>
 
 
-<p>Хэши, по существу, это объединение массивов: Вы можете думать о хэшах в основном, как о массивах, но не ограничиваясь целочисленными индексами.  (В самом деле, некоторые языки, особенно Perl, иногда называют хэши <em>associative arrays (ассоциированными массивами)</em> по этой причине.) Вместо этого, хэш-индексами, <em>ключами</em>, могут быть практически любые объекты. Например, мы можем использовать строки в качестве ключей:</p>
+<p>Хэши, по существу, это объединение массивов: вы можете думать о хэшах в основном, как о массивах, но не ограничиваясь целочисленными индексами.  (В самом деле, некоторые языки, особенно Perl, иногда называют хэши <em>associative arrays (ассоциированными массивами)</em> по этой причине.) Вместо этого, хэш-индексами, <em>ключами</em>, могут быть практически любые объекты. Например, мы можем использовать строки в качестве ключей:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="p">{}</span>                          <span class="c1"># {} is an empty hash.</span>
 <span class="go">=&gt; {}</span>
@@ -916,7 +916,7 @@
 </div>
 
 
-<p>Символы это специальный тип данных Ruby, очень мало используемый в других языках, так что они могут показаться странными на первый взгляд, но Rails довольно часто их использует, так что Вы быстро к ним привыкнете.</p>
+<p>Символы это специальный тип данных Ruby, очень мало используемый в других языках, так что они могут показаться странными на первый взгляд, но Rails довольно часто их использует, так что вы быстро к ним привыкнете.</p>
 
 <p>В терминах символов как хэш-ключей, мы можем определить <code>user</code> хэш следующим образом:</p>
 
@@ -1046,13 +1046,13 @@
 </div>
 
 
-<p>вызывает <code>stylesheet_link_tag</code> функцию с двумя аргументами: строкой, указывающей путь к таблице стилей, и хэшем, с указанием типа носителя ( <code>&rsquo;screen&rsquo;</code> для экрана компьютера и <code>&rsquo;print&rsquo;</code> для печатной версии). Из-за <tt class="verb">&lt;%= %&gt;</tt> скобок, результаты вставляются в шаблон ERb-ой, и если Вы посмотрите исходный код страницы в браузере, Вы должны увидеть HTML, необходимый для включении таблиц стилей  (<a class="ref" href="rails-flavored-ruby#code:css_source">Листинг&nbsp;4.6</a>).<sup class="footnote" id="fnref:4.14"><a href="#fn:4.14">14</a></sup></p>
+<p>вызывает <code>stylesheet_link_tag</code> функцию с двумя аргументами: строкой, указывающей путь к таблице стилей, и хэшем, с указанием типа носителя ( <code>&rsquo;screen&rsquo;</code> для экрана компьютера и <code>&rsquo;print&rsquo;</code> для печатной версии). Из-за <tt class="verb">&lt;%= %&gt;</tt> скобок, результаты вставляются в шаблон ERb-ой, и если вы посмотрите исходный код страницы в браузере, вы должны увидеть HTML, необходимый для включении таблиц стилей  (<a class="ref" href="rails-flavored-ruby#code:css_source">Листинг&nbsp;4.6</a>).<sup class="footnote" id="fnref:4.14"><a href="#fn:4.14">14</a></sup></p>
 
 <div class="label" id="code:css_source"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.6.</span> <span class="description">Исходный код HTML произведенный включением CSS.</span>       
+<div class="listing"><span class="header">Листинг 4.6.</span> <span class="description">Исходный код HTML произведенный включением CSS.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/blueprint/screen.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span>
 <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
@@ -1070,7 +1070,7 @@
 <h2><a id="sec:4.4" href="rails-flavored-ruby#sec:ruby_classes" class="heading"><span class="number">4.4</span> Ruby классы</a></h2>
 
 
-<p>Мы говорили, что все в Ruby является объектами, и в этом разделе мы, наконец, определим некоторые собственные. Ruby, как и многие другие объектно-ориентированных языки, использует <em>классы</em> чтобы организовать методы; эти классы, затем  <em>экземплируются</em> для создания объектов.  Если Вы новичок в объектно-ориентированном программировании, это может звучать как бред, так что давайте посмотрим на некоторые конкретные примеры.</p>
+<p>Мы говорили, что все в Ruby является объектами, и в этом разделе мы, наконец, определим некоторые собственные. Ruby, как и многие другие объектно-ориентированных языки, использует <em>классы</em> чтобы организовать методы; эти классы, затем  <em>экземплируются</em> для создания объектов.  Если вы новичок в объектно-ориентированном программировании, это может звучать как бред, так что давайте посмотрим на некоторые конкретные примеры.</p>
 
 <div class="label" id="sec:constructors"></div>
 
@@ -1274,7 +1274,7 @@
 
 <p>(Я и не знаю что круче: то, что Ruby позволяет добавлять методы во встроенные классы или то, что слово <code>"deified"</code> является палиндромом.)</p>
 
-<p>Изменение встроенных классов является мощной техникой, но с большой властью приходит большая ответственность, и это считается дурным тоном добавлять методы к встроенным классам, не имея <em>действительно</em> хорошей причины для этого. Rails имеет несколько хороших причин (чтобы не делать этого); например, в веб-приложениях Вы часто не хотите, чтобы переменные были <em>пустыми</em>; например, имя пользователя должно быть чем то другим, нежели пустое пространство и прочие <a href="http://ru.wikipedia.org/wiki/Пробел">пробелы</a>&mdash;и Rails добавляет <code>blank?</code> метод к Ruby.  Rails консоль автоматически включает Rails расширения, и мы можем увидеть это, например, здесь (это не будет работать в простом <code>irb</code> (Интерактивном Руби)):</p>
+<p>Изменение встроенных классов является мощной техникой, но с большой властью приходит большая ответственность, и это считается дурным тоном добавлять методы к встроенным классам, не имея <em>действительно</em> хорошей причины для этого. Rails имеет несколько хороших причин (чтобы не делать этого); например, в веб-приложениях вы часто не хотите, чтобы переменные были <em>пустыми</em>; например, имя пользователя должно быть чем то другим, нежели пустое пространство и прочие <a href="http://ru.wikipedia.org/wiki/Пробел">пробелы</a>&mdash;и Rails добавляет <code>blank?</code> метод к Ruby.  Rails консоль автоматически включает Rails расширения, и мы можем увидеть это, например, здесь (это не будет работать в простом <code>irb</code> (Интерактивном Руби)):</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">blank?</span>
 <span class="go">=&gt; true</span>
@@ -1316,7 +1316,7 @@
 </div>
 
 
-<p>Теперь Вы в состоянии оценить, по крайней мере смутно, что этот код означает: <code>PagesController</code> это класс, который наследует от <code>ApplicationController</code>, и оснащен <code>home</code>, <code>contact</code>, и <code>about</code> методами, каждый из которых определяет переменную экземпляра <code>@title</code>. Так как каждый сеанс Rails консоли загружает локальную среду Rails, мы можем даже создать контроллер в явном виде и изучить иерархию его классов:<sup class="footnote" id="fnref:4.18"><a href="#fn:4.18">18</a></sup></p>
+<p>Теперь вы в состоянии оценить, по крайней мере смутно, что этот код означает: <code>PagesController</code> это класс, который наследует от <code>ApplicationController</code>, и оснащен <code>home</code>, <code>contact</code>, и <code>about</code> методами, каждый из которых определяет переменную экземпляра <code>@title</code>. Так как каждый сеанс Rails консоли загружает локальную среду Rails, мы можем даже создать контроллер в явном виде и изучить иерархию его классов:<sup class="footnote" id="fnref:4.18"><a href="#fn:4.18">18</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">controller</span> <span class="o">=</span> <span class="no">PagesController</span><span class="o">.</span><span class="n">new</span>
 <span class="go">=&gt; #&lt;PagesController:0x22855d0&gt;</span>
@@ -1372,7 +1372,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 4.8.</span> <span class="description">Код для примера пользователя. <br /> <code>example_user.rb</code></span>       
+<div class="listing"><span class="header">Листинг 4.8.</span> <span class="description">Код для примера пользователя. <br /> <code>example_user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1524,26 +1524,23 @@
 </div><div class="footnotes">
 <ol>
 <li id="fn:4.1">Если помощник определен для конкретного контроллера, следует поместить его в соответствующий файл помощника; например, помощники для контроллера Pages обычно входят в <code>app/helpers/pages_helper.rb</code>. В нашем случае мы ожидаем, что помощник заголовка будет использоваться на страницах всего сайта, и у Rails есть специальный файл помощника для этого случая: <code>app/helpers/application_helper.rb</code>.&nbsp;<a class="arrow" href="#fnref:4.1">&uarr;</a></li>
-<li id="fn:4.2">Я не даю ссылки на API, потому что у них есть тенденция быстро выходить из моды. Давайте Google будет Вашей путеводной звездой. Кстати, &ldquo;API&rdquo; означает &ldquo;<a  href="http://ru.wikipedia.org/wiki/API">Application Programming Interface (Интерфейс прикладного программирования)</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:4.2">&uarr;</a></li>
-<li id="fn:4.3">Если Вы нетерпеливы, не стесняйтесь проверить <a href="http://wiki.github.com/joshuaclayton/blueprint-css/quick-start-tutorial">Blueprint CSS Quickstart tutorial</a>.&nbsp;<a class="arrow" href="#fnref:4.3">&uarr;</a></li>
+<li id="fn:4.2">Я не даю ссылки на API, потому что у них есть тенденция быстро устаревать. Давайте Google будет вашей путеводной звездой. Кстати, &ldquo;API&rdquo; означает &ldquo;<a  href="http://ru.wikipedia.org/wiki/API">Application Programming Interface (Интерфейс прикладного программирования)</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:4.2">&uarr;</a></li>
+<li id="fn:4.3">Если вы нетерпеливы, не стесняйтесь проверить <a href="http://wiki.github.com/joshuaclayton/blueprint-css/quick-start-tutorial">Blueprint CSS Quickstart tutorial</a>.&nbsp;<a class="arrow" href="#fnref:4.3">&uarr;</a></li>
 <li id="fn:4.4">Вспомните, что консольное приглашение, вероятно, будет чем-то вроде <code>ruby-1.9.2-head &gt;</code>, но примеры используют&nbsp;<code>&gt;&gt;</code> так как версии Ruby изменяются.&nbsp;<a class="arrow" href="#fnref:4.4">&uarr;</a></li>
-<li id="fn:4.5">Как и с Rails API, ссылки Ruby API выходят из моды, хотя и не так быстро. Google по-прежнему всегда готов Вам помочь&nbsp;<a class="arrow" href="#fnref:4.5">&uarr;</a></li>
+<li id="fn:4.5">Как и с Rails API, ссылки Ruby API выходят из моды, хотя и не так быстро. Google по-прежнему всегда готов вам помочь&nbsp;<a class="arrow" href="#fnref:4.5">&uarr;</a></li>
 <li id="fn:4.6">Чтобы узнать больше о происхождении &ldquo;foo&rdquo; и &ldquo;bar&rdquo;&mdash;и, в частности возможном <em>не</em> отношении &ldquo;foobar&rdquo; к &ldquo;FUBAR&rdquo;&mdash;см. <a  href="http://www.catb.org/jargon/html/F/foo.html">&ldquo;foo&rdquo; в Jargon File</a>.&nbsp;</a>.&nbsp;<a class="arrow" href="#fnref:4.6">&uarr;</a></li>
 <li id="fn:4.7">Програмисты, знакомые с Perl или PHP, должны сравнить это с автоматической интерполяцией переменных знака доллара в таких выражениях, как <code>"foo $bar"</code>.&nbsp;<a class="arrow" href="#fnref:4.7">&uarr;</a></li>
 <li id="fn:4.8">Заранее извиняюсь за случайные переключения  между <code>функцией</code> и <code>методом</code> повсюду в этой главе; в Ruby они&nbsp;&mdash;&nbsp;одно и то же: все методы&nbsp;&mdash;&nbsp;функции, и все функции&nbsp;&mdash;&nbsp;методы, потому что все&nbsp;&mdash;&nbsp;объект.&nbsp;<a class="arrow" href="#fnref:4.8">&uarr;</a></li>
-<li id="fn:4.9">Ну, все же осталась <em>одна</em> вещь, которую  мы не понимаем&nbsp;&mdash;&nbsp;как Rails связывает все это вместе: направление URL к действиям, делание <code>title</code> помощника доступным в представлениях, и т.д. Это интересная тема, и я поощряю Вас исследовать ее далее, но точное знание того, <em>как</em> Rails работает, не является необходимым для <em>использования</em> Rails. (Для более глубокого понимания я рекомендую <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> Оби Фернандеса.)&nbsp;<a class="arrow" href="#fnref:4.9">&uarr;</a></li>
+<li id="fn:4.9">Ну, все же осталась <em>одна</em> вещь, которую  мы не понимаем&nbsp;&mdash;&nbsp;как Rails связывает все это вместе: направление URL к действиям, делание <code>title</code> помощника доступным в представлениях, и т.д. Это интересная тема, и я поощряю вас исследовать ее далее, но точное знание того, <em>как</em> Rails работает, не является необходимым для <em>использования</em> Rails. (Для более глубокого понимания я рекомендую <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a> Оби Фернандеса.)&nbsp;<a class="arrow" href="#fnref:4.9">&uarr;</a></li>
 <li id="fn:4.10"><code>Second</code> метод, используемый здесь, не является в настоящий момент частью Ruby непосредственно, а скорее добавляется Rails. Это работает в данном случае, потому что консоль Rails автоматически включает Rails расширения в Ruby.&nbsp;<a class="arrow" href="#fnref:4.10">&uarr;</a></li>
 <li id="fn:4.11">С другой стороны, искушенные программисты могут извлечь пользу из понимания, что блоки - это <em>замыкания</em>, объединяющие анонимные функции с внешними, по отношению к этим функциям, данными.&nbsp;<a class="arrow" href="#fnref:4.11">&uarr;</a></li>
 <li id="fn:4.12">Ruby 1.9 фактически гарантирует, что хеши сохраняют свои элементы в том же самом порядке в каком они вводились, но было бы неблагоразумно когда-либо рассчитывать на определенный порядок.&nbsp;<a class="arrow" href="#fnref:4.12">&uarr;</a></li>
 <li id="fn:4.13">В результате наличия меньшего количества багажа символы легче сравнить друг с другом; строки должны быть сравнены посимвольно, в то время как символы могут быть сравнены все одним разом. Это делает их идеальными для использования в качестве хеш ключей.&nbsp;<a class="arrow" href="#fnref:4.13">&uarr;</a></li>
 <li id="fn:4.14">Можно увидеть немного пугающие числа, такие как <code>?1257465942</code>, после имен файла CSS. Они вставляются Rails, чтобы гарантировать, что браузеры перезагружают CSS, когда они изменяются на сервере.&nbsp;<a class="arrow" href="#fnref:4.14">&uarr;</a></li>
-<li id="fn:4.15">Эти результаты могут изменятся, в зависимости от версии Ruby, которую Вы используете. Этот пример предполагает, что Вы используете Ruby&nbsp;1.9.2.&nbsp;<a class="arrow" href="#fnref:4.15">&uarr;</a></li>
+<li id="fn:4.15">Эти результаты могут изменятся, в зависимости от версии Ruby, которую вы используете. Этот пример предполагает, что вы используете Ruby&nbsp;1.9.2.&nbsp;<a class="arrow" href="#fnref:4.15">&uarr;</a></li>
 <li id="fn:4.16">Для того чтобы узнать больше о классах Ruby и ключевом слове <code>self</code>, см.  <a href="http://railstips.org/">RailsTips</a> пост &ldquo;<a href="http://railstips.org/blog/archives/2006/11/18/class-and-instance-variables-in-ruby/">Class and Instance Variables in Ruby</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:4.16">&uarr;</a></li>
 <li id="fn:4.17">Для знакомых с JavaScript, эта функциональность сопоставима с использованием встроенного class prototype object to augment the class.(??) (Спасибо читателю  <a href="http://getsatisfaction.com/railstutorial/topics/adding_methods_to_built_in_classes_comparable_to_using_javascripts_prototype_object">Erik Eldridge</a> за указание на это.)&nbsp;<a class="arrow" href="#fnref:4.17">&uarr;</a></li>
-<li id="fn:4.18">Вы не должны знать, что делает каждый класс в этой иерархии. <em>Я</em> не знаю, что они все делают, и я программирую в Ruby on Rails с 2005. Это означает или что (a), я чрезвычайно некомпетентен или (b), можно быть квалифицированным  Rails разработчиком, не зная все его внутренности. Для нашей с Вами пользы я уповаю на последнее.&nbsp;<a class="arrow" href="#fnref:4.18">&uarr;</a></li>
+<li id="fn:4.18">Вы не должны знать, что делает каждый класс в этой иерархии. <em>Я</em> не знаю, что они все делают, и я программирую в Ruby on Rails с 2005. Это означает или что (a), я чрезвычайно некомпетентен или (b), можно быть квалифицированным  Rails разработчиком, не зная все его внутренности. Для нашей с вами пользы я уповаю на последнее.&nbsp;<a class="arrow" href="#fnref:4.18">&uarr;</a></li>
 </ol>
 </div>
-
-
-
 

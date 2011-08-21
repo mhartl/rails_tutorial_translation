@@ -91,7 +91,7 @@
 
 <p>Поразмыслив, мы видим, что в этих случаях приложение должно создать либо разрушить <em>взаимоотношение</em> (или <em>связь</em><sup class="footnote" id="fnref:12.3"><a href="#fn:12.3">3</a></sup>) между двумя пользователями. Затем пользователь <code>has_many :relationships</code> (имеет_много :взаимоотношений), и имеет много <code>following</code> (или <code>followers</code>) <em>через</em> эти взаимоотношения. Действительно, <a class="ref" href="following-users#fig:naive_user_has_many_following">Рис.&nbsp;12.6</a> уже содержит бОльшую часть реализации: поскольку каждый читаемый пользователь уникально идентифицирован посредством <code>followed_id</code>, мы можем преобразовать <code>following</code> в таблицу <code>relationships</code>, опустив информацию о пользователе, и использовать <code>followed_id</code> для получения читаемых пользователей из <code>users</code> таблицы. Кроме того, приняв во внимание  <em>обратные</em> взаимоотношения, мы могли бы использовать <code>follower_id</code> столбец для извлечения массива читателей пользователя.</p>
 
-<p>Чтобы создать <code>following</code> массив пользователей, мы могли бы вытянуть массив атрибутов <code>followed_id</code> а затем найти пользователя для каждого из них. Однако, как и следовало ожидать, в Rails есть более удобный способ для этой процедуры; соответствующая техника известна как <code>has_many :through</code> (имеет_много :через).<sup class="footnote" id="fnref:12.4"><a href="#fn:12.4">4</a></sup> Как мы увидим в <a class="ref" href="following-users#sec:following">Разделе&nbsp;12.1.4</a>, Rails позволяет нам сказать, что пользователь следит за сообщениями многих пользователей <em>через</em> взаимоотношения, используя краткий код</p>
+<p>Чтобы создать <code>following</code> массив пользователей, мы могли бы вытянуть массив атрибутов <code>followed_id</code>, а затем найти пользователя для каждого из них. Однако, как и следовало ожидать, в Rails есть более удобный способ для этой процедуры; соответствующая техника известна как <code>has_many :through</code> (имеет_много :через).<sup class="footnote" id="fnref:12.4"><a href="#fn:12.4">4</a></sup> Как мы увидим в <a class="ref" href="following-users#sec:following">Разделе&nbsp;12.1.4</a>, Rails позволяет нам сказать, что пользователь следит за сообщениями многих пользователей <em>через</em> взаимоотношения, используя краткий код</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:following</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:relationships</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="s2">&quot;followed_id&quot;</span>
 </pre></div>
@@ -2181,7 +2181,7 @@
 </div></div>
 
 
-<p>Этот код представляет собой внушительную комбинацию Rails, Ruby, и SQL, но он делает свою рабту и делает ее хорошо.<sup class="footnote" id="fnref:12.22"><a href="#fn:12.22">22</a></sup></p>
+<p>Этот код представляет собой внушительную комбинацию Rails, Ruby, и SQL, но он делает свою работу и делает ее хорошо.<sup class="footnote" id="fnref:12.22"><a href="#fn:12.22">22</a></sup></p>
 
 <div class="label" id="sec:the_new_status_feed"></div>
 

@@ -127,7 +127,7 @@
 
 <p>Теперь код приложения, в котором содержится трюк. На самом деле, он состоит из <em>двух</em> трюков. Во-первых, вы могли бы ожидать в этот момент, что мы запустим миграции для добавления <code>password</code> атрибута к модели User, как мы это делали с атрибутами <code>name</code> и <code>email</code> в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a>. Но это не так: мы будем хранить в базе данных только <em>зашифрованные</em> пароли; для пароля мы введем <em>виртуальный атрибут</em> (то есть, атрибут не соответствующий колонке в базе данных) используя метод <code>attr_accessor</code> так же как мы это делали с оригинальными <code>name</code> и <code>email</code> атрибутами образца пользователя в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>. <code>Password</code> атрибут никогда не будет записан в базу данных, но будет существовать только в памяти для использования при выполнении шага подтверждения пароля (реализовано ниже) и шага шифрования (реализовано в <a class="ref" href="modeling-and-viewing-users-two#sec:password_migration">Разделе&nbsp;7.1.2</a> и <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Разделе&nbsp;7.2</a>).</p>
 
-<p>Второй фокус заключается в том, что мы <em>не</em> будем вводить атрибут <code>password_confirmation</code> , даже виртуальный. Вместо него мыбудем использовать специальную валидацию</p>
+<p>Второй фокус заключается в том, что мы <em>не</em> будем вводить атрибут <code>password_confirmation</code> , даже виртуальный. Вместо него мы будем использовать специальную валидацию</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:confirmation</span> <span class="o">=&gt;</span> <span class="kp">true</span>
 </pre></div>
@@ -683,7 +683,7 @@
 
 <p>Так как мы находимся внутри класса User, Ruby знает, что <code>salt</code> ссылается на пользовательский атрибут <code>salt</code>.</p>
 
-<p>Важно также отметить использование булевого <code>new_record?</code> метода Active Record, который возвращает истину, если объект еще не был сохранен в базе данных. Поскольку соль это уникальный идентификатор для каждого пользователя, мы не хотим, чтобы он меняется каждый раз, когда пользователь обновляется (как в <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">Разделе&nbsp;10.1</a>), и включением <code>new_record?</code> мы обеспечиваем однократное создание соли, происходящее только при добавлении нового пользователя.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (Эта тонкость не важна сейчас, но она понадобится, когда мы реализуем функцию "запомнить меня" в   <a class="ref" href="sign-in-sign-out#sec:remember_me">Разделе&nbsp;9.3.2</a>.)</p>
+<p>Важно также отметить использование булевого <code>new_record?</code> метода Active Record, который возвращает истину, если объект еще не был сохранен в базе данных. Поскольку соль это уникальный идентификатор для каждого пользователя, мы не хотим, чтобы он менялся каждый раз, когда пользователь обновляется (как в <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">Разделе&nbsp;10.1</a>), и включением <code>new_record?</code> мы обеспечиваем однократное создание соли, происходящее только при добавлении нового пользователя.<sup class="footnote" id="fnref:7.10"><a href="#fn:7.10">10</a></sup> (Эта тонкость не важна сейчас, но она понадобится, когда мы реализуем функцию "запомнить меня" в   <a class="ref" href="sign-in-sign-out#sec:remember_me">Разделе&nbsp;9.3.2</a>.)</p>
 
 <p>В данный момент, тесты из  <a class="ref" href="modeling-and-viewing-users-two#code:has_password_tests">Листинга&nbsp;7.8</a> должны пройти:</p>
 
@@ -980,7 +980,7 @@
 <div class="codelisting">
 <div class="listing"><span class="header">Листинг 7.16.</span> <span class="description">Фабрика для симуляции объектов модели User. <br /> <code>spec/factories.rb</code></span>
 </div>
-<div class="code"><div class="highlight"><pre><span class="c1"># Исполльзуя символ &#39;:user&#39;, мы указываем Factory Girl на необходимость симулировать модель User.</span>
+<div class="code"><div class="highlight"><pre><span class="c1"># Используя символ &#39;:user&#39;, мы указываем Factory Girl на необходимость симулировать модель User.</span>
 <span class="no">Factory</span><span class="o">.</span><span class="n">define</span> <span class="ss">:user</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
   <span class="n">user</span><span class="o">.</span><span class="n">name</span>                  <span class="s2">&quot;Michael Hartl&quot;</span>
   <span class="n">user</span><span class="o">.</span><span class="n">email</span>                 <span class="s2">&quot;mhartl@example.com&quot;</span>

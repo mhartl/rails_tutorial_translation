@@ -166,7 +166,7 @@
 <div class="label" id="fig:micropost_belongs_to_user"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_belongs_to_user.png" alt="micropost_belongs_to_user" /></span></div><div class="caption"><span class="header">Рисунок  11.2: </span><span class="description">The <code>belongs_to</code> relationship between a micropost and its user.&nbsp;<a href="http://railstutorial.org/images/figures/micropost_belongs_to_user-full.png">(полный размер)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_belongs_to_user.png" alt="micropost_belongs_to_user" /></span></div><div class="caption"><span class="header">Рисунок  11.2: </span><span class="description"> <code>belongs_to</code> взаимоотношение между микросообщением и создавшим его пользователем.&nbsp;<a href="http://railstutorial.org/images/figures/micropost_belongs_to_user-full.png">(полный размер)</a></span></div></div>
 
 
 
@@ -390,7 +390,7 @@
 
 <p>Здесь мы указываем, что второй пост был создан совсем недавно, <code>1.hour.ago</code> (один.час.назад), а второй пост был создан <code>1.day.ago</code> (один.день.назад). Обратите внимание, насколько удобна Factory Girl в использовании: мы можем не только назначать пользователя используя массовое назначение (так как фабрики пренебрегают <code>attr_accessible</code>), мы также можем установить <code>created_at</code> вручную, чего не позволяет делать Active Record.<sup class="footnote" id="fnref:11.4"><a href="#fn:11.4">4</a></sup></p>
 
-<p>Большинство адаптеров баз данных (в том числе адаптер SQLite) возвращает микросообщения в порядке их id, поэтому мы можем организовать начальные тесты, которые почти наверняка провалятся, используя код в <a class="ref" href="user-microposts#code:micropost_ordering_test">Листинг&nbsp;11.9</a>.</p>
+<p>Большинство адаптеров баз данных (в том числе адаптер SQLite) возвращает микросообщения в порядке их id, поэтому мы можем организовать начальные тесты, которые почти наверняка провалятся, используя код в <a class="ref" href="user-microposts#code:micropost_ordering_test">Листинге&nbsp;11.9</a>.</p>
 
 <div class="label" id="code:micropost_ordering_test"></div>
 
@@ -536,7 +536,7 @@
 
 <h3><a id="sec:11.1.4" href="user-microposts#sec:micropost_validations" class="heading"><span class="number">11.1.4</span> Валидации микросообщений</a></h3>
 
-<p>Прежде чем покинуть модель Micropost, мы  tie off a couple of loose ends (??) добавив валидации (следуя примеру из <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">Раздела&nbsp;2.3.2</a>). И <code>user_id</code> и <code>content</code> атрибуты требуют, и <code>content</code> в дальнейшем вынужден быть не длиннее чем 140 знаков, что мы можем протестировать, используя код в <a class="ref" href="user-microposts#code:micropost_validations_tests">Листинге&nbsp;11.13</a>.</p>
+<p>Прежде чем покинуть модель Micropost, мы  tie off a couple of loose ends (??) добавив валидации (следуя примеру из <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">Раздела&nbsp;2.3.2</a>). И <code>user_id</code> и <code>content</code> атрибуты должны существовать, а <code>content</code> в дальнейшем вынужден быть не длиннее чем 140 знаков, что мы можем протестировать, используя код в <a class="ref" href="user-microposts#code:micropost_validations_tests">Листинге&nbsp;11.13</a>.</p>
 
 <div class="label" id="code:micropost_validations_tests"></div>
 

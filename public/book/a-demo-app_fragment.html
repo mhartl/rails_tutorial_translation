@@ -1,5 +1,23 @@
-
-
+<script type="text/javascript">
+$(document).ready(function(){
+  $("p").toggle(
+    function() {
+      $("p").css("background-color","");
+      $('div.newelement').remove();
+      var index = $("p").index(this);
+      var p_for_load = '/a-demo-app_fragment.html p:eq(' + index + ')';
+      $(this).css("background-color","#fffacd");
+      $(this).after (function() { return ('<div class="newelement">жопа </div>');});
+      $("div.newelement").load(p_for_load);
+    },
+    function(){
+      $('div.newelement').remove();
+      $(this).css("background-color","");
+    }
+  );
+});
+</script>
+$("p")[27]
 
 
 <div id="top"></div>

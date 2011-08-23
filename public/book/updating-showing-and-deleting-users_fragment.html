@@ -737,7 +737,7 @@
 </div></div>
 
 
-<p>Здесь мы добавили строку к методу <code>deny_access</code>, сохраняющую полный путь запроса с помощью <code>store_location</code> перед дальнейшим выполнением кода. Метод <code>store_location</code> помещает запрашиваемый URL в переменную <code>session</code> под ключом <code>:return_to</code>. (Мы сделали методы <code>store_location</code> и <code>clear_return_to</code> приватными так как они никогда не понабятся за пределами хелпера Sessions.)</p>
+<p>Здесь мы добавили строку к методу <code>deny_access</code>, сохраняющую полный путь запроса с помощью <code>store_location</code> перед дальнейшим выполнением кода. Метод <code>store_location</code> помещает запрашиваемый URL в переменную <code>session</code> под ключом <code>:return_to</code>. (Мы сделали методы <code>store_location</code> и <code>clear_return_to</code> приватными так как они никогда не понадобятся за пределами хелпера Sessions.)</p>
 
 <p>Мы также определили метод <code>redirect_back_or</code> для запрашиваемого URL если он существует, или какого либо дефолтного URL в противном случае. Этот метод необходим в <code>create</code> действии контроллера Sessions для переадресации после успешного входа (<a class="ref" href="updating-showing-and-deleting-users#code:friendly_session_create">Листинг&nbsp;10.18</a>).</p>
 

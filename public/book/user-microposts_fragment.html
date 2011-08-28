@@ -1,4 +1,22 @@
-
+<script type="text/javascript">
+$(document).ready(function(){
+  $("p").toggle(
+    function() {
+      $("p").css("background-color","");
+      $('div.newelement').remove();
+      var index = $("p").index(this);
+      var p_for_load = '/new/user-microposts_fragment.html p:eq(' + index + ')';
+      $(this).css("background-color","#fffacd");
+      $(this).after (function() { return ('<div class="newelement"> </div>');});
+      $("div.newelement").load(p_for_load);
+    },
+    function(){
+      $('div.newelement').remove();
+      $(this).css("background-color","");
+    }
+  );
+});
+</script>
 
 <div id="top"></div>
 
@@ -642,7 +660,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/user_microposts_mockup.png" alt="user_microposts_mockup" /></span></div><div class="caption"><span class="header">Рисунок  11.4: </span><span class="description">Макет страницы профиля с микросообщениями.&nbsp;&nbsp;<a href="http://railstutorial.org/images/figures/user_microposts_mockup-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Как и в случае обсуждения машинерии входа в <a class="ref" href="sign-in-sign-out#sec:remember_me">Разделе&nbsp;9.3.2</a>, <a class="ref" href="user-microposts#sec:augmenting_the_user_show_page">Раздел&nbsp;11.2.1</a> будет часто отправлять несколько элементов в  <a href="http://ru.wikipedia.org/wiki/Стэк">стек</a> на время, а затем выталкивать их оттуда один за другим. Если вы начнете увязать, будте терпеливы; у <a class="ref" href="user-microposts#sec:sample_microposts">Раздела&nbsp;11.2.2</a> хорошая развязка.</p>.</p>
+<p>Как и в случае обсуждения машинерии входа в <a class="ref" href="sign-in-sign-out#sec:remember_me">Разделе&nbsp;9.3.2</a>, <a class="ref" href="user-microposts#sec:augmenting_the_user_show_page">Раздел&nbsp;11.2.1</a> будет часто отправлять несколько элементов в  <a href="http://ru.wikipedia.org/wiki/Стэк">стек</a> на время, а затем выталкивать их оттуда один за другим. Если вы начнете увязать, будте терпеливы; у <a class="ref" href="user-microposts#sec:sample_microposts">Раздела&nbsp;11.2.2</a> хорошая развязка.</p>
 
 <div class="label" id="sec:augmenting_the_user_show_page"></div>
 

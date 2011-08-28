@@ -1,4 +1,22 @@
-
+<script type="text/javascript">
+$(document).ready(function(){
+  $("p").toggle(
+    function() {
+      $("p").css("background-color","");
+      $('div.newelement').remove();
+      var index = $("p").index(this);
+      var p_for_load = '/new/static-pages_fragment.html p:eq(' + index + ')';
+      $(this).css("background-color","#fffacd");
+      $(this).after (function() { return ('<div class="newelement"> </div>');});
+      $("div.newelement").load(p_for_load);
+    },
+    function(){
+      $('div.newelement').remove();
+      $(this).css("background-color","");
+    }
+  );
+});
+</script>
 <div id="top"></div>
 
 
@@ -735,7 +753,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 3.13.</span> <span class="description">Добавление загрузки окружения в блок <code>Spork.prefork</code> block. <br /> <code>spec/spec_helper.rb</code></span>
+<div class="listing"><span class="header">Листинг 3.13.</span> <span class="description">Добавление загрузки окружения в блок <code>Spork.prefork</code>. <br /> <code>spec/spec_helper.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spork&#39;</span>
 
@@ -1314,7 +1332,7 @@
 
 
 
-<p><p>Техника включает в себя создание <em>переменных экземпляра</em> в наших действиях. Так как заголовки (тайтлы) имеют переменную составляющую, мы установим переменную <code>@title</code> (произносится как "эт тайтл") в соответствующий заголовок для каждого действия  (<a class="ref" href="static-pages#code:pages_controller_with_title">Листинг&nbsp;3.24</a>).</p>
+<p>Техника включает в себя создание <em>переменных экземпляра</em> в наших действиях. Так как заголовки (тайтлы) имеют переменную составляющую, мы установим переменную <code>@title</code> (произносится как "эт тайтл") в соответствующий заголовок для каждого действия  (<a class="ref" href="static-pages#code:pages_controller_with_title">Листинг&nbsp;3.24</a>).</p>
 
 <div class="label" id="code:pages_controller_with_title"></div>
 

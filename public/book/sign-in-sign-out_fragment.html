@@ -1,4 +1,23 @@
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("p").toggle(
+    function() {
+      $("p").css("background-color","");
+      $('div.newelement').remove();
+      var index = $("p").index(this);
+      var p_for_load = '/new/sign-in-sign-out_fragment.html p:eq(' + index + ')';
+      $(this).css("background-color","#fffacd");
+      $(this).after (function() { return ('<div class="newelement"> </div>');});
+      $("div.newelement").load(p_for_load);
+    },
+    function(){
+      $('div.newelement').remove();
+      $(this).css("background-color","");
+    }
+  );
+});
+</script>
 <div id="top"></div>
 
 
@@ -33,7 +52,7 @@
 <h3><a id="sec:9.1.1" href="sign-in-sign-out#sec:sessions_controller" class="heading"><span class="number">9.1.1</span> Sessions контроллер</a></h3>
 
 
-<p>Sessions контроллер</a></h3>
+
 
 <p>Элементы системы входа и выхода соответствуют определенным REST действиям Sessions контроллера: форма входа обрабатывается <code>new</code> действием (рассматривается в этом разделе), фактический вход обрабатывается отправкой запроса <tt>POST</tt> к действию <code>create</code> (<a class="ref" href="sign-in-sign-out#sec:signin_failure">Раздел&nbsp;9.2</a> и <a class="ref" href="sign-in-sign-out#sec:signin_success">Раздел&nbsp;9.3</a>), и выход обрабатывается отправкой запроса <tt>DELETE</tt> к действию <code>destroy</code> (<a class="ref" href="sign-in-sign-out#sec:signing_out">Раздел&nbsp;9.4</a>). (Вспомним о соответствии между глаголами HTTP и REST действиями из <a class="ref" href="modeling-and-viewing-users-one#table:RESTful_users">Таблицы&nbsp;6.2</a>.) Так как мы знаем, что нам нужно <code>new</code> действие, мы можем создать его при генерации контроллера Sessions (аналогично контроллеру Users в <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>):<sup class="footnote" id="fnref:9.3"><a href="#fn:9.3">3</a></sup></p>
 
@@ -1035,7 +1054,6 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 9.5.</span><span class="description">10 типов людей</span></span>
-<p>There are 10 kinds of people in the world: Those who like the ternary operator, those who don&rsquo;t, and those who don&rsquo;t know about it. (If you happen to be in the third category, soon you won&rsquo;t be any longer.)</p>
 
 <p>В мире существует 10 типов людей: Те, кому нравится тройной оператор, те, кому он не нравится, и те, кто не знает о нем. (Если вам случилось быть в третьей категории, скоро вы ее покинете.) </p>
 

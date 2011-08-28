@@ -5,7 +5,7 @@ $(document).ready(function(){
       $("p").css("background-color","");
       $('div.newelement').remove();
       var index = $("p").index(this);
-      var p_for_load = '/a-demo-app_fragment.html p:eq(' + index + ')';
+      var p_for_load = '/new/a-demo-app_fragment.html p:eq(' + index + ')';
       $(this).css("background-color","#fffacd");
       $(this).after (function() { return ('<div class="newelement"> </div>');});
       $("div.newelement").load(p_for_load);
@@ -99,7 +99,7 @@ $(document).ready(function(){
 <h3><a id="sec:2.1.1" href="a-demo-app#sec:modeling_users" class="heading"><span class="number">2.1.1</span> Моделирование пользователей</a></h3>
 
 
-<p>Вариантов для модели данных пользователя, так же много, как много различных форм регистрации в сети; мы пойдем отчетливо минималистичным путем. У пользователей нашего demo app будет уникальный <code>целочисленный</code> идентификатор называемый <code>id</code>, публично видимое <code>имя </code> (тип - <code>string (строка)</code>), и <code>email</code> адрес  (также <code>string</code>) такой же как имя пользователя. Итоговая модель данных для пользователей представлена в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>.</p>
+<p>Вариантов для модели данных пользователя так же много, как много различных форм регистрации в сети; мы пойдем отчетливо минималистичным путем. У пользователей нашего demo app будет уникальный <code>целочисленный</code> идентификатор называемый <code>id</code>, публично видимое <code>имя </code> (тип - <code>string (строка)</code>), и <code>email</code> адрес  (также <code>string</code>) такой же как имя пользователя. Итоговая модель данных для пользователей представлена в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>.</p>
 
 <div class="label" id="fig:demo_user_model"></div>
 
@@ -237,7 +237,7 @@ $(document).ready(function(){
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_blank_user_index_rails_3.png" alt="demo_blank_user_index_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.4: </span><span class="description">Начальная index страница для ресурса Users (<a href="http://localhost:3000/users"><tt>/users</tt></a>).&nbsp;<a href="/images/figures/demo_blank_user_index_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Чтобы создать нового пользователя, мы посещаем <a href="http://localhost:3000/users/new"><tt>new</tt></a>страницу, как показано на <a class="ref" href="a-demo-app#fig:demo_new_user_rails_3">Рис.&nbsp;2.5</a>. (В <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, это станет страницей регистрации пользователя.)</p>
+<p>Чтобы создать нового пользователя, мы посещаем <a href="http://localhost:3000/users/new"><tt>new</tt></a> страницу, как показано на <a class="ref" href="a-demo-app#fig:demo_new_user_rails_3">Рис.&nbsp;2.5</a>. (В <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, это станет страницей регистрации пользователя.)</p>
 
 <div class="label" id="fig:demo_new_user_rails_3"></div>
 
@@ -506,7 +506,7 @@ $(document).ready(function(){
 <h2><a id="sec:2.3" href="a-demo-app#sec:microposts_resource" class="heading"><span class="number">2.3</span> Ресурс Microposts</a></h2>
 
 
-<p>Сгенерировав и исследовав ресурс Users, мы поворачиваемся теперь к связанному ресурсу Microposts. На протяжении этого раздела я рекомендую сравнивать элементы ресурса Microposts с аналогичными элементами User из  <a class="ref" href="a-demo-app#sec:demo_users_resource">Раздела&nbsp;2.2</a>;Вы должны увидеть, что эти два ресурса во многом параллельны друг другу. RESTful структура приложений Rails лучше всего усваивается посредством наблюдения за подобными повторяющимися формами; действительно, наблюдение параллельной структуры Users и Microposts даже на этой ранней стадии является одной из причин написания этой главы. (Как мы увидим, написание приложения, более устойчивого, нежели игрушечный пример в этой главе, требует значительных усилий &mdash; мы не увидим ресурс Microposts до  <a class="ref" href="user-microposts#top">Главы&nbsp;11</a>&mdash; и я не хотел так надолго откладывать его первое появление.)</p>
+<p>Сгенерировав и исследовав ресурс Users, мы поворачиваемся теперь к связанному ресурсу Microposts. На протяжении этого раздела я рекомендую сравнивать элементы ресурса Microposts с аналогичными элементами User из  <a class="ref" href="a-demo-app#sec:demo_users_resource">Раздела&nbsp;2.2</a>; вы должны увидеть, что эти два ресурса во многом параллельны друг другу. RESTful структура приложений Rails лучше всего усваивается посредством наблюдения за подобными повторяющимися формами; действительно, наблюдение параллельной структуры Users и Microposts даже на этой ранней стадии является одной из причин написания этой главы. (Как мы увидим, написание приложения, более устойчивого, нежели игрушечный пример в этой главе, требует значительных усилий &mdash; мы не увидим ресурс Microposts до  <a class="ref" href="user-microposts#top">Главы&nbsp;11</a>&mdash; и я не хотел так надолго откладывать его первое появление.)</p>
 
 <div class="label" id="sec:a_micropost_microtour"></div>
 
@@ -678,7 +678,7 @@ $(document).ready(function(){
 </div></div>
 
 
-<p>Код в <a class="ref" href="a-demo-app#code:demo_length_validation">Листинге&nbsp;2.9</a> может выглядеть, довольно таинственно &mdash; мы рассмотрим валидацию, более тщательно  в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a>&mdash;но его эффект, станет вполне очевиден, если мы перейдем в новую страницу микросообщений и введем больше чем 140 символов для контента сообщения. Как видно в <a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">Рис.&nbsp;2.14</a>, Rails renders <em>error messages</em> Rails выдает <em>сообщение об ошибке</em> указывающее, что контент микросообщения является слишком длинным. (Мы узнаем больше о сообщениях об ошибках в <a class="ref" href="sign-up#sec:signup_error_messages">Разделе&nbsp;8.2.3</a>.)</p>
+<p>Код в <a class="ref" href="a-demo-app#code:demo_length_validation">Листинге&nbsp;2.9</a> может выглядеть, довольно таинственно &mdash; мы рассмотрим валидацию, более тщательно  в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a>&mdash;но его эффект, станет вполне очевиден, если мы перейдем в новую страницу микросообщений и введем больше чем 140 символов для контента сообщения. Как видно в <a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">Рис.&nbsp;2.14</a>, Rails выдает <em>сообщение об ошибке</em> указывающее, что контент микросообщения является слишком длинным. (Мы узнаем больше о сообщениях об ошибках в <a class="ref" href="sign-up#sec:signup_error_messages">Разделе&nbsp;8.2.3</a>.)</p>
 
 <div class="label" id="fig:micropost_length_error_rails_3"></div>
 

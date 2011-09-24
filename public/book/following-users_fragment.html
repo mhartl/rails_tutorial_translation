@@ -720,7 +720,7 @@ $(document).ready(function(){
 </div></div>
 
 
-<p>Как вы наверное подозреваете, мы не будем создавать полную таблицу в бд для того чтобы просто  повести реверс взаимоотношений. Вместо этого мы воспользуемся основной симметрией между читаемыми и читателями для симуляции таблицы  <code>reverse_relationships</code>, передав <code>followed_id</code> в качестве первичного ключа. Иными словами, там где ассоциация <code>relationships</code> использует внешний ключ <code>follower_id</code>,</p>
+<p>Как вы наверное подозреваете, мы не будем создавать полную таблицу в бд для того чтобы просто  повести реверс взаимоотношений. Вместо этого мы воспользуемся основной симметрией между читаемыми и читателями для симуляции таблицы  <code>reverse_relationships</code>, передав <code>followed_id</code> в качестве внешнего ключа. Иными словами, там где ассоциация <code>relationships</code> использует внешний ключ <code>follower_id</code>,</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">has_many</span> <span class="ss">:relationships</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;follower_id&quot;</span>
 </pre></div>

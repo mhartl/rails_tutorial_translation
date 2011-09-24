@@ -457,7 +457,7 @@ $(document).ready(function(){
 </div></div>
 
 
-<p>Напомним из <a class="ref" href="sign-up#sec:failed_signup">Раздел&nbsp;8.4.2</a> Раздела&nbsp;8.4.2</a> что мы отображали ошибки регистрации, используя сообщения об ошибке модели User. Так как сессии не являются моделью Active Record, эта стратегия не сработает в данном случае, так что вместо этого мы поместим сообщение во флэш (или, скорее, в <code>flash.now</code>; см. <a class="ref" href="sign-in-sign-out#sidebar:flash_now">Блок&nbsp;9.1</a>). Благодаря отображению флэш сообщений в макете сайта (<a class="ref" href="sign-up#code:layout_flash">Листинг&nbsp;8.16</a>), <code>flash[:error]</code> сообщения отображаются автоматически; благодаря Blueprint CSS, они автоматически приобретают приятный стиль (<a class="ref" href="sign-in-sign-out#fig:failed_signin">Рис.&nbsp;9.5</a>).</p>
+<p>Напомним из <a class="ref" href="sign-up#sec:failed_signup">Раздела&nbsp;8.4.2</a>, что мы отображали ошибки регистрации, используя сообщения об ошибке модели User. Так как сессии не являются моделью Active Record, эта стратегия не сработает в данном случае, так что вместо этого мы поместим сообщение во флэш (или, скорее, во <code>flash.now</code>; см. <a class="ref" href="sign-in-sign-out#sidebar:flash_now">Блок&nbsp;9.1</a>). Благодаря отображению флэш сообщений в макете сайта (<a class="ref" href="sign-up#code:layout_flash">Листинг&nbsp;8.16</a>), <code>flash[:error]</code> сообщения отображаются автоматически; благодаря Blueprint CSS, они автоматически приобретают приятный стиль (<a class="ref" href="sign-in-sign-out#fig:failed_signin">Рис.&nbsp;9.5</a>).</p>
 
 <div class="label" id="sidebar:flash_now"></div>
 
@@ -601,7 +601,7 @@ $(document).ready(function(){
 
 
 <div class="sidebar"><span class="title"><span class="header">Box 9.2.</span><span class="description">Sessions and cookies</span></span>
-<p>Поскольку HTTP является <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP_session_state"><em>протоколом, не сохраняеющим своего состояния</em></a>, веб-приложения, требующие входа пользователей, должны реализовывать способ, позволяющий отслеживать прогресс каждого пользователя от страницы к странице. Один из методов для поддержания статуса вошедшего пользователя, является использование традиционных Rails сессий (с помощью специальной <code>session</code> функции) для хранения <em>remember token</em>, равного пользовательскому id:</p>
+<p>Поскольку HTTP является <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP_session_state"><em>протоколом, не сохраняющим своего состояния</em></a>, веб-приложения, требующие входа пользователей, должны реализовывать способ, позволяющий отслеживать прогресс каждого пользователя от страницы к странице. Один из методов для поддержания статуса вошедшего пользователя, является использование традиционных Rails сессий (с помощью специальной <code>session</code> функции) для хранения <em>remember token</em>, равного пользовательскому id:</p>
 
 <pre class="verbatim">  session[:remember_token] = user.id</pre>
 
@@ -1621,7 +1621,7 @@ $(document).ready(function(){
 </div><div class="footnotes">
 <ol>
 <li id="fn:9.1">Другой распространенной моделью является завершение сессии после истечения определенного количества времени. Это особенно уместно на сайтах, содержащих конфиденциальную информацию, такую как банковские и финансово-торговые операции.&nbsp;<a class="arrow" href="#fnref:9.1">&uarr;</a></li>
-<li id="fn:9.2">В <a class="ref" href="sign-in-sign-out#sec:remember_me">Раздел&nbsp;9.3.2</a> Разделе&nbsp;9.3.2</a> мы увидим, насколько продолжительно это самое &ldquo;навсегда&rdquo;.&nbsp;<a class="arrow" href="#fnref:9.2">&uarr;</a></li>
+<li id="fn:9.2">В <a class="ref" href="sign-in-sign-out#sec:remember_me">Разделе&nbsp;9.3.2</a> мы увидим, насколько продолжительно это самое &ldquo;навсегда&rdquo;.&nbsp;<a class="arrow" href="#fnref:9.2">&uarr;</a></li>
 <li id="fn:9.3">Если бы мы также добавили <code>create</code> и <code>destroy</code> действия, generate скрипт создал бы <em>представления</em> для этих действий, которые нам не нужны. Конечно, мы могли бы удалить представления, но я предпочел не допустить их создания скриптом <code>generate</code>, а вместо этого определить действия вручную.&nbsp;<a class="arrow" href="#fnref:9.3">&uarr;</a></li>
 <li id="fn:9.4">В случае, если вы задаетесь вопросом, почему мы используем <code>user</code> вместо <code>@user</code> в  <a class="ref" href="sign-in-sign-out#code:signin_failure">Листинге&nbsp;9.8</a>, это связано с тем, что эта user переменная никогда более не понадобится в других представлениях, следовательно, нет оснований использовать здесь переменную экземпляра. (Хотя использование <code>@user</code> по прежнему возможно.)&nbsp;<a class="arrow" href="#fnref:9.4">&uarr;</a></li>
 <li id="fn:9.5">Изображение из <a href="http://www.flickr.com/photos/hermanusbackpackers/3343254977/">http://www.flickr.com/photos/hermanusbackpackers/3343254977/</a>.&nbsp;<a class="arrow" href="#fnref:9.5">&uarr;</a></li>

@@ -274,7 +274,7 @@
 <div class="label" id="sec:a_user_tour"></div>
 
 
-<h3><a id="sec:2.2.1" href="a-demo-app#sec:a_user_tour" class="heading"><span class="number">2.2.1</span> A user tour</a></h3>
+<h3><a id="sec:2.2.1" href="a-demo-app#sec:a_user_tour" class="heading"><span class="number">2.2.1</span> ユーザーページを見てみる</a></h3>
 
 <p><a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a>をブラウザで見てみると、 <a class="ref" href="beginning#fig:riding_rails_3">図1.3</a>と同じくRailsのデフォルトページが表示されますが、実はUsersリソースを作ったときに他に色々な「ユーザーを扱うためのページ」が作成されています。例え、ば<a href="http://localhost:3000/users">/users</a>に行けば全ユーザのリストが見られます。また、<a href="http://localhost:3000/">/users/new</a>.<sup class="footnote" id="fnref:2.6"><a href="#fn:2.6">6</a></sup>はユーザー作成用のページです。この章の残り半分では、このユーザー関連のページを次々と見ていくことにします。この際、<a class="ref" href="a-demo-app#table:user_urls">表2.1</a>に載せてあるページとURLの関係を参照すると覚えやすいかも知れません。</p>
 
@@ -354,7 +354,7 @@
 <ol>
 <li>ブラウザが、<tt>/users</tt>URLをリクエスト</li>
 <li>Railsが、<tt>/users</tt>をUsersコントローラの<code>index</code>アクションにルーティングする</li>
-<li><code>index</code>アクションが、Userモデルに「全てのユーザを引き出してくれ」と要請(<code>User.all</code)</li>
+<li><code>index</code>アクションが、Userモデルに「全てのユーザを引き出してくれ」と要請(<code>User.all</code>)</li>
 <li>Userモデルが、データベースから全てのユーザーを読み取る</li>
 <li>Userモデルが、上で読み取ったユーザーのリストをコントローラに返す</li>
 <li>コントローラが、ユーザーのリストを<code>@users</code>変数に格納し、これが<code>index</code>ビューに渡される</li>
@@ -385,7 +385,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 2.3.</span> <span class="description">Usersコントローラの骨格<br /> <code>app/controllers/users_controller.rb</code></span>       
+<div class="listing"><span class="header">リスト2.3.</span> <span class="description">Usersコントローラの骨格<br /> <code>app/controllers/users_controller.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -440,7 +440,7 @@
 <div class="label" id="table:demo_RESTful_users"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left">page to list all users</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">page to show user with id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">page to make a new user</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left">create a new user</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">page to edit user with id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">update user with id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">delete user with id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Table 2.2: </span><span class="description">RESTful routes provided by the Users resource in <a class="ref" href="a-demo-app#code:rails_routes">リスト2.2</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP request</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Purpose</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left">全ユーザーの一覧を表示するページ</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">特定のidのユーザーを表示するページ <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">新規ユーザー作成ページ</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left">新規ユーザーの作成</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">特定のidのユーザーを編集するためのページ<code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">idが <code>1</code>のユーザーを編集するためのページ</td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">idが<code>1</code>のユーザーを削除</td></tr></table></div><div class="caption"><span class="header">Table 2.2: </span><span class="description"><a class="ref" href="a-demo-app#code:rails_routes">リスト2.2</a>のUsersリソースが提供するRESTful・ルート.</span></div></div>
 
 
 
@@ -449,9 +449,10 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">囲み 2.2.</span><span class="description">REpresentational State Transfer (REST)</span></span>
-<p>If you read much about Ruby on Rails web development, you&rsquo;ll see a lot of references to &ldquo;REST&rdquo;, which is an acronym for REpresentational State Transfer. REST is an architectural style for developing distributed, networked systems and software applications such as the World Wide Web and web applications. Although REST theory is rather abstract, in the context of Rails applications REST means that most application components (such as users and microposts) are modeled as <em>resources</em> that can be created, read, updated, and deleted&mdash;operations that correspond both to the <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD operations of relational databases</a> and the four fundamental <a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">HTTP request methods</a>: <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, and <tt>DELETE</tt>. (We&rsquo;ll learn more about HTTP requests in <a class="ref" href="static-pages#sec:TDD">節3.2.2</a> and especially <a class="ref" href="static-pages#sidebar:get_etc">囲み3.1</a>.)</p>
 
-<p>As a Rails application developer, the RESTful style of development helps you make choices about which controllers and actions to write: you simply structure the application using resources that get created, read, updated, and deleted. In the case of users and microposts, this process is straightforward, since they are naturally resources in their own right. In <a class="ref" href="following-users#top">Chapter&nbsp;12</a>, we&rsquo;ll see an example where REST principles allow us to model a subtler problem, &ldquo;following users&rdquo;, in a natural and convenient way.</p>
+<p>Rails関連の書籍を読んでいると&ldquo;REST&rdquo;という略語をよく見かけます。これはREpresentational State Transferの略で、インターネットそのものやWebアプリケーションなど、分散・ネットワークされたシステムやアプリケーションを構築するためのアーキテクチャです。REST理論はかなり抽象的ですが、RailsアプリケーションにおけるRESTというのは、アプリケーションを構成するコンポーネント(ユーザーやマイクロポストなど)がそれぞれ作成・読み取り・更新・削除(Create/Read/Update/Delete)可能な<em>リソース</em>としてモデル化され、<a href="http://ja.wikipedia.org/wiki/CRUD">データベースのCRUDオペレーション</a>や4つの基本的な<a href="http://en.wikipedia.org/wiki/HTTP_request#Request_methods">HTTPリクエスト</a>(<tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, and <tt>DELETE</tt>)の両方に該当している事を指します。(HTTPリクエストについては<a class="ref" href="static-pages#sec:TDD">節3.2.2</a>と<a class="ref" href="static-pages#sidebar:get_etc">囲み3.1</a>で解説しています。)
+
+<p>Rails開発者として、RESTfulなスタイルはどのようなコントローラやアクションを作成するか決める時に役立ちます。言ってしまえば、作成(C)・読み取り(R)・更新(U)・削除(D)されるリソースを使ってアプリケーション全体を構成してしまう事もできます。ユーザーやマイクロポストなどに関しては自然にリソース化できるので問題ありませんが、<a class="ref" href="following-users#top">第12章</a>では「ユーザーをフォローする」という少し入り組んだ課題をRESTの理念を使ってモデリングします。</p>
 </div>
 
 

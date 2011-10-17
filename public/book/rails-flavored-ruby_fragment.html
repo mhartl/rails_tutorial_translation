@@ -299,14 +299,14 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>These use the built-in Rails helper <code>stylesheet_link_tag</code>, which you can read more about at the Rails API.<sup class="footnote" id="fnref:4.2"><a href="#fn:4.2">2</a></sup> The first <code>stylesheet_link_tag</code> line includes the stylesheet <code>blueprint/screen.css</code> for screens (e.g., computer monitors), and the second includes <code>blueprint/print.css</code> for printing. (The helper automatically appends the <code>.css</code> extension to the filenames if absent, so I&rsquo;ve left it off for brevity.) As with the <code>title</code> helper, to an experienced Rails developer these lines look simple, but there are at least four new Ruby ideas: built-in Rails methods, method invocation with missing parentheses, symbols, and hashes. In this chapter we&rsquo;ll cover these new ideas as well. (We&rsquo;ll see the HTML produced by these stylesheet includes in <a class="ref" href="rails-flavored-ruby#code:css_source">Listing&nbsp;4.6</a> of <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Section&nbsp;4.3.4</a>.)</p>
+<p>Éstas usan un helper incluido por defecto, <code>stylesheet_link_tag</code>, que se encuentra documentado en la API de Rails <sup class="footnote" id="fnref:4.2"><a href="#fn:4.2">2</a></sup> la primera linea de <code>stylesheet_link_tag</code> inlcuye la hoja de estilos <code>blueprint/screen.css</code>, optimizada para pantallas (e.g., monitores de computadora), y la segunda agrega <code>blueprint/print.css</code>, para impresión. (El helper automáticamente agrega la extensión <code>.css</code> a los nombres de archivo, si no está presente. Es conveniente omitirla por brevedad.) Al igual que  el helper de <code>title</code>, a un desarrollador experto en Rails, estas lineas parecerán simples, pero introducen al menos cuatro conceptos nuevos de Ruby: métodos incluidos en el código de Ruby, invocación de métodos sin usar paréntesis, símbolos y hashes. En éste capítulo cubriremos estas nuevas ideas también. (Veremos el HTML producido por estas hojas de estilo en el <a class="ref" href="rails-flavored-ruby#code:css_source">Listado 4.6</a> de laf <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Sección 4.3.4</a>.)</p>
 
-<p>By the way, with the new stylesheets the site doesn&rsquo;t look much different than before, but it&rsquo;s a start (<a class="ref" href="rails-flavored-ruby#fig:home_with_stylesheet">Figure&nbsp;4.1</a>). We&rsquo;ll build on this foundation starting in <a class="ref" href="filling-in-the-layout#top">Chapter&nbsp;5</a>.<sup class="footnote" id="fnref:4.3"><a href="#fn:4.3">3</a></sup></p>
+<p>De todas formas, con las nuevas hojas de estilo el sitio se sigue viendo casi igual que antes, pero al menos es un comienzo. (<a class="ref" href="rails-flavored-ruby#fig:home_with_stylesheet">Figura 4.1</a>). Seguiremos sobre ésta base, en el <a class="ref" href="filling-in-the-layout#top">Capítulo 5</a>.<sup class="footnote" id="fnref:4.3"><a href="#fn:4.3">3</a></sup></p>
 
 <div class="label" id="fig:home_with_stylesheet"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_with_stylesheet.png" alt="home_with_stylesheet" /></span></div><div class="caption"><span class="header">Figure 4.1: </span><span class="description">The Home page with the new Blueprint stylesheets.&nbsp;<a href="http://railstutorial.org/images/figures/home_with_stylesheet-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_with_stylesheet.png" alt="home_with_stylesheet" /></span></div><div class="caption"><span class="header">Figura 4.1: </span><span class="description">La página Home con las hojas de estilo Blueprint .&nbsp;<a href="http://railstutorial.org/images/figures/home_with_stylesheet-full.png">(full size)</a></span></div></div>
 
 
 
@@ -317,7 +317,7 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 <h2><a id="sec:4.2" href="rails-flavored-ruby#sec:strings_and_methods" class="heading"><span class="number">4.2</span> Strings and methods</a></h2>
 
 
-<p>Our principal tool for learning Ruby will be the <em>Rails console</em>, which is a command-line tool for interacting with Rails applications. The console itself is built on top of interactive Ruby (<code>irb</code>), and thus has access to the full power of Ruby. (As we&rsquo;ll see in <a class="ref" href="rails-flavored-ruby#sec:a_controller_class">Section&nbsp;4.4.4</a>, the console also has access to the Rails environment.) Start the console at the command line as follows:<sup class="footnote" id="fnref:4.4"><a href="#fn:4.4">4</a></sup></p>
+<p>Nuestra principal herramienta para aprender Ruby será la <em>Consola de Rails</em>, una herramienta de linea de comandos para interactuar con nuestras aplicaciones de Rails. La consola está implementada sobre Ruby interactivo(<code>irb</code>), y por lo tanto presenta un intérprete completo de Ruby. (Como veremos en la <a class="ref" href="rails-flavored-ruby#sec:a_controller_class">Sección 4.4.4</a>, la consola también tiene acceso al entorno de Rails.) Ejecuta la consola en la linea de comandos con la siguiente linea:<sup class="footnote" id="fnref:4.4"><a href="#fn:4.4">4</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="go">Loading development environment (Rails 3.0.7)</span>
@@ -326,11 +326,11 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>By default, the console starts in a <em>development environment</em>, which is one of three separate environments defined by Rails (the others are <em>test</em> and <em>production</em>). This distinction won&rsquo;t be important in this chapter; we&rsquo;ll learn more about environments in <a class="ref" href="modeling-and-viewing-users-one#sec:rails_environments">Section&nbsp;6.3.1</a>.</p>
+<p>Por defecho, la consola parte en un<em>entorno de desarrollo</em>, que es uno de los tres entornos definidos por defecto por Rails (los otros dos son <em>test</em> y <em>production</em>). Este detalle no tieen mayor importancia por ahora, pero lo profundizaremos en la <a class="ref" href="modeling-and-viewing-users-one#sec:rails_environments">Sección 6.3.1</a>.</p>
 
-<p>The console is a great learning tool, and you should feel free to explore&mdash;don&rsquo;t worry, you (probably) won&rsquo;t break anything. When using the console, type Ctrl-C if you get stuck, or Ctrl-D to exit the console altogether.</p>
+<p>La consola es una gran herramienta de aprendizaje, y deberías aprovecharla para explorar; no te preocupes, no podrás dañar nada (espero!). Cuando estés dentro de la consola interactiva, y quieras terminar la ejecución, puedes presionar Ctrl+C para interrumpir el proceso, o Ctrl+D para terminar la consola.</p>
 
-<p>Throughout the rest of this chapter, you might find it helpful to consult the Ruby API.<sup class="footnote" id="fnref:4.5"><a href="#fn:4.5">5</a></sup> It&rsquo;s packed (perhaps even <em>too</em> packed) with information; for example, to learn more about Ruby strings you can look at the Ruby API entry for the <code>String</code> class.</p>
+<p>Puede que te resulte provechoso consultar la API de Ruby.<sup class="footnote" id="fnref:4.5"><a href="#fn:4.5">5</a></sup> Contiene muchos (quizás <em>demasiados</em>) datos útiles; por ejemlpo, para aprender detalles acerca del funcionamiento de los strings en Ruby, lo mejor es buscar la entrada que documenta la clase <code>String</code></p>
 
 <div class="label" id="sec:comments"></div>
 
@@ -338,7 +338,7 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 <h3><a id="sec:4.2.1" href="rails-flavored-ruby#sec:comments" class="heading"><span class="number">4.2.1</span> Comments</a></h3>
 
 
-<p>Ruby <em>comments</em> start with the pound sign&nbsp;<code>#</code> and extend to the end of the line. Ruby (and hence Rails) ignores comments, but they are useful for human readers (including, often, the original author!). In the code</p>
+<p>Los <em>comentarios</em> se inician con el signo de número <code>#</code>, y se extienden hasta el fin de la linea. Ruby (y por ende Rails) ignora los comentarios, pero pueden ser útiles para lectores humanos (muy frecuentemente, el autor original!). En el código a continuació a continuación</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="c1"># Return a title on a per-page basis.</span>
   <span class="k">def</span> <span class="nf">title</span>
@@ -349,9 +349,9 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>the first line is a comment indicating the purpose of the subsequent function definition.</p>
+<p>la primera linea es un comentario indicando el propósito de la definición que viene a continuación.</p>
 
-<p>You don&rsquo;t ordinarily include comments in console sessions, but for instructional purposes I&rsquo;ll include some comments in what follows, like this:</p>
+<p>Normalmente, no se utilizan comentarios en las sesiones de consola interactiva, pero para fines didácticos, incluiré algunos en partes que lo ameriten. Por ejemplo, así:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="mi">17</span> <span class="o">+</span> <span class="mi">42</span>   <span class="c1"># Integer addition</span>
@@ -360,7 +360,7 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>If you follow along in this section typing or copying-and-pasting commands into your own console, you can of course omit the comments if you like; the console will ignore them in any case.</p>
+<p>Si estás probando los comandos que aparecen presentados directamente en la consola, lo mejor será omitir los comentarios. El intérprete los ignorará de todas formas.</p>
 
 <div class="label" id="sec:strings"></div>
 
@@ -368,7 +368,7 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 <h3><a id="sec:4.2.2" href="rails-flavored-ruby#sec:strings" class="heading"><span class="number">4.2.2</span> Strings</a></h3>
 
 
-<p><em>Strings</em> are probably the most important data structure for web applications, since web pages ultimately consist of strings of characters sent from the server to the browser. Let&rsquo;s start exploring strings with the console, this time started with <code>rails&nbsp;c</code>, which is a shortcut for <code>rails console</code>:</p>
+<p>Es muy probable que los <em>Strings</em> sean la estructura de datos más importante para aplicaciones web, ya que al final todo se reduce a una serie de cadenas de caracteres enviados desde el servidor al explorador web. Comenzemos explorando la clase string con la consola. Podemos acceder a ella con el comando <code>rails&nbsp;c</code>, que es un atajo para <code>rails console</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails c</span>
 <span class="gp">&gt;&gt; </span><span class="s2">&quot;&quot;</span>         <span class="c1"># An empty string</span>
@@ -379,9 +379,9 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>These are <em>string literals</em> (also, amusingly, called <em>literal strings</em>), created using the double quote character&nbsp;<code>"</code>. The console prints the result of evaluating each line, which in the case of a string literal is just the string itself.</p>
+<p>Éstos son <em>string literals</em> (curiosamente, también pueden llamarse <em>literal strings</em>), instanciados usando la sintáxis de doble apóstrofer&nbsp;<code>"</code>. La consola mostrará el resultado de evaluar cada linea, lo que en el caso de un string significa mostrar su contenido.</p>
 
-<p>We can also concatenate strings with the <code>+</code> operator:</p>
+<p>También podemos concatenar strings usando el operador <code>+</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="s2">&quot;foo&quot;</span> <span class="o">+</span> <span class="s2">&quot;bar&quot;</span>    <span class="c1"># String concatenation</span>
 <span class="go">=&gt; &quot;foobar&quot;</span>
@@ -389,9 +389,9 @@ Nota en particular el cambio de la variable de instancia <code>@title</code> al 
 </div>
 
 
-<p>Here the result of evaluating <code>"foo"</code> plus <code>"bar"</code> is the string <code>"foobar"</code>.<sup class="footnote" id="fnref:4.6"><a href="#fn:4.6">6</a></sup></p>
+<p>Aquí el resultado de evaluar <code>"foo"</code> más <code>"bar"</code> es el string <code>"foobar"</code>.<sup class="footnote" id="fnref:4.6"><a href="#fn:4.6">6</a></sup></p>
 
-<p>Another way to build up strings is via <em>interpolation</em> using the special syntax <code>#{}</code>:<sup class="footnote" id="fnref:4.7"><a href="#fn:4.7">7</a></sup></p>
+<p>Otra manera de construir un string es usando <em>interpolación</em> usando la sintaxis: <code>#{}</code>:<sup class="footnote" id="fnref:4.7"><a href="#fn:4.7">7</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Michael&quot;</span>    <span class="c1"># Variable assignment</span>
 <span class="go">=&gt; &quot;Michael&quot;</span>

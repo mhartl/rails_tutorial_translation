@@ -105,9 +105,9 @@
 <h1 class="chapter"><a id="sec:4" href="rails-flavored-ruby#top" class="heading"><span class="number">Chapter 4</span> Rails-flavored Ruby</a></h1>
 
 
-<p>Grounded in examples from <a class="ref" href="static-pages#top">Chapter&nbsp;3</a>, this chapter explores some elements of Ruby important for Rails. Ruby is a big language, but fortunately the subset needed to be productive as a Rails developer is relatively small. Moreover, this subset is <em>different</em> from the usual approaches to learning Ruby, which is why, if your goal is making dynamic web applications, I recommend learning Rails first, picking up bits of Ruby along the way. To become a Rails <em>expert</em>, you need to understand Ruby more deeply, and this book gives you a good foundation for developing that expertise. As noted in <a class="ref" href="beginning#sec:comments_for_various_readers">Section&nbsp;1.1.1</a>, after finishing <em>Rails Tutorial</em> I suggest reading a pure Ruby book such as <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a>, or <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a>.</p>
+<p>Utilizando los ejemplos del <a class="ref" href="static-pages#top">Capítulo 3</a>, ahora exploraremos algunos elementos de Ruby importantes para Rails. Ruby es un gran lenguaje, pero afortunadamente el subconjunto que se necesita para ser productivo como desarrollador en Rails es relativamente pequeño. Pero aún más, este subconjunto es <em>diferente</em> a la manera usual para aprender Ruby, por lo que, si tu objetivo es desarrollar aplicaciones web, te recomiendo aprender Rails primero, e ir perfeccionando tu Ruby mientras caminas. Para convertirte en un <em>experto</em> en Rails, necesitarás comprender Ruby en mayor profundidad, y este libro te entrega buenas bases para buscar esa experiencia. Como dije en la <a class="ref" href="beginning#sec:comments_for_various_readers">Sección 1.1.1</a>, después de terminar el <em>Rails Tutorial</em>, sugiero leer un libro de Ruby puro, como por ejemplo <a href="http://www.amazon.com/gp/product/1430223634?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1430223634"><em>Beginning Ruby</em></a>, <a href="http://www.amazon.com/gp/product/1933988657?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1933988657"><em>The Well-Grounded Rubyist</em></a>, o <a href="http://www.amazon.com/gp/product/B000P28V8Q?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B000P28V8Q"><em>The Ruby Way</em></a>.</p>
 
-<p>This chapter covers a lot of material, and it&rsquo;s OK not to get it all on the first pass. I&rsquo;ll refer back to it frequently in future chapters.</p>
+<p>En éste capítulo cubriremos bastante material, y está bien si no lo comprendes todo a la primera leída. Lo mencionaré frecuentemente en los capítulos que siguen.</p>
 
 <div class="label" id="sec:motivation"></div>
 
@@ -115,7 +115,7 @@
 <h2><a id="sec:4.1" href="rails-flavored-ruby#sec:motivation" class="heading"><span class="number">4.1</span> Motivation</a></h2>
 
 
-<p>As we saw in the last chapter, it&rsquo;s possible to develop the skeleton of a Rails application, and even start testing it, with essentially no knowledge of the underlying Ruby language. We did this by relying on the generated controller and test code and following the examples we saw there. This situation can&rsquo;t last forever, though, and we&rsquo;ll open this chapter with a couple of additions to the site that bring us face-to-face with our Ruby limitations.</p>
+<p>Como vimos en el capítulo pasado, es posible desarrollar el esqueleto de una aplicación Rails, e incluso comenzar a testearla, sin saber nada de Ruby. Sólo fue posible conseguir esto aprovechando la generación automática del controlador y el código de pruebas, que comprobamos ahí. Sin embargo, no podemos depender para siempre de ese comportamiento, y en este capítulo nos toparemos rápidamente con nuestras actuales limitaciones de Ruby.
 
 <div class="label" id="sec:title_helper"></div>
 
@@ -123,13 +123,13 @@
 <h3><a id="sec:4.1.1" href="rails-flavored-ruby#sec:title_helper" class="heading"><span class="number">4.1.1</span> A <code>title</code> helper</a></h3>
 
 
-<p>When we last saw our new application, we had just updated our mostly static pages to use Rails layouts to eliminate duplication in our views (<a class="ref" href="rails-flavored-ruby#code:application_layout_redux">Listing&nbsp;4.1</a>).</p>
+<p>Lo último que vimos de nuestra nueva aplicación fue cómo abstraer nuestras páginas estáticas a vistas, para eliminar la duplicación en nuestra presentación.(<a class="ref" href="rails-flavored-ruby#code:application_layout_redux">Listing&nbsp;4.1</a>).</p>
 
 <div class="label" id="code:application_layout_redux"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 4.1.</span> <span class="description">The sample application site layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Listado 4.1.</span> <span class="description">El diseño de la aplicación de ejemplo. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -145,14 +145,14 @@
 </div></div>
 
 
-<p>This layout works well, but there&rsquo;s one part that could use a little polish. Recall that the title line</p>
+<p>Este diseño funciona bien, pero hay algunas partes que podrían mejorar. Fíjate en el título de la página:</p>
 
 <div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>relies on the definition of <code>@title</code> in the actions, such as</p>
+<p>éste depende de la definición de <code>@title</code> directamente, como a continuación: </p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -166,22 +166,22 @@
 </div>
 
 
-<p>But what if we don&rsquo;t define an <code>@title</code> variable? It&rsquo;s a good convention to have a <em>base title</em> we use on every page, with an optional variable title if we want to be more specific. We&rsquo;ve <em>almost</em> achieved that with our current layout, with one wrinkle: as you can see if you delete the <code>@title</code> assignment in one of the actions, in the absence of an <code>@title</code> variable the title appears as follows:</p>
+<p>Pero qué tal si definimos la variable <code>@title</code>? Podría ser buena idea tener un <em>título por defecto</em> que usemos en cada página, con un componente variable que usaremos si hay que ser más específico. Ya <em>casi</em> lo hemos logrado con el diseño actual, pero sólo hay un detalle: Si olvidamos definir la variable <code>@title</code> en nuestro código, el resultado sería el siguiente:</p>
 
 <div class="code"><div class="highlight"><pre>Ruby on Rails Tutorial Sample App | 
 </pre></div>
 </div>
 
 
-<p>In other words, there&rsquo;s a suitable base title, but there&rsquo;s also a trailing vertical bar character <code>|</code> at the end of the title.</p>
+<p>En otras palabras, hay un título por defecto, pero también hay un caracter que sobra, la barra vertical <code>|</code> que aparece al final.</p>
 
-<p>One common way to handle this case is to define a <em>helper</em>, which is a function designed for use in views. Let&rsquo;s define a <code>title</code> helper that returns a base title, &ldquo;Ruby on Rails Tutorial Sample App&rdquo;, if no <code>@title</code> variable is defined, and adds a vertical bar followed by the variable title if <code>@title</code> is defined (<a class="ref" href="rails-flavored-ruby#code:title_helper">Listing&nbsp;4.2</a>).<sup class="footnote" id="fnref:4.1"><a href="#fn:4.1">1</a></sup></p>
+<p>Una buena forma de manejar éste caso es definir un <em>helper</em>; una función designada para ser usada en las vistas. Definamos un helper <code>title</code> que devuelva un título por defecto, &ldquo;Ruby on Rails Tutorial Sample App&rdquo;, si <code>@title</code> no ha sido definida, y que agregue una barra vertical, seguida por el contenido de la variable <code>@title</code> si ésta se encuentra definida (<a class="ref" href="rails-flavored-ruby#code:title_helper">Listado 4.2</a>).<sup class="footnote" id="fnref:4.1"><a href="#fn:4.1">1</a></sup></p>
 
 <div class="label" id="code:title_helper"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 4.2.</span> <span class="description">Defining a <code>title</code> helper. <br /> <code>app/helpers/application_helper.rb</code></span>       
+<div class="listing"><span class="header">Listado 4.2.</span> <span class="description">Definiendo un helper <code>title</code> <br /> <code>app/helpers/application_helper.rb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">ApplicationHelper</span>
 
@@ -199,30 +199,30 @@
 </div></div>
 
 
-<p>This may look fairly simple to the eyes of an experienced Rails developer, but it&rsquo;s <em>full</em> of new Ruby ideas: modules, comments, local variable assignment, booleans, control flow, string interpolation, and return values. We&rsquo;ll cover each of these ideas in this chapter.</p>
+<p>Puede que ésto se vea simple a los ojos de un desarrollador Rails con experiencia, pero también se encuentra <em>lleno</em> de nuevas formas de Ruby: módulos, comentarios, asignación de variables locales, booleanos, control del flujo, interpolación de strings, y valores de retorno. Cubriremos todos estos temas durante este capítulo.</p>
 
-<p>Now that we have a helper, we can use it to simplify our layout by replacing</p>
+<p>Ahora que tenemos un helper, podemos usarlo para simplificar reemplazando</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;title&gt;</span>Ruby on Rails Tutorial Sample App | <span class="cp">&lt;%=</span> <span class="vi">@title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
 </pre></div>
 </div>
 
 
-<p>with</p>
+<p>por</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;title&gt;</span><span class="cp">&lt;%=</span> <span class="n">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/title&gt;</span>
 </pre></div>
 </div>
 
 
-<p>as seen in <a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">Listing&nbsp;4.3</a>.
-Note in particular the switch from the instance variable <code>@title</code> to the helper method <code>title</code> (without the <code>@</code>&nbsp;sign). Using Autotest or <code>rspec spec/</code>, you should verify that the tests from <a class="ref" href="static-pages#top">Chapter&nbsp;3</a> still pass.</p>
+<p>como se puede ver en el <a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">Listado 4.3</a>.
+Nota en particular el cambio de la variable de instancia <code>@title</code> al método helper <code>title</code> (sin la <code>@</code>&nbsp; delante). Usando Autotest o <code>rspec spec/</code>, deberías verificar que los tests del <a class="ref" href="static-pages#top">Capítulo 3</a> aún pasen.</p>
 
 <div class="label" id="code:application_layout_full_title"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 4.3.</span> <span class="description">The sample application site layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Listado 4.3.</span> <span class="description">El diseño de la aplicación de ejemplo. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -246,9 +246,9 @@ Note in particular the switch from the instance variable <code>@title</code> to 
 <h3><a id="sec:4.1.2" href="rails-flavored-ruby#sec:cascading_style_sheets" class="heading"><span class="number">4.1.2</span> Cascading Style Sheets</a></h3>
 
 
-<p>There&rsquo;s a second addition to our site that seems simple but adds several new Ruby concepts: including style sheets into our site layout. Though this is a book in web development, not web design, we&rsquo;ll be using cascading style sheets (CSS) to give the sample application some minimal styling, and we&rsquo;ll use the <a href="http://www.blueprintcss.org/">Blueprint CSS</a> framework as a foundation for that styling.</p>
+<p>Hay una segunda adición a nuestro sitio, que parece simple, pero introduce varios nuevos conceptos de ruby: incluir Hojas de estilo en el diseño de nuestro sitio. Aún cuando éste es un libro de desarrollo web, y no diseño web, de todas formas usaremos cascading style sheets (CSS) para darle a nuestra aplicación un mínimo de estilo, e incluiremos el framework <a href="http://www.blueprintcss.org/">Blueprint CSS</a> como base para ese estilo.</p>
 
-<p>To get started, <a href="http://github.com/joshuaclayton/blueprint-css/zipball/master">download the latest Blueprint CSS</a>. (For simplicity, I&rsquo;ll assume you download Blueprint to a <code>Downloads</code> directory, but use whichever directory is most convenient.) Using either the command line or a graphical tool, copy the Blueprint CSS directory <code>blueprint</code> into the <code>public/stylesheets</code> directory, a special directory where Rails keeps stylesheets. On my Mac, the commands looked like this, but your details may differ:</p>
+<p>Para comenzar, <a href="http://github.com/joshuaclayton/blueprint-css/zipball/master">descarga el último Blueprint CSS</a>. (Por convención, asumiré que descargarás Blueprint al directorio <code>Downloads</code> pero eres libre de usar el que te resulte más conveniente.) Ya sea usando el terminal o una interfaz gráfica, copia el directorio de Blueprint CSS <code>blueprint</code> al <code>public/stylesheets</code>, un directorio especial donde Rails guarda las hojas de estilo. En mi Mac, los comandos necesarios son los siguientes, pero ésto podría variar:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nv">$ </span>cp -r ~/Downloads/joshuaclayton-blueprint-css-&lt;version number&gt;/blueprint <span class="se">\</span>
 &gt; public/stylesheets/
@@ -256,7 +256,7 @@ Note in particular the switch from the instance variable <code>@title</code> to 
 </div>
 
 
-<p>Here <code>cp</code> is the Unix copy command, and the <code>-r</code> flag copies recursively (needed for copying directories). (As mentioned briefly in <a class="ref" href="static-pages#sec:autotest">Section&nbsp;3.2.1.1</a>, the tilde <tt class="verb">~</tt> means &ldquo;home directory&rdquo; in Unix.) <em>Note:</em> You should <em>not</em> paste in the&nbsp;<tt class="verb">&gt;</tt> character to your terminal. If you paste in the first line with a backslash and hit return, you will see&nbsp;<tt class="verb">&gt;</tt>, indicating a line continuation. You should then paste in the second line and hit return again to execute the command. Also note that you&rsquo;ll have to fill in the version number by hand, since that changes as Blueprint gets updated. Finally, be sure that you <em>don&rsquo;t</em> type</p>
+<p>Aquí <code>cp</code>, el comando Unix para copiar, tiene la opción <code>-r</code> para hacer que trabaje recursivamente (para copiar directorios). (Como mencioné brebemente en la <a class="ref" href="static-pages#sec:autotest">Sección 3.2.1.1</a>, la tilde <tt class="verb">~</tt> significa el directorio home en Unix.) <em>Nota: NO</em> debes pegar el caracter <tt class="verb">&gt;</tt> a tu terminal. Al pegar la primera linea, con el backslash al final, y presionar enter, verás que aparece el caracter<tt class="verb">&gt;</tt>, indicando que viene otra linea a continuación. Ahora debes pegar la segunda linea, y presionar enter de nuevo para ejecutar el comando. También fíjate en el número de versión que ocupas, ya que éste cambiará a medida que Blueprint se vaya actualizando. Por último, asegúrate que <em>NO</em> escribes</p>
 
 <div class="code"><div class="highlight"><pre><span class="nv">$ </span>cp -r ~/Downloads/joshuaclayton-blueprint-css-&lt;version number&gt;/blueprint/ <span class="se">\</span>
 &gt; public/stylesheets/
@@ -264,16 +264,16 @@ Note in particular the switch from the instance variable <code>@title</code> to 
 </div>
 
 
-<p>which has a trailing slash in <code>&hellip;/blueprint/</code>. This puts the <em>contents</em> of the Blueprint directory into <code>public/stylesheets</code> instead of moving the whole directory.</p>
+<p>con un slash al final de <code>&hellip;/blueprint/</code>. Ésto pone el <em>contenido</em> del directorio Blueprint dentro de <code>public/stylesheets</code>,en vez de mover el directorio completo.</p>
 
-<p>Once you have the stylesheets in the proper directory, Rails
-provides a helper for including them on our pages using Embedded Ruby (<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">Listing&nbsp;4.4</a>).</p>
+<p>Una vez que tengas las hojas de estilo en el directorio correcto, Rails provee un helper para incluirlas en nuestras páginas usando Embedded Ruby
+(<a class="ref" href="rails-flavored-ruby#code:layout_with_stylesheets">Listado 4.4</a>).</p>
 
 <div class="label" id="code:layout_with_stylesheets"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 4.4.</span> <span class="description">Adding stylesheets to the sample application layout. <br /> <code>app/views/layouts/application.html.erb</code></span>       
+<div class="listing"><span class="header">Listado 4.4.</span> <span class="description">Agregando hojas de estilo al diseño de la aplicación de ejemplo. <br /> <code>app/views/layouts/application.html.erb</code></span>       
 </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -291,7 +291,7 @@ provides a helper for including them on our pages using Embedded Ruby (<a class=
 </div></div>
 
 
-<p>Let&rsquo;s focus on the new lines:</p>
+<p>Enfoquémonos en las lineas nuevas:</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;blueprint/print&#39;</span><span class="p">,</span>  <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;print&#39;</span> <span class="cp">%&gt;</span>

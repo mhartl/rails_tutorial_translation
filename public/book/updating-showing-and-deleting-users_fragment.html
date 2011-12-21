@@ -1,24 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-  $("p").toggle(
-    function() {
-    $("a").click(function redirectPage(){ window.location = this;});
-      $("p").css("background-color","");
-      $('div.newelement').remove();
-      var index = $("p").index(this);
-      var p_for_load = '/new/updating-showing-and-deleting-users_fragment.html p:eq(' + index + ')';
-      $(this).css("background-color","#fffacd");
-      $(this).after (function() { return ('<div class="newelement"> </div>');});
-      $("div.newelement").load(p_for_load);
-    },
-    function(){
-      $('div.newelement').remove();
-      $(this).css("background-color","");
-    }
-  );
-});
-</script>
-
 <div id="top"></div>
 
 
@@ -40,7 +19,7 @@ $(document).ready(function(){
 <h2><a id="sec:10.1" href="updating-showing-and-deleting-users#sec:updating_users" class="heading"><span class="number">10.1</span> Обновление пользователей</a></h2>
 
 
-<p>Основная идея редактирования информации о пользователе тесно параллельна созданию новых пользователей (<a class="ref" href="sign-up#top">Глава&nbsp;8</a>). Вместо <code>new</code> действия визуализирующего представление для нового пользователя, мы имеем <code>edit</code> действие, отображающее представление для редактирования пользователей; вместо <code>create</code> отвечающего на запрос <tt>POST</tt>, мы имеем <code>update</code> действие, отвечающее на запрос <tt>PUT</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Блок&nbsp;3.1</a>). Основное отличие заключается в том, что зарегистрироваться может любой человек, но только текущий пользователь должен иметь возможность обновлять свою информацию. Это означает, что нам необходимо обеспечить контроль доступа таким образом, чтобы только авторизированные пользователи могли редактировать и обновлять информацию; аутентификационная машинерия из <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a> позволит нам использовать <em>before filter</em> для обеспечения этого вида контроля.</p>
+<p>Основная идея редактирования информации о пользователе тесно параллельна созданию новых пользователей (<a class="ref" href="sign-up#top">Глава&nbsp;8</a>). Вместо <code>new</code> действия визуализирующего представление для нового пользователя, мы имеем <code>edit</code> действие, отображающее представление для редактирования пользователей; вместо <code>create</code> отвечающего на запрос <tt>POST</tt>, мы имеем <code>update</code> действие, отвечающее на запрос <tt>PUT</tt> (<a class="ref" href="static-pages#sidebar:get_etc">Блок&nbsp;3.1</a>). Основное отличие заключается в том, что зарегистрироваться может любой человек, но только текущий пользователь должен иметь возможность обновлять свою информацию. Это означает, что нам необходимо обеспечить контроль доступа таким образом, чтобы только авторизированные пользователи могли редактировать и обновлять информацию; аутентификационный механизм из <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a> позволит нам использовать <em>before filter</em> для обеспечения этого вида контроля.</p>
 
 <div class="label" id="sec:edit_form"></div>
 

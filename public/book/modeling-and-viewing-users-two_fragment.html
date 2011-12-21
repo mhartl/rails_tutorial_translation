@@ -1,24 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-  $("p").toggle(
-    function() {
-    $("a").click(function redirectPage(){ window.location = this;});
-      $("p").css("background-color","");
-      $('div.newelement').remove();
-      var index = $("p").index(this);
-      var p_for_load = '/new/modeling-and-viewing-users-two_fragment.html p:eq(' + index + ')';
-      $(this).css("background-color","#fffacd");
-      $(this).after (function() { return ('<div class="newelement"> </div>');});
-      $("div.newelement").load(p_for_load);
-    },
-    function(){
-      $('div.newelement').remove();
-      $(this).css("background-color","");
-    }
-  );
-});
-</script>
-
 <div id="top"></div>
 
 
@@ -448,7 +427,7 @@ $(document).ready(function(){
 <h3><a id="sec:7.2.1" href="modeling-and-viewing-users-two#sec:a_secure_password_test" class="heading"><span class="number">7.2.1</span> Тест безопасного пароля</a></h3>
 
 
-<p>Как намекалось в <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">Разделе&nbsp;7.1.3</a>, вся машинерия шифрования паролей будет спрятана в <code>private</code> регионе модели User, который представляет собой проблему для тестирования. Нам нужен какой-то <em>публичный интерфейс</em> который мы можем выставить в остальной части приложения. Одним из полезных аспектов разработки через тестирование является то, что, выступая в качестве клиента для нашего кода приложения, тесты мотивируют нас разрабатывать юзабельный интерфейс с самого начала.</p>
+<p>Как намекалось в <a class="ref" href="modeling-and-viewing-users-two#sec:an_active_record_callback">Разделе&nbsp;7.1.3</a>, весь механизм шифрования паролей будет спрятан в <code>private</code> регионе модели User, который представляет собой проблему для тестирования. Нам нужен какой-то <em>публичный интерфейс</em> который мы можем выставить в остальной части приложения. Одним из полезных аспектов разработки через тестирование является то, что, выступая в качестве клиента для нашего кода приложения, тесты мотивируют нас разрабатывать юзабельный интерфейс с самого начала.</p>
 
 <p>Аутентификация пользователей предполагает сравнение зашифрованной версии подтверждаемого (отправляемого) пароля с (зашифрованным) паролем данного пользователя. Это означает, что мы должны определить какой-то метод для выполнения сравнения, мы назовем его <code>has_password?</code>; он и будет нашим публичным интерфейсом для машинерии шифрования.<sup class="footnote" id="fnref:7.6"><a href="#fn:7.6">6</a></sup> Метод  <code>has_password?</code> будет проверять имеет ли пользователь тот же пароль, что и отправленный в форме входа (будет сделана в <a class="ref" href="sign-in-sign-out#top">Главе&nbsp;9</a>); скелет метода <code>has_password?</code> показан в  <a class="ref" href="modeling-and-viewing-users-two#code:has_password_skeleton">Листинге&nbsp;7.7</a>.</p>
 

@@ -1,25 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-  $("p").toggle(
-    function() {
-    $("a").click(function redirectPage(){ window.location = this;});
-      $("p").css("background-color","");
-      $('div.newelement').remove();
-      var index = $("p").index(this);
-      var p_for_load = '/new/following-users_fragment.html p:eq(' + index + ')';
-      $(this).css("background-color","#fffacd");
-      $(this).after (function() { return ('<div class="newelement"> </div>');});
-      $("div.newelement").load(p_for_load);
-    },
-    function(){
-      $('div.newelement').remove();
-      $(this).css("background-color","");
-    }
-  );
-});
-</script>
-
-
 <div id="top"></div>
 
 

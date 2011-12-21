@@ -1,24 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-  $("p").toggle(
-    function() {
-    $("a").click(function redirectPage(){ window.location = this;});
-      $("p").css("background-color","");
-      $('div.newelement').remove();
-      var index = $("p").index(this);
-      var p_for_load = '/new/sign-up_fragment.html p:eq(' + index + ')';
-      $(this).css("background-color","#fffacd");
-      $(this).after (function() { return ('<div class="newelement"> </div>');});
-      $("div.newelement").load(p_for_load);
-    },
-    function(){
-      $('div.newelement').remove();
-      $(this).css("background-color","");
-    }
-  );
-});
-</script>
-
 <div id="top"></div>
 
 
@@ -1335,7 +1314,7 @@ $(document).ready(function(){
 
 <p>чтобы проверить, что код внутри <code>lambda</code> блока не меняет значение <code>User.count</code>.</p>
 
-<p>Интеграционный тест в <a class="ref" href="sign-up#code:signup_failure_test_lambda">Листинге&nbsp;8.21</a> связывает воедино все части Rails, включая модели, представления, контроллеры, маршрутизацию и хелперы. Он обеспечивает непрерывную цепь проверяющую, что наша регистрационная машинерия работает, по крайней мере для случая сбоя регистрации.</p>
+<p>Интеграционный тест в <a class="ref" href="sign-up#code:signup_failure_test_lambda">Листинге&nbsp;8.21</a> связывает воедино все части Rails, включая модели, представления, контроллеры, маршрутизацию и хелперы. Он обеспечивает непрерывную цепь проверяющую, что наш регистрационный механизм исправно работает, по крайней мере для случая сбоя регистрации.</p>
 
 <div class="label" id="sec:successful_signup"></div>
 

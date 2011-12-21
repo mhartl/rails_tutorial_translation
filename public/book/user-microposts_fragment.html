@@ -430,7 +430,7 @@
 </div>
 
 
-<p>указывающая, что сообщения должны быть упорядочены таким образом, чтобы новейшее сообщение было первым. Этот тест должен быть провальным, так как по умлчанию сообщения будут упорядочены по&nbsp;id, т.е., <code>[@mp1, @mp2]</code>. Эти тесты также тестируют базовую корректность самой <code>has_many</code> ассоциации, проверяя (как указано в <a class="ref" href="user-microposts#table:association_methods">Таблице&nbsp;11.1</a>) что <code>user.microposts</code> является массивом микросообщений.</p>
+<p>указывающая, что сообщения должны быть упорядочены таким образом, чтобы новейшее сообщение было первым. Этот тест должен быть провальным, так как по умолчанию сообщения будут упорядочены по&nbsp;id, т.е., <code>[@mp1, @mp2]</code>. Эти тесты также тестируют базовую корректность самой <code>has_many</code> ассоциации, проверяя (как указано в <a class="ref" href="user-microposts#table:association_methods">Таблице&nbsp;11.1</a>) что <code>user.microposts</code> является массивом микросообщений.</p>
 
 <p>Для того чтобы получить прохождение тестов упорядоченности, мы используем  Rails средство <code>default_scope</code> с параметром <code>:order</code>, как показано в <a class="ref" href="user-microposts#code:micropost_ordering">Листинге&nbsp;11.10</a>. (Это наш первый пример понятия <em>пространства</em>. Мы узнаем о пространстве в более общем контексте в <a class="ref" href="following-users#top">Главе&nbsp;12</a>.)</p>
 
@@ -534,7 +534,7 @@
 
 <h3><a id="sec:11.1.4" href="user-microposts#sec:micropost_validations" class="heading"><span class="number">11.1.4</span> Валидации микросообщений</a></h3>
 
-<p>Прежде чем покинуть модель Micropost, мы  tie off a couple of loose ends (??) добавив валидации (следуя примеру из <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">Раздела&nbsp;2.3.2</a>). И <code>user_id</code> и <code>content</code> атрибуты должны существовать, а <code>content</code> в дальнейшем вынужден быть не длиннее чем 140 знаков, что мы можем протестировать, используя код в <a class="ref" href="user-microposts#code:micropost_validations_tests">Листинге&nbsp;11.13</a>.</p>
+<p>Прежде чем покинуть модель Micropost, мы наведем в ней окончательный лоск, добавив валидации (следуя примеру из <a class="ref" href="a-demo-app#sec:putting_the_micro_in_microposts">Раздела&nbsp;2.3.2</a>). И <code>user_id</code> и <code>content</code> атрибуты должны существовать, а <code>content</code> в дальнейшем вынужден быть не длиннее чем 140 знаков, что мы можем протестировать, используя код в <a class="ref" href="user-microposts#code:micropost_validations_tests">Листинге&nbsp;11.13</a>.</p>
 
 <div class="label" id="code:micropost_validations_tests"></div>
 
@@ -737,7 +737,7 @@
 </div>
 
 
-<p>Используя условное <code>unless</code> замыкание (???),</p>
+<p>Используя условный оператор <code>unless</code>,</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">unless</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">empty?</span> <span class="cp">%&gt;</span>
 </pre></div>

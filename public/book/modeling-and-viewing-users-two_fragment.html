@@ -351,7 +351,7 @@
 
 <p>Здесь обратный вызов <code>encrypt_password</code>  делегирует реальное шифрование методу <code>encrypt</code>; как отмечалось в комментарии, это лишь временная реализация - сейчас <a class="ref" href="modeling-and-viewing-users-two#code:encrypt_password_callback">Листинг&nbsp;7.6</a> просто устанавливает зашифрованным <em>нешифрованный</em> пароль, чтобы достигнуть цели. Но этого достаточно для прохождения наших тестов, и мы сделаем действительно шифрующий метод <code>encrypt</code> в <a class="ref" href="modeling-and-viewing-users-two#sec:secure_passwords">Раздел&nbsp;7.2</a>.</p>
 
-<p>Прежде чем пытаться понять, реализацию, вначале отмечу, что методы шифрования идут после ключевого слова <code>private</code>; внутри Ruby классов, все методы, определенные <em>после</em> <code>private</code> используются внутри объекта и не предназначены для публичного использования.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> Для примера мы можем взглянуть на объект User в консоли:</p>
+<p>Прежде чем вы попытаетесь понять реализацию, отмечу, что методы шифрования идут после ключевого слова <code>private</code>; внутри Ruby классов, все методы, определенные <em>после</em> <code>private</code> используются внутри объекта и не предназначены для публичного использования.<sup class="footnote" id="fnref:7.3"><a href="#fn:7.3">3</a></sup> Для примера мы можем взглянуть на объект User в консоли:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span>
 <span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">encrypt_password</span>
@@ -627,7 +627,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 7.10.</span> <span class="description">Метод <code>has_password?</code> с безопасноым шифрованием. <br /> <code>app/models/user.rb</code></span>
+<div class="listing"><span class="header">Листинг 7.10.</span> <span class="description">Метод <code>has_password?</code> с безопасным шифрованием. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;digest&#39;</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>

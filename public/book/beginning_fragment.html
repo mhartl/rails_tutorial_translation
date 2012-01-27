@@ -746,7 +746,7 @@ but this is not cause for concern. In addition, some commands may produce errors
 
 <h4><a id="sec:1.3.1.1" href="beginning#sec:1.3.1.1" class="heading">Configurando o sistema pela primeira vez</a></h4>
 
-<p>Apos instalar o Git, você deve executar um conjunto de comandos de configuração. Essas são as configurações do <em>sistema</em>, ou seja, você só tem que fazê-las uma vez por computador:</p>
+<p>Apos instalar o Git, você deve executar um conjunto de comandos de configuração. Esses são as configurações do <em>sistema</em>, ou seja, você só tem que fazê-las uma vez por computador:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git config --global user.name <span class="s2">&quot;Seu Nome&quot;</span>
 <span class="gp">$</span> git config --global user.email seuemail@exemplo.com
@@ -827,15 +827,13 @@ doc/
 
 <h3><a id="sec:1.3.2" href="beginning#sec:adding_and_committing" class="heading"><span class="number">1.3.2</span> Adicionando e comitando</a></h3>
 
-
-<p>Finally, we&rsquo;ll add the files in your new Rails project to Git and then commit the results. You can add all the files (apart from those that match the ignore patterns in <code>.gitignore</code>) as follows:<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
+<p>Finalmente, vamos adicionar os arquivos no seu novo projeto Rails para o Git e depois comitar os resultados. Você pode adicionar todos os arquivos (com exceção daqueles que fazem parte do arquivo <code>.gitignore</code>) como segue:<sup class="footnote" id="fnref:1.20"><a href="#fn:1.20">20</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 </pre></div>
 </div>
 
-
-<p>Here the dot &lsquo;<code>.</code>&rsquo; represents the current directory, and Git is smart enough to add the files <em>recursively</em>, so it automatically includes all the subdirectories. This command adds the project files to a <em>staging area</em>, which contains pending changes to your project; you can see which files are in the staging area using the <code>status</code> command:<sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup></p>
+<p>Este ponto &lsquo;<code>.</code>&rsquo; representa o diretório atual, sendo o Git responsálvel por adicionar todos os arquivos e subdiretórios <em>recursivamente</em>. Este comando adiciona os arquivos de projeto para uma <em>área de preparação</em>, que contém as alterações pendentes para o seu projeto; você pode ver quais arquivos estão na área de preparação usando o comando: <code>status</code><sup class="footnote" id="fnref:1.21"><a href="#fn:1.21">21</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git status
 <span class="gp">#</span> On branch master
@@ -853,10 +851,9 @@ doc/
 </pre></div>
 </div>
 
+<p>(Resultados muito longos, então eu usei pontos verticais para indicar as saídas omitidas.)</p>
 
-<p>(The results are long, so I&rsquo;ve used vertical dots to indicate omitted output.)</p>
-
-<p>To tell Git you want to keep the changes, use the <code>commit</code> command:</p>
+<p>Para informar ao Git que você deseja manter as alterações, use o comando: <code>commit</code></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git commit -m <span class="s2">&quot;Initial commit&quot;</span>
 <span class="go">[master (root-commit) df0a62f] Initial commit</span>
@@ -869,12 +866,11 @@ doc/
 </pre></div>
 </div>
 
-
-<p>The <code>-m</code> flag lets you add a message for the commit; if you omit <code>-m</code>, Git will open the editor you set in <a class="ref" href="beginning#sec:git_setup">Section&nbsp;1.3.1</a> and have you enter the message there.</p>
+<p>A flag <code>-m</code> permite que você adicione uma mensagem ao comitar; caso você omita <code>-m</code>, o Git irá abrir um editor definido na <a class="ref" href="beginning#sec:git_setup">Seção&nbsp;1.3.1</a> onde você deverá digitar a mensagem.</p>
 
 <p>It is important to note that Git commits are <em>local</em>, recorded only on the machine on which the commits occur. This is in contrast to the popular open-source version control system called Subversion, in which a commit necessarily makes changes on a remote repository. Git divides a Subversion-style commit into its two logical pieces: a local recording of the changes (<code>git commit</code>) and a push of the changes up to a remote repository (<code>git push</code>). We&rsquo;ll see an example of the push step in <a class="ref" href="beginning#sec:git_commands">Section&nbsp;1.3.5</a>.</p>
 
-<p>By the way, you can see a list of your commit messages using the <code>log</code> command:</p>
+<p>Você pode ver uma lista de mensagens com seus comites usando o comando: <code>log</code></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git log
 <span class="go">commit df0a62f3f091e53ffa799309b3e32c27b0b38eb4</span>
@@ -885,8 +881,7 @@ doc/
 </pre></div>
 </div>
 
-
-<p>To exit <code>git log</code>, you may have to type <code>q</code> to quit.</p>
+ <p>Para sair do <code>git log</code>, talvez seja necessário pressionar <code>q</code>.</p>
 
 <h3><a id="sec:1.3.3" href="beginning#sec:1.3.3" class="heading"><span class="number">1.3.3</span> What good does Git do you?</a></h3>
 

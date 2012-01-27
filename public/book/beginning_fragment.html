@@ -1180,39 +1180,41 @@ by [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sec:deploying"></div>
 
 
-<h2><a id="sec:1.4" href="beginning#sec:deploying" class="heading"><span class="number">1.4</span> Deploying</a></h2>
+<h2><a id="sec:1.4" href="beginning#sec:deploying" class="heading"><span class="number">1.4</span>Implantação</a></h2>
 
 
-<p>Even at this early stage, we&rsquo;re already going to deploy our (still-empty) Rails application to production. This step is optional, but deploying early and often allows us to catch any deployment problems early in our development cycle. The alternative&mdash;deploying only after laborious effort sealed away in a development environment&mdash;often leads to terrible integration headaches when launch time comes.<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup></p>
-
-<p>Deploying Rails applications used to be a pain, but the Rails deployment ecosystem has matured rapidly in the past few years, and now there are several great options. These include shared hosts or virtual private servers running <a href="http://www.modrails.com/">Phusion Passenger</a> (a module for the Apache and Nginx<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup> web servers), full-service deployment companies such as <a href="http://engineyard.com/">Engine Yard</a> and <a href="http://railsmachine.com/">Rails Machine</a>, and cloud deployment services such as <a href="http://cloud.engineyard.com">Engine Yard Cloud</a> and <a href="http://heroku.com/">Heroku</a>.</p>
-
-<p>My favorite Rails deployment option is Heroku, which is a hosted platform built specifically for deploying Rails and other Ruby web applications.<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup> Heroku makes deploying Rails applications ridiculously easy&mdash;as long as your source code is under version control with Git. (This is yet another reason to follow the Git setup steps in <a class="ref" href="beginning#sec:version_control">Section&nbsp;1.3</a> if you haven&rsquo;t already.) The rest of this section is dedicated to deploying our first application to Heroku.</p>
-
-<h3><a id="sec:1.4.1" href="beginning#sec:1.4.1" class="heading"><span class="number">1.4.1</span> Heroku setup</a></h3>
+<p>Mesmo nesta fase inicial, nós iremos implantar nossa aplicação Rails (ainda vazia) no ambiente de produção. Esse passo é opcional, mas a frequência das implantações nos permite detectar precocemente quaisquer problemas no nosso ciclo de desenvolvimento. A outra opção &mdash; implantar somente após fazer um grande esforço no ambiente de desenvolvimento &mdash; frequentemente trazenormes problemas de integração.<sup class="footnote" id="fnref:1.25"><a href="#fn:1.25">25</a></sup></p>
 
 
-<p>After <a href="http://api.heroku.com/signup">signing up for a Heroku account</a>, install the Heroku gem:</p>
+<p>A implantação de aplicações utilizando Rails costumava ser trabalhosa, mas nos últimos anos o ecossistema desses aplicativos amadureceu rapidamente, e hoje há várias opções boas em várias modalidades: desde a hospedagem compartilhada ou com máquinas virtuais executando <a href="http://www.modrails.com/">Phusion Passenger</a> (um módulo para os servidores web Apache e Nginx<sup class="footnote" id="fnref:1.26"><a href="#fn:1.26">26</a></sup>); companhias com serviço completo de implantação como <a href="http://engineyard.com/">Engine Yard</a> e <a href="http://railsmachine.com/">Rails Machine</a>; até serviços de implantação utilizando cloud computing (nuvens) tais quais <a href="http://cloud.engineyard.com">Engine Yard Cloud</a> e <a href="http://heroku.com/">Heroku</a>.</p>
+
+
+<p>Minha escolha favorita para implantação é o Heroku, uma plataforma de hospedagem construída especificamente para a implantação de aplicações Rails e outras aplicações web que utilizem Ruby.<sup class="footnote" id="fnref:1.27"><a href="#fn:1.27">27</a></sup>Heroku torna fácil o processo de implantação de aplicações Rails&mdash; desde que o seu código-fonte esteja sobre controle de versão utilizando Git. (Esse é mais um motivo para seguir os passos de instalação e configuração do Git da <a class="ref" href="beginning#sec:version_control">Seção&nbsp;1.3</a> se você ainda não fez.) O resto desta seção é dedicada à implantação da nossa primeira aplicação na plataforma Heroku.</p>
+
+
+<h3><a id="sec:1.4.1" href="beginning#sec:1.4.1" class="heading"><span class="number">1.4.1</span>Configurando Heroku</a></h3>
+
+
+<p>Após <a href="http://api.heroku.com/signup">criar uma conta no Heroku</a>, instale a respectiva gem:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install heroku
 </pre></div>
 </div>
 
-
-<p>As with GitHub (<a class="ref" href="beginning#sec:github">Section&nbsp;1.3.4</a>), when using Heroku you will need to <a href="http://help.github.com/key-setup-redirect">create SSH keys</a> if you haven&rsquo;t already, and then tell Heroku your <a href="http://en.wikipedia.org/wiki/Public-key_cryptography">public key</a> so that you can use Git to push the sample application repository up to their servers:</p>
+<p>Como no GitHub (<a class="ref" href="beginning#sec:github">Seção&nbsp;1.3.4</a>), para usar o Heroku você precisará <a href="http://help.github.com/key-setup-redirect">criar chaves SSH</a> se você ainda não o fez, e então indicar ao Heroku suas <a href="http://en.wikipedia.org/wiki/Public-key_cryptography">chaves públicas</a>. Assim você poderá usar o Git para enviar o repositório da aplicação de exemplo nos servidores deles:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku keys:add
 </pre></div>
 </div>
 
 
-<p>Finally, use the <code>heroku</code> command to create a place on the Heroku servers for the sample app to live (<a class="ref" href="beginning#code:heroku_create">Listing&nbsp;1.8</a>).</p>
+<p>Finalmente, use o comando <code>heroku</code> para criar um local nos servidores deles onde a sua aplicação ficará hospedada (<a class="ref" href="beginning#code:heroku_create">  Listagem&nbsp;1.8</a>).</p>
 
 <div class="label" id="code:heroku_create"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.8.</span> <span class="description">Creating a new application at Heroku.</span> </div>
+<div class="listing"><span class="header">Listagem 1.8.</span> <span class="description">Criando uma nova aplicação no Heroku.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create
 <span class="go">Created http://severe-fire-61.heroku.com/ | git@heroku.com:severe-fire-61.git</span>
 <span class="go">Git remote heroku added</span>

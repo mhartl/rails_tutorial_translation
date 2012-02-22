@@ -162,9 +162,7 @@
 <div class="label" id="fig:create_demo_repo"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Figura 2.1: </span><span class="description">Criando um repositório no GitHUb para a app demo.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(tamanho original)</a></span></div></div>
-
-<p>You can also optionally create a new repository (<a class="ref" href="a-demo-app#fig:create_demo_repo">Figure&nbsp;2.1</a>) and push it up to GitHub:</p>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Figura 2.1: </span><span class="description">Criando um repositório no GitHub para a app demo.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(tamanho original)</a></span></div></div>
 
 <p>Você também pode opcionalmente criar um repositório novo (<a class="ref" href="a-demo-app#fig:create_demo_repo">Figura&nbsp;2.1</a>) e dar um push para o GitHub:</p>
 
@@ -189,26 +187,26 @@
 <div class="label" id="fig:demo_user_model"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_model.png" alt="demo_user_model" /></span></div><div class="caption"><span class="header">Figure 2.2: </span><span class="description">O modelo de dados para usuários.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_model.png" alt="demo_user_model" /></span></div><div class="caption"><span class="header">Figura 2.2: </span><span class="description">O modelo de dados para usuários.</span></div></div>
 
 
-<p>As we&rsquo;ll see starting in <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Section&nbsp;6.1.1</a>, the label <code>users</code> in <a class="ref" href="a-demo-app#fig:demo_user_model">Figure&nbsp;2.2</a> corresponds to a <em>table</em> in a database, and the <code>id</code>, <code>name</code>, and <code>email</code> attributes are <em>columns</em> in that table.</p>
+<p>Como veremos a partir da <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Seção 6.1.1</a>, o label <code>users</code> na <a class="ref" href="a-demo-app#fig:demo_user_model">Figura&nbsp;2.2</a> corresponde a uma <em>tabela</em> no banco de dados, e os atributos <code>id</code>, <code>name</code>, e <code>email</code> são <em>colunas</em> na tabela.</p>
 
 <div class="label" id="sec:modeling_microposts"></div>
 
 
-<h3><a id="sec:2.1.2" href="a-demo-app#sec:modeling_microposts" class="heading"><span class="number">2.1.2</span> Modeling microposts</a></h3>
+<h3><a id="sec:2.1.2" href="a-demo-app#sec:modeling_microposts" class="heading"><span class="number">2.1.2</span> Modelando microposts</a></h3>
 
 
-<p>The core of the micropost data model is even simpler than the one for users: a micropost has only an <code>id</code> and a <code>content</code> field for the micropost&rsquo;s text (of type <code>string</code>).<sup class="footnote" id="fnref:2.3"><a href="#fn:2.3">3</a></sup> There&rsquo;s an additional complication, though: we want to <em>associate</em> each micropost with a particular user; we&rsquo;ll accomplish this by recording the <code>user_id</code> of the owner of the post. The results are shown in <a class="ref" href="a-demo-app#fig:demo_micropost_model">Figure&nbsp;2.3</a>.</p>
 
+<p>O modelo de dados dos microposts é ainda mais simples que o de usuários: um micropost tem somente um <code>id</code> e um campo <code>content</code> para o texto do micropost (do tipo <code>string</code>).<sup class="footnote" id="fnref:2.3"><a href="#fn:2.3">3</a></sup> Há, entretanto, uma complicação a mais: nós queremos <em>associar</em> cada micropost com um usuário específico; nós iremos conseguir isto gravando o <code>user_id</code> do dono do post. Os resultados são exibidos na <a class="ref" href="a-demo-app#fig:demo_micropost_model">Figuras&nbsp;2.3</a>.</p>
 <div class="label" id="fig:demo_micropost_model"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_model.png" alt="demo_micropost_model" /></span></div><div class="caption"><span class="header">Figure 2.3: </span><span class="description">The data model for microposts.</span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_model.png" alt="demo_micropost_model" /></span></div><div class="caption"><span class="header">Figura 2.3: </span><span class="description">O modelo de dados para os microposts.</span></div></div>
 
 
-<p>We&rsquo;ll see in <a class="ref" href="a-demo-app#sec:demo_user_has_many_microposts">Section&nbsp;2.3.3</a> (and more fully in <a class="ref" href="user-microposts#top">Chapter&nbsp;11</a>) how this <code>user_id</code> attribute allows us to succinctly express the notion that a user potentially has many associated microposts.</p>
+<p>Nós veremos na <a class="ref" href="a-demo-app#sec:demo_user_has_many_microposts">Seção&nbsp;2.3.3</a> (e mais completo no <a class="ref" href="user-microposts#top">Capítulo&nbsp;11</a>) como este atributo <code>user_id</code> nos permite expressar sucintamente a noção de que um usuário potencialmente tenha muitos microposts associados.</p>
 
 <div class="label" id="sec:demo_users_resource"></div>
 

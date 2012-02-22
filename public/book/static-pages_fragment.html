@@ -304,30 +304,30 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>We&rsquo;ll leave the <code>index.html</code> file alone for now, but of course eventually we should remove it: we don&rsquo;t want the root of our application to be the Rails default page shown in <a class="ref" href="beginning#fig:riding_rails_3">Figure&nbsp;1.3</a>. We&rsquo;ll see in <a class="ref" href="filling-in-the-layout#sec:layout_links">Section&nbsp;5.2</a> how to change the address <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> to point to something other than <code>public/index.html</code>.</p>
+<p>Vamos nos esquecer do arquivo <code>index.html</code> por enquanto, mas com certeza eventualmente nós devemos removê-lo: não queremos que a página principal da nossa aplicação seja a página padrão do Rails exibida na <a class="ref" href="beginning#fig:riding_rails_3">Figura&nbsp;1.3</a>. Nós veremos na <a class="ref" href="filling-in-the-layout#sec:layout_links">Seção&nbsp;5.2</a> como mudar o endereço <a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> para apontar para outro arquivo diferente de <code>public/index.html</code>.</p>
 
 <div class="label" id="sec:static_pages_with_rails"></div>
 
 
-<h3><a id="sec:3.1.2" href="static-pages#sec:static_pages_with_rails" class="heading"><span class="number">3.1.2</span> Static pages with Rails</a></h3>
+<h3><a id="sec:3.1.2" href="static-pages#sec:static_pages_with_rails" class="heading"><span class="number">3.1.2</span> Páginas estáticas com Rails</a></h3>
 
 
-<p>The ability to return static HTML files is nice, but it&rsquo;s not particularly useful for making dynamic web applications. In this section, we&rsquo;ll take a first step toward making dynamic pages by creating a set of Rails <em>actions</em>, which are a more powerful way to define URLs than static files.<sup class="footnote" id="fnref:3.5"><a href="#fn:3.5">5</a></sup> Rails actions come bundled together inside <em>controllers</em> (the C in MVC from <a class="ref" href="beginning#sec:mvc">Section&nbsp;1.2.6</a>), which contain sets of actions related by a common purpose. We got a glimpse of controllers in <a class="ref" href="a-demo-app#top">Chapter&nbsp;2</a>, and will come to a deeper understanding once we explore the <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">REST architecture</a> more fully (starting in <a class="ref" href="modeling-and-viewing-users-one#top">Chapter&nbsp;6</a>); in essence, a controller is a container for a group of (possibly dynamic) web pages.</p>
+<p>A habilidade de retornar arquivos HTML estáticos é legal, mas não é particularmente útil para fazer aplicações web dinâmicas. Nesta seção, nós iremos dar um primeiro passo para fazer páginas dinâmicas criando um conjunto de <em>actions</em> do Rails, que são uma maneira mais poderosa de definir URLs do que arquivos estáticos.<sup class="footnote" id="fnref:3.5"><a href="#fn:3.5">5</a></sup> As actions do Rails são agrupadas dentro de <em>controllers</em> (o C do MVC na <a class="ref" href="beginning#sec:mvc">Seção&nbsp;1.2.6</a>), que contém conjunto de actions relacionadas por um propósito comum. Nós tivemos uma visão rápida dos controllers no <a class="ref" href="a-demo-app#top">Capítulo&nbsp;2</a>, e teremos um entendimento mais a fundo quando explorarmos a <a href="http://pt.wikipedia.org/wiki/REST">arquitetura REST</a> melhor (começando no <a class="ref" href="modeling-and-viewing-users-one#top">Capítulo&nbsp;6</a>); em essência, um controller é um contâiner para um grupo de (possivelmente dinâmicas) páginas web.</p>
 
-<p>To get started, recall from <a class="ref" href="beginning#sec:git_commands">Section&nbsp;1.3.5</a> that, when using Git, it&rsquo;s a good practice to do our work on a separate topic branch rather than the master branch. If you&rsquo;re using Git for version control, you should run the following command:</p>
+<p>Para iniciar, lembre-se da <a class="ref" href="beginning#sec:git_commands">Seção&nbsp;1.3.5</a> que, quando estiver usando Git, é uma boa prática fazer nosso trabalho em uma branch separada ao invés da branch master. Se você estiver usando Git para o controle de versões, você deve executar o seguinte comando:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git checkout -b static-pages
 </pre></div>
 </div>
 
 
-<p>Rails comes with a script for making controllers called <code>generate</code>; all it needs to work its magic is the controller&rsquo;s name. Since we&rsquo;re making this controller to handle (mostly) static pages, we&rsquo;ll just call it the Pages controller, and plan to make actions for a Home page, a Contact page, and an About page. The <code>generate</code> script takes an optional list of actions, so we&rsquo;ll include some of our initial actions directly on the command line:</p>
+<p>Rails vem com um script para criar controllers chamado <code>generate</code>; tudo o que ele precisa para que sua mágina funcione é o nome do controller. Já que estamos criando este controller para lidar (principalmente) com páginas estáticas, iremos chama-lo de Pages, e planejar criar actions para uma página Home, uma página Contact, e uma página About. O script <code>generate</code> recebe uma lista opcional de actions, então nós iremos incluir alguns de nossas actions iniciais diretamente na linha de comando:</p>
 
 <div class="label" id="code:generating_pages"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.4.</span> <span class="description">Generating a Pages controller.</span> </div>
+<div class="listing"><span class="header">Trecho 3.4.</span> <span class="description">Gerando um controller Pages.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Pages home contact
 <span class="go">      create  app/controllers/pages_controller.rb</span>
 <span class="go">       route  get &quot;pages/contact&quot;</span>
@@ -348,23 +348,23 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>(Note that, because we installed RSpec with <code>rails generate rspec:install</code>, the controller generation automatically creates RSpec test files in the <code>spec/</code> directory.) Here, I&rsquo;ve intentionally &ldquo;forgotten&rdquo; the <code>about</code> page so that we can see how to add it in by hand (<a class="ref" href="static-pages#sec:first_tests">Section&nbsp;3.2</a>).</p>
+<p>(Note que, porque instalamos RSpec com <code>rails generate rspec:install</code>, a geração do controller automaticamente cria arquivos de teste RSpec no diretório <code>spec/</code>.) Aqui, eu &ldquo;esqueci&rdquo; intencionalmente a página <code>about</code> para que nós pudéssemos ver como adiciona-la manualmente (<a class="ref" href="static-pages#sec:first_tests">Seção&nbsp;3.2</a>).</p>
 
-<p>The Pages controller generation in <a class="ref" href="static-pages#code:generating_pages">Listing&nbsp;3.4</a> automatically updates the <em>routes</em> file, called <code>config/routes.rb</code>, which Rails uses to find the correspondence between URLs and web pages. This is our first encounter with the <code>config</code> directory, so it&rsquo;s helpful to take a quick look at it (<a class="ref" href="static-pages#fig:config_directory_rails_3">Figure&nbsp;3.4</a>). The <code>config</code> directory is where Rails collects files needed for the application configuration&mdash;hence the name.</p>
+<p>A geração do controller Pages no <a class="ref" href="static-pages#code:generating_pages">Trecho&nbsp;3.4</a> automaticamente atualiza o arquivo <em>routes</em>, chamado <code>config/routes.rb</code>, que o Rails usa para encontrar a correspondência entre URLs e páginas web. Este é o nosso primeiro encontro com a pasta <code>config</code>, então é util dar uma olhada nela (<a class="ref" href="static-pages#fig:config_directory_rails_3">Figura&nbsp;3.4</a>). A pasta <code>config</code> é onde o Rails coleta os arquivos necessários para a configuração da aplicação&mdash;por isso o nome.</p>
 
 <div class="label" id="fig:config_directory_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Figure 3.4: </span><span class="description">Contents of the sample app&rsquo;s <code>config</code> directory.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/config_directory_rails_3.png" alt="config_directory_rails_3" /></span></div><div class="caption"><span class="header">Figura 3.4: </span><span class="description">Conteúdo da pasta <code>config</code> da aplicação.&nbsp;<a href="http://railstutorial.org/images/figures/config_directory_rails_3-full.png">(tela inteira)</a></span></div></div>
 
 
-<p>Since we generated <code>home</code> and <code>contact</code> actions, the routes file already has a rule for each one, as seen in <a class="ref" href="static-pages#code:pages_routes">Listing&nbsp;3.5</a>.</p>
+<p>Já que geramos as actions <code>home</code> e <code>contact</code>, o arquivo routes já possui uma regra para cada uma, como visto no <a class="ref" href="static-pages#code:pages_routes">Trecho&nbsp;3.5</a>.</p>
 
 <div class="label" id="code:pages_routes"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.5.</span> <span class="description">The routes for the <code>home</code> and <code>contact</code> actions in the Pages controller. <br /> <code>config/routes.rb</code></span>
+<div class="listing"><span class="header">Trecho 3.5.</span> <span class="description">As rotas para as actions <code>home</code> and <code>contact</code> no controller Pages. <br /> <code>config/routes.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
@@ -377,20 +377,20 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Here the rule</p>
+<p>Aqui a regra</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">get</span> <span class="s2">&quot;pages/home&quot;</span>
 </pre></div>
 </div>
 
 
-<p>maps requests for the URL <tt>/pages/home</tt> to the <code>home</code> action in the Pages controller. Moreover, by using <code>get</code> we arrange for the route to respond to a <tt>GET</tt> request, which is one of the fundamental
-<em>HTTP verbs</em> supported by the hypertext transfer protocol (<a class="ref" href="static-pages#sidebar:get_etc">Box&nbsp;3.1</a>). In our case, this means that when we generate a <code>home</code> action inside the Pages controller we automatically get a page at the address <tt>/pages/home</tt>. To see the results, kill the server by hitting Ctrl-C, run <code>rails server</code>, and then navigate to <a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a> (<a class="ref" href="static-pages#fig:raw_home_view">Figure&nbsp;3.5</a>).</p>
+<p>mapeia as requisições da URL <tt>/pages/home</tt> para a action <code>home</code> no controller Pages. Além disso, ao usar <code>get</code> nós fazemos com que a rota responda a uma requisição <tt>GET</tt>, que é um dos 
+<em>verbos HTTP</em> fundamentais suportados pelo Protocolo de Transferência de Hipertexto (<a class="ref" href="static-pages#sidebar:get_etc">Caixa&nbsp;3.1</a>). Em nosso caso, isso significa que quando nós geramos uma action <code>home</code> dentro de um controller Pages nós, automaticamente, temos uma página no endereço <tt>/pages/home</tt>. Para ver os resultados, pare o servidor apertando Ctrl-C, execute <code>rails server</code>, e então navegue para <a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a> (<a class="ref" href="static-pages#fig:raw_home_view">Figura&nbsp;3.5</a>).</p>
 
 <div class="label" id="fig:raw_home_view"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_home_view.png" alt="raw_home_view" /></span></div><div class="caption"><span class="header">Figure 3.5: </span><span class="description">The raw home view (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) generated by Rails.&nbsp;<a href="http://railstutorial.org/images/figures/raw_home_view-full.png">(full size)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/raw_home_view.png" alt="raw_home_view" /></span></div><div class="caption"><span class="header">Figura 3.5: </span><span class="description">A vista da página home (<a href="http://localhost:3000/pages/home"><tt>/pages/home</tt></a>) gerada pelo Rails.&nbsp;<a href="http://railstutorial.org/images/figures/raw_home_view-full.png">(tela inteira)</a></span></div></div>
 
 
 
@@ -398,20 +398,20 @@ by [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sidebar:get_etc"></div>
 
 
-<div class="sidebar"><span class="title"><span class="header">Box 3.1.</span><span class="description"><tt>GET</tt>, et cet.</span></span>
-<p>The hypertext transfer protocol (<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">HTTP</a>) defines four basic operations, corresponding to the four verbs <em>get</em>, <em>post</em>, <em>put</em>, and <em>delete</em>. These refer to operations between a <em>client</em> computer (typically running a web browser such as Firefox or Safari) and a <em>server</em> (typically running a web server such as Apache or Nginx). (It&rsquo;s important to understand that, when developing Rails applications on a local computer, the client and server are the same physical machine, but in general they are different.) An emphasis on HTTP verbs is typical of web frameworks (including Rails) influenced by the <em>REST architecture</em>, which we saw briefly in <a class="ref" href="a-demo-app#top">Chapter&nbsp;2</a> and will start learning about more in <a class="ref" href="sign-up#top">Chapter&nbsp;8</a>.</p>
+<div class="sidebar"><span class="title"><span class="header">Caixa 3.1.</span><span class="description"><tt>GET</tt>, et cet.</span></span>
+<p>O Protocolo de Transferência de Hipertexto (<a href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9todos">HTTP</a>) define quatro operações básicas, correspondendo aos quatro verbos <em>get</em>, <em>post</em>, <em>put</em>, e <em>delete</em>. Eles se referem às operações entre um computador <em>cliente</em> (tipicamente executando um navegador como Firefox ou Safari) e um <em>servidor</em> (tipicamente executando em um web server como Apache or Nginx). (É importante entender que, quando estiver desenvolvendo aplicações Rails em um computador local, o cliente e o servidor são a mesma máquina física, mas em geral elas são diferentes.) Uma ênfase nos verbos HTTP é típica nos frameworks web (incluindo Rails) influenciados pela <em>arquitetura REST</em>, que nós vemos rapidamente no <a class="ref" href="a-demo-app#top">Capítulo&nbsp;2</a> e iremos aprender mais no <a class="ref" href="sign-up#top">Capítulo&nbsp;8</a>.</p>
 
-<p><tt>GET</tt> is the most common HTTP operation, used for <em>reading</em> data on the web; it just means &ldquo;get a page&rdquo;, and every time you visit a site like google.com or craigslist.org your browser is submitting a <tt>GET</tt> request. <tt>POST</tt> is the next most common operation; it is the request sent by your browser when you submit a form. In Rails applications, <tt>POST</tt> requests are typically used for <em>creating</em> things (although HTTP also allows <tt>POST</tt> to perform updates); for example, the <tt>POST</tt> request sent when you submit a registration form creates a new user on the remote site. The other two verbs, <tt>PUT</tt> and <tt>DELETE</tt>, are designed for <em>updating</em> and <em>destroying</em> things on the remote server. These requests are less common than <tt>GET</tt> and <tt>POST</tt> since browsers are incapable of sending them natively, but some web frameworks (including Ruby on Rails) have clever ways of making it <em>seem</em> like browsers are issuing such requests.</p>
+<p><tt>GET</tt> é a operação HTTP mais comum, usada para <em>ler</em> dados na web; significa apenas &ldquo;pegue uma página&rdquo;, e toda vez que você visita um site como google.com ou craigslist.org seu navegador está enviando uma requisição <tt>GET</tt>. <tt>POST</tt> é a seguinte operação mais comum; é a requisição enviada pelo navegador quando você preenche e envia um formulário. Nas aplicações Rails, requisições <tt>POST</tt> são tipicamente usadas para <em>criar</em> coisas (apesar de que o HTTP também permite que <tt>POST</tt> faça atualizações); por exemplo, a requisição <tt>POST</tt> enviada quando você submete um formulário de cadastro cria um novo usuário no site remoto. Os outros dois verbos, <tt>PUT</tt> e <tt>DELETE</tt>, são projetados para <em>atualizar</em> e <em>excluir</em> coisas no servidor remoto. Estas requisições são menos comuns do que <tt>GET</tt> e <tt>POST</tt> já que os navegadores são incapazes de enviá-las nativamente, mas alguns frameworks web (incluindo Ruby on Rails) tem formas inteligentes de fazer <em>parecer</em> que os navegadores estão emitindo estas requisições.</p>
 </div>
 
 
-<p>To understand where this page comes from, let&rsquo;s start by taking a look at the Pages controller in a text editor; you should see something like <a class="ref" href="static-pages#code:pages_controller">Listing&nbsp;3.6</a>. (You may note that, unlike the demo Users and Microposts controllers from <a class="ref" href="a-demo-app#top">Chapter&nbsp;2</a>, the Pages controller does not follow the REST conventions.)</p>
+<p>Para entender de onde vem esta página, vamos começar dando uma olhada no controller Pages no editor de texto; você deve ver algo como <a class="ref" href="static-pages#code:pages_controller">Trecho&nbsp;3.6</a>. (Você pode notar que, diferente dos controllers Users e Microposts do <a class="ref" href="a-demo-app#top">Capítulo&nbsp;2</a>, o controller Pages não segue as convenções REST.)</p>
 
 <div class="label" id="code:pages_controller"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.6.</span> <span class="description">The Pages controller made by <a class="ref" href="static-pages#code:generating_pages">Listing&nbsp;3.4</a>. <br /> <code>app/controllers/pages_controller.rb</code></span>
+<div class="listing"><span class="header">Trecho 3.6.</span> <span class="description">O controller Pages criado no <a class="ref" href="static-pages#code:generating_pages">Trecho&nbsp;3.4</a>. <br /> <code>app/controllers/pages_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -425,9 +425,9 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>We see here that <code>pages_controller.rb</code> defines a <em>class</em> called <code>PagesController</code>. Classes are simply a convenient way to organize <em>functions</em> (also called <em>methods</em>) like the <code>home</code> and <code>contact</code> actions, which are defined using the <code>def</code> keyword. The angle bracket&nbsp;<code>&lt;</code> indicates that <code>PagesController</code> <em>inherits</em> from the Rails class <code>ApplicationController</code>; as we&rsquo;ll see momentarily, this means that our pages come equipped with a large amount of Rails-specific functionality. (We&rsquo;ll learn more about both classes and inheritance in <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Section&nbsp;4.4</a>.)</p>
+<p>Nós vemos aqui que o arquivo <code>pages_controller.rb</code> define uma <em>classe</em> chamada <code>PagesController</code>. Classes são simplesmente uma forma conveniente de organizar <em>funções</em> (também chamadas de <em>métodos</em>) como as actions <code>home</code> e <code>contact</code>, que são definidas usando a palavra chave <code>def</code>. O sinal de "menor que"&nbsp;<code>&lt;</code> indica que a classe <code>PagesController</code> <em>herda</em> da classe do Rails <code>ApplicationController</code>; como veremos rapidamente, isto significa que nossas páginas vem equipadas com uma grande quantidade de funcionalidades específicas do Rails. (Nós iremos aprender melhor sobre classes e herança na <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Seção&nbsp;4.4</a>.)</p>
 
-<p>In the case of the Pages controller, both its methods are initially empty:</p>
+<p>No caso do controller Pages, seus métodos são inicialmente vazios:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">home</span>
 <span class="k">end</span>
@@ -438,15 +438,15 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>In plain Ruby, these methods would simply do nothing. In Rails, the situation is different; <code>PagesController</code> is a Ruby class, but because it inherits from <code>ApplicationController</code> the behavior of its methods is specific to Rails: when visiting the URL <tt>/pages/home</tt>, Rails looks in the Pages controller and executes the code in the <code>home</code> action, and then renders the <em>view</em> (the V in MVC from <a class="ref" href="beginning#sec:mvc">Section&nbsp;1.2.6</a>) corresponding to the action. In the present case, the <code>home</code> action is empty, so all hitting <tt>/pages/home</tt> does is render the view. So, what does a view look like, and how do we find it?</p>
+<p>Em Ruby puro, estes métodos irão simplesmente fazer nada. Em Rails, a situaçao é diferente; <code>PagesController</code> é uma classe Ruby, mas porque ela herda de <code>ApplicationController</code> o comportamento de seus métodos é específico do Rails: ao visitar a URL <tt>/pages/home</tt>, o Rails olha no controller Pages e executa o código na action <code>home</code>, e então renderiza a <em>view</em> (o V do MVC da <a class="ref" href="beginning#sec:mvc">Seção&nbsp;1.2.6</a>) correspondente à ação. No caso atual, a action <code>home</code> está vazia, então acessar <tt>/pages/home</tt> irá apenas renderizar a view. Então, como é uma view, e como nós a encontramos?</p>
 
-<p>If you take another look at the output in <a class="ref" href="static-pages#code:generating_pages">Listing&nbsp;3.4</a>, you might be able to guess the correspondence between actions and views: an action like <code>home</code> has a corresponding view called <code>home.html.erb</code>. We&rsquo;ll learn in <a class="ref" href="static-pages#sec:slightly_dynamic_pages">Section&nbsp;3.3</a> what the <code>.erb</code> part means; from the <code>.html</code> part you probably won&rsquo;t be surprised that it basically looks like HTML (<a class="ref" href="static-pages#code:raw_home_view">Listing&nbsp;3.7</a>).</p>
+<p>Se você der uma outra olhada na saída do <a class="ref" href="static-pages#code:generating_pages">Trecho&nbsp;3.4</a>, você poderá ser capaz de adivinhar a correspondência entre actions e views: uma action como <code>home</code> tem uma view correspondente chamada <code>home.html.erb</code>. Nós iremos aprender na <a class="ref" href="static-pages#sec:slightly_dynamic_pages">Seção&nbsp;3.3</a> o que a parte <code>.erb</code> significa; pela parte <code>.html</code> você provavelmente não ficará surpreso de que, basicamente, se parece com HTML (<a class="ref" href="static-pages#code:raw_home_view">Trecho&nbsp;3.7</a>).</p>
 
 <div class="label" id="code:raw_home_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.7.</span> <span class="description">The generated view for the Home page. <br /> <code>app/views/pages/home.html.erb</code></span>
+<div class="listing"><span class="header">Trecho 3.7.</span> <span class="description">A view gerada para a página Home. <br /> <code>app/views/pages/home.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#home<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/home.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -454,13 +454,13 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>The view for the <code>contact</code> action is analogous (<a class="ref" href="static-pages#code:raw_contact_view">Listing&nbsp;3.8</a>).</p>
+<p>A view para a action <code>contact</code> é análoga a esta (<a class="ref" href="static-pages#code:raw_contact_view">Trecho&nbsp;3.8</a>).</p>
 
 <div class="label" id="code:raw_contact_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.8.</span> <span class="description">The generated view for the Contact page. <br /> <code>app/views/pages/contact.html.erb</code></span>
+<div class="listing"><span class="header">Trecho 3.8.</span> <span class="description">A view gerada para a página Contact. <br /> <code>app/views/pages/contact.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Pages#contact<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>Find me in app/views/pages/contact.html.erb<span class="nt">&lt;/p&gt;</span>
@@ -468,9 +468,9 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>Both of these views are just placeholders: they have a top-level heading (inside the <code>h1</code> tag) and a paragraph (<code>p</code> tag) with the full path to the relevant file. We&rsquo;ll add some (very slightly) dynamic content starting in <a class="ref" href="static-pages#sec:slightly_dynamic_pages">Section&nbsp;3.3</a>, but as they stand these views underscore an important point: Rails views can simply contain static HTML. As far as the browser is concerned, the raw HTML files from <a class="ref" href="static-pages#sec:truly_static_pages">Section&nbsp;3.1.1</a> and the controller/action method of delivering pages are indistinguishable: all the browser ever sees is HTML.</p>
+<p>Ambas as views são somente espaços reservados: elas tem um título (dentro da tag <code>h1</code>) e um parágrafo (tag <code>p</code>) com o caminho completo para o arquivo relevante. Nós iremos adicionar (muito levemente) conteúdo dinâmico começando na <a class="ref" href="static-pages#sec:slightly_dynamic_pages">Seção&nbsp;3.3</a>, mas enquanto não chegamos lá, estas views ressaltam um ponto importante: as views do Rails podem simplismente conter HTML estático. Até onde o navegador sabe, os arquivos puros de HTML da <a class="ref" href="static-pages#sec:truly_static_pages">Seção&nbsp;3.1.1</a> e os métodos controller/action de fornecer páginas são indistinguíveis: tudo o que o navegador sempre vê é HTML.</p>
 
-<p>In the remainder of this chapter, we&rsquo;ll first add the <code>about</code> action we &ldquo;forgot&rdquo; in <a class="ref" href="static-pages#sec:static_pages_with_rails">Section&nbsp;3.1.2</a>, add a very small amount of dynamic content, and then take the first steps toward styling the pages with CSS. Before moving on, if you&rsquo;re using Git it&rsquo;s a good idea to add the files for the Pages controller to the repository at this time:</p>
+<p>No restante deste capítulo, nós iremos primeiro adicionar a action <code>about</code> que nós &ldquo;esquecemos&rdquo; na <a class="ref" href="static-pages#sec:static_pages_with_rails">Seção&nbsp;3.1.2</a>, e uma pequena quantidade de conteúdo dinâmico, e então dar os primeiros passos para estilizar as páginas com CSS. Antes de seguir em frente, se você estiver usando Git é uma boa ideia adicionar os arquivos do controller Pages no repositório neste momento:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Added a Pages controller&quot;</span>

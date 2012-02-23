@@ -483,26 +483,26 @@ by [Michael Hartl](http://michaelhartl.com/).
 <div class="label" id="sec:first_tests"></div>
 
 
-<h2><a id="sec:3.2" href="static-pages#sec:first_tests" class="heading"><span class="number">3.2</span> Our first tests</a></h2>
+<h2><a id="sec:3.2" href="static-pages#sec:first_tests" class="heading"><span class="number">3.2</span> Nossos primeiros testes</a></h2>
 
 
-<p>If you ask five Rails developers how to test any given piece of code, you&rsquo;ll get about fifteen different answers&mdash;but they&rsquo;ll all agree that you should definitely be writing tests. It&rsquo;s in this spirit that we&rsquo;ll approach testing our sample application, writing solid tests without worrying too much about making them perfect. You shouldn&rsquo;t take the tests in <em>Rails Tutorial</em> as gospel; they are based on the style I have developed during my own work and from reading the code of others. As you gain experience as a Rails developer, you will no doubt form your own preferences and develop your own testing style.</p>
+<p>Se você perguntar a cinco desenvolvedores Rails como testar algum trecho de código, você receberá em torno de quinze respostas diferentes&mdash;mas todos eles concordarão que você deveria definitivamente escrever testes. É com esse espírito que nós abordaremos os testes da nossa aplicação, escrevendo tests sólidos sem nos preocuparmos tanto em fazê-los perfeitos. Você não deve levar os testes do <em>Tutorial Rails</em> como um evangelho; eles são baseados no estilo que eu desenvolvi durante meu próprio trabalho e ao ler o código de outros. Assim que você ganhar experiência como desenvolvedor Rails, você irá, sem dúvida, criar suas próprias preferências e desenvolver seu próprio estilo de teste.</p>
 
-<p>In addition to writing tests throughout the development of the sample application, we will also make the increasingly common choice about <em>when</em> to write tests by writing them <em>before</em> the application code&mdash;an approach known as <em>test-driven development</em>, or TDD.<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Our specific example will be to add an About page to our sample site. Fortunately, adding the extra page is not hard&mdash;you might even be able to guess the answer based on the examples in the previous section&mdash;which means that we can focus on testing, which contains quite a few new ideas.</p>
+<p>Além disso, escrever testes através do desenvolvimento da aplicação de exemplo, nós também iremos fazer a crescente e comum escolha sobre <em>quando</em> escrever testes ao escrevê-los <em>antes</em> do código da aplicação &mdash; uma abordagem conhecida como <em>desenvolvimento orientado a testes</em>, ou da sigla em inglês, TDD.<sup class="footnote" id="fnref:3.6"><a href="#fn:3.6">6</a></sup> Nosso exemplo específico será adicionar a página About ao nosso site. Felizmente, adicionar a página extra não é difícil&mdash;você pode até ser capaz de adivinhar a resposta com base nos exemplos da seção anterior&mdash;o que significa que nós podemos focar em testar, que contem algumas ideias novas.</p>
 
-<p>At first, testing for the existence of a page might seem like overkill, but experience shows that it is not. So many things can go wrong when writing software that having a good test suite is invaluable to assure quality. Moreover, it is common for computer programs&mdash;and especially web applications&mdash;to be constantly extended, and any time you make a change you risk introducing errors. Writing tests doesn&rsquo;t guarantee that these bugs won&rsquo;t happen, but it makes them much more likely to be caught (and fixed) when they occur. Furthermore, by writing tests for bugs that <em>do</em> happen, we can make them much less likely to recur.</p>
+<p>A princípio, testar a existência de uma página pode parecer desnecessário, mas a experiência nos mostra que não. Tantas coisas podem dar errado ao escrever software que ter uma boa suíte de testes é inestimável para garantir a qualidade. Além disso, é comum a programas de computador&mdash;e especialmente aplicações web&mdash;ser constantemente extendidos, e toda vez que você faz uma mudança você corre corre o risco de introduzir erros. Escrever testes não garante que estes bugs não aconteçam, mas isso os tornam muito mais provavéis de serem pegos (e corrigidos) quando acontecem. Além do mais, ao escrever testes para bugs que <em>realmente</em> acontecem, nós fazemos com que sejam muito menos prováveis de acontecer.</p>
 
-<p>(As noted in <a class="ref" href="beginning#sec:comments_for_various_readers">Section&nbsp;1.1.1</a>, if you find the tests overwhelming, go ahead and skip them on first reading. Once you have a stronger grasp of Rails and Ruby, you can loop back and learn testing on a second pass.)</p>
+<p>(Como visto na <a class="ref" href="beginning#sec:comments_for_various_readers">Seção&nbsp;1.1.1</a>, se você achar os testes cansativos, vá em frente e pule esta parte na primeira leitura. Quando tiver uma maior segurança em Rails e Ruby, você pode voltar e aprender a testá-los na segunda vez.)</p>
 
 <div class="label" id="sec:testing_tools"></div>
 
 
-<h3><a id="sec:3.2.1" href="static-pages#sec:testing_tools" class="heading"><span class="number">3.2.1</span> Testing tools</a></h3>
+<h3><a id="sec:3.2.1" href="static-pages#sec:testing_tools" class="heading"><span class="number">3.2.1</span> Ferramentas de teste</a></h3>
 
 
-<p>To write tests for our sample application, our main tool is a framework called <a href="http://rspec.info/">RSpec</a>, which is a <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>domain-specific language</em></a> for describing the behavior of code, together with a program (called <code>rspec</code>) to verify the desired behavior. Designed for testing any Ruby program, RSpec has gained significant traction in the Rails community. Obie Fernandez, author of <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, has called RSpec &ldquo;the Rails Way&rdquo;, and I agree.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
+<p>Para escrever testes para a nossa aplicação, nossa principal ferramenta é um framework chamado <a href="http://rspec.info/">RSpec</a>, que é uma <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language"><em>linguagem de domínio específico</em></a> para descrever o comportamento do código, junto com um programa (chamado <code>rspec</code>) para verificar o comportamento desejado. Desenvolvido para testar qualquer programa Ruby, RSpec tem ganhado atração significante na comunidade Rails. Obie Fernandez, autor de <a href="http://www.amazon.com/gp/product/0321601661?ie=UTF8&amp;tag=httpwwwrailst-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321601661"><em>The Rails&nbsp;3 Way</em></a>, chamou RSpec de &ldquo;o jeito Rails&rdquo;, e eu concordo.<sup class="footnote" id="fnref:3.7"><a href="#fn:3.7">7</a></sup></p>
 
-<p>If you followed the steps in the introduction, RSpec has already been installed via the Bundler <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_rspec">Listing&nbsp;3.1</a>) and <code>bundle install</code>.</p>
+<p>Se você seguiu os passos da introdução, RSpec já está instalado via Bundler <code>Gemfile</code> (<a class="ref" href="static-pages#code:gemfile_rspec">Trecho&nbsp;3.1</a>) e <code>bundle install</code>.</p>
 
 <div class="label" id="sec:autotest"></div>
 
@@ -510,9 +510,9 @@ by [Michael Hartl](http://michaelhartl.com/).
 <h4><a id="sec:3.2.1.1" href="static-pages#sec:autotest" class="heading">Autotest</a></h4>
 
 
-<p>Autotest is a tool that continuously runs your test suite in the background based on the specific file changes you make. For example, if you change a controller file, Autotest runs the tests for that controller. The result is instant feedback on the status of your tests. We&rsquo;ll learn more about Autotest when we see it in action (<a class="ref" href="static-pages#sec:TDD">Section&nbsp;3.2.2</a>).</p>
+<p>Autotest é uma ferramenta que continuamente roda sua suíte de testes em segundo plano baseado nas específicas mudanças em arquivo que você faz. Por exemplo, se você mudar o arquivo de um controller, Autotest roda o teste para aquele controller. O resultado é um feedback instantâneo no status dos seus testes. Nós aprenderemos mais sobre Autotest quando nós o virmos em ação (<a class="ref" href="static-pages#sec:TDD">Seção&nbsp;3.2.2</a>).</p>
 
-<p>Installing Autotest is optional, and configuring it can be a bit tricky, but if you can get it to work on your system I&rsquo;m sure you&rsquo;ll find it as useful as I do. To install Autotest, install the <tt>autotest</tt> and <tt>autotest-rails-pure</tt><sup class="footnote" id="fnref:3.8"><a href="#fn:3.8">8</a></sup> gems as follows:<sup class="footnote" id="fnref:3.9"><a href="#fn:3.9">9</a></sup></p>
+<p>Instalar o Autotest é opcional, e configurá-lo pode ser um pouco complicado, mas se você conseguir fazer com que funcione no seu sistema tenho certeza que você o achará tão útil quanto eu acho. Para instalar o Autotest, instale as gems <tt>autotest</tt> e <tt>autotest-rails-pure</tt><sup class="footnote" id="fnref:3.8"><a href="#fn:3.8">8</a></sup> como visto abaixo:<sup class="footnote" id="fnref:3.9"><a href="#fn:3.9">9</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest -v 4.4.6
 <span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-rails-pure -v 4.1.2
@@ -520,7 +520,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>The next steps depend on your platform. I&rsquo;ll go through the steps for OS&nbsp;X, since that&rsquo;s what I use, and then give references to blog posts that discuss Autotest on Linux and Windows. On OS&nbsp;X, you should <a href="http://growl.info/">install Growl</a> (if you don&rsquo;t have it already) and then install the <tt>autotest-fsevent</tt> and <tt>autotest-growl</tt> gems:<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
+<p>O próximo passo depende da sua plataforma. Irei mostrar os passos para o OS&nbsp;X, já que é o que eu uso, e então dar referências para posts de blogs que falam sobre o Autotest no Linux e no Windows. No OS&nbsp;X, você deve <a href="http://growl.info/">instalar o Growl</a> (se você ainda não tiver) e então instalar as gems <tt>autotest-fsevent</tt> e <tt>autotest-growl</tt>:<sup class="footnote" id="fnref:3.10"><a href="#fn:3.10">10</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-fsevent -v 0.2.4
 <span class="gp">$</span> <span class="o">[</span>sudo<span class="o">]</span> gem install autotest-growl -v 0.2.9
@@ -528,9 +528,9 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div>
 
 
-<p>If FSEvent won&rsquo;t install properly, double-check that <a href="http://developer.apple.com/technologies/tools/xcode.html">Xcode</a> is installed on your system.</p>
+<p>Se o FSEvent não instalar corretamente, verifique se <a href="http://developer.apple.com/technologies/tools/xcode.html">Xcode</a> está instalado no seu sistema.</p>
 
-<p>To use the Growl and FSEvent gems, make an Autotest configuration file in your Rails root directory and fill it with the contents of <a class="ref" href="static-pages#code:dot_autotest">Listing&nbsp;3.9</a> (or <a class="ref" href="static-pages#code:dot_autotest_alt">Listing&nbsp;3.10</a> if <a class="ref" href="static-pages#code:dot_autotest">Listing&nbsp;3.9</a> gives an error on your system):</p>
+<p>Para usar as gems Growl e FSEvent, faça um arquivo de configuração para o Autotest em sua pasta raiz do Rails e preencha com o conteúdo do <a class="ref" href="static-pages#code:dot_autotest">Trecho&nbsp;3.9</a> (ou <a class="ref" href="static-pages#code:dot_autotest_alt">Trecho&nbsp;3.10</a> se <a class="ref" href="static-pages#code:dot_autotest">Trecho&nbsp;3.9</a> apresentar um erro no seu sistema):</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate .autotest
 </pre></div>
@@ -541,7 +541,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.9.</span> <span class="description">The <code>.autotest</code> configuration file for Autotest on OS&nbsp;X.</span>
+<div class="listing"><span class="header">Trecho 3.9.</span> <span class="description">O arquivo de configuração <code>.autotest</code> para o Autotest no OS&nbsp;X.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;autotest/growl&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;autotest/fsevent&#39;</span>
@@ -555,7 +555,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 3.10.</span> <span class="description">An alternate <code>.autotest</code> file needed on some systems.</span>
+<div class="listing"><span class="header">Trecho 3.10.</span> <span class="description">Um arquivo <code>.autotest</code> alternativo, necessário em alguns sistemas.</span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;autotest-growl&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;autotest-fsevent&#39;</span>
@@ -563,16 +563,16 @@ by [Michael Hartl](http://michaelhartl.com/).
 </div></div>
 
 
-<p>(Note: this will create an Autotest configuration for the sample application only; if you want to share this Autotest configuration with other Rails or Ruby projects, you should create the <code>.autotest</code> file in your <em>home</em> directory instead:</p>
+<p>(Observação: isto irá criar uma configuração do Autotest apenas para a aplicação de exemplo; se você quiser compartilhar a configuração do Autotest com outros projetos Rails ou Ruby, você deve criar o arquivo <code>.autotest</code> no seu diretório <em>home</em>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mate ~/.autotest
 </pre></div>
 </div>
 
 
-<p>where <tt class="verb">~</tt> (tilde) is the Unix symbol for &ldquo;home directory&rdquo;.)</p>
+<p>onde <tt class="verb">~</tt> (o til) é o símbolo Unix para &ldquo;diretório home&rdquo;.)</p>
 
-<p>If you&rsquo;re running Linux with the Gnome desktop, you should try the steps at <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, which sets up on Linux a system similar to Growl notifications on OS&nbsp;X. Windows users should try installing <a href="http://www.growlforwindows.com/gfw/">Growl for Windows</a> and then follow the instructions at the <a href="http://github.com/svoop/autotest-growl">GitHub page for <code>autotest-growl</code></a>. Both Linux and Windows users might want to take a look at <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>; <em>Rails Tutorial</em> reader Fred Schoeneman has a write-up <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">about Autotest notification on his blog</a>.<sup class="footnote" id="fnref:3.11"><a href="#fn:3.11">11</a></sup></p>
+<p>Se você estiver rodando Linux com o Gnome, você deve tentar os passos em <a href="http://automate-everything.com/2009/08/gnome-and-autospec-notifications/">Automate Everything</a>, que configura em Linux um sistema similar às notificações Growl do OS&nbsp;X. Usuários Windows devem tentar instalar o <a href="http://www.growlforwindows.com/gfw/">Growl for Windows</a> e então seguir as instruções na <a href="http://github.com/svoop/autotest-growl">Página no GitHub do <code>autotest-growl</code></a>. Usuários tanto do Linux quanto do Windows devem dar uma olhada em <a href="http://github.com/carlosbrando/autotest-notification">autotest-notification</a>; o leitor do <em>Tutorial Rails</em>, Fred Schoeneman, escreveu <a href="http://fredschoeneman.posterous.com/pimp-your-autotest-notification">sobre as notificações do Autotest em seu blog</a>.<sup class="footnote" id="fnref:3.11"><a href="#fn:3.11">11</a></sup></p>
 
 <div class="label" id="sec:TDD"></div>
 

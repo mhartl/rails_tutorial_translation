@@ -1,7 +1,7 @@
 RailsTutorialTranslation::Application.routes.draw do
   resources :chapters, :only => ['show']
   match '/' => redirect('/chapters/beginning')
-
+  match '/help' => 'pages#help'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,71 @@
+
+<body class="webpage">
+  <div id="container">
+    <%= render 'layouts/header' %>
+      <div id="content">
+        <div id='sidebar'>
+          <div class='content'>
+            <div class="connect">
+              <h3>Присоединяйтесь</h3>
+              <ul>
+                <li class="feed">
+                  <a href="http://feeds.feedburner.com/RubyOnRailsTutorial_ru">Подписаться на RSS</a>
+                </li>
+                <li class="email">
+                  <a href="http://feedburner.google.com/fb/a/mailverify?uri=RubyOnRailsTutorial_ru&amp;loc=ru_RU">Email обновления</a>
+                </li>
+
+                <li class="twitter">
+                  <a href="http://www.twitter.com/gafar_heroku">Твиттер</a>
+                </li>
+              </ul>
+              <br/>
+              <a rel="nofollow" href="http://orphus.ru" id="orphus" target="_blank">
+                <img alt="Система Orphus" src="/images/orphus.gif" border="0" width="88" height="31" />
+              </a>
+            </div>
+          </div>
+        </div>
+      <div id="main" class="withsidebar">
+<h1>Помощь по Rails Tutorial</h1>
+
+<p>Добро пожаловать на страницу помощи Rails Tutorial. Мне свойственно пытаться помочь всем, кто обращается ко мне, и это прекрасно работало на первых порах, когда у книги было всего несколько сотен читателей, но, к (не)счастью, у Rails Tutorial сейчас столь широкий круг читателей, что моих ресурсов попросту недостаточно для оказания индивидуальной помощи.* Я до сих пор с благодарностью принимаю сообщения об ошибках в тексте (включая опечатки!),<sup>&dagger;</sup> но к настоящему времени исходный код примеров учебника уже тщательно отлажен тысячами читателей, так что не стоит писать о проблемах с примерами приложений на страницу отзывов о Rails Tutorial<sup>&Dagger;</sup> или направлять эти сообщения на мой email. Вместо этого я советую сравнить ваш код с <a href="https://github.com/railstutorial/sample_app">"официальным" кодом примера приложения</a>, возможно это поможет обнаружить источник проблемы. Если же это не помогло, пожалуйста, задайте свой вопрос на <a href="http://stackoverflow.com/">Stack Overflow</a>, используя теги <tt class="tag">ruby-on-rails</tt> и <tt class="tag">tutorials</tt>. (<a href="http://stackoverflow.com/questions/tagged/ruby-on-rails+tutorials">Кликните здесь</a> чтобы посмотреть вопросы помеченные этими двумя тегами.)</p>
+
+<h2>Советы по отладке</h2>
+
+<p>Предусмотреть все потенциальные проблемы, конечно же, невозможно, однако вот несколько советов по отладке которые могут вам помочь:</p>
+
+<ul>
+  <li>Вы используете в точности те же версии гемов (включая Rails), что и в учебнике?</li>
+  <li>Вы используете правильную версию Ruby с правильным гемсетом?</li>
+  <li>Вы перезапустили веб сервер?</li>
+  <li>Вы перезапустили Spork?</li>
+  <li>Вы перезапустили <tt>bundle install</tt>?</li>
+  <li>Вы пытались выполнить <tt>rake db:test:prepare</tt>?</li>
+  <li>Вы сравнили ваш код с <a href="https://github.com/railstutorial/sample_app">соответствующим кодом</a> на GitHub?</li>
+</ul>
+
+<p>Если же ваша проблема имеет более глобальный характер, например, сложности с установкой Rails или конфигурацией RSpec, я советую написать об этом на <a href="http://stackoverflow.com/">Stack Overflow</a> (опять же, используя теги <tt class="tag">ruby-on-rails</tt> и <tt class="tag">tutorials</tt>) или отправить сообщение в <a href="http://groups.google.com/group/rubyonrails-talk">гугл группу Ruby on Rails Talk</a>. Это позволит другим людям, столкнувшимся с аналогичными сложностями (и не только читающим Rails Tutorial) получить пользу от обсуждения. Вы также можете попробовать задать вопрос на  <a href="http://webchat.freenode.net/?channels=rubyonrails">Rails IRC канале (#rubyonrails)</a> или на <a href="http://www.railshotline.com/">Rails Hotline</a> чтобы получить онлайн поддержку от других Rails программистов. Если у вас возникли сложности связанные с <a href="https://rvm.beginrescueend.com/">RVM</a>, вы обычно можете найти его создателя, Wayne&nbsp;E. Seguin, на <a href="http://webchat.freenode.net/?channels=rvm">RVM IRC канале</a>. Для решения проблем с деплоем приложения на <a href="http://heroku.com/">Heroku</a>, пожалуйста, обращайтесь в <a href="http://support.heroku.com/">тех. поддержку Heroku</a>.</p>
+
+<p>Задавая свой вопрос в любой группе или форуме, постарайтесь включить в него как можно больше значимой информации. Иногда бывает сложно удержаться от искушения задать вопрос в духе "Я пытался установить RSpec, но он не работает. Может мне кто-нибудь сказать в чем проблема?" К сожалению, исходя из этого описания, совершенно невозможно определить в чем проблема. На некоторых форумах, вам могут даже нагрубить в ответ на такой вопрос, поскольку помимо того, что для решения проблемы недостаточно информации, к тому же нет никаких оснований полагать, что автор вопроса предпринимал хоть какие-то попытки решить его самостоятельно. Если вы хотите побольше узнать об общепринятых принципах задавания вопросов на форумах, включая способы увеличить шансы на полезный ответ, я очень рекомендую статью <a href="http://www.linuxrsp.ru/artic/smart-questions-ru.html">Как правильно задавать вопросы</a> (автор - <a href="http://www.catb.org/esr/">Eric Raymond</a>).</p>
+
+<p class="small">*Я рассматривал идею создание форума Rails Tutorial, но практика показала, что создание, поддержка и модерация такого форума это почти так же затратно по времени как и индивидуальная тех. поддержка. (Вот для чего существует <a href="http://stackoverflow.com/">Stack Overflow</a>.)</p>
+
+<p class="small"><sup>&dagger;</sup>Об ошибках в учебнике можно сообщать <a href="http://ruby.railstutorial.org/contact">по email</a>, но, пожалуйста, трижды проверьте, прежде чем писать мне; на данный момент огромное количество отправляемых ошибок не связаны с текстом учебника. (<em>Примечание:</em> я более не отслеживаю <a href="http://getsatisfaction.com/railstutorial">страницу Rails Tutorial Get Satisfaction</a>, которая ранее использовалась для сообщения об ошибках, но некоторые члены сообщества по-прежнему отвечают на задаваемые там вопросы.)</p>
+
+<p class="small"><sup>&Dagger;</sup>Из-за того что системы читателей очень сильно отличаются и из-за того, что экосистема Rails очень быстро меняется, совершенно нецелесообразно пытаться описать даже небольшую часть вещей которые могут пойти не так (хотя я, конечно же, пытался). Жизнь Rails-разработчика и программиста вообще, заключается в постоянном преодолении проблем с помощью своей силы воли (и Google-fu). Кроме того, вы будете удивлены, как часто люди клянутся, что они скопировали код в точности так, как он представлен в учебнике, только для того чтобы признаться в итоге, после полдюжины отправленных email, что они нашли опечатку в коде.</p>
+        </div>
+</div>
+
+    <div id="container-bottom"></div>
+
+<div id="fb-root"></div>
+  </div>
+  <%= render 'layouts/reformal' %>
+  <!--orphus-->
+    <div class="orphus center">
+      <script type="text/javascript" src="/javascripts/orphus.js"></script>
+    </div><!-- <div class="orphus center"> -->
+  <!--metrika-->
+    <%= render 'layouts/yandex_metrika' %>
+</body>

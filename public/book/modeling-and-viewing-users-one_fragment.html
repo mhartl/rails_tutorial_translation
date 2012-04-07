@@ -70,7 +70,7 @@
 
 <p>Напротив, при использовании Rails, чтобы смоделировать пользователей мы не должны идентифицировать атрибуты явно. Как отмечено кратко выше, чтобы хранить данные, Rails  по умолчанию использует реляционную базу данных, которая состоит из <em>таблиц</em> составленных из <em>строк</em>, данных, где у каждой строки есть <em>столбцы</em> атрибутов данных. Например, чтобы сохранить пользователей с именами и адресами электронной почты, мы составим таблицу <code>users</code> со столбцами <code>name</code> и <code>email</code> (с каждой строкой, соответствующей одному пользователю). Называя столбцы таким образом, мы позволим Active Record выводить атрибуты объектов User для нас.</p>
 
-<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на ваш взгляд, будте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить. Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>) что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
+<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на ваш взгляд, будьте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить. Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>) что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Users new
 </pre></div>
@@ -1198,7 +1198,7 @@
 </div>
 
 
-<p>Теперь вышеописанный сценарий с Алисой  будет хорошо работать: база данных сохранит запись пользователя, основанную на первом запросе, и отвергнет второе сохранение за нарушение уникальности. (Ошибка появится в логе Rails, но в этом нет ничего плохого. Можно фактически поймать <code>ActiveRecord::StatementInvalid</code> исключение that gets raised&mdash;см. <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> для примера&mdash;но в этом учебном руководстве мы не будем заморачиваться этим шагом.) Добавление этого индекса на атрибут электронной почты преследует вторую цель, кратко рассмотренную в <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">Разделе&nbsp;6.1.4</a>: он решает проблему <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Блок&nbsp;6.2</a>).</p>
+<p>Теперь вышеописанный сценарий с Алисой  будет хорошо работать: база данных сохранит запись пользователя, основанную на первом запросе, и отвергнет второе сохранение за нарушение уникальности. (Ошибка появится в логе Rails, но в этом нет ничего плохого. Можно фактически поймать <code>ActiveRecord::StatementInvalid</code> исключение &mdash; см. <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> для примера &mdash; но в этом учебном руководстве мы не будем заморачиваться этим шагом.) Добавление этого индекса на атрибут электронной почты преследует вторую цель, кратко рассмотренную в <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">Разделе&nbsp;6.1.4</a>: он решает проблему <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Блок&nbsp;6.2</a>).</p>
 
 <div class="label" id="sidebar:database_indices"></div>
 
@@ -1496,7 +1496,7 @@
 
 <p>Эта глава - первая половина двухступенчатого процесса создания рабочей модели User. У наших пользователей теперь есть атрибуты <code>name</code> и <code>email</code> вместе с валидациями, обеспечивающими несколько важных ограничений для их значений. Мы также предприняли первый маленький шаг к рабочей  странице показывающей пользователя и ресурсу Users, основанному на принципах REST. В <a class="ref" href="modeling-and-viewing-users-two#top">Главе&nbsp;7</a>, мы завершим процесс, добавив пароли пользователя и более полезное  представлениение пользователя.</p>
 
-<p>Если бы вы используете Git, теперь было бы хорошее время, чтобы фиксировать, если вы не сделали этого ранее:</p>
+<p>Если вы используете Git, теперь было бы неплохо зафиксировать внесенные изменения, если вы не сделали этого ранее:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -m <span class="s2">&quot;Finished first cut of the User model&quot;</span>

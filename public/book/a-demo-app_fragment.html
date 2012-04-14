@@ -4,9 +4,9 @@
 <h1 class="chapter"><a id="sec:2" href="a-demo-app#top" class="heading"><span class="number">Глава 2</span> demo app</a></h1>
 
 
-<p>В этой главе мы разработаем простое демонстрационное приложение, чтобы показать мощь Rails. Цель -  получить общее представление о программировании на Ruby on Rails (и веб-разработке в целом), быстро сгенерировав приложение, используя <em>scaffold generators</em>.<sup class="footnote" id="fnref:2.1"><a href="#fn:2.1">1</a></sup> Как обсуждалось в  <a class="ref" href="beginning#sidebar:scaffolding">Блоке&nbsp;1.1</a>, остальная часть книги будет применять противоположный подход, постепенно разрабатывая приложение с объяснением всех новых понятий по мере их появления,  но для быстрого обзора (и некоторого быстрорастворимого удовлетворения) нет ничего лучше scaffolding. Конечное  демонстрационное приложение позволит нам взаимодействовать с ним через свой URL, давая нам понимание строения приложений Rails, включая первый пример <em>REST архитектуры</em> предпочитаемой Rails.</p>
+<p>В этой главе мы разработаем простое демонстрационное приложение, чтобы показать мощь Rails. Цель -  получить общее представление о программировании на Ruby on Rails (и веб-разработке в целом), быстро сгенерировав приложение, используя <em>scaffold generators</em>.<sup class="footnote" id="fnref:2.1"><a href="#fn:2.1">1</a></sup> Как обсуждалось в  <a class="ref" href="beginning#sidebar:scaffolding">Блоке&nbsp;1.1</a>, остальная часть книги будет применять противоположный подход, постепенно разрабатывая приложение с объяснением всех новых понятий по мере их появления,  но для быстрого обзора (и некоторого быстрорастворимого удовлетворения) нет ничего лучше чем scaffolding. Конечное  демонстрационное приложение позволит нам взаимодействовать с ним через свой URL, дав нам понимание структуры Rails приложений, включая первый пример <em>REST архитектуры</em> предпочитаемой Rails.</p>
 
-<p>Как и предстоящий пример приложения, демонстрационное приложение будет состоять из <em>пользователей</em> и связанных с ними <em>микросообщений</em> (образуя минималистское приложение в стиле Twitter). Функциональность будет совершенно слаборазвита, и многие из шагов будут походить на волшебство, но не переживайте: полный пример приложения разработает подобное же приложение с нуля, начиная с <a class="ref" href="static-pages#top">Глава&nbsp;3</a>,  и я дам многочисленные ссылки на более поздний материал. Тем временем, имейте терпение и немного веры - все таки основная цель данного учебника - удержать вас  <em>вне</em> этого поверхностного, управляемого scaffold подхода, для достижения более глубокого понимания Rails.</p>
+<p>Как и предстоящий пример приложения, демонстрационное приложение будет состоять из <em>пользователей</em> и связанных с ними <em>микросообщений</em> (образуя минималистичное приложение в стиле Twitter). Функциональность будет совершенно слаборазвита и многие из шагов будут походить на волшебство, но не переживайте: полный пример приложения разработает подобное же приложение с нуля, начиная с <a class="ref" href="static-pages#top">Глава&nbsp;3</a>,  и я дам многочисленные ссылки на более поздний материал. Тем временем, имейте терпение и немного веры - все таки основная цель данного учебника - удержать вас  <em>вне</em> этого поверхностного, управляемого scaffold подхода, для достижения более глубокого понимания Rails.</p>
 
 <div class="label" id="sec:planning_the_application"></div>
 
@@ -58,7 +58,7 @@
 <div class="label" id="fig:create_demo_repo"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Рис. 2.1: </span><span class="description">Создание репозитория demo app в GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(полный размер)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/create_demo_repo.png" alt="create_demo_repo" /></span></div><div class="caption"><span class="header">Рис. 2.1: </span><span class="description">Создание репозитория demo app на GitHub.&nbsp;<a href="http://railstutorial.org/images/figures/create_demo_repo-full.png">(полный размер)</a></span></div></div>
 
 
 <p>Можно также дополнительно создать новый репозиторий (<a class="ref" href="a-demo-app#fig:create_demo_repo">Рис.&nbsp;2.1</a>) и отправить его в GitHub:</p>
@@ -69,7 +69,7 @@
 </div>
 
 
-<p>Теперь мы готовы начать делать само приложение. Типичный первый шаг, при разработке приложений это создание  <em>модели данных</em>, которая является изображением структур, необходимых нашему приложению. В нашем случае demo app будет упрощенным микроблогом: только пользователи и короткие (микро) сообщения. Таким образом, мы начнем с модели для <em>пользователей</em> приложения (<a class="ref" href="a-demo-app#sec:modeling_users">Раздел&nbsp;2.1.1</a>), и затем мы добавим модель для <em>микросообщений</em> (<a class="ref" href="a-demo-app#sec:modeling_microposts">Раздел&nbsp;2.1.2</a>).</p>
+<p>Теперь мы готовы начать делать само приложение. Типичный первый шаг, при разработке приложений это создание  <em>модели данных</em>, которая является изображением структур, необходимых нашему приложению. В нашем случае demo app будет упрощенным микроблогом: только пользователи и короткие (микро) сообщения. Таким образом, мы начнем с модели для <em>пользователей</em> приложения (<a class="ref" href="a-demo-app#sec:modeling_users">Раздел&nbsp;2.1.1</a>), затем мы добавим модель для <em>микросообщений</em> (<a class="ref" href="a-demo-app#sec:modeling_microposts">Раздел&nbsp;2.1.2</a>).</p>
 
 <div class="label" id="sec:modeling_users"></div>
 
@@ -77,7 +77,7 @@
 <h3><a id="sec:2.1.1" href="a-demo-app#sec:modeling_users" class="heading"><span class="number">2.1.1</span> Моделирование пользователей</a></h3>
 
 
-<p>Вариантов для модели данных пользователя так же много, как много различных форм регистрации в сети; мы пойдем отчетливо минималистичным путем. У пользователей нашего demo app будет уникальный <code>целочисленный</code> идентификатор называемый <code>id</code>, публично видимое <code>имя </code> (тип - <code>string (строка)</code>), и <code>email</code> адрес  (также <code>string</code>) такой же как имя пользователя. Итоговая модель данных для пользователей представлена в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>.</p>
+<p>Вариантов для модели данных пользователя так же много, как много различных форм регистрации в сети; мы пойдем отчетливо минималистичным путем. У пользователей нашего demo app будет уникальный <code>целочисленный</code> идентификатор называемый <code>id</code>, публично видимое <code>имя </code> (тип - <code>string (строка)</code>), и <code>email</code> адрес  (также <code>string</code>) совпадающий с именем пользователя. Итоговая модель данных для пользователей представлена в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>.</p>
 
 <div class="label" id="fig:demo_user_model"></div>
 
@@ -85,7 +85,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_model.png" alt="demo_user_model" /></span></div><div class="caption"><span class="header">Рис. 2.2: </span><span class="description">Модель данных для пользователей.</span></div></div>
 
 
-<p>A как мы увидим в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>, табличка <code>users</code> в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a> соответствует <em>таблице</em> в базе данных, и <code>id</code>, <code>name</code>, и <code>email</code> атрибуты это <em>столбцы</em> в этой таблице.</p>
+<p>Как мы увидим в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>, табличка <code>users</code> в <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a> соответствует <em>таблице</em> в базе данных, и <code>id</code>, <code>name</code>, и <code>email</code> атрибуты это <em>столбцы</em> в этой таблице.</p>
 
 <div class="label" id="sec:modeling_microposts"></div>
 
@@ -101,7 +101,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_micropost_model.png" alt="demo_micropost_model" /></span></div><div class="caption"><span class="header">Рис. 2.3: </span><span class="description">Модель данных для микросообщений.</span></div></div>
 
 
-<p>Мы увидим в <a class="ref" href="a-demo-app#sec:demo_user_has_many_microposts">Разделе&nbsp;2.3.3</a> (и более полно в <a class="ref" href="user-microposts#top">Главе&nbsp;11</a>) как этот атрибут <code>user_id</code> позволяет нам кратко реализовать идею, что у пользователя потенциально есть много связанных микросообщений.</p>
+<p>Мы увидим в <a class="ref" href="a-demo-app#sec:demo_user_has_many_microposts">Разделе&nbsp;2.3.3</a> (и более полно в <a class="ref" href="user-microposts#top">Главе&nbsp;11</a>) как этот <code>user_id</code> атрибут позволит нам кратко реализовать идею, что у пользователя потенциально есть много связанных с ним микросообщений.</p>
 
 <div class="label" id="sec:demo_users_resource"></div>
 
@@ -155,7 +155,7 @@
 </div>
 
 
-<p>Это просто обновляет базу данных с нашей новой моделью данных <code>users</code>. (Мы узнаем больше о миграциях базы данных в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>.) Отметьте, что для того чтобы обеспечить использование версии Rake, соответствующей нашему <code>Gemfile</code>, нам необходимо запустить <code>rake</code> используя <code>bundle exec</code>. В <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a> мы узнаем как сделать эту конструкцию более компактной.</p>
+<p>Это просто обновляет базу данных с нашей новой моделью данных <code>users</code>. (Мы узнаем больше о миграциях баз данных в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>.) Отметьте, что для того, чтобы обеспечить использование версии Rake, соответствующей нашему <code>Gemfile</code>, нам необходимо запустить <code>rake</code> используя <code>bundle exec</code>. В <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a> мы узнаем как сделать эту конструкцию более компактной.</p>
 
 <p>Теперь мы можем запустить локальный веб-сервер, используя <code>rails s</code>, что является сокращением для <code>rails server</code>:</p>
 
@@ -175,14 +175,14 @@
 <pre class="verbatim">  $ ./configure &amp;&amp; make &amp;&amp; sudo make install</pre>
 
 
-<p>обычно используемую, чтобы скомпилировать код на Unix- системах (включая Linux и Mac OS&nbsp;X).</p>
+<p>обычно используемую, для компиляции кода на Unix системах (включая Linux и Mac OS&nbsp;X).</p>
 
-<p>Rake это <em>Ruby make</em>, make -подобный язык написанный в Ruby. Rails использует Rake, в значительной степени, специально для неисчислимых небольших административных задач, необходимых при разработке поддерживаемых базой данных веб-приложений. <code>rake db:migrate</code> команда, вероятно, наиболее распространена, но есть и многие другие; можно увидеть список задач базы данных, используя <code>-T db</code>:</p>
+<p>Rake это <em>Ruby make</em>, make-подобный язык написанный на Ruby. Rails использует Rake, в значительной степени, специально для неисчислимых небольших административных задач, необходимых при разработке поддерживаемых базой данных веб-приложений. <code>rake db:migrate</code> команда, вероятно, наиболее распространена, но есть и многие другие; можно увидеть список задач базы данных, используя <code>-T db</code>:</p>
 
 <pre class="verbatim">$ bundle exec rake -T db</pre>
 
 
-<p>Чтобы увидеть все доступные задачи Rake, запустите</p>
+<p>Чтобы увидеть все доступные Rake задачи, запустите</p>
 
 <pre class="verbatim">$ bundle exec rake -T</pre>
 
@@ -199,15 +199,15 @@
 <h3><a id="sec:2.2.1" href="a-demo-app#sec:a_user_tour" class="heading"><span class="number">2.2.1</span> Обзор пользователя</a></h3>
 
 
-<p>При посещении корневого url&nbsp;<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> мы видим ту же самую дефолтную страницу Rails, что и в <a class="ref" href="beginning#fig:riding_rails_3">Рис.&nbsp;1.3</a>, но при генерировании ресурса Users scaffolding-ом мы также создали большое количество страниц для управления пользователями. Например, страницу для того, чтобы перечислить всех пользователей в  <a href="http://localhost:3000/users">/users</a>, и страницу для того, чтобы сделать нового пользователя в  <a href="http://localhost:3000/">/users/new</a>.<sup class="footnote" id="fnref:2.6"><a href="#fn:2.6">6</a></sup> Остальная часть этого Раздела, выделяется предпринятию ураганного тура через эти страницы пользователя (user). Поскольку мы продолжаем, полезно обратиться к <a class="ref" href="a-demo-app#table:user_urls">Table&nbsp;2.1</a>, которая показывает соответствие между страницами и URL.</p>
+<p>При посещении корневого url&nbsp;<a href="http://localhost:3000/"><tt>http://localhost:3000/</tt></a> мы видим ту же самую дефолтную страницу Rails, что и на <a class="ref" href="beginning#fig:riding_rails_3">Рис.&nbsp;1.3</a>, но при генерировании ресурса Users scaffolding-ом мы также создали большое количество страниц для управления пользователями. Например, страницу для отображения списка всех пользователей в  <a href="http://localhost:3000/users">/users</a>, и страницу для создания нового пользователя в  <a href="http://localhost:3000/">/users/new</a>.<sup class="footnote" id="fnref:2.6"><a href="#fn:2.6">6</a></sup> Остальная часть этого Раздела, выделяется предпринятию ураганного тура через эти страницы пользователя (user). Поскольку мы продолжаем, полезно обратиться к <a class="ref" href="a-demo-app#table:user_urls">Table&nbsp;2.1</a>, которая показывает соответствие между страницами и URL.</p>
 
 <div class="label" id="table:user_urls"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><a href="http://localhost:3000/users"><tt>/users</tt></a></td><td class="align_left"><code>index</code></td><td class="align_left">страница, чтобы перечислить всех пользователей</td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/1"><tt>/users/1</tt></a></td><td class="align_left"><code>show</code></td><td class="align_left">страница, чтобы показать пользователя с id <code>1</code></td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/new"><tt>/users/new</tt></a></td><td class="align_left"><code>new</code></td><td class="align_left">страница для создания нового пользователя</td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a></td><td class="align_left"><code>edit</code></td><td class="align_left">страница, для редактирования пользователя с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.1: </span><span class="description">Cоответствие между страницами и URL для ресурса Users.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Action</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><a href="http://localhost:3000/users"><tt>/users</tt></a></td><td class="align_left"><code>index</code></td><td class="align_left">страница, для отображения списка всех пользователей</td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/1"><tt>/users/1</tt></a></td><td class="align_left"><code>show</code></td><td class="align_left">страница показывающая пользователя с id <code>1</code></td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/new"><tt>/users/new</tt></a></td><td class="align_left"><code>new</code></td><td class="align_left">страница для создания нового пользователя</td></tr><tr><td class="align_left"><a href="http://localhost:3000/users/1/edit"><tt>/users/1/edit</tt></a></td><td class="align_left"><code>edit</code></td><td class="align_left">страница для редактирования пользователя с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.1: </span><span class="description">Cоответствие между страницами и URL для ресурса Users.</span></div></div>
 
 
-<p>Мы начинаем со страницы показывающей всех пользователей в нашем приложении, названной <a href="http://localhost:3000/users"><tt>index</tt></a>; как вы  могли бы ожидать, первоначально никаких пользователей нет (<a class="ref" href="a-demo-app#fig:demo_blank_user_index_rails_3">Рис.&nbsp;2.4</a>).</p>
+<p>Мы начнем со страницы показывающей всех пользователей в нашем приложении, названной <a href="http://localhost:3000/users"><tt>index</tt></a>; как вы могли бы ожидать, изначально там нет никаких пользователей (<a class="ref" href="a-demo-app#fig:demo_blank_user_index_rails_3">Рис.&nbsp;2.4</a>).</p>
 
 <div class="label" id="fig:demo_blank_user_index_rails_3"></div>
 
@@ -223,15 +223,15 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_new_user_rails_3.png" alt="demo_new_user_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.5: </span><span class="description">Страница new user (<a href="http://localhost:3000/users/new"><tt>/users/new</tt></a>).&nbsp;<a href="/images/figures/demo_new_user_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Мы можем создать пользователя, введя значения имени и адреса электронной почты в текстовые поля и затем нажав кнопку Create. Результат - страница <a href="http://localhost:3000/users/1"><tt>показывающая</tt></a> пользователя, как видно на <a class="ref" href="a-demo-app#fig:demo_show_user_rails_3">Рис.&nbsp;2.6</a>. (Зеленое приглашающее сообщение выполняется, с использованием <em>флэш</em>, о котором мы узнаем в <a class="ref" href="sign-up#sec:the_flash">Разделе&nbsp;8.3.3</a>.) Отметим, что в URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>; как вы  могли бы подозревать, цифра&nbsp;<code>1</code> просто атрибут <code>id</code> пользователя из  <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>. В <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">Разделе&nbsp;7.3</a>, эта страница станет профилем пользователя.</p>
+<p>Мы можем создать пользователя, введя значения имени и адреса электронной почты в текстовые поля и нажав затем кнопку Create User. Результат - страница <a href="http://localhost:3000/users/1"><tt>показывающая</tt></a> пользователя, как видно на <a class="ref" href="a-demo-app#fig:demo_show_user_rails_3">Рис.&nbsp;2.6</a>. (Зеленое приглашающее сообщение выполняется, с использованием <em>флэш</em>, о котором мы узнаем в <a class="ref" href="sign-up#sec:the_flash">Разделе&nbsp;8.3.3</a>.) Отметим, что в URL <a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>; как вы  могли бы подозревать, цифра&nbsp;<code>1</code> это просто атрибут <code>id</code> пользователя из  <a class="ref" href="a-demo-app#fig:demo_user_model">Рис.&nbsp;2.2</a>. В <a class="ref" href="modeling-and-viewing-users-two#sec:better_user_views">Разделе&nbsp;7.3</a> эта страница станет профилем пользователя.</p>
 
 <div class="label" id="fig:demo_show_user_rails_3"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_show_user_rails_3.png" alt="demo_show_user_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.6: </span><span class="description">Страница, показывающая пользователя (<a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>).&nbsp;<a href="/images/figures/demo_show_user_rails_3-full.png">(полный размер)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_show_user_rails_3.png" alt="demo_show_user_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.6: </span><span class="description">Страница показывающая пользователя (<a href="http://localhost:3000/users/1"><tt>/users/1</tt></a>).&nbsp;<a href="/images/figures/demo_show_user_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Чтобы изменить информацию пользователя, мы посещаем страницу <a href="http://localhost:3000/users/1/edit"><tt>edit</tt></a>  (<a class="ref" href="a-demo-app#fig:demo_edit_user_rails_3">Рис.&nbsp;2.7</a>). Изменяя информацию о пользователе и нажимая кнопку Update, мы изменяем информацию о пользователя в демонстрационном приложении (<a class="ref" href="a-demo-app#fig:demo_update_user_rails_3">Рис.&nbsp;2.8</a>). (Как мы увидим в <a class="ref" href="modeling-and-viewing-users-one#top">Главе&nbsp;6</a>, эти данные пользователя хранятся в бэкэнде базы данных.) Мы добавим функции edit/update (редактировать/обновить) пользователя к примеру приложения в  <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">Разделе&nbsp;10.1</a>.</p>
+<p>Для того, чтобы изменить информацию пользователя, мы посещаем страницу <a href="http://localhost:3000/users/1/edit"><tt>edit</tt></a>  (<a class="ref" href="a-demo-app#fig:demo_edit_user_rails_3">Рис.&nbsp;2.7</a>). Изменяя информацию о пользователе и нажимая кнопку Update, мы изменяем информацию о пользователя в демонстрационном приложении (<a class="ref" href="a-demo-app#fig:demo_update_user_rails_3">Рис.&nbsp;2.8</a>). (Как мы увидим в <a class="ref" href="modeling-and-viewing-users-one#top">Главе&nbsp;6</a>, эти данные пользователя хранятся в бэкэнде базы данных.) Мы добавим функции edit/update (редактировать/обновить) пользователя к примеру приложения в  <a class="ref" href="updating-showing-and-deleting-users#sec:updating_users">Разделе&nbsp;10.1</a>.</p>
 
 <div class="label" id="fig:demo_edit_user_rails_3"></div>
 
@@ -247,7 +247,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_update_user_rails_3.png" alt="demo_update_user_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.8: </span><span class="description">Пользователь с обновленной информацией.&nbsp;<a href="/images/figures/demo_update_user_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Теперь мы создадим второго пользователя, повторно посетив <a href="http://localhost:3000/users/new"><tt>new</tt></a> страницу и предоставив второй набор информации о пользователе; получившаяся <a href="http://localhost:3000/users"><tt>index</tt></a> показана на <a class="ref" href="a-demo-app#fig:demo_user_index_two_rails_3">Рис.&nbsp;2.9</a>. <a class="ref" href="updating-showing-and-deleting-users#sec:showing_users">Раздел&nbsp;10.3</a> преобразует index пользователя в более отполированную страницу для демонстрации всех пользователей.</p>
+<p>Теперь мы создадим второго пользователя, повторно посетив <a href="http://localhost:3000/users/new"><tt>new</tt></a> страницу и предоставив второй набор информации о пользователе; получившаяся страница <a href="http://localhost:3000/users"><tt>index</tt></a> показана на <a class="ref" href="a-demo-app#fig:demo_user_index_two_rails_3">Рис.&nbsp;2.9</a>. <a class="ref" href="updating-showing-and-deleting-users#sec:showing_users">Раздел&nbsp;10.3</a> преобразует index пользователя в более отполированную страницу для демонстрации всех пользователей.</p>
 
 <div class="label" id="fig:demo_user_index_two_rails_3"></div>
 
@@ -255,7 +255,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_user_index_two_rails_3.png" alt="demo_user_index_two_rails_3" /></span></div><div class="caption"><span class="header">Рис. 2.9: </span><span class="description">index страница пользователя (<a href="http://localhost:3000/users"><tt>/users</tt></a>) со вторым пользователем.&nbsp;<a href="/images/figures/demo_user_index_two_rails_3-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Показав, как создавать, отображать и редактировать пользователей, мы переходим наконец к их уничтожению (<a class="ref" href="a-demo-app#fig:demo_destroy_user_rails_3">Рис.&nbsp;2.10</a>). Следует проверить, что клик по ссылке <a class="ref" href="a-demo-app#fig:demo_destroy_user_rails_3">Рис.&nbsp;2.10</a> уничтожает второго пользователя, приводя к index странице с одним пользователем. (Если это не работает, убедитесь, что JavaScript включен в вашем браузере; Rails использует JavaScript, чтобы выдать запрос, который должен уничтожить пользователя.) <a class="ref" href="updating-showing-and-deleting-users#sec:destroying_users">Раздел&nbsp;10.4</a> добавляет удаление пользователя к демонстрационному приложению, заботясь об ограничении его использования специальным классом административных пользователей.</p>
+<p>Показав, как создавать, отображать и редактировать пользователей, мы переходим, наконец, к их уничтожению (<a class="ref" href="a-demo-app#fig:demo_destroy_user_rails_3">Рис.&nbsp;2.10</a>). Следует проверить, что клик по ссылке <a class="ref" href="a-demo-app#fig:demo_destroy_user_rails_3">Рис.&nbsp;2.10</a> уничтожает второго пользователя, приводя к index странице с одним пользователем. (Если это не работает, убедитесь, что JavaScript включен в вашем браузере; Rails использует JavaScript, чтобы выдать запрос, который должен уничтожить пользователя.) <a class="ref" href="updating-showing-and-deleting-users#sec:destroying_users">Раздел&nbsp;10.4</a> добавляет удаление пользователя к демонстрационному приложению, заботясь об ограничении его использования специальным классом административных пользователей.</p>
 
 <div class="label" id="fig:demo_destroy_user_rails_3"></div>
 
@@ -271,7 +271,7 @@
 <h3><a id="sec:2.2.2" href="a-demo-app#sec:mvc_in_action" class="heading"><span class="number">2.2.2</span> MVC в действии</a></h3>
 
 
-<p>Теперь, когда мы завершили быстрый обзор ресурса Пользователи (Users), давайте исследуем одну его определенную часть в контексте Модель-Представление-Контроллер (MVC) частично представленной в <a class="ref" href="beginning#sec:mvc">Разделе&nbsp;1.2.6</a>. Наша стратегия будет состоять в том, чтобы описать результаты типичного запроса браузера: посещение index страницы пользователя в <a href="http://localhost:3000/users">/users</a>&mdash;в терминах MVC (<a class="ref" href="a-demo-app#fig:mvc_detailed">Рис.&nbsp;2.11</a>).</p>
+<p>Теперь, когда мы завершили быстрый обзор ресурса Пользователи (Users), давайте исследуем одну его определенную часть в контексте паттерна Модель-Представление-Контроллер (MVC) частично представленного в <a class="ref" href="beginning#sec:mvc">Разделе&nbsp;1.2.6</a>. Наша стратегия будет состоять в том, чтобы описать результаты типичного запроса браузера: посещение index страницы пользователя на <a href="http://localhost:3000/users">/users</a>&mdash;в терминах MVC (<a class="ref" href="a-demo-app#fig:mvc_detailed">Рис.&nbsp;2.11</a>).</p>
 
 <div class="label" id="fig:mvc_detailed"></div>
 
@@ -286,13 +286,13 @@
 <li> <code>Index</code> действие просит, чтобы модель User получила всех пользователей (<code>User.all</code>).</li>
 <li>Модель User получает по запросу всех пользователей из базы данных.</li>
 <li>Модель User возвращает список пользователей в контроллер.</li>
-<li>Контроллер получает пользователей в <code>@users</code> переменной, которую передает <code>index</code> представлению.</li>
+<li>Контроллер получает пользователей в <code>@users</code> переменной, которую он передает <code>index</code> представлению.</li>
 <li>Представление использует Embedded (Встроенный) Ruby, чтобы визуализировать страницу как HTML.</li>
 <li>Контроллер возвращает HTML в браузер. <sup class="footnote" id="fnref:2.7"><a href="#fn:2.7">7</a></sup></li>
 </ol>
 
 
-<p>Мы начинаем с запроса, выданного браузером &mdash;то есть, с результата ввода URL в строке поиска или щелчка по ссылке (Шаг&nbsp;1 в <a class="ref" href="a-demo-app#fig:mvc_detailed">Рис.&nbsp;2.11</a>). Этот запрос вызывает <em>Rails маршрутизатор</em> (Шаг&nbsp;2), который отправляет к  надлежащему, <em>действию контроллера</em>, основываясь на URL (и, как мы увидим в <a class="ref" href="static-pages#sidebar:get_etc">Блоке&nbsp;3.1</a>, на типе запроса). Код создающий перенаправление URL пользователя к действиям контроллера для ресурса Users представлен в <a class="ref" href="a-demo-app#code:rails_routes">Листинге&nbsp;2.2</a>;<sup class="footnote" id="fnref:2.8"><a href="#fn:2.8">8</a></sup> этот код  фактически устанавливает таблицу пар URL/Действие, которые мы видели в  <a class="ref" href="a-demo-app#table:user_urls">Таблице&nbsp;2.1</a>.</p>
+<p>Мы начинаем с запроса, выданного браузером &mdash; то есть, с результата ввода URL в адресной строке или клика по ссылке (Шаг&nbsp;1 в <a class="ref" href="a-demo-app#fig:mvc_detailed">Рис.&nbsp;2.11</a>). Этот запрос вызывает <em>Rails маршрутизатор</em> (Шаг&nbsp;2), который отправляет к  надлежащему, <em>действию контроллера</em>, основываясь на URL (и, как мы увидим в <a class="ref" href="static-pages#sidebar:get_etc">Блоке&nbsp;3.1</a>, на типе запроса). Код создающий перенаправление URL пользователя к действиям контроллера для ресурса Users представлен в <a class="ref" href="a-demo-app#code:rails_routes">Листинге&nbsp;2.2</a>;<sup class="footnote" id="fnref:2.8"><a href="#fn:2.8">8</a></sup> этот код  фактически устанавливает таблицу пар URL/Действие, которые мы видели в  <a class="ref" href="a-demo-app#table:user_urls">Таблице&nbsp;2.1</a>.</p>
 
 <div class="label" id="code:rails_routes"></div>
 
@@ -310,7 +310,7 @@
 </div></div>
 
 
-<p>Страницы из <a class="ref" href="a-demo-app#sec:a_user_tour">Раздела&nbsp;2.2.1</a> соответствуют <em>действиям</em> в <em>контроллере</em> Users, который является набором связанных действий; контроллер, сгенерированный scaffolding,  схематично показан в <a class="ref" href="a-demo-app#code:demo_users_controller">Листинге&nbsp;2.3</a>. Отметьте запись <code>class UsersController &lt; ApplicationController</code>; это  пример <em>класса</em> Ruby с <em>наследованием</em>. (Мы обсудим наследование кратко в <a class="ref" href="a-demo-app#sec:inheritance_hierarchies">Разделе&nbsp;2.3.4</a> и охватим обе темы более подробно в <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Разделе&nbsp;4.4</a>.)</p>
+<p>Страницы из <a class="ref" href="a-demo-app#sec:a_user_tour">Раздела&nbsp;2.2.1</a> соответствуют <em>действиям</em> в <em>контроллере</em> Users, который является набором связанных действий; контроллер, сгенерированный scaffolding,  схематично показан в <a class="ref" href="a-demo-app#code:demo_users_controller">Листинге&nbsp;2.3</a>. Отметьте запись <code>class UsersController &lt; ApplicationController</code>; это  пример Ruby <em>класса</em> с <em>наследованием</em>. (Мы  вкратце обсудим наследование в <a class="ref" href="a-demo-app#sec:inheritance_hierarchies">Разделе&nbsp;2.3.4</a> и охватим обе темы более подробно в <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Разделе&nbsp;4.4</a>.)</p>
 
 <div class="label" id="code:demo_users_controller"></div>
 
@@ -366,12 +366,12 @@
 </div></div>
 
 
-<p>Вы могли заметить, что действий больше чем страниц; <code>index</code>, <code>show</code>, <code>new</code>, и <code>edit</code> действия, все соответствуют страницам из <a class="ref" href="a-demo-app#sec:a_user_tour">Раздела&nbsp;2.2.1</a>, но есть также дополнительные <code>create</code> (создать), <code>update</code> (обновить), и <code>destroy</code> (разрушить) действия. Эти действия обычно не визуализируют страницы (хотя иногда могут); вместо этого, их основная цель состоит в том, чтобы изменять информацию о пользователях в базе данных. Этот полный комплект действий контроллера, сведенный в  <a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблицу&nbsp;2.2</a>, представляет реализацию архитектуры REST в Rails (<a class="ref" href="a-demo-app#sidebar:REST">Блок&nbsp;2.2</a>). Отметьте в <a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблице&nbsp;2.2</a> что есть некоторое наложение в URL; например, и user <code>show</code> и <code>update</code> действиям соответствует URL <tt>/users/1</tt>. Различие между ними в <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/HTTP#.D0.9C.D0.B5.D1.82.D0.BE.D0.B4.D1.8B">методе запроса HTTP</a> на который они отвечают. Мы узнаем больше о методах запроса HTTP в  <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a>.</p>
+<p>Вы могли заметить, что действий больше чем страниц; <code>index</code>, <code>show</code>, <code>new</code>, и <code>edit</code> действия - все они соответствуют страницам из <a class="ref" href="a-demo-app#sec:a_user_tour">Раздела&nbsp;2.2.1</a>, но есть также дополнительные <code>create</code> (создать), <code>update</code> (обновить), и <code>destroy</code> (разрушить) действия. Эти действия обычно не визуализируют страницы (хотя иногда могут); вместо этого, их основная цель состоит в том, чтобы изменять информацию о пользователях в базе данных. Этот полный комплект действий контроллера, сведенный в  <a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблицу&nbsp;2.2</a>, представляет реализацию архитектуры REST в Rails (<a class="ref" href="a-demo-app#sidebar:REST">Блок&nbsp;2.2</a>). Отметьте в <a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблице&nbsp;2.2</a> что есть некоторое наложение в URL; например, и <code>show</code> и <code>update</code> действиям соответствует URL <tt>/users/1</tt>. Различие между ними в <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/HTTP#.D0.9C.D0.B5.D1.82.D0.BE.D0.B4.D1.8B">методе запроса HTTP</a> на который они отвечают. Мы узнаем больше о методах запроса HTTP в  <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a>.</p>
 
 <div class="label" id="table:demo_RESTful_users"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP запрос</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Действие</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left">страница, со списком всех пользователей</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">страница, показывающая пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">страница, чтобы сделать нового пользователя</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left">создание нового пользователя</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">страница для редактирования пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">обновление пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">удаление пользователя с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.2: </span><span class="description">RESTful маршруты, обеспеченные ресурсом Users в <a class="ref" href="a-demo-app#code:rails_routes">Листинге&nbsp;2.2</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP запрос</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Действие</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>index</code></td><td class="align_left">страница со списком всех пользователей</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">страница показывающая пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">страница для создания нового пользователя</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/users</tt></td><td class="align_left"><code>create</code></td><td class="align_left">создание нового пользователя</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/users/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">страница для редактирования пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">обновление пользователя с id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/users/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">удаление пользователя с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.2: </span><span class="description">RESTful маршруты, обеспеченные ресурсом Users в <a class="ref" href="a-demo-app#code:rails_routes">Листинге&nbsp;2.2</a>.</span></div></div>
 
 
 
@@ -380,19 +380,19 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 2.2.</span><span class="description">REST (REpresentational State Transfer, (</a href="http://ru.wikipedia.org/wiki/REST">«передача состояния представления»</a>))</span></span>
-<p>Если вы  много читали о веб-разработке Ruby on Rails, вы  видели много ссылок на “REST”, который является акронимом для (REpresentational State Transfer, «передача состояния представления»). REST - архитектурный стиль для разработки распределенных, сетевых систем и приложений, таких как World Wide Web и веб-приложения. Хотя теория REST довольно абстрактна, в контексте приложений Rails, REST означает, что большинство компонентов приложения (таких как пользователи и микросообщения) моделируются как <em>ресурсы</em> , которые могут быть созданы (Сreated), прочитаны (Read), обновлены (Updated), и удалены (Deleted) - операции, которые соответствуют и <a   href="http://ru.wikipedia.org/wiki/CRUD">операциям CRUD, реляционных баз данных</a> и четырем фундаментальным <a   href="http://ru.wikipedia.org/wiki/HTTP#.D0.9C.D0.B5.D1.82.D0.BE.D0.B4.D1.8B">методам запроса HTTP</a>: <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, и <tt>DELETE</tt>. (Мы узнаем больше о запросах HTTP в <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a> особенно в <a class="ref" href="static-pages#sidebar:get_etc">Блоке&nbsp;3.1</a>.)</p>
+<p>Если вы  много читали о веб-разработке на Ruby on Rails, вы  видели много ссылок на “REST”, являющуюся акронимом для REpresentational State Transfer («передача состояния представления»). REST - архитектурный стиль для разработки распределенных, сетевых систем и приложений, таких как World Wide Web и веб-приложения. Хотя теория REST довольно абстрактна, в контексте Rails приложений REST означает, что большинство компонентов приложения (таких как пользователи и микросообщения) моделируются как <em>ресурсы</em>, которые могут быть созданы (Сreated), прочитаны (Read), обновлены (Updated), и удалены (Deleted) - операции, которые соответствуют и <a href="http://ru.wikipedia.org/wiki/CRUD">операциям CRUD, реляционных баз данных</a> и четырем фундаментальным <a href="http://ru.wikipedia.org/wiki/HTTP#.D0.9C.D0.B5.D1.82.D0.BE.D0.B4.D1.8B">методам запроса HTTP</a>: <tt>POST</tt>, <tt>GET</tt>, <tt>PUT</tt>, и <tt>DELETE</tt>. (Мы узнаем больше о запросах HTTP в <a class="ref" href="static-pages#sec:TDD">Разделе&nbsp;3.2.2</a> и особенно в <a class="ref" href="static-pages#sidebar:get_etc">Блоке&nbsp;3.1</a>.)</p>
 
-<p>Как разработчику приложений Rails, RESTful  стиль разработки помогает вам  сделать выбор о том, какие контроллеры и действия написать: вы  просто структурируете приложение, используя ресурсы, которые создаются, читаются, обновляются, и удаляются. В случае пользователей и микросообщений, этот процесс является простым, так как они - натуральные ресурсы по определению. В <a class="ref" href="following-users#top">Главе&nbsp;12</a>, мы увидим пример, где принципы REST позволяют нам моделировать более тонкую проблему &ldquo;Слежения за сообщениями пользователей&rdquo; естественным и удобным способом.</p>
+<p>Как разработчику Rails приложений, RESTful  стиль разработки помогает вам  сделать выбор о том, какие контроллеры и действия написать: вы  просто структурируете приложение, используя ресурсы, которые создаются, читаются, обновляются, и удаляются. В случае пользователей и микросообщений, этот процесс является простым, так как они - натуральные ресурсы по определению. В <a class="ref" href="following-users#top">Главе&nbsp;12</a> мы увидим пример, где принципы REST позволяют нам моделировать более тонкую проблему &ldquo;Слежения за сообщениями пользователей&rdquo; естественным и удобным способом.</p>
 </div>
 
 
-<p>Чтобы исследовать отношения между контроллером Users и моделью User, давайте сосредоточимся на упрощенной версии <code>index</code> действия, показанную в <a class="ref" href="a-demo-app#code:demo_index_action">Листинге&nbsp;2.4</a>.<sup class="footnote" id="fnref:2.9"><a href="#fn:2.9">9</a></sup></p>
+<p>Чтобы исследовать отношения между контроллером Users и моделью User, давайте сосредоточимся на упрощенной версии <code>index</code> действия, показанной в <a class="ref" href="a-demo-app#code:demo_index_action">Листинге&nbsp;2.4</a>.<sup class="footnote" id="fnref:2.9"><a href="#fn:2.9">9</a></sup></p>
 
 <div class="label" id="code:demo_index_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 2.4.</span> <span class="description">Упрощенное user index  действие для демонстрационного приложения. <br /> <code>app/controllers/users_controller.rb</code></span>
+<div class="listing"><span class="header">Листинг 2.4.</span> <span class="description">Упрощенное index  действие для демонстрационного приложения. <br /> <code>app/controllers/users_controller.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
@@ -484,7 +484,7 @@
 <h2><a id="sec:2.3" href="a-demo-app#sec:microposts_resource" class="heading"><span class="number">2.3</span> Ресурс Microposts</a></h2>
 
 
-<p>Сгенерировав и исследовав ресурс Users, мы поворачиваемся теперь к связанному ресурсу Microposts. На протяжении этого раздела я рекомендую сравнивать элементы ресурса Microposts с аналогичными элементами User из  <a class="ref" href="a-demo-app#sec:demo_users_resource">Раздела&nbsp;2.2</a>; вы должны увидеть, что эти два ресурса во многом параллельны друг другу. RESTful структура приложений Rails лучше всего усваивается посредством наблюдения за подобными повторяющимися формами; действительно, наблюдение параллельной структуры Users и Microposts даже на этой ранней стадии является одной из причин написания этой главы. (Как мы увидим, написание приложения, более устойчивого, нежели игрушечный пример в этой главе, требует значительных усилий &mdash; мы не увидим ресурс Microposts до  <a class="ref" href="user-microposts#top">Главы&nbsp;11</a>&mdash; и я не хотел так надолго откладывать его первое появление.)</p>
+<p>Сгенерировав и исследовав ресурс Users, мы поворачиваемся теперь к связанному ресурсу Microposts. На протяжении этого раздела я рекомендую сравнивать элементы ресурса Microposts с аналогичными элементами User из  <a class="ref" href="a-demo-app#sec:demo_users_resource">Раздела&nbsp;2.2</a>; вы должны увидеть, что эти два ресурса во многом параллельны друг другу. RESTful структура Rails приложений лучше всего усваивается посредством наблюдения за подобными повторяющимися формами; действительно, наблюдение параллельной структуры Users и Microposts даже на этой ранней стадии является одной из причин написания этой главы. (Как мы увидим, написание приложения, более устойчивого, нежели игрушечный пример в этой главе, требует значительных усилий &mdash; мы не увидим ресурс Microposts до  <a class="ref" href="user-microposts#top">Главы&nbsp;11</a>&mdash; и я не хотел так надолго откладывать его первое появление.)</p>
 
 <div class="label" id="sec:a_micropost_microtour"></div>
 
@@ -534,13 +534,13 @@
 </div>
 
 
-<p>Теперь мы имеем возможность создавать микропосты тем же образом, каким мы создавали пользователей в <a class="ref" href="a-demo-app#sec:a_user_tour">Разделе&nbsp;2.2.1</a>. Как вы могли бы предположить, генератор scaffold обновил файл маршрутов Rails с правилом для ресурса Microposts, как видно в  <a class="ref" href="a-demo-app#code:demo_microposts_resource">Листинге&nbsp;2.7</a>.<sup class="footnote" id="fnref:2.12"><a href="#fn:2.12">12</a></sup> Как и с users, <code>resources :microposts</code> маршрутное правило направляет  URL микросообщений на действия в контроллере Microposts, как видно в  <a class="ref" href="a-demo-app#table:demo_RESTful_microposts">Таблице&nbsp;2.3</a>.</p>
+<p>Теперь мы имеем возможность создавать микропосты тем же образом, каким мы создавали пользователей в <a class="ref" href="a-demo-app#sec:a_user_tour">Разделе&nbsp;2.2.1</a>. Как вы могли бы предположить, генератор scaffold добавил в файл маршрутов Rails правило для ресурса Microposts, как видно в  <a class="ref" href="a-demo-app#code:demo_microposts_resource">Листинге&nbsp;2.7</a>.<sup class="footnote" id="fnref:2.12"><a href="#fn:2.12">12</a></sup> Как и с users, <code>resources :microposts</code> маршрутное правило направляет  URL микросообщений на действия в контроллере Microposts, как видно в  <a class="ref" href="a-demo-app#table:demo_RESTful_microposts">Таблице&nbsp;2.3</a>.</p>
 
 <div class="label" id="code:demo_microposts_resource"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 2.7.</span> <span class="description">Маршруты Rails, с новым правилом для ресурсов Microposts.<br /> <code>config/routes.rb</code></span>
+<div class="listing"><span class="header">Листинг 2.7.</span> <span class="description">Маршруты Rails с новым правилом для ресурсов Microposts.<br /> <code>config/routes.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">DemoApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">resources</span> <span class="ss">:microposts</span>
@@ -558,7 +558,7 @@
 <div class="label" id="table:demo_RESTful_microposts"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP запрос</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Действие</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>index</code></td><td class="align_left">страница, перечисляющая все микросообщения</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">страница, показывающая микросообщения с id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">страница, чтобы сделать новые микросообщения</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>create</code></td><td class="align_left">создание нового микросообщения</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">страница редактирования микросообщения с id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">обновление микросообщения с id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">удаление микросообщения с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.3: </span><span class="description">RESTful маршруты, обеспеченные ресурсом Microposts в <a class="ref" href="a-demo-app#code:demo_microposts_resource">Листинге&nbsp;2.7</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>HTTP запрос</strong></th><th class="align_left"><strong>URL</strong></th><th class="align_left"><strong>Действие</strong></th><th class="align_left"><strong>Назначение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>index</code></td><td class="align_left">страница со списком всех микросообщений</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>show</code></td><td class="align_left">страница показывающая микросообщение с id <code>1</code></td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/new</tt></td><td class="align_left"><code>new</code></td><td class="align_left">страница для создания нового микросообщения</td></tr><tr><td class="align_left"><tt>POST</tt></td><td class="align_left"><tt>/microposts</tt></td><td class="align_left"><code>create</code></td><td class="align_left">создание нового микросообщения</td></tr><tr><td class="align_left"><tt>GET</tt></td><td class="align_left"><tt>/microposts/1/edit</tt></td><td class="align_left"><code>edit</code></td><td class="align_left">страница для редактирования микросообщения с id <code>1</code></td></tr><tr><td class="align_left"><tt>PUT</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>update</code></td><td class="align_left">обновление микросообщения с id <code>1</code></td></tr><tr><td class="align_left"><tt>DELETE</tt></td><td class="align_left"><tt>/microposts/1</tt></td><td class="align_left"><code>destroy</code></td><td class="align_left">удаление микросообщения с id <code>1</code></td></tr></table></div><div class="caption"><span class="header">Таблица 2.3: </span><span class="description">RESTful маршруты, обеспеченные ресурсом Microposts в <a class="ref" href="a-demo-app#code:demo_microposts_resource">Листинге&nbsp;2.7</a>.</span></div></div>
 
 
 <p>Сам Microposts контроллер в схематичной форме представлен в <a class="ref" href="a-demo-app#code:demo_microposts_controller">Листинге&nbsp;2.8</a>. Отметьте, что, кроме наличия <code>MicropostsController</code> вместо <code>UsersController</code>, <a class="ref" href="a-demo-app#code:demo_microposts_controller">Листинг&nbsp;2.8</a> <em>идентичен</em> коду в <a class="ref" href="a-demo-app#code:demo_users_controller">Листинге&nbsp;2.3</a>. Это отражение REST архитектуры, характерной для обоих ресурсов.</p>
@@ -617,7 +617,7 @@
 </div></div>
 
 
-<p>Чтобы сделать несколько актуальных микросообщений, мы вводим информацию в new страницу микросообщений, <a href="http://localhost:3000/microposts/new">/microposts/new</a>, как видно в <a class="ref" href="a-demo-app#fig:demo_new_micropost_rails_3">Рис.&nbsp;2.12</a>.</p>
+<p>Чтобы сделать несколько актуальных микросообщений, мы вводим информацию в new страницу микросообщений, <a href="http://localhost:3000/microposts/new">/microposts/new</a>, как видно на <a class="ref" href="a-demo-app#fig:demo_new_micropost_rails_3">Рис.&nbsp;2.12</a>.</p>
 
 <div class="label" id="fig:demo_new_micropost_rails_3"></div>
 
@@ -641,7 +641,7 @@
 <h3><a id="sec:2.3.2" href="a-demo-app#sec:putting_the_micro_in_microposts" class="heading"><span class="number">2.3.2</span> Помещение <em>микро</em> в микросообщения</a></h3>
 
 
-<p>Каждое <em>микро</em>сообщение, достойное своего имени, должно иметь некоторые средства предписания длины сообщения. Реализация этого ограничения в Rails легка с <em>проверками допустимости</em> (валидацией); чтобы принять микросообщения с, самое большее, 140 символами (а-ля Twitter), мы используем проверку допустимости (валидацию) <em>длины</em>. В этой точке следует открыть файл <code>app/models/micropost.rb</code> в вашем текстовом редакторе или IDE и заполнить это содержанием <a class="ref" href="a-demo-app#code:demo_length_validation">Листинга&nbsp;2.9</a>. (Использование <em>валидации</em> из <a class="ref" href="a-demo-app#code:demo_length_validation">Листинга&nbsp;2.9</a> характерно для Rails&nbsp;3; если вы ранее работали с Rails&nbsp;2.3, следует сравнить это с использованием <code>validates_length_of</code>.)</p>
+<p>Каждое <em>микро</em>сообщение, достойное своего имени, должно иметь некоторые средства предписания длины сообщения. Реализация этого ограничения в Rails легка с <em>проверками допустимости</em> (валидациями); чтобы принять микросообщения с, самое большее, 140 символами (а-ля Twitter), мы используем проверку допустимости (валидацию) <em>длины</em>. В этой точке следует открыть файл <code>app/models/micropost.rb</code> в вашем текстовом редакторе или IDE и заполнить его содержанием <a class="ref" href="a-demo-app#code:demo_length_validation">Листинга&nbsp;2.9</a>. (Использование <em>валидации</em> из <a class="ref" href="a-demo-app#code:demo_length_validation">Листинга&nbsp;2.9</a> характерно для Rails&nbsp;3; если вы ранее работали с Rails&nbsp;2.3, следует сравнить это с использованием <code>validates_length_of</code>.)</p>
 
 <div class="label" id="code:demo_length_validation"></div>
 
@@ -656,7 +656,7 @@
 </div></div>
 
 
-<p>Код в <a class="ref" href="a-demo-app#code:demo_length_validation">Листинге&nbsp;2.9</a> может выглядеть, довольно таинственно &mdash; мы рассмотрим валидацию, более тщательно  в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a>&mdash;но его эффект, станет вполне очевиден, если мы перейдем в новую страницу микросообщений и введем больше чем 140 символов для контента сообщения. Как видно в <a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">Рис.&nbsp;2.14</a>, Rails выдает <em>сообщение об ошибке</em> указывающее, что контент микросообщения является слишком длинным. (Мы узнаем больше о сообщениях об ошибках в <a class="ref" href="sign-up#sec:signup_error_messages">Разделе&nbsp;8.2.3</a>.)</p>
+<p>Код в <a class="ref" href="a-demo-app#code:demo_length_validation">Листинге&nbsp;2.9</a> может выглядеть, довольно таинственно &mdash; мы рассмотрим валидацию, более тщательно  в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a> &mdash; но его эффект, станет вполне очевиден, если мы перейдем в новую страницу микросообщений и введем больше чем 140 символов для контента сообщения. Как видно в <a class="ref" href="a-demo-app#fig:micropost_length_error_rails_3">Рис.&nbsp;2.14</a>, Rails выдает <em>сообщение об ошибке</em> указывающее на то, что контент микросообщения является слишком длинным. (Мы узнаем больше о сообщениях об ошибках в <a class="ref" href="sign-up#sec:signup_error_messages">Разделе&nbsp;8.2.3</a>.)</p>
 
 <div class="label" id="fig:micropost_length_error_rails_3"></div>
 
@@ -704,7 +704,7 @@
 </div></div>
 
 
-<p>Мы можем посмотреть результат этой ассоциации в <a class="ref" href="a-demo-app#fig:micropost_user_association">Рис.&nbsp;2.15</a>. Из-за <code>user_id</code> столбца в таблице <code>microposts</code> Rails (используя Active Record) может вывести микросообщения, связанные с каждым пользователем.</p>
+<p>Мы можем увидеть результат применения этой ассоциации на <a class="ref" href="a-demo-app#fig:micropost_user_association">Рис.&nbsp;2.15</a>. Из-за <code>user_id</code> столбца в таблице <code>microposts</code> Rails (используя Active Record) может вывести микросообщения, связанные с каждым пользователем.</p>
 
 <div class="label" id="fig:micropost_user_association"></div>
 
@@ -712,7 +712,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/micropost_user_association.png" alt="micropost_user_association" /></span></div><div class="caption"><span class="header">Рис. 2.15: </span><span class="description">Связь между микросообщениями и пользователями.</span></div></div>
 
 
-<p>В  <a class="ref" href="user-microposts#top">Главе&nbsp;11</a> и <a class="ref" href="following-users#top">Главе&nbsp;12</a>, мы будем использовать ассоциацию пользователей и микросообщений и чтобы вывести на экран все микросообщения пользователя и чтобы создать Twitter-подобную подачу микросообщений. Пока, мы можем исследовать применение связи микросообщения-пользователь с помощью <em>консоли</em>, которая является полезным инструментом для взаимодействия с приложениями Rails. Мы сначала вызовем консоль командой <code>rails console</code> в командной строке, а затем получим первого пользователя из базы данных, используя <code>User.first</code> (поместив результаты в переменную <code>first_user</code>):<sup class="footnote" id="fnref:2.13"><a href="#fn:2.13">13</a></sup></p>
+<p>В  <a class="ref" href="user-microposts#top">Главе&nbsp;11</a> и <a class="ref" href="following-users#top">Главе&nbsp;12</a> мы будем использовать ассоциацию пользователей и микросообщений и чтобы вывести на экран все микросообщения пользователя, и чтобы создать Twitter-подобную подачу микросообщений. Пока, мы можем исследовать применение связи микросообщения-пользователь с помощью <em>консоли</em>, которая является полезным инструментом для взаимодействия с Rails приложениями. Сначала мы вызовем консоль командой <code>rails console</code> в командной строке, а затем получим первого пользователя из базы данных, используя <code>User.first</code> (поместив результаты в переменную <code>first_user</code>):<sup class="footnote" id="fnref:2.13"><a href="#fn:2.13">13</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">first_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
@@ -728,7 +728,7 @@
 </div>
 
 
-<p>(Я включил последнюю строку только чтобы продемонстрировать, как выйти из консоли, и на большинстве систем вы можете использовать Ctrl-d с этой же целью.) Здесь мы получили доступ к микросообщениям пользователя, используя код <code>first_user.microposts</code>: с этим кодом Active Record автоматически возвращает все микросообщения с <code>user_id</code> равным id <code>first_user</code> (в данном случае,&nbsp;<code>1</code>). Мы узнаем намного больше о средствах ассоциации (связи) в Active Record в  <a class="ref" href="user-microposts#top">Главе&nbsp;11</a> и <a class="ref" href="following-users#top">Главе&nbsp;12</a>.</p>
+<p>(Я включил последнюю строку только чтобы продемонстрировать, как выйти из консоли, и на большинстве систем вы можете использовать Ctrl-d с этой же целью.) Здесь мы получили доступ к микросообщениям пользователя, используя код <code>first_user.microposts</code>: с этим кодом Active Record автоматически возвращает все микросообщения с <code>user_id</code> равным id <code>first_user</code> (в данном случае,&nbsp;<code>1</code>). Мы узнаем намного больше о возможностях ассоциаций (связей) Active Record в  <a class="ref" href="user-microposts#top">Главе&nbsp;11</a> и <a class="ref" href="following-users#top">Главе&nbsp;12</a>.</p>
 
 <div class="label" id="sec:inheritance_hierarchies"></div>
 
@@ -736,9 +736,9 @@
 <h3><a id="sec:2.3.4" href="a-demo-app#sec:inheritance_hierarchies" class="heading"><span class="number">2.3.4</span> Иерархия наследования</a></h3>
 
 
-<p>Мы заканчиваем наше обсуждение демонстрационного приложения  кратким описанием иерархии классов  контроллеров и моделей в Rails. Это обсуждение будет иметь много смысла, только если у вас был некоторый опыт объектно-ориентированного программирования (ООП); если вы не изучали ООП, не стесняйтесь пропустить этот раздел. В частности, если вы незнакомы с <em>классами</em> (обсуждаемыми в  <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Разделе&nbsp;4.4</a>), я предлагаю вернуться к этому разделу позже.</p>
+<p>Мы закончим наше обсуждение демонстрационного приложения кратким описанием иерархии классов контроллеров и моделей в Rails. Это обсуждение будет иметь много смысла, только если у вас был некоторый опыт объектно-ориентированного программирования (ООП); если вы не изучали ООП, не стесняйтесь пропустить этот раздел. В частности, если вы незнакомы с <em>классами</em> (обсуждаемыми в  <a class="ref" href="rails-flavored-ruby#sec:ruby_classes">Разделе&nbsp;4.4</a>), я предлагаю вернуться к этому разделу позже.</p>
 
-<p>Мы начнем со структуры наследования для моделей. Сравнивая  <a class="ref" href="a-demo-app#code:demo_user_class">Листинг&nbsp;2.12</a> и <a class="ref" href="a-demo-app#code:demo_micropost_class">Листинг&nbsp;2.13</a>, мы видим, что и модель User и модель Micropost наследовались (через левую угловую скобку&nbsp;<code>&lt;</code>) от <code>ActiveRecord::Base</code>, которая является базовым классом для моделей, обеспеченных ActiveRecord; схема, резюмирующая это отношение, представлена в  <a class="ref" href="a-demo-app#fig:demo_model_inheritance">Рис.&nbsp;2.16</a>. Благодаря наследованию от <code>ActiveRecord::Base</code> наши объекты модели получают возможность связываться с базой данных, обрабатывать столбцы базы данных, как Ruby атрибуты, и так далее.</p>
+<p>Мы начнем со структуры наследования для моделей. Сравнивая  <a class="ref" href="a-demo-app#code:demo_user_class">Листинг&nbsp;2.12</a> и <a class="ref" href="a-demo-app#code:demo_micropost_class">Листинг&nbsp;2.13</a>, мы видим, что и модель User и модель Micropost наследовались (через левую угловую скобку&nbsp;<code>&lt;</code>) от <code>ActiveRecord::Base</code>, который является базовым классом для моделей, предоставляемых библиотекой ActiveRecord; схема, резюмирующая это отношение, представлена на  <a class="ref" href="a-demo-app#fig:demo_model_inheritance">Рис.&nbsp;2.16</a>. Благодаря наследованию от <code>ActiveRecord::Base</code> наши объекты модели получают возможность связываться с базой данных, обрабатывать столбцы базы данных, как Ruby атрибуты, и так далее.</p>
 
 <div class="label" id="code:demo_user_class"></div>
 
@@ -780,7 +780,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/demo_model_inheritance.png" alt="demo_model_inheritance" /></span></div><div class="caption"><span class="header">Рис. 2.16: </span><span class="description">Иерархия наследования для моделей User и Micropost.</span></div></div>
 
 
-<p>Структура наследования для контроллеров лишь немногим более сложная. Сравнивая <a class="ref" href="a-demo-app#code:demo_users_controller_class">Листинг&nbsp;2.14</a> и <a class="ref" href="a-demo-app#code:demo_microposts_controller_class">Листинг&nbsp;2.15</a>, мы видим, что и контроллер User и контроллер Micropost наследовались от Application controller. Исследуя  <a class="ref" href="a-demo-app#code:demo_application_controller_class">Листинг&nbsp;2.16</a>, мы видим, что сам <code>ApplicationController</code> наследует от <code>ActionController::Base</code>;  это базовый класс для контроллеров, обеспеченных Action Pack библиотекой Rails. Отношения между этими классами иллюстрируются в <a class="ref" href="a-demo-app#fig:demo_controller_inheritance">Рис.&nbsp;2.17</a>.</p>
+<p>Структура наследования для контроллеров лишь немногим более сложная. Сравнивая <a class="ref" href="a-demo-app#code:demo_users_controller_class">Листинг&nbsp;2.14</a> и <a class="ref" href="a-demo-app#code:demo_microposts_controller_class">Листинг&nbsp;2.15</a>, мы видим, что и контроллер User и контроллер Micropost наследовались от Application controller. Исследуя  <a class="ref" href="a-demo-app#code:demo_application_controller_class">Листинг&nbsp;2.16</a>, мы видим, что сам <code>ApplicationController</code> наследует от <code>ActionController::Base</code>;  это базовый класс для контроллеров, обеспеченных  Rails библиотекой Action Pack. Отношения между этими классами иллюстрируются в <a class="ref" href="a-demo-app#fig:demo_controller_inheritance">Рис.&nbsp;2.17</a>.</p>
 
 <div class="label" id="code:demo_users_controller_class"></div>
 
@@ -847,7 +847,7 @@
 <h3><a id="sec:2.3.5" href="a-demo-app#sec:deploying_the_demo_app" class="heading"><span class="number">2.3.5</span> Развертывание demo app</a></h3>
 
 
-<p>Закончив с ресурсом Microposts, теперь хорошее время, чтобы отправить репозиторий в GitHub:<sup class="footnote" id="fnref:2.14"><a href="#fn:2.14">14</a></sup></p>
+<p>Закончив ресурс Microposts, мы можем отправить репозиторий на GitHub:<sup class="footnote" id="fnref:2.14"><a href="#fn:2.14">14</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git add .
 <span class="gp">$</span> git commit -a -m <span class="s2">&quot;Done with the demo app&quot;</span>
@@ -856,7 +856,7 @@
 </div>
 
 
-<p>Можно также развернуть demo app в Heroku:</p>
+<p>Можно также развернуть demo app на Heroku:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create
 <span class="gp">$</span> git push heroku master
@@ -892,7 +892,8 @@
 
 <p><strong>Недостатки</strong></p>
 
-<ul><li>Нет собственного макета или стиля</li>
+<ul>
+<li>Нет собственного макета или стиля</li>
 <li>Нет статических страниц (таких как "Главная" или "О нас")</li>
 <li>Нет паролей пользователя</li>
 <li>Нет изображений пользователя</li>
@@ -900,34 +901,34 @@
 <li>Нет безопасности</li>
 <li>Нет автоматической связи пользователь/микросообщение</li>
 <li>Нет понятий &ldquo;following&rdquo; или &ldquo;followed&rdquo;</li>
-<li>Нет канала (RSS) micropost</li>
+<li>Нет потока (ленты) микросообщений</li>
 <li>Нет разработки через тестирование</li>
 <li><strong>Нет реального понимания</strong></li></ul>
 
 
-<p>Остальная часть этого учебного руководства выделяется усилению достоинств и устранению недостатков.</p>
+<p>Остальная часть этого учебника посвящена усилению достоинств и устранению недостатков.</p>
 
 <div class="navigation">  <a class="prev_page" href="beginning#top">
     &laquo;&nbsp;<span class="number">Глава 1</span> От нуля к развертыванию
   </a>
   <a class="next_page" href="static-pages#top">
-    <span class="number">Глава 3</span> В основном статичные страницы&nbsp;&raquo;
+    <span class="number">Глава 3</span> В основном статические страницы&nbsp;&raquo;
   </a>
 </div><div class="footnotes">
 <ol>
 <li id="fn:2.1">Я советую вам не слишком присматриваться к сгенерированному коду; на данном этапе, это только смутит вас.&nbsp;<a class="arrow" href="#fnref:2.1">&uarr;</a></li>
 <li id="fn:2.2">Вспомните, что команда <code>rails</code> генерирует дефолтный <code>.gitignore</code> файл, но в зависимости от вашей системы можно найти, что увеличенный файл из <a class="ref" href="beginning#code:gitignore">Листинга&nbsp;1.6</a> более удобен.&nbsp;<a class="arrow" href="#fnref:2.2">&uarr;</a></li>
-<li id="fn:2.3">Моделируя более длинные сообщения,  для нормального (немикро) блога, следует использовать тип <code>text</code> вместо <code>string</code>.&nbsp;<a class="arrow" href="#fnref:2.3">&uarr;</a></li>
+<li id="fn:2.3">Моделируя более длинные сообщения,  для нормального (не микро) блога, следует использовать тип <code>text</code> вместо <code>string</code>.&nbsp;<a class="arrow" href="#fnref:2.3">&uarr;</a></li>
 <li id="fn:2.4">Имя scaffold следует за соглашением в соответствии с которым, <em>модели</em> имеют единственное число, в отличие от ресурсов и контроллеров, которые используются во множественном числе. Таким образом, у нас есть <em>User</em> вместо <em>Users</em>.&nbsp;<a class="arrow" href="#fnref:2.4">&uarr;</a></li>
 <li id="fn:2.5">User id необходим как <em>первичный ключ</em> в базе данных.&nbsp;<a class="arrow" href="#fnref:2.5">&uarr;</a></li>
-<li id="fn:2.6">Начиная отсюда <tt>http://localhost:3000</tt> часть адреса неявна всякий раз, когда мы разрабатываем локально, и я буду обычно опускать ее.&nbsp;<a class="arrow" href="#fnref:2.6">&uarr;</a></li>
+<li id="fn:2.6">Начиная отсюда <tt>http://localhost:3000</tt> часть адреса очевидна всякий раз, когда мы разрабатываем локально, и я буду обычно опускать ее.&nbsp;<a class="arrow" href="#fnref:2.6">&uarr;</a></li>
 <li id="fn:2.7">Некоторые источники утверждают, что представление возвращает HTML непосредственно браузеру (через веб-сервер, такой как Apache или Nginx). Независимо от деталей реализации я предпочитаю думать о контроллере как о центральном концентраторе через который проходят информационные потоки всего приложения.&nbsp;<a class="arrow" href="#fnref:2.7">&uarr;</a></li>
 <li id="fn:2.8">Странная запись <code>:users</code> является <em>символом</em>, о котором мы узнаем в  <a class="ref" href="rails-flavored-ruby#sec:hashes_and_symbols">Разделе&nbsp;4.3.3</a>.&nbsp;<a class="arrow" href="#fnref:2.8">&uarr;</a></li>
 <li id="fn:2.9">Код scaffold является уродливым и запутывающим, поэтому я обрезал его.&nbsp;<a class="arrow" href="#fnref:2.9">&uarr;</a></li>
 <li id="fn:2.10">Помните, вы, как предполагается, не понимаете этот код сейчас. Он показан только в целях иллюстрации.&nbsp;<a class="arrow" href="#fnref:2.10">&uarr;</a></li>
 <li id="fn:2.11">Как и с User scaffold, генератор scaffold для микросообщений следует сингулярному соглашению для моделей Rails; таким образом, мы имеем, <code>generate Micropost</code>, а не <code>generate MicropostS</code>.&nbsp;<a class="arrow" href="#fnref:2.11">&uarr;</a></li>
 <li id="fn:2.12">У кода scaffold могут быть дополнительные новые строки по сравнению с <a class="ref" href="a-demo-app#code:demo_microposts_resource">Листингом&nbsp;2.7</a>; это не повод для беспокойства, поскольку Ruby игнорирует дополнительные новые строки.&nbsp;<a class="arrow" href="#fnref:2.12">&uarr;</a></li>
-<li id="fn:2.13">Ваше консольное приглашение, вероятно, будет чем-то вроде <code>ruby-1.9.2-head &gt;</code>, но я буду использовать <code>&gt;&gt;</code> чтобы приглашение не было связано с определенной версией Ruby.&nbsp;<a class="arrow" href="#fnref:2.13">&uarr;</a></li>
+<li id="fn:2.13">Ваше приглашение командной строки, вероятно, будет чем-то вроде <code>ruby-1.9.2-head &gt;</code>, но я буду использовать <code>&gt;&gt;</code> чтобы приглашение не было связано с определенной версией Ruby.&nbsp;<a class="arrow" href="#fnref:2.13">&uarr;</a></li>
 <li id="fn:2.14">Обычно, следует сделать меньшие, более частые фиксации, но для целей этой главы единственная большая фиксация в конце это нормально.&nbsp;<a class="arrow" href="#fnref:2.14">&uarr;</a></li>
 <li id="fn:2.15">Если вы развертывали в Heroku в <a class="ref" href="a-demo-app#sec:deploying_the_demo_app">Разделе&nbsp;2.3.5</a>.&nbsp;<a class="arrow" href="#fnref:2.15">&uarr;</a></li>
 </ol>

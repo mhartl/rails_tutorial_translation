@@ -14,12 +14,12 @@
 
 <p><em>Rails Учебник</em> это книга по веб-разработке, а не по веб-дизайну, но  работа над приложением, которое выглядит как <em>полное</em> дерьмо - удручает, поэтому, в этом разделе мы добавим некоторые структуры в шаблон и придадим ему минимальный дизайн с CSS. Мы также придадим нашему <em>коду</em> немного стиля, так сказать, используя <em>частичные шаблоны</em> почистим шаблон, поскольку он немного загроможден.</p>
 
-<p>При создании веб-приложений, часто бывает полезным получить  общий вид пользовательского интерфейса как можно раньше. Таким образом, на протяжении остальной части книги, я буду часто использовать <em>макеты</em> (в контексте Веб часто называемыми <em>каркасами</em>), которые являются грубыми набросками того, как приложение, возможно, будет выглядеть.<sup class="footnote" id="fnref:5.1"><a href="#fn:5.1">1</a></sup> В этой главе мы будем главным образом разрабатывать статические страницы введеные в <a class="ref" href="static-pages#sec:static_pages">Разделе&nbsp;3.1</a>, включая логотип сайта, заголовок с навигацией по сайту, и подвал сайта. Каркас для наиболее важной из страниц&nbsp;&mdash;&nbsp;Home страницы, представлен в <a class="ref" href="filling-in-the-layout#fig:home_page_mockup">Рис.&nbsp;5.1</a>. (Вы можете увидеть окончательный результат на <a class="ref" href="filling-in-the-layout#fig:site_with_footer">Рис.&nbsp;5.8</a>. Он отличается в некоторых деталях, например, подвал имеет четыре ссылки вместо трех, но это нормально, так как каркас и не должен быть абсолютно точным.)</p>
+<p>При создании веб-приложений, часто бывает полезным получить  общий вид пользовательского интерфейса как можно раньше. Таким образом, на протяжении остальной части книги, я буду часто использовать <em>макеты</em> (в контексте Веб часто называемыми <em>каркасами</em>), которые являются грубыми набросками того, как приложение, возможно, будет выглядеть.<sup class="footnote" id="fnref:5.1"><a href="#fn:5.1">1</a></sup> В этой главе мы будем главным образом разрабатывать статические страницы введеные в <a class="ref" href="static-pages#sec:static_pages">Разделе&nbsp;3.1</a>, включая логотип сайта, заголовок с навигацией по сайту, и подвал сайта. Каркас для наиболее важной из страниц&nbsp;&mdash;&nbsp;Home страницы, представлен на <a class="ref" href="filling-in-the-layout#fig:home_page_mockup">Рис.&nbsp;5.1</a>. (Вы можете увидеть конечный результат на <a class="ref" href="filling-in-the-layout#fig:site_with_footer">Рис.&nbsp;5.8</a>. Он отличается в некоторых деталях, например, подвал имеет четыре ссылки вместо трех, но это нормально, так как каркас и не должен быть абсолютно точным.)</p>
 
 <div class="label" id="fig:home_page_mockup"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_mockup.png" alt="home_page_mockup" /></span></div><div class="caption"><span class="header">Рисунок  5.1: </span><span class="description">Каркас Home страницы примера приложения.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_mockup-full.png">(полный размер)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/home_page_mockup.png" alt="home_page_mockup" /></span></div><div class="caption"><span class="header">Рис. 5.1: </span><span class="description">Каркас Home страницы примера приложения.&nbsp;<a href="http://railstutorial.org/images/figures/home_page_mockup-full.png">(полный размер)</a></span></div></div>
 
 
 <p>Как обычно, если вы используете Git для управления версиями, то сейчас самое время создать новую ветку:</p>
@@ -29,7 +29,7 @@
 </div>
 
 
-<p>У вас мог еще сохраниться <code>example_user.rb</code> файл из  <a class="ref" href="rails-flavored-ruby#top">Главы&nbsp;4</a> в каталоге вашего проекта, и если да, то вам следует просто удалить его.  </p>
+<p>У вас мог еще сохраниться <code>example_user.rb</code> файл из  <a class="ref" href="rails-flavored-ruby#top">Главы&nbsp;4</a> в каталоге вашего проекта, если это так, то вам следует просто удалить его.</p>
 
 <div class="label" id="sec:adding_to_the_layout"></div>
 
@@ -37,7 +37,7 @@
 <h3><a id="sec:5.1.1" href="filling-in-the-layout#sec:adding_to_the_layout" class="heading"><span class="number">5.1.1</span> Навигация по сайту</a></h3>
 
 
-<p>Когда мы последний раз видели файл шаблона сайта <code>application.html.erb</code> в <a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">Листинге&nbsp;4.3</a>, мы только что добавили к нему таблицы стилей Blueprint, используя Rails помощник <code>stylesheet_link_tag</code>. Пришло время добавить еще пару таблиц стилей, одну специально для интернет-браузеров Explorer и одну для нашего (скоро-будет-добавлен) пользовательского CSS. Мы также добавим несколько дополнительных (<code>div</code>-ов), несколько <code>id</code> и <code>class</code>-ов, и запустим навигацию по нашему сайту. Законченный файл&nbsp;&mdash;&nbsp;в  <a class="ref" href="filling-in-the-layout#code:layout_new_structure">Листинге&nbsp;5.1</a>; объяснения различных частей последуют сразу за ним.  Если вы не хотите откладывать удовольствие, вы можете посмотреть на результаты в <a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">Рис.&nbsp;5.2</a>. (<em>Примечание:</em> это (пока) не очень приятно.)</p>
+<p>Когда мы последний раз видели файл шаблона сайта <code>application.html.erb</code> в <a class="ref" href="rails-flavored-ruby#code:application_layout_full_title">Листинге&nbsp;4.3</a>, мы только что добавили к нему таблицы стилей Blueprint, используя Rails помощник <code>stylesheet_link_tag</code>. Пришло время добавить еще пару таблиц стилей, одну специально для интернет-браузеров Explorer и одну для нашего (скоро-будет-добавлен) пользовательского CSS. Мы также добавим несколько дополнительных (<code>div</code>-ов), несколько <code>id</code> и <code>class</code>-ов, и запустим навигацию по нашему сайту. Законченный файл&nbsp;&mdash;&nbsp;в  <a class="ref" href="filling-in-the-layout#code:layout_new_structure">Листинге&nbsp;5.1</a>; объяснения различных частей последуют сразу за ним.  Если вы не хотите откладывать удовольствие, вы можете посмотреть на результаты представленные на <a class="ref" href="filling-in-the-layout#fig:layout_no_logo_or_custom_css">Рис.&nbsp;5.2</a>. (<em>Примечание:</em> это (пока) не очень приятно.)</p>
 
 <div class="label" id="code:layout_new_structure"></div>
 
@@ -168,7 +168,7 @@
 </div>
 
 
-<p>Этот список использует Rails помощник <code>link_to</code> для создания ссылок (которые мы создавали непосредственно с якорным (анкорным) тегом&nbsp;<code>a</code> в <a class="ref" href="static-pages#sec:passing_title_tests">Разделе&nbsp;3.3.2</a>); Первый аргумент это текст ссылки, а второй это URL. Мы заполним URL-адреса <em>именованными маршрутами</em> в <a class="ref" href="filling-in-the-layout#sec:named_routes">Разделе&nbsp;5.2.3</a>, но сейчас мы используем заглушки URL <code>&rsquo;#&rsquo;</code> обычно применяемые  в веб-дизайне. После Rails обработки этого шаблона и оценки Embedded Ruby, список выглядит следующим образом:</p>
+<p>Этот список использует Rails помощник <code>link_to</code> для создания ссылок (которые мы создавали непосредственно с якорным (анкорным) тегом&nbsp;<code>a</code> в <a class="ref" href="static-pages#sec:passing_title_tests">Разделе&nbsp;3.3.2</a>); первый аргумент это текст ссылки, а второй это URL. Мы заполним URL-адреса <em>именованными маршрутами</em> в <a class="ref" href="filling-in-the-layout#sec:named_routes">Разделе&nbsp;5.2.3</a>, но сейчас мы используем заглушки URL <code>&rsquo;#&rsquo;</code> обычно применяемые  в веб-дизайне. После Rails обработки этого шаблона и оценки Embedded Ruby, список выглядит следующим образом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;round&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
@@ -187,7 +187,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 5.2.</span> <span class="description">Home страница со ссылкой на страницу регистрации <br /> <code>app/views/pages/home.html.erb</code></span>
+<div class="listing"><span class="header">Листинг 5.2.</span> <span class="description">Home страница со ссылкой на страницу регистрации. <br /> <code>app/views/pages/home.html.erb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Sample App<span class="nt">&lt;/h1&gt;</span>
 

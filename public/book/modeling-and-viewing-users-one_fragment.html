@@ -12,7 +12,7 @@
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 6.1.</span><span class="description">Прикручивание собственной  системы аутентификации.</span></span>
-<p>Фактически всем веб-приложениям в настоящее время требуется какая либо система входа и аутентификации. Неудивительно, что у большинства веб-платформ есть множество возможностей для реализации таких систем, и Rails не исключение. Примеры систем аутентификации и авторизации включают в себя <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a>, и <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (так же как не-Rails-специфичные решения, построенные на <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> или <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Разумно спросить, почему мы должны повторно изобретать колесо. Почему бы просто не использовать стандартное решение вместо того, чтобы прикручивать собственное?</p>
+<p>Фактически всем веб-приложениям в настоящее время требуется какая либо система входа и аутентификации. Неудивительно, что у большинства веб-фреймворков есть множество вариантов реализации подобных систем, и Rails не исключение. Примеры систем аутентификации и авторизации включают в себя <a href="http://github.com/thoughtbot/clearance">Clearance</a>, <a href="http://github.com/binarylogic/authlogic">Authlogic</a>, <a href="http://github.com/plataformatec/devise">Devise</a>, и <a href="http://railscasts.com/episodes/192-authorization-with-cancan">CanCan</a> (так же как не-Rails-специфичные решения, построенные на <a href="http://en.wikipedia.org/wiki/OpenID">OpenID</a> или <a href="http://en.wikipedia.org/wiki/Oauth">OAuth</a>). Разумно спросить, почему мы должны повторно изобретать колесо. Почему бы просто не использовать стандартное решение вместо того, чтобы прикручивать собственное?</p>
 
 <p>Есть несколько причин, почему создание нашей собственной системы аутентификации является хорошей идеей. Во-первых, стандартного решения для аутентификации в Rails не существует; а привязав учебник к какому либо конкретному проекту мы рискуем тем, что выбранный проект может выйти из моды или устареть. Кроме того, даже если бы мы угадали, то кодовая база проекта продолжала бы развиваться, тем самым превращая учебник в устаревший хлам. Наконец, представление всей машинерии аутентификации сразу было бы педагогическим бедствием - к примеру, Clearance содержит более чем 1 000 строк кода и создает сложную модель данных с самого начала. Системы аутентификации - захватывающее и богатое программированием упражнение; прикручивание нашего собственного означает, что мы можем рассматривать одну маленькую часть за один раз, что приведет к намного более глубокому пониманию - и аутентификации и Rails.</p>
 
@@ -44,9 +44,9 @@
 <h2><a id="sec:6.1" href="modeling-and-viewing-users-one#sec:user_model" class="heading"><span class="number">6.1</span> Модель User</a></h2>
 
 
-<p>Хотя конечная цель следующих трех глав это создание страницы регистрации для нашего сайта, в принятии регистрационной информации сейчас хорошего мало, так как у нас в настоящий момент нет  места, чтобы хранить ее. Таким образом, первый шаг в регистрации пользователей должен сделать структуру данных, для получения и хранения их информации. В Rails дефолтную структуру данных для модели данных называют, что достаточно естественно, <em>модель</em> (М. в MVC из <a class="ref" href="beginning#sec:mvc">Раздела&nbsp;1.2.6</a>). Дефолтное решение Rails для проблемы персистентности состоит в том, чтобы использовать <em>базу данных</em> для долгосрочного хранения данных, и дефолтную библиотеку <em>Active Record</em> для того, чтобы взаимодействовать с базой данных.<sup class="footnote" id="fnref:6.2"><a href="#fn:6.2">2</a></sup></p>
+<p>Хотя конечная цель следующих трех глав это создание страницы регистрации для нашего сайта, в принятии регистрационной информации сейчас хорошего мало, так нам в настоящий момент попросту негде ее хранить. Таким образом, первый шаг в регистрации пользователей должен создать структуру данных, для получения и хранения их информации. В Rails дефолтную структуру данных для модели данных называют, что достаточно естественно, <em>модель</em> (М. в MVC из <a class="ref" href="beginning#sec:mvc">Раздела&nbsp;1.2.6</a>). Дефолтное решение Rails для проблемы персистентности состоит в том, чтобы использовать <em>базу данных</em> для долгосрочного хранения данных, и дефолтную библиотеку <em>Active Record</em> для взаимодействия с базой данных.<sup class="footnote" id="fnref:6.2"><a href="#fn:6.2">2</a></sup></p>
 
-<p>Active Record идет с массой методов для создания, хранения и поиска объектов данных, и  все без необходимости использовать язык структурированных запросов (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> используемый <a  href="http://ru.wikipedia.org/wiki/Реляционная_база_данных">реляционными базами данных</a>. Кроме того, у Rails есть функции, называемые <em>миграциями</em> чтобы позволить определениям данных быть записанными в чистом Ruby, без необходимости изучать язык определения данных (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> Как результат,  Rails почти полностью изолирует вас от деталей хранения данных. В этой книге, при использовании SQLite для разработки и Heroku для развертывания (<a class="ref" href="beginning#sec:deploying">Раздел&nbsp;1.4</a>), мы разработали эту тему еще дальше, до точки, где мы едва когда-либо должны думать о том, как Rails хранит данные, даже для production приложений.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
+<p>Active Record идет с массой методов для создания, хранения и поиска объектов данных и все они без необходимости использовать язык структурированных запросов (SQL)<sup class="footnote" id="fnref:6.3"><a href="#fn:6.3">3</a></sup> применяемый <a  href="http://ru.wikipedia.org/wiki/Реляционная_база_данных">реляционными базами данных</a>. Кроме того, у Rails есть функции, называемые <em>миграциями</em> которые позволяют писать определения данных на чистом Ruby, без необходимости изучать язык определения данных (DDL).<sup class="footnote" id="fnref:6.4"><a href="#fn:6.4">4</a></sup> Как результат,  Rails почти полностью изолирует вас от деталей хранения данных. В этой книге, пблагодаря использованию SQLite для разработки и Heroku для развертывания (<a class="ref" href="beginning#sec:deploying">Раздел&nbsp;1.4</a>),, мы проработали эту туму еще дальше, до точки, где нам едва ли когда-нибудь придется задумываться о том, как Rails хранит данные, даже для рабочих приложений.<sup class="footnote" id="fnref:6.5"><a href="#fn:6.5">5</a></sup></p>
 
 <div class="label" id="sec:database_migrations"></div>
 
@@ -54,9 +54,9 @@
 <h3><a id="sec:6.1.1" href="modeling-and-viewing-users-one#sec:database_migrations" class="heading"><span class="number">6.1.1</span> Миграции базы данных</a></h3>
 
 
-<p>Можно вспомнить из <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Раздела&nbsp;4.4.5</a> что мы уже встречали, в сделанном нами классе <code>User</code> объекты user с атрибутами <code>name</code> и <code>email</code> Тот класс служил полезным примером, но он испытывал недостаток в критическом свойстве <em>персистентности</em>: когда мы создали объект User в консоли Rails, он исчез, как только мы вышли. Наша цель в этом Разделе состоит в том, чтобы создать модель для пользователей, которые не будут исчезать так легко.</p>
+<p>Можно вспомнить из <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Раздела&nbsp;4.4.5</a>, что мы уже встречали, в сделанном нами классе <code>User</code> объекты user с атрибутами <code>name</code> и <code>email</code>. Тот класс служил полезным примером, но он испытывал недостаток в критическом свойстве <em>персистентности</em>: когда мы создали объект User в консоли Rails, он исчез, как только мы вышли. Наша цель в этом Разделе состоит в том, чтобы создать модель для пользователей, которые не будут исчезать так легко.</p>
 
-<p>Как и с классом User в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы начнем с моделирования пользователя с двумя атрибутами: <code>name</code> и <code>email</code>, последний мы будем использовать в качестве уникального имени пользователя.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (Мы добавим атрибут пароля в <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">Разделе&nbsp;7.1</a>.) В <a class="ref" href="rails-flavored-ruby#code:example_user">Листинге&nbsp;4.8</a>, мы сделали это с <code>attr_accessor</code> методом Ruby:</p>
+<p>Как и с классом User в <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы начнем с моделирования пользователя с двумя атрибутами: <code>name</code> и <code>email</code>, последний мы будем использовать в качестве уникального имени пользователя.<sup class="footnote" id="fnref:6.6"><a href="#fn:6.6">6</a></sup> (Мы добавим атрибут пароля в <a class="ref" href="modeling-and-viewing-users-two#sec:insecure_passwords">Разделе&nbsp;7.1</a>.) В <a class="ref" href="rails-flavored-ruby#code:example_user">Листинге&nbsp;4.8</a>мы сделали это с помощью Ruby-метода <code>attr_accessor</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -68,16 +68,16 @@
 </div>
 
 
-<p>Напротив, при использовании Rails, чтобы смоделировать пользователей мы не должны идентифицировать атрибуты явно. Как отмечено кратко выше, чтобы хранить данные, Rails  по умолчанию использует реляционную базу данных, которая состоит из <em>таблиц</em> составленных из <em>строк</em>, данных, где у каждой строки есть <em>столбцы</em> атрибутов данных. Например, чтобы сохранить пользователей с именами и адресами электронной почты, мы составим таблицу <code>users</code> со столбцами <code>name</code> и <code>email</code> (с каждой строкой, соответствующей одному пользователю). Называя столбцы таким образом, мы позволим Active Record выводить атрибуты объектов User для нас.</p>
+<p>Напротив, при использовании Rails, чтобы смоделировать пользователей мы не должны идентифицировать атрибуты явно. Как было кратко отмечено выше, для хранения данных Rails  по умолчанию использует реляционные базы данных, которые состоят из <em>таблиц</em> составленных из <em>строк</em>, данных, где у каждой строки есть <em>столбцы</em> атрибутов данных. Например, для того, чтобы сохранить пользователей с именами и адресами электронной почты, мы составим таблицу <code>users</code> со столбцами <code>name</code> и <code>email</code> (с каждой строкой, соответствующей одному пользователю). Называя столбцы таким образом, мы позволим Active Record выводить атрибуты объектов User для нас.</p>
 
-<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на ваш взгляд, будьте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить. Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>) что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
+<p>Давайте посмотрим, как это работает. (Если это обсуждение становится слишком абстрактным на ваш взгляд, будьте терпеливы; консольные примеры, начинающиеся в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a> и скриншоты браузера базы данных в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_user_row">Рис.&nbsp;6.8</a> должны многое прояснить.) Вспомните из <a class="ref" href="filling-in-the-layout#sec:users_controller">Раздела&nbsp;5.3.1</a>  (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>), что мы создавали контроллер  Users  (наряду с <code>new</code> действием) используя команду</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller Users new
 </pre></div>
 </div>
 
 
-<p>Есть аналогичная команда для того, чтобы сделать модель: <code>generate model</code>; <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинг&nbsp;6.1</a> показывает команду для генерации модели User с двумя атрибутами, <code>name</code> и <code>email</code>.</p>
+<p>Есть аналогичная команда для создания модели: <code>generate model</code>; <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинг&nbsp;6.1</a> показывает команду для генерации модели User с двумя атрибутами, <code>name</code> и <code>email</code>.</p>
 
 <div class="label" id="code:generate_user_model"></div>
 
@@ -94,15 +94,15 @@
 </div></div>
 
 
-<p>(Отметьте, что, в отличие от множественного соглашения для имен контроллеров, названия моделей - в ед. числе: контроллер Users, но модель User), передавая дополнительные параметры <code>name:string</code> и <code>email:string</code>, мы говорим Rails о двух желаемых атрибутах, наряду с тем, какого типа эти атрибуты должны быть (в данном случае, <code>string</code>). Сравните это с включением имен действий в <a class="ref" href="static-pages#code:generating_pages">Листинге&nbsp;3.4</a> и <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>.</p>
+<p>(Обратите внимание, что, в отличие от множественного соглашения для имен контроллеров, названия моделей - в ед. числе: контроллер Users, но модель User.) Передавая дополнительные параметры <code>name:string</code> и <code>email:string</code>, мы говорим Rails о двух желаемых атрибутах, наряду с тем, какого типа эти атрибуты должны быть (в данном случае, <code>string</code>). Сравните это с включением имен действий в <a class="ref" href="static-pages#code:generating_pages">Листинге&nbsp;3.4</a> и <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>.</p>
 
-<p>Одним из результатов <code>generate</code> команды в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a> является новый файл, названный <em>migration</em>.  Миграции обеспечивают возможность постепенного изменения структуры базы данных, так, чтобы наша модель данных могла адаптироваться к изменяющимся требованиям. В случае модели User миграция создается автоматически сценарием генерации модели; что создает таблицу <code>users</code> с двумя столбцами, <code>name</code> и <code>email</code>, как показано в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>. (Мы увидим в <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">Разделе&nbsp;6.2.4</a> как сделать миграцию с нуля.)</p>
+<p>Одним из результатов <code>generate</code> команды в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a> является новый файл, названный <em>migration</em>.  Миграции обеспечивают возможность постепенного изменения структуры базы данных, так, чтобы наша модель данных могла адаптироваться к изменяющимся требованиям. В случае модели User, миграция создается автоматически сценарием генерации модели; что создает таблицу <code>users</code> с двумя столбцами, <code>name</code> и <code>email</code>, как это показано в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>. (Мы увидим в <a class="ref" href="modeling-and-viewing-users-one#sec:uniqueness_validation">Разделе&nbsp;6.2.4</a> как сделать миграцию с нуля.)</p>
 
 <div class="label" id="code:users_migration"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.2.</span> <span class="description">Миграция для модели User (чтобы составить таблицу <code>users</code>) <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.2.</span> <span class="description">Миграция для модели User (создающая таблицу <code>users</code>) <br /> <code>db/migrate/&lt;timestamp&gt;_create_users.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -122,9 +122,9 @@
 </div></div>
 
 
-<p>Отметьте, что имя миграции снабжается префиксом с <em>временнОй отметкой</em>, обозначающей время когда была сгенерирована миграция. В первые годы миграций, имена файлов были снабжены префиксом постепенно увеличивающихся целых чисел, которые вызвали конфликты у сотрудничающих команд, если у разных програмистов были миграции с тем же самым номером. Запрет очень невероятной одновременной работы на уровне миллисекунды, использующий временнЫе метки удобно избегает таких коллизий.</p>
+<p>Обратите внимание, что имя миграции снабжается префиксом с <em>временнОй отметкой</em>, обозначающей время когда была сгенерирована миграция. В первые дни миграций, имена файлов снабжались префиксом из постепенно увеличивающихся целых чисел, что приводило к конфликтам внутри команд разработчиков, при совпадении номеров миграций у разных программистов. Барьер, использующий временнЫе метки и опирающийся на невозможность сценария при котором миграции будут сгенерированы одновременно, с точностью до секунды,  помогает легко избегать таких коллизий.</p>
 
-<p>Давайте сосредоточимся на <code>self.up</code> методе, который использует метод Rails, называемый <code>create_table</code> чтобы создать <em>таблицу</em> в базе данных для хранения пользователей. (Использование <code>self (сам)</code> в <code>self.up</code> идентифицирует его как <em>метод класса</em>. Это не имеет значения сейчас, но мы узнаем о методах класса, когда сделаем собственный в  <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">Разделе&nbsp;7.2.4</a>.) <code>Сreate_table</code> метод принимает блок (<a class="ref" href="rails-flavored-ruby#sec:blocks">Раздел&nbsp;4.3.2</a>) с одной блоковой переменной, в данном случае названной <code>t</code> (от &ldquo;tаблица&rdquo;). Внутри блока <code>create_table</code> метод использует <code>t</code>&nbsp;объект для создания <code>name</code> и <code>email</code> столбцов в базе данных, оба типа <code>string</code>.<sup class="footnote" id="fnref:6.7"><a href="#fn:6.7">7</a></sup> Здесь имя таблицы является множественным (<code>users</code>) даже при том, что название модели в ед. числе (User), что отражает лингвистическое соглашение, которому следует Rails: модель представляет единственного (отдельного) пользователя, тогда как таблица базы данных состоит из многих пользователей. Заключительная строка в блоке, <code>t.timestamps</code>, является специальной командой, которая создает два <em>волшебных столбца</em>, называемые <code>created_at</code> и <code>updated_at</code>, которые являются временнЫми отметками, которые автоматически записывают, когда данный пользователь создается и обновляется. (Мы увидим конкретные примеры волшебных столбцов в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a>.) Полная модель данных, представленная этой миграцией, показана в <a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">Рис.&nbsp;6.2</a>.</p>
+<p>Давайте сосредоточимся на <code>self.up</code> методе, который использует метод Rails, называемый <code>create_table</code> чтобы создать <em>таблицу</em> в базе данных для хранения пользователей. (Использование <code>self (сам)</code> в <code>self.up</code> идентифицирует его как <em>метод класса</em>. Это не имеет значения сейчас, но мы узнаем о методах класса, когда сделаем собственный в  <a class="ref" href="modeling-and-viewing-users-two#sec:an_authenticate_method">Разделе&nbsp;7.2.4</a>.) <code>Сreate_table</code> метод принимает блок (<a class="ref" href="rails-flavored-ruby#sec:blocks">Раздел&nbsp;4.3.2</a>) с одной блоковой переменной, в данном случае названной <code>t</code> (от &ldquo;tаблица&rdquo;). Внутри блока <code>create_table</code> метод использует <code>t</code>&nbsp;объект для создания <code>name</code> и <code>email</code> столбцов в базе данных, оба типа <code>string</code>.<sup class="footnote" id="fnref:6.7"><a href="#fn:6.7">7</a></sup> Здесь имя таблицы является множественным (<code>users</code>) даже при том, что название модели в ед. числе (User), что отражает лингвистическое соглашение которому следует Rails: модель представляет единственного (отдельного) пользователя, тогда как таблица базы данных состоит из многих пользователей. Заключительная строка в блоке, <code>t.timestamps</code>, является специальной командой, которая создает два <em>волшебных столбца</em>, называемые <code>created_at</code> и <code>updated_at</code>, которые являются временнЫми отметками, которые автоматически записывают, когда данный пользователь создается и обновляется. (Мы увидим конкретные примеры волшебных столбцов в <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a>.) Полная модель данных, представленная этой миграцией, показана в <a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">Рис.&nbsp;6.2</a>.</p>
 
 <div class="label" id="fig:user_model_initial"></div>
 
@@ -138,12 +138,12 @@
 </pre></div>
 </div>
 
-<p>(Можно вспомнить, что мы запускали эту команду прежде, в <a class="ref" href="beginning#sec:rails_server">Разделе&nbsp;1.2.5</a> и еще раз в <a class="ref" href="a-demo-app#top">Главе&nbsp;2</a>.) При первом запуске <code>db:migrate</code> она создает файл <code>db/development.sqlite3</code>, который является базой данных <a href="http://sqlite.org/">SQLite</a><sup class="footnote" id="fnref:6.9"><a href="#fn:6.9">9</a></sup> Мы можем увидеть структуру базы данных, используя превосходный <a href="http://sqlitebrowser.sourceforge.net/">SQLite Database Browser</a> чтобы открыть файл <code>db/development.sqlite3</code> (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a>); сравните со схемой в  <a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">Рис.&nbsp;6.2</a>.  Вы могли отметить, что есть один столбец в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> неучтенный в миграции: <code>id</code> столбец. Как отмечено кратко в <a class="ref" href="a-demo-app#sec:demo_users_resource">Разделе&nbsp;2.2</a>, этот столбец создается автоматически, и используется Rails, чтобы идентифицировать каждую строку уникально.</p>
+<p>(Можно вспомнить, что мы запускали эту команду прежде, в <a class="ref" href="beginning#sec:rails_server">Разделе&nbsp;1.2.5</a> и еще раз в <a class="ref" href="a-demo-app#top">Главе&nbsp;2</a>.) При первом запуске <code>db:migrate</code> она создает файл <code>db/development.sqlite3</code>, который является базой данных <a href="http://sqlite.org/">SQLite</a><sup class="footnote" id="fnref:6.9"><a href="#fn:6.9">9</a></sup> Мы можем увидеть структуру базы данных, используя превосходный <a href="http://sqlitebrowser.sourceforge.net/">SQLite Database Browser</a> чтобы открыть файл <code>db/development.sqlite3</code> (<a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a>); сравните со схемой в  <a class="ref" href="modeling-and-viewing-users-one#fig:user_model_initial">Рис.&nbsp;6.2</a>.  Вы могли отметить, что есть один столбец в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> неучтенный в миграции: столбец <code>id</code>. Как было вкратце отмечено в <a class="ref" href="a-demo-app#sec:demo_users_resource">Разделе&nbsp;2.2</a>, этот столбец создается автоматически, и используется Rails в качестве уникального идентификатора каждой строки.</p>
 
 <div class="label" id="fig:sqlite_database_browser"></div>
 
 
-<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_database_browser.png" alt="sqlite_database_browser" /></span></div><div class="caption"><span class="header">Рисунок  6.3: </span><span class="description">The  <a href="http://sqlitebrowser.sourceforge.net/">SQLite Database Browser</a> с нашей новой <code>users</code> таблицей.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_database_browser-full.png">(полный размер)</a></span></div></div>
+<div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/sqlite_database_browser.png" alt="sqlite_database_browser" /></span></div><div class="caption"><span class="header">Рисунок  6.3: </span><span class="description"><a href="http://sqlitebrowser.sourceforge.net/">SQLite Database Browser</a> с нашей новой <code>users</code> таблицей.&nbsp;<a href="http://railstutorial.org/images/figures/sqlite_database_browser-full.png">(полный размер)</a></span></div></div>
 
 
 <p>Вы, вероятно, заметили, что запуск <code>db:migrate</code> выполняет <code>self.up</code> команду в файле миграции. Что, тогда делает <code>self.down</code>? Как вы могли бы предположить, <code>down</code> миграции <em>down</em>, ликвидируя последствия migrating up. В нашем случае это означает <em>сброс</em>  <code>users</code> таблицы в базе данных:</p>
@@ -184,9 +184,9 @@
 <h3><a id="sec:6.1.2" href="modeling-and-viewing-users-one#sec:the_model_file" class="heading"><span class="number">6.1.2</span> Файл модели</a></h3>
 
 
-<p>Мы видели, как генерация модели User в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a> сгенерировала файл миграции (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинг&nbsp;6.2</a>), и мы видели в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> результаты выполнения этой миграции: это обновило файл <code>development.sqlite3</code>, создав таблицу <code>users</code> со столбцами <code>id</code>, <code>name</code>, <code>email</code>, <code>created_at</code>, и <code>updated_at</code>. <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинг&nbsp;6.1</a> также создал саму модель; остальная часть этого раздела посвящена пониманию этого.</p>
+<p>Мы видели, как генерация модели User в  <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинге&nbsp;6.1</a> сгенерировала файл миграции (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинг&nbsp;6.2</a>) и мы видели в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> результаты выполнения этой миграции: это обновило файл <code>development.sqlite3</code>, создав таблицу <code>users</code> со столбцами <code>id</code>, <code>name</code>, <code>email</code>, <code>created_at</code> и <code>updated_at</code>. <a class="ref" href="modeling-and-viewing-users-one#code:generate_user_model">Листинг&nbsp;6.1</a> также создал саму модель; остальная часть этого раздела посвящена ее изучению.</p>
 
-<p>Мы начнем, с рассмотрения кода для модели User, которая живет в файле <code>user.rb</code> в каталоге <code>app/models/</code> это, мягко выражаясь, очень компактно (<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_model">Листинг&nbsp;6.3</a>).</p>
+<p>Мы начнем с рассмотрения кода для модели User, которая живет в файле <code>user.rb</code> в каталоге <code>app/models/</code> это, мягко выражаясь, очень компактно (<a class="ref" href="modeling-and-viewing-users-one#code:raw_user_model">Листинг&nbsp;6.3</a>).</p>
 
 <div class="label" id="code:raw_user_model"></div>
 
@@ -276,7 +276,7 @@
 
 
 
-<p>Я нахожу, что наличие модели данных, видимой в файлах модели, помогает мне вспомнить, какие атрибуты имеет модель, но будущие листинги кода будут обычно опускать аннотации для краткости.</p>
+<p>Наличие модели данных, видимой в файлах модели, помогает мне вспомнить, какие атрибуты имеет модель, но будущие листинги кода будут обычно опускать аннотации для краткости.</p>
 
 <div class="label" id="sec:accessible_attributes"></div>
 
@@ -284,7 +284,7 @@
 <h4><a id="sec:6.1.2.2" href="modeling-and-viewing-users-one#sec:accessible_attributes" class="heading">Доступные атрибуты</a></h4>
 
 
-<p>Другой необязательный, но полезный шаг должен сказать Rails, какие атрибуты модели доступны, то есть, какие атрибуты могут быть изменены внешними пользователями (такими как пользователи, подающие запросы с интернет браузера). Мы сделаем это с <code>attr_accessible</code> методом (<a class="ref" href="modeling-and-viewing-users-one#code:attr_accessible">Листинг&nbsp;6.6</a>). Мы увидим в  <a class="ref" href="updating-showing-and-deleting-users#top">Главе&nbsp;10</a> что использование <code>attr_accessible</code> важно для предотвращения уязвимости <a   href="http://www.rusrails.ru/ruby-on-rails-security-guide/mass-assignment"><em>массового назначения</em></a>, к сожалению распространенной и часто серьезной дыре в системе безопасности во многих Rails приложениях.</p>
+<p>Другой необязательный, но полезный шаг должен сказать Rails, какие атрибуты модели доступны, то есть, какие атрибуты могут быть изменены внешними пользователями (такими как пользователи, подающие запросы с интернет браузера). Мы сделаем это с <code>attr_accessible</code> методом (<a class="ref" href="modeling-and-viewing-users-one#code:attr_accessible">Листинг&nbsp;6.6</a>). Мы увидим в  <a class="ref" href="updating-showing-and-deleting-users#top">Главе&nbsp;10</a> что использование <code>attr_accessible</code> важно для предотвращения уязвимости <a href="http://www.rusrails.ru/ruby-on-rails-security-guide/mass-assignment"><em>массового назначения</em></a>, к сожалению распространенной и часто серьезной дыре в системе безопасности во многих Rails приложениях.</p>
 
 <div class="label" id="code:attr_accessible"></div>
 
@@ -344,7 +344,7 @@
 
 <p>Мы видим здесь дефолтное консольное представление объекта user, которое печатает те же самые атрибуты что и показанные в <a class="ref" href="modeling-and-viewing-users-one#fig:sqlite_database_browser">Рис.&nbsp;6.3</a> и <a class="ref" href="modeling-and-viewing-users-one#code:annotated_user_model">Листинге&nbsp;6.5</a>.</p>
 
-<p>Вызванный без параметров, <code>User.new</code> возвращает объект с <code>nil</code> атрибутами. В <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы разрабатывали пример класса User, чтобы взять <em>initialization хэш</em> чтобы установить атрибуты объектов; то проектное решение было мотивировано Active Record, которая позволяет объектам быть инициализированными таким же образом:</p>
+<p>Вызванный без параметров, <code>User.new</code> возвращает объект с <code>nil</code> атрибутами. В <a class="ref" href="rails-flavored-ruby#sec:a_user_class">Разделе&nbsp;4.4.5</a>, мы спроектировали пример класса User таким образом, чтобы он принимал <em>инициализационный хэш</em> для установки атрибутов объекта; такое решение было обусловлено библиотекой Active Record, которая позволяет инициализировать объекты тем же способом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Michael Hartl&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">)</span>
 <span class="go">=&gt; #&lt;User id: nil, name: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -355,7 +355,7 @@
 
 <p>Здесь мы видим, что, как и ожидалось, атрибуты имени и адреса электронной почты были установлены.</p>
 
-<p>Если вы следили за development log, вы, возможно, заметили, что новые строки еще не обнаружились. Это связано с тем, что вызов <code>User.new</code> не касается базы данных; он просто создает новый Ruby объект в памяти. Чтобы сохранить объект user в базы данных, мы вызовем метод <code>save</code> на переменной <code>user</code>:</p>
+<p>Если вы следили за development log, вы, возможно, заметили, что новые строки еще не обнаружились. Это связано с тем, что вызов <code>User.new</code> не касается базы данных; он просто создает новый Ruby объект в памяти. Чтобы сохранить объект user в базе данных, мы вызовем метод <code>save</code> на переменной <code>user</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">save</span>
 <span class="go">=&gt; true</span>
@@ -363,7 +363,7 @@
 </div>
 
 
-<p>Метод <code>save</code>возвращает <code>true</code> если сохранение успешно выполнилось и <code>false</code> если сохранение не выполнено. (Сейчас все сохранения, должны успешно выполняться; но в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a> мы увидим случаи, когда некоторые из них не сработают.), После сохранения  в development log должна появиться строка с командой SQL <code>INSERT INTO "users"</code>. Из-за множества методов, предоставляемых Active Record, в этой книге нам не потребуется необработанный SQL, и я опущу обсуждение команд SQL с этого времени. Но вы можете многому научиться, наблюдая за development log.</p>
+<p>Метод <code>save</code>возвращает <code>true</code> если сохранение успешно выполнилось и <code>false</code> если сохранение не выполнено. (Сейчас все сохранения, должны успешно выполняться; но в <a class="ref" href="modeling-and-viewing-users-one#sec:user_validations">Разделе&nbsp;6.2</a> мы увидим случаи, когда некоторые из них не сработают.), После сохранения в development log должна появиться строка с командой SQL <code>INSERT INTO "users"</code>. Из-за множества методов, предоставляемых Active Record, в этой книге нам не потребуется необработанный SQL, и я опущу обсуждение команд SQL с этого времени. Но вы можете многому научиться, наблюдая за development log.</p>
 
 <p>Вы, возможно, заметили, что у нового объекта  user  были <code>nil</code> значения для атрибутов <code>id</code> и волшебных столбцов <code>created_at</code> и <code>updated_at</code>. Давайте посмотрим, изменило ли наше <code>save</code> что-нибудь:</p>
 
@@ -388,7 +388,7 @@
 </div>
 
 
-<p>Как мы увидим в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, часто бывает удобно создать и сохранить модель в два приема, как мы это сделали выше, но Active Record также позволяет вам объединить эти действия в один шаг с <code>User.create</code>: </p>
+<p>Как мы увидим в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>, часто бывает удобно создать и сохранить модель в два приема, как мы это сделали выше, но Active Record также позволяет вам объединить эти действия в один шаг с <code>User.create</code>:</p>
 
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;A Nother&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;another@example.org&quot;</span><span class="p">)</span>
@@ -401,7 +401,7 @@
 </div>
 
 
-<p>Отметьте, что <code>User.create</code>, вместо того, чтобы возвратить <code>true</code> или <code>false</code>, возвращает сам объект User который мы можем дополнительно присвоить переменной (такой как <code>foo</code> во второй команде выше).</p>
+<p>Обратите внимание, что <code>User.create</code>, вместо того, чтобы возвратить <code>true</code> или <code>false</code>, возвращает сам объект User который мы можем дополнительно присвоить переменной (такой как <code>foo</code> во второй команде выше).</p>
 
 <p>Команда, обратная <code>create</code> это <code>destroy</code>:</p>
 
@@ -421,7 +421,7 @@
 </div>
 
 
-<p>Как мы узнаем, уничтожили ли мы в действительности объект? И как мы можем получить сохраненные и неуничтоженные объекты user из базы данных? Пора узнать, как использовать Active Record, чтобы найти объекты user.</p>
+<p>Как мы узнаем, уничтожили ли мы в действительности объект? И как мы можем получить сохраненные и неуничтоженные объекты user из базы данных? Пора узнать, как использовать Active Record, для поиска объектов user.</p>
 
 <div class="label" id="sec:finding_user_objects"></div>
 
@@ -429,7 +429,7 @@
 <h3><a id="sec:6.1.4" href="modeling-and-viewing-users-one#sec:finding_user_objects" class="heading"><span class="number">6.1.4</span> Поиск объектов user</a></h3>
 
 
-<p>Active Record предоставляет несколько возможностей для того, чтобы найти объекты. Давайте используем их, чтобы найти первого пользователя, которого мы создали, и чтобы проверить, что третий пользователь (<code>foo</code>) был уничтожен. Мы начнем с существующего пользователя:</p>
+<p>Active Record предоставляет несколько способов поиска объектов. Давайте используем их, для того, чтобы найти первого пользователя, которого мы создали, и чтобы проверить, что третий пользователь (<code>foo</code>) был уничтожен. Мы начнем с существующего пользователя:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">=&gt; #&lt;User id: 1, name: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -438,7 +438,7 @@
 </div>
 
 
-<p>Здесь мы передали id пользователя к <code>User.find</code>; Active Record возвращает пользователя с этим атрибутом <code>id</code>.</p>
+<p>Здесь мы передали id пользователя в <code>User.find</code>; Active Record вернула пользователя с этим атрибутом <code>id</code>.</p>
 
 <p>Давайте посмотрим, существует ли пользователь с <code>id</code>&nbsp;<code>3</code> в базе данных:</p>
 
@@ -450,7 +450,7 @@
 
 <p>Так как мы уничтожили нашего третьего пользователя в  <a class="ref" href="modeling-and-viewing-users-one#sec:creating_user_objects">Разделе&nbsp;6.1.3</a>, Active Record не может найти его в базе данных. Вместо этого <code>find</code> вызывает <em>exception (исключение)</em>, которое является способом указать на исключительное событие при выполнении программы, в данном случае, несуществующий Active Record id вызывает исключение <code>ActiveRecord::RecordNotFound</code>.<sup class="footnote" id="fnref:6.12"><a href="#fn:6.12">12</a></sup></p>
 
-<p>В дополнение к универсальному <code>find</code>, Active Record также позволяет нам находить пользователей с определенными атрибутами:</p>
+<p>В дополнение к универсальному <code>find</code>, Active Record также позволяет нам искать пользователей по определенным атрибутами:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="s2">&quot;mhartl@example.com&quot;</span><span class="p">)</span>
 <span class="go">=&gt; #&lt;User id: 1, name: &quot;Michael Hartl&quot;, email: &quot;mhartl@example.com&quot;,</span>
@@ -502,7 +502,7 @@
 </div>
 
 
-<p>Отметьте, что заключительный шаг необходим, чтобы записать изменения в базу данных. Мы можем увидеть, что произойдет без сохранения, используя <code>reload</code>, которая перезагружает объекты, опираясь на информацию в базе данных:</p>
+<p>Обратите внимание, что заключительный шаг необходим, для того чтобы записать изменения в базу данных. Мы можем увидеть, что произойдет без сохранения, используя <code>reload</code>, которая перезагружает объекты, опираясь на информацию в базе данных:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">email</span>
 <span class="go">=&gt; &quot;mhartl@example.net&quot;</span>
@@ -524,7 +524,7 @@
 </div>
 
 
-<p>Второй способ обновить атрибуты состоит в использовании <code>update_attributes</code>:</p>
+<p>Второй способ обновить атрибуты заключается в использовании <code>update_attributes</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;The Dude&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;dude@abides.org&quot;</span><span class="p">)</span>
 <span class="go">=&gt; true</span>
@@ -536,7 +536,7 @@
 </div>
 
 
-<p><code>Update_attributes</code> метод принимает хеш атрибутов, и в случае успеха выполняет и обновление и сохранение за один шаг (возвращающая <code>true</code> чтобы указать, что сохранение прошло). Стоит отметить, что, после того как вы определили некоторые атрибуты как доступные, используя <code>attr_accessible</code>  (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">Раздел&nbsp;6.1.2.2</a>), могут быть изменены <em>только</em> атрибуты включенные в вызов <code>update_attributes</code>. Если вы когда-либо обнаружите, что ваши модели загадочным образом начинают отказываться обновлять определенные столбцы, удостоверьтесь, что эти столбцы включаются в вызов <code>attr_accessible</code>.</p>
+<p><code>Update_attributes</code> метод принимает хеш атрибутов, и в случае успеха выполняет и обновление и сохранение за один шаг (возвращающая <code>true</code> чтобы указать, что сохранение произошло). Стоит отметить, что, после того как вы определили некоторые атрибуты как доступные, используя <code>attr_accessible</code>  (<a class="ref" href="modeling-and-viewing-users-one#sec:accessible_attributes">Раздел&nbsp;6.1.2.2</a>), <em>только</em> эти атрибуты могут быть включены в вызов <code>update_attributes</code>. Если вы когда-либо обнаружите, что ваши модели загадочным образом начинают отказываться обновлять определенные столбцы, удостоверьтесь, что эти столбцы включаются в вызов <code>attr_accessible</code>.</p>
 
 <div class="label" id="sec:user_validations"></div>
 
@@ -544,9 +544,9 @@
 <h2><a id="sec:6.2" href="modeling-and-viewing-users-one#sec:user_validations" class="heading"><span class="number">6.2</span> Валидации User</a></h2>
 
 
-<p>У модели User, которую мы создали в  <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">Разделе&nbsp;6.1</a> теперь, есть рабочие атрибуты <code>name</code> и <code>email</code> но они абсолютно универсальны: любая строка (включая пустую) в настоящий момент допустима. И все же, имена и адреса электронной почты это нечто более определенное. Например, <code>name</code> не должно быть пробелом, <code>email</code> должен соответствовать определенному формату, характерному для адресов электронной почты. Кроме того, так как мы будем использовать адреса электронной почты в качестве уникальных имен пользователей, когда они будут регистрироваться, мы не должны позволять дублироваться адресам электронной почты в базе данных.</p>
+<p>У модели User, которую мы создали в  <a class="ref" href="modeling-and-viewing-users-one#sec:user_model">Разделе&nbsp;6.1</a> теперь есть рабочие атрибуты <code>name</code> и <code>email</code>, но они абсолютно универсальны: любая строка (включая пустую) в настоящий момент допустима. И все же, имена и адреса электронной почты это нечто более определенное. Например, <code>name</code> не должно быть пробелом, <code>email</code> должен соответствовать определенному формату, характерному для адресов электронной почты. Кроме того, так как мы будем использовать адреса электронной почты в качестве уникальных имен пользователей при регистрации, мы не должны позволять дублироваться адресам электронной почты в базе данных.</p>
 
-<p>Короче говоря, мы не должны позволить <code>name</code> и <code>email</code> быть просто любыми строками; мы должны реализовать определенные ограничения на их значения. Active Record позволяет нам налагать такие ограничения, используя <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/Валидация"><em>validations</em></a>. В этом разделе мы охватим несколько из наиболее распространенных случаев, проверяя <em>наличие</em>, <em>длину</em>, <em>формат</em> и <em>уникальность</em>. В <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">Разделе&nbsp;7.1.1</a> мы добавим заключительную общепринятую валидацию, <em>подтверждение</em>. И мы увидим в <a class="ref" href="sign-up#sec:signup_failure">Разделе&nbsp;8.2</a> как валидации дают нам удобные сообщения об ошибках, когда пользователи предоставляют данные, которые нарушают их.</p>
+<p>Короче говоря, мы не должны позволить <code>name</code> и <code>email</code> быть просто любыми строками; мы должны реализовать определенные ограничения для их значений. Active Record позволяет нам налагать такие ограничения, с помощью <a  rel="nofollow" href="http://ru.wikipedia.org/wiki/Валидация"><em>validations</em></a>. В этом разделе мы рассмотрим несколько из наиболее распространенных случаев, применив валидации для <em>наличия</em>, <em>длины</em>, <em>формата</em> и <em>уникальностьи</em>. В <a class="ref" href="modeling-and-viewing-users-two#sec:password_validations">Разделе&nbsp;7.1.1</a> мы добавим заключительную общепринятую валидацию, <em>подтверждение</em>. И мы увидим в <a class="ref" href="sign-up#sec:signup_failure">Разделе&nbsp;8.2</a> как валидации дают нам удобные сообщения об ошибках, когда пользователи предоставляют данные, которые нарушают их.</p>
 
 <p>Как и с другими функциями нашего примера приложения, мы добавим валидации модели User, используя разработку через тестирование. Так как мы изменили модель данных, хорошей идеей будет подготовить тестовую базу данных перед продолжением:</p>
 
@@ -564,9 +564,9 @@
 <h3><a id="sec:6.2.1" href="modeling-and-viewing-users-one#sec:presence_validation" class="heading"><span class="number">6.2.1</span> Валидация наличия</a></h3>
 
 
-<p>Мы начнем с теста для наличия атрибута <code>name</code>. Хотя первым шагом в TDD должно быть написание <em>провального</em> теста (<a class="ref" href="static-pages#sec:TDD">Раздел&nbsp;3.2.2</a>), в данном случае мы еще не достаточно знаем  о валидациях, чтобы написать надлежащий тест, таким образом, мы сначала напишем валидацию, используя консоль, чтобы понять ее. Затем мы закомментируем валидацию, напишем провальный тест, и проверим, что раскомментирование валидации позволяет тесту пройти. Эта процедура может казаться излишне педантичной для такого простого теста, но я видел<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup> <em>много</em> &ldquo;простых&rdquo; тестов которые тестируют неправильную вещь; дотошность в TDD это <em>единственный</em> способ, позволяющий быть уверенным, что мы тестируем правильную вещь. (Этот метод комментария также полезен при спасении приложения, код  которого уже написан, но&mdash;<a href="http://en.wiktionary.org/wiki/quelle_horreur"><em>quelle horreur!</em></a>&mdash;(# какой ужас - фр.) не имеет тестов.)</p>
+<p>Мы начнем с теста для наличия атрибута <code>name</code>. Хотя первым шагом в TDD должно быть написание <em>провального</em> теста (<a class="ref" href="static-pages#sec:TDD">Раздел&nbsp;3.2.2</a>), в данном случае мы еще не достаточно знаем  о валидациях, чтобы написать надлежащий тест, таким образом, мы сначала напишем валидацию, используя консоль, чтобы понять ее. Затем мы закомментируем валидацию, напишем провальный тест, и проверим, что раскомментирование валидации позволяет тесту пройти. Эта процедура может казаться излишне педантичной для такого простого теста, но я видел<sup class="footnote" id="fnref:6.14"><a href="#fn:6.14">14</a></sup> <em>много</em> &ldquo;простых&rdquo; тестов которые тестируют неправильную вещь; дотошность в TDD это <em>единственный</em> способ, позволяющий быть уверенными, в том что мы тестируем правильную вещь. (Этот метод комментария также полезен при спасении приложения, код  которого уже написан, но&mdash;<a href="http://en.wiktionary.org/wiki/quelle_horreur"><em>quelle horreur!</em></a>&mdash;(# какой ужас - фр.) не имеет тестов.)</p>
 
-<p>Способ валидации наличия атрибута имени состоит в том, чтобы использовать, <code>validates</code> метод с аргументом <code>:presence =&gt; true</code>, как показано в <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">Листинге&nbsp;6.7</a>. <code>:presence =&gt; true</code> аргумент является одноэлементным <em>хэшем опций</em>; вспомните из <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Раздела&nbsp;4.3.4</a> что изогнутые фигурные скобки являются необязательными при передаче хеша в качестве последнего аргумента в методе. (Как отмечено в <a class="ref" href="filling-in-the-layout#sec:adding_to_the_layout">Разделе&nbsp;5.1.1</a>, использование хешей опций это повторяющаяся тема в Rails.)</p>
+<p>Способ валидации наличия атрибута имени заключается в применении метода <code>validates</code> с аргументом <code>:presence =&gt; true</code>, как показано в <a class="ref" href="modeling-and-viewing-users-one#code:validates_presence_of_name">Листинге&nbsp;6.7</a>. <code>:presence =&gt; true</code> аргумент является одноэлементным <em>хэшем опций</em>; вспомните из <a class="ref" href="rails-flavored-ruby#sec:css_revisited">Раздела&nbsp;4.3.4</a> что фигурные скобки являются необязательными при передаче хеша в качестве последнего аргумента в методе. (Как отмечено в <a class="ref" href="filling-in-the-layout#sec:adding_to_the_layout">Разделе&nbsp;5.1.1</a>, использование хэшэй опций это очень распространенный прием в Rails.)</p>
 
 <div class="label" id="code:validates_presence_of_name"></div>
 
@@ -608,7 +608,7 @@
 </div>
 
 
-<p>Здесь <code>user.save</code> возвращает <code>false</code>, указывая на провальное сохранение. В заключительной команде мы используем <code>valid?</code> метод, который возвращает <code>false</code> когда объект приводит к сбою одной или более валидаций, и <code>true</code> когда все валидации проходят. (Вспомните из <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">Раздела&nbsp;4.2.3</a> что Ruby использует вопросительный знак, чтобы указать на такие истинные/ложные <em>булевы</em> методы.) В данном случае, у нас есть только одна валидация, таким образом, мы знаем, какая перестала работать, но все еще полезно проверить, используя <code>errors</code> объект, генерируемый при отказе:</p>
+<p>Здесь <code>user.save</code> возвращает <code>false</code>, указывая на провальное сохранение. В заключительной команде мы используем <code>valid?</code> метод, который возвращает <code>false</code> когда объект приводит к сбою одной или более валидаций, и <code>true</code> когда все валидации проходят. (Вспомните из <a class="ref" href="rails-flavored-ruby#sec:objects_and_message_passing">Раздела&nbsp;4.2.3</a> что Ruby использует вопросительный знак, чтобы указать на такие истинные/ложные <em>булевы</em> методы.) В данном случае у нас есть только одна валидация, таким образом, мы знаем, какая именно провалилась, но все же не лишним будет в этом убедиться с помощью объекта <code>errors</code>, генерируемого при отказе:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span>
 <span class="go">=&gt; [&quot;Name can&#39;t be blank&quot;]</span>
@@ -616,15 +616,15 @@
 </div>
 
 
-<p>(Сообщение об ошибке - подсказка, что Rails проверяет наличие атрибута, используя <code>blank?</code> метод, который мы видели в конце  <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">Раздел&nbsp;4.4.3</a>.)</p>
+<p>(Сообщение об ошибке - подсказка, что Rails проверяет наличие атрибута, используя <code>blank?</code> метод, который мы видели в конце  <a class="ref" href="rails-flavored-ruby#sec:modifying_built_in_classes">Раздела&nbsp;4.4.3</a>.)</p>
 
-<p>Теперь о провальном тесте. Чтобы гарантировать, что наш начинающийся тест перестанет работать, давайте закомментируем валидацию в этой точке (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">Листинг&nbsp;6.8</a>).</p>
+<p>Теперь о провальном тесте. Чтобы гарантировать, что наш начинающийся тест перестанет работать, давайте закомментируем валидацию (<a class="ref" href="modeling-and-viewing-users-one#code:commented_out_validation">Листинг&nbsp;6.8</a>).</p>
 
 <div class="label" id="code:commented_out_validation"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.8.</span> <span class="description">Комментирование валидации, для обеспечения провальности теста. <br /> <code>app/models/user.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.8.</span> <span class="description">Закомментирование валидации для обеспечения провальности теста. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -792,7 +792,7 @@
 </div>
 
 
-<p>Конечно, мы также хотим проверять наличие адресов электронной почты. Тест (<a class="ref" href="modeling-and-viewing-users-one#code:validates_email_spec">Листинг&nbsp;6.12</a>) походит на аналогичный для атрибута <code>name</code>.</p>
+<p>Конечно, мы также хотим валидировать наличие адресов электронной почты. Тест (<a class="ref" href="modeling-and-viewing-users-one#code:validates_email_spec">Листинг&nbsp;6.12</a>) походит на аналогичный тест для атрибута <code>name</code>.</p>
 
 <div class="label" id="code:validates_email_spec"></div>
 
@@ -835,7 +835,7 @@
 </div></div>
 
 
-<p>Теперь все тесты должны пройти, и валидации &ldquo;наличия&rdquo;  укомплектованы.</p>
+<p>Теперь все тесты должны проходить, и валидации &ldquo;наличия&rdquo; готовы.</p>
 
 <div class="label" id="sec:length_validation"></div>
 
@@ -843,9 +843,9 @@
 <h3><a id="sec:6.2.2" href="modeling-and-viewing-users-one#sec:length_validation" class="heading"><span class="number">6.2.2</span> Валидация длины</a></h3>
 
 
-<p>Мы ограничили нашу модель User требованием имени для каждого пользователя, но мы должны пойти далее: имена пользователей будут отображаться на  сайте, таким образом, мы должны будем реализовать некоторое ограничение их длины. С работой, проделанной в <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">Раздел&nbsp;6.2.1</a>, этот шаг легок.</p>
+<p>Мы ограничили нашу модель User требованием имени для каждого пользователя, но мы должны пойти еще дальше: имена пользователей будут отображаться на  сайте, таким образом, мы должны будем реализовать некоторое ограничение их длины. С работой, проделанной в <a class="ref" href="modeling-and-viewing-users-one#sec:presence_validation">Разделе&nbsp;6.2.1</a>, этот шаг легок.</p>
 
-<p>Мы начнем с теста. Нет никакой науки для выбора максимальной длины; мы просто примем&nbsp;<code>50</code> как разумную верхнюю границу, что означает, что имена длиной в&nbsp;<code>51</code> символ являются слишком длинными (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">Листинг&nbsp;6.14</a>).</p>
+<p>Мы начнем с теста. В выборе максимальной длины нет ничего хитрого; мы просто примем&nbsp;<code>50</code> как разумную верхнюю границу, что означает, что имена длиной в&nbsp;<code>51</code> символ будут слишком длинными (<a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">Листинг&nbsp;6.14</a>).</p>
 
 <div class="label" id="code:length_validation_test"></div>
 
@@ -871,7 +871,7 @@
 </div></div>
 
 
-<p>Для удобства мы использовали &ldquo;умножение строки&rdquo; в <a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">Листинге&nbsp;6.14</a> чтобы сделать строку длиной в 51 символ. Мы можем увидеть, как это работает, используя консоль:</p>
+<p>Для удобства мы использовали &ldquo;мультипликацию строки&rdquo; в <a class="ref" href="modeling-and-viewing-users-one#code:length_validation_test">Листинге&nbsp;6.14</a> для создания строки длиной в 51 символ. Мы можем увидеть как это работает, используя консоль:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">51</span>
 <span class="go">=&gt; &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</span>
@@ -900,7 +900,7 @@
 </div></div>
 
 
-<p>С нашим комплектом тестов, вновь проходящим, мы можем идти дальше, к более интересной валидации: формата электронной почты.</p>
+<p>С нашим комплектом тестов, вновь проходящим, мы можем идти дальше, к более интересной валидации: валидации формата электронной почты.</p>
 
 <div class="label" id="sec:format_validation"></div>
 
@@ -908,9 +908,9 @@
 <h3><a id="sec:6.2.3" href="modeling-and-viewing-users-one#sec:format_validation" class="heading"><span class="number">6.2.3</span> Валидация формата</a></h3>
 
 
-<p>Наши валидации для атрибута <code>name</code> реализуют только минимальные ограничения: любое непустое имя длиной до 51 символов пройдет; но, конечно, атрибут <code>email</code> должен соответствовать более строгим требованиям. До сих пор мы только отклонили только пустой адрес  электронной почты; в этом Разделе мы потребуем, чтобы адреса электронной почты соответствовали знакомому образцу <code>user@example.com</code>.</p>
+<p>Наши валидации для атрибута <code>name</code> реализуют только минимальные ограничения: любое непустое имя длиной до 51 символов пройдет; но, конечно, атрибут <code>email</code> должен соответствовать более строгим требованиям. До сих пор мы отклоняли только пустой адрес электронной почты; в этом разделе мы потребуем, чтобы адреса электронной почты соответствовали знакомому образцу <code>user@example.com</code>.</p>
 
-<p>Ни тесты, ни валидации не будут исчерпывающими - лишь достаточно хорошими, чтобы принять большинство допустимых адресов электронной почты и отклонить большинство недопустимых. Мы начнем с пары тестов, включающих наборы допустимых и недопустимых адресов. Чтобы сделать эти наборы, стоит знать о полезном методе для того, чтобы сделать массивы строк, как замечено в этом консольном сеансе:</p>
+<p>Ни тесты, ни валидации не будут исчерпывающими - лишь достаточно хорошими, чтобы принять большую часть допустимых адресов электронной почты и отклонить большинство недопустимых. Мы начнем с пары тестов, включающих наборы допустимых и недопустимых адресов. Чтобы сделать эти наборы, стоит узнать о полезной технике создания массивов строк, как показано в этом консольном сеансе:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="sx">%w[foo bar baz]</span>
 <span class="go">=&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
@@ -926,13 +926,13 @@
 </div>
 
 
-<p>Здесь мы выполнили итерации по элементам массива <code>addresses</code> используя <code>each</code> метод (<a class="ref" href="rails-flavored-ruby#sec:blocks">Раздел&nbsp;4.3.2</a>). С этой техникой, мы готовы написать некоторые основные тесты валидации формата электронной почты (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">Листинг&nbsp;6.16</a>).</p>
+<p>Здесь мы выполнили итерации по элементам массива <code>addresses</code> используя <code>each</code> метод (<a class="ref" href="rails-flavored-ruby#sec:blocks">Раздел&nbsp;4.3.2</a>). С этой техникой, мы готовы написать несколько базовых тестов для валидации формата электронной почты (<a class="ref" href="modeling-and-viewing-users-one#code:email_format_validation_tests">Листинг&nbsp;6.16</a>).</p>
 
 <div class="label" id="code:email_format_validation_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.16.</span> <span class="description">Тесты для валидации формата электронной почты. <br /> <code>spec/models/user_spec.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.16.</span> <span class="description">Тесты для валидации формата адреса электронной почты. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -962,15 +962,15 @@
 </div></div>
 
 
-<p>Как отмечено выше, они не являются исчерпывающими, но мы проверяем обычные допустимые формы электронной почты <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (верхний регистр, подчеркивание, и соединенные домены), и <code>first.last@foo.jp</code> (стандартное корпоративное имя пользователя <code>first.last</code>, с двухбуквенным высокоуровневым доменом&nbsp;<code>jp</code>), наряду с несколькими недопустимыми формами.</p>
+<p>Как было отмечено выше, они не являются исчерпывающими, но мы проверили обычные допустимые формы электронной почты <code>user@foo.com</code>, <code>THE_USER@foo.bar.org </code> (верхний регистр, подчеркивание и соединенные домены) и <code>first.last@foo.jp</code> (стандартное корпоративное имя пользователя <code>first.last</code>, с двухбуквенным высокоуровневым доменом&nbsp;<code>jp</code>), наряду с несколькими недопустимыми формами.</p>
 
-<p>Код программы для валидации формата электронной почты использует <em>регулярное выражение</em> (или <em>regex</em>) чтобы определить формат, наряду с <code>:format</code> аргументом для <code>validates</code> метода (<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинг&nbsp;6.17</a>).</p>
+<p>Код приложения для валидации формата электронной почты использует <em>регулярное выражение</em> (или <em>regex</em>) для определения формата, наряду с <code>:format</code> аргументом для <code>validates</code> метода (<a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинг&nbsp;6.17</a>).</p>
 
 <div class="label" id="code:validates_format_of_email"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.17.</span> <span class="description">Валидация формата электронной почты с регулярным выражением. <br /> <code>app/models/user.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.17.</span> <span class="description">Валидация формата адреса электронной почты с регулярным выражением. <br /> <code>app/models/user.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
@@ -1000,12 +1000,12 @@
 
 <p>обеспечивает, что только адреса электронной почты, которые соответствуют образцу, будут считаться допустимыми.</p>
 
-<p>Так, откуда появился образец? Регулярные выражения состоят из краткого (некоторые сказали бы  <a href="http://catb.org/jargon/html/L/line-noise.html">нечитаемого</a>) языка для сравнения текстовых шаблонов; обучение построению регулярных выражений это искусство, и для начала я разбил <code>email_regex</code> на мелкие куски  (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Таблица&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> Я считаю, замечательный <a href="http://www.rubular.com/">Rubular</a> редактор регулярных выражений (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">Рис.&nbsp;6.6</a>) просто незаменимым для изучения  регулярных выражений.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> Cайт Rubular имеет красивый интерактивный интерфейс для создания регулярных выражений, а также удобную Regex справку. Я призываю вас изучать <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Таблицу&nbsp;6.1</a> с открытым в браузере Rubular-ом. Никакое чтение о регулярных выражениях не может заменить пару часов игры с Rubular.</p>
+<p>Так, откуда появился образец? Регулярные выражения состоят из краткого (некоторые сказали бы  <a href="http://catb.org/jargon/html/L/line-noise.html">нечитаемого</a>) языка для сравнения текстовых шаблонов; обучение построению регулярных выражений это искусство, и для начала я разбил <code>email_regex</code> на мелкие куски  (<a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Таблица&nbsp;6.1</a>).<sup class="footnote" id="fnref:6.16"><a href="#fn:6.16">16</a></sup> Я считаю что замечательный онлайн редактор регулярных выражений <a href="http://www.rubular.com/">Rubular</a>  (<a class="ref" href="modeling-and-viewing-users-one#fig:rubular">Рис.&nbsp;6.6</a>) просто незаменим для изучения  регулярных выражений.<sup class="footnote" id="fnref:6.17"><a href="#fn:6.17">17</a></sup> Cайт Rubular имеет красивый интерактивный интерфейс для создания регулярных выражений, а также удобную Regex справку. Я призываю вас изучать <a class="ref" href="modeling-and-viewing-users-one#table:email_regex">Таблицу&nbsp;6.1</a> с открытым в браузере Rubular-ом. Никакое чтение о регулярных выражениях не может заменить пару часов игры с Rubular.</p>
 
 <div class="label" id="table:email_regex"></div>
 
 
-<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Выражение</strong></th><th class="align_left"><strong>Значение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i </tt></td><td class="align_left"> полное regex</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">начало regex</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">начало соответствия строки</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">по крайней мере один символ слова, плюс, дефис, или точка</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">буквально &ldquo;знак собака&rdquo;</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">по крайней мере одна буква, цифра, дефис, или точка</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">буквальная точка</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">по крайней мере одна буква</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">конец соответствия строки</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">конец regex</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">нечувствительный к регистру</td></tr></table></div><div class="caption"><span class="header">Таблица 6.1: </span><span class="description">Элементы regex электронной почты  из <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинга&nbsp;6.17</a>.</span></div></div>
+<div class="table"><div class="center"><table class="tabular"><tr><th class="align_left"><strong>Выражение</strong></th><th class="align_left"><strong>Значение</strong></th></tr><tr class="top_bar"><td class="align_left"><tt class="verb">/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i </tt></td><td class="align_left"> полное regex</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">начало regex</td></tr><tr><td class="align_left"><tt class="verb">\A</tt></td><td class="align_left">начало соответствия строки</td></tr><tr><td class="align_left"><tt class="verb">[\w+\-.]+</tt></td><td class="align_left">по крайней мере один символ слова, плюс, дефис или точка</td></tr><tr><td class="align_left"><tt class="verb">@</tt></td><td class="align_left">буквально &ldquo;знак собаки&rdquo;</td></tr><tr><td class="align_left"><tt class="verb">[a-z\d\-.]+</tt></td><td class="align_left">по крайней мере одна буква, цифра, дефис или точка</td></tr><tr><td class="align_left"><tt class="verb">\.</tt></td><td class="align_left">буквальная точка</td></tr><tr><td class="align_left"><tt class="verb">[a-z]+</tt></td><td class="align_left">по крайней мере одна буква</td></tr><tr><td class="align_left"><tt class="verb">\z</tt></td><td class="align_left">конец соответствия строки</td></tr><tr><td class="align_left"><tt class="verb">/</tt></td><td class="align_left">конец regex</td></tr><tr><td class="align_left"><tt class="verb">i</tt></td><td class="align_left">нечувствительность к регистру</td></tr></table></div><div class="caption"><span class="header">Таблица 6.1: </span><span class="description">Элементы regex электронной почты  из <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинга&nbsp;6.17</a>.</span></div></div>
 
 
 <p>Кстати, на самом деле существует полное регулярное выражение для сопоставления адресов электронной почты в соответствии с официальным стандартом, но волноваться не стоит. Экземпляр из <a class="ref" href="modeling-and-viewing-users-one#code:validates_format_of_email">Листинга&nbsp;6.17</a> тоже хорош, возможно даже лучше чем официальный.<sup class="footnote" id="fnref:6.18"><a href="#fn:6.18">18</a></sup></p>
@@ -1023,7 +1023,7 @@
 
 <h3><a id="sec:6.2.4" href="modeling-and-viewing-users-one#sec:uniqueness_validation" class="heading"><span class="number">6.2.4</span> Валидация уникальности</a></h3>
 
-<p>Чтобы осуществить уникальность адресов электронной почты (так, чтобы мы могли использовать их в качестве имен пользователей), мы будем использовать <code>:unique</code> опцию для, <code>validates</code> метода. Но предупреждаю: есть <em>важное</em> предостережение, так что не просто просмотрите раздел, а прочитайте тщательно.</p>
+<p>Чтобы осуществить уникальность адресов электронной почты (так, чтобы мы могли использовать их в качестве имен пользователей), мы будем использовать <code>:unique</code> опцию для, <code>validates</code> метода. Но предупреждаю: есть <em>важное</em> предостережение, так что не просто просмотрите раздел, а прочитайте его внимательно.</p>
 
 <p>Мы начнем, как обычно, с наших тестов. В наших предыдущих тестах модели мы, главным образом, использовали <code>User.new</code>, который только создает объект Ruby в памяти, но для тестов уникальности мы фактически должны поместить запись в базу данных.<sup class="footnote" id="fnref:6.19"><a href="#fn:6.19">19</a></sup> (Первый) тест дублирования электронной почты представлен в  <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_test">Листинге&nbsp;6.18</a>.</p>
 
@@ -1031,7 +1031,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.18.</span> <span class="description">Тест для отклонения повторяющихся адресов электронной почты.<br /> <code>spec/models/user_spec.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.18.</span> <span class="description">Тест на отклонение повторяющихся адресов электронной почты.<br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1072,13 +1072,13 @@
 </div></div>
 
 
-<p>И все же мы не закончили. Адреса электронной почты, не чувствительны к регистру&mdash;<code>foo@bar.com</code> равен <code>FOO@BAR.COM</code> или <code>FoO@BAr.coM</code>&mdash;и наша валидация должна учитывать и этот случай. Мы тестируем на это с кодом в <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">Листинге&nbsp;6.20</a>.</p>
+<p>И все же мы не закончили. Адреса электронной почты не чувствительны к регистру &mdash; <code>foo@bar.com</code> равен <code>FOO@BAR.COM</code> или <code>FoO@BAr.coM</code> &mdash; и наша валидация должна учитывать и этот случай. Мы тестируем на это с помощью кода из <a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive_test">Листинга&nbsp;6.20</a>.</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_case_insensitive_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.20.</span> <span class="description">Тест для отклонения двойных адресов электронной почты, нечувствительный к регистру. <br /> <code>spec/models/user_spec.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.20.</span> <span class="description">Нечувствительный к регистру тест на отклонение дублирующихся адресов электронной почты. <br /> <code>spec/models/user_spec.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
@@ -1099,7 +1099,7 @@
 </div></div>
 
 
-<p>Здесь мы используем <code>upcase</code> метод на строках (описан кратко в <a class="ref" href="rails-flavored-ruby#sec:blocks">Разделе&nbsp;4.3.2</a>). Этот тест делает ту же самую вещь что и первый тест дублирования электронной почты, но с прописным адресом электронной почты. Если этот тест кажется немного абстрактным, запустите консоль:</p>
+<p>Здесь мы используем <code>upcase</code> метод на строках (описан кратко в <a class="ref" href="rails-flavored-ruby#sec:blocks">Разделе&nbsp;4.3.2</a>). Этот тест то же что и первый тест на дублирование адресов электронной почты, но с прописным адресом электронной почты. Если этот тест кажется немного абстрактным, запустите консоль:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
 <span class="gp">&gt;&gt; </span><span class="vi">@attr</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">&quot;user@example.com&quot;</span> <span class="p">}</span>
@@ -1114,7 +1114,7 @@
 </div>
 
 
-<p>Конечно, сейчас <code>user_with_duplicate_email.valid?</code> это <code>true</code>, так как это провальный тест, но мы хотим, чтобы оно было <code>false</code>. К счастью, <code>:uniqueness</code> принимает опцию, <code>:case_sensitive</code>, только для этой цели  (<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive">Листинг&nbsp;6.21</a>).</p>
+<p>Конечно, сейчас <code>user_with_duplicate_email.valid?</code> является <code>true</code>, так как это провальный тест, но мы хотим, чтобы оно было <code>false</code>. К счастью, <code>:uniqueness</code> принимает опцию, <code>:case_sensitive</code>, как раз для этой цели (<a class="ref" href="modeling-and-viewing-users-one#code:validates_uniqueness_of_email_case_insensitive">Листинг&nbsp;6.21</a>).</p>
 
 <div class="label" id="code:validates_uniqueness_of_email_case_insensitive"></div>
 
@@ -1134,7 +1134,7 @@
 </div></div>
 
 
-<p>Отметьте, что мы просто заменили <code>true</code> на <code>:case_sensitive =&gt; false</code>; Rails в этом случае делает вывод, что <code>:uniqueness</code> должно быть <code>true</code>. В этой точке наше приложение обеспечивает уникальность адресов электронной почты и наш набор тестов должен пройти.</p>
+<p>Обратите внимание, что мы просто заменили <code>true</code> на <code>:case_sensitive =&gt; false</code>; Rails в этом случае делает вывод, что <code>:uniqueness</code> должно быть <code>true</code>. В этой точке наше приложение обеспечивает уникальность адресов электронной почты и наш набор тестов должен пройти.</p>
 
 <div class="label" id="sec:the_caveat"></div>
 
@@ -1160,7 +1160,7 @@
 
 <p>Если вышеописанная последовательность  кажется вам неправдоподобной, поверьте мне, это не так: это происходит на любом Rails сайте со значительным трафиком.<sup class="footnote" id="fnref:6.21"><a href="#fn:6.21">21</a></sup> К счастью, решение просто в реализации, нам просто необходимо обеспечить уникальность также на уровне базы данных. Наш метод заключается в создании в базе данных <em>индекса</em> столбца электронной почты и последующем требовании уникальности <em>индекса</em>.</p>
 
-<p>Индекс электронной почты представляет собой обновление требований к нашей модели данных, что (как обсуждалось в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>) делается в Rails посредством миграций. Мы видели в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a> что генерация модели User автоматически создает новую миграцию (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинг&nbsp;6.2</a>); в данном случае мы добавляем структуру к существующей модели, таким образом, мы должны создать миграцию непосредственно, используя <code>migration</code> генератор:</p>
+<p>Индекс фдреса электронной почты представляет собой обновление требований к нашей модели данных, что (как обсуждалось в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a>) делается в Rails посредством миграций. Мы видели в <a class="ref" href="modeling-and-viewing-users-one#sec:database_migrations">Разделе&nbsp;6.1.1</a> что генерация модели User автоматически создает новую миграцию (<a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинг&nbsp;6.2</a>); в данном случае мы добавляем структуру к существующей модели, таким образом, мы должны создать миграцию непосредственно, используя <code>migration</code> генератор:</p>
 
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate migration add_email_uniqueness_index
@@ -1174,7 +1174,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 6.22.</span> <span class="description">Миграция для реализации уникальности электронной почты. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>
+<div class="listing"><span class="header">Листинг 6.22.</span> <span class="description">Миграция для реализации уникальности адреса электронной почты. <br /> <code>db/migrate/&lt;timestamp&gt;_add_email_uniqueness_index.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddEmailUniquenessIndex</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
@@ -1189,7 +1189,7 @@
 </div></div>
 
 
-<p>Здесь используется Rails метод <code>add_index</code> чтобы добавить индекс на столбце <code>email</code> таблицы <code>users</code>. Индекс сам по себе не обеспечивает уникальность, но это делает опция <code>:unique =&gt; true</code>.</p>
+<p>Здесь используется Rails метод <code>add_index</code> для добавления индекса на столбце <code>email</code> таблицы <code>users</code>. Индекс сам по себе не обеспечивает уникальность, но это делает опция <code>:unique =&gt; true</code>.</p>
 
 <p>Заключительный шаг должен переместить базу данных:</p>
 
@@ -1198,15 +1198,15 @@
 </div>
 
 
-<p>Теперь вышеописанный сценарий с Алисой  будет хорошо работать: база данных сохранит запись пользователя, основанную на первом запросе, и отвергнет второе сохранение за нарушение уникальности. (Ошибка появится в логе Rails, но в этом нет ничего плохого. Можно фактически поймать <code>ActiveRecord::StatementInvalid</code> исключение &mdash; см. <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> для примера &mdash; но в этом учебном руководстве мы не будем заморачиваться этим шагом.) Добавление этого индекса на атрибут электронной почты преследует вторую цель, кратко рассмотренную в <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">Разделе&nbsp;6.1.4</a>: он решает проблему <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Блок&nbsp;6.2</a>).</p>
+<p>Теперь вышеописанный сценарий с Алисой  будет хорошо работать: база данных сохранит запись пользователя, основанную на первом запросе, и отвергнет второе сохранение за нарушение уникальности. (Ошибка появится в логе Rails, но в этом нет ничего плохого. Можно фактически поймать <code>ActiveRecord::StatementInvalid</code> исключение &mdash; см. <a href="http://github.com/insoshi/insoshi/blob/master/app/controllers/people_controller.rb">Insoshi</a> для примера &mdash; но в этом учебном руководстве мы не будем заморачиваться этим шагом.) Добавление этого индекса на атрибут адреса электронной почты преследует вторую цель, кратко рассмотренную в <a class="ref" href="modeling-and-viewing-users-one#sec:finding_user_objects">Разделе&nbsp;6.1.4</a>: он решает проблему эффективности <code>find_by_email</code> (<a class="ref" href="modeling-and-viewing-users-one#sidebar:database_indices">Блок&nbsp;6.2</a>).</p>
 
 <div class="label" id="sidebar:database_indices"></div>
 
 
 <div class="sidebar"><span class="title"><span class="header">Блок 6.2.</span><span class="description">Индексы базы данных</span></span>
-<p>При создании столбца в базе данных, важно учитывать, что нам нужно будет <em>найти</em> записи по этому столбцу. Рассмотрим, например, <code>email</code> атрибут созданый миграцией в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>. Когда мы позволим пользователям регистрироваться на сайте, начиная с <a class="ref" href="sign-up#top">Главы&nbsp;8</a>, нам нужно будет найти записи пользователя соответствующие предоставленному адресу электронной почты; в базе данных, основанной, к сожалению, на наивной модели данных, единственный путь, чтобы найти пользователя по его адресу электронной почты, это просмотреть строку <em>каждого</em> пользователя в базе данных и сравнить его электронную почту с атрибутом данной электронной почты. Это известно в бизнесе баз данных, как <em>full-table scan</em> (полное сканирование таблицы), а для реального сайта с тысячами пользователей это <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a>.</p>
+<p>При создании столбца в базе данных, важно учитывать, что нам нужно будет <em>найти</em> записи по этому столбцу. Рассмотрим, например, <code>email</code> атрибут созданый миграцией в <a class="ref" href="modeling-and-viewing-users-one#code:users_migration">Листинге&nbsp;6.2</a>. Когда мы позволим пользователям регистрироваться на сайте, начиная с <a class="ref" href="sign-up#top">Главы&nbsp;8</a>, нам нужно будет найти запись пользователя соответствующую предоставленному адресу электронной почты; в базе данных, основанной, к сожалению, на наивной модели данных, единственный способ найти пользователя по его адресу электронной почты, это просмотреть строку <em>каждого</em> пользователя в базе данных и сравнить его адрес электронной почты с атрибутом предоставленного адреса электронной почты. Это известно в бизнесе баз данных, как <em>full-table scan</em> (полное сканирование таблицы), а для реального сайта с тысячами пользователей это <a href="http://catb.org/jargon/html/B/Bad-Thing.html">Bad Thing</a>.</p>
 
-<p>Добавление индекса к столбцу электронной почты решает проблему. Чтобы понять индекс базы данных, полезно рассмотреть аналогию с индексом книги. В книге, чтобы найти все вхождения заданной строки, например &ldquo;foobar&rdquo;, вам придется сканировать каждую страницу в поиске &ldquo;foobar&rdquo;. С индексом книги, с другой стороны, вы можете просто посмотреть &ldquo;foobar&rdquo; в индексе, чтобы увидеть все страницы, содержащие &ldquo;foobar&rdquo;. Индекс базы данных работает по сути таким же образом.</p>
+<p>Добавление индекса к столбцу электронной почты решает проблему. Чтобы понять индекс базы данных, полезно рассмотреть аналогию с индексом книги. В книге, чтобы найти все вхождения заданной строки, например &ldquo;foobar&rdquo;, вам придется сканировать каждую страницу в поиске &ldquo;foobar&rdquo;. С индексом книги, с другой стороны, вы можете просто посмотреть &ldquo;foobar&rdquo; в индексе, чтобы увидеть все страницы, содержащие &ldquo;foobar&rdquo;. Индекс базы данных работает, по сути, аналогичным образом.</p>
 </div>
 
 

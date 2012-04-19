@@ -670,7 +670,7 @@
 <h2><a id="sec:5.2" href="filling-in-the-layout#sec:layout_links" class="heading"><span class="number">5.2</span> Ссылки в шаблоне</a></h2>
 
 
-<p>Теперь, когда мы закончили шаблон сайта с достойным стилем, пришло время приступить к заполнению ссылок которые  мы заглушили символом <code>&rsquo;#&rsquo;</code>. Конечно, мы могли бы жестко откодить ссылки:</p>
+<p>Теперь, когда мы закончили шаблон сайта с достойным стилем, пришло время приступить к заполнению ссылок которые  мы заглушили символом <code>&rsquo;#&rsquo;</code>. Конечно, мы могли бы жестко захардкодить ссылки:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/pages/about&quot;</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;</span>
 </pre></div>
@@ -686,7 +686,7 @@
 
 <p>Таким образом код обретает более прозрачный смысл, и к тому же это более гибкий подход, поскольку мы можем изменить определение <code>about_path</code> и URL изменятся везде где используется <code>about_path</code>.</p>
 
-<p>Полный список наших запланированных ссылок представлен в  <a class="ref" href="filling-in-the-layout#table:url_mapping">Таблице&nbsp;5.1</a>, , а также их отображение в URL-адресах и маршрутах. Со временем, мы реализуем все, но предпоследнюю мы добавим только в конце этой главы, а последняя будет создана лишь в  <a class="ref" href="sign-in-sign-out#top">Главе&nbsp;9</a>.)</p>
+<p>Полный список наших запланированных ссылок представлен в  <a class="ref" href="filling-in-the-layout#table:url_mapping">Таблице&nbsp;5.1</a>, вместе с соответствием URI и маршрутов. Со временем, мы реализуем все ссылки, но предпоследнюю мы добавим только в конце этой главы, а последняя будет создана лишь в  <a class="ref" href="sign-in-sign-out#top">Главе&nbsp;9</a>.</p>
 
 <div class="label" id="table:url_mapping"></div>
 
@@ -847,7 +847,7 @@
 <h3><a id="sec:5.2.2" href="filling-in-the-layout#sec:rails_routes" class="heading"><span class="number">5.2.2</span> Rails маршруты</a></h3>
 
 
-<p>Теперь, когда у нас есть тесты  для URL, такие  как мы хотим, пришло время заставить их работать. Как отмечалось в <a class="ref" href="static-pages#sec:static_pages_with_rails">Разделе&nbsp;3.1.2</a>, Rails использует для отображения маршрутов файл <code>config/routes.rb</code>. Если вы посмотрите на дефолтный (по умолчанию) файл routes.rb, вы увидите беспорядок, но это полезный беспорядок — полный примеров закомментированных отображений маршрутов. Я советую почитать его как-нибудь, а также взглянуть на <a   href="http://guides.rubyonrails.org/routing.html">Rails Guides article &ldquo;Rails Routing from the outside in&rdquo;</a> (<span class="c"># <a  href="http://www.rusrails.ru/rails-routing">перевод этой статьи</a>, а также многих других из данного руководства можно найти на сайте <a href="http://www.rusrails.ru/">http://www.rusrails.ru/</a></span>) для более углубленного изучения маршрутов. Сейчас, однако, мы будем придерживаться примеров в <a class="ref" href="filling-in-the-layout#code:static_page_routes">Листинге&nbsp;5.18</a>.<sup class="footnote" id="fnref:5.9"><a href="#fn:5.9">9</a></sup></p>
+<p>Теперь, когда у нас есть тесты  для URL, такие  как мы хотим, пришло время заставить их работать. Как отмечалось в <a class="ref" href="static-pages#sec:static_pages_with_rails">Разделе&nbsp;3.1.2</a>, Rails использует для маршрутов файл <code>config/routes.rb</code>. Если вы посмотрите на дефолтный (по умолчанию) файл routes.rb, вы увидите беспорядок, но это полезный беспорядок — полный закомментированных примеров маршрутов. Я советую почитать его как-нибудь, а также взглянуть на <a   href="http://guides.rubyonrails.org/routing.html">Rails Guides article &ldquo;Rails Routing from the outside in&rdquo;</a> (<span class="c"># <a  href="http://www.rusrails.ru/rails-routing">перевод этой статьи</a>, а также многих других из данного руководства можно найти на сайте <a href="http://www.rusrails.ru/">http://www.rusrails.ru/</a></span>) для более углубленного изучения маршрутов. Сейчас, однако, мы будем придерживаться примеров в <a class="ref" href="filling-in-the-layout#code:static_page_routes">Листинге&nbsp;5.18</a>.<sup class="footnote" id="fnref:5.9"><a href="#fn:5.9">9</a></sup></p>
 
 <div class="label" id="code:static_page_routes"></div>
 
@@ -901,7 +901,7 @@
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Листинг 5.19.</span> <span class="description">Раскоментирование подсказки для определения root маршрута. <br /> <code>config/routes.rb</code></span>
+<div class="listing"><span class="header">Листинг 5.19.</span> <span class="description">Закомментированная подсказка для определения root маршрута. <br /> <code>config/routes.rb</code></span>
 </div>
 <div class="code"><div class="highlight"><pre><span class="no">SampleApp</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="o">.</span>
@@ -940,7 +940,7 @@
 </div></div>
 
 
-<p>Этот код направляет root URL&nbsp;<tt>/</tt> к <tt>/pages/home</tt>, и также дает URL помощника следующим образом:</p>
+<p>Этот код направляет корневой URL&nbsp;<tt>/</tt> к <tt>/pages/home</tt>, и также дает URL помощников следующим образом:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">root_path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/&#39;</span>
 <span class="n">root_url</span>  <span class="o">=&gt;</span> <span class="s1">&#39;http://localhost:3000/&#39;</span>
@@ -948,7 +948,7 @@
 </div>
 
 
-<p>Мы должны также прислушаться к коментарию в  <a class="ref" href="filling-in-the-layout#code:root_route_hint">Листинге&nbsp;5.19</a>  и удалить <code>public/index.html</code> чтобы предотвратить визуализацию дефолтной страницы  (<a class="ref" href="beginning#fig:riding_rails_3">Рис.&nbsp;1.3</a>) при посещении&nbsp;<tt>/</tt>. Конечно, вы можете просто удалить файл выполненив <em>Move to trash</em> в текстовом редакторе, но если вы используете Git для контроля версий, есть способ удалить файл и в тоже время сообщить Git об удалени&nbsp;&mdash;&nbsp;с помощью <code>git rm</code>:</p>
+<p>Мы должны также прислушаться к коментарию в  <a class="ref" href="filling-in-the-layout#code:root_route_hint">Листинге&nbsp;5.19</a>  и удалить <code>public/index.html</code> чтобы предотвратить отображение дефолтной страницы  (<a class="ref" href="beginning#fig:riding_rails_3">Рис.&nbsp;1.3</a>) при посещении&nbsp;<tt>/</tt>. Конечно, вы можете просто удалить файл выполненив <em>Move to trash</em> в текстовом редакторе, но если вы используете Git для контроля версий, есть способ удалить файл и в тоже время сообщить Git об удалени&nbsp;&mdash;&nbsp;с помощью <code>git rm</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git rm public/index.html
 <span class="gp">$</span> git commit -am <span class="s2">&quot;Removed default Rails page&quot;</span>
@@ -1006,7 +1006,7 @@
 </div></div>
 
 
-<p>У нас не будет именованного маршрута для &ldquo;Sign in&rdquo; ссылки, до <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a>, поэтому мы оставили ее в качестве&nbsp;<code>&rsquo;#&rsquo;</code> на данный момент. Обратите внимание, что этот код определяет локальную переменную <code>logo</code> для тега логотипа, а затем делает ссылку на него в следующей строке:</p>
+<p>У нас не будет именованного маршрута для &ldquo;Sign in&rdquo; ссылки, до <a class="ref" href="sign-in-sign-out#top">Главы&nbsp;9</a>, поэтому мы пока оставили ее в виде&nbsp;<code>&rsquo;#&rsquo;</code>. Обратите внимание, что этот код определяет локальную переменную <code>logo</code> для тега логотипа, а затем делает ссылку на него в следующей строке:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="cp">&lt;%</span> <span class="n">logo</span> <span class="o">=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="ss">:alt</span> <span class="o">=&gt;</span> <span class="s2">&quot;Sample App&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;round&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">logo</span><span class="p">,</span> <span class="n">root_path</span> <span class="cp">%&gt;</span>
@@ -1040,7 +1040,7 @@
 
 <p>При этом, наш макет имеет ссылки на все статические страницы, созданные в <a class="ref" href="static-pages#top">Главе&nbsp;3</a>, так, например, <a href="http://localhost:3000/about"><tt>/about</tt></a> ведет к About  странице (<a class="ref" href="filling-in-the-layout#fig:about_page">Рис.&nbsp;5.9</a>).</p>
 
-<p>Кстати, стоит отметить, что мы на самом деле не проверяли на наличие ссылок в шаблоне, наши тесты будут провальными, только если маршруты не определены. Вы можете проверить это, закомментировав один из маршрутов в <a class="ref" href="filling-in-the-layout#code:static_page_routes">Листинге&nbsp;5.18</a>  и выполнив тесты. Метод тестирования, который на самом деле обеспечивает уверенность что ссылки существуют и отправляют в правильные места, см. <a class="ref" href="filling-in-the-layout#sec:layout_exercises">Разделе&nbsp;5.5</a>.</p>
+<p>Кстати, стоит отметить, что мы на самом деле не протестировали на наличие ссылок в шаблоне, наши тесты будут провальными, только если маршруты не определены. Вы можете проверить это, закомментировав один из маршрутов в <a class="ref" href="filling-in-the-layout#code:static_page_routes">Листинге&nbsp;5.18</a>  и выполнив тесты. Метод тестирования, который на самом деле обеспечивает уверенность что ссылки существуют и отправляют в правильные места, см. <a class="ref" href="filling-in-the-layout#sec:layout_exercises">Разделе&nbsp;5.5</a>.</p>
 
 <div class="label" id="fig:about_page"></div>
 
@@ -1056,7 +1056,7 @@
 <h2><a id="sec:5.3" href="filling-in-the-layout#sec:user_signup" class="heading"><span class="number">5.3</span> Регистрация пользователей: первый шаг</a></h2>
 
 
-<p>В качестве кульминации нашей работы над макетом и маршрутами, в этом разделе мы сделаем маршрут для страницы регистрации (signup), что будет означать создание второго контроллера. Это первый важный шаг к предоставлению пользователям возможности регистрироваться на нашем сайте, мы сделаем следующий шаг - моделирование пользователя, в <a class="ref" href="modeling-and-viewing-users-one#top">Главе&nbsp;6</a>, и мы закончим работу в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.</p>
+<p>В качестве кульминации нашей работы над макетом и маршрутами, в этом разделе мы сделаем маршрут для страницы регистрации (signup), что будет означать создание второго контроллера. Это первый важный шаг к предоставлению пользователям возможности регистрироваться на нашем сайте, мы сделаем следующий шаг, моделирование пользователя, в <a class="ref" href="modeling-and-viewing-users-one#top">Главе&nbsp;6</a>, и мы закончим работу в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.</p>
 
 <div class="label" id="sec:users_controller"></div>
 
@@ -1064,7 +1064,7 @@
 <h3><a id="sec:5.3.1" href="filling-in-the-layout#sec:users_controller" class="heading"><span class="number">5.3.1</span> Users контроллер</a></h3>
 
 
-<p>Мы создали наш первый контроллер Pages, еще в <a class="ref" href="static-pages#sec:static_pages_with_rails">Разделе&nbsp;3.1.2</a>. Пришло время создать второй&nbsp;&mdash;&nbsp;контроллер Users.  Как и прежде, мы будем использовать <code>generate</code> чтобы сделать простейший контроллер, который отвечает нашим текущим потребностям, а именно, с одной страницей (заглушкой)  регистрации новых пользователей. Следуя конвенции <a  href="http://ru.wikipedia.org/wiki/REST">REST архитектуры</a> излюбленной Рельсами, мы назовем действие для новых пользователей, <code>new</code> и передадим его в качестве аргумента <code>generate controller</code> для создания его (действия) автоматически (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>).</p>
+<p>Мы создали наш первый контроллер Pages, еще в <a class="ref" href="static-pages#sec:static_pages_with_rails">Разделе&nbsp;3.1.2</a>. Пришло время создать второй&nbsp;&mdash;&nbsp;контроллер Users.  Как и прежде, мы будем использовать <code>generate</code> для создания простейшего контроллер, который отвечает нашим текущим потребностям, а именно, с одной страницей-заглушкой для регистрации новых пользователей. Следуя конвенции <a  href="http://ru.wikipedia.org/wiki/REST">REST архитектуры</a> предпочитаемой Рельсами, мы назовем действие для новых пользователей, <code>new</code> и передадим его в качестве аргумента в <code>generate controller</code> для создания его (действия) автоматически (<a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинг&nbsp;5.23</a>).</p>
 
 <div class="label" id="code:generate_users_controller"></div>
 
@@ -1246,7 +1246,7 @@
 </div></div>
 
 
-<p>Отмечу, что мы сохранили правило  <code>get "users/new"</code>, которое было сгенерированно автоматически при создании Users контроллера в <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>. В настоящее время это правило необходимо маршруту <tt>/users/new</tt> правильному, но не соответствующему REST конвенции  (<a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблица&nbsp;2.2</a>), и мы ликвидируем его в <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">Разделе&nbsp;6.3.3</a>.</p>
+<p>Обратите внимание, мы сохранили правило  <code>get "users/new"</code>, которое было сгенерированно автоматически при создании Users контроллера в <a class="ref" href="filling-in-the-layout#code:generate_users_controller">Листинге&nbsp;5.23</a>. В настоящее время это правило необходимо для работы роутинга <tt>/users/new</tt> правильному, но не соответствующему REST конвенции  (<a class="ref" href="a-demo-app#table:demo_RESTful_users">Таблица&nbsp;2.2</a>), и мы ликвидируем его в <a class="ref" href="modeling-and-viewing-users-one#sec:a_users_resource">Разделе&nbsp;6.3.3</a>.</p>
 
 <p>В этой точке тест для регистрации из <a class="ref" href="filling-in-the-layout#code:user_signup_spec">Листинга&nbsp;5.28</a> должен пройти. Все, что осталось, это добавить правильную ссылку к кнопке на главной странице.  Как и с другими маршрутами, <code>match &rsquo;/signup&rsquo;</code> дает нам именованный маршрут <code>signup_path</code>, который мы поместим для использования в <a class="ref" href="filling-in-the-layout#code:home_page_signup_link">Листинге&nbsp;5.30</a>.</p>
 
@@ -1287,7 +1287,7 @@
 
 <p>В этой главе мы привели шаблон нашего приложение в чувство и отполировали маршруты. Остальная часть книги посвящена конкретизации примера приложения: во-первых, путем добавления пользователей, которые могут зарегистрироваться, войти в систему и выйти; затем добавлением пользовательских микросообщений и, наконец, добавлением пользовательских взаимоотношений.</p>
 
-<p>Если вы следуете вместе с Git, убедитесь, что зафиксировали и объединили изменения (и, просто чтобы  быть параноиком, запустите тесты в первую очередь):</p>
+<p>Если вы используете Git, убедитесь, что зафиксировали и объединили изменения (и, просто чтобы  быть параноиком, запустите тесты в первую очередь):</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
 <span class="gp">$</span> git add .
@@ -1413,14 +1413,14 @@
   </a>
 </div><div class="footnotes">
 <ol>
-<li id="fn:5.1">Макет <em>Ruby on Rails Tutorial</em> сделан с помощью замечательного онлайн приложения для создания макетов, называемого <a href="http://gomockingbird.com">Mockingbird</a>.&nbsp;<a class="arrow" href="#fnref:5.1">&uarr;</a></li>
+<li id="fn:5.1">Макеты в <em>Ruby on Rails Tutorial</em> сделаны с помощью замечательного онлайн приложения для создания макетов, называемого <a href="http://gomockingbird.com">Mockingbird</a>.&nbsp;<a class="arrow" href="#fnref:5.1">&uarr;</a></li>
 <li id="fn:5.2">Они абсолютно не связаны с классами Ruby.&nbsp;<a class="arrow" href="#fnref:5.2">&uarr;</a></li>
-<li id="fn:5.3">Вы можете отметить, что <code>img</code> tag, вместо сходства с <tt class="verb">&lt;img&gt;...&lt;/img&gt;</tt>, более похож на <tt class="verb">&lt;img ... /&gt;</tt>. Теги, соответствующие этой форме, известны как <em>самозакрывающиеся</em> теги.&nbsp;<a class="arrow" href="#fnref:5.3">&uarr;</a></li>
+<li id="fn:5.3">Вы моли заметить, что <code>img</code> tag, вместо сходства с <tt class="verb">&lt;img&gt;...&lt;/img&gt;</tt>, более похож на <tt class="verb">&lt;img ... /&gt;</tt>. Теги, соответствующие этой форме, известны как <em>самозакрывающиеся</em>.&nbsp;<a class="arrow" href="#fnref:5.3">&uarr;</a></li>
 <li id="fn:5.4"><code>alt</code> текст также, будет выведен на экран средствами чтения с экрана для людей со слабым зрением. Хотя люди иногда неаккуратны при включении  <code>alt</code> атрибута для изображений, фактически, это требуется HTML стандартом. К счастью, Rails включает дефолтный <code>alt</code> атрибут; если вы не укажете значение атрибута, в названии <code>image_tag</code>, Rails просто будет использовать имя файла изображения (за вычетом расширения). В этом случае, тем не менее, <code>Sample App</code> является более дескриптивным чем  <code>logo</code>, таким образом я предпочел указать <code>alt</code> текст явно.&nbsp;<a class="arrow" href="#fnref:5.4">&uarr;</a></li>
 <li id="fn:5.5">Отметьте, что пользователи Chrome и Safari будут видеть индикатор поврежденного изображения, вместо альтернативного текста &ldquo;Sample App&rdquo;.&nbsp;<a class="arrow" href="#fnref:5.5">&uarr;</a></li>
 <li id="fn:5.6">Цвета HTML могут быть кодированы тремя основными 16 (шестнадцатеричными) числами, каждое из которых обозначает один из трех основных цветов, Красный, Зеленый, и Синий. <code>#fff</code> это максимум всех трех цветов, что  приводит к чистому белому. За подробностями обращайтесь на сайт <a href="http://www.w3schools.com/html/html_colors.asp">HTML colors</a>.&nbsp;<a class="arrow" href="#fnref:5.6">&uarr;</a></li>
 <li id="fn:5.7">Blueprint CSS испльзует сетку из столбцов шириной 40 пикселей, 30 пикселей для самого столбца и 10 пикселей отступа. Самый правый столбец в отступе не нуждается, таким образом, 18 столбцов это 710 пикселей: 18 * 40 &ndash; 10 = 710.&nbsp;<a class="arrow" href="#fnref:5.7">&uarr;</a></li>
-<li id="fn:5.8">Много разработчиков Rails используют  <code>shared</code> директорию для партиалов совместно используемую разными представлениями. Я же предпочитаю использовать <code>shared</code> папку для "служебных" партиалов которые используются во множестве страниц, помещая партиалы, которые используются буквально на каждой странице (как части шаблона сайта) в <code>layouts</code> директорию. (Мы создадим <code>shared</code> директорию в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.) Это кажется мне более логичным, но помещение всех партиалов в папку <code>shared</code> тоже замечательно работает.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
+<li id="fn:5.8">Многие Rails разработчики используют <code>shared</code> директорию для партиалов совместно используемых разными представлениями. Я предпочитаю использовать <code>shared</code> папку для "служебных" партиалов которые используются во множестве страниц, помещая партиалы, которые используются буквально на каждой странице (такие как части шаблона сайта) в <code>layouts</code> директорию. (Мы создадим <code>shared</code> директорию в <a class="ref" href="sign-up#top">Главе&nbsp;8</a>.) Это кажется мне более логичным, но помещение всех партиалов в папку <code>shared</code> тоже замечательно работает.&nbsp;<a class="arrow" href="#fnref:5.8">&uarr;</a></li>
 <li id="fn:5.9">В строке <code>SampleApp::Application.routes.draw do</code> вы могли распознать, что <code>draw</code> метод берет <em>block</em>, конструкцию, которую мы видели в <a class="ref" href="rails-flavored-ruby#sec:blocks">Разделе&nbsp;4.3.2</a>.&nbsp;<a class="arrow" href="#fnref:5.9">&uarr;</a></li>
 </ol>
 </div>

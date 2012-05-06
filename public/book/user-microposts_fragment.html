@@ -1381,7 +1381,7 @@
 <div class="figure"><div class="center"><span class="graphic"><img src="/images/figures/proto_feed_mockup.png" alt="proto_feed_mockup" /></span></div><div class="caption"><span class="header">Рисунок  11.12: </span><span class="description">Макет Home страницы с предварительной реализацией потока сообщений.&nbsp;<a href="http://railstutorial.org/images/figures/proto_feed_mockup-full.png">(полный размер)</a></span></div></div>
 
 
-<p>Так как каждый пользователь должен иметь поток сообщений, мы естественным образом пришли к <code>feed</code> методу в модели  User. В конце концов, мы протестируем. что поток сообщений возвращает микросообщения пользователей, за которыми следит текущий пользователь, но пока мы просто протестируем, что  <code>feed</code> метод <em>включает в себя</em> микросообщения текущего пользователя, но <em>исключает</em> сообщения других пользователей. Мы можем выразить эти требования в коде из <a class="ref" href="user-microposts#code:feed_specs">Листинга&nbsp;11.31</a>.</p>
+<p>Так как каждый пользователь должен иметь поток сообщений, мы естественным образом пришли к <code>feed</code> методу в модели  User. В конце концов, мы протестируем, что поток сообщений возвращает микросообщения пользователей, за которыми следит текущий пользователь, но пока мы просто протестируем, что  <code>feed</code> метод <em>включает в себя</em> микросообщения текущего пользователя, но <em>исключает</em> сообщения других пользователей. Мы можем выразить эти требования в коде из <a class="ref" href="user-microposts#code:feed_specs">Листинга&nbsp;11.31</a>.</p>
 
 <div class="label" id="code:feed_specs"></div>
 
@@ -1529,14 +1529,14 @@
 </div></div>
 
 
-<p>The status feed partial defers the feed item rendering to a feed item partial using the code (??)</p>
+<p>Партиал статуса потока сообщений перекладывает рендеринг элемента потока сообщений на партиал элемента потока сообщений с помощью кода</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s1">&#39;shared/feed_item&#39;</span><span class="p">,</span> <span class="ss">:collection</span> <span class="o">=&gt;</span> <span class="vi">@feed_items</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
 
-<p>Здесь мы передаем параметр <code>:collection</code> с feed items, что заставляет  <code>render</code> использовать данный партиал для (<code>&rsquo;feed_item&rsquo;</code> в данном случае) рендеринга каждого элемента в коллекции. (Мы опустили <code>:partial</code> параметр  в предыдущем рендеринге, написание, например, <code>render &rsquo;shared/micropost&rsquo;</code>, но с  <code>:collection</code> параметром этот синтаксис не работает.) Сам feed item (??) партиал представлен в <a class="ref" href="user-microposts#code:feed_item_partial">Листинге&nbsp;11.35</a>; обратите внимание на добавление удаляющей ссылки в партиал feed item, следуя примеру из <a class="ref" href="updating-showing-and-deleting-users#code:delete_links">Листинга&nbsp;10.38</a>.</p>
+<p>Здесь мы передаем параметр <code>:collection</code> с элементами потока сообщений, что заставляет  <code>render</code> использовать данный партиал для (<code>&rsquo;feed_item&rsquo;</code> в данном случае) рендеринга каждого элемента в коллекции. (Мы опустили <code>:partial</code> параметр  в предыдущем рендеринге, написание, например, <code>render &rsquo;shared/micropost&rsquo;</code>, но с  <code>:collection</code> параметром этот синтаксис не работает.) Сам партиал элемента потока сообщений представлен в <a class="ref" href="user-microposts#code:feed_item_partial">Листинге&nbsp;11.35</a>; обратите внимание на добавление удаляющей ссылки в партиал feed item, следуя примеру из <a class="ref" href="updating-showing-and-deleting-users#code:delete_links">Листинга&nbsp;10.38</a>.</p>
 
 <div class="label" id="code:feed_item_partial"></div>
 

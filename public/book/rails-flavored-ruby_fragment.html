@@ -266,7 +266,7 @@
 <h3><a id="sec:4.2.2" href="rails-flavored-ruby#sec:strings" class="heading"><span class="number">4.2.2</span> Строки</a></h3>
 
 
-<p><em>Строки</em> это, вероятно, наиболее важная структура данных для веб-приложений, так как веб-страницы, в конечном счете, состоят из строк символов отправленных с сервера на браузер. Давайте начнем изучение строк с консолью, в этот раз запустив ее командой <code>rails&nbsp;c</code>, что является сокращением для <code>rails console</code>:</p>
+<p><em>Строки</em> это, вероятно, наиболее важная структура данных для веб-приложений, так как веб-страницы, в конечном счете, состоят из строк символов отправленных с сервера в браузер. Давайте начнем изучение строк с консолью, в этот раз запустив ее командой <code>rails&nbsp;c</code>, что является сокращением для <code>rails console</code>:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails c</span>
 <span class="gp">&gt;&gt; </span><span class="s2">&quot;&quot;</span>         <span class="c1"># An empty string</span>
@@ -582,7 +582,7 @@
 </div>
 
 
-<p>Внимательный читатель может заметить в этой точке, что второе <code>return</code> здесь фактически ненужно&nbsp;&mdash;&nbsp;состояние последнего выражения в функции, т.е. строки <code>"The string is nonempty."</code> будет возвращено независимо от ключевого слова <code>return</code> но  использование <code>return</code> в обоих местах придает ему приятную симметрию.</p>
+<p>Внимательный читатель может заметить в этой точке, что второе <code>return</code> здесь фактически ненужно&nbsp;&mdash;&nbsp;состояние последнего выражения в функции, т.е. строки <code>"The string is nonempty."</code> будет возвращено независимо от ключевого слова <code>return</code>, но  использование <code>return</code> в обоих местах придает ему приятную симметрию.</p>
 
 <div class="label" id="sec:back_to_the_title_helper"></div>
 
@@ -949,7 +949,7 @@
 </div></div>
 
 
-<p>Этот вид хэшей-в-хэшах, или <em>вложенных хэшей</em>, в интенсивно используется Рельсами, как мы увидим в <a class="ref" href="sign-up#sec:signup_failure">Разделе&nbsp;8.2</a>.</p>
+<p>Этот вид хэшей-в-хэшах, или <em>вложенных хэшей</em>, интенсивно используется в Рельсах, как мы увидим в <a class="ref" href="sign-up#sec:signup_failure">Разделе&nbsp;8.2</a>.</p>
 
 <p>Также как массивы и диапазоны, хэши реагируют на <code>each</code> метод. Рассмотрим, например, хэш с именем <code>flash</code> с ключами для двух условий <code>:success</code> и <code>:error</code>:</p>
 
@@ -1018,7 +1018,7 @@
 </div>
 
 
-<p>это вызов этой функции. Но Есть две тайны.  Во-первых, где скобки? В Ruby, они не являются обязательными; эти две строки эквивалентны:</p>
+<p>это вызов этой функции. Но есть две тайны.  Во-первых, где скобки? В Ruby, они не являются обязательными; эти две строки эквивалентны:</p>
 
 <div class="code"><div class="highlight"><pre><span class="c1"># Parentheses on function calls are optional.</span>
 <span class="n">stylesheet_link_tag</span><span class="p">(</span><span class="s1">&#39;blueprint/screen&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;screen&#39;</span><span class="p">)</span>
@@ -1523,7 +1523,7 @@
 <ol>
 <li id="fn:4.1">Если помощник определен для конкретного контроллера, следует поместить его в соответствующий файл помощника; например, помощники для контроллера Pages обычно входят в <code>app/helpers/pages_helper.rb</code>. В нашем случае мы ожидаем, что помощник заголовка будет использоваться на страницах всего сайта, и у Rails есть специальный файл помощника для этого случая: <code>app/helpers/application_helper.rb</code>.&nbsp;<a class="arrow" href="#fnref:4.1">&uarr;</a></li>
 <li id="fn:4.2">Я не даю ссылки на API, потому что у них есть тенденция быстро устаревать. Давайте Google будет вашей путеводной звездой. Кстати, &ldquo;API&rdquo; означает &ldquo;<a  href="http://ru.wikipedia.org/wiki/API">Application Programming Interface (Интерфейс прикладного программирования)</a>&rdquo;.&nbsp;<a class="arrow" href="#fnref:4.2">&uarr;</a></li>
-<li id="fn:4.3">Если вы нетерпеливы, не стесняйтесь проверить <a href="http://wiki.github.com/joshuaclayton/blueprint-css/quick-start-tutorial">Blueprint CSS Quickstart tutorial</a>.&nbsp;<a class="arrow" href="#fnref:4.3">&uarr;</a></li>
+<li id="fn:4.3">Если вы нетерпеливы, не стесняйтесь проверить <a href="https://github.com/joshuaclayton/blueprint-css/wiki">Blueprint CSS wiki</a>.&nbsp;<a class="arrow" href="#fnref:4.3">&uarr;</a></li>
 <li id="fn:4.4">Вспомните, что консольное приглашение, вероятно, будет чем-то вроде <code>ruby-1.9.2-head &gt;</code>, но примеры используют&nbsp;<code>&gt;&gt;</code> так как версии Ruby изменяются.&nbsp;<a class="arrow" href="#fnref:4.4">&uarr;</a></li>
 <li id="fn:4.5">Как и с Rails API, ссылки Ruby API выходят из моды, хотя и не так быстро. Google по-прежнему всегда готов вам помочь&nbsp;<a class="arrow" href="#fnref:4.5">&uarr;</a></li>
 <li id="fn:4.6">Чтобы узнать больше о происхождении &ldquo;foo&rdquo; и &ldquo;bar&rdquo;&mdash;и, в частности возможном <em>не</em> отношении &ldquo;foobar&rdquo; к &ldquo;FUBAR&rdquo;&mdash;см. <a  href="http://www.catb.org/jargon/html/F/foo.html">&ldquo;foo&rdquo; в Jargon File</a>.&nbsp;</a>.&nbsp;<a class="arrow" href="#fnref:4.6">&uarr;</a></li>
